@@ -1,4 +1,4 @@
-# natID (Native Interface Design)
+# natID (Native Interface Design for macOS, linux, and windows)
 
 natID is a C++ framework for developing and distributing a wide range of applications, with a primary focus on engineering and data processing. It supports the following operating systems:
 
