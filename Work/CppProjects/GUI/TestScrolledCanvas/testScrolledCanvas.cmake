@@ -1,0 +1,24 @@
+set(SCROLLCANVASTEST_NAME testScrolledCanvas)				#Naziv prvog projekta u solution-u
+
+file(GLOB SCROLLCANVASTEST_SOURCES  ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
+file(GLOB SCROLLCANVASTEST_INCS  ${CMAKE_CURRENT_LIST_DIR}/src/*.h)
+set(SCROLLCANVASTEST_PLIST  ${CMAKE_CURRENT_LIST_DIR}/src/Info.plist)
+file(GLOB SCROLLCANVASTEST_INC_TD  ${MY_INC}/td/*.h)
+file(GLOB SCROLLCANVASTEST_INC_GUI ${MY_INC}/gui/*.h)
+
+# add executable
+add_executable(${SCROLLCANVASTEST_NAME} ${SCROLLCANVASTEST_INCS} ${SCROLLCANVASTEST_SOURCES} ${SCROLLCANVASTEST_INC_TD}  ${SCROLLCANVASTEST_INC_GUI})
+
+source_group("inc"            FILES ${SCROLLCANVASTEST_INCS})
+source_group("src"            FILES ${SCROLLCANVASTEST_SOURCES})
+source_group("inc\\td"        FILES ${SCROLLCANVASTEST_INC_TD})
+source_group("inc\\gui"        FILES ${SCROLLCANVASTEST_INC_GUI})
+
+target_link_libraries(${SCROLLCANVASTEST_NAME} debug ${MU_LIB_DEBUG} debug ${NATGUI_LIB_DEBUG} 
+									optimized ${MU_LIB_RELEASE}  optimized ${NATGUI_LIB_RELEASE})
+
+setTargetPropertiesForGUIApp(${SCROLLCANVASTEST_NAME} ${SCROLLCANVASTEST_PLIST})
+
+setIDEPropertiesForGUIExecutable(${SCROLLCANVASTEST_NAME} ${CMAKE_CURRENT_LIST_DIR})
+
+setPlatformDLLPath(${SCROLLCANVASTEST_NAME})

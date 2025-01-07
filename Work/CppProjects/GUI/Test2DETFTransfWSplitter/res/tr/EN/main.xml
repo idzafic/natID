@@ -1,0 +1,34 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+        <Res id="appTitle" tr="ETF Animation"/>
+        <Res id="lblFreq" tr="Revolving per minute (RPM) [rev/min]:"/>
+        <Res id="start" tr="Start"/>
+        <Res id="exp" tr="Explosion"/>
+        <Res id="startTT" tr="Start the thread"/>
+        <Res id="lblRotRad" tr="Rotation radius:"/>
+         <Res id="lblDir" tr="Rotation direction:"/>
+        <Res id="lblColor" tr="Symbol fill color:"/>
+        <Res id="lblLineColor" tr="Symbol line color:"/>
+        <Res id="Update" tr="Update"/>
+        <Res id="clkWise" tr="Clockwise"/>
+        <Res id="cntrClckWise" tr="Counterclockwise"/>
+        <Res id="stop" tr="Stop"/>
+        <Res id="stopTT" tr="Stop the thread"/>
+        <Res id="delete" tr="Delete"/>
+        <Res id="shPWD" tr="Show Password"/>
+        <Res id="lblUN" tr="User name:"/>
+        <Res id="lblPwd" tr="Password:"/>
+        <Res id="theApp" tr="File"/>
+        <Res id="timer" tr="Timer"/>
+        <Res id="closeNOK" tr="Error! Animation is running!"/>
+        <Res id="bombNOK" tr="Error! Animation is not running!"/>
+        <Res id="cloeErr" tr="Stop Animation and then close the app!"/>
+        <Res id="bombErr" tr="Explosion can be activated only if the animation is running!"/>
+         <Res id="settings" tr="Settings"/>
+        <!-- Settings -->
+        <Res id="dlgSettings" tr="Settings"/>
+        <Res id="lblLang" tr="Current application language:"/>
+        <Res id="lblLang2" tr="Application language after application's restart:"/>
+	</Translations>
+</DevRes>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Memos>
+	<Memo id="MemoExportF" fileName="Resursi\MemoExportF.xml"/>
+	<Memo id="MemoExternF" fileName="Resursi\MemoExternF.xml"/>
+	<Memo id="MemoExternF_GR" fileName="Resursi\MemoExternF_GR.xml"/>
+	<Memo id="MemoExternH" fileName="Resursi\MemoExternH.xml"/>
+	<Memo id="MemoInternF" fileName="Resursi\MemoInternF.xml"/>
+	<Memo id="MemoInternH" fileName="Resursi\MemoInternH.xml"/>
+</Memos>

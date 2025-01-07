@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+        <Res id="appTitle" tr="Snake (Zmija)"/>
+		<Res id="start" tr="Nova igra"/>
+		<Res id="startTT" tr="Počni novu igru"/>
+		<Res id="stop" tr="Predaj se"/>
+		<Res id="stopTT" tr="Predaj se i završi igru"/>
+        <Res id="Update" tr="Refrešuj"/>
+		
+		<Res id="GZBeatHS:" tr="Čestitke! Pobijedili ste dosadašnji najbolji rezultat sa ostvarenim rezultatom: "/>
+		<Res id="Score:" tr="Rezultat: "/>
+		<Res id="Highscore: " tr="Najbolji rezultat: "/>
+
+        <Res id="closeNOK" tr="Greška! Animacija je u toku!"/>
+        <Res id="cloeErr" tr="Zaustavite animaciju pa onda zatvorite aplikaciju!"/>
+        <Res id="settings" tr="Podešenja"/>
+        <!-- Settings -->
+        <Res id="dlgSettings" tr="Podešenja"/>
+        <Res id="lblLang" tr="Trenutni jezik aplikacija:"/>
+        <Res id="lblLang2" tr="Jezik aplikacije nakon njenog restarta:"/>
+        <Res id="chbTBIcsAndLbls" tr="Prikaži labele ispod ikona na alatnoj traci"/>
+        <Res id="lblLevel" tr="Težina:"/>
+		<Res id="RestartRequired" tr="Restartovati aplikaciju"/>
+		<Res id="RestartRequiredInfo" tr="Neke od promijenjenih postavki zahtijevaju ponovno pokretanje aplikacije kako bi bile primijenjene"/>
+		<Res id="Restart" tr="Restartovati"/>
+		<Res id="DoNoRestart" tr="Nemoj restartovati"/>
+        <!-- Status Bar -->
+        <Res id="ClStart" tr="Klikni 'Nova igra' tipku za početak igre..."/>
+        <Res id="clickArrK" tr="Kliknite na bilo koju tipku sa strelicom da pokrenete zmiju."/>
+        <Res id="+apple" tr="Odlično! Još jedna jabuka!"/>
+        <Res id="+pear" tr="Odlično! Uživam u kruškama!"/>
+        <Res id="+banana" tr="Izvrsno! Bananan mi je omiljena!"/>
+        <Res id="Total:" tr="Ukupno: "/>
+        <!-- Other -->
+        <Res id="theApp" tr="Aplikacija"/>
+        <Res id="game" tr="Igra"/>
+		<Res id="Easy" tr="Lako"/>
+		<Res id="Medium" tr="Srednje"/>
+		<Res id="Hard" tr="Teško"/>
+	</Translations>
+</DevRes>

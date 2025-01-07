@@ -1,0 +1,19 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="TransCost" path = "Work/Common/Icons/transportCostXL.png"/>
+		<Res id="normalRep" path="Work/Common/Icons/report64_2.png"/>
+		<Res id="fallRep" path="Work/Common/Icons/Waterfall64.png"/>
+		<Res id="incSize" path="Work/Common/Icons/sizeIncrease128.png"/>
+		<Res id="decSize" path="Work/Common/Icons/sizeDecrease128.png"/>
+		<Res id="img3" path="Work/Common/Icons/Blackberry8707g_48.png"/>
+		<Res id="ctxRep" path="Work/Common/Icons/ctxRep.png"/>
+		<Res id="UNSA" path = "Work/Common/Icons/UNSA/UNSA_Logo.png"/>
+		<Res id="settings" path = "Work/Common/Icons/SettingsBlue48.png"/>
+	</Images>
+	<Symbols>
+		<Res id="Xfmr4" path="Work/Common/Symbols/PSA/FourWindingTransformer.xml"/>
+		<Res id="TestPie" path="Work/Common/Symbols/PSA/TestPie.xml"/>
+		<Res id="TestOval" path="Work/Common/Symbols/PSA/TestOval.xml"/>
+	</Symbols>
+</DevRes>

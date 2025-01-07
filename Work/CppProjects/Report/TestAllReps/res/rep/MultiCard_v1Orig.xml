@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report paperOrientation="portrait" paperSize="A4" zoom="200" resGroup="Intern">
+	<Layout type="repeat" lMargin="15" tMargin="10" rMargin="15" bMargin="10" memoH="MemoInternH" pageF="PageFooterInt" docH="Intro_MultiCard">	
+		<Header key="ID" verticalLayout="true" showOnEveryPage="true" showOnFirstPage="true" y="0" height="19" lMargin="0" tMargin="0"> <!-- conditional == true means that belonging containers will be conditionaly drawn -->
+			<Formulas>
+				<Formula name="fInitInQ" f="(Quantity>0)*Quantity" type="decimal3"/>
+				<Formula name="fInitOutQ" f="(Quantity<0)*(0-Quantity)" type="decimal3"/>	
+			</Formulas>
+			<Row visibleOnCondition="0" y="0" height="5" lMargin="0" tMargin="0">	 <!-- visible only on first page -->
+				<CompositeText hAlign="left" vAlign="center" font="BodyHead" x="0" y="0" width="180" height="5">
+					<Numeric type="int4" showThSep="false" hideZero="false" lbl="Item ID: " name="ID"/>
+					<Text lbl=", " name="Name"/>					
+				</CompositeText>				
+			</Row>			
+			<Row visibleOnCondition="0" y="0" height="9" lMargin="0" tMargin="0" backClr="BackHead"> <!-- visibleOnCondition == 0: it will be drawn always, 1: on first page, 2: on other pages-->
+				<Line lineWidth="0.4" lineStyle="solid" x="0" y="0" width="-1" height="0"/> <!-- width == -1 means it will take with of its parent-->
+				<TrText hAlign="left" vAlign="center" font="BodyHead" x="0" y="0" width="9" height="9" name="Pos"/>
+				<TrText hAlign="left" vAlign="center" font="BodyHead" x="9" y="0" width="9" height="9" name="Da_te"/>
+				<TrText hAlign="left" vAlign="top" font="BodyHead" x="18" y="0" width="24" height="9" name="Document_No"/>
+				<TrText hAlign="right" vAlign="top" font="BodyHead" x="42" y="0" width="23" height="9" name="Inp_Quantity"/>
+				<TrText hAlign="right" vAlign="top" font="BodyHead" x="65" y="0" width="23" height="9" name="Out_Quantity"/>
+				<TrText hAlign="right" vAlign="top" font="BodyHead" x="88" y="0" width="23" height="9" name="Saldo_Quantity"/>
+				<TrText hAlign="right" vAlign="center" font="BodyHead" x="111" y="0" width="23" height="9" name="Price"/>
+				<TrText hAlign="right" vAlign="center" font="BodyHead" x="134" y="0" width="23" height="9" name="Value"/>
+				<TrText hAlign="right" vAlign="top" font="BodyHead" x="157" y="0" width="23" height="9" name="Saldo_Value"/>
+				<Line lineWidth="0.4" lineStyle="solid" x="0" y="9" width="-1" height="0"/> 
+			</Row>
+			<Row visibleOnCondition="1" y="0" height="5" lMargin="0" tMargin="0" backClr="BackSubHead">	 <!-- visible only on first page -->
+				<CompositeText hAlign="left" vAlign="center" font="BodySubHead" x="0" y="0" width="42" height="5">
+					<Date dateFmt="DateOwnShortDM" lbl="Initial amount until " name="#DocFromDT"/>	
+					<StaticText name=":" trLbl="false"/>
+				</CompositeText>
+				<Numeric type="decimal3" showThSep="true" hideZero="true" hAlign="right" vAlign="center" font="BodySubHead" x="42" y="0" width="23" height="5" name="fInitInQ"/>
+				<Numeric type="decimal3" showThSep="true" hideZero="true" hAlign="right" vAlign="center" font="BodySubHead" x="65" y="0" width="23" height="5" name="fInitOutQ"/>
+				<Numeric type="decimal3" showThSep="true" hideZero="false" hAlign="right" vAlign="center" font="BodySubHead" x="88" y="0" width="23" height="5" name="Quantity"/>				
+				<Numeric type="decimal2" showThSep="true" hideZero="false" hAlign="right" vAlign="center" font="BodySubHead" x="134" y="0" width="46" height="5" name="Value"/>
+				<Line lineWidth="0.15" lineStyle="solid" x="0" y="5" width="-1" height="0"/>
+			</Row>
+		</Header>
+		<Body key="ItemID" y="0" height="4.4" lMargin="0" tMargin="0" backClr2="BackBody">
+			<Formulas>
+				<Formula name="fIn" f="(Mult>0)*Quantity" type="decimal3"/>
+				<Formula name="fOut" f="(Mult<0)*Quantity" type="decimal3"/>
+				<Formula name="fValue" f="Mult*Quantity*Price" type="decimal2"/>
+				<Formula name="fSaldo" f="fSaldo+=(Mult*Quantity)" type="decimal3" moveToDP="true" initLink="Header/Quantity"/>				
+				<Formula name="fVSaldo" f="fVSaldo+=(Mult*Quantity*Price)" type="decimal2" moveToDP="true" initLink="Header/Value"/>
+			</Formulas>
+			<Row y="0" height="4.4" lMargin="0" tMargin="0">			
+				<Numeric type="int4" showThSep="false" hideZero="false" hAlign="left" vAlign="center" font="Body" x="0" y="0" width="9" height="4.5" name="#Pos"/>				
+				<Date dateFmt="DateOwnShortDM" hAlign="left" vAlign="center" font="Body" x="9" y="0" width="9" height="4.5" name="Date"/>
+				<Text hAlign="left" vAlign="center" font="Body" x="18" y="0" width="24" height="4.5" name="DocID"/>
+				<Numeric type="decimal3" showThSep="true" hideZero="true" hAlign="right" vAlign="top" font="Body" x="42" y="0" width="23" height="4.5" name="fIn"/>
+				<Numeric type="decimal3" showThSep="true" hideZero="true" hAlign="right" vAlign="top" font="Body" x="65" y="0" width="23" height="4.5" name="fOut"/>
+				<Numeric type="decimal3" showThSep="true" hideZero="false" hAlign="right" vAlign="top" font="Body" x="88" y="0" width="23" height="4.5" name="fSaldo"/>
+				<Numeric type="decimal4" showThSep="true" hideZero="false" hAlign="right" vAlign="top" font="Body" x="111" y="0" width="23" height="4.5" name="Price"/>
+				<Numeric type="decimal2" showThSep="true" hideZero="false" hAlign="right" vAlign="top" font="Body" x="134" y="0" width="23" height="4.5" name="fValue"/>
+				<Numeric type="decimal2" showThSep="true" hideZero="false" hAlign="right" vAlign="top" font="Body" x="157" y="0" width="23" height="4.5" name="fVSaldo"/>
+			</Row>
+		</Body>
+		<Footer showOnEveryPage="false" showOnFirstPage="false" y="0" height="10" lMargin="0" tMargin="0">
+			<Formulas>
+				<Formula name="totalIn" f="totalIn+=perIn"  type="decimal3" initLink="Header/fInitInQ"/>
+				<Formula name="totalOut" f="totalOut+=perOut" type="decimal3" initLink="Header/fInitOutQ"/>
+				<Formula name="fKPeriodSaldo" f="perIn-perOut" type="decimal3"/>				
+				<Formula name="fKTotalSaldo" f="totalIn-totalOut" type="decimal3"/>				
+			</Formulas>			
+			<Line lineWidth="0.15" lineStyle="solid" x="0" y="0" width="-1" height="0"/>
+			<Row y="0" height="5" lMargin="0" tMargin="0"  backClr="BackSubFoot">
+				<CompositeText hAlign="left" vAlign="center" font="BodySubFoot" x="0" y="0" width="42" height="5">
+					<Date dateFmt="DateOwnShortDM" lbl="Sum for period " name="#DocFromDT"/>
+					<Date dateFmt="DateOwnShortDM" lbl="-"  trLbl="false" name="#DocToDT"/>
+					<StaticText name=":" trLbl="false"/>
+				</CompositeText>				
+				<Aggregate fn="sum" type="decimal3" link="Body/fIn" showThSep="true" hideZero="false" hAlign="right" vAlign="center" font="BodySubFoot" x="42" y="0" width="23" height="5" name="perIn"/>
+				<Aggregate fn="sum" type="decimal3" link="Body/fOut" showThSep="true" hideZero="false" hAlign="right" vAlign="center" font="BodySubFoot" x="65" y="0" width="23" height="5" name="perOut"/>
+				<Numeric type="decimal3" showThSep="true" hideZero="false" hAlign="right" vAlign="center" font="BodySubFoot" x="88" y="0" width="23" height="5" name="fKPeriodSaldo"/>
+				<Aggregate fn="sum" type="decimal2" link="Body/fValue" showThSep="true" hideZero="false" hAlign="right" vAlign="center" font="BodySubFoot" x="111" y="0" width="46" height="5"/>				
+			</Row>
+			<Line lineWidth="0.4" lineStyle="solid" x="0" y="5" width="-1" height="0"/>
+			<Row y="5" height="5" lMargin="0" tMargin="0"  backClr="BackFoot">
+				<TrText hAlign="left" vAlign="center" font="BodyFoot" x="0" y="0" width="55" height="5" name="Total:"/>
+				<Numeric type="decimal3" showThSep="true" hideZero="false" hAlign="right" vAlign="center" font="BodyFoot" x="42" y="0" width="23" height="5" name="totalIn"/>
+				<Numeric type="decimal3" showThSep="true" hideZero="false" hAlign="right" vAlign="center" font="BodyFoot" x="65" y="0" width="23" height="5" name="totalOut"/>
+				<Numeric type="decimal3" showThSep="true" hideZero="false" hAlign="right" vAlign="center" font="BodyFoot" x="88" y="0" width="23" height="5" name="fKTotalSaldo"/>
+				<Aggregate fn="last" type="decimal2" link="Body/Formula/fVSaldo" showThSep="true" hideZero="false" hAlign="right" vAlign="center" font="BodyFoot" x="134" y="0" width="46" height="5"/>
+			</Row>			
+			<Line lineWidth="0.4" lineStyle="solid" x="0" y="10" width="-1" height="0"/>
+		</Footer>			
+	</Layout>
+</Report>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Memo layout="vertical" designWidth="170" dY="-17" height="22">
+	<Line lineWidth="0.2" lineStyle="solid" x="0" y="0.2" width="170" height="0" hScale="1"/>
+	<Row y="0" height="22">
+		<CompositeText hAlign="left" vAlign="top" font="MemoF3" x="0" y="1" width="84" height="21" html="yes" wrap="word" hScale="1" >
+			<ResText rt="true" name="MemFoot1"/>			
+		</CompositeText>		
+		<Line lineWidth="0.2" lineStyle="solid" x="1" y="0.2" width="0" height="21.8"/>
+		<CompositeText hAlign="left" vAlign="top" font="MemoF3" x="1" y="1" width="84" height="21" html="yes" wrap="word" hScale="1" >
+			<ResText rt="true" name="MemFoot2"/>			
+		</CompositeText>		
+		<Text hAlign="right" vAlign="center" font="PageFoot" x="-35" y="18" width="35" height="4" name="#Page"/>
+	</Row>	
+</Memo>

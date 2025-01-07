@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report paperOrientation="portrait" paperSize="A4" zoom="200" resGroup="Intern">
+	<Layout lMargin="15" tMargin="10" rMargin="15" bMargin="10" memoH="MemoInternH" pageF="PageFooterInt" docH="Intro_SingleCard">	
+		<Header layout="vertical" showOnEveryPage="true" showOnFirstPage="true" height="9" backClr="BackHead">
+			<Line lineWidth="0.4" lineStyle="solid" x="0" y="0" width="-1" height="0"/>
+			<Row height="9" hAlign="right" vAlign="center" font="BodyHead">
+				<TrText hAlign="left" width="12" name="Pos"/>
+				<TrText hAlign="left" width="15" name="Date"/>
+				<TrText hAlign="left" width="28" name="Document_No"/>
+				<TrText width="25" name="Inp_Quantity"/>
+				<TrText width="25" name="Out_Quantity"/>
+				<TrText width="25" name="Saldo_Quantity"/>
+				<TrText width="25" name="Price"/>
+				<TrText width="25" name="Saldo_Value"/>
+			</Row>		
+			<Line lineWidth="0.4" lineStyle="solid" height="0"/>
+		</Header>
+		<Body height="4.4" backClr2="BackBody" hAlign="right" vAlign="center" font="Body" >
+			<Formulas>
+				<Formula name="fIn" f="(Mult>0)*Quantity" type="decimal3"/>
+				<Formula name="fOut" f="(Mult<0)*Quantity" type="decimal3"/>
+				<Formula name="fSaldo" f="fSaldo+=(Mult*Quantity)" type="decimal3" moveToDP="true"/>
+				<Formula name="fVSaldo" f="fVSaldo+=(Mult*Quantity*Price)" type="decimal2" moveToDP="true"/>
+			</Formulas>			
+			<Numeric type="int4" showThSep="false" hAlign="left" width="12" name="#Pos"/>		
+			<Date dateFmt="DateOwnShortY2" hAlign="left" width="15" name="Datum"/>
+			<Text hAlign="left"  width="28" name="DocID"/>
+			<Numeric type="decimal3" hideZero="true"  width="25" name="fIn"/>
+			<Numeric type="decimal3" hideZero="true"  width="25" name="fOut"/>
+			<Numeric type="decimal3" width="25" name="fSaldo"/>
+			<Numeric type="decimal4" width="25" name="Price"/>
+			<Numeric type="decimal2" width="25" name="fVSaldo"/>			
+		</Body>
+		<Footer layout="vertical" height="5"backClr="BackFoot">
+			<Formulas>
+				<Formula name="fKSaldo" f="toalIn-totalOut" type="decimal3"/>
+			</Formulas>
+			<Line lineWidth="0.4" lineStyle="solid" height="0"/>
+			<Row height="5" hAlign="right" vAlign="center" font="BodyFoot">
+				<TrText hAlign="left" width="55" name="Total:"/>
+				<Aggregate fn="sum" type="decimal3" link="Body/fIn" width="25" name="toalIn"/>
+				<Aggregate fn="sum" type="decimal3" link="Body/fOut" width="25" name="totalOut"/>
+				<Numeric type="decimal3" width="25" name="fKSaldo"/>				
+				<Aggregate fn="last" type="decimal2" link="Body/Formula/fVSaldo" width="50"/>
+			</Row>
+			<Line lineWidth="0.4" lineStyle="solid" height="0"/>
+		</Footer>			
+	</Layout>
+</Report>

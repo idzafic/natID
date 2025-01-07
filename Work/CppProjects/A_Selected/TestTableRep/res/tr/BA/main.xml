@@ -1,0 +1,68 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+		<Res id="Name:" tr="Ime:"/>
+		<Res id="Quant" tr="Količina"/>
+		<Res id="QuantTT" tr="Količina u jedinici mjere"/>
+		<Res id="ProductN" tr="Proizvod"/>
+		<Res id="ProductNTT" tr="Naziv proizvoda"/>
+		<Res id="ItemID" tr="Šifra proizvoda"/>
+		<Res id="ItemIDTT" tr="Šifra ili identifikator proizvoda"/>
+		<Res id="Price" tr="Cijena"/>
+		<Res id="PriceTT" tr="Cijena proizvoda"/>
+		<Res id="Value" tr="Vrijednost"/>
+		<Res id="ValueTT" tr="Vrijednost proizvoda"/>
+		<Res id="Date" tr="Datum"/>
+		<Res id="DateTT" tr="Datum proizvodnje dato od proizvođača"/>
+		<Res id="Time" tr="Vrijeme"/>
+		<Res id="TimeTT" tr="Vrijeme proizvodnje dato od proizvođača"/>
+		<Res id="Color" tr="Boja"/>
+		<Res id="ColorTT" tr="Boja proizvoda"/>
+		
+		<Res id="option1" tr="Opcija 1"/>
+		<Res id="option1TT" tr="Tooltip za opciju 1"/>
+		<Res id="option2" tr="Opcija 2"/>
+		<Res id="option2TT" tr="Tooltip za opciju 2"/>
+		<Res id="incSize" tr="Povećaj"/>
+		<Res id="incSizeTT" tr="Povećaj veličinu forme"/>
+		<Res id="decSize" tr="Smanji"/>
+		<Res id="decSizeTT" tr="Smanji veličinu forme"/>
+		<Res id="canvas" tr="Crtež"/>
+		<Res id="canvasTT" tr="Prikaz crtanja na gui::Canvas klasi"/>
+		
+		<Res id="Find" tr="Find"/>
+		<Res id="Reverse" tr="Reverse"/>
+		<Res id="ShowScrollViewer" tr="Show Scroll Viewer"/>
+		<Res id="ShowSwitcher" tr="Show ViewSwitcher"/>
+		<Res id="ShowNavig" tr="Show navigator"/>
+		
+		<Res id="Quantity" tr="Količina"/>
+		<Res id="Total" tr="Ukupno"/>
+
+		<Res id="settings" tr="Podešenja"/>
+		<Res id="settingsTT" tr="Podešenja aplikacije"/>
+		<Res id="normalRep" tr="Izvještaj1"/>
+		<Res id="normalRepTT" tr="Izvještaj sa tabelarnim pregledom i sumom"/>
+		<Res id="normalRep2" tr="Izvještaj 2"/>
+		<Res id="normalRep2TT" tr="Izvještaj sa tabelarnim pregledom, sumom i manjim dodacima"/>
+		<Res id="fallRep" tr="Podgrupni1"/>
+		<Res id="fallRepTT" tr="Izvještaj sa podgrupama i njihovim sumama. Tekst napomene nakon izvještaja"/>
+		<Res id="fallRep2" tr="Podgrupni2"/>
+		<Res id="fallRep2TT" tr="Izvještaj sa podgrupama i njihovim sumama. Tekst napomene nakon izvještaja"/>
+		<Res id="Rep" tr="Etikete"/>
+		<Res id="RepTT" tr="Prikaz ispisa etiketa sa konteksnim menijem i interakcijom sa formoom za unos"/>
+
+		<!-- context menus-->
+		<Res id="Info" tr="Info (skok na formu za unos)"/>
+		<Res id="Details" tr="Detalji (skok na formu za unos)"/>
+
+		<!-- Settings -->
+		<Res id="settings" tr="Podešenja"/>
+        <Res id="settingsTT" tr="Podešenja (trenutno samo jezik)"/>
+		<Res id="dlgSettings" tr="Podešenja"/>
+		<Res id="lblLang" tr="Trenutni jezik aplikacija:"/>
+		<Res id="lblLang2" tr="Jezik aplikacije nakon njenog restarta:"/>
+		<Res id="chbTBIcsAndLbls" tr="Prikaži labele ispod ikona na glavnoj alatnoj traci"/>
+		<Res id="chbRepTBLabels" tr="Prikaži labele ispod ikona na report alatnoj traci"/>
+	</Translations>
+</DevRes>

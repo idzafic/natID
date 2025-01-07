@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DocFooter designWidth="170">
+	<CompositeText hAlign="left" vAlign="top" font="Body" y="0.3" width="-1" height="5" html="yes" wrap="word">
+		<TrText lbl="<b>" trLbl="false" name="Total"/>	
+		<StaticText name=":</b>"/>	
+		<ValueText type="decimal2" lbl=" <i>" trLbl="false" link="Footer/TotVal"/>
+		<Text name="#DocMoneySymb"/>
+		<Text lbl="</i> (" trLbl="false" name="#DocMoneyUnit"/>
+		<StaticText name=")"/>
+	</CompositeText>	
+</DocFooter>

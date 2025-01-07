@@ -1,0 +1,65 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+		<Res id="ShapeEditor" tr="Shape editor"/>
+		<Res id="Properties" tr="Properties"/>
+		<Res id="settings" tr="Settings"/>
+		<Res id="settingsTT" tr="Application adjustments (language and other visual properties.s)"/>
+		<Res id="rect" tr="Rectangle"/>
+		<Res id="rectTT" tr="Rectangle tool"/>	
+		<Res id="rndRct" tr="Rounded rectangle"/>
+		<Res id="rndRctTT" tr="Rounded rectange tool"/>
+		<Res id="circ" tr="Circle"/>
+		<Res id="circTT" tr="Circle tool"/>	
+		<Res id="Open" tr="Open"/>
+		<Res id="openTT" tr="Open existing model"/>
+		<Res id="Defaults" tr="Defaults"/>
+		
+		<Res id="GeomData" tr="Geometry parameters"/>
+		<Res id="RectWidth" tr="Rect width:"/>
+		<Res id="RectWidthTT" tr="Width of rectangles and rounded rectangles"/>
+		<Res id="RectHeight" tr="Rect height:"/>
+		<Res id="RectHeightTT" tr="Height of rectangles and rounded rectangles"/>
+		<Res id="RoundRadius" tr="Round radius:"/>
+		<Res id="RoundRadiusTT" tr="Radius for rounded rectangles"/>
+
+		<Res id="LineWidth" tr="Line width:"/>
+		<Res id="LineWidthTT" tr="Width of lines"/>
+		<Res id="CircleRadius" tr="Circle radius:"/>
+		<Res id="CircleRadiusTT" tr="Radius of circles"/>
+		
+
+		<Res id="VisualData" tr="Visual parameters"/>
+		<Res id="Attribs" tr="Attribs:"/>
+		<Res id="FillColor" tr="Fill color:"/>
+		<Res id="LineColor" tr="Line color:"/>
+		<Res id="LinePattern" tr="Line pattern:"/>
+		<Res id="TestBool" tr="Test bool:"/>
+
+		<Res id="Rectangle" tr="Rectangle"/>
+		<Res id="RoundedRect" tr="Rounded Rect"/>
+		<Res id="Circle" tr="Circle"/>
+		
+		<Res id="PosAndRadius" tr="Position and radius"/>
+		<Res id="SizeAndPosition" tr="Size and position"/>
+		<Res id="Left" tr="Left:"/>
+		<Res id="Top" tr="Top:"/>
+		<Res id="With" tr="With:"/>
+		<Res id="Height" tr="Height:"/>
+
+		<Res id="SetFront" tr="Bring to front"/>
+		<Res id="SetBack" tr="Bring to background"/>
+		<Res id="Delete" tr="Delete"/>
+
+		<!-- Settings -->
+        <Res id="dlgSettings" tr="Settings"/>
+        <Res id="lblLang" tr="Current application language:"/>
+        <Res id="lblLang2" tr="Application language after application's restart:"/>
+        <Res id="chbTBIcsAndLbls" tr="Show labels below icons on main toolbar"/>
+		<Res id="RestartRequired" tr="Restart the application"/>
+		<Res id="RestartRequiredInfo" tr="Some of the changed settings require restarting the application to take effect"/>
+		<Res id="Restart" tr="Restart"/>
+		<Res id="DoNoRestart" tr="Don't restart"/>
+
+	</Translations>
+</DevRes>

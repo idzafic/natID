@@ -1,0 +1,21 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+		<Res id="open" tr="Open"/>
+		<Res id="openTT" tr="Open existing model"/>
+		<Res id="save" tr="Save"/>
+		<Res id="saveTT" tr="Save model"/>
+		<Res id="rect" tr="Rectangle"/>
+		<Res id="rectTT" tr="Draw Rectangle"/>
+		<Res id="appTitle" tr="View Introduction"/>
+		<Res id="mOpen" tr="Load model option has been activated!"/>
+		<Res id="mSave" tr="Save model option has been activated!"/>
+		<Res id="mRect" tr="Rectangle drawing option has been activated!"/>
+		<Res id="name" tr="Item name:"/>
+		<Res id="quant" tr="Quantity:"/>
+		<Res id="price" tr="Price:"/>
+		<Res id="value" tr="Value:"/>
+		<Res id="add" tr="Add"/>
+		<Res id="delete" tr="Delete"/>
+	</Translations>
+</DevRes>

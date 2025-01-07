@@ -1,0 +1,65 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+		<Res id="ShapeEditor" tr="Uređivač (editor) grafičkih primitiva"/>
+		<Res id="Properties" tr="Podešenja"/>
+		<Res id="settings" tr="Podešenja"/>
+		<Res id="settingsTT" tr="Podešenja aplikacije kao što su jezik i ostali parametri."/>
+		<Res id="rect" tr="Pravougaonik"/>
+		<Res id="rectTT" tr="Crtanje pravougaonika"/>	
+		<Res id="rndRct" tr="Obli pravougaonik"/>
+		<Res id="rndRctTT" tr="Crtanje zaobljenih pravougaonika"/>
+		<Res id="circ" tr="Krug"/>
+		<Res id="circTT" tr="Crtanje kružnica"/>
+		<Res id="Open" tr="Otvori"/>
+		<Res id="openTT" tr="Otvori postojeći model"/>
+
+		<Res id="Defaults" tr="Zadane postavke"/>
+		<Res id="GeomData" tr="Geometrijski parametri"/>
+		<Res id="RectWidth" tr="Širina pravougaonika:"/>
+		<Res id="RectWidthTT" tr="Širina pravougaonika i zaobljenih pravougaonika"/>
+		<Res id="RectHeight" tr="Visina pravougaonika:"/>
+		<Res id="RectHeightTT" tr="Visina pravougaonika i zaobljenih pravougaonika"/>
+		<Res id="RoundRadius" tr="Radijus zakrivljenja:"/>
+		<Res id="RoundRadiusTT" tr="Radijus zakrivljenja za zaobljene pravougaonike"/>
+		
+		<Res id="LineWidth" tr="Debljina linije:"/>
+		<Res id="LineWidthTT" tr="Debljina linije"/>
+		<Res id="CircleRadius" tr="Radijus:"/>
+		<Res id="CircleRadiusTT" tr="Radijus kružnice"/>
+		
+
+		<Res id="VisualData" tr="Vizuelni parametri"/>
+		<Res id="Attribs" tr="Aributi:"/>
+		<Res id="FillColor" tr="Boja ispune:"/>
+		<Res id="LineColor" tr="Boja linije:"/>
+		<Res id="LinePattern" tr="Oblike linije:"/>
+		<Res id="TestBool" tr="Testiranje bool-a:"/>
+
+		<Res id="Rectangle" tr="Pravougaonik"/>
+		<Res id="RoundedRect" tr="Zaobljeni pravougaonik"/>
+		<Res id="Circle" tr="Krug / kružnica"/>
+
+		<Res id="PosAndRadius" tr="Pozicija i radijus"/>
+		<Res id="SizeAndPosition" tr="Dimenzija i pozicija"/>
+		<Res id="Left" tr="Lijevo:"/>
+		<Res id="Top" tr="Vrh:"/>
+		<Res id="With" tr="Širina:"/>
+		<Res id="Height" tr="Visina:"/>
+
+		<Res id="SetFront" tr="Postavi naprijed"/>
+		<Res id="SetBack" tr="Postavi nazad"/>
+		<Res id="Delete" tr="Pobriši"/>
+		
+		<!-- Settings -->
+
+        <Res id="dlgSettings" tr="Podešenja"/>
+        <Res id="lblLang" tr="Trenutni jezik aplikacija:"/>
+        <Res id="lblLang2" tr="Jezik aplikacije nakon njenog restarta:"/>
+        <Res id="chbTBIcsAndLbls" tr="Prikaži labele ispod ikona na alatnoj traci"/>
+		<Res id="RestartRequired" tr="Restartovati aplikaciju"/>
+		<Res id="RestartRequiredInfo" tr="Neke od promijenjenih postavki zahtijevaju ponovno pokretanje aplikacije kako bi bile primijenjene"/>
+		<Res id="Restart" tr="Restartovati"/>
+		<Res id="DoNoRestart" tr="Nemoj restartovati"/>
+	</Translations>
+</DevRes>

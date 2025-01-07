@@ -1,0 +1,20 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+		<Res id="zoomIn" tr="Povećaj"/>
+		<Res id="zoomInTT" tr="Povećaj (zumiraj) sadržaj"/>
+		
+		<Res id="zoomOut" tr="Smanji sadržaj"/>
+		<Res id="zoomOutTT" tr="Smanji sadržaj (zoom-out)"/>
+		
+		<Res id="rect" tr="Pravougaonik"/>
+		<Res id="rectTT" tr="Crtanje pravougaonika"/>	
+		<Res id="rndRct" tr="Obli pravougaonik"/>
+		<Res id="rndRctTT" tr="Crtanje zaobljenih pravougaonika"/>
+		<Res id="circ" tr="Krug"/>
+		<Res id="circTT" tr="Crtanje kružnica"/>
+		<Res id="Open" tr="Otvori"/>
+		<Res id="openTT" tr="Otvori postojeći model"/>
+		
+	</Translations>
+</DevRes>

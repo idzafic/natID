@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Fonts>
+	<Group id="Extern">
+		<Font id="AddFonts" family="Times New Roman" size="11.0" bold="false" italic="false" underline="false"/>
+		<Font id="Body" family="Times New Roman" size="10.0" bold="false" italic="false" underline="false"/>
+		<Font id="BodyFoot" family="Times New Roman" size="10.0" bold="true" italic="false" underline="false"/>
+		<Font id="BodyHead" family="Times New Roman" size="10.0" bold="false" italic="false" underline="false"/>
+		<Font id="BodySubFoot" family="Times New Roman" size="10.0" bold="false" italic="true" underline="false"/>
+		<Font id="BodySubHead" family="Times New Roman" size="10.0" bold="false" italic="true" underline="false"/>
+		<Font id="ByWords" family="Times New Roman" size="9.0" bold="false" italic="true" underline="false"/>
+		<Font id="DocuDesc" family="Times New Roman" size="10.0" bold="false" italic="false" underline="false"/>
+		<Font id="DocuDescBig" family="Times New Roman" size="11.0" bold="false" italic="false" underline="false"/>
+		<Font id="DocuName" family="Times New Roman" size="13.0" bold="true" italic="false" underline="false"/>
+		<Font id="DocuSummary" family="Times New Roman" size="10.0" bold="false" italic="false" underline="false"/>
+		<Font id="Foot" family="Times New Roman" size="90" bold="false" italic="false" underline="false"/>
+		<Font id="FootBold" family="Times New Roman" size="90" bold="false" italic="false" underline="false"/>
+		<Font id="Grouper1" family="Times New Roman" size="100" bold="true" italic="false" underline="false"/>
+		<Font id="Grouper2" family="Times New Roman" size="100" bold="true" italic="true" underline="false"/>
+		<Font id="Grouper3" family="Times New Roman" size="100" bold="false" italic="true" underline="false"/>
+		<Font id="Head" family="Times New Roman" size="90" bold="false" italic="false" underline="false"/>
+		<Font id="HeadBold" family="Times New Roman" size="90" bold="true" italic="false" underline="false"/>
+		<Font id="KUF" family="Times New Roman" size="80" bold="false" italic="false" underline="false"/>
+		<Font id="KUFBold" family="Times New Roman" size="80" bold="true" italic="false" underline="false"/>
+		<Font id="KUFMid" family="Times New Roman" size="75" bold="false" italic="false" underline="false"/>
+		<Font id="KUFMidBold" family="Times New Roman" size="75" bold="true" italic="false" underline="false"/>
+		<Font id="KUFSmall" family="Times New Roman" size="70" bold="false" italic="false" underline="false"/>
+		<Font id="MemoF1" family="Arial" size="100" bold="false" italic="false" underline="false"/>
+		<Font id="MemoF2" family="Arial" size="90" bold="false" italic="false" underline="false"/>
+		<Font id="MemoF3" family="Arial" size="85" bold="false" italic="false" underline="false"/>
+		<Font id="MemoH1" family="Times New Roman" size="140" bold="false" italic="false" underline="false"/>
+		<Font id="MemoH2" family="Times New Roman" size="130" bold="false" italic="false" underline="false"/>
+		<Font id="MemoH3" family="Times New Roman" size="120" bold="false" italic="false" underline="false"/>
+		<Font id="Note" family="Times New Roman" size="95" bold="false" italic="false" underline="false"/>
+		<Font id="PageFoot" family="Arial" size="90" bold="false" italic="false" underline="false"/>
+		<Font id="PageHead" family="Arial" size="90" bold="false" italic="false" underline="false"/>
+		<Font id="ShowF1" family="Times New Roman" size="100" bold="true" italic="false" underline="false"/>
+		<Font id="ShowF2" family="Times New Roman" size="220" bold="true" italic="false" underline="false"/>
+		<Font id="ShowF2b" family="Times New Roman" size="190" bold="true" italic="false" underline="false"/>
+		<Font id="ShowF3" family="Times New Roman" size="340" bold="true" italic="false" underline="false"/>
+		<Font id="ShowF3b" family="Times New Roman" size="280" bold="true" italic="false" underline="false"/>
+		<Font id="TableBody" family="Times New Roman" size="100" bold="false" italic="false" underline="false"/>
+		<Font id="TableBodyFoot" family="Times New Roman" size="100" bold="true" italic="false" underline="false"/>
+	</Group>
+	<Group id="Intern">
+		<Font id="AddFonts" family="Times New Roman" size="110" bold="false" italic="false" underline="false"/>
+		<Font id="Body" family="Times New Roman" size="100" bold="false" italic="false" underline="false"/>
+		<Font id="BodyFoot" family="Times New Roman" size="100" bold="true" italic="false" underline="false"/>
+		<Font id="BodyHead" family="Times New Roman" size="100" bold="false" italic="false" underline="false"/>
+		<Font id="BodySubFoot" family="Times New Roman" size="100" bold="false" italic="true" underline="false"/>
+		<Font id="BodySubHead" family="Times New Roman" size="100" bold="false" italic="true" underline="false"/>
+		<Font id="ByWords" family="Times New Roman" size="90" bold="false" italic="true" underline="false"/>
+		<Font id="DocuDesc" family="Times New Roman" size="100" bold="false" italic="false" underline="false"/>
+		<Font id="DocuDescBig" family="Times New Roman" size="110" bold="false" italic="false" underline="false"/>
+		<Font id="DocuName" family="Times New Roman" size="130" bold="true" italic="false" underline="false"/>
+		<Font id="DocuSummary" family="Times New Roman" size="100" bold="false" italic="false" underline="false"/>
+		<Font id="Foot" family="Times New Roman" size="90" bold="false" italic="false" underline="false"/>
+		<Font id="FootBold" family="Times New Roman" size="90" bold="false" italic="false" underline="false"/>
+		<Font id="Grouper1" family="Times New Roman" size="100" bold="true" italic="false" underline="false"/>
+		<Font id="Grouper2" family="Times New Roman" size="100" bold="true" italic="true" underline="false"/>
+		<Font id="Grouper3" family="Times New Roman" size="100" bold="false" italic="true" underline="false"/>
+		<Font id="Head" family="Times New Roman" size="90" bold="false" italic="false" underline="false"/>
+		<Font id="HeadBold" family="Times New Roman" size="90" bold="true" italic="false" underline="false"/>
+		<Font id="KUF" family="Times New Roman" size="80" bold="false" italic="false" underline="false"/>
+		<Font id="KUFBold" family="Times New Roman" size="80" bold="true" italic="false" underline="false"/>
+		<Font id="KUFMid" family="Times New Roman" size="75" bold="false" italic="false" underline="false"/>
+		<Font id="KUFMidBold" family="Times New Roman" size="75" bold="true" italic="false" underline="false"/>
+		<Font id="KUFSmall" family="Times New Roman" size="70" bold="false" italic="false" underline="false"/>
+		<Font id="MemoF1" family="Arial" size="100" bold="false" italic="false" underline="false"/>
+		<Font id="MemoF2" family="Arial" size="90" bold="false" italic="false" underline="false"/>
+		<Font id="MemoF3" family="Arial" size="85" bold="false" italic="false" underline="false"/>
+		<Font id="MemoH1" family="Times New Roman" size="125" bold="false" italic="false" underline="false"/>
+		<Font id="MemoH2" family="Times New Roman" size="115" bold="false" italic="false" underline="false"/>
+		<Font id="MemoH3" family="Times New Roman" size="110" bold="false" italic="false" underline="false"/>
+		<Font id="Note" family="Times New Roman" size="95" bold="false" italic="false" underline="false"/>
+		<Font id="PageFoot" family="Arial" size="90" bold="false" italic="false" underline="false"/>
+		<Font id="PageHead" family="Arial" size="90" bold="false" italic="false" underline="false"/>
+		<Font id="ShowF1" family="Times New Roman" size="100" bold="true" italic="false" underline="false"/>
+		<Font id="ShowF2" family="Times New Roman" size="180" bold="true" italic="false" underline="false"/>
+		<Font id="ShowF2b" family="Times New Roman" size="190" bold="true" italic="false" underline="false"/>
+		<Font id="ShowF3" family="Times New Roman" size="240" bold="true" italic="false" underline="false"/>
+		<Font id="ShowF3b" family="Times New Roman" size="280" bold="true" italic="false" underline="false"/>
+		<Font id="TableBody" family="Times New Roman" size="100" bold="false" italic="false" underline="false"/>
+		<Font id="TableBodyFoot" family="Times New Roman" size="100" bold="true" italic="false" underline="false"/>
+	</Group>
+</Fonts>

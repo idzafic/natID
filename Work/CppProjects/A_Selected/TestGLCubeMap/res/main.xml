@@ -1,0 +1,78 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="export" path="Work/Common/Icons/export48.png"/>
+	</Images>
+	<Texts>
+		<!--- all from res folder -->
+		<Res id="shCubeVert" path=":shaders/cube.vert"/>
+		<Res id="shCubeFrag" path=":shaders/cube.frag"/>
+		<Res id="shSphereVert" path=":shaders/sphere.vert"/>
+		<Res id="shSphereFrag" path=":shaders/sphere.frag"/>
+	</Texts>
+	<FileNames>
+		<!-- Cube Map 0 -->
+		<Res id="cm0Left" path="Work/Common/Images/CubeMaps/diceNumbers_Left.jpg"/>
+		<Res id="cm0Front" path="Work/Common/Images/CubeMaps/diceNumbers_Front.jpg"/>
+		<Res id="cm0Right" path="Work/Common/Images/CubeMaps/diceNumbers_Right.jpg"/>
+		<Res id="cm0Back" path="Work/Common/Images/CubeMaps/diceNumbers_Back.jpg"/>
+		<Res id="cm0Top" path="Work/Common/Images/CubeMaps/diceNumbers_Top.jpg"/>
+		<Res id="cm0Bottom" path="Work/Common/Images/CubeMaps/diceNumbers_Bottom.jpg"/>
+
+		<!-- Cube Map 1 -->
+		<Res id="cm1Left" path="Work/Common/Images/CubeMaps/diceDot_Left.jpg"/>
+		<Res id="cm1Front" path="Work/Common/Images/CubeMaps/diceDot_Front.jpg"/>
+		<Res id="cm1Right" path="Work/Common/Images/CubeMaps/diceDot_Right.jpg"/>
+		<Res id="cm1Back" path="Work/Common/Images/CubeMaps/diceDot_Back.jpg"/>
+		<Res id="cm1Top" path="Work/Common/Images/CubeMaps/diceDot_Top.jpg"/>
+		<Res id="cm1Bottom" path="Work/Common/Images/CubeMaps/diceDot_Bottom.jpg"/>
+
+		<!-- Cube Map 2 -->
+		<Res id="cm2Left" path="Work/Common/Images/CubeMaps/earth_Left.jpg"/>
+		<Res id="cm2Front" path="Work/Common/Images/CubeMaps/earth_Front.jpg"/>
+		<Res id="cm2Right" path="Work/Common/Images/CubeMaps/earth_Right.jpg"/>
+		<Res id="cm2Back" path="Work/Common/Images/CubeMaps/earth_Back.jpg"/>
+		<Res id="cm2Top" path="Work/Common/Images/CubeMaps/earth_Top.jpg"/>
+		<Res id="cm2Bottom" path="Work/Common/Images/CubeMaps/earth_Bottom.jpg"/>
+
+		<!-- Cube Map 3 -->
+		<Res id="cm3Left" path="Work/Common/Images/CubeMaps/sand_Left.jpg"/>
+		<Res id="cm3Front" path="Work/Common/Images/CubeMaps/sand_Front.jpg"/>
+		<Res id="cm3Right" path="Work/Common/Images/CubeMaps/sand_Right.jpg"/>
+		<Res id="cm3Back" path="Work/Common/Images/CubeMaps/sand_Back.jpg"/>
+		<Res id="cm3Top" path="Work/Common/Images/CubeMaps/sand_Top.jpg"/>
+		<Res id="cm3Bottom" path="Work/Common/Images/CubeMaps/sand_Bottom.jpg"/>
+
+		<!-- Planets -->
+		<Res id="earth" path="Work/Common/Images/Planets/planets/earth2k.jpg"/>
+		<Res id="venus" path="Work/Common/Images/Planets/planets/2k_venus.jpg"/>
+
+		<!-- Fonts -->
+		<Res id="arcade" path="other_bin/TestData/natGL/Fonts/Arcade32.text"/> <!-- ascii only -->
+		<Res id="arcadeClasic" path="other_bin/TestData/natGL/Fonts/ArcadeClassic32.text"/> <!-- ascii only -->
+
+		<Res id="arial" path="other_bin/TestData/natGL/Fonts/Arial32.text"/>
+		<Res id="arialb" path="other_bin/TestData/natGL/Fonts/Arial32b.text"/>
+		<Res id="ariali" path="other_bin/TestData/natGL/Fonts/Arial32i.text"/>
+		<Res id="arialbi" path="other_bin/TestData/natGL/Fonts/Arial32bi.text"/>
+
+		<Res id="goodTiming" path="other_bin/TestData/natGL/Fonts/Good Timing32.text"/>
+		
+		<Res id="korataki" path="other_bin/TestData/natGL/Fonts/Korataki32.text"/>
+		<Res id="lucida" path="other_bin/TestData/natGL/Fonts/Lucida32.text"/>
+		
+		<Res id="neuropol" path="other_bin/TestData/natGL/Fonts/Neuropolitical32.text"/>
+		<Res id="pilgi" path="other_bin/TestData/natGL/Fonts/PilGi32.text"/>
+		<Res id="recharge" path="other_bin/TestData/natGL/Fonts/Recharge32.text"/>
+		
+		<Res id="times" path="other_bin/TestData/natGL/Fonts/Times New Roman32.text"/>
+		<Res id="timesb" path="other_bin/TestData/natGL/Fonts/Times New Roman32b.text"/>
+		<Res id="timesi" path="other_bin/TestData/natGL/Fonts/Times New Roman32i.text"/>
+		<Res id="timesbi" path="other_bin/TestData/natGL/Fonts/Times New Roman32bi.text"/>
+
+		<Res id="videoPhreak" path="other_bin/TestData/natGL/Fonts/Videophreak32.text"/> <!-- ascii only -->
+		<Res id="vinq" path="other_bin/TestData/natGL/Fonts/Vinque32.text"/>
+		<Res id="zaphino" path="other_bin/TestData/natGL/Fonts/Zapfino64.text"/>
+		
+	</FileNames>
+</DevRes>

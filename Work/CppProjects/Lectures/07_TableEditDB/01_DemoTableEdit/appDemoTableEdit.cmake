@@ -1,0 +1,27 @@
+set(APPDEMOTABLEEDIT_NAME appDemoTableEdit)				#Naziv prvog projekta u solution-u
+
+file(GLOB APPDEMOTABLEEDIT_SOURCES  ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
+file(GLOB APPDEMOTABLEEDIT_INCS  ${CMAKE_CURRENT_LIST_DIR}/src/*.h)
+set(APPDEMOTABLEEDIT_PLIST  ${CMAKE_CURRENT_LIST_DIR}/src/Info.plist)
+file(GLOB APPDEMOTABLEEDIT_INC_TD  ${MY_INC}/td/*.h)
+file(GLOB APPDEMOTABLEEDIT_INC_GUI ${MY_INC}/gui/*.h)
+file(GLOB APPDEMOTABLEEDIT_INC_DP ${MY_INC}/dp/*.h)
+
+# add executable
+add_executable(${APPDEMOTABLEEDIT_NAME} ${APPDEMOTABLEEDIT_INCS} ${APPDEMOTABLEEDIT_SOURCES} ${APPDEMOTABLEEDIT_INC_TD}  
+				${APPDEMOTABLEEDIT_INC_GUI} ${APPDEMOTABLEEDIT_INC_DP})
+
+source_group("inc"            FILES ${APPDEMOTABLEEDIT_INCS})
+source_group("inc\\td"        FILES ${APPDEMOTABLEEDIT_INC_TD})
+source_group("inc\\gui"        FILES ${APPDEMOTABLEEDIT_INC_GUI})
+source_group("inc\\dp"        FILES ${APPDEMOTABLEEDIT_INC_DP})
+source_group("src"            FILES ${APPDEMOTABLEEDIT_SOURCES})
+
+target_link_libraries(${APPDEMOTABLEEDIT_NAME} debug ${MU_LIB_DEBUG} debug ${NATGUI_LIB_DEBUG} debug ${DP_LIB_DEBUG}
+										optimized ${MU_LIB_RELEASE} optimized ${NATGUI_LIB_RELEASE} optimized ${DP_LIB_RELEASE})
+
+setTargetPropertiesForGUIApp(${APPDEMOTABLEEDIT_NAME} ${APPDEMOTABLEEDIT_PLIST})
+
+setIDEPropertiesForGUIExecutable(${APPDEMOTABLEEDIT_NAME} ${CMAKE_CURRENT_LIST_DIR})
+
+setPlatformDLLPath(${APPDEMOTABLEEDIT_NAME})

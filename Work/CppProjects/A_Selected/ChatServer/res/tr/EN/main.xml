@@ -1,0 +1,14 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+		<Res id="closeNOK" tr="Cannot close"/>
+		<Res id="closeErr" tr="You need first to stop the server and then close the app."/>
+		<Res id="start" tr="Start"/>
+		<Res id="stop" tr="Stop"/>
+		<Res id="settings" tr="Settings"/>
+		<Res id="info" tr="Launch the web browser and enter the address: localhost:2504. 
+Optionally, click on the chat link, then log in using the button in the bottom right corner with one of the predefined users: Amir (pwd: AmirA), Damir (pwd: DamirD), Emir (pwd: EmirE), or Samir (pwd: SamirS).
+Next, start the ChatClient application and click the connect button on the toolbar. Use one of the predefined users for the login.
+You can now exchange messages between the web browser and the C++ client application."/>
+	</Translations>
+</DevRes>

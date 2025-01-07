@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Colors>
+	<Color id="BackBody" type="Black" a="255"/>
+	<Color id="BackFoot" type="Black" a="255"/>
+	<Color id="BackGrouper1" type="Black" a="255"/>
+	<Color id="BackGrouper2" type="Black" a="255"/>
+	<Color id="BackHead" type="Black" a="255"/>
+	<Color id="BackSubFoot" type="Black" a="255"/>
+	<Color id="BackSubHead" type="Black" a="255"/>
+	<Color id="BackTableBody" type="Black" a="255"/>
+	<Color id="BackTableFoot" type="Black" a="255"/>
+	<Color id="BackTableHead" type="Black" a="255"/>
+	<Color id="Warning" type="Red" a="255"/>
+</Colors>

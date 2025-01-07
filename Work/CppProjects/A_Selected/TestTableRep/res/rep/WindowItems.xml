@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report paperOrientation="portrait" paperSize="A4" resGroup="Intern" tr="Reports">
+	<Layout type="replicate" lMargin="3" tMargin="3" rMargin="3" bMargin="3">
+		<Repli dL="2" dT="2" dR="2" dB="2" nHRep="3" nVRep="6" width="64" height="44.5" vAlign="center" >
+			<Rectangle lineWidth="0.6" lineStyle="solid" x="0" y="0" width="-1" height="-1"/>
+			
+			<Line lineWidth="0.4" lineStyle="solid" x="0" y="5" width="-1" height="0"/>
+			<Line lineWidth="0.4" lineStyle="solid" x="0" y="10" width="-1" height="0"/>		
+			<Line lineWidth="0.4" lineStyle="solid" x="0" y="15" width="-1" height="0"/>				
+			<Line lineWidth="0.4" lineStyle="solid" x="0" y="32" width="-1" height="0"/>
+
+			<ResText hAlign="center" font="Body" width="-1" height="4.5" name="Company1"/>
+			
+			<CompositeText hAlign="center" font="Body" x="0" y="5" width="64" height="5">
+				<TrText name="Šifra: "/>
+				<Numeric type="int4" showThSep="false" name="ID"/>
+			</CompositeText>
+			
+			<CompositeText hAlign="center" font="Body" x="0" y="10" width="64" height="5">
+				<TrText name="Dostupna količina: "/>
+				<Numeric type="decimal3" showThSep="false" name="Quant"/>
+			</CompositeText>
+		
+			<Text hAlign="center" font="ShowF2b" x="0" y="15" width="-1" height="17" menuID="10" wrap="word" name="Name"/> <!-- wrap= no, word, any -->
+			
+			<TrText hAlign="left" font="ShowF2b" x="1" y="32" width="20" height="12.5" name="Price:"/>
+			<Numeric type="decimal2" hAlign="right" font="ShowF2b" x="0" y="32" width="56" height="12.5" name="Price"/>		
+			<Text hAlign="center" vAlign="bottom" font="Body" x="56" y="32" width="8" height="8.5" name="#DocMoneySymb"/>
+		
+		</Repli>
+	</Layout>
+</Report>

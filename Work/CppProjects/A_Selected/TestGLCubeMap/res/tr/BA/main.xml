@@ -1,0 +1,19 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+		<Res id="something" tr="Ćevapčići u žiži DŠČĆŽ..."/>
+		<Res id="speedAndType" tr="Brzina i tip"/>
+		<Res id="speedAndTypeTT" tr="Brzina i tip"/>
+		<Res id="exportTT" tr="Sacuvati scenu kao sliku"/>
+
+		        <!-- Settings -->
+        <Res id="dlgSettings" tr="Podešenja"/>
+        <Res id="lblLang" tr="Trenutni jezik aplikacija:"/>
+        <Res id="lblLang2" tr="Jezik aplikacije nakon njenog restarta:"/>
+        <Res id="chbTBIcsAndLbls" tr="Prikaži labele ispod ikona na alatnoj traci"/>
+		<Res id="RestartRequired" tr="Restartovati aplikaciju"/>
+		<Res id="RestartRequiredInfo" tr="Neke od promijenjenih postavki zahtijevaju ponovno pokretanje aplikacije kako bi bile primijenjene"/>
+		<Res id="Restart" tr="Restartovati"/>
+		<Res id="DoNoRestart" tr="Nemoj restartovati"/>
+	</Translations>
+</DevRes>

@@ -1,0 +1,35 @@
+set(APPWNDMENUANDTB_NAME appWndMenuTB)				#Naziv prvog projekta u solution-u
+
+file(GLOB APPWNDMENUANDTB_SOURCES  ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
+file(GLOB APPWNDMENUANDTB_INCS  ${CMAKE_CURRENT_LIST_DIR}/src/*.h)
+set(APPWNDMENUANDTB_PLIST  ${CMAKE_CURRENT_LIST_DIR}/src/Info.plist)
+file(GLOB APPWNDMENUANDTB_INC_TD  ${MY_INC}/td/*.h)
+file(GLOB APPWNDMENUANDTB_INC_GUI ${MY_INC}/gui/*.h)
+
+#Application icon
+set(APPWNDMENUANDTB_PLIST  ${CMAKE_CURRENT_LIST_DIR}/res/appIcon/AppIcon.plist)
+if(WIN32)
+	set(APPWNDMENUANDTB_APP_ICON ${CMAKE_CURRENT_LIST_DIR}/res/appIcon/winAppIcon.rc)
+else()
+	set(APPWNDMENUANDTB_APP_ICON ${CMAKE_CURRENT_LIST_DIR}/res/appIcon/winAppIcon.cpp)
+endif()
+
+# add executable
+add_executable(${APPWNDMENUANDTB_NAME} ${APPWNDMENUANDTB_INCS} ${APPWNDMENUANDTB_SOURCES} ${APPWNDMENUANDTB_INC_TD}  
+				${APPWNDMENUANDTB_INC_GUI} ${APPWNDMENUANDTB_APP_ICON})
+
+source_group("inc"            FILES ${APPWNDMENUANDTB_INCS})
+source_group("inc\\td"        FILES ${APPWNDMENUANDTB_INC_TD})
+source_group("inc\\gui"        FILES ${APPWNDMENUANDTB_INC_GUI})
+source_group("src"            FILES ${APPWNDMENUANDTB_SOURCES})
+
+target_link_libraries(${APPWNDMENUANDTB_NAME} debug ${MU_LIB_DEBUG} debug ${NATGUI_LIB_DEBUG} 
+										optimized ${MU_LIB_RELEASE} optimized ${NATGUI_LIB_RELEASE})
+
+setTargetPropertiesForGUIApp(${APPWNDMENUANDTB_NAME} ${APPWNDMENUANDTB_PLIST})
+
+setAppIcon(${APPWNDMENUANDTB_NAME} ${CMAKE_CURRENT_LIST_DIR})
+
+setIDEPropertiesForGUIExecutable(${APPWNDMENUANDTB_NAME} ${CMAKE_CURRENT_LIST_DIR})
+
+setPlatformDLLPath(${APPWNDMENUANDTB_NAME})

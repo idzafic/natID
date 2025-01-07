@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="add" path="Work/Common/Icons/Add48.png"/>
+		<Res id="mvLeft" path="Work/Common/Icons/arrow_left.png"/>
+		<Res id="mvRight" path="Work/Common/Icons/arrow_right.png"/>
+		<Res id="rem" path="Work/Common/Icons/Del64.png"/>
+		<Res id="remAll" path="Work/Common/Icons/delete48.png"/>
+		<Res id="ETF" path = "Work/Common/Icons/UNSA/ETF_Logo.png"/>
+		<Res id="UNSA" path = "Work/Common/Icons/UNSA/UNSA_Logo.png"/>
+		<Res id="Home" path = "Work/Common/Icons/Traditional-HomeXL.png"/>
+		<Res id="TransCost" path = "Work/Common/Icons/transportCostXL.png"/>
+		
+		<Res id="complex" path = "Work/Common/Icons/bh_flag.png"/>
+		<Res id="scroll" path = "Work/Common/Icons/Assortment64.png"/>
+		<Res id="table" path = "Work/Common/Icons/connOK.png"/>
+		<Res id="horiz" path = "Work/Common/Icons/Sestar64.png"/>
+		<Res id="vert" path = "Work/Common/Icons/SettingsBlue48.png"/>
+		<Res id="standard" path = "Work/Common/Icons/Sync_ON64.png"/>
+		<Res id="navigator" path = "Work/Common/Icons/time.png"/>
+	</Images>
+	<Symbols>
+		<Res id="bus" path="Work/Common/Symbols/PSA/bus.xml"/>
+		<Res id="ASArrowTL" path="Work/Common/Symbols/PSA/ASArrowTL.xml"/>
+		<Res id="resistor" path="Work/Common/Symbols/PSA/resistor.xml"/>
+		<Res id="load" path="Work/Common/Symbols/PSA/load.xml"/>
+		<Res id="shunt" path="Work/Common/Symbols/PSA/shunt.xml"/>
+		<Res id="inductor" path="Work/Common/Symbols/PSA/inductor.xml"/>
+		<Res id="capacitor" path="Work/Common/Symbols/PSA/capacitor.xml"/>
+		<Res id="generator" path="Work/Common/Symbols/PSA/generator.xml"/>
+		<Res id="ASSynchComp" path="Work/Common/Symbols/PSA/ASSynchComp.xml"/>
+		<Res id="ASAlternate" path="Work/Common/Symbols/PSA/ASAlternate.xml"/>
+		<Res id="ASGen" path="Work/Common/Symbols/PSA/ASGen.xml"/>
+		<Res id="ASMotor" path="Work/Common/Symbols/PSA/ASMotor.xml"/>
+		<Res id="breaker" path="Work/Common/Symbols/PSA/breaker.xml"/>
+		<Res id="disconctr" path="Work/Common/Symbols/PSA/disconnector.xml"/>
+		<Res id="fuse" path="Work/Common/Symbols/PSA/fuse.xml"/>
+		<Res id="Xfmr2" path="Work/Common/Symbols/PSA/TwoWindingTransformer.xml"/>
+		<Res id="Xfmr3" path="Work/Common/Symbols/PSA/ThreeWindingTransformer.xml"/>
+		<Res id="Xfmr4" path="Work/Common/Symbols/PSA/FourWindingTransformer.xml"/>
+		<Res id="TestArc" path="Work/Common/Symbols/PSA/TestArc.xml"/>
+		<Res id="TestPie" path="Work/Common/Symbols/PSA/TestPie.xml"/>
+		<Res id="TestOval" path="Work/Common/Symbols/PSA/TestOval.xml"/>
+		<Res id="TestRoundRect" path="Work/Common/Symbols/PSA/TestRoundedRect.xml"/>
+	</Symbols>
+</DevRes>

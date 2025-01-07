@@ -1,0 +1,107 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+		<Res id="bus" tr="Sabirnica"/>
+		<Res id="busTT" tr="Sabirnica - element preko kojeg se spajaju ostali elementi"/>
+		<Res id="capacitor" tr="Kondenzator"/>
+		<Res id="capacitorTT" tr="Kondenzator - element koji generiše reaktivnu snagu"/>
+		<Res id="inductor" tr="Zavojnica"/>
+		<Res id="inductorTT" tr="Zavojnica - element koji troši reaktivnu snagu"/>
+		<Res id="resistor" tr="Otpornik"/>
+		<Res id="resistorTT" tr="Otpornik - element koji troši aktivnu snagu"/>
+		<Res id="R" tr="Ser. otpornik"/>
+		<Res id="RTT" tr="Serijski otpornik - element koji troši aktivnu snagu"/>
+		<Res id="L" tr="Ser. zavojnica"/>
+		<Res id="LTT" tr="Serijska zavojnica - element koji troši reaktivnu snagu"/>
+		<Res id="C" tr="Ser. kondenzator"/>
+		<Res id="CTT" tr="Serijski kondenzator - element koji proizvodi reaktivnu snagu"/>
+		<Res id="shunt" tr="Otočnik"/>
+		<Res id="shuntTT" tr="Otočni element"/>
+		<Res id="generator" tr="Generator"/>
+		<Res id="generatorTT" tr="Generator snage - element koji proizvodi aktivnu i reaktivnu snagu"/>
+		<Res id="SC" tr="Sinhroni komp."/>
+		<Res id="SCTT" tr="Sinhroni kompenzator - element koji proizvodi reaktivnu snagu"/>
+		<Res id="motor" tr="Motor"/>
+		<Res id="motorTT" tr="Motor - element koji el. snagu u mehaničku"/>
+		<Res id="load" tr="Potrošač"/>
+		<Res id="loadTT" tr="Potrošač - element koji troši aktivnu i reaktivnu snagu"/>
+		<Res id="Xfmr2" tr="Transformator"/>
+		<Res id="Xfmr2TT" tr="Dvonamotajni transformator"/>
+		<Res id="Xfmr3" tr="Tronamotajni transf."/>
+		<Res id="Xfmr3TT" tr="Tronamotajni transformator"/>
+		<Res id="Xfmr4" tr="Četvoronamotajni tr."/>
+		<Res id="Xfmr4TT" tr="Četvoronamotajni transformator"/>
+		<Res id="disconctr" tr="Rastavljač"/>
+		<Res id="disconctrTT" tr="Rastavljač - element sa kojim se upravlja u deenergiziranom stanju"/>
+		<Res id="breaker" tr="Prekidač snage"/>
+		<Res id="breakerTT" tr="Prekidač snage"/>
+		<Res id="fuse" tr="Osigurač"/>
+		<Res id="fuseTT" tr="Osigurač - neupravljivi element za zaštitu"/>
+		
+		<Res id="Name:" tr="Name:"/>
+		<Res id="Quant" tr="Quantity"/>
+		<Res id="QuantTT" tr="Tooltip for quantity"/>
+		<Res id="ProductN" tr="Product"/>
+		<Res id="ProductNTT" tr="Name of product"/>
+		<Res id="ItemID" tr="Item ID"/>
+		<Res id="ItemIDTT" tr="Item ID or its unique identifier"/>
+		<Res id="Price" tr="Price"/>
+		<Res id="PriceTT" tr="Item price"/>
+		<Res id="Value" tr="Value"/>
+		<Res id="ValueTT" tr="Item value"/>
+		<Res id="Date" tr="Date"/>
+		<Res id="DateTT" tr="Production date specified by producer"/>
+		<Res id="Time" tr="Time"/>
+		<Res id="TimeTT" tr="Production time specified by producer"/>
+		<Res id="Color" tr="Color"/>
+		<Res id="ColorTT" tr="Item color"/>
+		
+		<Res id="option1" tr="Option 1"/>
+		<Res id="option1TT" tr="Tooltip for option 1"/>
+		<Res id="option2" tr="Option 2"/>
+		<Res id="option2TT" tr="Tooltip for option 2"/>
+		<Res id="incSize" tr="Increase"/>
+		<Res id="incSizeTT" tr="Increase form size"/>
+		<Res id="decSize" tr="Decrease"/>
+		<Res id="decSizeTT" tr="Decrease form size"/>
+		<Res id="canvas" tr="Canvas"/>
+		<Res id="canvasTT" tr="Draw something in canvas"/>
+		
+		<Res id="Find" tr="Find"/>
+		<Res id="Reverse" tr="Reverse"/>
+		<Res id="ShowScrollViewer" tr="Prikaži Canvas ViewScroller"/>
+		<Res id="ShowSwitcher" tr="Prikaži ViewSwitcher"/>
+		<Res id="ShowNavig" tr="Prikaži navigator"/>
+		
+		<Res id="Total" tr="Total"/>
+
+		<Res id="settings" tr="Settings"/>
+		<Res id="settingsTT" tr="Adjust application settings"/>
+		<Res id="normalRep" tr="Report#1"/>
+		<Res id="normalRepTT" tr="Simple tabelar report with total sum."/>
+		<Res id="normalRep2" tr="Report#2"/>
+		<Res id="normalRep2TT" tr="Simple tabelar report with total sum and other details"/>
+		<Res id="fallRep" tr="Waterfall#1"/>
+		<Res id="fallRepTT" tr="Report with subgroups and their summs. Added notes after tabelar part."/>
+		<Res id="fallRep2" tr="Waterfall#2"/>
+		<Res id="fallRep2TT" tr="Report with subgroups and their summs. Added notes after tabelar part."/>
+		<Res id="Rep" tr="Labels"/>
+		<Res id="RepTT" tr="Demonstration of a report with labels. Added context menus for interaction with main form."/>
+
+		<!-- context menus-->
+		<Res id="Info" tr="Info (jump to main/edit form)"/>
+		<Res id="Details" tr="Details (jump to main/edit form)"/>
+		
+
+		<!-- Settings -->
+		<Res id="settings" tr="Settings"/>
+		<Res id="settingsTT" tr="Application settings (translation language)"/>
+
+		<Res id="dlgSettings" tr="Settings"/>
+		<Res id="lblLang" tr="Current application language:"/>
+		<Res id="lblLang2" tr="Application language after application's restart:"/>
+		<Res id="chbTBIcsAndLbls" tr="Show labels below icons on the main toolbar"/>
+		<Res id="chbRepTBLabels" tr="Show labels below icons on the report toolbar"/>
+
+	</Translations>
+</DevRes>

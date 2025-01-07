@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DocHeader layout="vertical" designWidth="170" height="15.5" hAlign="center" vAlign="center">
+	<Text font="DocuName" height="6" name="#DocType" width="170" hScale="1"/>
+	<CompositeText font="DocuDesc" height="4.5" width="170" hScale="1">
+		<Date dateFmt="DateWinShort" lbl="From date: " name="#DocFromDT"/>
+		<Date dateFmt="DateWinShort" lbl=" to date: " name="#DocToDT"/>
+	</CompositeText>
+	<CompositeText font="DocuDesc" height="4.5" width="170" hScale="1">
+		<Numeric type="int4" showThSep="false" lbl="Item ID: " name="ID"/>
+		<Text lbl=", item name: " name="Name"/>
+	</CompositeText>	
+</DocHeader>

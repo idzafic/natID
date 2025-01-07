@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<DevRes>
+    <Translations>
+        <Res id="appTitle" tr="Snake"/>
+        <Res id="start" tr="Start"/>
+        <Res id="startTT" tr="Start the animation"/>
+        <Res id="stop" tr="Stop"/>
+        <Res id="stopTT" tr="Stop the animation"/>
+        <Res id="Update" tr="Update"/>
+        <Res id="GZBeatHS:" tr="Congragtulation! Make a new best score: "/>
+	<Res id="Score:" tr="Score: "/>
+	<Res id="Highscore: " tr="Best score: "/>
+        <Res id="lblFreq" tr="Revolving per minute (RPM) [rev/min]:"/>
+        <Res id="lblColor" tr="Jet color:"/>
+        <Res id="etfColor" tr="Color of ETF part:"/>
+        <Res id="custColor" tr="Use custom jet color"/>
+        <Res id="closeNOK" tr="Error! Animation is running!"/>
+        <Res id="cloeErr" tr="Stop Animation and then close the app!"/>
+        <Res id="settings" tr="Settings"/>
+        <!-- Settings -->
+        <Res id="dlgSettings" tr="Settings"/>
+        <Res id="lblLang" tr="Current application language:"/>
+        <Res id="lblLang2" tr="Application language after application's restart:"/>
+        <Res id="chbTBIcsAndLbls" tr="Show toolbar labels"/>
+        <Res id="lblLevel" tr="Difficulty:"/>
+        <Res id="RestartRequired" tr="Restart the application"/>
+        <Res id="RestartRequiredInfo" tr="Some of the changed settings require restarting the application to take effect"/>
+        <Res id="Restart" tr="Restart"/>
+        <Res id="DoNoRestart" tr="Don't restart"/>
+
+        <!-- Status Bar -->
+        <Res id="ClStart" tr="Pres 'Start' toolbar button to start new game"/>
+        <Res id="clickArrK" tr="Click any arrow key to start moving the snake."/>
+        <Res id="+apple" tr="Great! Another apple!"/>
+        <Res id="+pear" tr="Great! I enjoy pears!"/>
+        <Res id="+banana" tr="Excellent! Banana is my favorite!"/>
+        <Res id="Total:" tr="Total: "/>
+        <!-- Other -->
+        <Res id="theApp" tr="Application"/>
+        <Res id="game" tr="Game"/>		
+        <Res id="Easy" tr="Easy"/>
+        <Res id="Medium" tr="Medium"/>
+    </Translations>
+</DevRes>

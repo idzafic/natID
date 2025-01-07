@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PageHeader layout="free" designWidth="170" showOnEveryPage="true" showOnFirstPage="false" height="5" lMargin="0" tMargin="0">
+	<StaticText hAlign="center" vAlign="center" font="PageHead" width="170" hScale="1" name="Izvjestaj"/>
+</PageHeader>

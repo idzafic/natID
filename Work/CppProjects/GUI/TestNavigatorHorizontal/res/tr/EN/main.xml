@@ -1,0 +1,78 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+		<Res id="bus" tr="Sabirnica"/>
+		<Res id="busTT" tr="Sabirnica - element preko kojeg se spajaju ostali elementi"/>
+		<Res id="capacitor" tr="Kondenzator"/>
+		<Res id="capacitorTT" tr="Kondenzator - element koji generiše reaktivnu snagu"/>
+		<Res id="inductor" tr="Zavojnica"/>
+		<Res id="inductorTT" tr="Zavojnica - element koji troši reaktivnu snagu"/>
+		<Res id="resistor" tr="Otpornik"/>
+		<Res id="resistorTT" tr="Otpornik - element koji troši aktivnu snagu"/>
+		<Res id="R" tr="Ser. otpornik"/>
+		<Res id="RTT" tr="Serijski otpornik - element koji troši aktivnu snagu"/>
+		<Res id="L" tr="Ser. zavojnica"/>
+		<Res id="LTT" tr="Serijska zavojnica - element koji troši reaktivnu snagu"/>
+		<Res id="C" tr="Ser. kondenzator"/>
+		<Res id="CTT" tr="Serijski kondenzator - element koji proizvodi reaktivnu snagu"/>
+		<Res id="shunt" tr="Otočnik"/>
+		<Res id="shuntTT" tr="Otočni element"/>
+		<Res id="generator" tr="Generator"/>
+		<Res id="generatorTT" tr="Generator snage - element koji proizvodi aktivnu i reaktivnu snagu"/>
+		<Res id="SC" tr="Sinhroni komp."/>
+		<Res id="SCTT" tr="Sinhroni kompenzator - element koji proizvodi reaktivnu snagu"/>
+		<Res id="motor" tr="Motor"/>
+		<Res id="motorTT" tr="Motor - element koji el. snagu u mehaničku"/>
+		<Res id="load" tr="Potrošač"/>
+		<Res id="loadTT" tr="Potrošač - element koji troši aktivnu i reaktivnu snagu"/>
+		<Res id="Xfmr2" tr="Transformator"/>
+		<Res id="Xfmr2TT" tr="Dvonamotajni transformator"/>
+		<Res id="Xfmr3" tr="Tronamotajni transf."/>
+		<Res id="Xfmr3TT" tr="Tronamotajni transformator"/>
+		<Res id="Xfmr4" tr="Četvoronamotajni tr."/>
+		<Res id="Xfmr4TT" tr="Četvoronamotajni transformator"/>
+		<Res id="disconctr" tr="Rastavljač"/>
+		<Res id="disconctrTT" tr="Rastavljač - element sa kojim se upravlja u deenergiziranom stanju"/>
+		<Res id="breaker" tr="Prekidač snage"/>
+		<Res id="breakerTT" tr="Prekidač snage"/>
+		<Res id="fuse" tr="Osigurač"/>
+		<Res id="fuseTT" tr="Osigurač - neupravljivi element za zaštitu"/>
+		
+		<Res id="Name:" tr="Ime:"/>
+		<Res id="Quant" tr="Količina"/>
+		<Res id="QuantTT" tr="Količina u jedinici mjere"/>
+		<Res id="ProductN" tr="Proizvod"/>
+		<Res id="ProductNTT" tr="Naziv proizvoda"/>
+		<Res id="ItemID" tr="Šifra proizvoda"/>
+		<Res id="ItemIDTT" tr="Šifra ili identifikator proizvoda"/>
+		<Res id="Price" tr="Cijena"/>
+		<Res id="PriceTT" tr="Cijena proizvoda"/>
+		<Res id="Value" tr="Vrijednost"/>
+		<Res id="ValueTT" tr="Vrijednost proizvoda"/>
+		<Res id="Date" tr="Datum"/>
+		<Res id="DateTT" tr="Datum proizvodnje dato od proizvođača"/>
+		<Res id="Time" tr="Vrijeme"/>
+		<Res id="TimeTT" tr="Vrijeme proizvodnje dato od proizvođača"/>
+		<Res id="Color" tr="Boja"/>
+		<Res id="ColorTT" tr="Boja proizvoda"/>
+		
+		<Res id="option1" tr="Option 1"/>
+		<Res id="option1TT" tr="Tooltip za opciju 1"/>
+		<Res id="option2" tr="Option 2"/>
+		<Res id="option2TT" tr="Tooltip za opciju 2"/>
+		<Res id="incSize" tr="Increase"/>
+		<Res id="incSizeTT" tr="Increase form size"/>
+		<Res id="decSize" tr="Decrease"/>
+		<Res id="decSizeTT" tr="Decrease form size"/>
+		<Res id="canvas" tr="Canvas"/>
+		<Res id="canvasTT" tr="Prikaz crtanja na gui::Canvas klasi"/>
+		
+		<Res id="Find" tr="Traži"/>
+		<Res id="Reverse" tr="Okreni"/>
+		<Res id="ShowScrollViewer" tr="Prikaži Canvas ViewScroller"/>
+		<Res id="ShowSwitcher" tr="Prikaži ViewSwitcher"/>
+		<Res id="ShowNavig" tr="Prikaži navigator"/>
+		
+
+	</Translations>
+</DevRes>

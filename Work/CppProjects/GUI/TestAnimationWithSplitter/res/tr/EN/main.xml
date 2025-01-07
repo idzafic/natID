@@ -1,0 +1,22 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+        <Res id="appTitle" tr="Animation and GUI"/>
+        <Res id="start" tr="Start"/>
+        <Res id="startTT" tr="Start the animation"/>
+        <Res id="stop" tr="Stop"/>
+        <Res id="stopTT" tr="Stop the animation"/>
+        <Res id="Update" tr="Update"/>
+        <Res id="lblFreq" tr="Revolving per minute (RPM) [rev/min]:"/>
+        <Res id="lblColor" tr="Jet color:"/>
+        <Res id="etfColor" tr="Color of ETF part:"/>
+        <Res id="custColor" tr="Use custom jet color"/>
+        <Res id="closeNOK" tr="Error! Animation is running!"/>
+        <Res id="cloeErr" tr="Stop Animation and then close the app!"/>
+        <Res id="settings" tr="Settings"/>
+        <!-- Settings -->
+        <Res id="dlgSettings" tr="Settings"/>
+        <Res id="lblLang" tr="Current application language:"/>
+        <Res id="lblLang2" tr="Application language after application's restart:"/>
+	</Translations>
+</DevRes>

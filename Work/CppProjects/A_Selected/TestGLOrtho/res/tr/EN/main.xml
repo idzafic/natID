@@ -1,0 +1,30 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+		<!-- Toolbar -->
+		<Res id="settings" tr="Settings"/>
+		<Res id="settingsTT" tr="Adjust app properties."/>
+		<Res id="export" tr="Export"/>
+		<Res id="exportTT" tr="Export current frame to file."/>
+		<Res id="info" tr="Info"/>
+		<Res id="infoTT" tr="Brief introduction on how to navigate in the application."/>
+		<!-- Statusbar -->
+		<Res id="Zoom:" tr="Zoom:"/>
+		<Res id="Origin:" tr="Origin:"/>
+		<Res id="CurrPos:" tr="Pointer:"/>
+		<Res id="UsageHints" tr="Pan: Shift+Mosue Down Move, Zoom:Ctrl/Cmd+Scrollwheel. Use trackpad in case of laptop usage."/>
+		<Res id="UsageInfoHeader" tr="Short application usage instructions"/>
+		<Res id="UsageInfo" tr="<html><p><b>Pan: </b> <i>Shift</i>+ move mouse while pressed left mouse button.<br/><b>Zooming: </b><i>Ctrl/Cmd</i>+ rotate mouse wheel.<br/>Use trackpad in case if a laptop is your working machine.</p></html>"/>
+		
+		<!-- Settings -->
+        <Res id="dlgSettings" tr="Settings"/>
+        <Res id="lblLang" tr="Current application language:"/>
+        <Res id="lblLang2" tr="Application language after application's restart:"/>
+        <Res id="chbTBIcsAndLbls" tr="Show labels below icons on main toolbar"/>
+		<Res id="showStatusBar" tr="Show status bar"/>
+		<Res id="RestartRequired" tr="Restart the application"/>
+		<Res id="RestartRequiredInfo" tr="Some of the changed settings require restarting the application to take effect"/>
+		<Res id="Restart" tr="Restart"/>
+		<Res id="DoNoRestart" tr="Don't restart"/>
+	</Translations>
+</DevRes>

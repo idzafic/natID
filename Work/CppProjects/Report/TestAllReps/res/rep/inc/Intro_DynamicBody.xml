@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DocHeader layout="vertical" designWidth="170" height="165" hAlign="center" vAlign="center" font="DocuDesc">	
+	<Text font="DocuName" width="170" height="6" name="#DocType" hScale="1"/>	
+	<CompositeText width="170" height="4.5" hScale="1">
+		<Numeric type="int4" showThSep="false" lbl="From item ID: " name="FromID"/>			
+		<Numeric type="int4" showThSep="false" lbl=", to item ID: " name="ToID"/>			
+	</CompositeText>	
+</DocHeader>

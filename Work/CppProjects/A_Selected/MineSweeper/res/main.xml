@@ -1,0 +1,79 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="settings" path = "Work/Common/Icons/SettingsBlue48.png"/>
+		<Res id="Easy" path = "Work/Common/Icons/LevelEasy64.png"/>
+		<Res id="Medium" path = "Work/Common/Icons/LevelMedium64.png"/>
+		<Res id="Hard" path = "Work/Common/Icons/LevelHard64.png"/>
+		<Res id="faceHappy" path = "Work/Common/Icons/FaceHappy.png"/>
+		<Res id="faceSad" path = "Work/Common/Icons/FaceSad.png"/>
+	</Images>
+
+	<FileNames>
+		<Res id="otkrivena" path="Work/Common/Icons/MineSweeper/prazna.png"/>
+		<Res id="kec" path="Work/Common/Icons/MineSweeper/kec.png"/>
+		<Res id="dvica" path="Work/Common/Icons/MineSweeper/dvica.png"/>
+		<Res id="trica" path="Work/Common/Icons/MineSweeper/trica.png"/>
+		<Res id="cetvorka" path="Work/Common/Icons/MineSweeper/cetvorka.png"/>
+		<Res id="petica" path="Work/Common/Icons/MineSweeper/petica.png"/>
+		<Res id="sestica" path="Work/Common/Icons/MineSweeper/sestica.png"/>
+		<Res id="sedmica" path="Work/Common/Icons/MineSweeper/sedmica.png"/>
+		<Res id="osmica" path="Work/Common/Icons/MineSweeper/osmica.png"/>
+		<Res id="bomb" path="Work/Common/Icons/MineSweeper/bomb.png"/>
+		<Res id="skrivena" path="Work/Common/Icons/MineSweeper/closed.png"/>
+		<Res id="flag" path="Work/Common/Icons/MineSweeper/flag.png"/>
+
+		<Res id="Lotkrivena" path=":images/light/revealed.png"/>
+		<Res id="Lkec" path=":images/light/1.png"/>
+		<Res id="Ldvica" path=":images/light/2.png"/>
+		<Res id="Ltrica" path=":images/light/3.png"/>
+		<Res id="Lcetvorka" path=":images/light/4.png"/>
+		<Res id="Lpetica" path=":images/light/5.png"/>
+		<Res id="Lsestica" path=":images/light/6.png"/>
+		<Res id="Lsedmica" path=":images/light/7.png"/>
+		<Res id="Losmica" path=":images/light/8.png"/>
+		<Res id="Lbomb" path=":images/light/mine.png"/>
+		<Res id="Lskrivena" path=":images/light/unrevealed.png"/>
+		<Res id="Lflag" path=":images/light/flag.png"/>
+
+		<Res id="Dotkrivena" path=":images/dark/revealed.png"/>
+		<Res id="Dkec" path=":images/dark/1.png"/>
+		<Res id="Ddvica" path=":images/dark/2.png"/>
+		<Res id="Dtrica" path=":images/dark/3.png"/>
+		<Res id="Dcetvorka" path=":images/dark/4.png"/>
+		<Res id="Dpetica" path=":images/dark/5.png"/>
+		<Res id="Dsestica" path=":images/dark/6.png"/>
+		<Res id="Dsedmica" path=":images/dark/7.png"/>
+		<Res id="Dosmica" path=":images/dark/8.png"/>
+		<Res id="Dbomb" path=":images/dark/mine.png"/>
+		<Res id="Dskrivena" path=":images/dark/unrevealed.png"/>
+		<Res id="Dflag" path=":images/dark/flag.png"/>
+
+		<Res id="L2otkrivena" path=":images/light2/revealed.png"/>
+		<Res id="L2kec" path=":images/light2/1.png"/>
+		<Res id="L2dvica" path=":images/light2/2.png"/>
+		<Res id="L2trica" path=":images/light2/3.png"/>
+		<Res id="L2cetvorka" path=":images/light2/4.png"/>
+		<Res id="L2petica" path=":images/light2/5.png"/>
+		<Res id="L2sestica" path=":images/light2/6.png"/>
+		<Res id="L2sedmica" path=":images/light2/7.png"/>
+		<Res id="L2osmica" path=":images/light2/8.png"/>
+		<Res id="L2bomb" path=":images/light2/mine.png"/>
+		<Res id="L2skrivena" path=":images/light2/unrevealed.png"/>
+		<Res id="L2flag" path=":images/light2/flag.png"/>
+
+		<Res id="D2otkrivena" path=":images/dark2/revealed.png"/>
+		<Res id="D2kec" path=":images/dark2/1.png"/>
+		<Res id="D2dvica" path=":images/dark2/2.png"/>
+		<Res id="D2trica" path=":images/dark2/3.png"/>
+		<Res id="D2cetvorka" path=":images/dark2/4.png"/>
+		<Res id="D2petica" path=":images/dark2/5.png"/>
+		<Res id="D2sestica" path=":images/dark2/6.png"/>
+		<Res id="D2sedmica" path=":images/dark2/7.png"/>
+		<Res id="D2osmica" path=":images/dark2/8.png"/>
+		<Res id="D2bomb" path=":images/dark2/mine.png"/>
+		<Res id="D2skrivena" path=":images/dark2/unrevealed.png"/>
+		<Res id="D2flag" path=":images/dark2/flag.png"/>
+
+	</FileNames>
+</DevRes>

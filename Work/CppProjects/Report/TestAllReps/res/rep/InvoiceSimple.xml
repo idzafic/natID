@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report paperOrientation="landscape" paperSize="A4" zoom="200" resGroup="Extern">
+	<Layout lMargin="10" tMargin="10" rMargin="10" bMargin="10" memoH="MemoExternH" memoF="MemoExternF_GR" pageH="PageHeaderExt" pageF="PageFooterExt" docH="Intro_Invoice" docF="Summary_Invoice">	
+		<Header layout="vertical" showOnEveryPage="true" showOnFirstPage="true" height="15" backClr="BackHead" hAlign="right" vAlign="center" font="BodyHead">
+			<Line lineWidth="0.4" lineStyle="solid" width="-1" height="0"/> <!-- width == -1 means it will take with of its parent-->
+			<Row height="10">
+				<TrText hAlign="left" width="8" name="Pos"/>
+				<TrText hAlign="left" width="70" name="Item name"/>
+				<TrText width="66" name="Quantity"/>
+				<TrText vAlign="top" width="133" name="Price_VAT"/>
+			</Row>			
+			<Line lineWidth="0.1" lineStyle="solid" x="5" width="-1" height="0"/> <!-- width == -1 means it will take with of its parent-->
+			<Row height="5">
+				<TrText hAlign="left" x="5" width="18" height="5" name="ID"/>
+				<TrText width="254" height="5" name="Value"/>
+			</Row>
+			<Line lineWidth="0.4" lineStyle="solid" width="-1" height="0"/>
+		</Header>
+		<Body layout="vertical" height="9" backClr2="BackBody" hAlign="right" vAlign="center" font="Body">
+			<Formulas calcCT="true" calcRT="true">
+				<Formula name="fValue" f="Quantity*Price" type="decimal2"/>
+			</Formulas>
+			<Row height="4.5">
+				<Numeric type="int4" showThSep="false" hideZero="false" hAlign="left" width="8" name="#Pos"/>
+				<Text hAlign="left" width="70" name="ItemName"/>
+				<Numeric type="decimal3" width="66" name="Quantity"/>
+				<Numeric type="decimal4" width="133" name="Price"/>
+			</Row>
+			<Line lineWidth="0.1" lineStyle="solid" x="5" width="-1" height="0"/>
+			<Row height="4.5">
+				<Numeric type="int4" showThSep="false" hAlign="left" x="5" width="18" name="ItemID"/>
+				<Numeric type="decimal2" font="BodyFoot" width="254" name="fValue"/>
+			</Row>
+			<Line lineWidth="0.2" lineStyle="solid" width="-1" height="0"/>
+		</Body>
+		<Footer layout="vertical" height="5" backClr="BackFoot" font="BodyFoot">
+			<Line lineWidth="0.4" lineStyle="solid" width="-1" height="0"/>
+			<Row height="5" hAlign="right" vAlign="center" >
+				<TrText hAlign="left" width="100" name="Total:"/>
+				<Aggregate fn="sum" type="decimal2" link="Body/fValue" width="177"/>
+			</Row>
+			<Line lineWidth="0.4" lineStyle="solid" width="-1" height="0"/>
+		</Footer>			
+	</Layout>
+</Report>

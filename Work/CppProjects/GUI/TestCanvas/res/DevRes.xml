@@ -1,0 +1,13 @@
+<?xml version='1.0'?>
+<DevRes regionals="Work/Common/Regionals">
+	<Langs>
+		<Lang id="EN" name="English"/>
+		<Lang id="BA" name="Bosanski"/>
+	</Langs>
+	<ArtWork>
+		<Config path=":main.xml"/>
+	</ArtWork>
+	<Translation>
+		<Config path=":tr/%s/main.xml"/>
+	</Translation>
+</DevRes>

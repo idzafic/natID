@@ -1,0 +1,19 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+        <Res id="appTitle" tr="Programske niti i GUI"/>
+		<Res id="start" tr="Pokreni"/>
+		<Res id="startTT" tr="Pokreni programsku nit"/>
+		<Res id="stop" tr="Zaustavi"/>
+		<Res id="stopTT" tr="Zaustavi programsku nit"/>
+        <Res id="delete" tr="Briši sadržaj"/>
+        <Res id="shPWD" tr="Prikaži šifru"/>
+        <Res id="lblUN" tr="Korisničko ime:"/>
+        <Res id="lblPwd" tr="Šifra:"/>
+        <Res id="thApp" tr="NitTest"/>
+        <Res id="thread" tr="Programska nit"/>
+        <Res id="closeThNOK" tr="Greška! Programska nit se izvršava!"/>
+        <Res id="stopThBefClose" tr="Zaustavite programsku nit ili sačekajte da se izvrši pa onda zatvorite aplikaciju!"/>
+	</Translations>
+</DevRes>
+

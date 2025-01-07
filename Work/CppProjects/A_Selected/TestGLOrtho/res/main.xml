@@ -1,0 +1,13 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="settings" path = "Work/Common/Icons/SettingsBlue48.png"/>
+		<Res id="info" path="Work/Common/Icons/Info48.png"/>
+		<Res id="export" path="Work/Common/Icons/export48.png"/>
+	</Images>
+	<Texts>
+		<!--- all from res folder -->
+		<Res id="shVert" path=":shaders/First.vert"/>
+		<Res id="shFrag" path=":shaders/First.frag"/>
+	</Texts>
+</DevRes>

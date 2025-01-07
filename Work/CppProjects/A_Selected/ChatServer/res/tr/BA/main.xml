@@ -1,0 +1,14 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+		<Res id="closeNOK" tr="Applikacija se ne može zatvoriti"/>
+		<Res id="closeErr" tr="Applikacija se ne može zatvoriti u toku rada servera. Prvo zaustavite server pa onda zatvorite apikaciju."/>
+		<Res id="start" tr="Start"/>
+		<Res id="stop" tr="Stop"/>
+		<Res id="settings" tr="Settings"/>
+		<Res id="info" tr="Pokrenuti web broswer i ukucati adresu localhost:2504. 
+Opciono ddabrati chat opciju, klinnuti na login i koristiti korisnike Amir[pwd:AmirA], Damir[DamirD], Emir[EmirE] i Samir[SamirS].
+Pokrenuti ChatClient kliknuti na login. Slati poruke između Web pretraživača i C++ client aplikacije."/>
+	</Translations>
+</DevRes>
+

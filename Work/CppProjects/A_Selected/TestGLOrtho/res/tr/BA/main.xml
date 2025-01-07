@@ -1,0 +1,29 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+		<!-- Toolbar -->
+		<Res id="settings" tr="Podešenja"/>
+		<Res id="settingsTT" tr="Podešanja aplikacijski osobina."/>
+		<Res id="export" tr="Eksport"/>
+		<Res id="exportTT" tr="Snimi (eksportuj) trenutnu sliku u fajl."/>
+		<Res id="info" tr="Info"/>
+		<Res id="infoTT" tr="Kraktko uputstvo o korišenju miša i o upravljanju aplikacijom."/>
+		<!-- Statusbar -->
+		<Res id="Zoom:" tr="Uvećanje:"/>
+		<Res id="Origin:" tr="Referenca:"/>
+		<Res id="CurrPos:" tr="Pokazivač:"/>
+		<Res id="UsageHints" tr="Pomjeranje: Shift+Mosue Down Move, Uvećanje:Ctrl/Cmd+Scrollwheel, koristi trackpad u slučaju korištenja laptopa."/>
+		<Res id="UsageInfoHeader" tr="Kratko uputstvo za korištenje aplikacije"/>
+		<Res id="UsageInfo" tr="<html><p><b>Pomjeranje: </b> <i>Shift</i> pokreti uz stisnutu lijevu tipku miša.<br/><b>Uvećanje: </b><i>Ctrl/Cmd</i>+ pokretanje kotača na mišu.<br/>Koristi trackpad u slučaju ako je laptop radna mašina.lk jlkjlkjldsjlkjljl klj ljljlkj l lčkjlkjj ljlj lkj lkjljlkj lj l jlkj lkjl j</p></html>"/>
+		        <!-- Settings -->
+        <Res id="dlgSettings" tr="Podešenja"/>
+        <Res id="lblLang" tr="Trenutni jezik aplikacija:"/>
+        <Res id="lblLang2" tr="Jezik aplikacije nakon njenog restarta:"/>
+        <Res id="chbTBIcsAndLbls" tr="Prikaži labele ispod ikona na alatnoj traci"/>
+		<Res id="showStatusBar" tr="Prikaži statusnu traku"/>
+		<Res id="RestartRequired" tr="Restartovati aplikaciju"/>
+		<Res id="RestartRequiredInfo" tr="Neke od promijenjenih postavki zahtijevaju ponovno pokretanje aplikacije kako bi bile primijenjene"/>
+		<Res id="Restart" tr="Restartovati"/>
+		<Res id="DoNoRestart" tr="Nemoj restartovati"/>
+	</Translations>
+</DevRes>

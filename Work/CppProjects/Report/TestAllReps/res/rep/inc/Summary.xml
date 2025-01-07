@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DocFooter designWidth="170">
+	<Note hAlign="left" vAlign="top" font="Note" y="1" width="-1" name="Note"/>
+	<Row y= "1" height="20" hAlign="center" vAlign="top" font="Body" name="Signature">		
+		<Group layout="vertical" width="43" name="prepBy">
+			<TrText height="5" name="Prepared By"/>
+			<Line lineWidth="0.1" y="10" lineStyle="dot" height="0"/>
+			<Text height="5" name="#Sign1"/>
+		</Group>
+		<Group layout="vertical" x="2.6666" width="43">
+			<TrText height="5" name="Approved By"/>
+			<Line lineWidth="0.1" y="10" lineStyle="dot" height="0"/>
+			<Text height="5" name="#Sign2"/>
+		</Group>
+	</Row>	
+</DocFooter>

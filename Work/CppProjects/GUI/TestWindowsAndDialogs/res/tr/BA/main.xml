@@ -1,0 +1,67 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+        <Res id="settings" tr="Podešenja"/>
+        <Res id="settingsTT" tr="Podešenja jezika i ostalih stvari.."/>
+		<Res id="open" tr="Otvori"/>
+		<Res id="openTT" tr="Otvori postojeći model"/>
+		<Res id="save" tr="Snimi"/>
+		<Res id="saveTT" tr="Snimi postojeći model"/>
+		<Res id="rect" tr="Pravougaonik"/>
+		<Res id="rectTT" tr="Crtanje pravougaonika"/>
+		<Res id="appTitle" tr="Uvod u View"/>
+		<Res id="mOpen" tr="Aktivirana je opcija za učitavanje modela!"/>
+		<Res id="mSave" tr="Aktivirana je opcija za snimanje modela!"/>
+		<Res id="mRect" tr="Aktivirana je opcija za crtanje pravougonika!"/>
+		<Res id="name" tr="Naziv artikla:"/>
+		<Res id="quant" tr="Količina:"/>
+		<Res id="price" tr="Cijena:"/>
+		<Res id="value" tr="Iznos:"/>
+		<Res id="add" tr="Dodaj"/>
+		<Res id="delete" tr="Izbriši"/>
+        <Res id="open" tr="Otvori"/>
+        <Res id="openTT" tr="Otvori postojeći model"/>
+        <Res id="save" tr="Snimi"/>
+        <Res id="saveTT" tr="Snimi postojeći model"/>
+        <Res id="rect" tr="Pravougaonik"/>
+        <Res id="rectTT" tr="Crtanje pravougaonika"/>
+        <Res id="appTitle" tr="Demonstracija TableEdit-a"/>
+        
+        <!-- Labels -->
+        <Res id="id" tr="Šifra artkla:"/>
+        <Res id="name" tr="Naziv:"/>
+        <Res id="color" tr="Boja:"/>
+        <Res id="quant" tr="Količina:"/>
+        <Res id="price" tr="Cijena:"/>
+        <Res id="value" tr="Iznos:"/>
+        <Res id="date" tr="Datum:"/>
+        <Res id="time" tr="Vrijeme:"/>
+        <Res id="fromID" tr="Od šifre:"/>
+        <Res id="toID" tr="Do šifre:"/>
+        
+        <!--Prevodi za TableEdit-->
+        <Res id="ItemID" tr="Šifra proizvoda"/>
+        <Res id="ItemIDTT" tr="Šifra ili identifikator proizvoda"/>
+        <Res id="ProductN" tr="Proizvod"/>
+        <Res id="ProductNTT" tr="Naziv proizvoda"/>
+        <Res id="Quant" tr="Količina"/>
+        <Res id="QuantTT" tr="Količina u jedinici mjere"/>
+        <Res id="Price" tr="Cijena"/>
+        <Res id="PriceTT" tr="Cijena proizvoda"/>
+        <Res id="Value" tr="Vrijednost"/>
+        <Res id="ValueTT" tr="Vrijednost proizvoda"/>
+        <Res id="Date" tr="Datum"/>
+        <Res id="DateTT" tr="Datum proizvodnje dato od proizvođača"/>
+        <Res id="Time" tr="Vrijeme"/>
+        <Res id="TimeTT" tr="Vrijeme proizvodnje dato od proizvođača"/>
+        <Res id="Color" tr="Boja"/>
+        <Res id="ColorTT" tr="Boja proizvoda"/>
+        
+        <!-- Settings -->
+        <Res id="dlgSettings" tr="Podešenja"/>
+        <Res id="lblLang" tr="Trenutni jezik aplikacija:"/>
+        <Res id="lblLang2" tr="Jezik aplikacije nakon njenog restarta:"/>
+        
+	</Translations>
+</DevRes>
+

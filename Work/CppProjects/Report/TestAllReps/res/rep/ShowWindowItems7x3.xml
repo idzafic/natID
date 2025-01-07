@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report paperOrientation="portrait" paperSize="A4" resGroup="Extern">
+	<Layout type="replicate" lMargin="3" tMargin="3" rMargin="3" bMargin="3">
+		<Repli dL="2" dT="2" dR="2" dB="2" nHRep="3" nVRep="7" width="64" height="37.57142857" vAlign="center" >
+			<Rectangle lineWidth="0.6" lineStyle="solid" x="0" y="0" width="-1" height="-1"/>
+			<Line lineWidth="0.4" lineStyle="solid" x="0" y="4.5" width="-1" height="0"/>
+			<Line lineWidth="0.3" lineStyle="solid" x="0" y="9" width="-1" height="0"/>			
+			<Line lineWidth="0.3" lineStyle="solid" x="0" y="25" width="-1" height="0"/>
+			<Line lineWidth="0.3" lineStyle="solid" x="29" y="4.5" width="0" height="4.5"/>
+			
+			<ResText hAlign="center" font="Body" width="-1" height="4.5" name="Company1"/>
+			<TrText hAlign="left" font="Body" x="1" y="4.5" width="25" height="4.5" r="0" g="0" b="255" name="ID:"/>
+			<Numeric type="int4" showThSep="false" font="ShowF1" x="0.5" y="4.5" hAlign="right" width="27.5" height="4.5" name="ID"/>
+			<TrText hAlign="left" font="Body" x="29.5" y="4.5" width="25" height="4.5" r="0" g="0" b="255" name="Nivel:"/>
+			<Text hAlign="right" font="ShowF1" x="29.5" y="4.5" width="33.333333" height="4.5" name="DocID"/>
+			
+			<Text hAlign="center" font="ShowF2b" x="0" y="9" width="-1" height="16" wrap="word" name="Name"/> <!-- wrap= no, word, any -->
+			<TrText hAlign="left" font="Body" x="1" y="25" width="25" height="4.5" r="0" g="0" b="255" name="Price:"/>
+			<Numeric type="decimal2" hAlign="right" font="ShowF3b" x="0" y="25" width="57" height="12.714" name="Price"/>		
+			<Text hAlign="center" vAlign="bottom" font="ShowF1" x="57.5" y="27" width="6" height="4.5" name="#DocMoneySymb"/>
+			<Line lineWidth="0.1" lineStyle="solid" x="57.5" y="31.5" width="6" height="0"/>
+			<Text hAlign="center" vAlign="top" font="ShowF1" x="57.5" y="31.5" width="6.2" height="5" html="try" name="Unit"/>
+		</Repli>
+	</Layout>
+</Report>

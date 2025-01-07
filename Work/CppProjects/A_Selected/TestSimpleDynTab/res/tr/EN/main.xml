@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+		<Res id="addView" tr="Add tab"/>
+		<Res id="addViewTT" tr="Add tab view"/>
+		<Res id="remView" tr="Delete tab"/>
+		<Res id="remViewTT" tr="Delete tab view"/>
+		<Res id="mvvLeft" tr="Move left"/>
+		<Res id="mvvLeftTT" tr="Move tab one position left"/>
+		<Res id="mvvRight" tr="Move right"/>
+		<Res id="mvvRightTT" tr="Move tab one position right"/>
+		<Res id="remAllViews" tr="Close all"/>
+		<Res id="remAllViewsTT" tr="Close all tabs"/>
+		
+		<Res id="view0" tr="Grid view demonstration"/>
+		<Res id="view1" tr="Vertical view - just for display ŽŠČĐĆžžčćšđ"/>
+		<Res id="view2" tr="Horizontal (third) view - just to have it"/>
+		<Res id="view3" tr="ViewScroller with Canvas demo (Fourth view)"/>
+		<Res id="view4" tr="Fourth view"/>
+		<Res id="view5" tr="Fifth view"/>
+		<Res id="view6" tr="Sixth view"/>
+		<Res id="view7" tr="Seventh view"/>
+		<Res id="Find" tr="Search"/>
+		<Res id="Reverse" tr="Reverse"/>
+		<Res id="ShowScrollViewer" tr="Show Canvas ViewScroller"/>
+		<Res id="ShowSwitcher" tr="Show ViewSwitcher"/>
+		<Res id="ShowNavig" tr="Show navigator"/>
+		<Res id="tabsCnt" tr="Number of tabs: "/>
+
+
+        <Res id="dlgSettings" tr="Settings"/>
+        <Res id="lblLang" tr="Current application language:"/>
+        <Res id="lblLang2" tr="Application language after application's restart:"/>
+        <Res id="chbTBIcsAndLbls" tr="Show labels below icons on main toolbar"/>
+		<Res id="RestartRequired" tr="Restart the application"/>
+		<Res id="RestartRequiredInfo" tr="Some of the changed settings require restarting the application to take effect"/>
+		<Res id="Restart" tr="Restart"/>
+		<Res id="DoNoRestart" tr="Don't restart"/>
+
+
+		
+
+	</Translations>
+</DevRes>

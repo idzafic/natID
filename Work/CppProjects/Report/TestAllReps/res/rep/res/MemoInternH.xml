@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Memo layout="vertical" dY="-3" designWidth="170" height="15" >	
+	<Row y="0" height="15" lMargin="0" tMargin="0">
+		<ResPicture width="14" height="14" name="ETF"/>
+		<Group layout="vertical" x="1" width="140" hAlign="Center" vAlign="Top" hScale="1">
+			<ResText font="MemoH1" height="5" hScale="1" name="Company1"/>
+			<CompositeText font="MemoH2" height="5" hScale="1">
+				<Text lbl="Object: " name="#ObjType"/>
+				<Text name="#ObjID"/>
+				<Text lbl="-" translate="false" name="#ObjName"/>
+				<Text lbl=", " translate="false" name="#ObjPlace"/>				
+			</CompositeText>
+			<CompositeText font="MemoH3" height="5" hScale="1">
+				<Text lbl="Address: " name="#ObjAddress"/>				
+				<Text lbl=", Tel: " translate="false" name="#ObjPhone"/>							
+			</CompositeText>			
+		</Group>
+		<ResPicture x="1" width="14" height="14" name="UNSA"/>
+	</Row>	
+	<Line lineWidth="0.4" lineStyle="solid" width="170" height="0" hScale="1"/>
+</Memo>

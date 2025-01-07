@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper Tiles with Canvas</title>
+    <style>
+        canvas {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <!-- Light Mode Canvases -->
+        <canvas id="light-1" width="64" height="64" title="Light Tile 1"></canvas>
+        <canvas id="light-2" width="64" height="64" title="Light Tile 2"></canvas>
+        <canvas id="light-3" width="64" height="64" title="Light Tile 3"></canvas>
+        <canvas id="light-4" width="64" height="64" title="Light Tile 4"></canvas>
+        <canvas id="light-5" width="64" height="64" title="Light Tile 5"></canvas>
+        <canvas id="light-6" width="64" height="64" title="Light Tile 6"></canvas>
+        <canvas id="light-7" width="64" height="64" title="Light Tile 7"></canvas>
+        <canvas id="light-8" width="64" height="64" title="Light Tile 8"></canvas>
+        <canvas id="light-mine" width="64" height="64" title="Light Mine Tile"></canvas>
+        <canvas id="light-flag" width="64" height="64" title="Light Flag Tile"></canvas>
+        <canvas id="light-empty" width="64" height="64" title="Light Empty Tile"></canvas>
+        <canvas id="light-revealed-empty" width="64" height="64" title="Light Revealed Empty Tile"></canvas>
+        <!-- Dark Mode Canvases -->
+        <canvas id="dark-1" width="64" height="64" title="Dark Tile 1"></canvas>
+        <canvas id="dark-2" width="64" height="64" title="Dark Tile 2"></canvas>
+        <canvas id="dark-3" width="64" height="64" title="Dark Tile 3"></canvas>
+        <canvas id="dark-4" width="64" height="64" title="Dark Tile 4"></canvas>
+        <canvas id="dark-5" width="64" height="64" title="Dark Tile 5"></canvas>
+        <canvas id="dark-6" width="64" height="64" title="Dark Tile 6"></canvas>
+        <canvas id="dark-7" width="64" height="64" title="Dark Tile 7"></canvas>
+        <canvas id="dark-8" width="64" height="64" title="Dark Tile 8"></canvas>
+        <canvas id="dark-mine" width="64" height="64" title="Dark Mine Tile"></canvas>
+        <canvas id="dark-flag" width="64" height="64" title="Dark Flag Tile"></canvas>
+        <canvas id="dark-empty" width="64" height="64" title="Dark Empty Tile"></canvas>
+        <canvas id="dark-revealed-empty" width="64" height="64" title="Dark Revealed Empty Tile"></canvas>
+    </div>
+    <div>
+        <!-- Export Buttons -->
+        <button onclick="saveCanvasImage('light-1')">Save Light 1</button>
+        <button onclick="saveCanvasImage('light-2')">Save Light 2</button>
+        <button onclick="saveCanvasImage('light-3')">Save Light 3</button>
+        <button onclick="saveCanvasImage('light-4')">Save Light 4</button>
+        <button onclick="saveCanvasImage('light-5')">Save Light 5</button>
+        <button onclick="saveCanvasImage('light-6')">Save Light 6</button>
+        <button onclick="saveCanvasImage('light-7')">Save Light 7</button>
+        <button onclick="saveCanvasImage('light-8')">Save Light 8</button>
+        <button onclick="saveCanvasImage('light-mine')">Save Light Mine</button>
+        <button onclick="saveCanvasImage('light-flag')">Save Light Flag</button>
+        <button onclick="saveCanvasImage('light-empty')">Save Light Empty</button>
+        <button onclick="saveCanvasImage('light-revealed-empty')">Save Light Revealed Empty</button>
+
+        <button onclick="saveCanvasImage('dark-1')">Save Dark 1</button>
+        <button onclick="saveCanvasImage('dark-2')">Save Dark 2</button>
+        <button onclick="saveCanvasImage('dark-3')">Save Dark 3</button>
+        <button onclick="saveCanvasImage('dark-4')">Save Dark 4</button>
+        <button onclick="saveCanvasImage('dark-5')">Save Dark 5</button>
+        <button onclick="saveCanvasImage('dark-6')">Save Dark 6</button>
+        <button onclick="saveCanvasImage('dark-7')">Save Dark 7</button>
+        <button onclick="saveCanvasImage('dark-8')">Save Dark 8</button>
+        <button onclick="saveCanvasImage('dark-mine')">Save Dark Mine</button>
+        <button onclick="saveCanvasImage('dark-flag')">Save Dark Flag</button>
+        <button onclick="saveCanvasImage('dark-empty')">Save Dark Empty</button>
+        <button onclick="saveCanvasImage('dark-revealed-empty')">Save Dark Revealed Empty</button>
+        <button onclick="saveAll()">Save All</button>
+    </div>
+
+    <script>
+        // Function to draw tiles on canvas with rounded corners
+        function drawTile(canvasId, mode, type) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            const tileSize = 64;
+            const cornerRadius = 10;
+
+            // Define styles based on mode
+            const lightModeStyles = {
+                background: ['#e0f0e0', '#f8fff8'],
+                borderColor: '#888',
+                backgroundUnRel: ['#fcacac', '#f0b0b0'],
+                borderColorUnRel: '#000',
+                textColor: {
+                    '1': '#006400', '2': '#228B22', '3': '#A52A2A', '4': '#8B0000', '5': '#B22222', '6': '#8B008B', '7': '#4B0082', '8': '#800080'
+                },
+                emptyTileBg: ['#e0f0e0', '#f8fff8'],
+                revealedEmptyBorder: '#888',
+                emojiColor: '#555'
+            };
+            const darkModeStyles = {
+                background: ['#406040', '#608060'],
+                borderColor: '#bbb',
+                backgroundUnRel: ['#4c1c1c', '#5e2e2e'],
+                borderColorUnRel: '#666',
+                textColor: {
+                    '1': '#00FF00', '2': '#32CD32', '3': '#FFFF00', '4': '#FF7F50', '5': '#FF0000', '6': '#FF69B4', '7': '#DA70D6', '8': '#EE82EE'
+                },
+                emptyTileBg: ['#406040', '#608060'],
+                revealedEmptyBorder: '#bbb',
+                emojiColor: '#FB45F3' // brown color for bomb in dark mode
+            };
+
+            // Select styles based on mode
+            const styles = mode === 'light' ? lightModeStyles : darkModeStyles;
+
+            // Draw rounded rectangle background
+            ctx.beginPath();
+            ctx.moveTo(cornerRadius, 0);
+            ctx.lineTo(tileSize - cornerRadius, 0);
+            ctx.arcTo(tileSize, 0, tileSize, cornerRadius, cornerRadius);
+            ctx.lineTo(tileSize, tileSize - cornerRadius);
+            ctx.arcTo(tileSize, tileSize, tileSize - cornerRadius, tileSize, cornerRadius);
+            ctx.lineTo(cornerRadius, tileSize);
+            ctx.arcTo(0, tileSize, 0, tileSize - cornerRadius, cornerRadius);
+            ctx.lineTo(0, cornerRadius);
+            ctx.arcTo(0, 0, cornerRadius, 0, cornerRadius);
+            ctx.closePath();
+            ctx.fillStyle = ctx.createLinearGradient(0, 0, tileSize, tileSize);
+            if (type == 'empty')
+            {
+                ctx.fillStyle.addColorStop(0, styles.backgroundUnRel[0]);
+                ctx.fillStyle.addColorStop(1, styles.backgroundUnRel[1]);
+                ctx.strokeStyle = styles.borderColorUnRel;
+            }
+            else
+            {
+                ctx.fillStyle.addColorStop(0, styles.background[0]);
+                ctx.fillStyle.addColorStop(1, styles.background[1]);
+                ctx.strokeStyle = styles.borderColor;
+            }
+            ctx.fill();
+
+            // Draw border
+            ctx.lineWidth = 6;
+            
+            ctx.stroke();
+
+            // Draw text or symbols
+            if (type >= '1' && type <= '8') {
+                ctx.fillStyle = styles.textColor[type];
+                ctx.font = '36px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(type, tileSize / 2, tileSize / 2);
+            } else if (type === 'mine') {
+                ctx.fillStyle = styles.emojiColor;
+                ctx.font = '40px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('💣', tileSize / 2, tileSize / 2);
+            } else if (type === 'flag') {
+                ctx.fillStyle = styles.emojiColor;
+                ctx.font = '48px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('⛳', tileSize / 2, tileSize / 2);
+            } else if (type === 'empty') {
+                //ctx.lineWidth = 8;
+                ctx.strokeRect(0, 0, tileSize, tileSize);
+                ctx.strokeStyle = styles.borderColorUnRel;
+                ctx.stroke();
+            } else if (type === 'revealed-empty') {
+                ctx.fillStyle = ctx.createLinearGradient(0, 0, tileSize, tileSize);
+                ctx.fillStyle.addColorStop(0, styles.emptyTileBg[0]);
+                ctx.fillStyle.addColorStop(1, styles.emptyTileBg[1]);
+                ctx.fillRect(0, 0, tileSize, tileSize);
+                //ctx.lineWidth = 2;
+                ctx.strokeStyle = styles.revealedEmptyBorder;
+                ctx.stroke();
+
+                //ctx.fillStyle = styles.textColor['1'];
+                //ctx.font = '36px Arial';
+                //ctx.textAlign = 'center';
+                //ctx.textBaseline = 'middle';
+                //ctx.fillText('0', tileSize / 2, tileSize / 2);
+            }
+        }
+
+        // Initialize canvases
+        const lightNumbers = ['1', '2', '3', '4', '5', '6', '7', '8'];
+        const darkNumbers = ['1', '2', '3', '4', '5', '6', '7', '8'];
+
+        lightNumbers.forEach(num => drawTile(`light-${num}`, 'light', num));
+        darkNumbers.forEach(num => drawTile(`dark-${num}`, 'dark', num));
+
+        drawTile('light-mine', 'light', 'mine');
+        drawTile('light-flag', 'light', 'flag');
+        drawTile('light-empty', 'light', 'empty');
+        drawTile('light-revealed-empty', 'light', 'revealed-empty');
+
+        drawTile('dark-mine', 'dark', 'mine');
+        drawTile('dark-flag', 'dark', 'flag');
+        drawTile('dark-empty', 'dark', 'empty');
+        drawTile('dark-revealed-empty', 'dark', 'revealed-empty');
+
+        // Function to save canvas as PNG
+        function saveCanvasImage(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png');
+            link.download = `${canvasId}.png`;
+            link.click();
+        }
+        function saveAll() 
+        {
+            saveCanvasImage('light-1');
+            saveCanvasImage('light-2');
+            saveCanvasImage('light-3');
+            saveCanvasImage('light-4');
+            saveCanvasImage('light-5');
+            saveCanvasImage('light-6');
+            saveCanvasImage('light-7');
+            saveCanvasImage('light-8');
+            saveCanvasImage('light-mine');
+            saveCanvasImage('light-flag');
+            saveCanvasImage('light-empty');
+            saveCanvasImage('light-revealed-empty');
+
+            saveCanvasImage('dark-1');
+            saveCanvasImage('dark-2');
+            saveCanvasImage('dark-3');
+            saveCanvasImage('dark-4');
+            saveCanvasImage('dark-5');
+            saveCanvasImage('dark-6');
+            saveCanvasImage('dark-7');
+            saveCanvasImage('dark-8');
+            saveCanvasImage('dark-mine');
+            saveCanvasImage('dark-flag');
+            saveCanvasImage('dark-empty');
+            saveCanvasImage('dark-revealed-empty');
+        }
+    </script>
+</body>
+</html>

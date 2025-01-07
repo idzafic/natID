@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DocHeader layout="vertical" designWidth="180" height="10" hAlign="center" vAlign="center" font="DocuName">
+	<StaticText height="10" name="Positive entries only" width="180" hScale="1"/>		
+</DocHeader>

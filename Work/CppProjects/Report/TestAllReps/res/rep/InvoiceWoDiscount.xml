@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report paperOrientation="portrait" paperSize="A4" zoom="200" resGroup="Extern">
+	<Layout lMargin="15" tMargin="15" rMargin="15" bMargin="15" memoH="MemoExternH" memoF="MemoExternF_GR" pageH="PageHeaderExt" pageF="PageFooterExt" docH="Intro_Invoice" body="InvoiceWoDiscount_Body" docF="Summary_Invoice"/>			
+</Report>

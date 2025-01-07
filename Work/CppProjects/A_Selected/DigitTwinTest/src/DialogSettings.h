@@ -1,0 +1,39 @@
+//
+//  Created by Izudin Dzafic on 28/07/2020.
+//  Copyright © 2020 IDz. All rights reserved.
+//
+#pragma once
+#include <gui/Dialog.h>
+#include "ViewSettings.h"
+
+class DialogSettings : public gui::Dialog
+{
+protected:
+    ViewSettings _viewSettings;
+    
+    bool onClick(Dialog::Button::ID btnID, gui::Button* pButton) override
+    {
+        if (btnID == Dialog::Button::ID::OK)
+        {
+            td::String strTr = _viewSettings.getTranslationExt();
+            if (strTr.length() > 0)
+            {
+                auto pApp = getApplication();
+                auto appProperties = pApp->getProperties();
+                //write translation info back to properties
+                appProperties->setValue("translation", strTr);
+            }
+        }
+        return true;
+    }
+public:
+    DialogSettings(gui::Frame* pFrame, td::UINT4 wndID = 0)
+    : gui::Dialog(pFrame, { {gui::Dialog::Button::ID::OK, tr("Ok"), gui::Button::Type::Default},
+                            {gui::Dialog::Button::ID::Cancel, tr("Cancel")}}, gui::Size(450, 100), wndID)
+    {
+        setTitle(tr("dlgSettings"));
+        setCentralView(&_viewSettings);
+//        composeContent();
+    }
+
+};

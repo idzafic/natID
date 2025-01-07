@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DocHeader layout="free" designWidth="180" height="56" lMargin="0" tMargin="0" hAlign="left" vAlign="center" >
+	<Group x="5" y="0" width="90" height="40" name="Customer" font="Address">
+		<Rectangle roundDiameter="3" lineWidth="0.5" lineStyle="solid" x="0" y="10" width="90" height="28"/>
+		<Numeric type="int4" showThSep="false" hideZero="false" x="5" y="2" width="84" height="5" lbl="Customer ID: " name="CustomerID"/>
+		<Text x="5" y="11" width="84" height="5" name="Name"/>
+		<Text x="5" y="16" width="84" height="5" name="Subname"/>
+		<Text x="5" y="21" width="84" height="5" name="Street"/>
+		<Text x="5" y="26" width="84" height="5" name="Post"/>
+		<Text x="5" y="31" width="84" height="5" name="Country"/>
+	</Group>
+	<Group layout="vertical" x="99" y="0" width="81" height="55" name="InvoiceData" font="DocuDesc" >
+		<CompositeText font="DocuName" y="1" width="90" height="7">
+			<Text name="#DocType"/>
+			<Text lbl=": " translation="false" name="#DocID"/>
+		</CompositeText>
+		<Text height="4" lbl="Object ID: " name="#ObjID"/>
+		<Text height="4" lbl="Object name: " name="#ObjName"/>
+		<Text height="4" lbl="Place: " name="#ObjPlace"/>
+		<DateTime dateFmt="DateWinLong" timeFmt="TimeOwnShortHMM" height="4" lbl="Date: " name="#DocDT"/>
+		<CompositeText height="4">			
+			<Numeric type="int4" showThSep="false" hideZero="false"  lbl="Payment deadline: " name="#DocPayDays"/>
+			<DateTime dateFmt="DateWinShort" timeFmt="TimeOwnShortHMM" lbl=" days, or latest on " name="#DocPayDT"/>
+		</CompositeText>		
+		<Text height="4" lbl="Payment type: " name="PaymentType"/>
+		<Text height="4" lbl="Proinvoice ID: " name="ProInvoiceID"/>
+		<Date dateFmt="DateWinLong" height="4" lbl="Proinvoice date: " name="ProInvoiceDate"/>
+		<Text font="DocuDesc" height="4" lbl="Agreement ID: " name="AgreementID"/>
+		<Date dateFmt="DateWinLong" height="4" lbl="Agreement date: " name="AgreementDate"/>
+	</Group>
+</DocHeader>

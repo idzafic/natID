@@ -1,0 +1,30 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+
+        <Res id="dlgSettings" tr="Settings"/>
+        <Res id="lblLang" tr="Current application language:"/>
+        <Res id="lblLang2" tr="Application language after application's restart:"/>
+        <Res id="chbTBIcsAndLbls" tr="Show labels below icons on main toolbar"/>
+		<Res id="RestartRequired" tr="Restart the application"/>
+		<Res id="RestartRequiredInfo" tr="Some of the changed settings require restarting the application to take effect"/>
+		<Res id="Restart" tr="Restart"/>
+		<Res id="DoNoRestart" tr="Don't restart"/>
+
+  	        <Res id="Normal" tr="Normal"/>
+        	<Res id="Bold" tr="Bold"/>
+	        <Res id="Italic" tr="Italic"/>
+                <Res id="BoldItalic" tr="Bold Italic"/>
+            <Res id="Underline" tr="Underline"/>
+            <Res id="ResetUnderline" tr="Reset Underline"/>
+            <Res id="Subscript" tr="Subscript"/>
+            <Res id="Superscript" tr="Superscript"/>
+            <Res id="ResetSupSuperscript" tr="Reset Superscript"/>
+            <Res id="ResetColor" tr="Reset Color"/>
+            <Res id="IncreaseFont" tr="Increase Font"/>
+            <Res id="DecreaseFont" tr="Decrease Font"/>
+	
+
+
+	</Translations>
+</DevRes>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report paperOrientation="landscape" paperSize="A4" zoom="100" resGroup="Intern">
+	<Layout name="testDynBodyAndContextMenus" lMargin="15" tMargin="10" rMargin="15" bMargin="10" memoH="MemoInternH" pageF="PageFooterInt" docH="Intro_DynamicBody">
+		<Body layout="vertical" height="20" hAlign="right" vAlign="center" font="Body">		<!-- members of dynamic body (containing tables) can be only Row of Group containers -->
+			<Formulas calcCT="true">
+				<Formula name="fValue" f="Quantity*Price" type="decimal2"/>	
+			</Formulas>		
+			<Row height="20" name="dynamic">  <!-- This is dynamic row containing two parallel tables -->
+				<Group layout="vertical" height="20" width="110">
+					<Row height="5">
+						<TrText name="Item:" width="20" hAlign="left"/>
+						<CompositeText hAlign="left" height="5" width="85" font="BodyHead" menuID="10" name="itemDesc">
+							<Numeric type="int2" name="NT"/>
+							<Numeric type="int4" showThSep="false" lbl="-" trLbl="false" name="ID"/>
+							<Text lbl=":" trLbl="false" name="Name"/>
+						</CompositeText>
+					</Row>
+					
+					<Row height="5">
+						<TrText name="Quantity:" width="15" hAlign="left"/>
+						<Numeric type="decimal3" width="20" name="Quantity"/>
+						<TrText name="Price:"    width="15"/>
+						<Numeric type="decimal4" width="20" name="Price"/>
+						<TrText name="Value:"    width="15"/>
+						<Numeric type="decimal2" width="20" name="fValue"/>
+					</Row>
+					<Row height="5">
+						<TrText width="20" hAlign="left" name="TaxName:" />					
+						<Text   width="30" hAlign="left" name="TaxName"/>					
+						<TrText name="TaxPercent:"    width="20"/>
+						<Numeric type="smallDecimal2" width="30" name="TaxPercent"/>
+					</Row>
+					<Row height="5">
+						<TrText width="20" hAlign="left" name="Assortment:" />	
+						<CompositeText hAlign="left" width="100">
+							<Numeric type="int2" name="AssortID"/>										
+							<Text lbl=":" name="AssortName"/>
+						</CompositeText>										
+					</Row>				
+				</Group>
+				<Table key="Body.NT+Body.ID" x="1" width="75" name="Ingredients">
+					<Caption height="5" hAlign="left" vAlign="center" font="BodyHead">
+						<TrText width="-1" height="5" name="Ingradients:"/>
+					</Caption>
+					<Header layout="vertical" showOnEveryPage="true" showOnFirstPage="true" height="5" backClr="BackTableHead">
+						<Line lineWidth="0.4" lineStyle="solid" width="-1" height="0"/>
+						<Row height="5" hAlign="left" vAlign="center" font="BodyHead">				
+							<TrText width="5" name="Id"/>
+							<TrText width="30" name="Name"/>
+							<TrText width="20" hAlign="right" name="Value"/>
+							<TrText width="20" hAlign="right" name="dblValue"/>
+						</Row>			
+						<Line lineWidth="0.2" lineStyle="solid" width="-1" height="0"/>
+					</Header>
+					<Body height="4.5" backClr2="BackTableBody" font="TableBody" hAlign="left" vAlign="center" >  <!-- default layout for body is Horizontal -->
+						<Formulas calcCT="true">
+							<Formula name="dblValue" f="2*Value" type="decimal2"/>							
+						</Formulas>						
+						<Numeric type="int4" width="5" name="ExtID"/>					
+						<Text width="30" name="Name" menuID="20"/>
+						<Numeric type="real8" width="20" hAlign="right" noDecimals="2" name="Value"/>	
+						<Numeric type="decimal2" width="20" hAlign="right" noDecimals="2"name="dblValue"/>
+					</Body>	
+					<Footer layout="vertical" height="4.1" hAlign="right" vAlign="center" backClr="BackTableFoot" font="BodyFoot">
+						<Line lineWidth="0.4" lineStyle="solid" width="-1" height="0"/>
+						<Row height="4">
+							<TrText width="15" hAlign="left" name="Ukupno:"/>
+							<Aggregate fn="sum" type="real8" noDecimals="2" link="Body/Row:dynamic/Table:Ingredients/Body/Value" width="40" name="total"/>
+							<Aggregate fn="sum" type="decimal2" link="Body/Row:dynamic/Table:Ingredients/Body/dblValue" width="20" name="dblTotal"/>
+						</Row>
+						<Line lineWidth="0.4" lineStyle="solid" width="-1" height="0"/>
+					</Footer>
+				</Table>
+				<Table key="Body.NT+Body.ID" x="5" width="75" name="Nutritions">	
+					<Caption height="5" hAlign="left" vAlign="center" font="BodyHead">
+						<TrText width="-1" height="5" name="Nutritions:"/>
+					</Caption>
+					<Header layout="vertical" showOnEveryPage="true" showOnFirstPage="true" height="5" backClr="BackTableHead">
+						<Line lineWidth="0.4" lineStyle="solid" width="-1" height="0"/>
+						<Row height="5" hAlign="left" vAlign="center" font="BodyHead">				
+							<TrText width="5" name="Id"/>
+							<TrText width="30" name="Name"/>
+							<TrText width="20" hAlign="right" name="Value"/>
+							<TrText width="20" hAlign="right" name="WeekValue"/>
+						</Row>			
+						<Line lineWidth="0.2" lineStyle="solid" width="-1" height="0"/>
+					</Header>
+					<Body height="4.5" backClr2="BackTableBody" font="TableBody" hAlign="left" vAlign="center" >  <!-- default layout for body is Horizontal BBI Kasaner, 2Fl, MinEl-->
+						<Formulas calcCT="true">
+							<Formula name="weekValue" f="7*Value" type="decimal2"/>							
+						</Formulas>	
+						<Numeric type="int4" width="5" name="ExtID"/>					
+						<Text width="30" name="Name" menuID="30"/>				
+						<Numeric type="real8" width="20" hAlign="right" noDecimals="2"name="Value"/>
+						<Numeric type="decimal2" width="20" hAlign="right" noDecimals="2"name="weekValue"/>
+					</Body>	
+					<Footer layout="vertical" height="4.1" hAlign="right" vAlign="center" backClr="BackTableFoot" font="BodyFoot">	
+						<Line lineWidth="0.4" lineStyle="solid" width="-1" height="0"/>
+						<Row height="4">
+							<TrText width="15" hAlign="left" name="Ukupno:"/>
+							<Aggregate fn="sum" type="real8" noDecimals="2" link="Body/Row:dynamic/Table:Nutritions/Body/Value" width="40" name="nutTotal"/>
+							<Aggregate fn="sum" type="decimal2" link="Body/Row:dynamic/Table:Nutritions/Body/weekValue" width="20" name="nutWeekTotal"/>
+						</Row>
+						<Line lineWidth="0.4" lineStyle="solid" width="-1" height="0"/>
+					</Footer>
+				</Table>
+			</Row>
+			<Group height="15" layout="vertical">
+				<Row height="15" hAlign="left" vAlign="top">
+					<TrText width="25" name="Description:"/> 
+					<Text width="242" name="Description"/> 
+				</Row>			
+				<Line lineWidth="0.4" lineStyle="solid" height="0"/>
+			</Group>			
+		</Body>		
+		<Footer layout="horizontal" height="170" hAlign="left" vAlign="top" font="BodyFoot">	
+			<TrText hAlign="left" width="100" name="Total Value of all items:"/>		
+			<Aggregate fn="sum" type="decimal2" link="Body/fValue" width="30" />
+		</Footer>			
+	</Layout>
+</Report>

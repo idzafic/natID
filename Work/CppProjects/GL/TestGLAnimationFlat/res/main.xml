@@ -1,0 +1,17 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="export" path="Work/Common/Icons/export48.png"/>
+	</Images>
+	<Texts>
+		<!--- all from res folder -->
+		<Res id="shVertFlat" path=":shaders/Flat.vert"/>
+		<Res id="shFragFlat" path=":shaders/Flat.frag"/>
+		<Res id="shVertInt" path=":shaders/Interpolation.vert"/>
+		<Res id="shFragInt" path=":shaders/Interpolation.frag"/>
+	</Texts>
+	<Textures>
+		<Res id="brickWall" path="Work/Common/Images/brickwall.jpg" mirrorV = "true"/>
+		<Res id="nature" path="Work/Common/Images/nature.jpg" mirrorV = "true"/>
+	</Textures>
+</DevRes>

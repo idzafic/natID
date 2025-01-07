@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report paperOrientation="portrait" paperSize="A4" zoom="200" resGroup="Intern">
+	<Layout type="fall" lMargin="15" tMargin="10" rMargin="15" bMargin="10" memoH="MemoInternH" pageF="PageFooterInt" docH="Intro_MultiCard">
+		<Header layout="vertical" showOnEveryPage="true" showOnFirstPage="true" height="9" hAlign="right" vAlign="center" backClr="BackHead" font="BodyHead"> 
+			<Line lineWidth="0.4" lineStyle="solid" height="0"/> <!-- width == -1 means it will take with of its parent-->
+			<Row height="9"> <!-- visibleOnCondition == 0: it will be drawn always, 1: on first page, 2: on other pages-->				
+				<TrText width="9" hAlign="left" name="Pos"/>
+				<TrText width="9" hAlign="left" name="Da_te"/>
+				<TrText width="24" hAlign="left" name="Document_No"/>
+				<TrText width="23" name="Inp_Quantity"/>
+				<TrText width="23" name="Out_Quantity"/>
+				<TrText width="23" name="Saldo_Quantity"/>
+				<TrText width="23" name="Price"/>
+				<TrText width="23" name="Value"/>
+				<TrText width="23" name="Saldo_Value"/>
+			</Row>
+			<Line lineWidth="0.4" lineStyle="solid" height="0"/> 
+		</Header>
+			
+		<Body height="4.4" backClr2="BackBody" hAlign="right" vAlign="center" font="Body">
+			<Formulas calcCT="true">
+				<Formula name="fIn" f="(Mult>0)*Quantity" type="decimal3"/>
+				<Formula name="fOut" f="(Mult<0)*Quantity" type="decimal3"/>
+				<Formula name="fValue" f="Mult*Quantity*Price" type="decimal2"/>
+				<Formula name="fSaldo" f="fSaldo+=(Mult*Quantity)" type="decimal3" moveToDP="true" initLink="Grouper/GHead/Quantity"/>				
+				<Formula name="fVSaldo" f="fVSaldo+=(Mult*Quantity*Price)" type="decimal2" moveToDP="true" initLink="Grouper/GHead/Value"/>
+			</Formulas>	
+			<Counter format="G1.B1" hAlign="left" width="9"/>	
+			<Date dateFmt="DateOwnShortDM" hAlign="left" width="9" name="Date"/>
+			<Text hAlign="left" width="24" name="DocID"/>
+			<Numeric type="decimal3" hideZero="true" width="23" name="fIn"/>
+			<Numeric type="decimal3" hideZero="true" width="23" name="fOut"/>
+			<Numeric type="decimal3" width="23" name="fSaldo"/>
+			<Numeric type="decimal4" width="23" name="Price"/>
+			<Numeric type="decimal2" width="23" name="fValue"/>
+			<Numeric type="decimal2" width="23" name="fVSaldo"/>			
+		</Body>
+		
+		<Grouper name="ID" hAlign="right" vAlign="center" font="Grouper1">
+			<GHead layout="vertical" height="10" backClr="BackGrouper1">
+				<Formulas calcCT="true">
+					<Formula name="fInitInQ" f="(Quantity>0)*Quantity" type="decimal3"/>
+					<Formula name="fInitOutQ" f="(Quantity<0)*(0-Quantity)" type="decimal3"/>	
+				</Formulas>
+				<Line lineWidth="0.2" lineStyle="solid" height="0"/>
+				<Row height="5">
+					<Counter format="G1" hAlign="left" width="9"/>
+					<CompositeText hAlign="left" height="5" width="170">
+						<Numeric type="int4" showThSep="false" lbl="Item ID: " name="ID"/>
+						<Text lbl=", " name="Name"/>					
+					</CompositeText>
+				</Row>
+				<RectFill height="5" backClr="BackGrouper2"/> <!-- to simulate Group2 -->
+				<Row height="5" font="Grouper2">	
+					<StaticText width="9"/> <!-- empty space-->
+					<CompositeText hAlign="left" width="33">
+						<Date dateFmt="DateOwnShortDM" lbl="Donos do " name="#DocFromDT"/>	
+						<StaticText name=":" trLbl="false"/>
+					</CompositeText>
+					<Numeric type="decimal3" hideZero="true" width="23" name="fInitInQ"/>
+					<Numeric type="decimal3" hideZero="true" width="23" name="fInitOutQ"/>
+					<Numeric type="decimal3" width="23" name="Quantity"/>				
+					<Numeric type="decimal2" width="69" name="Value"/>	
+				</Row>
+				<Line lineWidth="0" lineStyle="dot" height="0"/>
+			</GHead>
+			<GFoot layout="vertical" height="10" backClr="BackGrouper1">
+				<Formulas calcCT="true">
+					<Formula name="totalIn" f="totalIn=(Quantity>0)*Quantity+perIn"  type="decimal3" />
+					<Formula name="totalOut" f="totalOut=(Quantity<0)*(0-Quantity)+perOut" type="decimal3"/>
+					<Formula name="fKPeriodSaldo" f="perIn-perOut" type="decimal3"/>				
+					<Formula name="fKTotalSaldo" f="totalIn-totalOut" type="decimal3"/>
+					<Formula name="fVSaldo" f="Value+PerSaldo" type="decimal2"/>
+				</Formulas>	
+				<RectFill height="5" backClr="BackGrouper2"/> <!-- to simulate Group2 -->
+				<Line lineWidth="0.2" lineStyle="dot" height="0"/>				
+				<Row height="5" font="Grouper2">
+					<StaticText width="9"/> <!-- empty space-->
+					<CompositeText hAlign="left" width="33">
+						<Date dateFmt="DateOwnShortDM" lbl="Za per. " name="#DocFromDT"/>
+						<Date dateFmt="DateOwnShortDM" lbl="-"  trLbl="false" name="#DocToDT"/>
+						<StaticText name=":" trLbl="false"/>
+					</CompositeText>				
+					<Aggregate fn="sum" type="decimal3" link="Body/fIn" width="23" name="perIn"/>
+					<Aggregate fn="sum" type="decimal3" link="Body/fOut" width="23" name="perOut"/>
+					<Numeric type="decimal3" showThSep="true" hideZero="false" width="23" name="fKPeriodSaldo"/>
+					<Aggregate fn="sum" type="decimal2" link="Body/fValue" width="46" name="PerSaldo"/>									
+				</Row>
+				<Row height="5">
+					<Counter format="G1)" hAlign="left" width="9"/>
+					<TrText hAlign="left"width="33"name="Total:"/>
+					<Numeric type="decimal3" width="23" name="totalIn"/>
+					<Numeric type="decimal3" width="23" name="totalOut"/>
+					<Numeric type="decimal3" width="23" name="fKTotalSaldo"/>
+					<Numeric type="decimal2" width="69" name="fVSaldo"/>
+					<!--<Aggregate fn="last" type="decimal2" link="Body/Formula/fVSaldo" width="69"/> -->
+				</Row>					
+				<Line lineWidth="0.2" lineStyle="solid" height="0"/> 
+			</GFoot>
+		</Grouper>
+		
+		<Footer layout="vertical" height="5" hAlign="right" vAlign="center">			
+			<Line lineWidth="0.4" lineStyle="solid" height="0"/>
+				<Row height="5" backClr="BackFoot" font="BodyFoot">
+					<TrText hAlign="left"width="42"name="Total:"/>		
+					<Aggregate fn="sum" type="decimal2" link="Grouper/GFoot/fVSaldo" width="138" name="TotalSaldo"/>
+				</Row>			
+			<Line lineWidth="0.4" lineStyle="solid" height="0"/>
+		</Footer>
+	</Layout>
+</Report>

@@ -1,0 +1,32 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+        <Res id="appTitle" tr="Animacija i GUI"/>
+        <Res id="Animation" tr="Animacija"/>
+		<Res id="start" tr="Pokreni"/>
+		<Res id="startTT" tr="Pokreni animaciju"/>
+		<Res id="stop" tr="Zaustavi"/>
+		<Res id="stopTT" tr="Zaustavi animaciju"/>
+        <Res id="Update" tr="Refrešuj"/>
+        <Res id="lblFreq" tr="Broj rotacija u minuti [obr/min]:"/>
+        <Res id="lblColor" tr="Boja aviona:"/>
+        <Res id="custColor" tr="Koristi korisničku boju"/>
+        <Res id="etfColor" tr="Boja ETF oznake:"/>
+        <Res id="closeNOK" tr="Greška! Animacija je u toku!"/>
+        <Res id="cloeErr" tr="Zaustavite animaciju pa onda zatvorite aplikaciju!"/>
+        <Res id="settings" tr="Podešenja"/>
+        <Res id="settingsTT" tr="Podešenja (trenutno samo jezik)"/>
+        <!-- Settings -->
+        <Res id="dlgSettings" tr="Podešenja"/>
+        <Res id="lblLang" tr="Trenutni jezik aplikacija:"/>
+        <Res id="lblLang2" tr="Jezik aplikacije nakon njenog restarta:"/>
+        <Res id="chbTBIcsAndLbls" tr="Prikaži labele ispod ikona na alatnoj traci"/>
+		<Res id="RestartRequired" tr="Restartovati aplikaciju"/>
+		<Res id="RestartRequiredInfo" tr="Neke od promijenjenih postavki zahtijevaju ponovno pokretanje aplikacije kako bi bile primijenjene"/>
+		<Res id="Restart" tr="Restartovati"/>
+		<Res id="DoNoRestart" tr="Nemoj restartovati"/>
+
+        <Res id="chbRestartPosition" tr="Pokreći avion uvijek sa početne tačke"/>
+        <Res id="info" tr="Kliknuti tipku 'B' za efekat bombe, kliknuti i držati tipku 'M' za efekat pucanja automatske puške (mitraljez)."/>
+	</Translations>
+</DevRes>

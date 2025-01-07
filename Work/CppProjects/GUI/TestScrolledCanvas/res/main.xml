@@ -1,0 +1,16 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="TransCost" path = "Work/Common/Icons/transportCostXL.png"/>
+		<Res id="zoomIn" path = "Work/Common/Icons/zoomIn64.png"/>
+		<Res id="zoomOut" path = "Work/Common/Icons/zoomOut64.png"/>
+		<Res id="fullScreen" path = "Work/Common/Icons/fullScreen64.png"/>
+		<Res id="bh_flag" path = "Work/Common/Icons/bh_flag.png"/>
+	</Images>
+	<Symbols>
+		<Res id="Xfmr4" path="Work/Common/Symbols/PSA/FourWindingTransformer.xml"/>
+		<Res id="rect" path="Work/Common/Symbols/Shapes/rectangle.xml"/>
+		<Res id="roundRct" path="Work/Common/Symbols/Shapes/roundedRectangle.xml"/>
+		<Res id="circ" path="Work/Common/Symbols/Shapes/circle.xml"/>
+	</Symbols>
+</DevRes>

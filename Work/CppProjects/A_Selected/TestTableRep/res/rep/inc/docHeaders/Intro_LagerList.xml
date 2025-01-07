@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DocHeader layout="vertical" designWidth="170" height="13" hAlign="center" vAlign="center">
+	<Text font="DocuName" height="6" name="#DocType" width="170" hScale="1"/>
+	<DateTime height = "4.5" dateFmt="DateWinLong" timeFmt="TimeOwnShortHMM" font="DocuDesc" lbl="At date: " name="#DocToDT"/>
+</DocHeader>

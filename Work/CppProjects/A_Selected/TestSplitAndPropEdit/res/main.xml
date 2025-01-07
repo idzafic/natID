@@ -1,0 +1,13 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="imgOpen" path="Work/Common/Icons/openSave/open64.png"/>
+		<Res id="imgSave" path="Work/Common/Icons/openSave/save64.png"/>
+		<Res id="settings" path = "Work/Common/Icons/SettingsBlue48.png"/>
+	</Images>
+	<Symbols>
+		<Res id="rect" path="Work/Common/Symbols/Shapes/rectangle.xml"/>
+		<Res id="roundRct" path="Work/Common/Symbols/Shapes/roundedRectangle.xml"/>
+		<Res id="circ" path="Work/Common/Symbols/Shapes/circle.xml"/>
+	</Symbols>
+</DevRes>

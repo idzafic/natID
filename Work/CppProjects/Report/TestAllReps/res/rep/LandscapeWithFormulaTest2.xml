@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report paperOrientation="landscape" paperSize="A4" zoom="200" resGroup="Intern">	
+	<Layout paperOrientation="landscape" lMargin="15" tMargin="15" rMargin="15" bMargin="10" memoH="MemoInternH" pageF="PageFooterInt">	
+		<Header layout="vertical" dynamic="true" showOnEveryPage="true" showOnFirstPage="true" height="14" hAlign="right" vAlign="center" font="BodyHead"> <!-- conditional == true means that belonging containers will be conditionaly drawn -->			
+			<Group layout="vertical" visibleOnCondition="0" height="9" backClr="BackHead" font="BodyHead">
+				<Line lineWidth="0.4" lineStyle="solid" height="0"/> <!-- width == -1 means it will take with of its parent-->
+				<Row height="9"> <!-- visibleOnCondition == 0: it will be drawn always, 1: on first page, 2: on other pages-->				
+					<TrText width="10" hAlign="left" name="Pos"/>
+					<TrText width="20" hAlign="left" name="Da_te"/>
+					<TrText width="107" hAlign="left" name="Name"/>
+					<TrText width="30" name="Quantity"/>				
+					<TrText width="30" name="Price"/>
+					<TrText width="10" name="Mult"/>
+					<TrText width="30" name="In Value"/>
+					<TrText width="30" name="Out Value"/>
+				</Row>
+				<Line lineWidth="0.4" lineStyle="solid" height="0"/> 
+			</Group>
+			<Group layout="vertical" visibleOnCondition="1" height="5" backClr="BackSubHead">
+				<Row height="5">
+					<TrText width="207" name="Donos:" hAlign="left"/>
+					<Numeric type="decimal2" width="30" name="InVal"/>	
+					<Numeric type="decimal2" width="30" name="OutVal"/>
+				</Row>
+				<Line lineWidth="0.2" lineStyle="dash" height="0"/> 
+			</Group>
+		</Header>
+		<Body height="4.4" backClr2="BackBody" hAlign="right" vAlign="center" font="Body">			
+			<Formulas calcCT="true">				
+				<Formula name="fInValue" f="(Mult>0)*Quantity*Price" type="decimal2"/>	
+				<Formula name="fOutValue" f="(Mult<0)*Quantity*Price" type="decimal2"/>	
+			</Formulas>					
+			<Numeric type="int4" showThSep="false" hAlign="left" width="10" name="#Pos"/>				
+			<Date dateFmt="DateWinShort" hAlign="left" width="20" name="Date"/>
+			<Text hAlign="left" width="107" name="Name"/>
+			<Numeric type="decimal3" hideZero="true" width="30" name="Quantity"/>						
+			<Numeric type="decimal4" width="30" name="Price"/>
+			<Numeric type="int4" width="10" name="Mult"/>
+			<Numeric type="decimal2" width="30" hideZero="true" name="fInValue"/>
+			<Numeric type="decimal2" width="30" hideZero="true" name="fOutValue"/>
+		</Body>				
+		<Footer layout="vertical" height="10" hAlign="right" vAlign="center" font="BodyFoot">
+			<Formulas>
+				<Formula name="totalIn" f="totalIn+=perIn"  type="decimal2" initLink="Header/InVal"/>
+				<Formula name="totalOut" f="totalOut+=perOut" type="decimal2" initLink="Header/OutVal"/>						
+			</Formulas>			
+			<Line lineWidth="0.2" lineStyle="dash" height="0"/>			
+			<Row height="5" backClr="BackSubFoot" font="BodySubFoot">
+				<TrText hAlign="left"width="207" name="Period:"/>				
+				<Aggregate fn="sum" type="decimal2" link="Body/fInValue" width="30" name="perIn"/>
+				<Aggregate fn="sum" type="decimal2" link="Body/fOutValue" width="30" name="perOut"/>
+			</Row>			
+			<Line lineWidth="0.4" lineStyle="solid" height="0"/>
+			<Row height="5" backClr="BackFoot" font="BodyFoot">
+				<TrText hAlign="left"width="207" name="Total:"/>				
+				<Numeric type="decimal2" width="30" name="totalIn"/>
+				<Numeric type="decimal2" width="30" name="totalOut"/>
+			</Row>			
+			<Line lineWidth="0.4" lineStyle="solid" height="0"/>
+		</Footer>		
+	</Layout>
+</Report>

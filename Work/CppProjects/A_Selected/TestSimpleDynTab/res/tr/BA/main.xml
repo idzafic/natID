@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+
+		
+		<Res id="addView" tr="Dodaj tab"/>
+		<Res id="addViewTT" tr="Dodaj tab view"/>
+		<Res id="remView" tr="Izbriši tab"/>
+		<Res id="remViewTT" tr="Izbriši tab view"/>
+		<Res id="mvvLeft" tr="Pomjeri ulijevo"/>
+		<Res id="mvvLeftTT" tr="Pomjeri selekciju u lijevo"/>
+		<Res id="mvvRight" tr="Pomjeri udesno"/>
+		<Res id="mvvRightTT" tr="Pomjeri selekciju u desno"/>
+		<Res id="remAllViews" tr="Zatvori sve"/>
+		<Res id="remAllViewsTT" tr="Zatvori sve tabove"/>
+		
+		<Res id="view0" tr="Grid view demonstracija"/>
+		<Res id="view1" tr="Vertikalni view - samo za pokaz ŽŠČĐĆžžčćšđ"/>
+		<Res id="view2" tr="Horizontalni (treći) view - ovaj baš samo da ima"/>
+		<Res id="view3" tr="ViewScroller with Canvas demo (Četvrti view)"/>
+		<Res id="view4" tr="Četvrti view"/>
+		<Res id="view5" tr="Peti view"/>
+		<Res id="view6" tr="Šesti view"/>
+		<Res id="view7" tr="Sedmi view"/>
+		<Res id="tabsCnt" tr="Broj tabova: "/>
+
+
+		        <!-- Settings -->
+        <Res id="dlgSettings" tr="Podešenja"/>
+        <Res id="lblLang" tr="Trenutni jezik aplikacija:"/>
+        <Res id="lblLang2" tr="Jezik aplikacije nakon njenog restarta:"/>
+        <Res id="chbTBIcsAndLbls" tr="Prikaži labele ispod ikona na alatnoj traci"/>
+		<Res id="RestartRequired" tr="Restartovati aplikaciju"/>
+		<Res id="RestartRequiredInfo" tr="Neke od promijenjenih postavki zahtijevaju ponovno pokretanje aplikacije kako bi bile primijenjene"/>
+		<Res id="Restart" tr="Restartovati"/>
+		<Res id="DoNoRestart" tr="Nemoj restartovati"/>
+
+
+
+	</Translations>
+</DevRes>

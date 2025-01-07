@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report paperOrientation="portrait" paperSize="A4" zoom="200" resGroup="Intern">
+	<Layout type="fall" lMargin="15" tMargin="10" rMargin="15" bMargin="10" memoH="MemoInternH" pageF="PageFooterInt" docH="Intro_WF">
+		<Header showOnEveryPage="true" showOnFirstPage="true" height="9" hAlign="right" vAlign="center"  backClr="BackHead" font="BodyHead">
+			<Group layout="vertical" height="9">
+				<Line lineWidth="0.4" lineStyle="solid" height="0"/> <!-- width == -1 means it will take with of its parent-->
+				<Row height="9"> <!-- visibleOnCondition == 0: it will be drawn always, 1: on first page, 2: on other pages-->								
+					<TrText width="10" hAlign="left" name="Pos"/>
+					<!-- <StaticText width="2"/>   no need for empty space of 2mm-->
+					<TrText width="30" hAlign="left" name="NT:ID"/>	
+					<TrText width="50" hAlign="left" name="Item_Name"/>
+					<TrText width="30" name="Quantity"/>										
+					<TrText width="30" name="AVG_Price"/>
+					<TrText width="30" name="Total_Value"/>					
+				</Row>
+				<Line lineWidth="0.4" lineStyle="solid" height="0"/> 
+			</Group>
+		</Header>		
+			
+		<Body key="ID" height="4.4" backClr2="BackBody" hAlign="right" vAlign="center" font="Body">						
+			<Formulas>
+				<Formula name="fPrice" f="(Quant!=0)*Value/Quant" type="decimal4"/>				
+			</Formulas>				
+			<!--Body contentent -->
+			<Counter width="10" format="GI.Ga.B1" hAlign="left"/>	
+			<!-- <StaticText width="2"/>   no need for empty space of 2mm-->
+			<CompositeText width="30" hAlign="left">				
+				<Numeric type="int2" name="NT"/>				
+				<Numeric type="int4" lbl=":" trLbl="false" showThSep="false" name="ID"/>
+			</CompositeText>		
+			<Text name="Name" width="50" hAlign="left"/>			
+			<Numeric type="decimal3" showThSep="true" width="30" name="Quant"/>
+			<Numeric type="decimal4" showThSep="true" width="30" name="fPrice"/>
+			<Numeric type="decimal2" showThSep="true" width="30" name="Value"/>					
+		</Body>
+		
+		<!--GroupBy descriptor -->
+		<Grouper name="Tax.ID" hAlign="left" vAlign="center" font="Grouper1">
+			<GHead height="5" backClr="BackGrouper1">
+				<Line lineWidth="0.2" lineStyle="solid" height="0"/>
+				<CompositeText>
+					<Counter format="GI)"/>
+					<TrText name=" TaxID "/>	
+					<Numeric type="int4" showThSep="false" name="ID"/>
+					<Text lbl="-" trLbl="false" name="Name"/>
+					<Numeric type="decimal2" lbl="=" trLbl="false" name="Value"/>
+					<StaticText name="%"/>
+				</CompositeText>
+				<Line y="5" lineWidth="0" lineStyle="dot" height="0"/>
+			</GHead>
+			<GFoot height="5" backClr="BackGrouper1">
+				<Line lineWidth="0" lineStyle="dot" height="0"/>
+				<Row height="4">
+					<CompositeText hAlign="left" width="140">
+						<Counter format="GI)"/>
+						<TrText name=" TaxID "/>
+						<Numeric type="int4" showThSep="false" name="ID"/>
+						<Text lbl="-" trLbl="false" name="Name"/>
+						<Numeric type="decimal2" lbl="=" trLbl="false" name="Value"/>
+						<StaticText name="%"/>
+						<TrText name=" (Total):"/>
+					</CompositeText>
+					<Aggregate fn="sum" type="decimal2" link="Grouper/Grouper/GFoot/TotalAssort" hAlign="right" width="40" name="TotalTax"/>
+				</Row>				
+				<Line y="5" lineWidth="0.2" lineStyle="solid" height="0"/> 
+			</GFoot>
+			<Grouper name="Assort.ID" font="Grouper2">
+				<GHead height="5">  <!-- lMargin removed -->
+					<!--<Line lineWidth="0" lineStyle="dot" height="0"/> -->
+					<CompositeText hAlign="left" width="140">
+						<Counter format="GI.Ga "/>
+						<TrText name="AssortID "/>	
+						<Numeric type="int4" showThSep="false" name="ID"/>					
+						<Text lbl=", " trLbl="false" name="Name"/>	
+					</CompositeText>
+				</GHead>
+				<GFoot height="5"> <!-- lMargin removed -->
+					<Row height="5">
+						<CompositeText hAlign="left" width="140">
+							<Counter format="GI.Ga "/>
+							<TrText name="AssortID "/>	
+							<Numeric type="int4" showThSep="false" name="ID"/>					
+							<Text lbl=", " trLbl="false" name="Name"/>	
+							<TrText name=" (Total):"/>
+						</CompositeText>				
+						<Aggregate fn="sum" type="decimal2" link="Body/Value" hAlign="right" width="40" name="TotalAssort"/>
+					</Row>
+					<Line y="5" lineWidth="0" lineStyle="dot" height="0"/>
+				</GFoot>				
+			</Grouper>
+		</Grouper>		
+		<Footer layout="vertical" height="5" hAlign="right" vAlign="center" backClr="BackHead" font="BodyFoot">	
+			<Line lineWidth="0.4" lineStyle="solid" height="0"/>
+			<Row height="5">
+				<TrText name="Total:" width="30" hAlign="left"/>
+				<Aggregate fn="sum" type="decimal2" link="Grouper/GFoot/TotalTax" font="BodyFoot" width="150" name="Total"/>
+			</Row>			
+			<Line lineWidth="0.4" lineStyle="solid" height="0"/>
+		</Footer>			
+	</Layout>
+</Report>

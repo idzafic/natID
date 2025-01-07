@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+        <Res id="appTitle" tr="Digitalni blizanac (Klatno)"/>
+		<Res id="start" tr="Pokreni"/>
+		<Res id="startTT" tr="Pokreni animaciju"/>
+		<Res id="stop" tr="Zaustavi"/>
+		<Res id="stopTT" tr="Zaustavi animaciju"/>
+        <Res id="Update" tr="Refrešuj"/>
+        <Res id="animation" tr="Animacija"/>
+        <Res id="lblX" tr="Inicijalni otklon x[m]:"/>
+		<Res id="lblK" tr="Koeficijent otpora okruženja k:"/>
+		<Res id="lblG" tr="Gravitaciono ubrzanje g [m/s^2]:"/>
+        <Res id="lblM" tr="Masa klatna m [kg]:"/>
+		<Res id="lblParams" tr="Parametri sistema:"/>
+		<Res id="lblL" tr="l [m]:"/>
+		<Res id="lblValK" tr="k:"/>
+		<Res id="lblValG" tr="g [m/s^2]:"/>
+        <Res id="lblValM" tr="m [kg]:"/>
+		<Res id="lblInitVals" tr="Početne vrijednosti:"/>
+		<Res id="lblX0" tr="x0 [m]:"/>
+		<Res id="lblY0" tr="y0 [m]:"/>
+        
+        <Res id="lblColor" tr="Boja klatna:"/>		
+        <Res id="custColor" tr="Koristi korisničku boju"/>
+        <Res id="fontColor" tr="Boja ETF oznake:"/>
+        <Res id="closeNOK" tr="Greška! Animacija je u toku!"/>
+        <Res id="cloeErr" tr="Zaustavite animaciju pa onda zatvorite aplikaciju!"/>
+        <Res id="settings" tr="Podešenja"/>
+        <!-- Settings -->
+        <Res id="dlgSettings" tr="Podešenja"/>
+        <Res id="lblLang" tr="Trenutni jezik aplikacija:"/>
+        <Res id="lblLang2" tr="Jezik aplikacije nakon njenog restarta:"/>
+	</Translations>
+</DevRes>

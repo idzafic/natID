@@ -1,0 +1,18 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+        <Res id="appTitle" tr="Threads and GUI"/>
+        <Res id="start" tr="Start"/>
+        <Res id="startTT" tr="Start the thread"/>
+        <Res id="stop" tr="Stop"/>
+        <Res id="stopTT" tr="Stop the thread"/>
+        <Res id="delete" tr="Delete"/>
+        <Res id="shPWD" tr="Show Password"/>
+        <Res id="lblUN" tr="User name:"/>
+        <Res id="lblPwd" tr="Password:"/>
+        <Res id="thApp" tr="ThreadTest"/>
+        <Res id="thread" tr="Thread"/>
+        <Res id="closeThNOK" tr="Error! Thread is running!"/>
+        <Res id="stopThBefClose" tr="Stop thread or wait until it finishes and then close the app!"/>
+	</Translations>
+</DevRes>

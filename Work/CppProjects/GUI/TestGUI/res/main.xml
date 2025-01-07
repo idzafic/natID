@@ -1,0 +1,47 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="poly128" path="Work/Common/Icons/PolyLine_128.png"/>
+		<Res id="rect12" path="Work/Common/Icons/Rectangle_12.png"/>
+		<Res id="img1" path="Work/Common/Icons/add2.png"/>
+		<Res id="img2" path="Work/Common/Icons/arrow_upXL.png"/>
+		<Res id="incSize" path="Work/Common/Icons/sizeIncrease128.png"/>
+		<Res id="decSize" path="Work/Common/Icons/sizeDecrease128.png"/>
+		<Res id="img3" path="Work/Common/Icons/Blackberry8707g_48.png"/>
+		
+		<Res id="prev" path="Work/Common/Icons/arrow_left.png"/>
+		<Res id="next" path="Work/Common/Icons/arrow_right.png"/>
+		<Res id="remove" path="Work/Common/Icons/delete48.png"/>
+		<Res id="ETF" path = "Work/Common/Icons/UNSA/ETF_Logo.png"/>
+		<Res id="UNSA" path = "Work/Common/Icons/UNSA/UNSA_Logo.png"/>
+		<Res id="Home" path = "Work/Common/Icons/Traditional-HomeXL.png"/>
+		<Res id="TransCost" path = "Work/Common/Icons/transportCostXL.png"/>
+	</Images>
+	<Symbols>
+		<Res id="bus" path="Work/Common/Symbols/PSA/bus.xml"/>
+		<Res id="ASArrowTL" path="Work/Common/Symbols/PSA/ASArrowTL.xml"/>
+		<Res id="resistor" path="Work/Common/Symbols/PSA/resistor.xml"/>
+		<Res id="load" path="Work/Common/Symbols/PSA/load.xml"/>
+		<Res id="shunt" path="Work/Common/Symbols/PSA/shunt.xml"/>
+		<Res id="inductor" path="Work/Common/Symbols/PSA/inductor.xml"/>
+		<Res id="capacitor" path="Work/Common/Symbols/PSA/capacitor.xml"/>
+		<Res id="generator" path="Work/Common/Symbols/PSA/generator.xml"/>
+		<Res id="ASSynchComp" path="Work/Common/Symbols/PSA/ASSynchComp.xml"/>
+		<Res id="ASAlternate" path="Work/Common/Symbols/PSA/ASAlternate.xml"/>
+		<Res id="ASGen" path="Work/Common/Symbols/PSA/ASGen.xml"/>
+		<Res id="ASMotor" path="Work/Common/Symbols/PSA/ASMotor.xml"/>
+		<Res id="breaker" path="Work/Common/Symbols/PSA/breaker.xml"/>
+		<Res id="disconctr" path="Work/Common/Symbols/PSA/disconnector.xml"/>
+		<Res id="fuse" path="Work/Common/Symbols/PSA/fuse.xml"/>
+		<Res id="Xfmr2" path="Work/Common/Symbols/PSA/TwoWindingTransformer.xml"/>
+		<Res id="Xfmr3" path="Work/Common/Symbols/PSA/ThreeWindingTransformer.xml"/>
+		<Res id="Xfmr4" path="Work/Common/Symbols/PSA/FourWindingTransformer.xml"/>
+		<Res id="TestArc" path="Work/Common/Symbols/PSA/TestArc.xml"/>
+		<Res id="TestPie" path="Work/Common/Symbols/PSA/TestPie.xml"/>
+		<Res id="TestOval" path="Work/Common/Symbols/PSA/TestOval.xml"/>
+		<Res id="TestRoundRect" path="Work/Common/Symbols/PSA/TestRoundedRect.xml"/>
+	</Symbols>
+	<Texts>
+		<Res id="infoTxt" path=":texts/Info.txt"/> <!-- from res folder -->
+	</Texts>
+</DevRes>

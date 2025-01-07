@@ -1,0 +1,11 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="TransCost" path="Work/Common/Icons/transportCostXL.png"/>
+	</Images>
+	<Symbols>
+		<Res id="Xfmr4" path="Work/Common/Symbols/PSA/FourWindingTransformer.xml"/>
+		<Res id="Bez1" path="Work/Common/Symbols/Shapes/Bezier01.xml"/>
+		<Res id="Bez2" path="Work/Common/Symbols/Shapes/Bezier02.xml"/>
+	</Symbols>
+</DevRes>

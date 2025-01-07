@@ -1,0 +1,10 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="invoiceRep" path = "Work/Common/Icons/transportCost.png"/>
+		<Res id="cardRep" path="Work/Common/Icons/Report.png"/>
+	</Images>
+	<Symbols>
+		<Res id="Xfmr4" path="Work/Common/Symbols/PSA/FourWindingTransformer.xml"/>
+	</Symbols>
+</DevRes>

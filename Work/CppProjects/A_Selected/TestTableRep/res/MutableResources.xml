@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Groups>		
+	<Group id="Intern">		
+		<Fonts>
+			<Font id="PageHead" 	family="Arial" size="10.0" bold="false" italic="false" underline="false"/>  <!-- 0 -->
+			<Font id="MemoH1" 		family="Times New Roman" size="13.0"  bold="false" italic="false"  underline="false"/>  <!-- 1 -->
+			<Font id="MemoH2" 		family="Times New Roman" size="12.0"  bold="false" italic="false"  underline="false"/>  <!-- 2 -->
+			<Font id="MemoH3" 		family="Times New Roman" size="11.5"  bold="false" italic="false"  underline="false"/>  <!-- 3 -->
+		
+			<Font id="MemoF1" 		family="Arial" size="10.0"  bold="false" italic="false"  underline="false"/>  <!-- 4 -->
+			<Font id="MemoF2" 		family="Arial" size="9.0"  bold="false" italic="false"  underline="false"/>  <!-- 5 -->
+			<Font id="MemoF3" 		family="Arial" size="8.5"  bold="false" italic="false"  underline="false"/>  <!-- 6 -->
+		
+			<Font id="DocuName" 	family="Times New Roman" size="13.0" bold="true"  italic="false" underline="false"/>	  <!-- 7 -->
+			<Font id="DocuDesc" 	family="Times New Roman" size="11.0" bold="false" italic="false" underline="false"/>	  <!-- 8 -->
+			<Font id="BodyHead" 	family="Times New Roman" size="11.0" bold="true" italic="false" underline="false"/>	<!-- 9 -->		
+			<Font id="BodySubHead" 	family="Times New Roman" size="11.0" bold="false" italic="true" underline="false"/>	  <!-- 11 -->
+			<Font id="Body" 		family="Times New Roman" size="10.0" bold="false" italic="false" underline="false"/>  <!-- 12 -->		
+			<Font id="TableBody"	family="Times New Roman" size="10.0" bold="false" italic="false" underline="false"/>  <!-- 12 -->
+			<Font id="BodySubFoot" 	family="Times New Roman" size="10.0" bold="false" italic="true" underline="false"/>  <!-- 14 -->
+			<Font id="BodyFoot" 	family="Times New Roman" size="10.0" bold="true"  italic="false" underline="false"/>  <!-- 15 -->
+			<Font id="TableBodyFoot"	family="Times New Roman" size="10.0" bold="true"  italic="false" underline="false"/>  <!-- 15 -->
+			<Font id="DocuSummary" 	family="Times New Roman" size="10.0" bold="false" italic="false" underline="false"/>  <!-- 16 -->		
+			<Font id="Note" 		family="Times New Roman" size="9.5" bold="false" italic="false"  underline="false"/>  <!-- 17 -->
+			<Font id="Address" 		family="Times New Roman" size="11.0" bold="false" italic="false" underline="false"/>  <!-- 18 -->
+			<Font id="Foot" 		family="Times New Roman" size="10.0"  bold="false" italic="false" underline="false"/>  <!-- 19 -->
+			<Font id="FootBold"		family="Times New Roman" size="10.0"  bold="true" italic="false" underline="false"/>  <!-- 20 -->
+			<Font id="Head" 		family="Times New Roman" size="10.0"  bold="false" italic="false" underline="false"/>  <!-- 21 -->
+			<Font id="HeadBold"		family="Times New Roman" size="10.0"  bold="true" italic="false" underline="false"/>  <!-- 22 -->
+			<Font id="ByWords" 		family="Times New Roman" size="10.0"  bold="false" italic="true"  underline="false"/>  <!-- 23 -->
+		
+			<Font id="PageFoot" 	family="Arial" size="9.0"  bold="false" italic="false"  underline="false"/>	 <!-- 24 -->		
+		
+     		<Font id="ShowF1" 		family="Times New Roman" size="20.0" bold="true" italic="false" underline="false"/> 
+     		<Font id="ShowF2" 		family="Times New Roman" size="22.0" bold="true" italic="false" underline="false"/> 
+     		<Font id="ShowF3" 		family="Times New Roman" size="34.0" bold="true" italic="false" underline="false"/> 
+     		<Font id="ShowF2b" 		family="Times New Roman" size="19.0" bold="true" italic="false" underline="false"/> 
+     		<Font id="ShowF3b" 		family="Times New Roman" size="28.0" bold="true" italic="false" underline="false"/>
+     		
+     		<Font id="Grouper1" 	family="Times New Roman" size="11.0" bold="true" italic="false" underline="false"/>
+     		<Font id="Grouper2" 	family="Times New Roman" size="11.0" bold="true" italic="true" underline="false"/>	
+     		<Font id="Grouper3" 	family="Times New Roman" size="11.0" bold="false" italic="true" underline="false"/>
+		</Fonts>
+		<Colors>
+			<Color id="BackBody" name="yellow" a="255"/>
+			<Color id="BackFoot" name="lightBlue" a="255"/>
+			<Color id="BackGrouper1" name="lightGray" a="255"/>
+			<Color id="BackGrouper2" name="lightGray" a="255"/>
+			<Color id="BackHead" name="lightBlue" a="255"/>
+			<Color id="BackSubFoot" name="lightGray" a="255"/>
+			<Color id="BackSubHead" name="lightGray" a="255"/>
+			<Color id="BackTableBody" name="yellow" a="255"/>
+			<Color id="BackTableFoot" name="lightGray" a="255"/>
+			<Color id="BackTableHead" name="lightGray" a="255"/>
+			<Color id="Warning" name="red" a="255"/>
+		</Colors>
+		<Images>
+			<Image id="ETF" file="Work/Common/Icons/UNSA/ETF_Logo.png"/>
+			<Image id="UNSA" file="Work/Common/Icons/UNSA/UNSA_Logo.png"/>
+			<Image id="ISO9001" file=":rep/res/ISO9001.png"/>
+		</Images>
+		<Memos>
+			<Memo id="MemoExportF" file=":rep/res/MemoExportF.xml"/>
+			<Memo id="MemoExternF" file=":rep/res/MemoExternF.xml"/>
+			<Memo id="MemoExternF_GR" file=":rep/res/MemoExternF_GR.xml"/>
+			<Memo id="MemoExternH" file=":rep/res/MemoExternH.xml"/>
+			<Memo id="MemoInternF" file=":rep/res/MemoInternF.xml"/>
+			<Memo id="MemoInternH" file=":rep/res/MemoInternH.xml"/>
+		</Memos>
+		<Texts>
+			<Text id="Company1" txt="Elektrotehnički Fakultet"/>
+			<Text id="Company2" txt="Univerzitet u SA"/>
+			<Text id="Company3" txt="Kampus Univerziteta"/>
+			<Text id="Company4" txt="Zmaja od Bosne bb"/>
+			<Text id="Company5" txt="Tel./Fax: +387(33) XXX XXX"/>
+			<Text id="Company6" txt="Ident. br.:420913355XXX"/>
+			<Text id="MemFoot1" txt="Senada Mehdina Hodžića 34, Sarajevo, BiH
+1234567890123456 - Intesa Sanpaolo banka, d.d. BiH
+1034567890123456 - Unicredit banka, d.d. BiH
+1234567890123456 - Sparkasse Bank, d.d. Sarajevo, BiH
+1134567890123456 - NLB Banka, d.d. Tuzla,BiH"/>
+			<Text id="MemFoot2" txt="Objekti:
+Lab1, Tel: 234 234 234,33 234-466, Fax: 33 828-345
+Lab2, Tel: 234 234 234, Fax: sdfljl lkj 
+Lab Sarajevo, Tel: 234 234 234, Fax: 982374987
+itd..."/>
+		</Texts>
+	</Group>
+</Groups>

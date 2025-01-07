@@ -1,0 +1,61 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+		<Res id="bus" tr="Sabirnica"/>
+		<Res id="busTT" tr="Sabirnica - element preko kojeg se spajaju ostali elementi"/>
+		<Res id="capacitor" tr="Kondenzator"/>
+		<Res id="capacitorTT" tr="Kondenzator - element koji generiše reaktivnu snagu"/>
+		<Res id="inductor" tr="Zavojnica"/>
+		<Res id="inductorTT" tr="Zavojnica - element koji troši reaktivnu snagu"/>
+		<Res id="resistor" tr="Otpornik"/>
+		<Res id="resistorTT" tr="Otpornik - element koji troši aktivnu snagu"/>
+		<Res id="R" tr="Ser. otpornik"/>
+		<Res id="RTT" tr="Serijski otpornik - element koji troši aktivnu snagu"/>
+		<Res id="L" tr="Ser. zavojnica"/>
+		<Res id="LTT" tr="Serijska zavojnica - element koji troši reaktivnu snagu"/>
+		<Res id="C" tr="Ser. kondenzator"/>
+		<Res id="CTT" tr="Serijski kondenzator - element koji proizvodi reaktivnu snagu"/>
+		<Res id="shunt" tr="Otočnik"/>
+		<Res id="shuntTT" tr="Otočni element"/>
+		<Res id="generator" tr="Generator"/>
+		<Res id="generatorTT" tr="Generator snage - element koji proizvodi aktivnu i reaktivnu snagu"/>
+		<Res id="SC" tr="Sinhroni komp."/>
+		<Res id="SCTT" tr="Sinhroni kompenzator - element koji proizvodi reaktivnu snagu"/>
+		<Res id="motor" tr="Motor"/>
+		<Res id="motorTT" tr="Motor-element koji električnu energiju pretvara u mehaničku"/>
+		<Res id="load" tr="Load"/>
+		<Res id="loadTT" tr="Load - element koji troši aktivnu i reaktivnu snagu"/>
+		<Res id="Xfmr2" tr="Transformator"/>
+		<Res id="Xfmr2TT" tr="Dvonamotajni transformator"/>
+		<Res id="Xfmr3" tr="Tronam. transf."/>
+		<Res id="Xfmr3TT" tr="Tronamotajni transformator"/>
+		<Res id="Xfmr4" tr="Četvoro nam. tr."/>
+		<Res id="Xfmr4TT" tr="Četvoro-namotajni transformator"/>
+		<Res id="disconctr" tr="Rastavljač"/>
+		<Res id="disconctrTT" tr="Rastavljač - element sa kojim se upravlja u deenergiziranom stanju"/>
+		<Res id="breaker" tr="Prekidač snage"/>
+		<Res id="breakerTT" tr="Prekidač snage"/>
+		<Res id="fuse" tr="Osigurač"/>
+		<Res id="fuseTT" tr="Osigurač - neupravljivi element za zaštitu"/>
+		
+		<Res id="addView" tr="Dodaj tab"/>
+		<Res id="addViewTT" tr="Dodaj tab view"/>
+		<Res id="remView" tr="Izbriši tab"/>
+		<Res id="remViewTT" tr="Izbriši tab view"/>
+		<Res id="mvvLeft" tr="Pomjeri ulijevo"/>
+		<Res id="mvvLeftTT" tr="Pomjeri tab jednu poziciju u lijevo"/>
+		<Res id="mvvRight" tr="Pomjeri udesno"/>
+		<Res id="mvvRightTT" tr="Pomjeri tab jednu poziciju u desno"/>
+		<Res id="remAllViews" tr="Zatvori sve"/>
+		<Res id="remAllViewsTT" tr="Zatvori sve tabove"/>
+		
+		<Res id="view1" tr="Prvi view"/>
+		<Res id="view2" tr="Drugi view"/>
+		<Res id="view3" tr="Treći view sa nešto dužim tekstom"/>
+		<Res id="view4" tr="Četvrti view"/>
+		<Res id="view5" tr="Peti view"/>
+		<Res id="view6" tr="Šesti view"/>
+		<Res id="view7" tr="Sedmi view"/>
+
+	</Translations>
+</DevRes>

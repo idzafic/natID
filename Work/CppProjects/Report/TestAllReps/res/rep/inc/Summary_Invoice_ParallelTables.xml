@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DocFooter designWidth="180"><!--- DocFooter ima uvijek Vertical layout -->
+	<CompositeText hAlign="left" vAlign="top" font="Body" y="0.3" width="-1" height="5" html="yes" wrap="word">
+		<TrText lbl="<b>" trLbl="false" name="To pay (by words): "/>		
+		<ValueText type="decimal2" lbl=" <i>" trLbl="false" link="Footer/Total"/>
+		<Text name="#DocMoneySymb"/>
+		<Text lbl="</i> (" trLbl="false" name="#DocMoneyUnit"/>
+		<StaticText name=")</b>"/>
+	</CompositeText>
+	<Table x="50" y="1" width="130" name="PDVSpec">	
+		<Caption height="5" hAlign="left" vAlign="center" font="BodyHead">
+			<TrText width="-1" height="5" name="VAT Specification:"/>
+		</Caption>
+		<Header layout="vertical" showOnEveryPage="true" showOnFirstPage="true" height="10" backClr="BackTableHead">
+			<Line lineWidth="0.4" lineStyle="solid" width="-1" height="0"/>
+			<Row height="10" hAlign="right" vAlign="center" font="BodyHead">				
+				<TrText width="10" hAlign="left" name="VAT ID"/>
+				<TrText width="30" hAlign="left" name="VAT Name"/>
+				<TrText width="15" name="VAT%"/>
+				<TrText width="25" name="Value_WoVAT"/>				
+				<TrText width="25" name="Value_VAT"/>
+				<TrText width="25" name="Value_WithVAT"/>
+			</Row>			
+			<Line lineWidth="0.2" lineStyle="solid" width="-1" height="0"/>
+		</Header>
+		<Body height="4.5" backClr2="BackTableBody" font="TableBody" hAlign="right" vAlign="center" >  <!-- default layout for body is Horizontal -->
+			<Formulas calcCT="true" calcRT="true">
+				<Formula name="fValue0" f="Value-VATValue" type="decimal2"/>
+			</Formulas>
+			<Numeric type="int2" showThSep="false" hAlign="left" width="10" name="TaxID"/>
+			<Text hAlign="left" vAlign="top" width="30" name="Name"/>
+			<Numeric type="smallDecimal1" width="15" name="VATPerc"/>
+			<Numeric type="decimal2" width="25" name="fValue0"/>				
+			<Numeric type="decimal2" width="25" name="VATValue"/>
+			<Numeric type="decimal2" width="25" name="Value"/>
+		</Body>	
+		<Footer layout="vertical" height="5" backClr="BackTableFoot">
+			<Formulas calcCT="true" calcRT="true">
+				<Formula name="fTotalWoVAT" f="Total-VATTotal" type="decimal2"/>				
+			</Formulas>
+			<Line lineWidth="0.2" lineStyle="solid" x="0" y="0" width="-1" height="0"/>
+			<Row height="5" hAlign="right" vAlign="center" font="TableBody">
+				<TrText hAlign="left" width="55" name="Total:"/>
+				<Numeric type="decimal2" width="25" name="fTotalWoVAT"/>
+				<Aggregate fn="sum" type="decimal2" width="25" link="DocFooter/Table:PDVSpec/Body/VATValue" name="VATTotal"/>
+				<Aggregate fn="sum" type="decimal2" width="25" link="DocFooter/Table:PDVSpec/Body/Value" name="Total"/>
+			</Row>
+			<Line lineWidth="0.4" lineStyle="solid" width="-1" height="0"/>
+		</Footer>
+	</Table>
+	
+	<Table x="40" y="2" width="140" name="AssortSpec">	
+		<Caption height="5" hAlign="left" vAlign="center" font="BodyHead">
+			<TrText width="-1" height="5" name="Assortment overview:"/>
+		</Caption>
+		<Header layout="vertical" showOnEveryPage="true" showOnFirstPage="true" height="10" backClr="BackTableHead">
+			<Line lineWidth="0.4" lineStyle="solid" width="-1" height="0"/>
+			<Row height="10" hAlign="right" vAlign="center" font="BodyHead">				
+				<TrText width="20" hAlign="left" name="Assort_ID"/>
+				<TrText width="45" hAlign="left" name="Assortment Name"/>
+				<TrText width="25" name="Value_WoVAT"/>				
+				<TrText width="25" name="Value_VAT"/>
+				<TrText width="25" name="Value_WithVAT"/>
+			</Row>			
+			<Line lineWidth="0.2" lineStyle="solid" width="-1" height="0"/>
+		</Header>
+		<Body height="4.5" backClr2="BackTableBody" font="TableBody" hAlign="right" vAlign="center" >  <!-- default layout for body is Horizontal -->
+			<Formulas calcCT="true" calcRT="true">
+				<Formula name="fValue0" f="Value-VATValue" type="decimal2"/>
+			</Formulas>
+			<Numeric type="int2" showThSep="false" hAlign="left" width="20" name="ID"/>
+			<Text hAlign="left" vAlign="top" width="45" name="Name"/>			
+			<Numeric type="decimal2" width="25" name="fValue0"/>				
+			<Numeric type="decimal2" width="25" name="VATValue"/>
+			<Numeric type="decimal2" width="25" name="Value"/>
+		</Body>	
+		<Footer layout="vertical" height="5" backClr="BackTableFoot">
+			<Formulas calcCT="true" calcRT="true">
+				<Formula name="fTotalWoVAT" f="Total-VATTotal" type="decimal2"/>				
+			</Formulas>
+			<Line lineWidth="0.2" lineStyle="solid" x="0" y="0" width="-1" height="0"/>
+			<Row height="5" hAlign="right" vAlign="center" font="TableBody">
+				<TrText hAlign="left" width="65" name="Total:"/>
+				<Numeric type="decimal2" width="25" name="fTotalWoVAT"/>
+				<Aggregate fn="sum" type="decimal2" width="25" link="DocFooter/Table:AssortSpec/Body/VATValue" name="VATTotal"/>
+				<Aggregate fn="sum" type="decimal2" width="25" link="DocFooter/Table:AssortSpec/Body/Value" name="Total"/>
+			</Row>
+			<Line lineWidth="0.4" lineStyle="solid" width="-1" height="0"/>
+		</Footer>
+	</Table>
+	
+	<Row y="10" name="ParallelTables">
+		<Table width="85" name="AllEntries">	
+			<Caption height="5" hAlign="left" vAlign="center" font="BodyHead">
+				<TrText width="-1" height="5" name="Positive &amp; negative entries:"/>
+			</Caption>		
+			<Header layout="vertical" height="5" backClr="BackTableHead">
+				<Line lineWidth="0.4" lineStyle="solid" width="-1" height="0"/>
+				<Row height="5" hAlign="right" vAlign="center" font="BodyHead">				
+					<TrText width="20" hAlign="left" name="Datum"/>
+					<TrText width="40" hAlign="left" name="Name"/>
+					<TrText width="25" name="Quantity"/>
+				</Row>
+				<Line lineWidth="0.2" lineStyle="solid" width="-1" height="0"/>
+			</Header>	
+			<Body height="4.5" backClr2="BackTableBody" font="TableBody" hAlign="right" vAlign="center" >  <!-- default layout for body is Horizontal -->
+				<Date dateFmt="DateWinShort" hAlign="left" width="20" name="Date"/>
+				<Text hAlign="left" width="40" name="Name"/>
+				<Numeric type="decimal3" width="25" name="Quantity"/>
+			</Body>
+			<Footer layout="vertical" height="5" backClr="BackTableFoot">			
+				<Line lineWidth="0.2" lineStyle="solid" width="-1" height="0"/>
+				<Row height="5" hAlign="right" vAlign="center" font="TableBody">
+					<TrText hAlign="left" width="60" name="Total:"/>				
+					<Aggregate fn="sum" type="decimal3" width="25" link="DocFooter/Row:ParallelTables/Table:AllEntries/Body/Quantity" name="TotQ2"/>				
+				</Row>
+				<Line lineWidth="0.4" lineStyle="solid" width="-1" height="0"/>
+			</Footer>
+		</Table>	
+		<Table x="10" width="85" name="PosEntries">
+			<Caption height="5" hAlign="left" vAlign="center" font="BodyHead">
+				<TrText width="-1" height="5" name="Positive entries:"/>
+			</Caption>		
+			<Header layout="vertical" height="5" backClr="BackTableHead">
+				<Line lineWidth="0.4" lineStyle="solid" width="-1" height="0"/>
+				<Row height="5" hAlign="right" vAlign="center" font="BodyHead">				
+					<TrText width="20" hAlign="left" name="Datum"/>
+					<TrText width="40" hAlign="left" name="Name"/>
+					<TrText width="25" name="Quantity"/>
+				</Row>
+				<Line lineWidth="0.2" lineStyle="solid" width="-1" height="0"/>
+			</Header>	
+			<Body height="4.5" backClr2="BackTableBody" font="TableBody" hAlign="right" vAlign="center" >  <!-- default layout for body is Horizontal -->
+				<Date dateFmt="DateWinShort" hAlign="left" width="20" name="Date"/>
+				<Text hAlign="left" width="40" name="Name"/>
+				<Numeric type="decimal3" width="25" name="Quantity"/>
+			</Body>
+			<Footer layout="vertical" height="5" backClr="BackTableFoot">			
+				<Line lineWidth="0.2" lineStyle="solid" width="-1" height="0"/>
+				<Row height="5" hAlign="right" vAlign="center" font="TableBody">
+					<TrText hAlign="left" width="60" name="Total:"/>				
+					<Aggregate fn="sum" type="decimal3" width="25" link="DocFooter/Row:ParallelTables/Table:PosEntries/Body/Quantity" name="TotQ1"/>				
+				</Row>
+				<Line lineWidth="0.4" lineStyle="solid" width="-1" height="0"/>
+			</Footer>
+		</Table>
+	</Row>
+	<CompositeText hAlign="justify" vAlign="top" font="Body" y="1" width="-1" height="8.5" html="yes" wrap="word" name="test">
+		<TrText name="Napomena: Plaćanje u roku od <b>"/>
+		<Numeric type="int4" name="#DocPayDays"/>
+		<TrText name=" dana.</b> Rok plaćanja počinje od dana prijema robe. Reklamacije se prihvataju u roku od <b>"/>		
+		<Numeric type="int4" name="#DocReclamDays"/>
+		<TrText name=" dana</b> uz prethodni zapisnik. Za plaćanje preko <b>"/>
+		<Numeric type="int4" name="#DocExtraIR"/>
+		<TrText name=" dana</b> zaračunava se zakonska <b>zatezna kamata.</b>"/>
+	</CompositeText>
+	
+	<Note hAlign="justify" vAlign="top" font="Note" y="1" width="-1" name="Note"/>
+	<Line lineWidth="0.1" lineStyle="solid" width="-1" height="0"/>
+	<Row y="2" height="20" hAlign="center" vAlign="top" font="Body" name="Signature">		
+		<Group layout="vertical" width="56.667" name="prepBy">
+			<TrText height="5" name="Prepared By"/>
+			<Line lineWidth="0.1" y="10" lineStyle="dot" height="0"/>
+			<Text height="5" name="PreparedBy"/>
+		</Group>
+		<Group layout="vertical" x="5" width="56.667">
+			<TrText height="5" name="Controlled By"/>
+			<Line lineWidth="0.1" y="10" lineStyle="dot" height="0"/>
+			<Text height="5" name="CtrlBy"/>
+		</Group>
+		<Group layout="vertical" x="5" width="56.667">
+			<TrText height="5" name="Approved By"/>
+			<Line lineWidth="0.1" y="10" lineStyle="dot" height="0"/>
+			<Text height="5" name="ApprovedBy"/>
+		</Group>
+	</Row>	
+</DocFooter>

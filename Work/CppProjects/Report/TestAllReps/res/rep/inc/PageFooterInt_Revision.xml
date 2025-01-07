@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PageFooter layout="vertical" designWidth="170" showOnEveryPage="true" showOnFirstPage="true" height="6">
+	<Line lineWidth="0.2" lineStyle="solid" width="170" height="0" hScale="1"/>	
+	<Group layout="free" x="0" y="0" width="170" height="3" font="PageFoot" name="pageFoot1" vAlign="top" hScale="1">
+		<CompositeText hAlign="left" vAlign="top" hScale="1">
+			<Text name="#DocFormID"/>
+			<Text lbl=", Rev.:" name="#DocFormRevision"/>
+		</CompositeText>
+		<Text hAlign="center" name="#DocID" hScale="1"/>
+		<Text hAlign="right" name="#Page" hScale="1"/>
+	</Group>
+	<Group layout="free" x="0" y="0" width="170" height="3" font="PageFoot" name="pageFoot2" vAlign="top" hScale="1">		
+		<Date dateFmt="DateWinShort" hAlign="left" hScale="1" name="#DocFormRevisionDate"/>
+		<Date dateFmt="DateWinShort" hAlign="center"  hScale="1" name="#DocDT"/>
+		<StaticText hAlign="right" name=" " hScale="1"/>
+	</Group>
+</PageFooter>

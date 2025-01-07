@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+        <Res id="appTitle" tr="Minolovac"/>
+        <Res id="settings" tr="Podešenja"/>
+		<Res id="settingsTT" tr="Podesite prikaz elemenata kao i jezik koji zahtjeva restartanje aplikacije."/>
+		<Res id="theApp" tr="Aplikacija"/>
+        <Res id="game" tr="Igra"/>
+		<Res id="Level" tr="Nivo"/>
+		<Res id="Easy" tr="Lagan"/>
+		<Res id="Medium" tr="Srednji"/>
+		<Res id="Hard" tr="Težak"/>
+		<Res id="Done" tr="Potraga za bombama je završena!"/>
+		<Res id="Dead" tr="Eksplozija! Pokušajte ponovo!"/>
+		<Res id="AllOK" tr="ODLIČNO! Minsko polje očišćeno"/>
+		<Res id="Bombs:" tr="Mine:"/>
+		<Res id="Flags:" tr="Markeri:"/>
+		<Res id="Size:" tr="Veličina:"/>
+		<Res id="ClStart" tr="Klinkite na neko od polja"/>
+        <Res id="EmptyFieldClicked" tr="Klinuto na čisto polje. Nema potrebe za klikanjem na očišćenom polju. Pažljivo odaberite neko drugo polje."/>
+        <Res id="BulkClear" tr="Očiščeno više od jedng polja."/>
+        <Res id="ClearedField" tr="Očišćeno jedno polje. Mina je blizu."/>
+        <Res id="FlagRemoved" tr="Uklonjena zastavica."/>
+        <Res id="FlagAdded" tr="Postavljena zastavica."/>
+		<Res id="FlagFailed" tr="Nema smisla postavljati marker na očišćeni teren!"/>
+	
+        <!-- Settings -->
+        <Res id="dlgSettings" tr="Podešenja"/>
+        <Res id="lblLang" tr="Trenutni jezik aplikacija:"/>
+        <Res id="lblLang2" tr="Jezik aplikacije nakon njenog restarta:"/>
+		<Res id="chbTBIcsAndLbls" tr="Prikaži labele ispod ikona na alatnoj traci."/>
+		<Res id="chbUseCombo" tr="Koristi ComboBox za odabir nivoa (težine) igre."/>
+		<Res id="theme" tr="Tema:"/>
+		<Res id="RestartRequired" tr="Restartovati aplikaciju"/>
+		<Res id="RestartRequiredInfo" tr="Neke od promijenjenih postavki zahtijevaju ponovno pokretanje aplikacije kako bi bile primijenjene"/>
+		<Res id="Restart" tr="Restartovati"/>
+		<Res id="DoNoRestart" tr="Nemoj restartovati"/>
+		
+		<Res id="showStatusBar" tr="Prikaži statusnu traku"/>
+	</Translations>
+</DevRes>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report paperOrientation="portrait" paperSize="A4" zoom="200" resGroup="Intern" tr="Reports">
+	<Layout lMargin="10" tMargin="10" rMargin="10" bMargin="10" memoH="MemoInternH" pageF="pageFH/PageFooterInt" docH="docHeaders/Intro_LagerList" docF="docFooters/WordToLetters">	
+		<Header layout="Vertical" showOnEveryPage="true"  backClr="BackHead" font="BodyHead" showOnFirstPage="true" height="9" hAlign="Right" vAlign="Center"> <!-- conditional == true means that belonging containers will be conditionaly drawn -->
+			<Line lineWidth="0.4" lineStyle="solid" height="0"/> <!-- width == -1 means it will take with of its parent-->
+			<Row visibleOnCondition="0" height="9"> <!-- visibleOnCondition == 0: it will be drawn always, 1: on first page, 2: on other pages-->				
+				<TrText width="15" hAlign="Left" name="Pos"/>
+				<TrText width="15" hAlign="Left" name="ID"/>
+				<TrText width="40" hAlign="Left" name="Item name"/>
+				<TrText width="40" name="Quantity"/>
+				<TrText width="40" name="Price"/>
+				<TrText width="40" name="Value"/>
+			</Row>
+			<Line lineWidth="0.4" lineStyle="solid" height="0"/> 		
+		</Header>
+		
+		<Body height="4.5" backClr2="BackBody" hAlign="Right" vAlign="center" font="Body">
+			<Numeric type="int4" showThSep="false" hAlign="Left"  width="15" name="#Pos"/>
+			<Numeric type="int4" showThSep="false" hAlign="Left" width="15" name="ID"/>
+			<Text hAlign="Left" font="Body" width="40" name="Name"/>
+			<Numeric type="decimal3" width="40" name="Quant"/>
+			<Numeric type="decimal4" width="40" name="Price"/>
+			<Numeric type="decimal2" width="40" name="Value"/>		
+		</Body>
+	
+		<Footer layout="vertical" height="5" hAlign="Right" vAlign="center">		
+			<Line lineWidth="0.4" lineStyle="solid" height="0"/>
+			<Row height="5" backClr="BackFoot" font="BodyFoot">
+				<CompositeText hAlign="Left" width="110">
+					<TrText name="Total"/>
+					<StaticText name=":"/>
+				</CompositeText>
+				<Aggregate fn="sum" type="decimal2" link="Body/Value" width="80" name="TotVal"/>
+			</Row>			
+			<Line lineWidth="0.4" lineStyle="solid" height="0"/>
+		</Footer>
+				
+	</Layout>
+</Report>

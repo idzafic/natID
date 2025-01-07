@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PageFooter layout="vertical" designWidth="170" showOnEveryPage="true" showOnFirstPage="true" height="5">
+	<Line lineWidth="0.2" lineStyle="solid" width="170" height="0" hScale="1"/>	
+	<Group layout="free" x="0" y="0" width="170" height="5" font="PageFoot" name="pageFoot" hScale="1">
+		<Text hAlign="Left" vAlign="top"  name="#DocType" hScale="1"/>
+		<Text hAlign="Center" vAlign="top" name="#DocID" hScale="1"/>
+		<Text hAlign="Right" vAlign="top" name="#Page" hScale="1"/>
+	</Group>
+</PageFooter>

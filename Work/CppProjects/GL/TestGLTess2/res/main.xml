@@ -1,0 +1,17 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<!-- <Res id="poly128" path="Work/Common/Icons/PolyLine_128.png"/> -->
+	</Images>
+	<Symbols>
+		<Res id="bus" path="Work/Common/Symbols/PSA/bus.xml"/>
+	</Symbols>
+	<Texts>
+		<!--- all from res folder -->
+		<Res id="shVert" path=":shaders/First.vert"/>
+		<Res id="shFrag" path=":shaders/First.frag"/>
+		<Res id="shTessCntrl" path=":shaders/First.tcs"/>
+		<Res id="shTessEval" path=":shaders/First.tes"/>
+
+	</Texts>
+</DevRes>

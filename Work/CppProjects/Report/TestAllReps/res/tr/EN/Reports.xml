@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevRes>
+	<Translations>
+		<Res id="Da_te" tr="Date"/>
+		<Res id="Price_WoVAT" tr="Price
+without VAT"/>
+		<Res id="Price_VAT" tr="Price
+with VAT"/>
+		<Res id="Document_No" tr="Document
+Number"/>
+		<Res id="Inp_Quantity" tr="Input
+Quantity"/>
+		<Res id="Out_Quantity" tr="Output
+Quantity"/>
+		<Res id="Saldo_Quantity" tr="Quantity
+Saldo"/>
+		<Res id="Saldo_Value" tr="Value
+saldo"/>	
+		<Res id="VAT%" tr="VAT
+[%]"/>
+		<Res id="Value_WoVAT" tr="Value
+without VAT"/>
+		<Res id="Value_VAT" tr="VAT
+Value"/>
+		<Res id="Value_WithVAT" tr="Value
+with VAT"/>
+	</Translations>
+</DevRes>

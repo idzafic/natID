@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Memo layout="free" dY="0" designWidth="170" height="30" lMargin="0" tMargin="0">
+	<Row y="0" height="30" hScale="1">
+		<ResPicture x="0" y="0" width="20" height="20" aspect="true" name="ETF"/>
+		<Group x="1" y="0" width="130" height="30" hScale="1">
+			<ResText hAlign="center" vAlign="top" font="MemoH1" x="0" y="0" width="130" height="5" hScale="1" name="Company1"/>
+			<ResText hAlign="center" vAlign="top" font="MemoH3" x="0" y="4.67" width="130" height="5" hScale="1" name="Company2"/>
+			<ResText hAlign="center" vAlign="top" font="MemoH3" x="0" y="9.34" width="130" height="5" hScale="1" name="Company3"/>
+			<ResText hAlign="center" vAlign="top" font="MemoH3" x="0" y="14" width="130" height="5" hScale="1" name="Company4"/>
+			<ResText hAlign="center" vAlign="top" font="MemoH3" x="0" y="18.67" width="130" height="5" hScale="1" name="Company5"/>
+			<ResText hAlign="center" vAlign="top" font="MemoH3" x="0" y="23.34" width="130" height="5" hScale="1" name="Company6"/>
+		</Group>
+		<ResPicture x="1" y="0" width="18" height="18" name="UNSA"/>
+	</Row>	
+	<Line lineWidth="0.3" lineStyle="solid" x="0" y="29" width="170" height="0" hScale="1"/>
+	<Line lineWidth="0.3" lineStyle="solid" x="0" y="29.7" width="170" height="0" hScale="1"/>
+</Memo>

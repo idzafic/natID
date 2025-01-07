@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report paperOrientation="portrait" paperSize="A4" zoom="200" resGroup="Intern" tr="Reports">
+	<Layout type="fall" lMargin="10" tMargin="10" rMargin="10" bMargin="10" memoH="MemoInternH" pageF="pageFH/PageFooterInt" docH="docHeaders/Intro_LagerList" docF="docFooters/Summary">	
+		<Header layout="vertical" dynamic="true" showOnEveryPage="true" showOnFirstPage="true" backClr="BackHead" font="BodyHead" height="9" hAlign="right" vAlign="center"> <!-- conditional == true means that belonging containers will be conditionaly drawn -->
+				<Line lineWidth="0.4" lineStyle="solid" height="0"/> <!-- width == -1 means it will take with of its parent-->
+				<Row visibleOnCondition="0" height="9"> <!-- visibleOnCondition == 0: it will be drawn always, 1: on first page, 2: on other pages-->		
+					<StaticText width="5"/>		
+					<TrText width="14" hAlign="left" name="Pos"/>
+					<TrText width="16" hAlign="left" name="ID"/>
+					<TrText width="45" hAlign="left" name="Item name"/>
+					<TrText width="40" name="Quantity"/>
+					<TrText width="30" name="Price"/>
+					<TrText width="40" name="Value"/>
+
+				</Row>
+				<Line lineWidth="0.4" lineStyle="solid" height="0"/> 		
+		</Header>
+		<!-- key: if nothing first column in body
+		          if key == '+' then first two column in body dataset
+				  in general number of + specify number of first columns in body -->
+		
+		<Body key="" height="4.5" backClr2="BackBody" hAlign="right" vAlign="center" font="Body"> 
+			<StaticText width="5"/>			
+			<Numeric type="int4" showThSep="false" hAlign="left"  width="14" name="#Pos"/>
+			<Numeric type="int4" showThSep="false" hAlign="left" width="16" name="ID"/>
+			<Text hAlign="left" font="Body" width="45" name="Name"/>
+			<Numeric type="decimal3" width="40" name="Quant"/>
+			<Numeric type="decimal4" width="30" name="Price"/>
+			<Numeric type="decimal2" width="40" name="Value"/>			
+		</Body>
+	
+		<Grouper name="" hAlign="left" vAlign="center" font="Grouper1">	
+			<GHead height="5" backClr="BackGrouper1">
+				<Line lineWidth="0.2" lineStyle="solid" height="0"/>			
+				<Row height="5">	 <!-- visible only on first page -->
+					<CompositeText hAlign="left" vAlign="center" font="Grouper1" width="-1">
+						<Numeric type="int4" showThSep="false" lbl="ID: " name="ID"/>
+						<Text lbl=", " name="Name"/>					
+					</CompositeText>
+				</Row>				
+			</GHead>	
+		</Grouper>	
+	
+		<Footer layout="vertical" height="5" hAlign="Right" vAlign="center">		
+			<Line lineWidth="0.4" lineStyle="solid" height="0"/>
+			<Row height="5" backClr="BackFoot" font="BodyFoot">
+				<TrText hAlign="Left"width="110"name="Total:"/>
+				<Aggregate fn="sum" type="decimal2" link="Body/Value" width="80"/>
+			</Row>			
+			<Line lineWidth="0.4" lineStyle="solid" height="0"/>
+		</Footer>	
+		
+			
+	</Layout>
+</Report>

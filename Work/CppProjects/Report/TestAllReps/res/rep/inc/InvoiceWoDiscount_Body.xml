@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BodyInc>
+	<Header layout="vertical" showOnEveryPage="true" showOnFirstPage="true" height="14.5" backClr="BackHead" font="BodyHead">
+		<Line lineWidth="0.4" lineStyle="solid" x="0" y="0" width="-1" height="0"/> <!-- width == -1 means it will take with of its parent-->
+		<Row height="10" hAlign="right" vAlign="center" >
+			<TrText hAlign="left" width="12" height="15" name="Pos"/>
+			<TrText hAlign="left" width="68" name="Item name"/>
+			<TrText width="25" name="Quantity"/>
+			<TrText width="25" name="Price_WoVAT"/>
+			<TrText width="25" name="VAT ID"/>				
+			<TrText width="25" name="Price_VAT"/>
+		</Row>
+		<Line lineWidth="0.1" lineStyle="solid" x="12" width="-1" height="0"/> <!-- width == -1 means it will take with of its parent-->
+		<Row height="4.5" hAlign="right" vAlign="top" >
+			<TrText hAlign="left" x="12" width="28" name="ID"/>
+			<TrText hAlign="left" width="40" name="EAN Code"/>
+			<TrText width="25" name="Meas. Unit"/>
+			<TrText width="25" name="Value"/>
+			<TrText width="25" name="Value"/>				
+			<TrText width="25" name="Value"/>
+		</Row>
+		<Line lineWidth="0.4" lineStyle="solid" width="-1" height="0"/>
+	</Header>
+	<Body layout="vertical" height="9" backClr2="BackBody" hAlign="right" vAlign="center" font="Body">
+		<Formulas calcCT="true" calcRT="true">
+			<Formula name="fValue" f="fValue=(Quantity*Price)" type="decimal2"/>
+			<Formula name="fVATValue" f="fVATValue=(fValue*(1.0-1.0/(1.0+VATPerc/100.0)))" type="decimal2"/>
+			<Formula name="fValue0" f="fValue0=(fValue-fVATValue)" type="decimal2"/>
+			<Formula name="fPrice0" f="fValue0/Quantity" type="decimal4"/>
+		</Formulas>
+		<Row height="4.5">
+			<Numeric type="int4" showThSep="false" hAlign="left" width="12" height="9" name="#Pos"/>
+			<Text hAlign="left" font="Body" width="68" name="ItemName"/>
+			<Numeric type="decimal3" width="25" name="Quantity"/>
+			<Numeric type="decimal4" width="25" name="fPrice0"/>
+			
+			<CompositeText width="25">
+				<Numeric type="int2" showThSep="false" name="TaxID"/>
+				<Numeric type="smalldecimal1" showThSep="false" lbl=":" name="VATPerc"/>
+				<StaticText name="%"/>
+			</CompositeText>								
+			<Numeric type="decimal4" width="25" name="Price"/>
+		</Row>
+		
+		<Line lineWidth="0.1" lineStyle="solid" x="12" y="0" width="-1" height="0"/>
+		
+		<Row height="4.5">
+			<Numeric type="int4" showThSep="false" hAlign="left" x="12" y="0" width="28" name="ItemID"/>
+			<Numeric type="lint8" showThSep="false" hAlign="left" width="40" name="EANCode"/>
+			<Text hAlign="right" vAlign="top" width="25" name="Unit" html="try"/> <!-- html: no, yes, try -->
+			<Numeric type="decimal2" width="25" name="fValue0"/>				
+			<Numeric type="decimal2" width="25" name="fVATValue"/>
+			<Numeric type="decimal2" width="25" font="BodyFoot" name="fValue"/>
+		</Row>
+		<Line lineWidth="0.2" lineStyle="solid" x="0" y="0" width="-1" height="0"/>
+	</Body>
+	<Footer layout="vertical" height="5" backClr="BackFoot" hAlign="right" vAlign="center" font="Body" >
+		<Formulas>
+			<Formula name="fTotalWoVAT" f="Total-VATTotal" type="decimal2"/>				
+		</Formulas>			
+		<Line lineWidth="0.4" lineStyle="solid" x="0" y="0" width="-1" height="0"/>
+		<Row height="5">
+			<TrText hAlign="left" width="105" name="Total:"/>
+			<Numeric type="decimal2" width="25" name="fTotalWoVAT"/>
+			<Aggregate fn="sum" type="decimal2" link="Body/fVATValue" width="25" name="VATTotal"/>
+			<Aggregate fn="sum" type="decimal2" link="Body/fValue" width="25" font="BodyFoot" name="Total"/>
+		</Row>
+		<Line lineWidth="0.4" lineStyle="solid" x="0" y="0" width="-1" height="0"/>
+	</Footer>
+</BodyInc>

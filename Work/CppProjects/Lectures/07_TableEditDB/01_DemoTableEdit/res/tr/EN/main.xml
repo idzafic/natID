@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+		<Res id="open" tr="Open"/>
+		<Res id="openTT" tr="Open existing model"/>
+		<Res id="save" tr="Save"/>
+		<Res id="saveTT" tr="Save model"/>
+		<Res id="rect" tr="Rectangle"/>
+		<Res id="rectTT" tr="Draw Rectangle"/>
+		<Res id="appTitle" tr="TableEdit Demo"/>
+		<!-- Labels -->
+		<Res id="id" tr="Item ID:"/>
+		<Res id="name" tr="Name:"/>
+		<Res id="color" tr="Color:"/>
+		<Res id="quant" tr="Quantity:"/>
+		<Res id="price" tr="Price:"/>
+		<Res id="value" tr="Value:"/>
+		<Res id="date" tr="Date:"/>
+		<Res id="time" tr="Time:"/>
+		<Res id="fromID" tr="From ID:"/>
+		<Res id="toID" tr="To ID:"/>
+		
+		<!--Prevodi za TableEdit-->
+		<Res id="ItemID" tr="Item ID"/>
+		<Res id="ItemIDTT" tr="Item ID"/>
+		<Res id="ProductN" tr="Product"/>
+		<Res id="ProductNTT" tr="Product's name"/>
+		<Res id="Quant" tr="Quantity"/>
+		<Res id="QuantTT" tr="Quantity in mu"/>
+		<Res id="Price" tr="Price"/>
+		<Res id="PriceTT" tr="Price of item"/>
+		<Res id="Value" tr="Value"/>
+		<Res id="ValueTT" tr="Item's value"/>
+		<Res id="Date" tr="Date"/>
+		<Res id="DateTT" tr="Production date specified by producer"/>
+		<Res id="Time" tr="Time"/>
+		<Res id="TimeTT" tr="Production time specified by producer"/>
+		<Res id="Color" tr="Color"/>
+		<Res id="ColorTT" tr="Product color"/>
+	</Translations>
+</DevRes>

@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DevRes>
+	<Translations>
+		<Res id="Price_WoVAT" tr="Cijena
+bez PDV-a"/>
+		<Res id="Price_VAT" tr="Cijena
+sa PDV-om"/>
+		<Res id="Customer ID: " tr="Šifra komintenta: "/>
+		<Res id="Item name" tr="Ime artikla"/>
+		<Res id="Pos" tr="Rbr"/>
+		<Res id="Quantity" tr="Količina"/>
+		<Res id="Price" tr="Cijena"/>
+		<Res id="with VAT" tr="sa PDV-om"/>	
+		<Res id="ID" tr="Šifra"/>
+		<Res id="Value" tr="Vrijednost"/>	
+		<Res id="Total:" tr="Ukupno:"/>	
+		<Res id="Invoice no: " tr="Račun broj: "/>
+		<Res id="Object ID: " tr="Šifra objekta: "/>
+		<Res id="Object name: " tr="Naziv objekta: "/>
+		<Res id="Place: " tr="Mjesto: "/>
+		<Res id="Date: " tr="Datum: "/>
+		<Res id="From date: " tr="Od datuma: "/>
+		<Res id="To date: " tr="Do datuma: "/>
+		<Res id="Item ID: " tr="Šifra artikla: "/>
+		<Res id="Item name: " tr="Naziv artikla: "/>
+		<Res id="Payment deadline: " tr="Rok uplate: "/>
+		<Res id="Payment type: " tr="Način plaćanja: "/>	
+		<Res id="Item ID" tr="Šifra artikla"/>	
+		<Res id="Item name" tr="Naziv artikla"/>	
+		<Res id="Input" tr="Ulaz"/>
+		<Res id="Output" tr="Izlaz"/>
+		<Res id="VAT ID" tr="PDV%"/>
+		<Res id="EAN Code" tr="EAN kod"/>
+		<Res id="Meas. Unit" tr="JMJ"/>
+		
+		<Res id="Document_No" tr="Broj
+dokumenta"/>
+		<Res id="Inp_Quantity" tr="Ulazna
+količina"/>
+		<Res id="Out_Quantity" tr="Izlazna
+količina"/>
+		<Res id="Saldo_Quantity" tr="Količinsko
+saldo"/>
+		<Res id="Saldo_Value" tr="Vrijednosno
+saldo"/>
+		<Res id="Date" tr="Datum"/>
+		<Res id="Da_te" tr="Dat-
+um"/>	
+		<Res id=" to date: " tr=" do datuma: "/>
+		<Res id=", item name: " tr=", naziv artikla: "/>
+		<Res id="Object: " tr="Objekat: "/>
+		<Res id="Address: " tr="Adresa: "/>
+		<Res id=" days, or latest on " tr=" dana, ili najkasnije do "/>
+		<Res id="Proinvoice ID: " tr="Broj predračuna: "/>
+		<Res id="Proinvoice date: " tr="Datum predračuna: "/>
+		<Res id="Agreement ID: " tr="Broj ugovora: "/>
+		<Res id="Agreement date: " tr="Datum ugovora: "/>	
+		<Res id="Initial amount until " tr="Početno stanje do "/>
+		<Res id="Sum for period " tr="Promet za per. "/>
+		<Res id="VAT Specification:" tr="Specifikacija poreza:"/>
+		<Res id="VAT%" tr="PDV
+[%]"/>
+		<Res id="Value_WoVAT" tr="Vrijednost
+bez PDV-a"/>
+		<Res id="Value_VAT" tr="Vrijednost
+PDV-a"/>
+		<Res id="Value_WithVAT" tr="Vrijednost
+sa PDV-om"/>	
+		<Res id="VAT ID" tr="Šifra
+tarife"/>
+		<Res id="VAT Name" tr="Naziv tarife"/>
+		<Res id="ID:" tr="Šifra:"/>
+		<Res id="Price:" tr="Cijena:"/>
+		<Res id="To pay (by words): " tr="Za uplatu (slovima):"/>	
+	</Translations>
+</DevRes>

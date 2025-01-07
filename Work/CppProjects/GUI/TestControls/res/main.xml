@@ -1,0 +1,11 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+        <Res id="eye" path="Work/Common/Icons/eyeBlue32.png"/>
+		<Res id="menu" path="Work/Common/Icons/menuA_32.png"/>
+        <Res id="zoomIn" path="Work/Common/Icons/zoomIn64.png"/>
+        <Res id="zoomOut" path="Work/Common/Icons/zoomOut64.png"/>
+	</Images>
+	<Symbols>
+	</Symbols>
+</DevRes>

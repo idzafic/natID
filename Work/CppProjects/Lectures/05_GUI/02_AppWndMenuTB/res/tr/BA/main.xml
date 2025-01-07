@@ -1,0 +1,16 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+		<Res id="open" tr="Otvori"/>
+		<Res id="openTT" tr="Otvori postojeći model"/>
+		<Res id="save" tr="Snimi"/>
+		<Res id="saveTT" tr="Snimi postojeći model"/>
+		<Res id="rect" tr="Pravougaonik"/>
+		<Res id="rectTT" tr="Crtanje pravougaonika"/>
+		<Res id="appTitle" tr="Uvod u GUI"/>
+		<Res id="mOpen" tr="Aktivirana je opcija za učitavanje modela!"/>
+		<Res id="mSave" tr="Aktivirana je opcija za snimanje modela!"/>
+		<Res id="mRect" tr="Aktivirana je opcija za crtanje pravougonika!"/>
+	</Translations>
+</DevRes>
+

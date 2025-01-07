@@ -1,0 +1,43 @@
+set(TESTGLANIMATION_NAME testGLAnimation)				#Naziv prvog projekta u solution-u
+
+file(GLOB TESTGLANIMATION_SOURCES  ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
+file(GLOB TESTGLANIMATION_INCS  ${CMAKE_CURRENT_LIST_DIR}/src/*.h)
+file(GLOB TESTGLANIMATION_INC_TD  ${MY_INC}/td/*.h)
+file(GLOB TESTGLANIMATION_INC_GUI ${MY_INC}/gui/*.h)
+file(GLOB TESTGLANIMATION_INC_GUI_GL ${MY_INC}/gui/gl/*.h)
+
+#Application icon
+set(TESTGLANIMATION_PLIST  ${CMAKE_CURRENT_LIST_DIR}/res/appIcon/AppIcon.plist)
+if(WIN32)
+	set(TESTGLANIMATION_WINAPP_ICON ${CMAKE_CURRENT_LIST_DIR}/res/appIcon/winAppIcon.rc)
+else()
+	set(TESTGLANIMATION_WINAPP_ICON ${CMAKE_CURRENT_LIST_DIR}/res/appIcon/winAppIcon.cpp)
+endif()
+
+# add executable
+add_executable(${TESTGLANIMATION_NAME} ${TESTGLANIMATION_INCS} ${TESTGLANIMATION_SOURCES} ${TESTGLANIMATION_INC_TD} ${TESTGLANIMATION_INC_GUI} 
+				${TESTGLANIMATION_INC_GUI_GL} ${TESTGLANIMATION_WINAPP_ICON})
+
+source_group("inc"            FILES ${TESTGLANIMATION_INCS})
+source_group("src"            FILES ${TESTGLANIMATION_SOURCES})
+source_group("inc\\td"        FILES ${TESTGLANIMATION_INC_TD})
+source_group("inc\\gui"        FILES ${TESTGLANIMATION_INC_GUI})
+source_group("inc\\gl"        FILES ${TESTGLANIMATION_INC_GUI_GL})
+
+target_link_libraries(${TESTGLANIMATION_NAME} debug ${MU_LIB_DEBUG} optimized ${MU_LIB_RELEASE} 
+									debug ${NATGUI_LIB_DEBUG} optimized ${NATGUI_LIB_RELEASE} 
+								debug ${NATGL_LIB_DEBUG} optimized ${NATGL_LIB_RELEASE})
+
+
+addOpenGLLibraries(${TESTGLANIMATION_NAME})
+
+setTargetPropertiesForGUIApp(${TESTGLANIMATION_NAME} ${TESTGLANIMATION_PLIST})
+
+setAppIcon(${TESTGLANIMATION_NAME} ${CMAKE_CURRENT_LIST_DIR})
+
+setIDEPropertiesForGUIExecutable(${TESTGLANIMATION_NAME} ${CMAKE_CURRENT_LIST_DIR})
+
+setPlatformDLLPath(${TESTGLANIMATION_NAME})
+
+
+

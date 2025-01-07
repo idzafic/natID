@@ -1,0 +1,19 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="start" path="Work/Common/Icons/arrow_right.png"/>
+		<Res id="stop" path="Work/Common/Icons/x.png"/>
+        <Res id="TransCost" path = "Work/Common/Icons/transportCostXL.png"/>
+	</Images>
+	
+    <Symbols>
+        <Res id="jet" path="Work/Common/Symbols/Shapes/FighterJet.xml"/>
+        <Res id="star" path="Work/Common/Symbols/Shapes/Star.xml"/>
+    </Symbols>
+	
+	<Sounds>
+		<Res id="flight" path="Work/Common/Sounds/JetFlight.wav"/>
+		<Res id="bomb" path="Work/Common/Sounds/Explosion.wav"/>
+	</Sounds>
+</DevRes>
+
