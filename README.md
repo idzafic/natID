@@ -48,7 +48,6 @@ To try prebuilt applications:
 
 ![dataReporst](https://github.com/user-attachments/assets/c24a814b-03e3-494b-97ec-28d3a5d60ad6)
 
-![mineSweeper](https://github.com/user-attachments/assets/2fb46dc1-a4af-4759-a791-6b6b07823e14)
 ![snake](https://github.com/user-attachments/assets/e610e0b7-201b-4498-9364-25fd804b2645)
 
 ![navigator](https://github.com/user-attachments/assets/6ef8d036-60f3-4f82-9321-ad79075842fe)
