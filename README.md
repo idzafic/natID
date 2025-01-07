@@ -2,7 +2,7 @@
 
 natID is a C++ framework for developing and distributing a wide range of applications, with a primary focus on engineering and data processing. It supports the following operating systems:
 
-  - macOS 12.3+ (Intel and ARM)
+  - macOS 12.3+ (Intel and ARM/Apple Sillicon)
   - Linux (requires GTK 4.14 or later)
   - Windows 10, 11
 
