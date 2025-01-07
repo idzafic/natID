@@ -53,3 +53,5 @@ To try prebuilt applications:
 ![navigator](https://github.com/user-attachments/assets/6ef8d036-60f3-4f82-9321-ad79075842fe)
 ![shapeEditor](https://github.com/user-attachments/assets/c2ad3f15-69c4-4304-ad84-bd3814606030)
 ![mineSweeper](https://github.com/user-attachments/assets/7f48c616-750e-42d7-b300-0e5cefc45f2f)
+
+![glCubeMapBox](https://github.com/user-attachments/assets/5172d17c-d82c-4e95-9639-ff1eb94a20d4)
