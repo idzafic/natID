@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="FJet" type="NoConnections">
+    <Group name="G0">
+        <FillPolygon lineWidth="1" lineStyle="Solid" lineColor="SysText" fillColor="Red" fixLineColor="true" fixFillColor="true" showLine="true" symmetry="vertical">
+            <Point x="0" y="-70"/>
+            <Point x="16" y="-20"/>
+            <Point x="69" y="-20"/>
+            <Point x="26" y="9"/>
+            <Point x="42" y="57"/>
+            <Point x="0" y="28"/>
+        </FillPolygon>
+    </Group>
+</Symbol>

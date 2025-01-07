@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="SnakeHead" type="NoConnectionsNGroups">
+    <Group name="G0">
+		<Line x1="0" y1="0" x2="10" y2="13" lineWidth="4" lineColor="Green" />
+		<Line x1="0" y1="0" x2="10" y2="-13" lineWidth="4" lineColor="Green" />
+		<FillPie x="0" y="0" r="10" fromAngle="30" toAngle="330" lineWidth="0" lineStyle="Solid" lineColor="Black" fillColor="Green" fixFillColor="true" showLine="true"/>
+		<FillCircle x="10" y="13" r="3"  lineWidth="1" lineStyle="Solid" lineColor="Black" fillColor="Black"/>
+		<FillCircle x="10" y="-13" r="3"  lineWidth="1" lineStyle="Solid" lineColor="Black" fillColor="Black"/>	
+    </Group>
+</Symbol>

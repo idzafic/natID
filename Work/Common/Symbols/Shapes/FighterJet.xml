@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="FJet" type="NoConnectionsNGroups">
+    <Group name="G0">
+        <FillPolygon lineWidth="1" lineStyle="Solid" lineColor="SysText" fillColor="Blue" fixLineColor="true" fixFillColor="false" showLine="true" symmetry="horizonal">
+            <Point x="-93" y="7"/>
+            <Point x="-87" y="7"/>
+            <Point x="-87" y="13"/>
+            <Point x="-93" y="13"/>
+            <Point x="-93" y="36"/>
+            <Point x="-79" y="36"/>
+            <Point x="-60" y="7"/>
+            <Point x="-45" y="7"/>
+            <Point x="-45" y="52"/>
+            <Point x="-51" y="52"/>
+            <Point x="-51" y="57"/>
+            <Point x="-13" y="57"/>
+            <Point x="-13" y="52"/>
+            <Point x="-24" y="52"/>
+            <Point x="0" y="20"/>
+            <Point x="13" y="18"/>
+            <Point x="24" y="15"/>
+            <Point x="32" y="12"/>
+            <Point x="53" y="10.5"/>
+            <Point x="68" y="9"/>
+            <Point x="82" y="5"/>
+            <Point x="93" y="0"/>
+        </FillPolygon>
+        <FillPolygon lineWidth="1" lineStyle="Solid" lineColor="SysText" fillColor="Gold" fixLineColor="true" fixFillColor="true" showLine="true" symmetry="horizonal">
+            <Point x="68" y="9"/>
+            <Point x="82" y="5"/>
+            <Point x="93" y="0"/>
+        </FillPolygon>
+        <AttachedSymbols>
+            <Symbol name="StarLW" x="-26" y="-27" rotate="true"/>
+            <Symbol name="StarRW" x="-26" y="27" rotate="true"/>
+        </AttachedSymbols>
+    </Group>
+    <!-- ETF -->
+    <Group name="G0">
+        <Lines lineWidth="2" lineStyle="Solid" lineColor="Yellow" fixLineWidth="true">
+            <!-- E -->
+            <Line x1="-14" y1="-8" x2="-7" y2="-8"/>
+            <Line x1="-14" y1="-8" x2="-14" y2="8"/>
+            <Line x1="-14" y1="0" x2="-8" y2="0"/>
+            <Line x1="-14" y1="8" x2="-7" y2="8"/>
+            
+            <!-- T -->
+            <Line x1="-5" y1="-8" x2="5" y2="-8"/>
+            <Line x1="0" y1="-8" x2="0" y2="8"/>
+            
+            <!-- F -->
+            <Line x1="8" y1="-8" x2="15" y2="-8"/>
+            <Line x1="8" y1="-8" x2="8" y2="8"/>
+            <Line x1="8" y1="0" x2="14" y2="0"/>
+        </Lines>
+    </Group>
+</Symbol>

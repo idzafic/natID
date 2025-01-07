@@ -1,0 +1,170 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+		<Res id="repView" tr="Reports"/>
+		<Res id="repNoView" tr="There is no open report! Operation cannot be completed!"/>
+		<Res id="repError" tr="Error"/>
+		
+		<Res id="print" tr="Print"/>
+		<Res id="expXML" tr="Export to XML"/>	
+		
+		<Res id="print" tr="Print"/>
+		<Res id="printTT" tr="Print"/>
+		<Res id="expPDF" tr="To PDF"/>
+		<Res id="expPDFTT" tr="Eksport to PDF"/>
+		<Res id="expXML" tr="To XML"/>	
+		<Res id="expXMLTT" tr="Eksport to XML"/>
+		
+		<Res id="zoom11" tr="1:1"/>	
+		<Res id="zoom11TT" tr="Make 1:1 ratio with printed version"/>	
+		<Res id="repZoom" tr="Zoom"/>	
+		<Res id="repZoomTT" tr="Zoom value in percentage"/>
+		<Res id="zoomW" tr="To width"/>	
+		<Res id="zoomWTT" tr="Fidth page width"/>	
+		<Res id="zoomH" tr="To height"/>	
+		<Res id="zoomHTT" tr="Fit page width"/>	
+		
+		<Res id="vwSingle" tr="One page"/>	
+		<Res id="vwSingleTT" tr="Show one page in column"/>	
+		
+		<Res id="vwTwo" tr="Two pages"/>	
+		<Res id="vwTwoTT" tr="Show two pages in column"/>
+		
+		<Res id="vwThree" tr="Three pages"/>	
+		<Res id="vwThreeTT" tr="Show three pages in column"/>
+		
+		<Res id="vwFour" tr="Four pages"/>	
+		<Res id="vwFourTT" tr="Show four pages in column"/>
+		
+		<Res id="repPg#" tr="Page/Total # pages"/>	
+		<Res id="repPg#TT" tr="Page number / Total number of pages"/>
+		
+		<Res id="goToFirst" tr="To first"/>	
+		<Res id="goToFirstTT" tr="Show (go to) first page"/>
+		
+		<Res id="goToLast" tr="To last"/>	
+		<Res id="goToLastTT" tr="Show (go to) last page"/>
+		
+		<Res id="rep2XML" tr="Export to XML"/>	
+		<Res id="rep2PDF" tr="Export to PDF"/>	
+		
+		<Res id="0" tr="zero "/>
+		<Res id="1" tr="one "/>
+		<Res id="2" tr="two "/>
+		<Res id="3" tr="three "/>
+		<Res id="4" tr="four "/>
+		<Res id="5" tr="five "/>
+		<Res id="6" tr="six "/>
+		<Res id="7" tr="seven "/>
+		<Res id="8" tr="eight "/>
+		<Res id="9" tr="nine "/>
+		<Res id="10" tr="ten "/>
+		<Res id="11" tr="eleven "/>
+		<Res id="12" tr="twelve "/>
+		<Res id="13" tr="thirteen "/>	
+		<Res id="14" tr="fourteen "/>	
+		<Res id="15" tr="fifteen "/>	
+		<Res id="16" tr="sixteen "/>	
+		<Res id="17" tr="seventeen "/>
+		<Res id="18" tr="eighteen "/>
+		<Res id="19" tr="nineteen "/>
+		<Res id="20" tr="twenty "/>
+		<Res id="30" tr="thirty "/>
+		<Res id="40" tr="fourty "/>
+		<Res id="50" tr="fifty "/>
+		<Res id="60" tr="sixty "/>
+		<Res id="70" tr="seventy "/>
+		<Res id="80" tr="eighty "/>
+		<Res id="90" tr="ninety "/>
+		<Res id="100_beg" tr="hundred "/>
+		<Res id="100" tr="hundred "/>	
+		<Res id="200" tr="twohundred "/>
+		<Res id="300" tr="threehundred "/>
+		<Res id="400" tr="fourhundred "/>
+		<Res id="500" tr="fivehundred "/>
+		<Res id="600" tr="sixhundred "/>
+		<Res id="700" tr="sevenhundred "/>
+		<Res id="800" tr="eighthundred "/>
+		<Res id="900" tr="ninehundred "/>
+		<Res id="1e3_beg" tr="thousand "/>
+		<Res id="1e3" tr="one thousand "/>
+		<Res id="2e3" tr="two thousand "/>
+		<Res id="3e3" tr="three thousand "/>
+		<Res id="4e3" tr="four thousand "/>
+		<Res id="5e3" tr="five thousand "/>
+		<Res id="6e3" tr="six thousand "/>
+		<Res id="7e3" tr="seven thousand "/>
+		<Res id="8e3" tr="eight thousand "/>
+		<Res id="9e3" tr="nine thousand "/>
+		<Res id="e3s" tr="thousand "/>	
+		<Res id="1e6_beg" tr="million "/>
+		<Res id="1e6" tr="one million "/>
+		<Res id="2e6" tr="two million "/>
+		<Res id="3e6" tr="three million "/>
+		<Res id="4e6" tr="four million "/>
+		<Res id="5e6" tr="five million "/>
+		<Res id="6e6" tr="six million "/>
+		<Res id="7e6" tr="seven million "/>
+		<Res id="8e6" tr="eight million "/>
+		<Res id="9e6" tr="nine million "/>
+		<Res id="e6s" tr="million "/>
+		<Res id="1e9_beg" tr="billion "/>
+		<Res id="1e9" tr="one billion "/>
+		<Res id="2e9" tr="two billion "/>
+		<Res id="3e9" tr="three billion "/>
+		<Res id="4e9" tr="four billion "/>
+		<Res id="5e9" tr="five billion "/>
+		<Res id="6e9" tr="six billion "/>
+		<Res id="7e9" tr="seven billion "/>
+		<Res id="8e9" tr="eight billion "/>
+		<Res id="9e9" tr="nine billion "/>
+		<Res id="e9s" tr="billion "/>
+		<Res id="1e12_beg" tr="trillion "/>
+		<Res id="1e12" tr="one trillion "/>
+		<Res id="2e12" tr="two trillion "/>	
+		<Res id="3e12" tr="three trillion "/>	
+		<Res id="4e12" tr="four trillion "/>	
+		<Res id="5e12" tr="five trillion "/>	
+		<Res id="6e12" tr="six trillion "/>	
+		<Res id="7e12" tr="seven trillion "/>	
+		<Res id="8e12" tr="eight trillion "/>	
+		<Res id="9e12" tr="nine trillion "/>	
+		<Res id="e12s" tr="trillion "/>	
+		<Res id="1e15_beg" tr="quadrillion "/>
+		<Res id="1e15" tr="one quadrillion "/>
+		<Res id="2e15" tr="two quadrillion "/>
+		<Res id="3e15" tr="three quadrillion "/>
+		<Res id="4e15" tr="four quadrillion "/>
+		<Res id="5e15" tr="five quadrillion "/>
+		<Res id="6e15" tr="six quadrillion "/>
+		<Res id="7e15" tr="seven quadrillion "/>
+		<Res id="8e15" tr="eight quadrillion "/>
+		<Res id="9e15" tr="nine quadrillion "/>
+		<Res id="e15s" tr="quadrillion "/>
+		<Res id="and" tr="and "/>
+		<Res id="Page" tr="Page"/>
+		<Res id="Save_PDF" tr="Save in PDF"/>
+		<Res id="Print_F10" tr="Print (F10)"/>
+		<Res id="ExpToXML" tr="Export in XML"/>
+		<Res id="1_Pg" tr="Page Preview without parallel sides"/>
+		<Res id="2_Pg" tr="Page Preview with two parallel sides"/>
+		<Res id="3_Pg" tr="Page Preview with three parallel sides"/>
+		<Res id="4_Pg" tr="Page Preview with four parallel sides"/>	
+		<Res id="FirstPg" tr="First visible page"/>	
+		<Res id="Zoom" tr="  Zoom:  "/>
+		<Res id="CursorPg" tr="Page number under mouse coursor and coordinates in mm"/>
+		<Res id="RVTB" tr="Tool for Report Preview"/>
+		<Res id="ViewTB" tr="Tool for managing the Report is visible"/>
+		<Res id="NoDPToExp" tr="No Data for Export! Report does not contain any tables from base!"/>	
+		<Res id="XMLExpFld" tr="Choice Folder for XML Export"/>
+		<Res id="ExpToXMLDone" tr="Export in XML successful!"/>
+		<Res id="PDFFn" tr="PDF File Name"/>
+		<Res id="PDFFd" tr="Acrobat Reader Folder(*.pdf)"/>
+		<Res id="Zoom:" tr="Zoom (enlargement):"/>
+		<Res id="1stVisPg" tr="First visible page:"/>
+		<Res id="ZoomGoToPg" tr="Go to Page and Edit of Zoom..."/>
+		<Res id="TotPg" tr="Total Page Number:"/>	
+		<Res id="ShRepTB" tr="Show Toolbar for Reports"/>		
+		
+	</Translations>
+</DevRes>

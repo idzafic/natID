@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="SVC" type="OneConnectionOneGroup">
+	<Group name="0" x="-12" y="0">
+		<Circles lineWidth="1" lineStyle="SOLID" lineColor="#000000">
+			<Circle x="0" y="0" r="12"/>
+		</Circles>
+		<Line lineWidth="1" lineStyle="SOLID" lineColor="#000000" fixLineWidth="true">
+			<Point x="-5" y="-4"/>
+			<Point x="-5" y="4"/>
+			<Point x="-3" y="7"/>
+		</Line>
+		<Polyline lineWidth="1" lineStyle="SOLID" lineColor="#000000" fixLineWidth="true">
+			<Point x="5" y="5"/>
+			<Point x="-5" y="0"/>
+			<Point x="5" y="-5"/>
+			<Point x="5" y="5"/>
+		</Polyline>
+	</Group>
+</Symbol>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="Cricle" type="NoConnections">
+	<Group name="Circ">
+		<Circle x="0" y="0" r="12" lineWidth="1" lineStyle="Solid" lineColor="SysText"/>
+	</Group>
+</Symbol>

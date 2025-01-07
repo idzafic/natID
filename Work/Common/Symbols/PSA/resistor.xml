@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="Resistor" type="OneConnectionOneGroup">
+	<Group name="G0" x="0" y="0">
+		<Polyline lineWidth="1" lineStyle="Solid" lineColor="SysText">
+			<Point x="8" y="0"/>
+			<Point x="12" y="6"/>
+			<Point x="17" y="-6"/>
+			<Point x="22" y="6"/>
+			<Point x="27" y="-6"/>
+			<Point x="32" y="0"/>
+		</Polyline>
+		<Lines lineWidth="1" lineStyle="Solid" lineColor="SysText">
+			<Line x1="0" y1="0" x2="8" y2="0"/>
+			<Line x1="32" y1="0" x2="40" y2="0"/>
+			<Line x1="40" y1="-7" x2="40" y2="7"/>
+			<Line x1="43" y1="-5" x2="43" y2="5"/>
+			<Line x1="46" y1="-2" x2="46" y2="2"/>
+		</Lines>
+	</Group>
+</Symbol>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="TwoWindingTransformer" type="OneConnectionOneGroup">
+	<Group name="Primary" x="-20" y="0">
+		<Circle x="-8" y="0" r="12" lineWidth="1" lineStyle="Solid" lineColor="SysText"/>
+		<AttachedSymbols>
+			<Symbol name="Connection_Type" x="-11" y="0" rotate="false"/>
+			<Symbol name="LTC" x="-8" y="0" rotate="true"/>
+			<Symbol name="Controlled_Side" x="-17" y="0" rotate="true"/>
+		</AttachedSymbols>
+	</Group>
+	<Group name="Secondary" x="20" y="0">
+		<Circle x="8" y="0" r="12" lineWidth="1" lineStyle="Solid" lineColor="SysText"/>
+		<AttachedSymbols>
+			<Symbol name="Connection_Type" x="11" y="0" rotate="false"/>
+			<Symbol name="LTC" x="8" y="0" rotate="true"/>
+			<Symbol name="Controlled_Side" x="17" y="0" rotate="true"/>
+		</AttachedSymbols>
+	</Group>
+</Symbol>

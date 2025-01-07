@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="Test rounded rect" type="NoConnections">
+	<Group name="G0">
+		<Oval x="-15" y="-20" w="30" h="14" lineWidth="1" lineStyle="Solid" lineColor="SysText"/>
+		<FillOval x="-15" y="0" w="30" h="14" lineWidth="1" lineStyle="Solid" lineColor="SysText" fillColor="Blue" fixFillColor="true" showLine="true"/>
+		<FillOval x="-15" y="20" w="30" h="14" fillColor="Green"/>
+	</Group>
+</Symbol>

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="Test pie" type="NoConnections">
+	<Group name="G0">
+		<Pie x="0" y="0" r="20" fromAngle="60" toAngle="120" lineWidth="1" lineStyle="Solid" lineColor="SysText"/>
+		<FillPie x="0" y="0" r="20" fromAngle="180" toAngle="240" lineWidth="1" lineStyle="Solid" lineColor="SysText" fillColor="Blue" fixFillColor="true" showLine="true"/>
+		<FillPie x="0" y="0" r="20" fromAngle="300" toAngle="360" fillColor="Green"/>
+	</Group>
+</Symbol>

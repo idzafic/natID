@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="ASMotor" type="NoConnections">
+	<Group name="G0">
+		<Polyline lineWidth="1" lineStyle="Solid" lineColor="SysText" fixLineStyle="true">
+			<Point x="-4" y="5"/>
+			<Point x="-4" y="-5"/>
+			<Point x="-3.8" y="-5"/>
+			<Point x="-0.1" y="0"/>
+			<Point x="0.1" y="0"/>
+			<Point x="3.8" y="-5"/>
+			<Point x="4" y="-5"/>
+			<Point x="4" y="5"/>
+		</Polyline>
+	</Group>
+</Symbol>

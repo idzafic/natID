@@ -1,0 +1,166 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+		<Res id="repView" tr="Izvještaji"/>
+		<Res id="repError" tr="Greška"/>
+		<Res id="repNoView" tr="Nije otvoren ni jedan izvještaj! Operacija se ne može izvršiti!"/>
+		
+		<Res id="print" tr="Štampaj"/>
+		<Res id="printTT" tr="Štampaj"/>
+		<Res id="expPDF" tr="U PDF"/>
+		<Res id="expPDFTT" tr="Eksportuj u PDF"/>
+		<Res id="expXML" tr="U XML"/>	
+		<Res id="expXMLTT" tr="Eksportuj u XML"/>
+		
+		<Res id="zoom11" tr="1:1"/>	
+		<Res id="zoom11TT" tr="Napravi odnos 1:1 kao na papiru"/>	
+		<Res id="repZoom" tr="Lupa"/>	
+		<Res id="repZoomTT" tr="Vrijednost uvećanja izvještaja u procentima"/>
+		
+		<Res id="zoomW" tr="Na širinu"/>	
+		<Res id="zoomWTT" tr="Podesi da kompletna širina stranice bude vidljiva"/>	
+		<Res id="zoomH" tr="Na visinu"/>	
+		<Res id="zoomHTT" tr="Podesi da kompletna visina stranice bude vidljiva"/>	
+		
+		<Res id="vwSingle" tr="1 str."/>	
+		<Res id="vwSingleTT" tr="Prikaži jednu stranu u koloni"/>	
+		
+		<Res id="vwTwo" tr="2 str."/>	
+		<Res id="vwTwoTT" tr="Prikaži dvije strane paralelno"/>
+		
+		<Res id="vwThree" tr="3 str."/>	
+		<Res id="vwThreeTT" tr="Prikaži tri strane paralelno"/>
+		
+		<Res id="vwFour" tr="4 str."/>	
+		<Res id="vwFourTT" tr="Prikaži četiri strane paralelno"/>
+		
+		<Res id="repPg#" tr="Strana/Ukupno str."/>	
+		<Res id="repPg#TT" tr="Broj stranice / Ukupan broj strana u izvještaju"/>
+		
+		<Res id="goToFirst" tr="Na prvu"/>	
+		<Res id="goToFirstTT" tr="Prikaži (idi na) prvu stranicu"/>
+		
+		<Res id="goToLast" tr="Na zadnju"/>	
+		<Res id="goToLastTT" tr="Prikaži (idi na) zadnju stranicu"/>
+		
+		<Res id="rep2XML" tr="Eksport u XML"/>	
+		<Res id="rep2PDF" tr="Eksport u PDF"/>	
+		
+		<Res id="0" tr="nula "/>
+		<Res id="1" tr="jedan "/>
+		<Res id="2" tr="dva "/>
+		<Res id="3" tr="tri "/>
+		<Res id="4" tr="četiri "/>
+		<Res id="5" tr="pet "/>
+		<Res id="6" tr="šest "/>
+		<Res id="7" tr="sedam "/>
+		<Res id="8" tr="osam "/>
+		<Res id="9" tr="devet "/>
+		<Res id="10" tr="deset "/>
+		<Res id="11" tr="jedanaest "/>
+		<Res id="12" tr="dvanaest "/>
+		<Res id="13" tr="trinaest "/>	
+		<Res id="14" tr="četrnaest "/>	
+		<Res id="15" tr="petnaest "/>	
+		<Res id="16" tr="šesnaest "/>	
+		<Res id="17" tr="sedamnaest "/>
+		<Res id="18" tr="osamnaest "/>
+		<Res id="19" tr="devetnaest "/>
+		<Res id="20" tr="dvadeset "/>
+		<Res id="30" tr="trideset "/>
+		<Res id="40" tr="četrdeset "/>
+		<Res id="50" tr="pedeset "/>
+		<Res id="60" tr="šezdeset "/>
+		<Res id="70" tr="sedamdeset "/>
+		<Res id="80" tr="osamdeset "/>
+		<Res id="90" tr="devedeset "/>
+		<Res id="100_beg" tr="stotinu "/>
+		<Res id="100" tr="stotina "/>	
+		<Res id="200" tr="dvjesta "/>
+		<Res id="300" tr="trista "/>
+		<Res id="400" tr="četiristo "/>
+		<Res id="500" tr="petsto "/>
+		<Res id="600" tr="šeststo "/>
+		<Res id="700" tr="sedamsto "/>
+		<Res id="800" tr="osamsto "/>
+		<Res id="900" tr="devetsto "/>
+		<Res id="1e3_beg" tr="hiljada "/>
+		<Res id="1e3" tr="jedna hiljada "/>
+		<Res id="2e3" tr="dvije hiljade "/>
+		<Res id="3e3" tr="tri hiljade "/>
+		<Res id="4e3" tr="četiri hiljade "/>
+		<Res id="5e3" tr="pet hiljada "/>
+		<Res id="6e3" tr="šest hiljada "/>
+		<Res id="7e3" tr="sedam hiljada "/>
+		<Res id="8e3" tr="osam hiljada "/>
+		<Res id="9e3" tr="devet hiljada "/>
+		<Res id="e3s" tr="hiljada "/>	
+		<Res id="1e6_beg" tr="milion "/>
+		<Res id="1e6" tr="jedan milion "/>
+		<Res id="2e6" tr="dva miliona "/>
+		<Res id="3e6" tr="tri miliona "/>
+		<Res id="4e6" tr="četiri miliona "/>
+		<Res id="5e6" tr="pet miliona "/>
+		<Res id="6e6" tr="šest miliona "/>
+		<Res id="7e6" tr="sedam miliona "/>
+		<Res id="8e6" tr="osam miliona "/>
+		<Res id="9e6" tr="devet miliona "/>
+		<Res id="e6s" tr="miliona "/>
+		<Res id="1e9_beg" tr="milijarda "/>
+		<Res id="1e9" tr="jedna milijarda "/>
+		<Res id="2e9" tr="dvije milijarde "/>
+		<Res id="3e9" tr="tri milijarde "/>
+		<Res id="4e9" tr="četiri milijarde "/>
+		<Res id="5e9" tr="pet milijardi "/>
+		<Res id="6e9" tr="šest milijardi "/>
+		<Res id="7e9" tr="sedam milijardi "/>
+		<Res id="8e9" tr="osam milijardi "/>
+		<Res id="9e9" tr="devet milijardi "/>
+		<Res id="e9s" tr="milijardi "/>
+		<Res id="1e12_beg" tr="bilion "/>
+		<Res id="1e12" tr="jedan bilion "/>
+		<Res id="2e12" tr="dva biliona "/>	
+		<Res id="3e12" tr="tri biliona "/>	
+		<Res id="4e12" tr="četiri biliona "/>	
+		<Res id="5e12" tr="pet biliona "/>	
+		<Res id="6e12" tr="šest biliona "/>	
+		<Res id="7e12" tr="sedam biliona "/>	
+		<Res id="8e12" tr="osam biliona "/>	
+		<Res id="9e12" tr="devet biliona "/>	
+		<Res id="e12s" tr="biliona "/>	
+		<Res id="1e15_beg" tr="trilion "/>
+		<Res id="1e15" tr="jedan trilion "/>
+		<Res id="2e15" tr="dva triliona "/>
+		<Res id="3e15" tr="tri triliona "/>
+		<Res id="4e15" tr="četiri triliona "/>
+		<Res id="5e15" tr="pet triliona "/>
+		<Res id="6e15" tr="šest triliona "/>
+		<Res id="7e15" tr="sedam triliona "/>
+		<Res id="8e15" tr="osam triliona "/>
+		<Res id="9e15" tr="devet triliona "/>
+		<Res id="e15s" tr="triliona "/>
+		<Res id="and" tr="i "/>
+		<Res id="Page" tr="Strana"/>
+		<Res id="Save_PDF" tr="Snimi u PDF format"/>
+		<Res id="Print_F10" tr="Štampa (F10)"/>
+		<Res id="ExpToXML" tr="Eksport u XML format"/>
+		<Res id="1_Pg" tr="Običan prikaz bez paralelnih strana"/>
+		<Res id="2_Pg" tr="Prikaz sa dvije paralelne strane"/>
+		<Res id="3_Pg" tr="Prikaz sa tri paralelne strane"/>
+		<Res id="4_Pg" tr="Prikaz sa četiri paralelne strane"/>	
+		<Res id="FirstPg" tr="Prva vidljiva stranica"/>	
+		<Res id="CursorPg" tr="Broj stranice ispod kurzora miša i koordinate u mm"/>
+		<Res id="RVTB" tr="Alat za pregled izvještaja"/>
+		<Res id="ViewTB" tr="Alat za upravljenje izvještajem je vidljiv"/>
+		<Res id="NoDPToExp" tr="Nema podataka za eksport! Izvještaj ne sadrži ni jednu tabelu iz baze!"/>	
+		<Res id="XMLExpFld" tr="Odabir direktorija za XML eksport"/>
+		<Res id="ExpToXMLDone" tr="Eksport u XML je uspješno urađen!"/>
+		<Res id="PDFFn" tr="Ime PDF datoteke"/>
+		<Res id="PDFFd" tr="Acrobat čitač datoteke (*.pdf)"/>
+		<Res id="Zoom:" tr="Zum (uvećanje):"/>
+		<Res id="1stVisPg" tr="Prva vidljiva strana:"/>
+		<Res id="ZoomGoToPg" tr="Idi na stranu i podešenje uvećanja..."/>
+		<Res id="TotPg" tr="Ukupan broj strana:"/>	
+		<Res id="ShRepTB" tr="Prikaži traku alata za izvještaje"/>				
+	</Translations>
+</DevRes>

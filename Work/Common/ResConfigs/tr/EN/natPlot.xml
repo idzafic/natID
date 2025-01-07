@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<DevRes>
+	<Translations>
+		<Res id="@Plot_settings" tr="@Plot settings" />
+		<Res id="@Plot_zatvori" tr="Close" />
+		<Res id="@Plot_legendCols" tr="Number of columns in plot legend: " />
+		<Res id="@Plot_marginLeft" tr="Left margin: " />
+		<Res id="@Plot_marginRight" tr="Right margin: " />
+		<Res id="@Plot_marginTop" tr="Top Margin: " />
+		<Res id="@Plot_marginBottom" tr="Bottom margin: " />
+		<Res id="@Plot_xSpace" tr="Space to X axis label: " />
+		<Res id="@Plot_ySpace" tr="Space to Y axis label: " />
+		<Res id="@Plot_pngDesc" tr=" " />
+		<Res id="@Plot_epsDesc" tr=" " />
+		<Res id="@Plot_pdfDesc" tr=" " />
+		<Res id="@Plot_svgDesc" tr=" " />
+		<Res id="@Plot_txtDesc" tr="C style points" />
+		<Res id="@Plot_xmlDesc" tr="save plot colors, points and position" />
+
+		<Res id="@PlotFullScreen" tr="Toggle full size" />
+		<Res id="@PlotGrid" tr="Show/hide grid" />
+		<Res id="@PlotLegend" tr="Show/hide legend" />
+		<Res id="@PlotSave" tr="Export to image ..." />
+		<Res id="@PlotReset" tr="Show original" />
+		<Res id="@PlotSettings" tr="Settings ..." />
+		<Res id="@PlotShowAnnotations" tr="Show annotations" />
+		<Res id="@PlotDeleteAnnotations" tr="Delete annotations"/>
+		<Res id="@PlotHelp" tr="Show help ..."/>
+	</Translations>
+</DevRes>

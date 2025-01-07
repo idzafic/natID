@@ -1,0 +1,28 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+		<Res id="Properties" tr="Properties"/>
+		<Res id="Quit" tr="Quit"/>		
+		<Res id="pointer" tr="Pointer"/>
+		<Res id="pointerTT" tr="Pointer/selector of other elements"/>
+		<Res id="Save" tr="Save"/>
+		<Res id="SaveTT" tr="Save the document"/>
+		<Res id="Reload" tr="Reload"/>
+		<Res id="ReloadTT" tr="Reload all elements with loosing changes"/>
+		<Res id="Delete" tr="Delete"/>
+		<Res id="DeleteTT" tr="Delete selected element"/>
+		<Res id="DelAll" tr="Delete all"/>
+		<Res id="DelAllTT" tr="Delete all content"/>
+		<Res id="Insert" tr="Insert"/>
+		<Res id="InsertTT" tr="Insert above selected row"/>
+		<Res id="PushBack" tr="Push back"/>
+		<Res id="PushBackTT" tr="Add it as last element"/>
+		<Res id="_fdFileType" tr="File type:"/>
+		<Res id="Ok" tr="Ok"/>
+		<Res id="Cancel" tr="Cancel"/>
+		<Res id="@msgInfo" tr="Information"/>
+		<Res id="@msgWarning" tr="Warning"/>
+		<Res id="@msgError" tr="Error"/>
+		<Res id="@AppMenu" tr="Application menu"/>
+	</Translations>
+</DevRes>

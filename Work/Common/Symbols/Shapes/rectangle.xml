@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="Rectangle" type="NoConnections">
+	<Group name="Rect">
+		<Rect x="-15" y="-10" w="30" h="20" lineWidth="1" lineStyle="Solid" lineColor="SysText"/>
+	</Group>
+</Symbol>

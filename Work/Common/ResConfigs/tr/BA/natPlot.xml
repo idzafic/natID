@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<DevRes>
+	<Translations>
+		<Res id="@Plot_settings" tr="Postavke grafa" />
+		<Res id="@Plot_zatvori" tr="Zatvori" />
+		<Res id="@Plot_legendCols" tr="Broj kolona u legendi: " />
+		<Res id="@Plot_marginLeft" tr="Margina lijevo: " />
+		<Res id="@Plot_marginRight" tr="Margina desno: " />
+		<Res id="@Plot_marginTop" tr="Margina gore: " />
+		<Res id="@Plot_marginBottom" tr="Margina dole: " />
+		<Res id="@Plot_xSpace" tr="Razmak imena X ose: " />
+		<Res id="@Plot_ySpace" tr="Razmak imena Y ose: " />
+		<Res id="@Plot_pngDesc" tr=" " />
+		<Res id="@Plot_epsDesc" tr=" " />
+		<Res id="@Plot_pdfDesc" tr=" " />
+		<Res id="@Plot_svgDesc" tr=" " />
+		<Res id="@Plot_txtDesc" tr="tačke u C stilu ili vertikalno" />
+		<Res id="@Plot_xmlDesc" tr="linije, pozicija i boje grafa" />
+
+		<Res id="@PlotFullScreen" tr="Minimalne margine [On/Off]" />
+		<Res id="@PlotGrid" tr="Pomoćne linije [On/Off]" />
+		<Res id="@PlotLegend" tr="Prikaži legendu [On/Off]" />
+		<Res id="@PlotSave" tr="Exportuj graf u sliku ..." />
+		<Res id="@PlotReset" tr="Prikaži početni izgled" />
+		<Res id="@PlotSettings" tr="Podešenja plotera ..." />
+
+		<Res id="@PlotShowAnnotations" tr="Prikaži dodatne informacije" />
+		<Res id="@PlotDeleteAnnotations" tr="Izbriši pomoćne informacije" />
+		<Res id="@PlotHelp" tr="Prikaži pomoć ..." />
+	</Translations>
+</DevRes>

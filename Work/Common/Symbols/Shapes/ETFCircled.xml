@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="Pendulum" type="NoConnectionsNGroups">
+    <Group name="Circ">
+        <FillCircle x="0" y="0" r="25" lineWidth="2" lineStyle="Solid" lineColor="SysText" fillColor="Blue" fixLineColor="true" fixFillColor="false" showLine="true"/>
+    </Group>
+    <!-- ETF -->
+    <Group name="ETF">
+        <Lines lineWidth="2" lineStyle="Solid" lineColor="Yellow" fixLineWidth="true">
+            <!-- E -->
+            <Line x1="-14" y1="-8" x2="-7" y2="-8"/>
+            <Line x1="-14" y1="-8" x2="-14" y2="8"/>
+            <Line x1="-14" y1="0" x2="-8" y2="0"/>
+            <Line x1="-14" y1="8" x2="-7" y2="8"/>
+            
+            <!-- T -->
+            <Line x1="-5" y1="-8" x2="5" y2="-8"/>
+            <Line x1="0" y1="-8" x2="0" y2="8"/>
+            
+            <!-- F -->
+            <Line x1="8" y1="-8" x2="15" y2="-8"/>
+            <Line x1="8" y1="-8" x2="8" y2="8"/>
+            <Line x1="8" y1="0" x2="14" y2="0"/>
+        </Lines>
+    </Group>
+</Symbol>

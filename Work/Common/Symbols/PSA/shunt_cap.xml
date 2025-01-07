@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="Shunt_Cap" type="OneConnectionOneGroup">
+	<Group name="G0" x="0" y="0">
+		<Polyline lineWidth="1" lineStyle="SOLID" lineColor="#000000">
+			<Point x="24" y="-7"/>
+			<Point x="24" y="7"/>
+			<Point x="0" y="7"/>
+			<Point x="0" y="-7"/>
+		</Polyline>
+		<Segments lineWidth="1" lineStyle="SOLID" lineColor="#000000" fixLineStyle="true">
+			<Segment x1="24" y1="0" x2="32" y2="0"/>
+			<Segment x1="32" y1="-7" x2="32" y2="7"/>
+			<Segment x1="35" y1="-5" x2="35" y2="5"/>
+			<Segment x1="38" y1="-2" x2="38" y2="2"/>
+		</Segments>
+		<Segments lineWidth="1" lineStyle="SOLID" lineColor="#000000" fixLineWidth="true" fixLineStyle="true">
+			<Segment x1="14" y1="-4" x2="14" y2="4"/>
+			<Segment x1="10" y1="-4" x2="10" y2="4"/>
+			<Segment x1="5" y1="0" x2="10" y2="0"/>
+			<Segment x1="19" y1="0" x2="14" y2="0"/>
+		</Segments>
+	</Group>
+</Symbol>

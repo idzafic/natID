@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="disc_circle_open" type="NConnectionsOneGroup">
+	<Connections>
+		<Point x="-5" y="0"/>
+		<Point x="5" y="0"/>
+	</Connections>
+	<Group name="G0">
+		<Polygon lineWidth="1" lineStyle="SOLID" lineColor="#000000" fillColor="#ff0000" fixFillColor="true" drawLine="true">
+			<Point x="-5" y="0"/>
+			<Point x="-4" y="-3"/>
+			<Point x="-3" y="-4"/>
+			<Point x="0" y="-5"/>
+			<Point x="3" y="-4"/>
+			<Point x="4" y="-3"/>
+			<Point x="5" y="0"/>
+			<Point x="4" y="3"/>
+			<Point x="3" y="4"/>
+			<Point x="0" y="5"/>
+			<Point x="-3" y="4"/>
+			<Point x="-4" y="3"/>
+		</Polygon>
+	</Group>
+</Symbol>

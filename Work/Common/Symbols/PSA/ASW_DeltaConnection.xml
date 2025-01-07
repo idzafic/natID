@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="" type="NoConnections">
+	<Group name="Delta">
+		<Polyline lineWidth="1" lineStyle="SOLID" lineColor="#000000" fixLineWidth="true" fixLineStyle="true">
+			<Point x="-4" y="-4"/>
+			<Point x="4" y="-4"/>
+			<Point x="0" y="4"/>
+			<Point x="-4" y="-4"/>
+		</Polyline>
+	</Group>
+</Symbol>

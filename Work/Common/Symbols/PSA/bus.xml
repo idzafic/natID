@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="Busbar" type="NoConnections">
+	<Group name="G0" x="0" y="0">
+		<!-- ><FillRect x="-18" y="-2" w="36" h="4" fillColor="SysText" showLine="false"/> -->
+		<Line x1="-18" y1="2" x2="18" y2="0" lineWidth="4" lineStyle="Solid" fixLineStyle="true" fixLineWidth="true" lineColor="SysText"/>
+		<FillCircles fillColor="SysText" showLine="false">
+			<Circle x="-10" y="0" r="4"/>
+			<Circle x="0" y="0" r="4"/>
+			<Circle x="10" y="0" r="4"/>
+		</FillCircles>
+		<Lines lineWidth="1" lineStyle="Solid" fixLineStyle="true" fixLineWidth="true" lineColor="SysText">
+			<Line x1="-10" y1="0" x2="-10" y2="10"/>
+			<Line x1="0" y1="-10" x2="0" y2="10"/>
+			<Line x1="10" y1="0" x2="10" y2="10"/>  
+		</Lines>
+		
+		<!--
+		<Circles lineColor="SysText" lineWidth="1" lineStyle="Solid" fixLineStyle="true" fixLineWidth="true">
+			<Circle x="-10" y="0" r="3"/>
+			<Circle x="0" y="0" r="3"/>
+			<Circle x="10" y="0" r="3"/>
+		</Circles>
+			-->
+		
+	</Group>
+</Symbol>

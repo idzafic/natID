@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="FourWindingTransformer" type="OneConnectionOneGroup">
+	<Group name="Primary" x="-23" y="0">
+		<Circle x="-10" y="0" r="13" lineWidth="1" lineStyle="Solid" lineColor="SysText"/>
+		<AttachedSymbols>
+			<Symbol name="Conn_Type" x="-13" y="0" rotate="false"/>
+			<Symbol name="LTC" x="-10" y="0" rotate="true"/>
+			<Symbol name="Controlled_Side" x="-20" y="-0" rotate="true"/>
+		</AttachedSymbols>
+	</Group>
+	<Group name="Secondary" x="23" y="0">
+		<Circle x="10" y="0" r="13" lineWidth="1" lineStyle="Solid" lineColor="SysText"/>
+		<AttachedSymbols>
+			<Symbol name="Conn_Type" x="13" y="0" rotate="false"/>
+			<Symbol name="LTC" x="10" y="0" rotate="true"/>
+			<Symbol name="Controlled_Side" x="20" y="0" rotate="true"/>
+		</AttachedSymbols>
+	</Group>
+	<Group name="Terc" x="0" y="-23">
+		<Circle x="0" y="-10" r="13" lineWidth="1" lineStyle="Solid" lineColor="SysText"/>
+		<AttachedSymbols>
+			<Symbol name="Conn_Type" x="0" y="-15" rotate="false"/>
+			<Symbol name="LTC" x="0" y="-10" rotate="true"/>
+			<Symbol name="Controlled_Side" x="0" y="-20" rotate="true"/>
+		</AttachedSymbols>
+	</Group>
+	<Group name="Quad" x="0" y="23">
+		<Circle x="0" y="10" r="13" lineWidth="1" lineStyle="Solid" lineColor="SysText"/>
+		<AttachedSymbols>
+			<Symbol name="Conn_Type" x="0" y="13" rotate="false"/>
+			<Symbol name="LTC" x="0" y="10" rotate="false"/>
+			<Symbol name="Controlled_Side" x="0" y="20" rotate="true"/>
+		</AttachedSymbols>
+	</Group>
+
+
+</Symbol>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="BreakerRectClose_NO" type="NConnectionsOneGroup">
+	<Connections>
+		<Point x="-8" y="0"/>
+		<Point x="8" y="0"/>
+	</Connections>
+	<Group name="G0">
+		<Polyline lineWidth="1" lineStyle="SOLID" lineColor="#000000">
+			<Point x="-8" y="8"/>
+			<Point x="8" y="8"/>
+			<Point x="8" y="-8"/>
+			<Point x="-8" y="-8"/>
+		</Polyline>
+		<Polygon lineWidth="1" lineStyle="SOLID" lineColor="#000000" fillColor="#008000" fixFillColor="true" drawLine="true">
+			<Point x="-5" y="5"/>
+			<Point x="5" y="5"/>
+			<Point x="5" y="-5"/>
+			<Point x="-5" y="-5"/>
+		</Polygon>
+	</Group>
+</Symbol>

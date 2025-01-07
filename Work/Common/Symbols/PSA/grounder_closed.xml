@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="GrounderClosed" type="OneConnectionOneGroup">
+	<Group name="G0" x="-5" y="0">
+		<Polygon lineWidth="1" lineStyle="SOLID" lineColor="#000000" fillColor="#008000" fixFillColor="true" drawLine="true">
+			<Point x="-5" y="0"/>
+			<Point x="-4" y="-3"/>
+			<Point x="-3" y="-4"/>
+			<Point x="0" y="-5"/>
+			<Point x="3" y="-4"/>
+			<Point x="4" y="-3"/>
+			<Point x="5" y="0"/>
+			<Point x="4" y="3"/>
+			<Point x="3" y="4"/>
+			<Point x="0" y="5"/>
+			<Point x="-3" y="4"/>
+			<Point x="-4" y="3"/>
+		</Polygon>
+		<Segments lineWidth="1" lineStyle="SOLID" lineColor="#c0c0c0" fixLineColor="true">
+			<Segment x1="5" y1="0" x2="15" y2="0"/>
+			<Segment x1="15" y1="5" x2="15" y2="-5"/>
+			<Segment x1="18" y1="3" x2="18" y2="-3"/>
+			<Segment x1="21" y1="1" x2="21" y2="-1"/>
+		</Segments>
+	</Group>
+</Symbol>

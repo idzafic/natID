@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="FuseBurned" type="NConnectionsOneGroup">
+	<Connections>
+		<Point x="-6" y="0"/>
+		<Point x="6" y="0"/>
+	</Connections>
+	<Group name="G0">
+		<Polygon lineWidth="1" lineStyle="SOLID" lineColor="#000000" fillColor="#ff0000" fixFillColor="true" drawLine="true">
+			<Point x="-6" y="0"/>
+			<Point x="0" y="-6"/>
+			<Point x="6" y="0"/>
+			<Point x="0" y="6"/>
+		</Polygon>
+	</Group>
+</Symbol>

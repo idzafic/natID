@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="Fuse" type="NConnectionsOneGroup">
+	<Connections>
+		<Point x="-15" y="0"/>
+		<Point x="15" y="0"/>
+	</Connections>
+	<Group name="G0">
+		<Rect x="-15" y="-8" w="30" h="16" lineWidth="1" lineColor="SysText"/>
+		<Lines lineWidth="1" lineStyle="Solid" lineColor="SysText">
+			<Line x1="-20" y1="0" x2="-10" y2="0"/>
+			<Line x1="-10" y1="0" x2="-5" y2="-4"/>
+			<Line x1="-5" y1="-4" x2="5" y2="4"/>
+			<Line x1="5" y1="4" x2="10" y2="0"/>
+			<Line x1="10" y1="0" x2="20" y2="0"/>
+		</Lines>
+	</Group>
+</Symbol>

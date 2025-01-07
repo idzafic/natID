@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="BreakerRectClosed" type="NConnectionsOneGroup">
+	<Connections>
+		<Point x="-5" y="0"/>
+		<Point x="5" y="0"/>
+	</Connections>
+	<Group name="G0">
+		<Polygon fillColor="#000000" drawLine="true">
+			<Point x="-5" y="5"/>
+			<Point x="5" y="5"/>
+			<Point x="5" y="-5"/>
+			<Point x="-5" y="-5"/>
+		</Polygon>
+	</Group>
+</Symbol>

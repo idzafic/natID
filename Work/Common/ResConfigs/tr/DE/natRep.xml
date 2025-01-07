@@ -1,0 +1,170 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+		<Res id="repView" tr="Reports"/>
+		<Res id="repNoView" tr="There is no open report! Operation cannot be completed!"/>
+		<Res id="repError" tr="Error"/>
+		
+		<Res id="print" tr="Print"/>
+		<Res id="expXML" tr="Export to XML"/>	
+		
+		<Res id="print" tr="Print"/>
+		<Res id="printTT" tr="Print"/>
+		<Res id="expPDF" tr="To PDF"/>
+		<Res id="expPDFTT" tr="Eksport to PDF"/>
+		<Res id="expXML" tr="To XML"/>	
+		<Res id="expXMLTT" tr="Eksport to XML"/>
+		
+		<Res id="zoom11" tr="1:1"/>	
+		<Res id="zoom11TT" tr="Make 1:1 ratio with printed version"/>	
+		<Res id="repZoom" tr="Zoom"/>	
+		<Res id="repZoomTT" tr="Zoom value in percentage"/>
+		<Res id="zoomW" tr="To width"/>	
+		<Res id="zoomWTT" tr="Fidth page width"/>	
+		<Res id="zoomH" tr="To height"/>	
+		<Res id="zoomHTT" tr="Fit page width"/>	
+		
+		<Res id="vwSingle" tr="One page"/>	
+		<Res id="vwSingleTT" tr="Show one page in column"/>	
+		
+		<Res id="vwTwo" tr="Two pages"/>	
+		<Res id="vwTwoTT" tr="Show two pages in column"/>
+		
+		<Res id="vwThree" tr="Three pages"/>	
+		<Res id="vwThreeTT" tr="Show three pages in column"/>
+		
+		<Res id="vwFour" tr="Four pages"/>	
+		<Res id="vwFourTT" tr="Show four pages in column"/>
+		
+		<Res id="repPg#" tr="Page/Total # pages"/>	
+		<Res id="repPg#TT" tr="Page number / Total number of pages"/>
+		
+		<Res id="goToFirst" tr="Erste"/>	
+		<Res id="goToFirstTT" tr="Zeige (gehe nach) erste Seite"/>
+		
+		<Res id="goToLast" tr="Laetze"/>	
+		<Res id="goToLastTT" tr="Zeige (gehe nach) last Seite"/>
+		
+		<Res id="rep2XML" tr="Exportieren nach XML"/>	
+		<Res id="rep2PDF" tr="Exportieren nach PDF"/>	
+		
+		<Res id="0" tr="null "/>
+		<Res id="1" tr="eins "/>
+		<Res id="2" tr="zwei "/>
+		<Res id="3" tr="drei "/>
+		<Res id="4" tr="vier "/>
+		<Res id="5" tr="fuenf "/>
+		<Res id="6" tr="sechs "/>
+		<Res id="7" tr="sieben "/>
+		<Res id="8" tr="acht "/>
+		<Res id="9" tr="neun "/>
+		<Res id="10" tr="zehn "/>
+		<Res id="11" tr="elf "/>
+		<Res id="12" tr="zwölf "/>
+		<Res id="13" tr="dreizehn "/>	
+		<Res id="14" tr="vierzehn "/>	
+		<Res id="15" tr="fünfzehn "/>	
+		<Res id="16" tr="sechzehn "/>	
+		<Res id="17" tr="siebzehn "/>
+		<Res id="18" tr="achtzehn "/>
+		<Res id="19" tr="neunzehn "/>
+		<Res id="20" tr="zwanzig "/>
+		<Res id="30" tr="dreissig "/>
+		<Res id="40" tr="vierzig "/>
+		<Res id="50" tr="fünfzig "/>
+		<Res id="60" tr="sechzig "/>
+		<Res id="70" tr="siebzig "/>
+		<Res id="80" tr="achtzig "/>
+		<Res id="90" tr="neunzig "/>
+		<Res id="100_beg" tr="hundert "/>
+		<Res id="100" tr="einhundert "/>	
+		<Res id="200" tr="zweihunder "/>
+		<Res id="300" tr="dreihundert "/>
+		<Res id="400" tr="vierhundert "/>
+		<Res id="500" tr="fünfhundert "/>
+		<Res id="600" tr="sechshundert "/>
+		<Res id="700" tr="siebenhundert "/>
+		<Res id="800" tr="achthundert "/>
+		<Res id="900" tr="neunhundert "/>
+		<Res id="1e3_beg" tr=" "/>
+		<Res id="1e3" tr="eintausend "/>
+		<Res id="2e3" tr="zweitausend "/>
+		<Res id="3e3" tr="dreitausend "/>
+		<Res id="4e3" tr="viertausend "/>
+		<Res id="5e3" tr="fünftausend "/>
+		<Res id="6e3" tr="sechstausend "/>
+		<Res id="7e3" tr="siebentausend "/>
+		<Res id="8e3" tr="achttausend "/>
+		<Res id="9e3" tr="neuntausend "/>
+		<Res id="e3s" tr=" "/>	
+		<Res id="1e6_beg" tr="million "/>
+		<Res id="1e6" tr="ein million "/>
+		<Res id="2e6" tr="zwei million "/>
+		<Res id="3e6" tr="drei million "/>
+		<Res id="4e6" tr="vier million "/>
+		<Res id="5e6" tr="fünf million "/>
+		<Res id="6e6" tr="sechs million "/>
+		<Res id="7e6" tr="sieben million "/>
+		<Res id="8e6" tr="acht million "/>
+		<Res id="9e6" tr="neun million "/>
+		<Res id="e6s" tr=" "/>
+		<Res id="1e9_beg" tr="milliarde "/>
+		<Res id="1e9" tr="eine milliarde "/>
+		<Res id="2e9" tr="zwei milliarden "/>
+		<Res id="3e9" tr="drei milliarden "/>
+		<Res id="4e9" tr="vier milliarden "/>
+		<Res id="5e9" tr="fünf milliarden "/>
+		<Res id="6e9" tr="sechs milliarden "/>
+		<Res id="7e9" tr="sieben milliarden "/>
+		<Res id="8e9" tr="acht milliarden "/>
+		<Res id="9e9" tr="neun milliarden "/>
+		<Res id="e9s" tr=" "/>
+		<Res id="1e12_beg" tr="billion "/>
+		<Res id="1e12" tr="ein billion "/>
+		<Res id="2e12" tr="zwei billion "/>	
+		<Res id="3e12" tr="drei billion "/>	
+		<Res id="4e12" tr="vier billion "/>	
+		<Res id="5e12" tr="fünf billion "/>	
+		<Res id="6e12" tr="sechs billion "/>	
+		<Res id="7e12" tr="sieben billion "/>	
+		<Res id="8e12" tr="acht billion "/>	
+		<Res id="9e12" tr="neun billion "/>	
+		<Res id="e12s" tr=" "/>	
+		<Res id="1e15_beg" tr="billiarde "/>
+		<Res id="1e15" tr="eine billiarde "/>
+		<Res id="2e15" tr="zwei billiarden "/>
+		<Res id="3e15" tr="drei billiarden "/>
+		<Res id="4e15" tr="vier billiarden "/>
+		<Res id="5e15" tr="fünf billiarden "/>
+		<Res id="6e15" tr="sechs billiarden "/>
+		<Res id="7e15" tr="sieben billiarden "/>
+		<Res id="8e15" tr="acht billiarden "/>
+		<Res id="9e15" tr="neun billiarden "/>
+		<Res id="e15s" tr="billiarde "/>
+		<Res id="and" tr="und "/>
+		<Res id="Page" tr="Seite"/>
+		<Res id="Save_PDF" tr="Speichern in PDF format"/>
+		<Res id="Print_F10" tr="Drücken (F10)"/>
+		<Res id="ExpToXML" tr="Export ins XML-Format"/>
+		<Res id="1_Pg" tr="Einfache Ansicht ohne parallele Seiten"/>
+		<Res id="2_Pg" tr="Überblick von zwei parallelen Seiten"/>
+		<Res id="3_Pg" tr="Überblick von drei parallelen Seiten"/>
+		<Res id="4_Pg" tr="Überblick von vier parallelen Seiten"/>	
+		<Res id="FirstPg" tr="Erste sichtbare Seite"/>	
+		<Res id="Zoom" tr="  zoomen:  "/>
+		<Res id="CursorPg" tr="Seitenzahl unter dem Mauszeiger und Koordinaten in mm"/>
+		<Res id="RVTB" tr=" Werkzeug zum Anzeigen von Berichten"/>
+		<Res id="ViewTB" tr="Das Berichtsverwaltungswerkzeug ist sichtbar"/>
+		<Res id="NoDPToExp" tr="Keine Daten zum Exportieren! Der Bericht enthält keine Tabellen aus der Datenbasis!"/>	
+		<Res id="XMLExpFld" tr="Auswählen eines Verzeichnisses für den XML-Export"/>
+		<Res id="ExpToXMLDone" tr="Export nach XML erfolgreich durchgeführt!"/>
+		<Res id="PDFFn" tr="Der Name der PDF-Datei"/>
+		<Res id="PDFFd" tr="Acrobat-Dateireader(*.pdf)"/>
+		<Res id="Zoom:" tr="Zoomen:"/>
+		<Res id="1stVisPg" tr="Erste sichtliche seite:"/>
+		<Res id="ZoomGoToPg" tr="Gehen Sie zur Seite und zoomen Sie hinein..."/>
+		<Res id="TotPg" tr="Gesamtzahl der Seiten:"/>	
+		<Res id="ShRepTB" tr="Berichtssymbolleiste fuer Werkzeug anzeigen"/>	
+		
+	</Translations>
+</DevRes>

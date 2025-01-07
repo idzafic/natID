@@ -1,0 +1,16 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="@PlotFullScreen" path="Work/Common/Icons/Graph/fullscreen.png" desktop="Dark"/>
+		<Res id="@PlotGrid" path="Work/Common/Icons/Graph/grid.png" desktop="Dark"/>
+		<Res id="@PlotLegend" path="Work/Common/Icons/Graph/legend.png" desktop="Dark"/>
+		<Res id="@PlotSave" path="Work/Common/Icons/Graph/save.png" desktop="Dark"/>
+		<Res id="@PlotReset" path="Work/Common/Icons/Graph/fitToWindow.png" desktop="Dark"/>
+		<Res id="@PlotSettings" path="Work/Common/Icons/Graph/settings.png" desktop="Dark"/>
+		
+		<Res id="@PlotShowAnotation" path="Work/Common/Icons/Graph/annotations.png" desktop="Dark"/>
+		<Res id="@PlotDeleteAnnotation" path="Work/Common/Icons/Graph/delete.png" desktop="Dark"/>
+		<Res id="@PlotHelp" path="Work/Common/Icons/Graph/info.png" desktop="Dark"/>
+	</Images>
+	<Symbols/>
+</DevRes>

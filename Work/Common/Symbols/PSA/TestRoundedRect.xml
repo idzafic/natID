@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="Test rounded rect" type="NoConnections">
+	<Group name="G0">
+		<RoundedRect x="-15" y="-20" w="30" h="14" rx="5" ry="5" lineWidth="1" lineStyle="Solid" lineColor="SysText"/>
+		<FillRoundedRect x="-15" y="0" w="30" h="14" rx="5" ry="5" lineWidth="1" lineStyle="Solid" lineColor="SysText" fillColor="Blue" fixFillColor="true" showLine="true"/>
+		<FillRoundedRect x="-15" y="20" w="30" h="14" rx="5" ry="5" fillColor="Green" fixFillColor="true"/>
+	</Group>
+</Symbol>

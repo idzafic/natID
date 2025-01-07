@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="BreakerRectOpen" type="NConnectionsOneGroup">
+	<Connections>
+		<Point x="-10" y="0"/>
+		<Point x="10" y="0"/>
+	</Connections>
+	<Group name="G0">
+		<Rect x="-10" y="-6" w="20" h="10" lineWidth="2" lineStyle="Solid" lineColor="SysText"/>
+	</Group>
+</Symbol>

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="ASAlternate" type="NoConnections">
+	<Group name="AC0">
+		<Polyline lineWidth="1" lineStyle="Solid" lineColor="SysText" fixLineStyle="true">
+			<Point x="-8" y="0"/>
+			<Point x="-7" y="3"/>
+			<Point x="-6" y="4"/>
+			<Point x="-4" y="5"/>
+			<Point x="-2" y="4"/>
+			<Point x="-1" y="3"/>
+			<Point x="0" y="0"/>
+			<Point x="1" y="-3"/>
+			<Point x="2" y="-4"/>
+			<Point x="4" y="-5"/>
+			<Point x="6" y="-4"/>
+			<Point x="7" y="-3"/>
+			<Point x="8" y="0"/>
+		</Polyline>
+	</Group>
+</Symbol>

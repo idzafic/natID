@@ -1,0 +1,28 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+		<Res id="Properties" tr="Podešenja"/>
+		<Res id="Quit" tr="Kraj"/>	
+		<Res id="pointer" tr="Pokazivač"/>
+		<Res id="pointerTT" tr="Pokazivač/selektor elemenata"/>
+		<Res id="Save" tr="Snimi"/>
+		<Res id="SaveTT" tr="Snimi - sačuvaj sve promjene"/>
+		<Res id="Reload" tr="Učitaj ponovo"/>
+		<Res id="ReloadTT" tr="Učitaj ponovo uz gubitak postojećih promjena"/>
+		<Res id="Delete" tr="Izbriši"/>
+		<Res id="DeleteTT" tr="Izbriši selektirani element"/>
+		<Res id="DelAll" tr="Izbriši sve"/>
+		<Res id="DelAllTT" tr="Izbriši sve elemente"/>
+		<Res id="Insert" tr="Ubaci"/>
+		<Res id="InsertTT" tr="Ubaci iznad selektiranog"/>
+		<Res id="PushBack" tr="Dodaj"/>
+		<Res id="PushBackTT" tr="Dodaj na kraj"/>
+		<Res id="_fdFileType" tr="Tip fajla:"/>
+		<Res id="Ok" tr="Ok"/>
+		<Res id="Cancel" tr="Odustani"/>
+		<Res id="@msgInfo" tr="Informacija"/>
+		<Res id="@msgWarning" tr="Upozorenje"/>
+		<Res id="@msgError" tr="Greška"/>
+		<Res id="@AppMenu" tr="Aplikacioni meni"/>
+	</Translations>
+</DevRes>

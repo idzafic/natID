@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="ASW_WyeConnectionBig" type="NoConnections">
+	<Group name="G0">
+		<Segments lineWidth="1" lineStyle="SOLID" lineColor="#000000" fixLineWidth="true">
+			<Segment x1="4" y1="4" x2="0" y2="0"/>
+			<Segment x1="-4" y1="4" x2="0" y2="0"/>
+			<Segment x1="0" y1="-5" x2="0" y2="0"/>
+		</Segments>
+	</Group>
+</Symbol>

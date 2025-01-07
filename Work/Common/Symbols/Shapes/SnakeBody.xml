@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="SnakeBody" type="NoConnectionsNGroups">
+    <Group name="G0">
+		<FillOval x="-5" y="-5" w="10" h="10" lineWidth="0" lineStyle="Solid" lineColor="Black" fillColor="Green" fixFillColor="true" showLine="true"/>
+		<!--<FillRect x="-5" y="-5" w="10" h="10"   lineWidth="0" lineStyle="Solid" lineColor="Black" fillColor="Green" fixFillColor="true" showLine="true"/>-->
+
+    </Group>
+</Symbol>

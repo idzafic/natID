@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="ASW_OpenWyeConnection" type="NoConnections">
+	<Group name="G0">
+		<Polyline lineWidth="1" lineStyle="SOLID" lineColor="#000000" fixLineWidth="true">
+			<Point x="-2" y="-2"/>
+			<Point x="0" y="3"/>
+			<Point x="3" y="-3"/>
+		</Polyline>
+	</Group>
+</Symbol>

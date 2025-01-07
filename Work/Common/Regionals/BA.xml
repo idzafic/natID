@@ -1,0 +1,29 @@
+<?xml version='1.0'?>
+<Regionals id="bs-Latn-BA">
+	<Numeric decSeparator="," thSeparator="."/>
+	<Date separator="." winShort="dd.mm.YYYY" winLong="dddd d. mmm YYYY" shortDM="dd.mm" shortY2="dd.mm.YY" shortY4="dd.mm.YYYY"/>
+	<Time separator=":" winShort="hh:mm:ss" winLong="hh:mm:ss.u" shortHMM="h:mm" shortHMMSS="h:mm::ss" shortHMMSSu="h::mm::ss.u"/>
+	<Days>
+		<Day name="nedjelja" shortName="ned"/>
+		<Day name="ponedjeljak" shortName="pon"/>
+		<Day name="utorak" shortName="uto"/>
+		<Day name="srijeda" shortName="sri"/>
+		<Day name="četvrtak" shortName="čet"/>
+		<Day name="petak" shortName="pet"/>
+		<Day name="subota" shortName="sub"/>
+	</Days>
+	<Months>
+		<Month name="januar" shortName="jan"/>
+		<Month name="februar" shortName="feb"/>
+		<Month name="mart" shortName="mar"/>
+		<Month name="april" shortName="apr"/>
+		<Month name="maj" shortName="maj"/>
+		<Month name="juni" shortName="jun"/>
+		<Month name="juli" shortName="jul"/>
+		<Month name="august" shortName="aug"/>
+		<Month name="septembar" shortName="sep"/>
+		<Month name="oktobar" shortName="okt"/>
+		<Month name="novembar" shortName="nov"/>
+		<Month name="decembar" shortName="dec"/>
+	</Months>
+</Regionals>

@@ -1,0 +1,26 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="@repPrint" path="Work/Common/Icons/print64_3colors.png"/>
+		<Res id="@repToPDF" path="Work/Common/Icons/saveToPDF64.png"/>
+		<Res id="@repToXML" path = "Work/Common/Icons/saveToXML64.png"/>
+		
+		<Res id="@repZoom11" path="Work/Common/Icons/view1to1_64.png"/>
+		<Res id="@repZoomW" path="Work/Common/Icons/fitToWidth_64.png"/>
+		<Res id="@repZoomH" path="Work/Common/Icons/fitToHeight_64.png"/>
+		
+		<Res id="@repSingle" path="Work/Common/Icons/single_selXL.png"/>
+		<Res id="@repTwo" path="Work/Common/Icons/parallel_selXL.png"/>
+		<Res id="@repThree" path="Work/Common/Icons/three_selXL.png"/>
+		<Res id="@repFour" path = "Work/Common/Icons/four_selXL.png"/>
+		
+		<Res id="parallelSel" path = "Work/Common/Icons/parallel_sel.png"/>		
+		<Res id="threeSel" path = "Work/Common/Icons/three_sel.png"/>		
+		<Res id="fourSel" path="Work/Common/Icons/four_sel.png"/>
+		
+		<Res id="@repGoToFirst" path="Work/Common/Icons/moveFirst_64.png"/>
+		<Res id="@repGoToLast" path="Work/Common/Icons/moveLast_64.png"/>
+	</Images>
+	<Symbols>
+	</Symbols>
+</DevRes>

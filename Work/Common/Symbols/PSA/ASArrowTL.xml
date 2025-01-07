@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="ASArrowTL" type="NoConnections">
+	<Group name="G0">
+		<Line x1="14.72244" y1="8.5" x2="-14.72244" y2="-8.5" lineWidth="1" lineStyle="Solid" lineColor="SysText" fixLineStyle="true"/>
+		<Polyline lineWidth="1" lineStyle="Solid" lineColor="SysText" fixLineStyle="true">
+			<Point x="-7.52628" y="-8.96410"/>
+			<Point x="-14.72244" y="-8.5"/>
+			<Point x="-11.52628" y="-2.03589"/>
+		</Polyline>
+	</Group>
+</Symbol>

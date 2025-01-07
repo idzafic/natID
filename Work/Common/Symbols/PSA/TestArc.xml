@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="Test arc" type="NoConnections">
+	<Group name="G0">
+		<Arc x="0" y="0" r="20" fromAngle="30" toAngle="150" lineWidth="1" lineStyle="Solid" lineColor="SysText"/>
+		<FillArc x="0" y="0" r="20" fromAngle="150" toAngle="270" lineWidth="1" lineStyle="Solid" lineColor="SysText" fillColor="Blue" fixFillColor="true" showLine="true"/>
+		<FillArc x="0" y="0" r="20" fromAngle="270" toAngle="390" fillColor="Green"/>
+	</Group>
+</Symbol>

@@ -1,0 +1,29 @@
+<?xml version='1.0'?>
+<Regionals id="en-US">
+	<Numeric decSeparator="." thSeparator=","/>
+	<Date separator="/" winShort="mm/dd/YYYY" winLong="dddd mmm d YYYY" shortDM="mm/dd" shortY2="mm/dd/YY" shortY4="mm/dd/YYYY"/>
+	<Time separator=":" winShort="hh:mm:ss" winLong="hh:mm:ss.u" shortHMM="h:mm" shortHMMSS="h:mm::ss" shortHMMSSu="h::mm::ss.u"/>
+	<Days>
+		<Day name="sunday" shortName="sun"/>
+		<Day name="mondey" shortName="mon"/>
+		<Day name="tuesday" shortName="tue"/>
+		<Day name="wednesday" shortName="wed"/>
+		<Day name="thursday" shortName="thu"/>
+		<Day name="friday" shortName="fri"/>
+		<Day name="saturday" shortName="sat"/>
+	</Days>
+	<Months>
+		<Month name="january" shortName="jan"/>
+		<Month name="february" shortName="feb"/>
+		<Month name="march" shortName="mar"/>
+		<Month name="april" shortName="apr"/>
+		<Month name="may" shortName="maj"/>
+		<Month name="june" shortName="jun"/>
+		<Month name="july" shortName="jul"/>
+		<Month name="august" shortName="aug"/>
+		<Month name="september" shortName="sep"/>
+		<Month name="october" shortName="oct"/>
+		<Month name="november" shortName="nov"/>
+		<Month name="december" shortName="dec"/>
+	</Months>
+</Regionals>

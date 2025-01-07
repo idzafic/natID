@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="ASCapacitor" type="NoConnections">
+	<Group name="G0">
+		<Lines lineWidth="1" lineStyle="Solid" lineColor="SysText" fixLineWidth="false" fixLineStyle="true">
+			<Line x1="2" y1="-4" x2="2" y2="4"/>
+			<Line x1="-2" y1="-4" x2="-2" y2="4"/>
+			<Line x1="-7" y1="0" x2="-2" y2="0"/>
+			<Line x1="7" y1="0" x2="2" y2="0"/>
+		</Lines>
+	</Group>
+</Symbol>

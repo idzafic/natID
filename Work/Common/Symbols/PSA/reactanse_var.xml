@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="reactance_var" type="OneConnectionOneGroup">
+	<Group name="G0" x="0" y="-20">
+		<Line lineWidth="1" lineStyle="SOLID" lineColor="#000000">
+			<Point x="0" y="-12"/>
+			<Point x="4" y="-11"/>
+			<Point x="6" y="-9"/>
+			<Point x="4" y="-7"/>
+			<Point x="0" y="-6"/>
+			<Point x="4" y="-5"/>
+			<Point x="6" y="-3"/>
+			<Point x="4" y="-1"/>
+			<Point x="0" y="0"/>
+			<Point x="4" y="1"/>
+			<Point x="6" y="3"/>
+			<Point x="4" y="5"/>
+			<Point x="0" y="6"/>
+			<Point x="4" y="7"/>
+			<Point x="6" y="9"/>
+			<Point x="4" y="11"/>
+			<Point x="0" y="12"/>
+		</Line>
+		<Segments lineWidth="1" lineStyle="SOLID" lineColor="#000000">
+			<Segment x1="0" y1="-20" x2="0" y2="-12"/>
+			<Segment x1="0" y1="12" x2="0" y2="20"/>
+			<Segment x1="-7" y1="20" x2="7" y2="20"/>
+			<Segment x1="-5" y1="23" x2="5" y2="23"/>
+			<Segment x1="-2" y1="26" x2="2" y2="26"/>
+			<Segment x1="-9" y1="10" x2="13" y2="-12"/>
+			<Segment x1="12" y1="-9" x2="13" y2="-12"/>
+			<Segment x1="10" y1="-11" x2="13" y2="-12"/>
+		</Segments>
+	</Group>
+</Symbol>

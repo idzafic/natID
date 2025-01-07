@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="ACSC" type="NoConnections">
+	<Group name="SC">
+		<Polyline lineWidth="1" lineStyle="Solid" lineColor="SysText" fixLineStyle="true">
+			<Point x="-0.8" y="-3.5"/>
+			<Point x="-2.4" y="-4.9"/>
+			<Point x="-5.6" y="-4.9"/>
+			<Point x="-7.2" y="-3.5"/>
+			<Point x="-7.2" y="-1.4"/>
+			<Point x="-5.6" y="0"/>
+			<Point x="-2.4" y="0"/>
+			<Point x="-0.8" y="1.4"/>
+			<Point x="-0.8" y="3.5"/>
+			<Point x="-2.4" y="4.9"/>
+			<Point x="-5.6" y="4.9"/>
+			<Point x="-7.2" y="3.5"/>
+		</Polyline>
+		<Polyline lineWidth="1" lineStyle="Solid" lineColor="SysText" fixLineStyle="true">
+			<Point x="7.2" y="-3.5"/>
+			<Point x="5.6" y="-4.9"/>
+			<Point x="2.4" y="-4.9"/>
+			<Point x="0.8" y="-3.5"/>
+			<Point x="0.8" y="3.5"/>
+			<Point x="2.4" y="4.9"/>
+			<Point x="5.6" y="4.9"/>
+			<Point x="7.2" y="3.5"/>
+		</Polyline>
+	</Group>
+</Symbol>

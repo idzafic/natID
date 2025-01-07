@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="pointer" type="NoConnections">
+	<Group name="G0">
+		<Polygon lineWidth="1" lineStyle="Solid" lineColor="SysText">
+			<Point x="2.26795" y="7.92820"/>
+			<Point x="-1.73205" y="1"/>
+			<Point x="-5.19615" y="3"/>
+			<Point x="-6" y="-10.39232"/>
+			<Point x="5.19616" y="-3"/>
+			<Point x="1.73205" y="-1"/>
+			<Point x="5.73205" y="5.92821"/>
+		</Polygon>
+	</Group>
+</Symbol>

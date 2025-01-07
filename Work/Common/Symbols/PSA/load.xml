@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="Load" type="OneConnectionOneGroup">
+	<Group name="G0" x="0" y="0">
+		<Line x1="0" y1="0" x2="8" y2="0"lineWidth="1" lineStyle="Solid" lineColor="SysText"/>
+		<Polygon lineWidth="1" lineStyle="Solid" lineColor="SysText">
+			<Point x="20" y="0"/>
+			<Point x="8" y="6"/>
+			<Point x="8" y="-6"/>
+		</Polygon>
+	</Group>
+</Symbol>

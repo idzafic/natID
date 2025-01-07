@@ -1,0 +1,16 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="@defImg" path="Work/Common/Icons/defaultImg.png"/>
+		<Res id="@msgInfo" path="Work/Common/Icons/Msg/Info64.png"/>
+		<Res id="@msgWarning" path="Work/Common/Icons/Msg/Warning64.png"/>
+		<Res id="@msgError" path="Work/Common/Icons/Msg/Error64.png"/>
+	</Images>
+	<Symbols>
+		<Res id="pointer" path="Work/Common/Symbols/PSA/pointer.xml"/>
+		<Res id="@defSymb" path="Work/Common/Symbols/Shapes/defaultSymbol.xml"/>
+	</Symbols>
+	<Sounds>
+		<Res id="click" path="Work/Common/Sounds/Click.wav"/>
+	</Sounds>
+</DevRes>

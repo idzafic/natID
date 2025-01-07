@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="Disconnector" type="NConnectionsOneGroup">
+	<Connections>
+		<Point x="-15" y="0"/>
+		<Point x="15" y="0"/>
+	</Connections>
+	<Group name="G0">
+		<Lines lineWidth="1" lineStyle="Solid" lineColor="SysText">
+			<Line x1="-20" y1="0" x2="-8" y2="0"/>
+			<Line x1="-8" y1="0" x2="8" y2="-10"/>
+			<Line x1="8" y1="-2" x2="8" y2="2"/>
+			<Line x1="8" y1="0" x2="20" y2="0"/>
+		</Lines>
+	</Group>
+</Symbol>

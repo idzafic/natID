@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbol name="BezWithCubic" type="NoConnectionsOneGroup" x="107" y="5" w="75" h="90" calibrate="true">
+	<Group name="G0" x="0" y="0">
+		<Bezier lineWidth="0" lineStyle="Solid" lineColor="SysText" fillColor="SysText">
+			<!-- x,y are final points, x1,y1: first control point, x2,y2: second control point -->
+			<MoveTo x="110" y="10"/>
+			<CubicTo x="115" y="10" x1="110" y1="10" x2="113" y2="10"/>
+			<LineTo x="175" y="10"/>
+			<CubicTo x="180" y="12" x1="177" y1="10" x2="180" y2="10"/>
+			<LineTo x="180" y="15"/>
+			<LineTo x="170" y="15"/>
+			<LineTo x="170" y="85"/>
+			<CubicTo x="165" y="90" x1="170" y1="87" x2="168" y2="90"/>
+			<LineTo x="160" y="90"/>
+			<LineTo x="160" y="15"/>
+			<LineTo x="130" y="15"/>
+			<LineTo x="130" y="85"/>
+			<CubicTo x="125" y="90" x1="130" y1="87" x2="128" y2="90"/>
+			<LineTo x="120" y="90"/>
+			<LineTo x="120" y="15"/>
+			<LineTo x="110" y="15"/>
+			<LineTo x="110" y="12"/>
+			<CubicTo x="110" y="10" x1="110" y1="10" x2="110" y2="10" close="true"/>
+		</Bezier>
+	</Group>
+</Symbol>
