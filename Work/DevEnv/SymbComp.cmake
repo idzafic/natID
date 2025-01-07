@@ -1,0 +1,16 @@
+#Symbolic Computation lib
+
+if (WIN32)
+    set(SYMBCOMP_LIB_DEBUG "${MY_LIB}/symbSolversD.lib")
+    set(SYMBCOMP_LIB_RELEASE "${MY_LIB}/symbSolvers.lib")
+	if( CMAKE_SIZEOF_VOID_P EQUAL 4 )
+		set(SYMBCOMP_LIB_DEBUG "${MY_LIB}/symbSolvers32D.lib")
+		set(SYMBCOMP_LIB_RELEASE "${MY_LIB}/symbSolvers32.lib")
+	endif()
+elseif (APPLE)
+    set(SYMBCOMP_LIB_DEBUG "${MY_LIB}/symbSolversD.dylib")
+    set(SYMBCOMP_LIB_RELEASE "${MY_LIB}/symbSolvers.dylib")
+else ()
+    set(SYMBCOMP_LIB_DEBUG "${MY_LIB}/symbSolversD.so")
+    set(SYMBCOMP_LIB_RELEASE "${MY_LIB}/symbSolvers.so")
+endif()

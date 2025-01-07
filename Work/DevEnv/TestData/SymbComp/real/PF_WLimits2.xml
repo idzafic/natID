@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model type="NR" domain="real" name="PF">
+	<Vars>
+		<Var name="phi_2" val="phi_1"/> <!-- Variable name and its initial value (optional)-->
+		<Var name="v_2" val="1"/>
+		<Var name="phi_3" val="phi_1"/>
+		<Var name="v_3" val="1"/>
+	</Vars>
+	<Params>
+		<Param name="phi_1" val="atg2(0, -1)"/> <!-- Parameter name and its value-->
+		<Param name="cGen2Reg" val="true"/>  <!-- initially generator on node 2 is in regulation mode -->
+		
+		<Param name="v_1" val="1"/>
+		
+		<Param name="aY" val="32.8797974610715"/> 
+		<Param name="aY11" val="aY"/> 
+		<Param name="aY21" val="aY"/>
+		<Param name="aY22" val="65.7595949221429"/> 
+		<Param name="aY23" val="aY"/>
+		<Param name="aY32" val="aY"/>
+		<Param name="aY33" val="aY"/>
+		
+		<Param name="thetaDiag" val="-1.40564764938027"/> 
+		<Param name="thetaOffDiag" val="1.73594500420952"/> 
+		<Param name="theta11" val="thetaDiag"/> 
+		<Param name="theta21" val="thetaOffDiag"/> 
+		<Param name="theta22" val="thetaDiag"/> 
+		<Param name="theta23" val="thetaOffDiag"/> 
+		<Param name="theta32" val="thetaOffDiag"/> 
+		<Param name="theta33" val="thetaDiag"/>
+		
+		<Param name="P2_inj" val="0.2"/>
+		<Param name="Q2_inj" val="0"/>
+		<Param name="Q2_inj_min" val="-1"/>
+		<Param name="Q2_inj_max" val="2.5"/>
+		<Param name="V2_sp" val="1.01"/>
+		
+		<Param name="P3_inj" val="-2"/>
+		<Param name="Q3_inj" val="-1"/>
+		
+		<Param name="angleS3" val="0"/>
+		<Param name="testDiscret1" val="0"/>
+		<Param name="testDiscret2" val="0"/>
+	</Params>
+	<NLEqs>
+		<!-- node 2 (PV node)-->
+		<Eq fx="v_2^2*aY22*cos(theta22) + v_2*(aY21*v_1*cos(phi_2-theta21-phi_1) + aY23*v_3*cos(phi_2-theta23-phi_3))-P2_inj"/>
+		<Eq cond="cGen2Reg">
+			<Then fx="v_2-V2_sp"/>  <!-- if node is PV -->				
+			<Else fx="-v_2^2*aY22*sin(theta22) + v_2*(aY21*v_1*sin(phi_2-theta21-phi_1) + aY23*v_3*sin(phi_2-theta23-phi_3))-Q2_inj"/>
+		</Eq>		
+		<!-- node 3 -->
+		<Eq fx="v_3^2*aY33*cos(theta33) + v_3*(aY32*v_2*cos(phi_3-theta32-phi_2)) - P3_inj"/>
+		<Eq fx="-v_3^2*aY33*sin(theta33) + v_3*(aY32*v_2*sin(phi_3-theta32-phi_2)) - Q3_inj"/>
+	</NLEqs>
+	
+	<Limits>
+		<Group name="Gen2">
+			<Eq cond="cGen2Reg"> <!-- PV generator on node 2 -->
+				<Then>
+					<Eq fx="Q2_inj = -v_2^2*aY22*sin(theta22) + v_2*(aY21*v_1*sin(phi_2-theta21-phi_1) + aY23*v_3*sin(phi_2-theta23-phi_3))"/>
+					<Eq cond="Q2_inj <= Q2_inj_min">
+						<Then signal="LowLimit">
+							<Eq fx="cGen2Reg = false"/> <!-- disable voltage regulation on gen 2 -->
+							<Eq fx="Q2_inj = Q2_inj_min"/> <!-- set generator to PQ with given minQ -->
+						</Then>
+						<Else>
+							<Eq cond="Q2_inj >= Q2_inj_max">
+								<Then signal="HighLimit">
+									<Eq fx="cGen2Reg = false"/> <!-- disable voltage regulation on gen 2 -->
+									<Eq fx="Q2_inj = Q2_inj_max"/> <!-- set generator to PQ with maxQ -->
+								</Then>
+							</Eq>
+						</Else>					
+					</Eq>
+				</Then>
+			</Eq>
+		</Group>
+	</Limits>
+	
+	<PostProc>
+		<Eq fx="Q2_inj = -v_2^2*aY22*sin(theta22) + v_2*(aY21*v_1*sin(phi_2-theta21-phi_1) + aY23*v_3*sin(phi_2-theta23-phi_3))"/>
+		<Eq fx="angleS3 = 10+atg2(Q3_inj, P3_inj)"/>
+		<Eq fx="testDiscret1 = disc(1.225, 1, 0.1)"/>
+		<Eq fx="testDiscret2 = disc(0.825, 1, 0.1)"/>
+	</PostProc>
+</Model>
+
+<!-- solution 
+
+-->

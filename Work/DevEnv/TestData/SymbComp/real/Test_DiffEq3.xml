@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model type="DAE" domain="real" method="RK2" name="y(t)=c1*e^(3*t) + c2*e^(-t)*sin(5*t) + c3*e^(-t)*cos(5*t)+dc">
+	<Vars>
+		<Var name="y" val="y_0" out="true"/> 
+		<Var name="x1" val="y_prime_0"/> 
+		<Var name="x2" val="y_second_0"/> 
+	</Vars>
+	<Params>  
+		<Param name="c1" val="10"/>
+		<Param name="c2" val="15"/>
+		<Param name="c3" val="3"/> 
+		<Param name="dc" val="5"/> 
+		<Param name="k" val="0.5"/> 
+		<Param name="thau" val="1"/> 
+		<Param name="f" val="5"/>
+		<Param name="omega" val="2*pi*f"/>
+		<Param name="y_0" val="c1+c3+dc"/>
+		<Param name="y_prime_0" val="-k*c1+omega*c2-thau*c3"/>
+		<Param name="y_second_0" val="k^2*c1-2*thau*omega*c2+(thau^2-omega^2)*c3"/>
+		<Param name="t" val="0"/>
+		<Param name="y_exact" val="c1*e^(-k*t) + c2*e^(-thau*t)*sin(omega*t) + c3*e^(-thau*t)*cos(omega*t)+dc" out="true"/>
+		<!--Param name="y_exact" val="y_0" out="true"/-->
+	</Params>
+	<ODEqs>
+		<!-- y''' + (2*thau+k)y'' + (omega^2+thau^2+2*thau*k)y' +k(omega^2+thau^2)(y-dc)=0 -->
+		<Eq fx="y' = x1"/> 
+		<Eq fx="x1' = x2"/> 		
+		<Eq fx="x2' = -(2*thau+k)*x2-(omega^2+thau^2+2*thau*k)*x1-k*(omega^2+thau^2)*(y-dc)"/>	
+	</ODEqs>
+	<PostProc>
+		<Eq fx="y_exact = c1*e^(-k*t) + c2*e^(-thau*t)*sin(omega*t) + c3*e^(-thau*t)*cos(omega*t)+dc"/>
+	</PostProc>
+</Model>
+
+<!-- Nastaviti od createStateSpace -->

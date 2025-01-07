@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model type="DAE" domain="real" method="RK2" name="y(t)=A*cos(omega*t)+B*sin(omega*t)">
+	<Vars>
+		<Var name="x" val="y_prime_0"/> 
+		<Var name="y" val="y_0" out="true"/> 
+	</Vars>
+	<Params>  
+		<Param name="A" val="3"/>
+		<Param name="B" val="5"/> 
+		<Param name="f" val="1"/> 
+		<Param name="omega" val="2*pi*f"/>
+		<Param name="y_0" val="A"/>
+		<Param name="y_prime_0" val="B*omega"/>
+		<Param name="maxVal" val="sqrt(A^2+B^2)" out="true"/>
+		<Param name="minVal" val="-maxVal" out="true"/>
+		<Param name="t" val="0"/>
+		<Param name="y_exact" val="A*cos(omega*t)+B*sin(omega*t)" out="true"/>
+	</Params>
+	<ODEqs>
+		<Eq fx="y' = x"/> 		
+		<Eq fx="x' = -omega^2 * y"/>	
+	</ODEqs>
+	<PostProc>
+		<Eq fx="y_exact = A*cos(omega*t)+B*sin(omega*t)"/>
+	</PostProc>
+</Model>
+
+<!-- Nastaviti od createStateSpace -->

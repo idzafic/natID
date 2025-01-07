@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model type="DAE" domain="real" method="RK2" name="y(t)=c1*e^(3*t) + c2*e^(-t)*sin(5*t) + c3*e^(-t)*cos(5*t)+dc">
+	<Vars>
+		<Var name="y" val="y_0" out="true"/> 
+		<Var name="x1" val="y_prime_0"/> 
+		<Var name="x2" val="y_second_0"/> 
+	</Vars>
+	<Params>  
+		<Param name="c1" val="10"/>
+		<Param name="c2" val="15"/>
+		<Param name="c3" val="3"/> 
+		<Param name="dc" val="5"/> 
+		<Param name="y_0" val="c1+c3+dc"/>
+		<Param name="y_prime_0" val="-3*c1+5*c2-c3"/>
+		<Param name="y_second_0" val="9*c1-10*c2-24*c3"/>
+		<Param name="y_exact" val="y_0" out="true"/>
+	</Params>
+	<ODEqs>
+		<!-- y''' + 5y'' + 32y' +78(y-dc)=0 -->
+		<Eq fx="y' = x1"/> 
+		<Eq fx="x1' = x2"/> 		
+		<Eq fx="x2' = -5*x2-32*x1-78*(y-dc)"/>	
+	</ODEqs>
+	<PostProc>
+		<Eq fx="y_exact = c1*e^(-3*t) + c2*e^(-t)*sin(5*t) + c3*e^(-t)*cos(5*t)+dc"/>
+	</PostProc>
+</Model>
+
+<!-- Nastaviti od createStateSpace -->

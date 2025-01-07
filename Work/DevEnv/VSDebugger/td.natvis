@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+  <Type Name="td::StringBase&lt;char,*,4,*&gt;">
+    <DisplayString Condition="buffer == 0">{{len=0, refs=0, txt=""}}</DisplayString>
+    <DisplayString>{{len={*((unsigned int*)(buffer)) &amp; 0x0FFFFFFF}, refs={*((unsigned int*)(buffer))&gt;&gt;28}, txt={(char*)buffer+4, s8}}}</DisplayString>
+    <StringView>(char*)buffer+4,s8</StringView>
+    <Expand>
+      <Item Name="len">*((unsigned int *)(buffer)) &amp; 0x0FFFFFFF</Item>
+      <Item Name="refs">*((unsigned int *)(buffer)) &gt;&gt; 28</Item>
+      <Item Name="txt">(char*)buffer+4, s8</Item>
+    </Expand>
+  </Type>
+  <Type Name="td::StringBase&lt;wchar_t,*,4,*&gt;">
+    <DisplayString Condition="buffer == 0">{{len=0, refs=0, txt=""}}</DisplayString>
+    <DisplayString>{{len={*((int*)(buffer)) &amp; 0x0FFFFFFF}, unitLen={(*((int*)(buffer)) &amp; 0x0FFFFFFF)/2}, refs={*((int*)(buffer)) &gt;&gt; 28}, txt={(wchar_t*)(((char*)buffer)+4), su}}}</DisplayString>
+    <StringView>(wchar_t*)((char*)buffer+4),su</StringView>
+    <Expand>
+      <Item Name="len">*((int*)(buffer)) &amp; 0x0FFFFFFF</Item>
+      <Item Name="unitLen">(*((int*)(buffer)) &amp; 0x0FFFFFFF)/2</Item>
+      <Item Name="refs">*((int*)(buffer))&gt;&gt;28</Item>
+      <Item Name="txt">(wchar_t*)(((char*)buffer)+4), su</Item>
+    </Expand>
+  </Type>
+  <Type Name="td::StringBase&lt;char,*,2,*&gt;">
+    <DisplayString Condition="buffer == 0">{{len=0, txt=""}}</DisplayString>
+    <DisplayString>{{length={*((WORD*)(buffer))}, txt={(char*)buffer+2, s8}}}</DisplayString>
+    <StringView>(char*)buffer+2,s8</StringView>
+    <Expand>
+      <Item Name="length">*((WORD*)(buffer))</Item>
+      <Item Name="txt">(char*)buffer+2, s8</Item>
+    </Expand>
+  </Type>
+  <Type Name="td::StringBase&lt;wchar_t,*,2,*&gt;">
+    <DisplayString Condition="buffer == 0">{{len=0, txt=""}}</DisplayString>
+    <DisplayString>{{len={*((WORD*)(buffer))}, txt={(wchar_t*)(((char*)buffer)+2), su}}}</DisplayString>
+    <StringView>(wchar_t*)((char*)buffer+2),su</StringView>
+    <Expand>
+      <Item Name="length">*((WORD*)(buffer))</Item>
+      <Item Name="txt">(wchar_t*)(((char*)buffer)+2), su</Item>
+    </Expand>
+  </Type>
+  <Type Name="td::StringBase&lt;char,*,0,*&gt;">
+    <DisplayString Condition="buffer == 0">{{len=0, txt=""}}</DisplayString>
+    <DisplayString>{{len={strlen(buffer)}, txt={(char*)buffer, s8}}}</DisplayString>
+    <StringView>(char*)buffer,s8</StringView>
+    <Expand>
+      <Item Name="length">strlen(buffer)</Item>
+      <Item Name="txt">(char*)buffer+4, s8</Item>
+    </Expand>
+  </Type>
+  <Type Name="td::StringBase&lt;wchar_t,*,0,*&gt;">
+    <DisplayString Condition="buffer == 0">{{len=0, txt=""}}</DisplayString>
+    <DisplayString>{{len={wstrlen(buffer)}, txt={(wchar_t*)buffer, su}}}</DisplayString>
+    <StringView>(wchar_t*)buffer,su</StringView>
+    <Expand>
+      <Item Name="length">wstrlen(buffer)</Item>
+      <Item Name="txt">(wchar_t*)buffer, su</Item>
+    </Expand>
+  </Type>
+  
+  <!-- SmallChFix -->
+  <Type Name="td::SmallChFix&lt;1&gt;">    
+    <DisplayString>{{type="ch7&lt;1&gt;", chVal={_chVal, s8}}}</DisplayString>    
+  </Type>
+  <Type Name="td::SmallChFix&lt;2&gt;">    
+    <DisplayString>{{type="ch7&lt;2&gt;", chVal={_chVal, s8}}}</DisplayString>    
+  </Type>
+  <Type Name="td::SmallChFix&lt;3&gt;">    
+    <DisplayString>{{type="ch7&lt;3&gt;", chVal={_chVal, s8}}}</DisplayString>    
+  </Type>
+  <Type Name="td::SmallChFix&lt;4&gt;">    
+    <DisplayString>{{type="ch&lt;4&gt;", chVal={_chVal, s8}}}</DisplayString>    
+  </Type>
+  <Type Name="td::SmallChFix&lt;5&gt;">    
+    <DisplayString>{{type="ch&lt;5&gt;", chVal={_chVal, s8}}}</DisplayString>    
+  </Type>
+  <Type Name="td::SmallChFix&lt;6&gt;">    
+    <DisplayString>{{type="ch7&lt;6&gt;", chVal={_chVal, s8}}}</DisplayString>    
+  </Type>
+  <Type Name="td::SmallChFix&lt;7&gt;">    
+    <DisplayString>{{type="ch7&lt;7&gt;", chVal={_chVal, s8}}}</DisplayString>    
+  </Type>
+  
+  <!--Date and Time-->
+  <Type Name="td::Date">
+    <DisplayString Condition="_date == 0">{{date="na(0.0.0)"}}</DisplayString>
+    <DisplayString>{{date={_date &amp; 0x0000001F}.{(0x000001E0 &amp; _date) &gt;&gt; 5}.{(0x7FFFFE00 &amp; _date) &gt;&gt; 9}}}</DisplayString>
+  </Type>
+  <Type Name="td::Time">
+    <DisplayString Condition="_time == 0">{{time="na(0.0.0)"}}</DisplayString>
+    <DisplayString>{{time={_time / (60*60*10000)}:{(_time % (60 * 60 * 10000))/(60 * 10000)}:{(_time % (60 * 10000))/10000}.{ _time % 10000}}}</DisplayString>
+  </Type>
+  <Type Name="td::DateTime">
+    <DisplayString Condition="_date == 0">{{date="null", time={_time / (60*60*10000)}:{(_time % (60 * 60 * 10000))/(60 * 10000)}:{(_time % (60 * 10000))/10000}.{ _time % 10000}}}</DisplayString>
+    <DisplayString>{{date={_date &amp; 0x0000001F}.{(0x000001E0 &amp; _date) &gt;&gt; 5}.{(0x7FFFFE00 &amp; _date) &gt;&gt; 9}, time={_time / (60*60*10000)}:{(_time % (60 * 60 * 10000))/(60 * 10000)}:{(_time % (60 * 10000))/10000}.{ _time % 10000}}}</DisplayString>
+  </Type>
+  <!--Decimal-->
+  <Type Name="td::Decimal&lt;*,0&gt;">
+    <DisplayString>{{val={_value}}}</DisplayString>
+  </Type>
+  <Type Name="td::Decimal&lt;*,1&gt;">
+    <DisplayString>{{val={_value/10}.{_value%10}}}</DisplayString>
+  </Type>
+  <Type Name="td::Decimal&lt;*,2&gt;">
+    <DisplayString>{{val={_value/100}.{_value%100}}}</DisplayString>
+  </Type>
+  <Type Name="td::Decimal&lt;*,3&gt;">
+    <DisplayString>{{val={_value/1000}.{_value%1000}}}</DisplayString>
+  </Type>
+  <Type Name="td::Decimal&lt;*,4&gt;">
+    <DisplayString>{{val={_value/10000}.{_value%10000}}}</DisplayString>
+  </Type>
+  
+  <!--Variant-->
+  <Type Name="td::Variant">    
+	<DisplayString Condition="(int)(_flags &amp; 0x00010000) == 0x00010000">{{type={(int) (_flags &amp; 0x000000FF)}, data=null, flags={_flags}}}</DisplayString>
+	<DisplayString Condition="(int)(_flags &amp; 0x000000FF) == 0">{{type="TD_NONE", val={_lu8Val}, flags={_flags}}}</DisplayString>
+    <DisplayString Condition="(int)(_flags &amp; 0x000000FF) == 1">{{type="bool", val={(_chVal[0]=='Y') ? true : false}, flags={_flags}}}</DisplayString>
+    <DisplayString Condition="(int)(_flags &amp; 0x000000FF) == 2">{{type="BYTE", val={_byteVal}, flags={_flags}}}</DisplayString>
+    <DisplayString Condition="(int)(_flags &amp; 0x000000FF) == 3">{{type="WORD", val={_wordVal}, flags={_flags}}}</DisplayString>
+    <DisplayString Condition="(int)(_flags &amp; 0x000000FF) == 4">{{type="INT2", val={_i2Val}, flags={_flags}}}</DisplayString>
+    <DisplayString Condition="(int)(_flags &amp; 0x000000FF) == 5">{{type="UINT4", val={_u4Val}, flags={_flags}}}</DisplayString>
+	<DisplayString Condition="(int)(_flags &amp; 0x000000FF) == 6">{{type="INT4", val={_i4Val}, flags={_flags}}}</DisplayString>	
+    <DisplayString Condition="(int)(_flags &amp; 0x000000FF) == 7">{{type="LINT8", val={_li8Val}, flags={_flags}}}</DisplayString>
+    <DisplayString Condition="(int)(_flags &amp; 0x000000FF) == 8">{{type="LUINT8", val={_lu8Val}, flags={_flags}}}</DisplayString>
+    <DisplayString Condition="(int)(_flags &amp; 0x000000FF) == 9">{{type="float", val={_r4Val}, flags={_flags}}}</DisplayString>
+    <DisplayString Condition="(int)(_flags &amp; 0x000000FF) == 10">{{type="double", val={_r8Val}, flags={_flags}}}</DisplayString>
+    <DisplayString Condition="(int)(_flags &amp; 0x000000FF) == 11">{{type="String", len={*((int*)(_strVal)) &amp; 0x0FFFFFFF}, refs={*((int *)(_strVal)) &gt;&gt; 28}, txt={(char*)_strVal+4, s8}, dbLen={ _flags / 4294967296}, dbType={ (_flags &amp; 0x0000FF00) / 256}}}</DisplayString>
+    <DisplayString Condition="(int)(_flags &amp; 0x000000FF) == 15">{{type="Date", val={_dateVal &amp; 0x0000001F}.{(0x000001E0 &amp; _dateVal) &gt;&gt; 5}.{(0x7FFFFE00 &amp; _dateVal) &gt;&gt; 9}, flags={_flags}}}</DisplayString>
+    <DisplayString Condition="(int)(_flags &amp; 0x000000FF) == 16">{{type="Time", val={_timeVal / (60*60*10000)}:{(_timeVal % (60 * 60 * 10000))/(60 * 10000)}:{(_timeVal % (60 * 10000))/10000}.{ _timeVal % 10000}, flags={_flags}}}</DisplayString>
+    <DisplayString Condition="(int)(_flags &amp; 0x000000FF) == 17">{{type="DateTime", date={(_dtVal &gt;&gt; 32) &amp; 0x0000001F}.{(0x000001E0 &amp; (_dtVal &gt;&gt; 32)) &gt;&gt; 5}.{(0x7FFFFE00 &amp; (_dtVal &gt;&gt; 32)) &gt;&gt; 9}, time={(_dtVal &amp; 0x00000000FFFFFFFF) / (60*60*10000)}:{((_dtVal &amp; 0x00000000FFFFFFFF) % (60 * 60 * 10000))/(60 * 10000)}:{((_dtVal &amp; 0x00000000FFFFFFFF) % (60 * 10000))/10000}.{ (_dtVal &amp; 0x00000000FFFFFFFF) % 10000}, flags={_flags}}}</DisplayString>
+    <DisplayString Condition="(int)(_flags &amp; 0x000000FF) == 18">{{type="Decimal0", val={_decVal}, flags={_flags}}}</DisplayString>
+    <DisplayString Condition="(int)(_flags &amp; 0x000000FF) == 19">{{type="Decimal1", val={_decVal/10}.{_decVal%10}, flags={_flags}}}</DisplayString>
+    <DisplayString Condition="(int)(_flags &amp; 0x000000FF) == 20">{{type="Decimal2", val={_decVal/100}.{_decVal%100}, flags={_flags}}}</DisplayString>
+    <DisplayString Condition="(int)(_flags &amp; 0x000000FF) == 21">{{type="Decimal3", val={_decVal/1000}.{_decVal%1000}, flags={_flags}}}</DisplayString>
+    <DisplayString Condition="(int)(_flags &amp; 0x000000FF) == 22">{{type="Decimal4", val={_decVal/10000}.{_decVal%10000}, flags={_flags}}}</DisplayString>
+	<DisplayString Condition="(int)(_flags &amp; 0x000000FF) == 27">{{type="ch7", val={_chVal, s8}, dbLen={ _flags/ 4294967296}, dbType={ (_flags &amp; 0x0000FF00) / 256}, flags={_flags}}}</DisplayString>	
+    <DisplayString Condition="(int)(_flags &amp; 0x000000FF) == 35">{{type="SmallDecimal0", val={_smallDecVal}, flags={_flags}}}</DisplayString>
+    <DisplayString Condition="(int)(_flags &amp; 0x000000FF) == 36">{{type="SmallDecimal1", val={_smallDecVal/10}.{_smallDecVal%10}, flags={_flags}}}</DisplayString>
+    <DisplayString Condition="(int)(_flags &amp; 0x000000FF) == 37">{{type="SmallDecimal2", val={_smallDecVal/100}.{_smallDecVal%100}, flags={_flags}}}</DisplayString>
+    <DisplayString Condition="(int)(_flags &amp; 0x000000FF) == 38">{{type="SmallDecimal3", val={_smallDecVal/1000}.{_smallDecVal%1000}, flags={_flags}}}</DisplayString>
+    <DisplayString Condition="(int)(_flags &amp; 0x000000FF) == 39">{{type="SmallDecimal4", val={_smallDecVal/10000}.{_smallDecVal%10000}, flags={_flags}}}</DisplayString>
+	<StringView>(char*)_strVal+4,s8</StringView>
+    <Expand>
+      <Item Name="len">*((int *)(_strVal)) &amp; 0x0FFFFFFF</Item>
+      <Item Name="refs">*((int *)(_strVal)) &gt;&gt; 28</Item>
+      <Item Name="txt">(char*)_strVal+4, s8</Item>
+    </Expand>	
+  </Type>
+  
+   <!--SafeFullVector-->
+	<Type Name="cnt::SafeFullVector&lt;*,*&gt;">
+		<DisplayString>{{size={_size}}}</DisplayString>
+		<Expand>
+			<Item Name="[size]">_size</Item>        
+			<ArrayItems>
+				<Size>_size</Size>
+				<ValuePointer>_data</ValuePointer>
+			</ArrayItems>
+		</Expand>
+	</Type>
+	
+	<Type Name="cnt::PushBackVector&lt;*,*&gt;">
+		<DisplayString>{{size={_top-_data},capacity={_size}}}</DisplayString>
+		<Expand>
+			<Item Name="[size]">_top-_data</Item>
+			<Item Name="[capacity]">_size</Item>  			
+			<ArrayItems>
+				<Size>_top-_data</Size>
+				<ValuePointer>_data</ValuePointer>
+			</ArrayItems>
+		</Expand>
+	</Type>	
+</AutoVisualizer>

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Model type="NR" domain="cmplx" name="CmplxDemo">
+	<Vars conj="false">
+		<Var name="x" val="e+1i*e"/> <!-- Variable name and initial value (optional) -->
+		<Var name="y" val="0"/> <!-- Variable name and initial value (optional) -->
+	</Vars>
+	<Params>
+		<Param name="a" val="2e-6+3e-7i"/> <!-- Test parsing cmplx number -->
+		<Param name="b" val="-0.5-0.2i"/> <!-- Test parsing cmplx number -->
+		<Param name="c" val="b-0.5-0.2i"/> <!-- Test parsing cmplx number -->
+		<Param name="d" val="-2i*b"/> <!-- Test parsing cmplx number -->
+		<!-- e is reserved for Euler number -->
+		<Param name="ce" val="2"/> <!-- Test parsing cmplx number -->
+		<Param name="f" val="10-2i*b"/> <!-- Test parsing cmplx number -->
+
+	</Params>
+	<NLEqs>
+		<Eq fx="x+y=3+3i"/> 		<!-- Second nonlinear equaiton of the model -->	
+		<Eq fx="x*y=4i"/> 	<!-- First nonlinear equaiton of the model -->
+		<!-- Solution: x=0.6686 y=1.97162		-->
+	</NLEqs>
+</Model>

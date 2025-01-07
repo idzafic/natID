@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Model type="NR" domain="real" name="Demo">
+	<Vars>
+		<Var name="x" val="sin(pi/2)"/> 
+		<Var name="y" val="atg2(2*k, 2*sin(3*pi/2))"/> 
+	</Vars>
+	<Params>
+		<Param name="k" val="1"/>
+		<Param name="n" val="1"/> 
+		<Param name="l1" val="false"/> 
+		<Param name="l2" val="true"/> 
+		<Param name="x_deg"/> <!-- will be calculated in PreProc -->
+		<Param name="y_deg"/>  
+		<Param name="allNeg"/>
+		<Param name="allNonNeg"/>
+		<Param name="oneNonNegOneNeg"/>
+		<Param name="atLeastOneNeg"/>
+		<Param name="atLeastOnePos"/>
+		<Param name="l2AndNotl1"/>
+		<Param name="l1XorNotl2"/>
+		<Param name="notL1OrNotl2"/>
+		<Param name="l1orNotl2"/>
+		<Param name="not_l1Andl2"/>
+	</Params>
+	<PreProc>
+		<Eq fx="x_deg = x*180/pi"/>
+		<Eq fx="y_deg = y*180/pi"/>
+	</PreProc>
+	<NLEqs>
+		<Eq fx="x+y=5"/> 	
+		<Eq fx="x-y=1"/>
+	</NLEqs>
+	<PostProc>
+		<Eq cond="not(l1 and l2)">
+			<Then fx="not_l1Andl2 = true"/>
+			<Else fx="not_l1Andl2 = false"/>
+		</Eq>
+		<Eq cond="not l1 or not l2">
+			<Then fx="notL1OrNotl2 = true"/>
+			<Else fx="notL1OrNotl2 = false"/>
+		</Eq>
+		
+		<Eq cond="l1 or not l2">
+			<Then fx="l1orNotl2 = true"/>
+			<Else fx="l1orNotl2 = false"/>
+		</Eq>
+		
+		<Eq cond="l1 xor not l2">
+			<Then fx="l1XorNotl2 = true"/>
+			<Else fx="l1XorNotl2 = false"/>
+		</Eq>
+		
+		<Eq cond="x>=0 xor y >= 0">
+			<Then fx="oneNonNegOneNeg = true"/>
+			<Else fx="oneNonNegOneNeg = false"/>
+		</Eq>
+		
+		<Eq cond="x<0 and y < 0">
+			<Then fx="allNeg = true"/>
+			<Else fx="allNeg = false"/>
+		</Eq>
+		<Eq cond="x>=0 and y >= 0">
+			<Then fx="allNonNeg = true"/>
+			<Else fx="allNonNeg = false"/>
+		</Eq>
+		
+		<Eq cond="x<0 or y < 0">
+			<Then fx="atLeastOneNeg = true"/>
+			<Else fx="atLeastOneNeg = false"/>
+		</Eq>
+		
+		<Eq cond="x>0 or y > 0">
+			<Then fx="atLeastOnePos = true"/>
+			<Else fx="atLeastOnePos = false"/>
+		</Eq>
+	</PostProc>
+	
+</Model>

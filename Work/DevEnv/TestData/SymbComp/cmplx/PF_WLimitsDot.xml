@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model type="NR" domain="cmplx" name="PFWithRegulatingGeneratorAndItsLimits">
+	<Vars conj="true">
+		<Var name="v2" val="v1"/>
+		<Var name="v3" val="v1"/>
+	</Vars>
+	<Params>
+		<Param name="cGen2Reg" val="true"/>  <!-- initially generator on node 2 is in voltage regulation mode -->
+		
+		<Param name="v1" val="1.01*e^(1i*pi/3)"/>
+		<Param name="z12" val="0.005+0.03i"/> 
+		<Param name="z23" val="0.005+0.03i"/> 
+		 
+		<Param name="y21" val="1/z12"/> 
+		<Param name="y23" val="1/z23"/> 
+		
+		<Param name="y22" val="y21+y23"/> 
+		<Param name="y33" val="y23"/> 
+		
+		<Param name="S2_inj" val="0.2+0i"/>
+		<Param name="S3_inj" val="-2-1i"/>
+		
+		<Param name="Q2_limits" val="-1+1.3i"/> <!--- real part is min and imag part is max linit -->
+		<Param name="V2_sp" val="1.01"/>
+	</Params>
+	<!-- Start of outer loop -->
+	<!-- Start of inner Loop -->
+	<NLEqs>
+		<!-- node 2 (PV node)-->
+		<!-- Sinj2 + conj(Sinj2) = 2*P2_inj -->
+		<Eq fx="v2*conj(y22*v2-y21*v1-y23*v3) + conj(v2)*(y22*v2-y21*v1-y23*v3)=2*real(S2_inj)"/>
+		<Eq cond="cGen2Reg">
+			<Then fx="v2*conj(v2)=V2_sp^2"/>  <!-- if node is PV -->				
+			<Else fx="v2*conj(y22*v2-y21*v1-y23*v3) - conj(v2)*(y22*v2-y21*v1-y23*v3)=2i*imag(S2_inj)"/> <!-- Sinj2-conj(Sinj2)=2i*Q2_inj -->
+		</Eq>		
+		<!-- node 3 -->
+		<Eq fx="v3*conj(y33*v3-y23*v2) = S3_inj"/>
+		<Eq fx="conj(v3)*(y33*v3-y23*v2) = conj(S3_inj)"/>
+	</NLEqs>
+	<!-- End of inner Loop -->
+	<Limits>
+		<Group name="Gen2">
+			<Eq cond="cGen2Reg"> <!-- PV generator on node 2 -->
+				<Then>
+					<Eq fx="S2_inj.imag = imag(v2*conj(y22*v2-y21*v1-y23*v3))"/>
+					<Eq cond="imag(S2_inj) <= real(Q2_limits)"> <!-- check against min limit -->
+						<Then signal="LowLimit">
+							<Eq fx="cGen2Reg = false"/> <!-- disable voltage regulation on gen 2 -->
+							<Eq fx="S2_inj.imag = real(Q2_limits)"/> <!-- set generator to PQ with given minQ -->
+						</Then>
+						<Else>
+							<Eq cond="imag(S2_inj) >= imag(Q2_limits)"> <!-- check against max limit -->
+								<Then signal="HighLimit">
+									<Eq fx="cGen2Reg = false"/> <!-- disable voltage regulation on gen 2 -->
+									<Eq fx="S2_inj.imag = imag(Q2_limits)"/> <!-- set generator to PQ with maxQ -->
+								</Then>
+							</Eq>
+						</Else>					
+					</Eq>
+				</Then>
+			</Eq>
+		</Group>
+	</Limits>
+	<!-- End of outer loop -->
+	
+	<PostProc>
+		<Eq fx="S2_inj.imag = imag(v2*conj(y22*v2-y21*v1-y23*v3))"/>
+	</PostProc>
+</Model>
+
+<!-- solution 
+
+-->

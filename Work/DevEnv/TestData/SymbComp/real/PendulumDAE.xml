@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model type="DAE" domain="real" method="Trapezoidal" name="PendulumModelUsingDAE">
+	<Vars out="true">
+		<Var name="x" val="0.6"/> <!-- Variable name and initial value (optional) -->
+		<Var name="v_x" val="0"/> <!-- Variable name and initial value (optional) -->
+		<Var name="y" val="sqrt(l^2-x^2)"/> <!-- "0.998749218"  Variable name and initial value (optional) -->
+		<Var name="v_y" val="0"/> <!-- Variable name and initial value (optional) -->
+		<Var name="F" val="m*g*y/l"/> <!-- "9.6" Variable name and initial value (optional) -->
+	</Vars>
+	<Params dT="1e-3">  <!-- default integration step -->
+		<Param name="l" val="1"/> <!-- Parameter name and its value -->
+		<Param name="m" val="1"/> <!-- Parameter name and its value -->
+		<Param name="g" val="9.81"/> <!-- Parameter name and its value -->
+		<Param name="k" val="0"/> <!-- koeficijent otpora zraka -->
+	</Params>
+	<ODEqs>
+		<Eq fx="x'=v_x"/> 				<!-- First state variable-->
+		<Eq fx="v_x'=-F*x/(m*l)-k*v_x/m"/> 	<!-- Second state variable-->	
+		<Eq fx="y'=v_y"/> 	<!-- 3rd state variable-->
+		<Eq fx="v_y'=g-F*y/(m*l)-k*v_y/m"/> 	<!-- 4th state variable-->			
+	</ODEqs>
+	<NLEqs>
+		<Eq fx="x^2+y^2-l^2"/> 	<!-- First nonlinear equaiton of the model -->		
+	</NLEqs>
+</Model>

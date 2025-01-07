@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model type="WLS" domain="real" name="PF">
+	<Vars>
+		<Var name="v_1" val="1"/>
+		<Var name="phi_2" val="0"/> <!-- Variable name and its initial value (optional)-->
+		<Var name="v_2" val="1"/>
+		<Var name="phi_3" val="0"/>
+		<Var name="v_3" val="1"/>
+	</Vars>
+	<Params>
+		<Param name="w_inj" val="0.1"/> 
+		<Param name="w_v" val="0.1"/> 
+		<Param name="phi_1" val="0"/> <!-- Parameter name and its value-->
+		<Param name="aY" val="32.8797974610715"/> 
+		<Param name="aY11" val="aY"/> 
+		<Param name="aY21" val="aY"/>
+		<Param name="aY22" val="65.7595949221429"/> 
+		<Param name="aY23" val="aY"/>
+		<Param name="aY32" val="aY"/>
+		<Param name="aY33" val="aY"/>
+		
+		<Param name="thetaDiag" val="-1.40564764938027 "/> 
+		<Param name="thetaOffDiag" val="1.73594500420952 "/> 
+		<Param name="theta11" val="thetaDiag"/> 
+		<Param name="theta21" val="thetaOffDiag"/> 
+		<Param name="theta22" val="thetaDiag"/> 
+		<Param name="theta23" val="thetaOffDiag"/> 
+		<Param name="theta32" val="thetaOffDiag"/> 
+		<Param name="theta33" val="thetaDiag"/>
+
+		<Param name="P3_inj" val="-1"/>
+		<Param name="Q3_inj" val="-0.3"/>
+		<Param name="v1_meas" val="1"/>
+		<Param name="v2_meas" val="0.984267"/>
+		<Param name="v3_meas" val="0.969386"/>
+	</Params>
+	<MeasEqs>
+		<!-- node 3 -->
+		<Eq w="w_inj" fx="v_3^2*aY33*cos(theta33) + v_3*(aY32*v_2*cos(phi_3-theta32-phi_2)) - P3_inj"/>
+		<Eq w="w_inj" fx="-v_3^2*aY33*sin(theta33) + v_3*(aY32*v_2*sin(phi_3-theta32-phi_2)) - Q3_inj"/>
+		<!-- voltages -->
+		<Eq w="w_v" fx="v_1 - v1_meas"/>
+		<Eq w="w_v" fx="v_2 - v2_meas"/>
+		<Eq w="w_v" fx="v_3 - v3_meas"/>
+	</MeasEqs>
+	
+	<ECs>
+		<!-- node 2 (ZI)-->
+		<Eq fx="v_2*aY22*cos(theta22) + aY21*v_1*cos(phi_2-theta21-phi_1) + aY23*v_3*cos(phi_2-theta23-phi_3)"/>
+		<Eq fx="-v_2*aY22*sin(theta22) + aY21*v_1*sin(phi_2-theta21-phi_1) + aY23*v_3*sin(phi_2-theta23-phi_3)"/>
+	</ECs>
+</Model>
+
+<!-- solution 
+DLLTest:Solved in 4 iterations. Precision = 9.22737e-12
+DLLTest:Results outside DLL. Var No: 5
+Results:
+v_1=1
+phi_2=-0.0289596
+v_2=0.984267
+phi_3=-0.058834
+v_3=0.969386
+
+-->

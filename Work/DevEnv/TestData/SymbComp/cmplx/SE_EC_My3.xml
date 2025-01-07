@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model type="WLS" domain="cmplx" name="SE_EC" >
+	<Vars> <!-- conj="true" is by default -->
+		<Var name="v1" val="v1_cm"/>
+		<Var name="v2" val="v1_cm"/>
+		<Var name="v3" val="v1_cm"/>
+	</Vars>
+	<Params>
+		<Param name="phiSlack" val="pi/4"/>  <!-- angle of slack -->
+		<Param name="v1_meas" val="1"/> <!-- real magnitude measurement on node 1 -->
+		<Param name="v1_cm" val="v1_meas*e^(phiSlack*1i)"/>
+		<Param name="w_inj" val="1"/> 
+		<Param name="w_v" val="1"/> 
+		 
+		<Param name="z12" val="0.005+0.03i"/> 
+		<Param name="z23" val="0.005+0.03i"/> 
+		<Param name="z24" val="0.01+0.05i"/>
+		 
+		<Param name="y21" val="1/z12"/> 
+		<Param name="y23" val="1/z23"/> 
+		<Param name="y24" val="1/z24"/> 
+		
+		<Param name="y22" val="y21+y23"/> 
+		<Param name="y33" val="y23"/> 
+		
+		<Param name="S3_inj" val="-1-0.3i"/>
+		
+		<Param name="v2_meas" val="0.984267"/>
+		<Param name="v3_meas" val="0.969386"/>
+	</Params>
+	<MeasEqs>
+		<!-- node 1 slack(node) Fix angle -->
+		<!-- <Eq w="w_phiSlack" fx="v1-conj(v1)-2i*v1_meas*sin(phiSlack)"/> -->
+		<Eq w="w_v" fx="v1 - v1_cm"/>
+		<Eq w="w_v" fx="conj(v1) - conj(v1_cm)"/>
+		
+		<!-- node 3 -->
+		<Eq w="w_inj" fx="v3*conj(y33*v3-y23*v2) - S3_inj"/>
+		<Eq w="w_inj" fx="conj(v3)*(y33*v3-y23*v2) - conj(S3_inj)"/>
+		<!-- voltages -->
+		<Eq w="w_v" fx="v2*conj(v2) - v2_meas^2"/>
+		<Eq w="w_v" fx="v3*conj(v3) - v3_meas^2"/>
+	</MeasEqs>
+	
+	<ECs>
+		<!-- node 2 (ZI)-->
+		<Eq fx="y22*v2-y21*v1-y23*v3"/>
+		<Eq fx="conj(y22*v2-y21*v1-y23*v3)"/>
+	</ECs>
+</Model>
+
+
+<!-- solution 
+DLLTest:Solved in 4 iterations. Precision = 3.15782e-11
+DLLTest:Results outside DLL. Var No: 6
+Results (rect):
+v1=(0.707107,0.707107)
+#v1=(0.707107,-0.707107)
+v2=(0.715843,0.675538)
+#v2=(0.715843,-0.675538)
+v3=(0.724578,0.643968)
+#v3=(0.724578,-0.643968)
+Results (polar):
+v1=(1,0.785398)[pu,rad] = (1,45)[pu,deg]
+#v1=(1,-0.785398)[pu,rad] = (1,-45)[pu,deg]
+v2=(0.984267,0.756439)[pu,rad] = (0.984267,43.3407)[pu,deg]
+#v2=(0.984267,-0.756439)[pu,rad] = (0.984267,-43.3407)[pu,deg]
+v3=(0.969386,0.726564)[pu,rad] = (0.969386,41.6291)[pu,deg]
+#v3=(0.969386,-0.726564)[pu,rad] = (0.969386,-41.6291)[pu,deg]
+
+-->

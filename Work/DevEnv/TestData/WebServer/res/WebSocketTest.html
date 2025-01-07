@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+
+<html>
+   <head>
+      <title>WebSocket Test</title>
+	  <script type="text/javascript" src="natID_WebSock.js"></script>
+	  <script type="text/javascript" charset="utf-8">
+		 
+		 function onLogin()
+		 {
+			 alert("Just loggedIn");
+		 }
+		 
+		 //handler of received messages after login
+		 function onWSMessage(receivedMsg)
+		 {
+			 alert("Received something");
+		 }
+		 
+		 function onDisconnect()
+		 {
+		 	alert("Just disconnected");
+		 }
+		 
+		 function loginWS(f)
+		 {
+		  var un = document.getElementById("un").value;
+		  var pwd = document.getElementById("pwd").value;
+		  var connString = "ws://localhost:2504/natIDsock";
+		  var statusField = document.getElementById("status");
+		  natID.connectWS(connString, un, pwd, onLogin, onWSMessage, onDisconnect, statusField, true);
+		 }
+		 
+		 function disconnectWS()
+		 {
+			 if (natID.isWSDisconnected())
+			 {
+			 	alert("Already disconnected!")
+				return;
+			 }
+			 natID.disconnectWS();
+		 }
+      </script>
+   </head>
+   
+   <body>
+	   <form id="logger" onsubmit="event.preventDefault(); loginWS(this)">
+	    <table border="0">
+	     <tr>
+	       <td><label for="un">User name:</label></td>
+	       <td><input type="text" id="un" name="un" size="20" required></td>    
+	     </tr>
+	     <tr>
+	       <td><label for="pwd">Password: </label></td>
+	       <td><input type="password" id="pwd" name="pwd" minlength="4" size="30" required></td>
+	     </tr>
+	    </table>
+ 	    <button type="submit">Connect</button>
+ 	    <button type="button" onclick="disconnectWS()">Disconnect</button><br>
+        <label for="status">Status:</label>
+        <input type="text" id="status" name="status" readonly><br><br>
+	  </form>
+       <p style="font-family:times;">Go to <a href="index.html">index page using this link.</a> </p>
+   </body>
+</html>

@@ -1,0 +1,17 @@
+#DataProvider library
+
+if (WIN32)
+	if( CMAKE_SIZEOF_VOID_P EQUAL 4 )
+		set(DP_LIB_DEBUG "${MY_LIB}/dataProvider32D.lib")
+		set(DP_LIB_RELEASE "${MY_LIB}/dataProvider32.lib")
+	else()
+		set(DP_LIB_DEBUG "${MY_LIB}/dataProviderD.lib")
+		set(DP_LIB_RELEASE "${MY_LIB}/dataProvider.lib")
+	endif()
+elseif (APPLE)
+    set(DP_LIB_DEBUG ${MY_LIB}/dataProviderD.dylib)
+    set(DP_LIB_RELEASE ${MY_LIB}/dataProvider.dylib)
+else ()
+    set(DP_LIB_DEBUG ${MY_LIB}/dataProviderD.so)
+    set(DP_LIB_RELEASE ${MY_LIB}/dataProvider.so)
+endif()

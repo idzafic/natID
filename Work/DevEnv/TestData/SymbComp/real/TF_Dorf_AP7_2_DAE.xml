@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model type="DAE" domain="real" method="RK2" desc="Dorf Adv Problem 7.2 str 503_Needs Fix">
+	<Vars>
+		<Var name="err" out="true"/> 
+		<Var name="yc"/> 
+		<Var name="xc1"/>
+		<Var name="x1"/>
+		<Var name="x2"/>
+		<Var name="x3"/>
+		<Var name="y" out="true"/> 
+	</Vars>
+	<Params>  
+		<Param name="u" val="1" out="true"/>
+		<Param name="K" val="120"/>
+	</Params>
+	<ODEqs>
+		<Eq fx="xc1'=err"/>
+		<Eq fx="x1'=-11*x1-20*x2+32*x3+yc"/>
+		<Eq fx="x2'=x1"/>
+		<Eq fx="x3'=x2"/>
+	</ODEqs>
+	<NLEqs>
+		<Eq fx="err=u-y"/> 	<!-- negative feedback -->	
+		<Eq fx="yc=K*xc1+K*err"/>
+		<Eq fx="y=x2+3*x3"/>
+	</NLEqs>
+</Model>
+
+<!-- Nastaviti od createStateSpace -->

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model type="NR" domain="real" name="PF">
+	<Vars>
+		<Var name="phi_2" val="0"/> <!-- Variable name and its initial value (optional)-->
+		<Var name="v_2" val="1"/>
+		<Var name="phi_3" val="0"/>
+		<Var name="v_3" val="1"/>
+	</Vars>
+	<Params>
+		<Param name="v_1" val="1"/>
+		<Param name="phi_1" val="0"/> <!-- Parameter name and its value-->
+		<Param name="aY" val="32.8797974610715"/> 
+		<Param name="aY11" val="aY"/> 
+		<Param name="aY21" val="aY"/>
+		<Param name="aY22" val="65.7595949221429"/> 
+		<Param name="aY23" val="aY"/>
+		<Param name="aY32" val="aY"/>
+		<Param name="aY33" val="aY"/>
+		
+		<Param name="thetaDiag" val="-1.40564764938027 "/> 
+		<Param name="thetaOffDiag" val="1.73594500420952 "/> 
+		<Param name="theta11" val="thetaDiag"/> 
+		<Param name="theta21" val="thetaOffDiag"/> 
+		<Param name="theta22" val="thetaDiag"/> 
+		<Param name="theta23" val="thetaOffDiag"/> 
+		<Param name="theta32" val="thetaOffDiag"/> 
+		<Param name="theta33" val="thetaDiag"/>
+
+		<Param name="P3_inj" val="-1"/>
+		<Param name="Q3_inj" val="-0.3"/>
+	</Params>
+	<NLEqs>
+		<!-- node 2 (ZI)-->
+		<Eq fx="v_2*aY22*cos(theta22) + aY21*v_1*cos(phi_2-theta21-phi_1) + aY23*v_3*cos(phi_2-theta23-phi_3)"/>
+		<Eq fx="-v_2*aY22*sin(theta22) + aY21*v_1*sin(phi_2-theta21-phi_1) + aY23*v_3*sin(phi_2-theta23-phi_3)"/>
+		<!-- node 3 -->
+		<Eq fx="v_3^2*aY33*cos(theta33) + v_3*(aY32*v_2*cos(phi_3-theta32-phi_2)) - P3_inj"/>
+		<Eq fx="-v_3^2*aY33*sin(theta33) + v_3*(aY32*v_2*sin(phi_3-theta32-phi_2)) - Q3_inj"/>
+	</NLEqs>
+</Model>
+
+<!-- solution 
+DLLTest:Solved in 3 iterations. Precision = 2.76107e-09
+DLLTest:Results outside DLL. Var No: 4
+Results:
+phi_2=-0.0289596
+v_2=0.984267
+phi_3=-0.0588341
+v_3=0.969385
+-->

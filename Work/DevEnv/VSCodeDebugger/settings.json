@@ -1,0 +1,13 @@
+{
+    "cmake.buildDirectory": "${workspaceFolder}/build",
+    "cmake.debugConfig": {
+        "setupCommands": [
+            {
+                "text": "source ~/Work/DevEnv/VSCodeDebugger/debugHelper_unix.py"
+            },
+            {
+                 "text": "-enable-pretty-printing"
+            }
+        ]
+    }
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model type="DAE" domain="real" method="RK4" desc="Dorf Adv Problem 7.1 str 503">
+	<Vars>
+		<Var name="err" out="true"/> 
+		<Var name="yc"/> 
+		<Var name="y" out="true"/> 
+	</Vars>
+	<Params>  
+		<Param name="u" val="1" out="true"/>
+		<Param name="K" val="0.563"/> <!--- 0.563 -->
+	</Params>
+	<TFs>
+		<Eq fx="yc/err=(K*(s+6))/(s+4)"/> <!-- PI Controller with variable ampflification K -->
+		<Eq fx="y/yc=(s+3)/(s*(s^2+4*s+8))"/> 	<!-- Process -->
+	</TFs>
+	<NLEqs>
+		<Eq fx="err=u-y"/> 	<!-- negative feedback -->	
+	</NLEqs>
+</Model>
+
+<!-- Nastaviti od createStateSpace -->

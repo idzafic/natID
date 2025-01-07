@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model type="DAE" domain="real" method="Trapezoidal" name="Dorf CP4.5">
+	<Vars>
+		<Var name="err" val="0" out="true"/> 
+		<Var name="y1" val="0"/> 
+		<Var name="y2" val="0" out="true"/> 
+	</Vars>
+	<Params>  
+		<Param name="u" val="1" out="true"/>
+		<Param name="k" val="2"/> 
+		<Param name="Ki" val="10"/>
+	</Params>
+	<TFs>
+		<Eq fx="y1/err=Ki/s"/> 		<!-- First Transfer Function (Controller) -->
+		<Eq fx="y2/y1=1/(s+k)"/> 	<!-- Second Transfer Function (Process)-->			
+	</TFs>
+	<NLEqs>
+		<Eq fx="err=u-y2"/> 	<!-- negative feedback (error - input to controller)-->		
+	</NLEqs>
+</Model>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model type="NR" domain="real" name="PF">
+	<Vars>
+		<Var name="phi_2" val="0"/> <!-- Variable name and its initial value (optional)-->
+		<Var name="phi_3" val="0"/>
+		<Var name="v_2" val="1"/>
+		<Var name="v_3" val="1"/>
+	</Vars>
+         
+	<Params>
+		<Param name="v_1" val="0.999679"/>
+		<Param name="phi_1" val="0"/> <!-- Parameter name and its value-->
+		<Param name="aY11" val="50.1721"/> 
+		<Param name="aY12" val="31.6228"/> 
+		<Param name="aY13" val="18.5695"/> 
+		<Param name="aY21" val="aY12"/>
+		<Param name="aY22" val="43.3210"/> 
+		<Param name="aY23" val="11.7041"/>
+		<Param name="aY31" val="aY13"/>
+		<Param name="aY32" val="aY23"/>
+		<Param name="aY33" val="30.2720"/>
+		
+		<Param name="theta11" val="-1.2273"/> 
+		<Param name="theta12" val="1.8925"/> 
+		<Param name="theta13" val="1.9513"/> 
+		<Param name="theta21" val="theta12"/> 
+		<Param name="theta22" val="-1.2390"/> 
+		<Param name="theta23" val="1.9296"/> 
+		<Param name="theta31" val="theta13"/> 
+		<Param name="theta32" val="theta23"/> 
+		<Param name="theta33" val="-1.1987"/> 
+
+		<Param name="P2_inj" val="-0.496113"/>
+		<Param name="Q2_inj" val="-0.294942"/>
+		<Param name="P3_inj" val="-1.50503"/>
+		<Param name="Q3_inj" val="-0.798326"/>
+	</Params>
+	<NLEqs>
+		<!-- node 2 -->
+		<Eq fx="v_2^2*aY22*cos(theta22)+v_2*(aY21*v_1*cos(phi_2-theta21-phi_1) + aY23*v_3*cos(phi_2-theta23-phi_3)) - P2_inj"/>
+		<Eq fx="-v_2^2*aY22*sin(theta22)+v_2*(aY21*v_1*sin(phi_2-theta21-phi_1) + aY23*v_3*sin(phi_2-theta23-phi_3)) - Q2_inj"/>
+		<!-- node 3 -->
+		<Eq fx="v_3^2*aY33*cos(theta33)+v_3*(aY31*v_1*cos(phi_3-theta31-phi_1) + aY32*v_2*cos(phi_3-theta32-phi_2)) - P3_inj"/>
+		<Eq fx="-v_3^2*aY33*sin(theta33)+v_3*(aY31*v_1*sin(phi_3-theta31-phi_1) + aY32*v_2*sin(phi_3-theta32-phi_2)) - Q3_inj"/>
+	</NLEqs>
+</Model>
+
+<!-- solution 
+DLLTest:Solved in 3 iterations. Precision = 1.3288e-08
+DLLTest:Results outside DLL. Var No: 4
+Results:
+phi_2=-0.02175
+phi_3=-0.0474588
+v_2=0.974208
+v_3=0.943712
+
+-->

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model type="WLS" domain="real" name="AburExposito_">
+	<Vars>
+		<Var name="theta_2" val="0"/> <!-- Variable name and its initial value (optional)-->
+		<Var name="theta_3" val="0"/>
+		<Var name="v_1" val="1"/>
+		<Var name="v_2" val="1"/>
+		<Var name="v_3" val="1"/>
+	</Vars>
+	<Params>
+		<Param name="w_inj" val="1/0.01^2"/> 
+		<Param name="w_br" val="1/0.008^2"/> 
+		<Param name="w_v" val="1/0.004^2"/> 
+		<Param name="theta_1" val="0"/> <!-- Parameter name and its value-->
+
+		<Param name="g_12" val="10"/> 
+		<Param name="b_12" val="-30"/> 
+		<Param name="g_13" val="6.8966"/> 
+		<Param name="b_13" val="-17.2414"/>
+		<Param name="g_23" val="4.1096"/> 
+		<Param name="b_23" val="-10.9589"/>
+		<Param name="P_12" val="0.888"/>
+		<Param name="P_13" val="1.173"/>
+		<Param name="P_2_meas" val="-0.501"/>
+		<Param name="Q_12" val="0.568"/>
+		<Param name="Q_13" val="0.663"/>
+		<Param name="Q_2_meas" val="-0.286"/>
+		<Param name="V_1" val="1.006"/>
+		<Param name="V_2" val="0.968"/>
+		
+		<Param name="G_11" val="g_12+g_13"/>
+		<Param name="B_11" val="b_12+b_13"/>
+		<Param name="G_22" val="g_12+g_23"/>
+		<Param name="B_22" val="b_12+b_23"/> 
+		<Param name="G_33" val="g_13+g_23"/>
+		<Param name="B_33" val="b_13+b_23"/> 
+		
+		<!-- PostProc params -->
+		<Param name="P_1" val="0"/> 
+		<Param name="P_2" val="0"/>  
+		<Param name="P_3" val="0"/> 
+		<Param name="Q_1" val="0"/> 
+		<Param name="Q_2" val="0"/>  
+		<Param name="Q_3" val="0"/> 
+		
+	</Params>
+	<MeasEqs>
+		<Eq w="w_br" fx="v_1^2*g_12-v_1*v_2*(g_12*cos(theta_1-theta_2)+b_12*sin(theta_1-theta_2))-P_12"/> 
+		<Eq w="w_br" fx="v_1^2*g_13-v_1*v_3*(g_13*cos(theta_1-theta_3)+b_13*sin(theta_1-theta_3))-P_13"/>
+		<Eq w="w_inj" fx="v_2^2*G_22-v_2*v_1*(g_12*cos(theta_2-theta_1)+b_12*sin(theta_2-theta_1))-v_2*v_3*(g_23*cos(theta_2-theta_3)+b_23*sin(theta_2-theta_3))-P_2_meas"/>
+		<Eq w="w_br" fx="-v_1^2*b_12-v_1*v_2*(g_12*sin(theta_1-theta_2)-b_12*cos(theta_1-theta_2))-Q_12"/>
+		<Eq w="w_br" fx="-v_1^2*b_13-v_1*v_3*(g_13*sin(theta_1-theta_3)-b_13*cos(theta_1-theta_3))-Q_13"/>
+		<Eq w="w_inj" fx="-v_2^2*B_22-v_2*v_1*(g_12*sin(theta_2-theta_1)-b_12*cos(theta_2-theta_1))-v_2*v_3*(g_23*sin(theta_2-theta_3)-b_23*cos(theta_2-theta_3))-Q_2_meas"/>
+		<Eq w="w_v" fx="v_1-V_1"/>
+		<Eq w="w_v" fx="v_2-V_2"/>
+	</MeasEqs>
+	<PostProc>
+		<!-- calculate injected powers -->
+		<Eq fx="P_1 = v_1^2*G_11-v_1*v_2*(g_12*cos(theta_1-theta_2)+b_12*sin(theta_1-theta_2))-v_1*v_3*(g_13*cos(theta_1-theta_3)+b_13*sin(theta_1-theta_3))"/>
+		<Eq fx="P_2 = v_2^2*G_22-v_2*v_1*(g_12*cos(theta_2-theta_1)+b_12*sin(theta_2-theta_1))-v_2*v_3*(g_23*cos(theta_2-theta_3)+b_23*sin(theta_2-theta_3))"/>
+		<Eq fx="P_3 = v_3^2*G_33-v_3*v_1*(g_13*cos(theta_3-theta_1)+b_13*sin(theta_3-theta_1))-v_3*v_2*(g_23*cos(theta_3-theta_2)+b_23*sin(theta_3-theta_2))"/>
+		<Eq fx="Q_1 = -v_1^2*B_11-v_1*v_2*(g_12*sin(theta_1-theta_2)-b_12*cos(theta_1-theta_2))-v_1*v_3*(g_13*sin(theta_1-theta_3)-b_13*cos(theta_1-theta_3))"/>
+		<Eq fx="Q_2 = -v_2^2*B_22-v_2*v_1*(g_12*sin(theta_2-theta_1)-b_12*cos(theta_2-theta_1))-v_2*v_3*(g_23*sin(theta_2-theta_3)-b_23*cos(theta_2-theta_3))"/>
+		<Eq fx="Q_3 = -v_3^2*B_33-v_3*v_1*(g_13*sin(theta_3-theta_1)-b_13*cos(theta_3-theta_1))-v_3*v_2*(g_23*sin(theta_3-theta_2)-b_23*cos(theta_3-theta_2))"/>
+	</PostProc>
+</Model>

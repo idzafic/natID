@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model type="DAE" domain="real" method="Trapezoidal" name="Dorf Example 7.60 str 481">
+	<Vars>
+		<Var name="err"/> 
+		<Var name="yc"/> 
+		<Var name="yclim"/>
+		<Var name="ym"/> 
+		<Var name="ul"/> 
+		<Var name="y"/> 
+	</Vars>
+	<Params>  
+		<Param name="u" val="1" out="true"/>
+		<Param name="Kp" val="91.3"/>
+		<Param name="Kd" val="91.3"/>
+		<Param name="Td" val="0"/> <!-- disturbance -->
+	</Params>
+	<TFs>
+		<Eq fx="yc/err=Kp+Kd*s"/> 	<!-- PD controller -->		
+		<Eq fx="ym/yclim=5000/(s+1000)"/> 	<!-- Motor coil -->
+		<Eq fx="y/ul=1/(s^2+20*s)"/> 	<!-- Load -->	
+	</TFs>
+	<NLEqs>
+		<Eq fx="err=u-y"/> 	<!-- negative feedback -->	
+		<Eq fx="yclim=lim(yc, -12000, 12000)"/> <!-- limiter -->
+		<Eq fx="ul=ym-Td"/> <!-- Input to load (output from motor minus disturbance)-->	
+	</NLEqs>
+</Model>

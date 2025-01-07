@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model type="WLS" domain="real" name="PF">
+	<Vars>
+		<Var name="v_1" val="1"/>
+		<Var name="phi_2" val="0"/> <!-- Variable name and its initial value (optional)-->
+		<Var name="v_2" val="1"/>
+		<Var name="phi_3" val="0"/>
+		<Var name="v_3" val="1"/>
+		<Var name="phi_4" val="0"/>
+		<Var name="v_4" val="1"/>
+	</Vars>
+	<Params>
+		<Param name="w_inj" val="1"/> 
+		<Param name="w_v" val="1"/> 
+		<Param name="w_zi" val="10000"/> 
+		
+		<Param name="phi_1" val="0"/> <!-- Parameter name and its value-->
+		<Param name="aY" val="32.8797974610715"/> 
+		<Param name="aY2" val="19.6116135138184"/> 
+		<Param name="aY11" val="aY"/> 
+		<Param name="aY12" val="aY"/>
+		
+		<Param name="aY22" val="85.3633544731127"/> 
+		<Param name="aY21" val="aY"/>
+		<Param name="aY23" val="aY"/>
+		<Param name="aY24" val="aY2"/>
+		
+		<Param name="aY33" val="aY"/>
+		<Param name="aY32" val="aY"/>
+		
+		<Param name="aY44" val="aY2"/>
+		<Param name="aY42" val="aY2"/>
+		
+		<Param name="thetaDiag" val="-1.40564764938027"/> 
+		<Param name="thetaOffDiag" val="1.73594500420952"/> 
+		<Param name="thetaDiag2" val="-1.37340076694502"/> 
+		<Param name="thetaOffDiag2" val="1.76819188664478"/> 
+		
+		<Param name="theta11" val="thetaDiag"/> 
+		<Param name="theta12" val="thetaOffDiag"/> 
+		
+		<Param name="theta21" val="thetaOffDiag"/> 
+		<Param name="theta22" val="-1.3982403774491"/> 
+		<Param name="theta23" val="thetaOffDiag"/> 
+		<Param name="theta24" val="thetaOffDiag2"/> 
+		
+		<Param name="theta32" val="thetaOffDiag"/> 
+		<Param name="theta33" val="thetaDiag"/>
+		
+		<Param name="theta42" val="thetaOffDiag2"/> 
+		<Param name="theta44" val="thetaDiag2"/>
+
+		<Param name="P3_inj" val="-1"/>
+		<Param name="Q3_inj" val="-0.3"/>
+		
+		<Param name="P4_inj" val="-0.8"/>
+		<Param name="Q4_inj" val="-0.25"/>
+		
+		<Param name="v1_meas" val="1"/>
+		<Param name="v2_meas" val="0.969919"/>
+		<Param name="v3_meas" val="0.954797"/>
+		<Param name="v4_meas" val="0.947475"/>
+	</Params>
+	<MeasEqs>
+		<!-- node 2 (ZI)-->
+		<Eq w="w_zi" fx="v_2*aY22*cos(theta22) + aY21*v_1*cos(phi_2-theta21-phi_1) + aY23*v_3*cos(phi_2-theta23-phi_3) + aY24*v_4*cos(phi_2-theta24-phi_4)"/>
+		<Eq w="w_zi" fx="-v_2*aY22*sin(theta22) + aY21*v_1*sin(phi_2-theta21-phi_1) + aY23*v_3*sin(phi_2-theta23-phi_3) + aY24*v_4*sin(phi_2-theta24-phi_4)"/>
+		<!-- node 3 -->
+		<Eq w="w_inj" fx="v_3^2*aY33*cos(theta33) + v_3*(aY32*v_2*cos(phi_3-theta32-phi_2)) - P3_inj"/>
+		<Eq w="w_inj" fx="-v_3^2*aY33*sin(theta33) + v_3*(aY32*v_2*sin(phi_3-theta32-phi_2)) - Q3_inj"/>
+		<!-- node 4 -->
+		<Eq w="w_inj" fx="v_4^2*aY44*cos(theta44) + v_4*(aY42*v_2*cos(phi_4-theta42-phi_2)) - P4_inj"/>
+		<Eq w="w_inj" fx="-v_4^2*aY44*sin(theta44) + v_4*(aY42*v_2*sin(phi_4-theta42-phi_2)) - Q4_inj"/>
+		
+		<!-- voltages -->
+		<Eq w="w_v" fx="v_1 - v1_meas"/>
+		<Eq w="w_v" fx="v_2 - v2_meas"/>
+		<Eq w="w_v" fx="v_3 - v3_meas"/>
+		<Eq w="w_v" fx="v_4 - v4_meas"/>
+	</MeasEqs>
+</Model>
+
+<!-- solution 
+DLLTest:Solved in 4 iterations. Precision = 2.25735e-10
+DLLTest:Results outside DLL. Var No: 7
+Results:
+v_1=1
+phi_2=-0.0529045
+v_2=0.969919
+phi_3=-0.0836843
+v_3=0.954797
+phi_4=-0.0937222
+v_4=0.947475
+
+-->

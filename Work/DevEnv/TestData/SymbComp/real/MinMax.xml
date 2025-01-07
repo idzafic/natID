@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Model type="NR" domain="real" desc="min max test">
+	<Vars>
+		<Var name="x" val="0"/> <!-- Variable name and initial value (optional) -->
+		<Var name="y" val="0"/> <!-- Variable name and initial value (optional) -->
+	</Vars>
+	<Params>
+		<Param name="k" val="2"/> <!-- Parameter name and its value -->
+		<Param name="n" val="0.5"/> <!-- Parameter name and its value -->
+		<Param name="minVal"/>
+		<Param name="maxVal"/>
+	</Params>
+	<NLEqs>
+		<Eq fx="y=k*x/2+n"/> 		<!-- Second nonlinear equaiton of the model -->	
+		<Eq fx="y=2*k*x-n"/> 	<!-- First nonlinear equaiton of the model -->
+	</NLEqs>
+	<PostProc>
+		<Eq fx="minVal=min(2*y, x/2)"/>
+		<Eq fx="maxVal=max(2*y, x/2)"/>
+	</PostProc>
+</Model>

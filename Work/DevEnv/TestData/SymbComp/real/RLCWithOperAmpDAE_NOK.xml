@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model type="DAE" domain="real" name="Milojkovic_ZbirkaZadataka_Zad6_25">
+	<Vars>
+		<Var name="u_c" val="0"/> <!-- bez sopstvene enerije -->
+		<Var name="i_L" val="0"/> 
+	</Vars>
+	<Params dT="1e-5">
+		<Param name="t" val="0"/>
+		<Param name="E" val="6" out="true"/>
+		<Param name="R" val="4"/> 
+		<Param name="L" val="1.25"/>
+		<Param name="C" val="0.1"/>
+		<Param name="alpha" val="3"/>
+		<Param name="u_2" val="0" out="true"/>
+	</Params>
+	<ODEqs>
+		<Eq fx="i_L'=(r*i_L+R*i-u_c-E)/L"/> 				
+		<Eq fx="u_c'=(-alpha*i_1)/(2*R*C)"/> 			
+	</ODEqs>
+	<NLEqs>
+		<Eq fx="i_L=i_1+alpha*i_1"/> 	<!-- First nonlinear equaiton of the model -->		
+	</NLEqs>
+	<PostProc>
+		<Eq name="u_2" fx="-u_c"/>
+	</PostProc>
+</Model>

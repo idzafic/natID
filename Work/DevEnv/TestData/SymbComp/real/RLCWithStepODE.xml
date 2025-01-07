@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model type="ODE" domain="real" name="SerialRLCWithStepGen">
+	<Vars>
+		<Var name="u_c" val="0"/>
+		<Var name="i_L" val="0"/> 
+	</Vars>
+	<Params dT="1e-5">
+		<Param name="t" val="0"/>
+		<Param name="R" val="1"/> 
+		<Param name="L" val="0.01"/> 
+		<Param name="C" val="1e-5"/>
+		<Param name="u_g" val="10" out="true"/>
+		<Param name="u_L" val="0" out="true"/> 
+	</Params>
+	<!-- u_g-u_l-u_c-R*i=0 -> u_g-L*i_L'-u_c-R*i=0 -> i_L'=(u_g-u_c+R*i)/L; gdje je i=i_c=i_L -->
+	<!--<PreProc>
+		<Eq name="u_g" fx="u_max*sin(omega*t+phi)"/>
+	</PreProc> -->
+	<ODEqs>
+		<Eq fx="i_L' = (u_g-u_c-R*i_L)/L"/> 				
+		<Eq fx="u_c' = i_L/C"/> 			
+	</ODEqs>
+	<PostProc>
+		<Eq fx="u_L = u_g-u_c-R*i_L"/>
+	</PostProc>
+</Model>

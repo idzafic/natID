@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model type="ODE" domain="real" name="Milojkovic_ZbirkaZadataka_Zad6_26">
+	<Vars>
+		<Var name="u_c" val="-E/2"/> 
+		<Var name="i_L" val="E/(2*R)"/> 
+	</Vars>
+	<Params dT="1e-5">
+		<Param name="t" val="0"/>
+		<Param name="E" val="120"/>
+		<Param name="R" val="60"/> 
+		<Param name="L" val="6e-3"/>
+		<Param name="C" val="5/3*1e-6"/>
+		<Param name="u_c_sol" val="60-120" out="true"/>
+		<Param name="i_L_sol" val="3-2" out="true"/>
+	</Params>
+	<ODEqs>
+		<Eq fx="u_c' = -3*u_c/(2*R*C)+i_L/(2*C)"/> 				
+		<Eq fx="i_L' = -u_c/(2*L)-R*i_L/(2*L)+E/L"/> 			
+	</ODEqs>
+	<PostProc>
+		<Eq fx="u_c_sol = 60-120*e^(-10*1000*t)"/>
+		<Eq fx="i_L_sol = 3-2*e^(-10*1000*t)"/>
+	</PostProc>
+</Model>

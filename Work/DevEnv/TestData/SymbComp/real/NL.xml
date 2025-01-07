@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Model type="NR" domain="real" name="Demo">
+	<Vars>
+		<Var name="x" val="1"/> <!-- Variable name and initial value (optional) -->
+		<Var name="y" val="1"/> <!-- Variable name and initial value (optional) -->
+	</Vars>
+	<Params>
+		<Param name="k" val="2"/> <!-- Parameter name and its value -->
+		<Param name="n" val="0.5"/> <!-- Parameter name and its value -->
+	</Params>
+	<NLEqs>
+		<Eq fx="x^x+ln(y)=k*x+n+y*-0.2"/> 		<!-- Second nonlinear equaiton of the model -->	
+		<Eq fx="x^2+y^2=4+0.5*x"/> 	<!-- First nonlinear equaiton of the model -->
+		<!-- Solution: x=0.6686 y=1.97162		-->
+	</NLEqs>
+</Model>

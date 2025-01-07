@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model type="DAE" domain="real" method="Trapezoidal" name="Dorf Example 7.7 str 452">
+	<Vars>
+		<Var name="err" out="true"/> 
+		<Var name="yc"/> 
+		<Var name="y" out="true"/> 
+		<Var name="err_x1"/>
+		<Var name="ydiv"/> 
+		<Var name="y_x1"/>
+		<Var name="y_x2"/>
+		<Var name="y_x3"/>
+	</Vars>
+	<Params>  
+		<Param name="u" val="1" out="true"/>
+		<Param name="Kp" val="370"/>
+		<Param name="Ki" val="100"/>
+		<Param name="Kd" val="60"/>
+		<Param name="b" val="10"/> 
+		<Param name="omega_n" val="4"/> 
+		<Param name="sigma" val="0.707"/> 
+		<Param name="a1" val="2*sigma*omega_n+b"/> 
+		<Param name="a2" val="2*sigma*omega_n*b"/> 
+		<Param name="a1_c" val="15.656"/>  <!-- 2*sigma*omega_n+b -->
+		<Param name="a2_c" val="56.56"/> <!-- 2*sigma*omega_n*b -->
+	</Params>
+	<ODEqs> <!-- PID controller -->	
+		<Eq fx="err_x1'=err"/>
+		<Eq fx="err'=ydiv/Kd"/>
+		<Eq fx="y_x1'=y_x2"/>
+		<Eq fx="y_x2'=y_x3"/>
+		<Eq fx="y_x3'=yc - a2*y_x2 - a1*y_x3"/>
+	</ODEqs>
+	<NLEqs>
+		<Eq fx="err=u-y"/> 	<!-- negative feedback -->	
+		<Eq fx="ydiv+Ki*err_x1+Kp*err-yc"/> <!-- PID controller output -->	
+		<Eq fx="y-y_x1"/> <!-- process output -->
+	</NLEqs>
+</Model>
+
+<!-- Nastaviti od createStateSpace -->

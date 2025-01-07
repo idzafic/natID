@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model type="DAE" domain="real" method="Trapezoidal" name="Dorf Example 7.7 str 452">
+	<Vars>
+		<Var name="err" out="true"/> 
+		<Var name="yc"/> 
+		<Var name="y" out="true"/> 
+		<Var name="err_x1"/>
+		<Var name="ydiv"/> 
+	</Vars>
+	<Params>  
+		<Param name="u" val="1" out="true"/>
+		<Param name="Kp" val="370"/>
+		<Param name="Ki" val="100"/>
+		<Param name="Kd" val="60"/>
+		<Param name="b" val="10"/> 
+		<Param name="omega_n" val="4"/> 
+		<Param name="sigma" val="0.707"/> 
+		<Param name="a1" val="2*sigma*omega_n+b"/> 
+		<Param name="a2" val="2*sigma*omega_n*b"/> 
+	</Params>
+	<TFs>	
+		<Eq fx="y/yc = 1/(s^3 + a1*s^2 + a2*s)"/> 	<!-- Process -->	
+	</TFs>
+	<ODEqs> <!-- PID controller -->	
+		<Eq fx=" err_x1'  = err"/>
+		<Eq fx="err'= ydiv/Kd"/>
+	</ODEqs>
+	<NLEqs>
+		<Eq fx="err=u-y"/> 	<!-- negative feedback -->	
+		<Eq fx="ydiv+Ki*err_x1+Kp*err-yc"/> <!-- PID controller output-->	
+	</NLEqs>
+</Model>
+
+<!-- Nastaviti od createStateSpace -->

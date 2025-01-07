@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Model type="NR" domain="real" name="Demo">
+	<Vars>
+		<Var name="x" val="-1"/> <!-- Variable name and initial value (optional) -->
+		<Var name="y" val="1"/> <!-- Variable name and initial value (optional) -->
+	</Vars>
+	<Params>
+		<Param name="k" val="1+(5!=6)"/> <!-- Parameter name and its value -->
+		<Param name="n" val="-0.5"/> <!-- Parameter name and its value -->
+	</Params>
+	<NLEqs>
+		<Eq fx="x^2+y^2=4"/> 	<!-- First nonlinear equation of the model (circle) -->
+		<Eq fx="-y-(-k*x+n)"/> 		<!-- Second equation of the model (line) -->	
+		<!-- rezultat: x=0.688819 y=1.87764		-->
+		<!-- https://web.iit.edu/sites/web/files/departments/academic-affairs/academic-resource-center/pdfs/product_quotient_rule.pdf -->
+	</NLEqs>
+</Model>

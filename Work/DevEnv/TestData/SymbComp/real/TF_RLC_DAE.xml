@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model type="DAE" domain="real" method="Trapezoidal" name="RLC">
+	<Vars>
+		<Var name="y2" val="0"/>
+		<Var name="x1" val="0"/> 
+		<Var name="x2" val="0"/> 
+	</Vars>
+	<Params>  
+		<Param name="y1" val="1"/>
+		<Param name="R" val="1"/>
+		<Param name="L" val="0.1"/>
+		<Param name="C" val="0.005"/>
+	</Params>
+	<ODEqs>
+		<Eq fx="x1'=x2"/>
+		<Eq fx="x2'=y1-1/(L*C)*x1-R*x2/L"/>
+	</ODEqs>
+	<NLEqs>
+		<Eq fx="y2=R*x2/L"/> 	<!-- Mechanical system -->			
+	</NLEqs>
+</Model>
+
+<!--- Primjer sa linka:
+https://coertvonk.com/physics/rlc-filters/rlc-resonator/rlc-resonator-14404#:~:text=In%20the%20RLC%20circuit%2C%20the,multiplied%20with%20the%20capacitor%20impedance.
+-->

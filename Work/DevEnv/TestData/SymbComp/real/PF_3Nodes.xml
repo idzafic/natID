@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model type="NR" domain="real" name="PF">
+	<Vars>
+		<Var name="theta_2" val="0"/> <!-- Variable name and its initial value (optional)-->
+		<Var name="theta_3" val="0"/>
+		<Var name="v_2" val="1"/>
+		<Var name="v_3" val="1"/>
+	</Vars>
+	<Params>
+		<Param name="v_1" val="0.999679"/>
+		<Param name="theta_1" val="0"/> <!-- Parameter name and its value-->
+		<Param name="g_12" val="10"/> 
+		<Param name="b_12" val="-30"/> 
+		<Param name="g_13" val="6.8966"/> 
+		<Param name="b_13" val="-17.2414"/>
+		<Param name="g_23" val="4.1096"/> 
+		<Param name="b_23" val="-10.9589"/>
+		<Param name="G11" val="g_12+g_13"/>
+		<Param name="B11" val="b_12+b_13"/>
+		<Param name="G22" val="g_12+g_23"/>
+		<Param name="B22" val="b_12+b_23"/>
+		<Param name="G33" val="g_13+g_23"/>
+		<Param name="B33" val="b_13+b_23"/>		
+		<Param name="G12" val="-g_12"/>
+		<Param name="B12" val="-b_12"/>
+		<Param name="G13" val="-g_13"/>
+		<Param name="B13" val="-b_13"/>
+		<Param name="G23" val="-g_23"/>
+		<Param name="B23" val="-b_23"/>
+		<Param name="P2_inj" val="-0.496113"/>
+		<Param name="Q2_inj" val="-0.294942"/>
+		<Param name="P3_inj" val="-1.50503"/>
+		<Param name="Q3_inj" val="-0.798326"/>
+	</Params>
+	<NLEqs>
+		<!-- node 2 -->
+		<Eq fx="v_2^2*G22 + v_2*v_1*(G12*cos(theta_2-theta_1)+B12*sin(theta_2-theta_1))+v_2*v_3*(G23*cos(theta_2-theta_3)+B23*sin(theta_2-theta_3))-P2_inj"/>
+		<Eq fx="-v_2^2*B22 + v_2*v_1*(G12*sin(theta_2-theta_1)-B12*cos(theta_2-theta_1))+v_2*v_3*(G23*sin(theta_2-theta_3)-B23*cos(theta_2-theta_3))-Q2_inj"/>
+		<!-- node 3 -->
+		<Eq fx="v_3^2*G33 + v_3*v_1*(G13*cos(theta_3-theta_1)+B13*sin(theta_3-theta_1))+v_3*v_2*(G23*cos(theta_3-theta_2)+B23*sin(theta_3-theta_2))-P3_inj"/>
+		<Eq fx="-v_3^2*B33 + v_3*v_1*(G13*sin(theta_3-theta_1)-B13*cos(theta_3-theta_1))+v_3*v_2*(G23*sin(theta_3-theta_2)-B23*cos(theta_3-theta_2))-Q3_inj"/>
+	</NLEqs>
+</Model>
+
+<!-- solution 
+theta_2=-0.0216753
+theta_3=-0.0474476
+v_1=0.999679
+v_2=0.974208
+v_3=0.943715
+
+PostProc values
+P_1 = 2.05478
+P_2 = -0.496113
+P_3 = -1.50503
+Q_1 = 1.23395
+Q_2 = -0.294942
+Q_3 = -0.798326
+
+theta_2=-0.0101078
+theta_3=-0.0429377
+v_2=0.978291
+v_3=0.945484
+-->

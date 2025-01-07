@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model type="WLS" domain="real" name="4Nodes">
+	<Vars>
+		<Var name="theta_2" val="0"/> <!-- Variable name and its initial value (optional)-->
+		<Var name="theta_3" val="0"/>
+		<Var name="theta_4" val="0"/>
+		<Var name="v_1" val="1"/>
+		<Var name="v_2" val="1"/>
+		<Var name="v_3" val="1"/>
+		<Var name="v_4" val="1"/>
+	</Vars>
+	<Params>
+		<Param name="w_inj" val="1/0.01^2"/> 
+		<Param name="w_br" val="1/0.008^2"/> 
+		<Param name="w_v" val="1/0.004^2"/> 
+		<Param name="w_zi" val="1/0.00001^2"/> 
+		
+		<Param name="theta_1" val="0"/> <!-- Parameter name and its value-->
+		<Param name="g_12" val="10"/> 
+		<Param name="b_12" val="-30"/> 
+		<Param name="g_13" val="6.8966"/> 
+		<Param name="b_13" val="-17.2414"/>
+		<Param name="g_23" val="4.1096"/> 
+		<Param name="b_23" val="-10.9589"/>
+		<Param name="g_34" val="10"/> 
+		<Param name="b_34" val="-50"/>
+		<Param name="b_cap4" val="0.5"/>
+		
+		<Param name="G11" val="g_12+g_13"/>
+		<Param name="B11" val="b_12+b_13"/>
+		<Param name="G22" val="g_12+g_23"/>
+		<Param name="B22" val="b_12+b_23"/>
+		<Param name="G33" val="g_13+g_23+g_34"/>
+		<Param name="B33" val="b_13+b_23+b_34"/>
+		<Param name="G44" val="g_34"/>
+		<Param name="B44" val="b_34+b_cap4"/>		
+		<Param name="G12" val="-g_12"/>
+		<Param name="B12" val="-b_12"/>
+		<Param name="G13" val="-g_13"/>
+		<Param name="B13" val="-b_13"/>
+		<Param name="G23" val="-g_23"/>
+		<Param name="B23" val="-b_23"/>
+		<Param name="G34" val="-g_34"/>
+		<Param name="B34" val="-b_34"/>
+		<Param name="P_12_meas" val="0.442334"/>
+		<Param name="Q_12_meas" val="0.399886"/>
+		<Param name="P_13_meas" val="1.05947"/>
+		<Param name="Q_13_meas" val="0.36184"/>
+		<Param name="P_2_meas" val="-0.496113"/>
+		<Param name="Q_2_meas" val="-0.294942"/>
+		<Param name="P_43_meas" val="-1.50503"/>
+		<Param name="Q_43_meas" val="-0.328247"/>
+		<Param name="V_1_meas" val="1.02"/>
+		<Param name="V_2_meas" val="1.00394"/>
+		<Param name="V_3_meas" val="0.982513"/>
+		<Param name="V_4_meas" val="0.969618"/>
+		
+		<!-- PostProc params -->
+		<Param name="P_12" val="0"/> 
+		<Param name="Q_12" val="0"/>
+		<Param name="P_21" val="0"/>  
+		<Param name="Q_21" val="0"/> 
+		<Param name="P_12_loss" val="0"/>  
+		<Param name="Q_12_loss" val="0"/>
+		
+		<Param name="P_13" val="0"/> 
+		<Param name="Q_13" val="0"/>
+		<Param name="P_31" val="0"/>  
+		<Param name="Q_31" val="0"/> 
+		<Param name="P_13_loss" val="0"/>  
+		<Param name="Q_13_loss" val="0"/>
+		
+		<Param name="P_23" val="0"/> 
+		<Param name="Q_23" val="0"/>
+		<Param name="P_32" val="0"/>  
+		<Param name="Q_32" val="0"/> 
+		<Param name="P_23_loss" val="0"/>  
+		<Param name="Q_23_loss" val="0"/>
+		
+		<Param name="P_34" val="0"/> 
+		<Param name="Q_34" val="0"/>
+		<Param name="P_43" val="0"/>  
+		<Param name="Q_43" val="0"/> 
+		<Param name="P_34_loss" val="0"/>  
+		<Param name="Q_34_loss" val="0"/>
+		
+	</Params>
+	<MeasEqs>
+		<Eq w="w_br" fx="v_1^2*g_12-v_1*v_2*(g_12*cos(theta_1-theta_2)+b_12*sin(theta_1-theta_2))-P_12_meas"/> 
+		<Eq w="w_br" fx="v_1^2*g_13-v_1*v_3*(g_13*cos(theta_1-theta_3)+b_13*sin(theta_1-theta_3))-P_13_meas"/>
+		<Eq w="w_inj" fx="v_2^2*G22-v_2*v_1*(g_12*cos(theta_2-theta_1)+b_12*sin(theta_2-theta_1))-v_2*v_3*(g_23*cos(theta_2-theta_3)+b_23*sin(theta_2-theta_3))-P_2_meas"/>
+		<Eq w="w_br" fx="-v_1^2*b_12-v_1*v_2*(g_12*sin(theta_1-theta_2)-b_12*cos(theta_1-theta_2))-Q_12_meas"/>
+		<Eq w="w_br" fx="-v_1^2*b_13-v_1*v_3*(g_13*sin(theta_1-theta_3)-b_13*cos(theta_1-theta_3))-Q_13_meas"/>
+		<Eq w="w_inj" fx="-v_2^2*B22-v_2*v_1*(g_12*sin(theta_2-theta_1)-b_12*cos(theta_2-theta_1))-v_2*v_3*(g_23*sin(theta_2-theta_3)-b_23*cos(theta_2-theta_3))-Q_2_meas"/>
+		
+		<Eq w="w_br" fx="v_4^2*g_34-v_4*v_3*(g_34*cos(theta_4-theta_3)+b_34*sin(theta_4-theta_3))-P_43_meas"/>
+		<Eq w="w_br" fx="-v_4^2*b_34-v_4*v_3*(g_34*sin(theta_4-theta_3)-b_34*cos(theta_4-theta_3))-Q_43_meas"/>
+			
+		<Eq w="w_v" fx="v_1-V_1_meas"/>
+		<Eq w="w_v" fx="v_2-V_2_meas"/>
+		<Eq w="w_v" fx="v_1-V_3_meas"/>
+		<Eq w="w_v" fx="v_2-V_4_meas"/>
+	</MeasEqs>
+	<ECs>
+		<Eq fx="v_3*G33 + v_1*(G13*cos(theta_3-theta_1)+B13*sin(theta_3-theta_1))+v_2*(G23*cos(theta_3-theta_2)+B23*sin(theta_3-theta_2))+v_4*(G34*cos(theta_3-theta_4)+B34*sin(theta_3-theta_4))"/>
+		<Eq fx="-v_3*B33 + v_1*(G13*sin(theta_3-theta_1)-B13*cos(theta_3-theta_1))+v_2*(G23*sin(theta_3-theta_2)-B23*cos(theta_3-theta_2))+v_4*(G34*sin(theta_3-theta_4)-B34*cos(theta_3-theta_4))"/>
+	</ECs>
+	<PostProc>
+		<!-- active and reactive powers on brach 1-2 -->
+		<Eq fx="P_12 = v_1^2*g_12 - v_1*v_2*(g_12*cos(theta_1-theta_2)+b_12*sin(theta_1-theta_2))"/>
+		<Eq fx="Q_12 = -v_1^2*b_12 - v_1*v_2*(g_12*sin(theta_1-theta_2)-b_12*cos(theta_1-theta_2))"/>
+		<Eq fx="P_21 = v_2^2*g_12 - v_2*v_1*(g_12*cos(theta_2-theta_1)+b_12*sin(theta_2-theta_1))"/>
+		<Eq fx="Q_21 = -v_2^2*b_12 - v_2*v_1*(g_12*sin(theta_2-theta_1)-b_12*cos(theta_2-theta_1))"/>
+		<Eq fx="P_12_loss = P_12 + P_21"/>
+		<Eq fx="Q_12_loss = Q_12 + Q_21"/>
+		
+		<!-- active and reactive powers on brach 1-3 -->
+		<Eq fx="P_13 = v_1^2*g_13 - v_1*v_3*(g_13*cos(theta_1-theta_3)+b_13*sin(theta_1-theta_3))"/>
+		<Eq fx="Q_13= -v_1^2*b_13 - v_1*v_3*(g_13*sin(theta_1-theta_3)-b_13*cos(theta_1-theta_3))"/>
+		<Eq fx="P_31 = v_3^2*g_13 - v_3*v_1*(g_13*cos(theta_3-theta_1)+b_13*sin(theta_3-theta_1))"/>
+		<Eq fx="Q_31 = -v_3^2*b_13 - v_3*v_1*(g_13*sin(theta_3-theta_1)-b_13*cos(theta_3-theta_1))"/>
+		<Eq fx="P_13_loss = P_13 + P_31"/>
+		<Eq fx="Q_13_loss = Q_13 + Q_31"/>
+		
+		<!-- active and reactive powers on brach 2-3 -->
+		<Eq fx="P_23 = v_2^2*g_23 - v_2*v_3*(g_23*cos(theta_2-theta_3)+b_23*sin(theta_2-theta_3))"/>
+		<Eq fx="Q_23 = -v_2^2*b_23 - v_2*v_3*(g_23*sin(theta_2-theta_3)-b_23*cos(theta_2-theta_3))"/>
+		<Eq fx="P_32 = v_3^2*g_23 - v_3*v_2*(g_23*cos(theta_3-theta_2)+b_23*sin(theta_3-theta_2))"/>
+		<Eq fx="Q_32 = -v_3^2*b_23 - v_3*v_2*(g_23*sin(theta_3-theta_2)-b_23*cos(theta_3-theta_2))"/>
+		<Eq fx="P_23_loss = P_23 + P_32"/>
+		<Eq fx="Q_23_loss = Q_23 + Q_32"/>
+		
+		<!-- active and reactive powers on brach 3-4 -->
+		<Eq fx="P_34 = v_3^2*g_34 - v_3*v_4*(g_34*cos(theta_3-theta_4)+b_34*sin(theta_3-theta_4))"/>
+		<Eq fx="Q_34 = -v_3^2*b_34 - v_3*v_4*(g_34*sin(theta_3-theta_4)-b_34*cos(theta_3-theta_4))"/>
+		<Eq fx="P_43 = v_4^2*g_34 - v_4*v_3*(g_34*cos(theta_4-theta_3)+b_34*sin(theta_4-theta_3))"/>
+		<Eq fx="Q_43 = -v_4^2*b_34 - v_4*v_3*(g_34*sin(theta_4-theta_3)-b_34*cos(theta_4-theta_3))"/>
+		<Eq fx="P_34_loss = P_34 + P_43"/>
+		<Eq fx="Q_34_loss = Q_34 + Q_43"/>
+	</PostProc>
+</Model>
+
+<!-- solution 
+theta_2=-0.00905379
+theta_3=-0.0456537
+theta_4=-0.0747136
+v_2=1.00394
+v_3=0.982513
+v_4=0.969618
+DLLTest:Number of Parameters:55
+PostProc values
+P_12 = 0.442334
+Q_12 = 0.399886
+P_21 = -0.438916
+Q_21 = -0.389633
+P_12_loss = 0.00341761
+Q_12_loss = 0.0102528
+P_13 = 1.05947
+Q_13 = 0.36184
+P_31 = -1.03537
+Q_31 = -0.301604
+P_13_loss = 0.0240947
+Q_13_loss = 0.0602365
+P_23 = 0.486679
+Q_23 = 0.0946914
+P_32 = -0.479362
+Q_32 = -0.0751798
+P_23_loss = 0.0073169
+Q_23_loss = 0.0195117
+P_34 = 1.51474
+Q_34 = 0.376783
+P_43 = -1.50503
+Q_43 = -0.328247
+P_34_loss = 0.00970729
+Q_34_loss = 0.0485365
+
+-->

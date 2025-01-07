@@ -1,0 +1,18 @@
+
+if(WIN32)
+	set(GTK_GL_INCS "DodatiIncsLibsZaWinGL")
+	if("${CMAKE_SIZEOF_VOID_P}" STREQUAL "4")	
+		set(GTK_GL_INCS  "${GTK_INCP}" "${GTK_INCP}/epoxy")			
+		set(GTK_GL_LIBS "${GTK_LIBP}/epoxy.lib")
+	else()
+		set(GTK_GL_INCS  "${GTK_INCP}" "${GTK_INCP}/epoxy")			
+		set(GTK_GL_LIBS "${GTK_LIBP}/epoxy.lib")
+	endif()
+elseif(APPLE)
+    set(GTK_GL_INCS  "${GTK_INCP}" "${GTK_INCP}/epoxy")			
+	set(GTK_GL_LIBS "${GTK_LIBP}/libepoxy.0.dylib")
+else()
+	#Linux
+	set(GTK_GL_INCS  "${GTK_INCP}" "${GTK_INCP}/epoxy")			
+	set(GTK_GL_LIBS "${GTK_LIBP}/epoxy.0.so")
+endif()

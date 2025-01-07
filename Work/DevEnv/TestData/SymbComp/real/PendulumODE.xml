@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model type="ODE" name="Pendulum">
+	<Vars out="true">
+		<Var name="theta" val="pi/6"/> <!-- Variable name and initial value (optional) -->
+		<Var name="omega" val="0"/> <!-- Variable name and initial value (optional) -->
+	</Vars>
+	<Params dT="1e-5">
+		<Param name="l" val="1"/> <!-- Parameter name and its value -->
+		<Param name="m" val="1"/> <!-- Parameter name and its value -->
+		<Param name="g" val="9.81"/> <!-- Parameter name and its value -->
+		<Param name="k" val="0"/> <!-- koeficijent otpora zraka -->
+	</Params>
+	<ODEqs>
+		<Eq fx="theta'=omega"/> 				<!-- First state variable-->
+		<Eq fx="omega'=-g*sin(theta)/l-k*omega/(m*l)"/> 	<!-- Second state variable-->			
+	</ODEqs>
+</Model>

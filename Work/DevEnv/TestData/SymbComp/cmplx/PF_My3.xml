@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model type="NR" domain="cmplx" name="PF_3Nodes">
+	<Vars conj="true">
+		<Var name="v2" val="v1"/>
+		<Var name="v3" val="v1"/>
+	</Vars>
+	<Params>
+		<Param name="v1" val="1+0i"/>
+		<Param name="z12" val="0.005+0.03i"/> 
+		<Param name="z23" val="0.005+0.03i"/> 
+		<Param name="z24" val="0.01+0.05i"/>
+		 
+		<Param name="y21" val="1/z12"/> 
+		<Param name="y23" val="1/z23"/> 
+		<Param name="y24" val="1/z24"/> 
+		
+		<Param name="y22" val="y21+y23"/> 
+		<Param name="y33" val="y23"/> 
+		
+		<Param name="S3_inj" val="-1-0.3i"/>
+	</Params>
+	<NLEqs>
+		<!-- node 2 (ZI)-->
+		<Eq fx="y22*v2-y21*v1-y23*v3=0"/>
+		<Eq fx="conj(y22*v2-y21*v1-y23*v3)=0"/>
+		<!-- node 3 -->
+		<Eq fx="v3*conj(y33*v3-y23*v2) - S3_inj=0"/>
+		<Eq fx="conj(v3)*(y33*v3-y23*v2) - conj(S3_inj)=0"/>
+	</NLEqs>
+</Model>
+
+<!-- solution 
+DLLTest:Solved in 3 iterations. Precision = 2.76107e-09
+DLLTest:Results outside DLL. Var No: 4
+Results:
+phi_2=-0.0289596
+v_2=0.984267
+phi_3=-0.0588341
+v_3=0.969385
+-->

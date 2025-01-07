@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Model type="NR" domain="real" name="DerivationTestWithRealVariablesAndFunctions">
+	<Vars>
+		<Var name="x" val="-1"/> <!-- Variable name and initial value (optional) -->
+		<Var name="y" val="1"/> <!-- Variable name and initial value (optional) -->
+	</Vars>
+	<Params>
+		<Param name="k" val="2"/> <!-- Parameter name and its value -->
+		<Param name="n" val="-0.5"/> <!-- Parameter name and its value -->
+	</Params>
+	<NLEqs>
+		<!--simple tests -->	
+		
+		<Eq fx="4/x"/> 	
+		<Eq fx="e^x"/> 
+		<Eq fx="log(x)"/>
+		<Eq fx="sign(x*y)"/>
+		<Eq fx="abs(x)"/>
+		<Eq fx="asin(x)"/>
+		<Eq fx="acos(x)"/>
+		<Eq fx="atg(x)"/>
+		<Eq fx="atg2(x,y)"/>
+		
+		<!--more complex tests -->
+		<Eq fx="4/(4*x+y*2)"/> 
+		<Eq fx="e^(1-x)+x*2"/> 
+		<Eq fx="e^(cos(2*pi*x^2))"/> 
+		<Eq fx="log(x^2*3)"/>
+		<Eq fx="ln(x^2*3)"/>
+		<Eq fx="atg2(3*x^2,y)"/>
+		<Eq fx="abs(2*x^2+y)*3"/>
+		<Eq fx="atg(2*x/y)"/>
+		<Eq fx="asin(x/y)"/>  
+		<Eq fx="acos(x/y)"/>  
+		<Eq fx="abs(x)*e^(2*x)"/> 
+		<Eq fx="sign(3*x)+ln(x*cos(x))"/> 
+		<Eq fx="sin(x)/cos(x)"/> 	
+		<Eq fx="sin(x)*cos(x)"/> 	
+		<Eq fx="sign(x)*x^2"/> 
+		<Eq fx="sign(x)*x^(x*2*y*3)"/> 
+		
+		<Eq fx="(x*y)^2*4"/>
+		<Eq fx="4*(x*y)^2"/>
+		<Eq fx="4*sqr(x*y)"/>
+		<Eq fx="4*sqrt(x*y)"/>  
+		<Eq fx="tg(3*x^2)*2"/> 
+		
+		<Eq fx="(x+2)^(x+1)"/> 	
+		<Eq fx="sin(2*x)/x^2"/> 	
+		
+		<Eq fx="ln(2*x+5)/2"/> 	
+		<Eq fx="(k+5)^x"/> 	
+		<Eq fx="2.71^x"/> 	
+		<Eq fx="(3+2*x)^2/2"/> 	
+		<Eq fx="0.5*x^2"/> 	
+		<Eq fx="x^2*0.5"/> 	
+		<Eq fx="x^2*3+y^(k+1)=4"/> 	
+		<Eq fx="-y-(-k*x+n)"/> 	
+		<!-- very complex tests -->
+		<Eq fx="cos(x)^((x+2)^(x+1))"/> 
+	</NLEqs>
+</Model>

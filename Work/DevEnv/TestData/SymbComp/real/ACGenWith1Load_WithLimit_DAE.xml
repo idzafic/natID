@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model type="DAE" domain="real" method="Trapezoidal" name="Generator with a single node">
+	<Vars out="true">
+		<Var name="theta_g" val="0"/> 
+		<Var name="omega_g" val="1"/> 
+		<Var name="regI" val="1.01102"/>
+		<Var name="theta_l" val="0.00200082"/> 
+		<Var name="v_l" val="0.989694"/>
+		<Var name="P_ge" val="1.01102"/>
+		<Var name="P_gm" val="1.01102"/>
+	</Vars>
+	<Params dT="1e-4">  <!-- default integration step -->
+		<Param name="omega_ref" val="1"/>
+		<Param name="V_gref" val="1"/>
+		<Param name="v_g" val="V_gref"/> 
+		<Param name="g_line" val="100"/>
+		<Param name="b_line" val="-10"/> 
+		<Param name="P_l_steady" val="-1"/> 
+		<Param name="P_l_transient" val="-10"/> 
+		<Param name="Q_l" val="-0.3"/> 
+		<Param name="H" val="20"/> 
+		<Param name="D" val="0.1"/> 
+		<Param name="G11" val="g_line"/>
+		<Param name="B11" val="b_line"/>
+		<Param name="G22" val="G11"/>
+		<Param name="B22" val="B11"/>
+		<Param name="G12" val="-g_line"/>
+		<Param name="B12" val="-b_line"/>
+		<Param name="Kp" val="200"/> <!-- 100-->
+		<Param name="Ki" val="60"/> <!-- 20 -->
+		<Param name="Pgm_min" val="0"/> <!-- 20 -->
+		<Param name="Pgm_max" val="11.5"/> <!-- 20 -->
+	</Params>
+	<!-- Main problem -->
+	<ODEqs>
+		<Eq fx="theta_g' = omega_g"/> 
+		<Eq fx="omega_g' = (P_gm-P_ge) / (H*omega_g)"/> 
+		<Eq fx="regI = Ki*int(omega_ref-omega_g)"/> 
+	</ODEqs>
+	<NLEqs>
+		<Eq fx="v_l^2*G22 + v_l*v_g*(G12*cos(theta_l-theta_g) + B12*sin(theta_l-theta_g))-P_l_transient"/>
+		<Eq fx="-v_l^2*B22 + v_l*v_g*(G12*sin(theta_l-theta_g) - B12*cos(theta_l-theta_g))-Q_l"/>	
+		<Eq fx="P_ge=v_g^2*G11 + v_l*v_g*(G12*cos(theta_g-theta_l) + B12*sin(theta_g-theta_l))"/>
+		<Eq fx="P_gm=lim(Kp*(omega_ref-omega_g) + regI, Pgm_min, Pgm_max)"/>
+	</NLEqs>
+	<PostProc>
+		<!-- limit angles to be between pi an -pi -->
+		<Eq cond="theta_g > pi">
+			<Then fx="theta_g -= 2*pi"/>
+		</Eq>
+		<Eq cond="theta_l > pi">
+			<Then fx="theta_l -= 2*pi"/>
+		</Eq>
+	</PostProc>
+</Model>
