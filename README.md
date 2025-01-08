@@ -1,6 +1,6 @@
 # natID (Native Interface Design for macOS, linux, and windows)
 
-natID is a C++ framework for developing and distributing a wide range of applications, with a primary focus on engineering and data processing. It supports the following operating systems:
+natID is a C++ framework designed for developing and distributing a wide variety of applications, with a focus on engineering, data processing, and data visualization. The main goal of natID is to allow you to write GUI applications in modern C++ once and compile them for different operating systems without changes. While there are other toolkits that follow this approach, natID's key advantage is that it uses the native components of each system. As a result, applications created with natID have a natural look and feel. It supports the following operating systems:
 
   - macOS 12.3+ (Intel and ARM/Apple Sillicon)
   - Linux (requires GTK 4.14 or later)
