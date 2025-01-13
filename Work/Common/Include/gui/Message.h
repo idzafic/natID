@@ -1,12 +1,3 @@
-// ################################################################################################################
-// # native Interface Design (natID)
-// # Licensed under the Creative Commons Attribution-NoDerivatives (CC BY-ND), version 4.
-// # 
-// # You may use this code under the terms of the Creative Commons Attribution-NoDerivatives (CC BY-ND), version 4.
-// # 
-// # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
-// ################################################################################################################
-
 //
 //  Created by Izudin Dzafic on 28/07/2020.
 //  Copyright © 2020 IDz. All rights reserved.
@@ -27,7 +18,7 @@ public:
     enum class Type : unsigned char {MT_NA=0, MT_FocusIn, MT_FocusOut, MT_Enter, MT_ComboSelectionChanged, MT_TableEditSelectionChanged,
         MT_BtnClick, MT_CheckBtnClick, MT_DrawableBtnClick, MT_DlgBtnClick, MT_FileDlgClick, MT_AlertClick, MT_MenuActivate,
         MT_ToolbarActivate, MT_ToolbarPopoverChange, MT_PopoverButtonSelChange, MT_ToolbarComboSelectionChanged,
-        MT_NavigatorSelectionChanged, MT_StandardTabViewSelectionChanged, MT_TextEditSelectionChaged,
+        MT_NavigatorSelectionChanged, MT_StandardTabViewSelectionChanged, MT_TextEditSelectionChaged, MT_CodeViewSelectionChaged,
         MT_TabViewSelectionChanged, MT_TabViewShowView,
         MT_BeginEdit, MT_ReMeasure, MT_Slider_ValChange, MT_DateTime_ValChange, MT_Color_ValChange, MT_LinePattern_ValChange,
         MT_Timer,

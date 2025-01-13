@@ -1,12 +1,3 @@
-// ################################################################################################################
-// # native Interface Design (natID)
-// # Licensed under the Creative Commons Attribution-NoDerivatives (CC BY-ND), version 4.
-// # 
-// # You may use this code under the terms of the Creative Commons Attribution-NoDerivatives (CC BY-ND), version 4.
-// # 
-// # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
-// ################################################################################################################
-
 //
 //  Created by Izudin Dzafic on 28/07/2020.
 //  Copyright © 2020 IDz. All rights reserved.
@@ -24,7 +15,7 @@
 namespace gui
 {
 
-enum class ObjType : unsigned char {AppWindow=0, Window, Dialog, FileDialog, OpenFileDialog, SaveFileDialog, MenuBar, MenuItem, ToolBar, ToolBarView, ToolBarItem, ToolBarButton, StatusBar, ToolBarPopoverItem, Image, View, ViewScroller, ViewSwitcher, StandardTabView, TabView, Navigator, Canvas, GLView, GLXView, Label, LineEdit, PasswordEdit, NumericEdit, DateEdit, TimeEdit, TextEdit, ComboBox, DBComboBox, CheckBox, Slider, ProgressIndicator, TableEdit, ColorPicker, LinePatternPicker, DotPatternPicker, PopoverView, ColorPopoverView, PopoverButton, ContextMenuNat, ImageView, Button, PushButton, DrawableButton, DrawableButtonIntern, DrawableButtonWithDelegate,
+enum class ObjType : unsigned char {AppWindow=0, Window, Dialog, FileDialog, OpenFileDialog, SaveFileDialog, MenuBar, MenuItem, ToolBar, ToolBarView, ToolBarItem, ToolBarButton, StatusBar, ToolBarPopoverItem, Image, View, ViewScroller, ViewSwitcher, StandardTabView, TabView, Navigator, Canvas, GLView, GLXView, Label, LineEdit, PasswordEdit, NumericEdit, DateEdit, TimeEdit, TextEdit, CodeView, ComboBox, DBComboBox, CheckBox, Slider, ProgressIndicator, TableEdit, ColorPicker, LinePatternPicker, DotPatternPicker, PopoverView, ColorPopoverView, PopoverButton, ContextMenuNat, ImageView, Button, PushButton, DrawableButton, DrawableButtonIntern, DrawableButtonWithDelegate,
     MenuButton, HorizontalLayout, VerticalLayout, GridLayout, PropertyLayout, SplitterLayout, SplitterCell, Transformation, Timer, NA};
 
 //enum class Artwork : unsigned char {EPS=0, PDF, SVG};
