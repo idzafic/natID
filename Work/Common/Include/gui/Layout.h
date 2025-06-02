@@ -18,10 +18,12 @@ namespace gui
 {
 
 class View;
+class BaseView;
 
 class NATGUI_API Layout : public Control
 {
     friend class View;
+    friend class BaseView;
 protected:
     Layout();
     void addCtrlToView(Control* pCtrl, View* pView) const;

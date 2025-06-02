@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevRes>
+	<Translations>
+		<Res id="@ML.HeaderIncorrect" tr="Zaglavlje (header) modela nije korektan ili nedostaje (@ML.HeaderIncorrectOrMissing)"/>
+		<Res id="@SC.CmplxTypeInReal" tr="Detektovana kompleksna vrijednost u modelu realne domene (@SC.CmplxTypeInReal)"/>
+		<Res id="@CELH.Type" tr="Tip"/>
+		<Res id="@CELHT.TypeTT" tr="Tip poruke (Info, Upozorenje, Greška)"/>
+		<Res id="@CELH.Editor" tr="Editor"/>
+		<Res id="@CELHT.Editor" tr="Editor koji je generisao poruku (glavni-'mozak' ikona, ili visualizirajući editor-ikona grafa)"/>
+		<Res id="@CELH.Line#" tr="#Linije"/>
+		<Res id="@CELH.Line#TT" tr="Broj linije u odgovarajućem editoru"/>
+		<Res id="@CELH.Col#" tr="#Kolone"/>
+		<Res id="@CELH.Col#TT" tr="Broj kolone u odgovarajućem editoru"/>
+		<Res id="@CELH.Msg" tr="Opis poruke"/>
+		<Res id="@CELH.MsgTT" tr="Poruka sa svim raspoloživim detaljima"/>
+		<Res id="@CE.VarDDVars" tr="Varijabla iz glavnog modela je već definisana u varijablama gl. modela (@CE.VarDDVars)"/>
+		<Res id="@CE.SubVarDDSubVars" tr="Varijabla podmodela (SubModel) je već definisana u varijablama podmodela (@CE.SubVarDDSubVars)"/>
+		<Res id="@CE.ParDDInPars" tr="Parametar podmodela je već definisana u parametrima podmodela (@CE.ParDDInPars)"/>
+		<Res id="@CE.ParDDInVars" tr="Parametar glavnog modela je već definisan u varijablama (@CE.ParDDInVars)"/>
+		<Res id="@CE.SubParDDSubVars" tr="Varijabla podmodela je već definisana u varijablama podmodela (@CE.SubParDDSubVars)"/>
+		<Res id="@CE.SubParDDSubPars" tr="Parametar podmodela je već definisan u parametrima podmodela (@CE.SubParDDSubPars)"/>
+		<Res id="@CE.SubParDDInPars" tr="Parametar podmodela je već definisan u parametrima glavnog modela (@CE.SubParDDInPars)"/>
+		<Res id="@CE.notInModel" tr="Token se nalazi izvan granica modela (@CE.notInModel)"/>
+		<Res id="@CE.endMissing" tr="Nedostaje end (@CE.endMissing)"/>
+		<Res id="@CE.AttribClosedNoO" tr="Pokušaj zatvaranja sekcije atributa sa &apos;]&apos; bez otvaranaj (nedostaje &apos;[&apos;) (@CE.AttribClosedNoOpen)"/>
+		<Res id="@CE.AttribNotClosed" tr="Sekcija atributa je otvorena ali nije zatvorena sa ']' (@CE.AttribNotClosed)"/>
+		<Res id="@CE.wrongModelPos" tr="Pogrešna pozicija modela (@CE.wrongModelPos)"/>
+		<Res id="@CE.endMissmatch" tr="Nesinhronizirani 'end' (Vjerovano previše &apos;end&apos;-ova) (@CE.endMissmatch)"/>
+		<Res id="@CE.AttribMismatch" tr="Neodgovarajući tip atributa (@CE.AttribMismatch)"/>
+		<Res id="@CE.UnknownLabel" tr="Nepoznata labela (@CE.UnknownLabel)"/>
+		<Res id="@CE.UnexpectedToken" tr="Neočekivan token (@CE.UnexpectedToken)"/>
+		<Res id="@CESB.NoOfErrors" tr="Broj grešaka:"/>
+		<Res id="@CESB.CursorPositio" tr="Pozicija pokazivača:"/>
+		<Res id="@SC.EmpryParamName" tr="Prazno ime parametra (@SC.EmpryParamName)"/>
+		<Res id="@SC.AssignWith0Toke" tr="Pridodjeljivanje bez ijednog tokena (@SC.AssignWith0Tokens)"/>
+		<Res id="@SC.AssignWith2Toke" tr="Pridodjeljivanje sa dva tokena (@SC.AssignWith2Tokens)"/>
+		<Res id="@SC.WrongType" tr="Pogrešan tip (@SC.WrongType)"/>
+		<Res id="@SC.Missing=InAssig" tr="Nedostaje '=' u izrazu za pridodjeljivanje (@SC.Missing=InAssignement)"/>
+		<Res id="@ML.HeaderParamInco" tr="Nekompletirana vrijednost header parametra (nedostaje vrijednost pozlije znaka pridodjeljivanja '=')"/>
+		<Res id="@ML.HeaderTokError" tr="Neočekivan/nepoznat token in header definition"/>
+		<Res id="@ML.HeaderEndAfter" tr="Postoji sadržaj u istoj liniji poslije 'end' u definiciji header-a"/>
+		<Res id="@ML.HeaderParamUnkn" tr="Nepoznat parameter name u definiciji header-a"/>
+		<Res id="@ML.HeaderParamExp=" tr="Potrebno je unijeti '=' polije imena header parametra"/>
+		<Res id="@ML.HeaderReportExp" tr="Potrebno je unijeti 'Tip izvještavanja' kao parametarsku vrijednost"/>
+		<Res id="@ML.HeaderWrong=Pos" tr="Pogrešna lokacija '=' znaka u definiciji header parametara"/>
+		<Res id="@ML.HeaderWrongCons" tr="Pogrešna pozicija konstante u definiciji header parametara"/>
+		<Res id="@ML.HeaderWrongPara" tr="Pogrešan tip parametra (specirani tip vrijednosti nije odgovarajući za ovo ime parametra)"/>
+		<Res id="@ML.HeaderWrongParT" tr="Pogrešan tip parametra (specirani tip vrijednosti nije odgovarajući za ovo ime parametra)"/>
+		<Res id="@ML.HeaderUnknownPa" tr="Nepoznato ime/tip header parametra"/>
+		<Res id="@ML.HeaderWithout:" tr="Nedostaje ':' na kraju definicije header-a (zadnji token u liniji sa  'Header' mora biti ':')"/>
+		<Res id="@ML.HeaderTokenAfte" tr="Postoji token u liniji gdje je definisan 'Header' a poslije znaka ':'. Znak ':' mora biti zadnji token."/>
+		<Res id="@ML.HeaderFirstToke" tr="Deklaraija headera mora početi sa 'Header' tokenom."/>
+		<Res id="@CE.ExpEndsWithOper" tr="Izraz/jednačina završava operatorom!"/>
+		<Res id="@CE.ExpEndsWithOpen" tr="Izraz/jednačina završava otvorenom zagranoom!"/>
+		<Res id="@CE.ExpEndsWithAssi" tr="Izraz završava dodijelom!"/>
+		<Res id="@CE.Mising_)" tr="Neusklađenost otvorenih-zatvorenih zagrada. Nedostaje &apos;)&apos;"/>
+		<Res id="@CE.Mising_(" tr="Neusklađenost otvorenih-zatvorenih zagrada. Nedostaje &apos;(&apos;"/>
+		<Res id="@CE.CloseParenthesi" tr="Neusklađenost otvorenih-zatvorenih zagrada."/>
+		<Res id="@ET.FnParamOr()MM" tr="Greška parametra funkcije ili neusklađenost &apos;)&apos; - &apos;)&apos;"/>
+		<Res id="@ET.FnNotPrpFormatt" tr="Funkcija @ nije pravilno formatirana"/>
+		<Res id="@ET.FnNeeds_(" tr="Funkcija @ nije pravilno formatirana! Nedostaje &apos;(&apos;"/>
+		<Res id="@ET.FnNeeds_)" tr="Funkcija @ nije pravilno formatirana! Nedostaje &apos;)&apos;"/>
+		<Res id="@ET.LabelAfterOpera" tr="ID parametra/varijable=&apos;@&apos; nakon drugog operanda"/>
+		<Res id="@ET.ConstAfterOpera" tr="Konstanta=@ nakon drugog operanda"/>
+		<Res id="@ET.(_AfterOperand" tr="Otvorena zagrada nakon operanda"/>
+		<Res id="@ET.OperAfterUnOp" tr="Operator &apos;@&apos; nakon unarnog operatora &apos;@&apos;"/>
+		<Res id="@ET.UnaryAfterUnOpr" tr="Unarni operator &apos;@&apos; nakon operanda"/>
+		<Res id="@ET.OperAfterOper" tr="Operator &apos;@&apos; nakon operatora &apos;@&apos;"/>
+		<Res id="@ET.,NeedsOperator" tr="Zarez slijedi unarni operator!"/>
+		<Res id="@ET.,OutsideFn" tr="Zarez korišten izvan funkcija s više parametara!"/>
+		<Res id="@ET.()_Mismatch" tr="Neusklađenost otvorenih-zatvorenih zagrada!"/>
+		<Res id="@ET.FnParamMising" tr="Nedostaje čvor parametra funkcije!"/>
+		<Res id="@ET.FnParam#Commas" tr="Broj zareza ne odgovara funkciji! Unesite sve parametre funkcije!"/>
+		<Res id="@ET.FnParam2Err" tr="Ne mogu pripremiti drugi parametar funkcije s više parametara!"/>
+		<Res id="@ET.,AfterUnFn" tr="Zarez nakon unarne funkcije!"/>
+		<Res id="@ET.MFnPremEnd" tr="Prerani kraj jednačine tijekom parsiranja funkcije s više parametara=@!"/>
+		<Res id="@ET.MFnExpOprnd" tr="Očekivan operand, dobiven ne-operand tijekom parsiranja funkcije s više parametara=@!"/>
+		<Res id="@ET.MFnNoVar2" tr="Funkcija s više parametara @ ne podržava varijable kao drugi parametar"/>
+		<Res id="@ET.MFnNoVar3" tr="Funkcija s više parametara @ ne podržava varijable kao treći parametar"/>
+		<Res id="@ET.ExpPremEnd" tr="Prerani kraj jednačine/izraza"/>
+		<Res id="@ET.Exp,InMFn" tr="Očekivan zarez u funkciji s više parametara: @"/>
+		<Res id="@ET.ExpPremEndFn" tr="Prerani kraj jednačine (fn=@)!"/>
+		<Res id="@ET.sAfterOprnd" tr="Laplace operator nakon drugog operanda"/>
+		<Res id="@ET.UnexpTokenID" tr="Neočekivan ID tokena: @(@)"/>
+		<Res id="@ET.ErrDifIfThen" tr="Ne mogu diferencirati if-then-else jednačinu!"/>
+		<Res id="@SC.TFBadFormat" tr="Funkcija prenosa je loše formatirana!"/>
+		<Res id="@ET.ErrInitValueExp" tr="Ne mogu napraviti stablo izraza za izraz početne vrijednosti!"/>
+		<Res id="@SC.InitValErr" tr="Ne mogu izračunati početnu vrijednost!"/>
+		<Res id="@SC.NLReadFail" tr="Greška čitanja NL bloka"/>
+		<Res id="@SC.NLNvars!=NEQsl" tr="Broj varijabli nije jednak broju jednačina!"/>
+		<Res id="@SC.CannotSolveSubM" tr="Ne mogu riješiti &apos;SubModel&apos;"/>
+		<Res id="@SC.EmptyJacSubMode" tr="Prazan Jacobian u &apos;SubModel&apos;"/>
+		<Res id="@SC.EmptyJacobian" tr="Prazan Jacobian"/>
+		<Res id="@SC.CannotFactorize" tr="Ne mogu faktorizirati matricu u &apos;SubModel&apos;"/>
+		<Res id="@SC.LUSolveErrorSub" tr="Greška riješavanja Sparse LU u &apos;SubModel&apos;"/>
+		<Res id="@SC.LUSolveError" tr="Greška riješavanja Sparse LU"/>
+		<Res id="@SC.MaxIterLimitSub" tr="Dosegnut maksimalni broj iteracija u &apos;SubModel&apos;"/>
+		<Res id="@SC.MaxIterLimit" tr="Dosegnut maksimalni broj iteracija"/>
+		<Res id="@SC.FactorErrorSubM" tr="Greška faktorizacije sparse matrice u &apos;SubModel&apos;"/>
+		<Res id="@SC.FactorizationEr" tr="Greška sparse faktorizacije"/>
+		<Res id="@ET.Expected_)" tr="Očekivana zatvorena zagrada &apos;)&apos;"/>
+		<Res id="@ET.FnAfterOperand" tr="Funkcija nakon operanda"/>
+		<Res id="@ET.LimitFnFormatNo" tr="Format funkcije granice nije u redu"/>
+		<Res id="@ET.LimiFnWo_(" tr="Funkcija granice bez otvorene zagrade &apos;(&apos;"/>
+		<Res id="@ET.LimitFnNeeds_)" tr="Funkcija granice treba zatvorenu zagradu &apos;)&apos;"/>
+		<Res id="@ET.FnNotPrpFmt" tr="Funkcija nije pravilno formatirana"/>
+		<Res id="@ET.)_AfterOper" tr="Zatvorena zagrada &apos;)&apos; nakon operatora"/>
+		<Res id="@ET.EmptyExpression" tr="Prazan izraz"/>
+		<Res id="@ET.UnexpectedEnd" tr="Neočekivan kraj izraza"/>
+		<Res id="@ET.OperatorWoOprnd" tr="Operator bez operanda"/>
+		<Res id="@SC.ErrInReInit" tr="Greška u &apos;ReInit&apos;"/>
+		<Res id="@SC.ErrInPreProc" tr="Greška u &apos;PreProc&apos;"/>
+		<Res id="@SC.ErrInIterPostPr" tr="Greška u &apos;IterPostProc&apos;"/>
+		<Res id="@SC.ErrInBasePostPr" tr="Greška u &apos;BasePostProc&apos;"/>
+		<Res id="@SC.ErrInPostProc" tr="Greška u &apos;PostProc&apos;"/>
+		<Res id="@SC.ErrInLimits" tr="Greška u &apos;Limits&apos;"/>
+		<Res id="@SC.ErrorInRepeat" tr="Greška u &apos;Repeat&apos;"/>
+		<Res id="@SC.ODEReadModelErr" tr="Greška čitanja/parsiranja &apos;ODE&apos; sekcije"/>
+		<Res id="@SC.WrongDTForODE" tr="Pogresan korak integracije za ODE. dT mora biti pozitivna vrijednost!"/>
+		<Res id="@SC.NoDeltaT" tr="Vrijednost za korak integracije (dT) nije specificirana!"/>
+		<Res id="@SC.WLSReadFail" tr="Greška čitanja &apos;WLS&apos; sekcije"/>
+		<Res id="@CE.WLSEErrorSolve" tr="Greška u rješavanju WLS modela"/>
+		<Res id="@SC.ErrorDAEInit" tr="Greška u DAE inicijalizaciji"/>
+		<Res id="@SC.DAEFactorizatio" tr="Greška DAE faktorizacije"/>
+		<Res id="@SC.WrongDTForDAE" tr="Pogresan dt za DAE"/>
+		<Res id="@SC.WrongDAEMethod" tr="Pogresan DAE način rješavanja (dozvoljeni načini su Euler, RK2, RK4, RK6,...)"/>
+		<Res id="@SC.WrongDAEMethodS" tr="Pogresan DAE način u &apos;SubModel&apos;"/>
+		<Res id="@CS.DistNoType" tr="Definicija distribucije zahtjeva &apos;type&apos;! (dozvoljeni tipovi su Gauss, Student, Normal,...)"/>
+		<Res id="@CS.NoMinInUniformD" tr="&apos;min&apos; vrijednost je obavezna u uniformnoj distribuciji"/>
+		<Res id="@CS.NoMaxInUniformD" tr="&apos;max&apos; vrijednost je obavezna u uniformnoj distribuciji"/>
+		<Res id="@CS.NoPimBernoulliD" tr="&apos;p&apos; vrijednost je obavezna u Bernoulli distribuciji"/>
+		<Res id="@CS.NoLamdaInPoisso" tr="&apos;lambda&apos; vrijednost je obavezna u Poisson distribuciji"/>
+		<Res id="@CS.NoLamdaInExponD" tr="&apos;lambda&apos; vrijednost je obavezna u eksponencijalnoj distribuciji"/>
+		<Res id="@CS.NoAlphaInGammaD" tr="&apos;alpha&apos; vrijednost je obavezna u Gamma distribuciji"/>
+		<Res id="@CS.NoBetaInGammaDi" tr="&apos;beta&apos; vrijednost je obavezna u Gamma distribuciji"/>
+		<Res id="@CS.NoMeanInGaussDi" tr="&apos;mean&apos; vrijednost je obavezna u Gauss distribuciji"/>
+		<Res id="@CS.NoDevInGaussDis" tr="&apos;dev&apos; vrijednost je obavezna u Gauss distribuciji"/>
+		<Res id="@CS.0DevInGaussDist" tr="&apos;dev&apos; vrijednost mora biti pozitivna u Gauss distribuciji!"/>
+		<Res id="@CS.NoMeanInLogGaus" tr="&apos;mean&apos; vrijednost je obavezna u &apos;LogGauss&apos; distribuciji"/>
+		<Res id="@CS.NoDevInLogGausD" tr="&apos;dev&apos; vrijednost je obavezna u &apos;LogGauss&apos; distribuciji"/>
+		<Res id="@CS.NoKInChiSquared" tr="&apos;k&apos; vrijednost je obavezna u &apos;ChiSquared&apos; distribuciji"/>
+		<Res id="@CS.NoNInStudentDis" tr="&apos;k&apos; vrijednost je obavezna u &apos;Student&apos; distribuciji"/>
+		<Res id="@CS.UnknowntDistrib" tr="Nepoznata distribucija"/>
+		<Res id="@SC.Mising=InAssign" tr="Nedostaje token dodijele u izrazu dodijele"/>
+		<Res id="@SC.NoVarsDeclared" tr="Nema deklarirane varijable"/>
+		<Res id="@SC.EmptyInitExpr" tr="Prazan init izraz"/>
+		<Res id="@SC.MissingDotInAss" tr="Nedostaje točka u dodijeli"/>
+		<Res id="@SC.NoImagRealPartI" tr="Nema &apos;imag&apos; ili &apos;real&apos; člana u dodijeli"/>
+		<Res id="@SC.NoParentSolver" tr="Nema roditeljskog rješavača"/>
+		<Res id="@SC.WrongAssignment" tr="Pogresan izraz dodijele"/>
+		<Res id="@SC.WrongIfConditio" tr="Pogresan uvjet u &apos;if&apos; izjavi"/>
+		<Res id="@SC.WrongSignalInIf" tr="Pogresan signal u &apos;if&apos; izjavi"/>
+		<Res id="@SC.EmptyIf" tr="Prazan &apos;if&apos;"/>
+		<Res id="@SC.IncompleteIf" tr="Nepotpuna &apos;if&apos; izjava"/>
+		<Res id="@SC.ElseExpected" tr="Očekivan &apos;else&apos; u if jednačini!"/>
+		<Res id="@SC.NoExprInElse" tr="Nema izraza u &apos;else&apos; izjavi"/>
+		<Res id="@SC.WrongSignalInEl" tr="Pogresan signal u &apos;else&apos; izjavi"/>
+		<Res id="@SC.ElseMissingEnd" tr="&apos;else&apos; zahtjeva završnu &apos;end&apos; ključnu riječ"/>
+		<Res id="@SC.IncAssignmentEq" tr="Nepotpun izraz dodijele"/>
+		<Res id="@SC.UnknownSymbol" tr="Nepoznat simbol"/>
+		<Res id="@SC.CannotMakeExpre" tr="Ne mogu napraviti izraz"/>
+		<Res id="@SC.CannotMakeIFExp" tr="Ne mogu napraviti &apos;if&apos; izraz"/>
+		<Res id="@SC.IncompleteIF" tr="Nepotpun &apos;if&apos; izraz"/>
+		<Res id="@SC.IfInUnsupported" tr="&apos;if&apos; je postavljen u grupu koja ne podržava &apos;if&apos; izraze"/>
+		<Res id="@SC.IncompleteIfEls" tr="Nepotpun &apos;if&apos;-&apos;else&apos;"/>
+		<Res id="@ET.ErrDifEqua" tr="Greška u diferencijalnoj jednačini"/>
+		<Res id="@SC.UnexpectedExpre" tr="Neočekivan tip izraza"/>
+		<Res id="@SC.SymbolicJacobia" tr="Greška u stvaranju simboličkog Jacobian-a"/>
+		<Res id="@SC.ErrorInLimits0" tr="Greška u granicama (0)"/>
+		<Res id="@SC.ErrorInLimits1" tr="Greška u granicama (1)"/>
+		<Res id="@SC.LimitGroupEndMi" tr="Neusklađenost &apos;end&apos; grupe granica"/>
+		<Res id="@SC.LinitsMustBeGro" tr="Granice moraju biti grupirane"/>
+		<Res id="@CS.StatAssNotOK" tr="Dodjela objekta statistike je pogrešna"/>
+		<Res id="@CS.StatsToNotStatV" tr="Greška dodjele objekta statistike ne-stats upravljaču"/>
+		<Res id="@CS.StatsStrWrongEx" tr="Pogresan operator dodijele za stats (mora biti &apos;&lt;&lt;&apos;)"/>
+		<Res id="@CS.EmptyStatAsssig" tr="Prazna stats dodjela"/>
+		<Res id="@CS.StatsWronExpTyp" tr="Pogresan tip izraza u objektu statistike"/>
+		<Res id="@CS.StatsCannotMake" tr="Ne mogu napraviti stablo izraza za objekt statistike"/>
+		<Res id="@CS.StatsCannotCrea" tr="Ne mogu kreirati stablo izraza za objekt statistike"/>
+		<Res id="@SC.PrematureEnd" tr="Prerani kraj modela"/>
+		<Res id="@SC.CannotCreateSol" tr="Ne mogu kreirati rješavač"/>
+		<Res id="@SC.ODEWrongFormat" tr="ODE pogresan format jednačine. Mora biti varijabla praćena apostrofom i zatim operatorom dodijele &apos;=&apos;"/>
+		<Res id="@SC.ODEExpectedVari" tr="ODE očekuje varijablu"/>
+		<Res id="@SC.ODEExpected=Tok" tr="ODE očekuje token dodijele &apos;=&apos;"/>
+		<Res id="@SC.DerivAndIntAvai" tr="Diferencijacija i integracija ne mogu se koristiti u istom ODE izrazu"/>
+		<Res id="@SC.NoDerivNoInt" tr="Nema ni diferencijacije ni integracije u ODE jednačini"/>
+		<Res id="@SC.ODEExpected&apos;or" tr="ODE očekuje ili varijablu praćenu apostrofom i zatim operatorom dodijele ili varijablu praćenu dodijelom i zatim &apos;int&apos; funkcijom"/>
+		<Res id="@SC.WrongODEExp" tr="ODE jednačina nije u redu"/>
+		<Res id="@SC.ODEMissInt" tr="ODE treba &apos;int&apos; funkciju. Ili ste zaboravili staviti apostrof nakon imena varijable"/>
+		<Res id="@SC.ODEHasMultInts" tr="ODE jednačina ima više &apos;int&apos; metoda. Može biti samo jedna."/>
+		<Res id="@SC.ODEWithDiffAndI" tr="ODE jednačina ima oboje: diff (apostrof) i &apos;int&apos; funkciju. Može biti jedno od toga."/>
+		<Res id="@SC.CannotCrODEExpT" tr="Ne mogu kreirati ODE stablo izraza"/>
+		<Res id="@SC.ODEIntWrongOper" tr="Nema pravilnog &apos;int&apos; u ODE jednačini"/>
+		<Res id="@SC.ODEEmptyInt" tr="Prazan &apos;int&apos; u ODE jednačini"/>
+		<Res id="@SC.ODEIntWithSS" tr="&apos;int&apos; ne može koristiti parametar za integraciju. Mora biti varijabla!"/>
+		<Res id="@SC.TFsWrongFormat" tr="Pogresan format funkcije prenosa"/>
+		<Res id="@SC.TFsNoDiv1Operat" tr="Nema tokena dijeljenja &apos;/&apos; u definiciji funkcije prenosa"/>
+		<Res id="@SC.TFsNoAssignOper" tr="Nema operatora dodijele u definiciji funkcije prenosa"/>
+		<Res id="@SC.TFsWrongTokens" tr="Pronađeni neočekivani tokeni u definiciji funkcije prenosa"/>
+		<Res id="@SC.TFsCannotMakeET" tr="Ne mogu napraviti stablo izraza za funkciju prenosa"/>
+		<Res id="@SC.WrongYInTF" tr="Izlazni simbol u funkciji prenosa mora biti varijabla"/>
+		<Res id="@SC.TFYNotVariable" tr="Izlazni simbol u funkciji prenosa mora biti varijabla (2)"/>
+		<Res id="@SC.WrongUInTF" tr="Ulazni simbol u funkciji prenosa mora biti varijabla"/>
+		<Res id="@SC.TFUNotVarNorPar" tr="Ulazni simbol za funkciju prenosa nije ni varijabla ni parametar"/>
+		<Res id="@SC.NoDAEorTFEqs" tr="Nema ni ODE ni TF blokova u DAE modelu"/>
+		<Res id="@SC.Vars!=#Eqs" tr="Broj varijabli nije jednak broju jednačina"/>
+		<Res id="@SC.ODENotOK" tr="ODE nije u redu. ODE izraz mora počinjati varijablom stanja"/>
+		<Res id="@SC.DAE#Eq!=#Vars" tr="Broj varijabli nije jednak broju jednačina u DAE problemu"/>
+		<Res id="@SC.TFOut!Variable" tr="Izlaz funkcije prenosa nije varijabla"/>
+		<Res id="@SC.TFOutIsParam" tr="Izlaz funkcije prenosa je parametar"/>
+		<Res id="@SC.TFIn!Declared" tr="Varijabla korištena u funkciji prenosa nije deklarirana"/>
+		<Res id="@SCTFTokListError" tr="Nema dovoljno tokena za deklaraciju funkcije prenosa. Mora biti najmanje 4!"/>
+		<Res id="@SC.TFExprTreeErr" tr="Greška stvaranja stabla izraza za funkciju prenosa"/>
+		<Res id="@SC.TFPolyCoefficen" tr="Ne mogu izvući koeficijent polinoma u funkciji prenosa"/>
+		<Res id="@SC.TFDenomNoLaplad" tr="Nema Laplace operatora u nazivniku funkcije prenosa"/>
+		<Res id="@SC.TFNomNoLapladeO" tr="Nema Laplace operatora u brojniku funkcije prenosa"/>
+		<Res id="@SC.TF2SSError" tr="Greška u pretvaranju funkcije prenosa u formulaciju prostora stanja"/>
+		<Res id="@SC.DAENLDerivs" tr="Greška u NL grupi DAE modela"/>
+		<Res id="@SC.DAEExpandError" tr="Greška u stvaranju implicitnog DAE rješavača (greška proširenja)"/>
+		<Res id="@SC.DAENLJack2" tr="Ne mogu kreirati sparse Jacobian za DAE model (2)"/>
+		<Res id="@SC.DAENLJack3" tr="Ne mogu kreirati sparse Jacobian za DAE model (3)"/>
+		<Res id="@SC.0Expansion" tr="Greška u stvaranju implicitnog DAE rješavača s nula faza (greška nule proširenja)"/>
+		<Res id="@SC.DAENLJack0Exp" tr="Ne mogu kreirati sparse Jacobian za DAE model (@SC.DAENLJack0Exp)"/>
+		<Res id="@SC.DAEEqError" tr="Ne mogu kreirati DAE evaluatore"/>
+		<Res id="@SC.DAEEqExpDiffErr" tr="Ne mogu kreirati sparse Jacobian za DAE model (@SC.DAEEqExpDiffError)"/>
+		<Res id="@SC.DAEEqExp0Error" tr="Greška u stvaranju implicitnog DAE rješavača s nula faza (@SC.DAEEqExp0Error)"/>
+		<Res id="@SC.DAEEqExp0DiffEr" tr="Ne mogu kreirati sparse Jacobian za DAE model (@SC.DAEEqExp0DiffError)"/>
+		<Res id="@CS.NLEsError" tr="Ne mogu pravilno parsirati &apos;NLEs&apos; jednačine"/>
+		<Res id="@SC.WrongPlotToken" tr="Pogresan tip/token grafa (@SC.WrongPlotToken)"/>
+		<Res id="@SC.WrongPlotTokenR" tr="Pogresan tip/token grafa (@SC.WrongPlotTokenRKW)"/>
+		<Res id="@SC.WrongPlotXBound" tr="Pogresan x-okvir grafa"/>
+		<Res id="@SC.WrongPlotYBound" tr="Pogresan y-okvir grafa"/>
+		<Res id="@SC.EmptyPlot" tr="Prazan graf"/>
+		<Res id="@SC.WrongPlotAttrib" tr="Pogresan naziv atributa grafa"/>
+		<Res id="@SC.SecondXAxisInPl" tr="Jedan graf može imati samo jednu x-os! Definirano je više od 1 x-ose u grafu!"/>
+		<Res id="@SC.SecondCondInPlo" tr="Jedan graf može imati samo jedan uvjet! Definirano je više od 1 uvjeta u grafu!"/>
+		<Res id="@SC.PlotPremEnd" tr="Graf je završen prerano. Nema &apos;end&apos;"/>
+		<Res id="@SC.PlotNoYAxis" tr="Graf ne sadrži nikakvu y-os. Graf mora imati najmanje jednu y-os!"/>
+		<Res id="@SC.PlotHLineErr" tr="Greška u definiciji horizontalne linije grafa (&apos;hLine&apos;)"/>
+		<Res id="@SC.PlotVLineErr" tr="Greška u definiciji vertikalne linije grafa (&apos;vLine&apos;)"/>
+		<Res id="@SC.PlotHBandErr" tr="Greška u definiciji horizontalne trake grafa (&apos;hBand&apos;)"/>
+		<Res id="@SC.PlotVBandErr" tr="Greška u definiciji vertikalne trake grafa (&apos;vBand&apos;)"/>
+		<Res id="@SC.PlotAxisErr" tr="Greška u definiciji x-osi grafa"/>
+		<Res id="@SC.PlotYAxisErr" tr="Greška u definiciji y-osi grafa"/>
+		<Res id="@SC.PlotCondErr" tr="Greška u definiciji uvjeta grafa"/>
+		<Res id="@CS.#Vars!=#Eqs" tr="Broj varijabli nije jednak broju jednačina!"/>
+		<Res id="@SC.NoODEEqs" tr="Nema ODE jednačina"/>
+		<Res id="@SC.#Vars!=#ODEs" tr="Broj varijabli nije jednak broju jednačina u ODE modelu!"/>
+		<Res id="@SC.WLSNoVars" tr="WLS model nema deklarirane varijable"/>
+		<Res id="@SC.WLSNoWLSEs" tr="Nema WLS jednačina"/>
+		<Res id="@SC.WLSNotEnoughEQs" tr="Nema dovoljno WLS jednačina"/>
+		<Res id="@CS.WLSEsError" tr="Greška u WLS modelu"/>
+		<Res id="@CS.WLSECError" tr="Greška u WLS EC (ograničen jednakošću) modelu"/>
+		<Res id="@SC.BadExpression" tr="Loš izraz"/>
+		<Res id="@SC.WrongExprType" tr="Pogresan tip izraza"/>
+		<Res id="@SC.MissingColor" tr="Nedostaje boja"/>
+		<Res id="@SC.UnexpectedToken" tr="Neočekivan token"/>
+		<Res id="@SC.Missing(AfterFn" tr="Nedostaje otvorena zagrada &apos;(&apos; nakon funkcije"/>
+		<Res id="@SC.SyntaxError" tr="Sintaksna greška"/>
+		<Res id="@SC.NestedConjNotAl" tr="Ugniježđene konjugirane funkcije (conj u conj) nisu dozvoljene. Napravite ručnu konjugaciju i stvorite ravnu konjugiranu izraz."/>
+		<Res id="@SC.OperatorAfter=" tr="Operator nakon operatora dodijele"/>
+		<Res id="@SC.Double=" tr="Dupli operator dodijele (dodjela nakon dodijele)"/>
+		<Res id="@SC.EqEndsWith=" tr="Izraz/jednačina završava operatorom dodijele"/>
+		<Res id="@SC.UnkownSymbol" tr="Nepoznat simbol"/>
+		<Res id="@SC.TwoConsOperands" tr="Dva konstantna operanda pojavljuju se jedan za drugim (dvije konstante jedna za drugom)"/>
+		<Res id="@SC.UnsupportedToke" tr="Nepodržan token"/>
+	</Translations>
+</DevRes>

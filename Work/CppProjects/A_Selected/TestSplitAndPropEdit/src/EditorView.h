@@ -152,7 +152,7 @@ protected:
                 gui::Rect rect(modelPoint, sz);
                 
                 IShape2D* pShape = IShape2D::createRect(g_defaultSettings.getAttribs(), rect, g_defaultSettings.getFillColor(), g_defaultSettings.getLineColor(), g_defaultSettings.getLineWidth(), g_defaultSettings.getLinePattern());
-                _model.appendShape(pShape);
+                _model.appendShape(pShape, true);
                 reDraw();
             }
                 break;
@@ -162,24 +162,14 @@ protected:
                 gui::Rect rect(modelPoint, sz);
 
                 IShape2D* pShape = IShape2D::createRoundedRect(g_defaultSettings.getAttribs(), rect, g_defaultSettings.getRoundedRectRadius(), g_defaultSettings.getFillColor(), g_defaultSettings.getLineColor(), g_defaultSettings.getLineWidth(), g_defaultSettings.getLinePattern());
-                _model.appendShape(pShape);
-                
-//                gui::Point p(300,300);
-//                gui::Size sz(100, 100);
-//                gui::Rect rect(p, sz);
-//
-//                IShape2D* pShape = IShape2D::createRoundedRect(g_defaultSettings.getAttribs(), rect, 20, g_defaultSettings.getFillColor(), g_defaultSettings.getLineColor(), g_defaultSettings.getLineWidth(), g_defaultSettings.getLinePattern());
-//                _model.appendShape(pShape);
+                _model.appendShape(pShape, true);
                 reDraw();
             }
                 break;
             case IShape2D::Tool::AddCircle:
             {
-//                gui::Point p(300,300);
-//                IShape2D* pShape = IShape2D::createCircle(g_defaultSettings.getAttribs(), p, 100, g_defaultSettings.getFillColor(), g_defaultSettings.getLineColor(), g_defaultSettings.getLineWidth(), g_defaultSettings.getLinePattern());
-                
                 IShape2D* pShape = IShape2D::createCircle(g_defaultSettings.getAttribs(), modelPoint, g_defaultSettings.getCircleRadius(), g_defaultSettings.getFillColor(), g_defaultSettings.getLineColor(), g_defaultSettings.getLineWidth(), g_defaultSettings.getLinePattern());
-                _model.appendShape(pShape);
+                _model.appendShape(pShape, true);
                 reDraw();
             }
                 break;
@@ -310,6 +300,7 @@ protected:
 public:
     EditorView()
     : gui::Canvas({gui::InputDevice::Event::CursorShape, gui::InputDevice::Event::PrimaryClicks, gui::InputDevice::Event::SecondaryClicks, gui::InputDevice::Event::CursorDrag, gui::InputDevice::Event::Zoom, gui::InputDevice::Event::Keyboard})
+    , _model(&g_defaultSettings)
     , _callBackDeleteSelectedShape(std::bind(&EditorView::checkDeleteSelectedAnswer, this, std::placeholders::_1))
     {
 //        setCursor(gui::Cursor::Type::Default);
@@ -346,6 +337,15 @@ public:
     void setPropSwitcher(gui::PropertyEditorSwitcher* pPropSwitcher)
     {
         _pPropSwitcher = pPropSwitcher;
+        if (_pPropSwitcher)
+        {
+            gui::PropertyEditor* pDefSettings = _pPropSwitcher->getPropertyEditor(0);
+            g_defaultSettings.setPropViewer(pDefSettings);
+        }
+        else
+        {
+            g_defaultSettings.setPropViewer(nullptr);
+        }
     }
     
     void updateCursor() const

@@ -52,6 +52,8 @@ protected:
     void resetHandle(); //just for window when is closed from outside
     mu::IAppProperties* getAppProperties();
     const mu::IAppProperties* getAppProperties() const;
+    void copyToClipboard(const char* pStr) const;
+    void copyToClipboard(const td::String& str) const;
 public:
     gui::Handle getHandle() const;
     std::tuple<gui::ObjType, gui::Handle> getNatInfo() const;
@@ -64,8 +66,11 @@ public:
     static void asyncCall1(AsyncFn1 pFn, void* userData);
     ///translation
     td::String tr(const char* strKey) const;
+    const char* trCStr(const char* strKey) const;
+    
     td::String getResText(const char* strKey) const;
     td::String getResFileName(const char* strKey) const;
+    td::String getMenuResFileName(const char* strKey) const;
     
     const cnt::SafeFullVector<gui::Lang>& getSupportedLanguages() const;
     int getTranslationLanguageIndex() const;

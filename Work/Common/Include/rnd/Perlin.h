@@ -293,6 +293,6 @@ public:
     }
 };
 
-using Perlin = PerlinNoise<double>;
+using Perlin = PerlinNoise<float>;
 
 } //namespace rnd

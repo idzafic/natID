@@ -8,13 +8,16 @@
 // ################################################################################################################
 
 #pragma once
+#include <td/Types.h>
+#include <tuple>
 
 namespace td
 {
 
-inline const char* findFirstNonWhiteSpace(const char* pBuff)
+template <typename CH>
+inline const CH* findFirstNonWhiteSpace(const CH* pBuff)
 {
-    char ch = *pBuff;
+    CH ch = *pBuff;
     while (ch != 0)
     {
         if (td::isWhiteSpace(ch))
@@ -28,9 +31,10 @@ inline const char* findFirstNonWhiteSpace(const char* pBuff)
     return nullptr;
 }
 
-inline const char* findFirstWhiteSpace(const char* pBuff)
+template <typename CH>
+inline const CH* findFirstWhiteSpace(const CH* pBuff)
 {
-    char ch = *pBuff;
+    CH ch = *pBuff;
     while (ch != 0)
     {
         if (td::isWhiteSpace(ch))
@@ -41,10 +45,11 @@ inline const char* findFirstWhiteSpace(const char* pBuff)
     return nullptr;
 }
 
-inline const char* findChar(const char* pBuff, char chToFind, size_t fromPosition)
+template <typename CH>
+inline const CH* findChar(const CH* pBuff, CH chToFind, size_t fromPosition)
 {
     pBuff += fromPosition;
-    char ch = *pBuff;
+    CH ch = *pBuff;
     while (ch)
     {
         if (ch == chToFind)
@@ -56,9 +61,10 @@ inline const char* findChar(const char* pBuff, char chToFind, size_t fromPositio
     return nullptr;
 }
 
-inline const char* findChar(const char* pBuff, char chToFind)
+template <typename CH>
+inline const CH* findChar(const CH* pBuff, CH chToFind)
 {
-    char ch = *pBuff;
+    CH ch = *pBuff;
     while (ch)
     {
         if (ch == chToFind)
@@ -70,9 +76,25 @@ inline const char* findChar(const char* pBuff, char chToFind)
     return nullptr;
 }
 
-inline const char* findCharOrWhiteSpace(const char* pBuff, char chToFind)
+template <typename CH>
+inline const CH* skipHorizontalWhiteSpaces(const CH* pStr)
 {
-    char ch = *pBuff;
+    CH ch = *pStr;
+    while (ch)
+    {
+        if (!td::isHorizontalSpace(ch))
+            return pStr;
+        
+        ++pStr;
+        ch = *pStr;
+    }
+    return pStr;
+}
+
+template <typename CH>
+inline const CH* findCharOrWhiteSpace(const CH* pBuff, CH chToFind)
+{
+    CH ch = *pBuff;
     while (ch)
     {
         if (ch == chToFind)
@@ -89,10 +111,11 @@ inline const char* findCharOrWhiteSpace(const char* pBuff, char chToFind)
     return nullptr;
 }
 
-inline const char* findLastNonWhiteSpace(const char* pBuff, char chToFind, const char*& pLastNonWhiteSpace)
+template <typename CH>
+inline const CH* findLastNonWhiteSpace(const CH* pBuff, CH chToFind, const CH*& pLastNonWhiteSpace)
 {
     pLastNonWhiteSpace = nullptr;
-    char ch = *pBuff;
+    CH ch = *pBuff;
     while (ch)
     {
         if (ch == chToFind)
@@ -109,12 +132,13 @@ inline const char* findLastNonWhiteSpace(const char* pBuff, char chToFind, const
     return nullptr;
 }
 
-inline size_t getCount(const char* pStr, char chToCount)
+template <typename CH>
+inline size_t getCount(const CH* pStr, CH chToCount)
 {
     if (!pStr)
         return 0;
     size_t nCh = 0;
-    auto ch = *pStr;
+    CH ch = *pStr;
     while (ch != 0)
     {
         if (ch == chToCount)
@@ -125,11 +149,24 @@ inline size_t getCount(const char* pStr, char chToCount)
     return nCh;
 }
 
+
+inline size_t strLen(const td::UTF32* pStr)
+{
+    size_t len = 0;
+    while (pStr)
+    {
+        ++len;
+        ++pStr;
+    }
+    return len;
+}
+
 // Function to find the first occurrence of a pattern in a string
-inline int findPattern(const char* str, const char* pattern)
+template <typename CH>
+inline int findPattern(const CH* str, const CH* pattern)
 {
     // Get the lengths of the string and the pattern
-    size_t str_len = strlen(str);
+    size_t str_len = td::strLen(str);
     size_t pattern_len = strlen(pattern);
 
     // Edge case: if the pattern is longer than the string, return -1
@@ -152,10 +189,11 @@ inline int findPattern(const char* str, const char* pattern)
     return -1;
 }
 
-inline bool beginsWith(const char* str, const char* pattern)
+template <typename CH>
+inline bool beginsWith(const CH* str, const CH* pattern)
 {
     // Get the lengths of the string and the pattern
-    size_t str_len = strlen(str);
+    size_t str_len = td::strLen(str);
     size_t pattern_len = strlen(pattern);
 
     // Edge case: if the pattern is longer than the string, return -1
@@ -174,4 +212,187 @@ inline bool beginsWith(const char* str, const char* pattern)
     return false;
 }
 
+
+inline bool isUTF8ContinuationByte(unsigned char byte)
+{
+    return ((byte & 0xC0) == 0x80); // Top 2 bits are 10
 }
+
+///returns len in bytes, and glyphLen
+//inline std::tuple<td::UINT4, td::UINT4> getLenUTF8(const char* pStr)
+//{
+//    if (!pStr)
+//        return {0,0};
+//    const unsigned char* pUTF8 = (const unsigned char*) pStr;
+//    td::UINT4 len =0;
+//    td::UINT4 glyphLen = 0;
+//    
+//    while (*pUTF8 != 0)
+//    {
+//        unsigned char ch = *pUTF8;
+//        
+//        if (ch < 0x7F)
+//        {
+//            ++len;
+//            ++glyphLen;
+//            ++pUTF8;
+//            continue;
+//        }
+//        if ((ch & 0xE0) == 0xC0)    //2-byte UTF8 character
+//        {
+//            ++pUTF8;
+//            ch = *pUTF8;
+//            if (!isUTF8ContinuationByte(ch))
+//            {
+//                assert(false); //not utf8
+//                return {0,0};
+//            }
+//            len += 2;
+//            ++glyphLen;
+//            ++pUTF8;
+//        }
+//        else if ((ch & 0xF0) == 0xE0)    // 3-byte character
+//        {
+//            ++pUTF8;
+//            ch = *pUTF8;
+//            if (!isUTF8ContinuationByte(ch))
+//            {
+//                assert(false); //not utf8
+//                return {0,0};
+//            }
+//            ++pUTF8;
+//            ch = *pUTF8;
+//            if (!isUTF8ContinuationByte(ch))
+//            {
+//                assert(false); //not utf8
+//                return {0,0};
+//            }
+//            len += 3;
+//            ++glyphLen;
+//            ++pUTF8;
+//        }
+//        else if ((ch & 0xF8) == 0xF0)    // 4-byte character
+//        {
+//            ++pUTF8;
+//            ch = *pUTF8;
+//            if (!isUTF8ContinuationByte(ch))
+//            {
+//                assert(false); //not utf8
+//                return {0,0};
+//            }
+//            ++pUTF8;
+//            ch = *pUTF8;
+//            if (!isUTF8ContinuationByte(ch))
+//            {
+//                assert(false); //not utf8
+//                return {0,0};
+//            }
+//            ++pUTF8;
+//            ch = *pUTF8;
+//            if (!isUTF8ContinuationByte(ch))
+//            {
+//                assert(false); //not utf8
+//                return {0,0};
+//            }
+//            len += 4;
+//            ++glyphLen;
+//            ++pUTF8;
+//        }
+//        else
+//        {
+//            assert(false); //not utf8
+//            return {0,0};
+//        }
+//    }
+//    return {len, glyphLen};
+//}
+
+/// Returns length in bytes and glyph length (number of visible characters)
+inline std::tuple<unsigned int, unsigned int> getLenUTF8(const char* pStr)
+{
+    if (!pStr)
+        return {0, 0};
+
+    const unsigned char* pUTF8 = reinterpret_cast<const unsigned char*>(pStr);
+    unsigned int len = 0;
+    unsigned int glyphLen = 0;
+
+    while (*pUTF8 != 0)
+    {
+        unsigned char ch = *pUTF8;
+
+        if (ch < 0x80) // 1-byte character (ASCII)
+        {
+            ++len;
+            ++glyphLen;
+            ++pUTF8;
+        }
+        else if ((ch & 0xE0) == 0xC0) // 2-byte UTF-8 character
+        {
+            if (!isUTF8ContinuationByte(pUTF8[1]))
+            {
+                assert(false); // Invalid UTF-8 sequence
+                return {0, 0};
+            }
+            len += 2;
+            ++glyphLen;
+            pUTF8 += 2;
+        }
+        else if ((ch & 0xF0) == 0xE0) // 3-byte UTF-8 character
+        {
+            if (!isUTF8ContinuationByte(pUTF8[1]) || !isUTF8ContinuationByte(pUTF8[2]))
+            {
+                size_t progress = (const char*) pUTF8 - pStr;
+                assert(false); // Invalid UTF-8 sequence
+                return {0, 0};
+            }
+            len += 3;
+            ++glyphLen;
+            pUTF8 += 3;
+        }
+        else if ((ch & 0xF8) == 0xF0) // 4-byte UTF-8 character
+        {
+            if (!isUTF8ContinuationByte(pUTF8[1]) || !isUTF8ContinuationByte(pUTF8[2]) || !isUTF8ContinuationByte(pUTF8[3]))
+            {
+                assert(false); // Invalid UTF-8 sequence
+                return {0, 0};
+            }
+            len += 4;
+            ++glyphLen;
+            pUTF8 += 4;
+        }
+        else
+        {
+            assert(false); // Invalid UTF-8 sequence
+            return {0, 0};
+        }
+    }
+
+    return {len, glyphLen};
+}
+
+inline int toUTF8(td::UTF32 ch, td::UTF8 utf[4]) {
+    if (ch < 0x80) {  // 1-byte UTF-8
+        utf[0] = (unsigned char) ch;
+        return 1;
+    } else if (ch < 0x800) {  // 2-byte UTF-8
+        utf[0] = (unsigned char) (0xC0 | (ch >> 6));
+        utf[1] = (unsigned char) (0x80 | (ch & 0x3F));
+        return 2;
+    } else if (ch < 0x10000) {  // 3-byte UTF-8
+        utf[0] = (unsigned char) (0xE0 | (ch >> 12));
+        utf[1] = (unsigned char) (0x80 | ((ch >> 6) & 0x3F));
+        utf[2] = (unsigned char) (0x80 | (ch & 0x3F));
+        return 3;
+    } else if (ch < 0x110000) {  // 4-byte UTF-8
+        utf[0] = (unsigned char) (0xF0 | (ch >> 18));
+        utf[1] = (unsigned char) (0x80 | ((ch >> 12) & 0x3F));
+        utf[2] = (unsigned char) (0x80 | ((ch >> 6) & 0x3F));
+        utf[3] = (unsigned char) (0x80 | (ch & 0x3F));
+        return 4;
+    }
+    assert(false);
+    return 0;  // Invalid character
+}
+
+} //namespace td

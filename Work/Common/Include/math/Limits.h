@@ -16,19 +16,19 @@ namespace math
 {
 
 template <typename T>
-inline T maxVal()
+inline constexpr T maxVal()
 {
     return std::numeric_limits<T>::max();
 }
 
 template <typename T>
-inline T minVal()
+inline constexpr T minVal()
 {
     return std::numeric_limits<T>::lowest();
 }
 
 template <typename T>
-inline T minEps()
+inline constexpr T minEps()
 {
     return std::numeric_limits<T>::min();
 }

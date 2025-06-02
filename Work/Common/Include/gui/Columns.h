@@ -23,6 +23,7 @@ namespace gui
 class Column
 {
 public:
+    const cnt::SafeFullVector<td::String>* pEnumStrings = nullptr;
     td::String header;
     td::String toolTip;
     td::INT2 width = 100;

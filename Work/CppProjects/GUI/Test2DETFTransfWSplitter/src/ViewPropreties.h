@@ -88,7 +88,7 @@ public:
         , _hl1(3)
     {
         setMargins(10, 5, 10, 5);
-        _neFrequency.setNoDec(2);
+        _neFrequency.setNumberOfDigitsAfterDecimalPoint(2);
         _neFrequency.setValue(_frequency);
         _neFrequency.setMaxValue(60);
         _neFrequency.setMinValue(0.1);

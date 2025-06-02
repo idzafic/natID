@@ -275,18 +275,12 @@ protected:
             return;
         }
         setupVBO();
-#ifdef DEBUG_GL
-        GLenum error = glGetError();
-        if (error != GL_NO_ERROR)
-        {
-            mu::dbgLog("OpenGL error: %x", error);
-        }
-#endif
+        dbgCheckGLError();
     }
     
     void onDraw(const gui::Rect& rect) override
     {
-        gui::gl::Context::clear(gui::gl::Context::Clear::Color);
+        gui::gl::Context::clear({ gui::gl::Context::Clear::Color, gui::gl::Context::Clear::Depth }); //cler OpenGL buffers
         // Use the shader program (and activate VAO internally)
         _program.activate();
         // Set up model matrix and color in the vertex shader

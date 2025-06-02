@@ -1,0 +1,29 @@
+<?xml version='1.0'?>
+<Regionals id="ru-RU">
+    <Numeric decSeparator="," thSeparator=" "/>
+    <Date separator="." winShort="dd.mm.YYYY" winLong="dddd, d mmmm YYYY" shortDM="dd.mm" shortY2="dd.mm.YY" shortY4="dd.mm.YYYY"/>
+    <Time separator=":" winShort="hh:mm:ss" winLong="hh:mm:ss.u" shortHMM="h:mm" shortHMMSS="h:mm::ss" shortHMMSSu="h::mm::ss.u"/>
+    <Days>
+        <Day name="воскресенье" shortName="вс"/>
+        <Day name="понедельник" shortName="пн"/>
+        <Day name="вторник" shortName="вт"/>
+        <Day name="среда" shortName="ср"/>
+        <Day name="четверг" shortName="чт"/>
+        <Day name="пятница" shortName="пт"/>
+        <Day name="суббота" shortName="сб"/>
+    </Days>
+    <Months>
+        <Month name="январь" shortName="янв"/>
+        <Month name="февраль" shortName="фев"/>
+        <Month name="март" shortName="мар"/>
+        <Month name="апрель" shortName="апр"/>
+        <Month name="май" shortName="май"/>
+        <Month name="июнь" shortName="июн"/>
+        <Month name="июль" shortName="июл"/>
+        <Month name="август" shortName="авг"/>
+        <Month name="сентябрь" shortName="сен"/>
+        <Month name="октябрь" shortName="окт"/>
+        <Month name="ноябрь" shortName="ноя"/>
+        <Month name="декабрь" shortName="дек"/>
+    </Months>
+</Regionals>

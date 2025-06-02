@@ -8,6 +8,9 @@
 #include "ToolBar.h"
 #include "ViewCubeMap.h"
 #include "DialogSettings.h"
+#include "ViewSettings.h"
+#include <gui/Panel.h>
+#include <gui/Application.h>
 
 class MainWindow : public gui::Window
 {
@@ -16,7 +19,7 @@ protected:
     MenuBar _mainMenuBar;
     ToolBar _toolBar;
     ViewCubeMap _viewCubeMap;
-    int _cSettingsDlgID = 10;
+    td::UINT4 _cSettingsDlgID = 10;
 public:
     MainWindow()
     : gui::Window(gui::Geometry(50, 50, 1200, 600))
@@ -36,20 +39,20 @@ protected:
         auto [menuID, firstSM, lastSM1, actionID] = aiDesc.getIDs();
 
         if(menuID == 10){
-            if(actionID == 10){
-                auto pDlg = getAttachedWindow(_cSettingsDlgID);
-            if (pDlg)
-                pDlg->setFocus();
-            else
+            if(actionID == 10)
             {
-                DialogSettings* pSettingsDlg = new DialogSettings(this, _cSettingsDlgID);
-                pSettingsDlg->keepOnTopOfParent();
-                pSettingsDlg->setMainTB(&_toolBar);
-                pSettingsDlg->open();
+                auto pDlg = getAttachedWindow(_cSettingsDlgID);
+                if (pDlg)
+                    pDlg->setFocus();
+                else
+                {
+                  DialogSettings* pSettingsDlg = new DialogSettings(this, _cSettingsDlgID);
+                  pSettingsDlg->keepOnTopOfParent();
+                  pSettingsDlg->setMainTB(&_toolBar);
+                  pSettingsDlg->open();
+                }
+                return true;
             }
-            return true;
-        }
-            
         }
 
         if (menuID == 20)

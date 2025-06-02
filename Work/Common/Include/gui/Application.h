@@ -18,6 +18,8 @@
 #include <cnt/List.h>
 #include <mu/Application.h>
 #include <gui/InitialParams.h>
+#include <cnt/PushBackVector.h>
+#include <functional>
 
 namespace gui
 {
@@ -29,21 +31,30 @@ class MenuBar;
 class NATGUI_API Application : public mu::Application
 {
     friend class AppHelper;
-    
 private:
     gui::Handle _handle = nullptr;
     Window* _initialWindow = nullptr;
     MenuBar* _menu = nullptr;
     Window* _repWindow = nullptr;
+    
+    ContextMenus* _systemContextMenus = nullptr;
     ContextMenus* _contextMenus = nullptr;
 
     gui::Window::FrameSize _initialSize = gui::Window::FrameSize::AdjustToContent;
     td::BYTE _menuBarLocation = 0;
     td::BYTE _appDevResID = 0;
-    td::BYTE _darkMode = 0;
+    
     td::BYTE _closing = 0;
+    static td::BYTE darkMode;
     td::BYTE _userInitiatedClose = 1; //in case when user presses close button on the main window (without calling close())
     
+private:
+    using CMCallback = struct CMCB
+    {
+        void* pObj;
+        std::function<void(td::BYTE)> callBack;
+    };
+    static cnt::PushBackVector<CMCallback> _onDesktopModeChange;
 private:
     Application(int devResPos = 0);
     bool _prepareGUI(gui::Handle handle);
@@ -51,6 +62,7 @@ private:
     void setGraphicsMode(td::BYTE darkMode);
     td::BYTE getDevResID() const;
     void invertResColors();
+    
 protected:
     virtual void initGraphics(td::UINT2& nModels, td::UINT2& nSharedShapes, td::UINT2& nSharedTexts);
     virtual Window* createInitialWindow(); //has to be overriden
@@ -64,7 +76,7 @@ protected:
     virtual void onDeactivated();
     virtual bool shouldClose();
     virtual void onClosed();
-    virtual void systemAppearanceChanged(bool bDarkMode); //switch from dark -> light -> dark
+    virtual void systemColorModeChanged(bool bDarkMode); //switch from dark -> light -> dark
     const char* getMainToolBarStrID() const override;
     void stop();
     
@@ -72,7 +84,6 @@ public:
     Application(int argc, const char** argv, const char* applicationGroup = nullptr, int devResPos = 0, bool createLogFile = true);
     virtual ~Application();
     bool isClosing() const;
-    bool isDarkMode() const;
     
     void initEnvironment(td::UINT4 genInit = (td::UINT4) GenInit::GI_FT_ALL);
     void initRegionals(const td::String& translationExtension);
@@ -96,6 +107,31 @@ public:
     
     bool isUserInitiatedClose(); //when user presses x the main window (without calling close())
     
+    static bool handleUserEvent(td::UINT4 eventID, const td::Variant& userParam = td::Variant(td::TD_NONE));
+    
+    static bool isDarkMode();
+    //register desktop mode change callback
+    static void addDesktopModeCallback(void* pObject, const std::function<void(td::BYTE)>& callBack);
+    
+    template <class TOBJ>
+    static void addDesktopModeCallback(TOBJ* pObject, const std::function<void(td::BYTE)>& callBack)
+    {
+        Application::addDesktopModeCallback((void*) pObject, callBack);
+    }
+    
+    //unregister desktop mode change callback
+    static void removeDesktopModeCallback(void* pObject);
+    
+    template <class TOBJ>
+    static void removeDesktopModeCallback(TOBJ* pObject)
+    {
+        Application::removeDesktopModeCallback((void*) pObject);
+    }
+    
+    static td::ColorID getForegroundColor(td::ColorScheme colorScheme);
+
+    static td::ColorID getBackgroundColor(td::ColorScheme colorScheme);
+
     //ContextMenus
     MenuItem* getItem(td::BYTE menuID, td::BYTE firstSubMenuID, td::BYTE lastSubMenuID, td::BYTE actionID);
     void openContextMenu(td::BYTE menuID, gui::Frame* pFrame, const gui::Point& pointOnFrame, gui::IMessageConsumer* pConsumer = nullptr, const gui::ContextData* pContextData = nullptr, td::UINT2 contextMenuGroup = 0);
@@ -104,6 +140,7 @@ public:
 };
 
 NATGUI_API Application* getApplication();
+
 
 } //namespace gui
 #else

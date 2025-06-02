@@ -39,12 +39,13 @@ include <boost/regex.hpp>
 #include <sys/file.h>
 #endif
 #include <fo/Definitions.h>
-
+#include <td/MutableString.h>
+#include <cnt/PushBackVector.h>
 
 
 //#ifdef MU_WINDOWS
 #define FO_BINARY_OPEN_TRUNCATE	  (std::ios_base::binary | std::ios_base::trunc)
-#define FO_BINARY_OPEN_EXISTING   (std::ios_base::binary)
+#define FO_BINARY_OPEN_EXISTING   (std::ios_base::binary | std::ios_base::in)
 
 #define FO_TXT_OPEN_EXISTING   (std::ios_base::in)
 
@@ -1005,7 +1006,7 @@ bool writeAll(T& f, const char* buffer, size_t buffSize)
 template <class T_STREAM, class T_CHAR, int NINITLEN, int INCREMENT>
 bool getLine(T_STREAM& f, td::BufferString<T_CHAR, NINITLEN, INCREMENT>& s)
 {
-        typename std::ios_base::iostate _State = std::ios_base::goodbit;
+    typename std::ios_base::iostate _State = std::ios_base::goodbit;
     bool _Changed = false;
 
     if (f.good() && !f.eof())
@@ -1027,6 +1028,11 @@ bool getLine(T_STREAM& f, td::BufferString<T_CHAR, NINITLEN, INCREMENT>& s)
                 if (ch == TD_EOF)
                 {
                     _State |= std::ios_base::eofbit;
+                    if (s.length() == 0)
+                    {
+                        f.setstate(_State);
+                        return false;
+                    }
                     break;
                 }
                 s += ch;
@@ -1074,6 +1080,86 @@ bool getLine(T_STREAM& f, td::BufferString<T_CHAR, NINITLEN, INCREMENT>& s)
     f.setstate(_State);
 
     return true;
+}
+
+//fromPosition is input/output argument
+template <class ISTREAM>
+inline bool getLine(ISTREAM& f, td::MutableString& str, td::UINT4& pos)
+{
+    typename std::ios_base::iostate _State = std::ios_base::goodbit;
+    bool _Changed = false;
+
+    if (f.good() && !f.eof())
+    {
+        // state okay, extract characters
+        if (str.capacity() == 0)
+            str.reserve(4096);
+        str.reset();
+        
+        char END_LINE = TD_TO_NEWLINE;
+        char BEG_LINE = TD_TO_LINEBEG;
+        char END_OF_FILE = TD_EOF;
+        char ch = f.rdbuf()->sgetc();
+
+        for (; ; ch = f.rdbuf()->snextc())
+        {
+            if (ch == END_OF_FILE)
+            {
+                // end of file, quit
+                //check if it is really eof (some encodings placing FF chars)
+                ch = f.rdbuf()->snextc();
+                if (ch == TD_EOF)
+                {
+                    _State |= std::ios_base::eofbit;
+                    if (str.length() == 0)
+                    {
+                        f.setstate(_State);
+                        return false;
+                    }
+                    break;
+                }
+                str.append(ch);
+                ++pos;
+                _Changed = true;
+            }
+            else if (ch == BEG_LINE)
+            {
+                // got a delimiter, discard it
+                _Changed = true;
+                ++pos;
+            }
+            else if (ch == END_LINE)
+            {
+                // got a delimiter, discard it and return
+                _Changed = true;
+                f.rdbuf()->sbumpc();
+                ++pos;
+                break;
+            }
+            else
+            {    // got a character, add it to string
+                str.append(ch);
+                ++pos;
+                _Changed = true;
+            }
+        }
+    }
+    else
+        return false; //eof of bad file indicator
+
+    if (!_Changed)
+        _State |= std::ios_base::failbit;
+
+    f.setstate(_State);
+
+    return true;
+}
+template <class ISTREAM, typename TPOS>
+inline void goToPos(ISTREAM& f, TPOS pos, bool clearState)
+{
+    if (clearState)
+        f.clear();
+    f.seekg(pos, std::ios::beg);
 }
 
 [[nodiscard]]
@@ -1753,6 +1839,25 @@ inline bool loadFileContent(const td::String& fileName, td::String& content)
     return true;
 }
 
+inline td::String loadFileContent(const td::String& fileName)
+{
+    td::String content;
+    loadFileContent(fileName, content);
+    return content;
+}
+
+inline bool loadFileContent(const td::String& fileName, td::MutableString& content)
+{
+    std::ifstream f;
+    if (!openExistingBinaryFile(f, fileName))
+        return false;
+
+    char buf[1024*4];
+    while (f.read(buf, sizeof(buf)).gcount() > 0)
+        content.append(buf, (int)f.gcount());
+    return true;
+}
+
 
 inline bool loadBinaryFile(const td::String& fileName, td::String& content)
 {
@@ -1808,6 +1913,8 @@ inline void loadFromStream(ISTREAM& f, td::String& content)
 
     builder.getString(content);
 }
+
+
 
 inline int createTxtFileUsingOS(const td::String& fileName)
 {
@@ -1893,6 +2000,62 @@ inline int closeOSFile(int fd)
     
 }
 
+inline void resolveRelativePath(td::String& strPotentialRelativePath)
+{
+    if (strPotentialRelativePath.length() < 2)
+        return;
+    char ch0 = strPotentialRelativePath.at(0);
+    if (ch0 == '.')
+    {
+        char ch1 = strPotentialRelativePath.at(1);
+        if (ch1 == '/' || ch1 == '\\')
+        {
+            fs::path resolvedPath = fs::current_path() / (strPotentialRelativePath.c_str() + 2);
+            strPotentialRelativePath = resolvedPath.c_str();
+        }
+        else if (ch1 == '.')
+        {
+            if (strPotentialRelativePath.length() < 3)
+                return;
+            char ch2 = strPotentialRelativePath.at(2);
+            if (ch2 == '/' || ch2 == '\\')
+            {
+                fs::path resolvedPath = fs::current_path()  / strPotentialRelativePath.c_str();
+                resolvedPath = resolvedPath.lexically_normal();
+                strPotentialRelativePath = resolvedPath.c_str();
+            }
+        }
+    }
+}
+
+inline void resolveRelativePath(const fs::path& rootPath, td::String& strPotentialRelativePath)
+{
+    if (strPotentialRelativePath.length() < 2)
+        return;
+    char ch0 = strPotentialRelativePath.at(0);
+    if (ch0 == '.')
+    {
+        char ch1 = strPotentialRelativePath.at(1);
+        if (ch1 == '/' || ch1 == '\\')
+        {
+            fs::path resolvedPath = rootPath / (strPotentialRelativePath.c_str() + 2);
+            strPotentialRelativePath = resolvedPath.c_str();
+        }
+        else if (ch1 == '.')
+        {
+            if (strPotentialRelativePath.length() < 3)
+                return;
+            char ch2 = strPotentialRelativePath.at(2);
+            if (ch2 == '/' || ch2 == '\\')
+            {
+                fs::path resolvedPath = rootPath / strPotentialRelativePath.c_str();
+                resolvedPath = resolvedPath.lexically_normal();
+                strPotentialRelativePath = resolvedPath.c_str();
+            }
+        }
+    }
+}
+
 template <class TSTR>
 bool copyFile(const TSTR& srcFile, const TSTR& destFileOrFolder, fo::CopyOption co)
 {
@@ -1975,50 +2138,185 @@ inline bool copyFolder(const fo::fs::path& inFolder, const fo::fs::path& outFold
     return true;
 }
 
-} //namespace fo
+template <class TSTRING>
+td::String getFileNameWithoutExtension(const TSTRING& fullFileName)
+{
+    fo::fs::path fullPath(fullFileName.c_str());
 
-//HANDLE hW = ::CreateFileW(str.c_str(), GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);	
-//int iFile 
-//
-//	if (hW != INVALID_HANDLE_VALUE) 
-//	{
-//		int file_descriptor = _open_osfhandle((intptr_t)hW, 0);
-//
-//		if (file_descriptor != -1) 
-//		{
-//			FILE* file = _fdopen(file_descriptor, "w");
-//
-//			if (file != NULL) 
-//			{
-//				f.open(file);
-//
-//				//std::streambuf sb(file);
-//				//f.rdbuf(file);
-//
-//
-//				//						std::ofstream stream(file);
-//
-//				//f = stream;
-//
-//
-//				//stream << "Hello World\n";
-//
-//				//// Closes stream, file, file_descriptor, and file_handle.
-//				//stream.close();
-//
-//				//file = NULL;
-//				//file_descriptor = -1;
-//				//file_handle = INVALID_HANDLE_VALUE;
-//			}
-//		}
-//	}			
-//		}
-//		catch(...)
-//		{
-//			return false;
-//		}
-//#else
-//f.open(fileName);
-//#endif
-//return f.is_open();
-//	}
+    // Get the filename without extension
+    td::String filenameWithoutExtension = fullPath.stem().string();
+    return filenameWithoutExtension;
+}
+
+template <bool CheckIfOrigFilesExists, bool CheckIfNewFileExists = CheckIfOrigFilesExists>
+inline fs::path replaceFileExtension(const fs::path& inputPath, const char* newExtension)
+{
+    fs::path newPath;
+    if constexpr (CheckIfOrigFilesExists)
+    {
+        if (!fs::exists(inputPath))
+            return newPath;
+    }
+
+    newPath = inputPath;
+    newPath.replace_extension(newExtension);
+
+    if constexpr(CheckIfNewFileExists)
+    {
+        if (fs::exists(newPath))
+            return newPath;
+        return fs::path();
+    }
+    return newPath;
+}
+
+template <bool CheckIfOrigFilesExists, bool CheckIfNewFileExists = CheckIfOrigFilesExists>
+inline td::String replaceFileExtension(const td::String& inputFileName, const char* newExtension)
+{
+    fs::path filePath(inputFileName.c_str());
+
+    if constexpr (CheckIfOrigFilesExists)
+    {
+        //check if input file name exists
+        if (!fs::exists(filePath))
+            return td::String();
+    }
+
+    filePath.replace_extension(newExtension);
+
+    if constexpr(CheckIfNewFileExists)
+    {
+        if (fs::exists(filePath))
+            return filePath.string();
+        return td::String();
+    }
+    return filePath.string();
+}
+
+template <bool CheckIfOrigFilesExists, bool CheckIfNewFileExists = CheckIfOrigFilesExists>
+inline fs::path replaceFileExtension(const fs::path& inputPath, const td::String& newExtension)
+{
+    return replaceFileExtension<CheckIfOrigFilesExists, CheckIfNewFileExists>(inputPath, newExtension.c_str());
+}
+
+template <bool CheckIfOrigFilesExists, bool CheckIfNewFileExists = CheckIfOrigFilesExists>
+inline td::String replaceFileExtension(const td::String& inputFileName, const td::String& newExtension)
+{
+    return replaceFileExtension<CheckIfOrigFilesExists, CheckIfNewFileExists>(inputFileName, newExtension.c_str());
+}
+
+
+inline bool makeCopyWithExtensionChange(const fs::path& filePath, const char* newExtension, const fs::path newFolder = {})
+{
+    try
+    {
+        if (!fs::exists(filePath) || !fs::is_regular_file(filePath))
+        {
+            return false; // File doesn't exist or is not a regular file
+        }
+
+        // Create new file name with new extension (replace old one)
+        fs::path newFileName = filePath.stem();
+        newFileName += newExtension;
+
+        // Determine the destination folder
+        fs::path destinationFolder = newFolder.empty() ? filePath.parent_path() : newFolder;
+
+        // Ensure destination folder exists
+        if (!fs::exists(destinationFolder))
+        {
+            fs::create_directories(destinationFolder);
+        }
+
+        // Full destination path
+        fs::path destinationPath = destinationFolder / newFileName;
+
+        // Copy the file
+        fs::copy_file(filePath, destinationPath, fs::copy_options::overwrite_existing);
+
+        return true;
+    }
+    
+    catch (const std::exception&)
+    {
+        return false;
+    }
+}
+
+
+template <typename TSTRCONT>
+inline bool matchesPattern(const fs::path& filePath, const TSTRCONT& patterns)
+{
+    std::string filename = filePath.filename().string();
+
+    for (const td::String& pattern : patterns)
+    {
+        if (pattern.length() < 2 || pattern.at(0) != '*')
+            continue;
+
+        std::string ext = pattern.c_str() + 1; // remove '*'
+        if (filename.size() >= ext.size() &&
+            filename.compare(filename.size() - ext.size(), ext.size(), ext) == 0)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+template <typename TCONT>
+inline bool collectFileNames(const fs::path& location, const td::String& strPattern, TCONT& fileNames, bool goToSubFolders)
+{
+    cnt::PushBackVector<td::String> patterns;
+    auto nSeparators = strPattern.getCount(';');
+    if (nSeparators == 0)
+        patterns.push_back(strPattern);
+    else
+    {
+        patterns.reserve(nSeparators+1);
+        strPattern.split(';', patterns);
+    }
+    
+    try
+    {
+        if (!fs::exists(location) || !fs::is_directory(location))
+            return false;
+
+        if (goToSubFolders)
+        {
+            for (const auto& entry : fs::recursive_directory_iterator(location))
+            {
+                if (!entry.is_regular_file())
+                    continue;
+
+                const fs::path& filePath = entry.path();
+                std::string filename = filePath.filename().string();
+
+                if (matchesPattern(filePath, patterns))
+                    fileNames.push_back(filePath);
+            }
+        }
+        else
+        {
+            for (const auto& entry : fs::directory_iterator(location))
+            {
+                if (!entry.is_regular_file())
+                    continue;
+
+                const fs::path& filePath = entry.path();
+                std::string filename = filePath.filename().string();
+
+                if (matchesPattern(filePath, patterns))
+                    fileNames.push_back(filePath);
+            }
+        }
+
+        return true;
+    }
+    catch (const std::exception&)
+    {
+        return false;
+    }
+}
+
+} //namespace fo

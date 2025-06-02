@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevRes>
+	<Translations>
+		<Res id="@Plot_settings" tr="プロット設定"/>
+		<Res id="@Plot_zatvori" tr="閉じる"/>
+		<Res id="@Plot_legendCols" tr="凡例の列数: "/>
+		<Res id="@Plot_marginLeft" tr="左余白: "/>
+		<Res id="@Plot_marginRight" tr="右余白: "/>
+		<Res id="@Plot_marginTop" tr="上余白: "/>
+		<Res id="@Plot_marginBottom" tr="下余白: "/>
+		<Res id="@Plot_xSpace" tr="X軸ラベルまでの間隔: "/>
+		<Res id="@Plot_ySpace" tr="Y軸ラベルまでの間隔: "/>
+		<Res id="@Plot_savedImageRes" tr="保存画像の解像度: "/>
+		<Res id="@Plot_height" tr="画像の高さ: "/>
+		<Res id="@Plot_width" tr="画像の幅"/>
+		<Res id="@Plot_colorDef" tr="色定義対象:"/>
+		<Res id="@Plot_defLineProps" tr="デフォルト線プロパティ"/>
+		<Res id="@Plot_allMode" tr="任意のテーマ"/>
+		<Res id="@Plot_darkMode" tr="ダークモード"/>
+		<Res id="@Plot_whiteMode" tr="ライトモード"/>
+		<Res id="@Plot2JPG" tr="JPG画像形式"/>
+		<Res id="@Plot2PNG" tr="PNG画像形式"/>
+		<Res id="@Plot2PDF" tr="PDF文書形式"/>
+		<Res id="@Plot2EPS" tr="EPS画像形式"/>
+		<Res id="@Plot2SVG" tr="SVG画像形式"/>
+		<Res id="@Plot2TXT" tr="TXT (テキスト) 形式"/>
+		<Res id="Fig_AllMode" tr="すべてのカラーモード"/>
+		<Res id="Fig_DarkMode" tr="ダークカラーモード"/>
+		<Res id="Fig_LightMode" tr="ライトカラーモード"/>
+		<Res id="Fig_DefLineProps" tr="線のプロパティ"/>
+		<Res id="@Plot_AxisFS" tr="フォントサイズ:"/>
+		<Res id="@Plot_AxisFN" tr="フォント名:"/>
+	</Translations>
+</DevRes>

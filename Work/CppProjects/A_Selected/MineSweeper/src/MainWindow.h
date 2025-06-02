@@ -17,6 +17,13 @@ protected:
     StatusBar _statusBar;
 protected:
     
+    void systemColorModeChanged(bool bDarkMode) override
+    {
+        gui::Window::systemColorModeChanged(bDarkMode);
+        for(auto &fun : systemAppearanceChangedEvent)
+            fun(bDarkMode);
+    }
+    
     void onInitialAppearance() override
     {
         _mainView.setDifficulty(ViewMinesweeper::Difficulty::Medium);

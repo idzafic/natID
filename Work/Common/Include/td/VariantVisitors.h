@@ -31,6 +31,7 @@ namespace td
         void operator()(td::ColorID& val) const { val = vb._colorID; }
         void operator()(td::LinePattern& val) const { val = vb._linePattern; }
 		void operator()(td::DotPattern& val) const { val = vb._dotPattern; }
+        void operator()(td::Anchor& val) const { val = vb._anchor; }
 		void operator()(td::LINT8& val) const { val = vb._li8Val; }
 		void operator()(td::LUINT8& val) const { val = vb._lu8Val; }
 		void operator()(float& val) const { val = vb._r4Val; }
@@ -81,6 +82,7 @@ namespace td
         bool operator()(td::ColorID val) const { return val == vb.colorID(); }
         bool operator()(td::LinePattern val) const { return val == vb.linePattern(); }
 		bool operator()(td::DotPattern val) const { return val == vb.dotPattern(); }
+        bool operator()(td::Anchor val) const { return val == vb.anchor(); }
 		bool operator()(td::LINT8 val) const { return val == vb.li8Val(); }
 		bool operator()(td::LUINT8 val) const { return val == vb.lu8Val(); }
 		bool operator()(float val) const { return val == vb.r4Val(); }
@@ -118,6 +120,7 @@ namespace td
         bool operator()(td::ColorID val) const { return val < vb.colorID(); }
         bool operator()(td::LinePattern val) const { return val < vb.linePattern(); }
 		bool operator()(td::DotPattern val) const { return val < vb.dotPattern(); }
+        bool operator()(td::Anchor val) const { return val < vb.anchor(); }
 		bool operator()(td::LINT8 val) const { return val < vb.li8Val(); }
 		bool operator()(td::LUINT8 val) const { return val < vb.lu8Val(); }
 		bool operator()(float val) const { return val < vb.r4Val(); }
@@ -155,6 +158,7 @@ namespace td
         bool operator()(td::ColorID val) const { return val <= vb.colorID(); }
         bool operator()(td::LinePattern val) const { return val <= vb.linePattern(); }
 		bool operator()(td::DotPattern val) const { return val <= vb.dotPattern(); }
+        bool operator()(td::Anchor val) const { return val <= vb.anchor(); }
 		bool operator()(td::LINT8 val) const { return val <= vb.li8Val(); }
 		bool operator()(td::LUINT8 val) const { return val <= vb.lu8Val(); }
 		bool operator()(float val) const { return val <= vb.r4Val(); }
@@ -193,6 +197,7 @@ namespace td
         bool operator()(td::ColorID val) const { return val > vb.colorID(); }
         bool operator()(td::LinePattern val) const { return val > vb.linePattern(); }
 		bool operator()(td::DotPattern val) const { return val > vb.dotPattern(); }
+        bool operator()(td::Anchor val) const { return val > vb.anchor(); }
 		bool operator()(td::LINT8 val) const { return val > vb.li8Val(); }
 		bool operator()(td::LUINT8 val) const { return val > vb.lu8Val(); }
 		bool operator()(float val) const { return val > vb.r4Val(); }
@@ -230,6 +235,7 @@ namespace td
         bool operator()(td::ColorID val) const { return val >= vb.colorID();}
         bool operator()(td::LinePattern val) const { return val >= vb.linePattern();}
 		bool operator()(td::DotPattern val) const { return val >= vb.dotPattern();}
+        bool operator()(td::Anchor val) const { return val >= vb.anchor();}
 		bool operator()(td::LINT8 val) const { return val >= vb.li8Val(); }
 		bool operator()(td::LUINT8 val) const { return val >= vb.lu8Val(); }
 		bool operator()(float val) const { return val >= vb.r4Val(); }
@@ -266,6 +272,7 @@ namespace td
         bool operator()(td::ColorID val) const { return val == td::ColorID::Black; }
         bool operator()(td::LinePattern val) const { return val == td::LinePattern::Solid; }
 		bool operator()(td::DotPattern val) const { return val == td::DotPattern::Pixel; }
+        bool operator()(td::Anchor val) const { return val == td::Anchor::Fixed; }
 	};
 
 
@@ -327,6 +334,7 @@ namespace td
         void operator() (td::ColorID& val) const { val = td::toColorID(pStr); }
         void operator() (td::LinePattern& val) const { val = td::toLinePattern(pStr); }
         void operator() (td::DotPattern& val) const { val = td::toDotPattern(pStr); }
+        void operator() (td::Anchor& val) const { val = td::toAnchor(pStr); }
 
 		template <typename TVAL>
 		void operator()(TVAL& val) const { val.fromString(pStr); }
@@ -405,6 +413,13 @@ namespace td
         }
         
         TSTR& operator()(td::DotPattern val) const
+        {
+            td::String strVal(td::toString(val));
+            s << strVal;
+            return s;
+        }
+        
+        TSTR& operator()(td::Anchor val) const
         {
             td::String strVal(td::toString(val));
             s << strVal;
@@ -524,6 +539,11 @@ namespace td
         }
         
         const char* operator()(td::DotPattern val) const
+        {
+            return td::toString(val);
+        }
+        
+        const char* operator()(td::Anchor val) const
         {
             return td::toString(val);
         }
@@ -761,6 +781,11 @@ namespace td
         {
             return td::String(toString(val));
         }
+        
+        td::String operator()(td::Anchor val) const
+        {
+            return td::String(toString(val));
+        }
 	};
 	
 	template <typename TVAR>
@@ -783,6 +808,7 @@ namespace td
         void operator() (td::ColorID) const{}
         void operator() (td::LinePattern) const{}
         void operator() (td::DotPattern) const{}
+        void operator() (td::Anchor) const{}
 
 		void operator()(td::BoolCh& val) const
 		{
@@ -826,6 +852,7 @@ namespace td
         void operator() (td::ColorID) const{}
         void operator() (td::LinePattern) const{}
         void operator() (td::DotPattern) const{}
+        void operator() (td::Anchor) const{}
 
 		template <typename TVAL, int NDEC>
 		void operator()(td::Decimal<TVAL, NDEC>& val) const
@@ -864,6 +891,7 @@ namespace td
         void operator() (td::ColorID) const{}
         void operator() (td::LinePattern) const{}
         void operator() (td::DotPattern) const{}
+        void operator() (td::Anchor) const{}
 		template <typename TVAL>
 		void operator()(TVAL& val) const
 		{
@@ -891,6 +919,7 @@ namespace td
         void operator() (td::ColorID) const{}
         void operator() (td::LinePattern) const{}
         void operator() (td::DotPattern) const{}
+        void operator() (td::Anchor) const{}
 
 		template <typename TVAL>
 		void operator()(TVAL& val) const
@@ -914,6 +943,7 @@ namespace td
         void operator() (td::ColorID) const{}
         void operator() (td::LinePattern) const{}
         void operator() (td::DotPattern) const{}
+        void operator() (td::Anchor) const{}
 		template <typename TVAL>
 		void operator()(TVAL& val) const
 		{	
@@ -937,6 +967,8 @@ namespace td
 		void operator() (td::Color& val) const { val = var.colorVal(); }
         void operator() (td::ColorID& val) const { val = var.colorID(); }
         void operator() (td::LinePattern& val) const { val = var.linePattern(); }
+        void operator() (td::DotPattern& val) const { val = var.dotPattern(); }
+        void operator() (td::Anchor& val) const { val = var.anchor(); }
 		void operator()(td::BoolCh& val) const{ val = var.boolVal(); }
 		void operator()(td::ChFix7& val) const	{ val = var.chFixVal(); }
 		

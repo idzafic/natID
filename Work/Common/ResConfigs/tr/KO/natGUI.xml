@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevRes>
+	<Translations>
+		<Res id="@GUI.fdFileType" tr="파일 유형:"/>
+		<Res id="Ok" tr="확인"/>
+		<Res id="Cancel" tr="취소"/>
+		<Res id="@msgInfo" tr="정보"/>
+		<Res id="@msgWarning" tr="경고"/>
+		<Res id="@msgError" tr="오류"/>
+		<Res id="@AppMenu" tr="애플리케이션 메뉴"/>
+		<Res id="@CTX.CloseAllOnLeft" tr="왼쪽 모두 닫기"/>
+		<Res id="@CTX.CloseAllOnRigh" tr="오른쪽 모두 닫기"/>
+		<Res id="@CTX.CloseAllButThi" tr="이것 제외 모두 닫기"/>
+		<Res id="@CTX.CloseAll" tr="모두 닫기"/>
+		<Res id="@CTX.TEExport2XML" tr="내용을 XML로 내보내기"/>
+		<Res id="@CTX.TEExport2TXT" tr="내용을 TXT로 내보내기"/>
+		<Res id="@CTX.TECopy" tr="선택한 행 복사"/>
+		<Res id="@TE.find:" tr="찾기:"/>
+		<Res id="@TE.replace:" tr="바꾸기:"/>
+		<Res id="@TE.GoToLine:" tr="줄 이동:"/>
+		<Res id="@TE.Info:" tr="정보:"/>
+		<Res id="@TE.LEfindTT" tr="검색할 내용"/>
+		<Res id="@TE.BtnfindTT" tr="다음 찾기"/>
+		<Res id="@TE.replaceTT" tr="바꿀 내용"/>
+		<Res id="@TE.findAllTT" tr="마지막 위치 도달 후 처음부터 다시 검색"/>
+		<Res id="@TE.ReplaceTT" tr="다음 항목 바꾸기"/>
+		<Res id="@TE.ReplaceAllTT" tr="모두 바꾸기 (문서 시작부터 끝까지)"/>
+		<Res id="@TE.GoToLineTT" tr="편집기에서 지정한 줄로 이동"/>
+		<Res id="@TE.found" tr="찾음:"/>
+		<Res id="@TE.NotFound" tr="찾을 수 없음"/>
+		<Res id="@TE.replaced" tr="바뀜"/>
+		<Res id="@TE.NotReplaced" tr="바뀐 내용 없음"/>
+		<Res id="@TE.replacedAll:" tr="모두 바꿈:"/>
+		<Res id="@TE.LineNoTooLarge" tr="줄 번호가 너무 큼"/>
+		<Res id="@TE.OnLine" tr="찾은 줄 번호"/>
+		<Res id="@TE.Export2XML" tr="내용을 XML로 내보내기"/>
+		<Res id="@TE.Export2TXT" tr="내용을 TXT로 내보내기"/>
+		<Res id="@TE.findReplaceDlg" tr="찾기 및 바꾸기"/>
+	</Translations>
+</DevRes>

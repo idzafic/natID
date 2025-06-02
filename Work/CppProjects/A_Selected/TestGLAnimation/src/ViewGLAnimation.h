@@ -49,17 +49,7 @@ private:
         assert(_mvpLoc >= 0);
         if (_mvpLoc < 0)
             return false;
-#ifdef DEBUG_GL
-        GLenum error = glGetError();
-        if (error != GL_NO_ERROR)
-        {
-            if (pLog)
-                pLog->showInfo("setupShaders", "ERROR! OpenGL error in setupVBO");
-            
-            mu::dbgLog("ERROR! OpenGL error in setupVBO! Error code = %x", error);
-            return false;
-        }
-#endif
+        dbgCheckGLError();
 //        if (pLog)
 //            pLog->showInfo("setupShaders", "Pos10");
         return true;
@@ -133,17 +123,7 @@ private:
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindVertexArray(0);
         
-#ifdef DEBUG_GL
-        GLenum error = glGetError();
-        if (error != GL_NO_ERROR)
-        {
-            mu::ILogger* pLog = mu::pApp()->getLogger();
-            if (pLog)
-                pLog->showError("ViewGLAnimation::onInit", "Error! Cannot setup shaders!");
-            mu::dbgLog("ERROR! OpenGL error in setupVBO! Error code = %x", error);
-            assert(false);
-        }
-#endif
+        dbgCheckGLError();
     }
 protected:
     
@@ -194,15 +174,7 @@ protected:
         // Set face culling winding order
 //        glEnable(GL_CULL_FACE);
         
-#ifdef DEBUG_GL
-        GLenum error = glGetError();
-        if (error != GL_NO_ERROR)
-        {
-            if (pLog)
-                pLog->showError("setupShaders", "ERROR! OpenGL error in onInit last pos");
-            mu::dbgLog("OpenGL error: %x", error);
-        }
-#endif
+        dbgCheckGLError();
     }
     
     bool prepareNextFrame() override

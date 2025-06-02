@@ -18,9 +18,15 @@
 
 namespace gui
 {
+class Resources;
+class ImageHelper;
+class Canvas;
 
-class NATGUI_API Image : public NatObject
+class NATGUI_API Image //: public NatObject
 {
+    friend class Resources;
+    friend class ImageHelper;
+    
 public:
     enum class AspectRatio : unsigned char {No=0, Keep};
     enum class Type : unsigned char {PNG=0, JPG, BMP};
@@ -35,10 +41,16 @@ public:
     } Data;
     
 private:
+    union
+    {
+        Handle _handle = nullptr;
+        Image* _pResImage;
+    };
     gui::Handle _disabled = nullptr;
     float _ratioHW = 1;
     td::BYTE _fromRes = 0;
     td::BYTE _fromDisplay = 0;
+    td::BYTE _invertable = 0;
     //enum class Type {FromRes, FromFile, FromDB};
     //Type _type = Type::FromRes;
 private:
@@ -46,12 +58,16 @@ private:
     void calcHWRatio();
 public:
     Image();
-    Image(gui::Handle handle);
+    Image(gui::Handle handle); //for resource
     Image(const char* fileOrResName);
     Image(const td::String& fileOrResName);
     Image(const gui::Size& sz);
+//    Image(const Image& img); //for resource images only
+    Image(const Image* pResImage); //for resource images only
     ~Image();
-    virtual gui::ObjType getObjType() const override { return ObjType::Image; }
+//    virtual gui::ObjType getObjType() const override { return ObjType::Image; }
+    gui::Handle getHandle();
+    const gui::Handle getHandle() const;
     
     void draw(const gui::Rect& rect, AspectRatio aspectRatio = AspectRatio::Keep, td::HAlignment hAlign=td::HAlignment::Center, td::VAlignment vAlign=td::VAlignment::Center) const;
     void drawWithoutContextManagement(const gui::Rect& rect, AspectRatio aspectRatio = AspectRatio::Keep, td::HAlignment hAlign=td::HAlignment::Center, td::VAlignment vAlign=td::VAlignment::Center) const;
@@ -64,11 +80,17 @@ public:
     bool getData(Data& data) const;
     
     //for drawing to Image
-    void startDrawingContext(bool clear = false, td::ColorID clearColor = td::ColorID::Transparent);
+    void startDrawingContext(gui::Canvas* pCanvas, bool clear = false, td::ColorID clearColor = td::ColorID::Transparent);
     void releaseDrawingContext();
     float getHWRatio() const;
     bool isFromDisplay() const;
+    void setInvertible(bool bInvertable);
+    bool isInvertible() const;
     void invertColors();
+    //get color from (x,y) pixel where (0,0) is top-left corner of the image
+    //td::Color getColor(unsigned int x, unsigned int y) const;
+    //get data content (bytes are ordered from top-left->top right up to bottom->right corner)
+    void getContent(cnt::SafeFullVector<td::Color>& content) const;
     bool saveToFile(const td::String& fileName, Image::Type type = Image::Type::PNG) const;
     gui::Handle getDisabled();
 };

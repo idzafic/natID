@@ -24,7 +24,7 @@ class NATGUI_API Dialog : public Window
 {
     friend class DialogView;
     friend class WindowHelper;
-    enum class EventHandlerType : td::BYTE { Consumer=0, FunctionForSingleButtonWithoutBtnID, FunctionForAllButtons, FunctionForSingleButton};
+    enum class EventHandlerType : td::BYTE { Consumer=0, FunctionForSingleButtonWithoutBtnID, FunctionForAllButtons, FunctionForSingleButton, NA};
 public:
     class Button
     {
@@ -100,6 +100,18 @@ public:
     const gui::DialogView& getCentralViewWithButtons() const;
     const Control* getCentralControl() const;
     
+    template <class TVIEW>
+    TVIEW* getView() const
+    {
+        const Control* pConstCtrl = getCentralControl();
+        
+        if (!pConstCtrl)
+            return nullptr;
+        Control* pCtrl = const_cast<Control*>(pConstCtrl);
+
+        return reinterpret_cast<TVIEW*>(pCtrl);
+    }
+    
     //set visual ID (wndID) if it has not been already set in constructor, otherwise if will complain
     template <class TINT>
     void setVisualID(TINT wndID)
@@ -120,6 +132,7 @@ public:
     void openModal(gui::Dialog::Button::ID, std::function<void(gui::Dialog*)> fnToCall);
     
     void openNonModal(std::function<void(gui::Dialog*)> fnToCall);
+    void openNonModal();
 
     //get butto id that closed the dialog 
     Dialog::Button::ID getClickedButtonID() const;

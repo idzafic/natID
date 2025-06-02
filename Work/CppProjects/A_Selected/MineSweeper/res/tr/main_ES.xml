@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<DevRes>
+    <Translations>
+        <Res id="appTitle" tr="Minesweeper"/>
+        <Res id="settings" tr="Ajustes"/>
+        <Res id="settingsTT" tr="Ajustar la apariencia y el idioma. El idioma requiere reiniciar la aplicación."/>
+        <Res id="theApp" tr="Aplicación"/>
+        <Res id="game" tr="Juego"/>
+        <Res id="Level" tr="Nivel"/>
+        <Res id="Easy" tr="Fácil"/>
+        <Res id="Medium" tr="Medio"/>
+        <Res id="Hard" tr="Difícil"/>
+        <Res id="Done" tr="La búsqueda de bombas ha terminado."/>
+        <Res id="Dead" tr="¡Explosión! ¡Inténtalo de nuevo!"/>
+        <Res id="AllOK" tr="¡EXCELENTE! ¡Campo minado limpio!"/>
+        <Res id="Bombs:" tr="Minas:"/>
+        <Res id="Flags:" tr="Banderas:"/>
+        <Res id="Size:" tr="Tamaño:"/>
+        <Res id="ClStart" tr="Haga clic en cualquier campo para comenzar"/>
+        <Res id="EmptyFieldClicked" tr="Clic en campo vacío. No es necesario..."/>
+        <Res id="BulkClear" tr="Más de un campo despejado."/>
+        <Res id="ClearedField" tr="Un campo despejado. Mina cerca."/>
+        <Res id="FlagRemoved" tr="Bandera (marca) eliminada."/>
+        <Res id="FlagAdded" tr="Bandera de mina colocada en un campo."/>
+        <Res id="FlagFailed" tr="¡No es necesario colocar un marcador en un área limpia!"/>
+        
+        <Res id="dlgSettings" tr="Ajustes"/>
+        <Res id="lblLang" tr="Idioma actual de la aplicación:"/>
+        <Res id="lblLang2" tr="Idioma de la aplicación después del reinicio de la aplicación:"/>
+        <Res id="chbTBIcsAndLbls" tr="Mostrar etiquetas de la barra de herramientas."/>
+        <Res id="chbUseCombo" tr="Usar ComboBox para la selección de nivel (dificultad)."/>
+        <Res id="theme" tr="Tema:"/>
+        <Res id="showStatusBar" tr="Mostrar barra de estado"/>
+        <Res id="RestartRequired" tr="Reiniciar la aplicación"/>
+        <Res id="RestartRequiredInfo" tr="Algunos de los cambios realizados en la configuración requieren que se reinicie la aplicación para que surtan efecto"/>
+        <Res id="Restart" tr="Reiniciar"/>
+        <Res id="DoNoRestart" tr="No reiniciar"/>
+
+    </Translations>
+</DevRes>

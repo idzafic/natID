@@ -123,7 +123,9 @@ namespace dp
 
 		virtual bool showLog(mu::ILogger::MsgType, const td::String& header, const td::String& msg) const = 0;
 
-		virtual bool exportToXML(const td::String& fileName, const td::String strID, bool checkStrings = false) = 0;
+		virtual bool exportToXML(const td::String& fileName, const td::String& strID, bool checkStrings = false) = 0;
+        
+        virtual bool exportToTXT(const td::String& fileName) = 0;
 
 		virtual td::INT4 importFromXML(const td::String& fileName) = 0;  //returns number of inserted rows, neg number for not ok
 

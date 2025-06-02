@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevRes>
+    <Translations>
+        <Res id="repView" tr="Rapports"/>
+        <Res id="repError" tr="Erreur"/>
+        <Res id="repNoView" tr="Aucun rapport n'est ouvert ! L'opération ne peut pas être terminée !"/>
+        <Res id="print" tr="Imprimer"/>
+        <Res id="printTT" tr="Imprimer"/>
+        <Res id="expPDF" tr="Vers PDF"/>
+        <Res id="expPDFTT" tr="Exporter en PDF"/>
+        <Res id="expXML" tr="Vers XML"/>
+        <Res id="expXMLTT" tr="Exporter en XML"/>
+        <Res id="zoom11" tr="1:1"/>
+        <Res id="zoom11TT" tr="Établir un rapport 1:1 avec la version imprimée"/>
+        <Res id="repZoom" tr="Zoom"/>
+        <Res id="repZoomTT" tr="Valeur du zoom en pourcentage"/>
+        <Res id="zoomW" tr="À la largeur"/>
+        <Res id="zoomWTT" tr="Ajuster à la largeur de la page"/>
+        <Res id="zoomH" tr="À la hauteur"/>
+        <Res id="zoomHTT" tr="Ajuster à la largeur de la page"/>
+        <Res id="vwSingle" tr="Une page"/>
+        <Res id="vwSingleTT" tr="Afficher une page en colonne"/>
+        <Res id="vwTwo" tr="Deux pages"/>
+        <Res id="vwTwoTT" tr="Afficher deux pages en colonne"/>
+        <Res id="vwThree" tr="Trois pages"/>
+        <Res id="vwThreeTT" tr="Afficher trois pages en colonne"/>
+        <Res id="vwFour" tr="Quatre pages"/>
+        <Res id="vwFourTT" tr="Afficher quatre pages en colonne"/>
+        <Res id="repPg#" tr="Page/Total des pages"/>
+        <Res id="repPg#TT" tr="Numéro de page / Nombre total de pages"/>
+        <Res id="goToFirst" tr="Au début"/>
+        <Res id="goToFirstTT" tr="Afficher (aller à) la première page"/>
+        <Res id="goToLast" tr="À la fin"/>
+        <Res id="goToLastTT" tr="Afficher (aller à) la dernière page"/>
+        <Res id="rep2XML" tr="Exporter en XML"/>
+        <Res id="0" tr="zéro "/>
+        <Res id="1" tr="un "/>
+        <Res id="2" tr="deux "/>
+        <Res id="3" tr="trois "/>
+        <Res id="4" tr="quatre "/>
+        <Res id="5" tr="cinq "/>
+        <Res id="6" tr="six "/>
+        <Res id="7" tr="sept "/>
+        <Res id="8" tr="huit "/>
+        <Res id="9" tr="neuf "/>
+        <Res id="10" tr="dix "/>
+        <Res id="11" tr="onze "/>
+        <Res id="12" tr="douze "/>
+        <Res id="13" tr="treize "/>
+        <Res id="14" tr="quatorze "/>
+        <Res id="15" tr="quinze "/>
+        <Res id="16" tr="seize "/>
+        <Res id="17" tr="dix-sept "/>
+        <Res id="18" tr="dix-huit "/>
+        <Res id="19" tr="dix-neuf "/>
+        <Res id="20" tr="vingt "/>
+        <Res id="30" tr="trente "/>
+        <Res id="40" tr="quarante "/>
+        <Res id="50" tr="cinquante "/>
+        <Res id="60" tr="soixante "/>
+        <Res id="70" tr="soixante-dix "/>
+        <Res id="80" tr="quatre-vingts "/>
+        <Res id="90" tr="quatre-vingt-dix "/>
+        <Res id="100_beg" tr="cent "/>
+        <Res id="200" tr="deux cents "/>
+        <Res id="300" tr="trois cents "/>
+        <Res id="400" tr="quatre cents "/>
+        <Res id="500" tr="cinq cents "/>
+        <Res id="600" tr="six cents "/>
+        <Res id="700" tr="sept cents "/>
+        <Res id="800" tr="huit cents "/>
+        <Res id="900" tr="neuf cents "/>
+        <Res id="1e3" tr="mille "/>
+        <Res id="2e3" tr="deux mille "/>
+        <Res id="3e3" tr="trois mille "/>
+        <Res id="4e3" tr="quatre mille "/>
+        <Res id="5e3" tr="cinq mille "/>
+        <Res id="6e3" tr="six mille "/>
+        <Res id="7e3" tr="sept mille "/>
+        <Res id="8e3" tr="huit mille "/>
+        <Res id="9e3" tr="neuf mille "/>
+        <Res id="e3s" tr="mille "/>
+        <Res id="1e6" tr="un million "/>
+        <Res id="2e6" tr="deux millions "/>
+        <Res id="3e6" tr="trois millions "/>
+        <Res id="4e6" tr="quatre millions "/>
+        <Res id="5e6" tr="cinq millions "/>
+        <Res id="6e6" tr="six millions "/>
+        <Res id="7e6" tr="sept millions "/>
+        <Res id="8e6" tr="huit millions "/>
+        <Res id="9e6" tr="neuf millions "/>
+        <Res id="e6s" tr="millions "/>
+        <Res id="1e9" tr="un milliard "/>
+        <Res id="2e9" tr="deux milliards "/>
+        <Res id="3e9" tr="trois milliards "/>
+        <Res id="4e9" tr="quatre milliards "/>
+        <Res id="5e9" tr="cinq milliards "/>
+        <Res id="6e9" tr="six milliards "/>
+        <Res id="7e9" tr="sept milliards "/>
+        <Res id="8e9" tr="huit milliards "/>
+        <Res id="9e9" tr="neuf milliards "/>
+        <Res id="e9s" tr="milliards "/>
+        <Res id="1e12" tr="un billion "/>
+        <Res id="2e12" tr="deux billions "/>
+        <Res id="3e12" tr="trois billions "/>
+        <Res id="4e12" tr="quatre billions "/>
+        <Res id="5e12" tr="cinq billions "/>
+        <Res id="6e12" tr="six billions "/>
+        <Res id="7e12" tr="sept billions "/>
+        <Res id="8e12" tr="huit billions "/>
+        <Res id="9e12" tr="neuf billions "/>
+        <Res id="e12s" tr="billions "/>
+        <Res id="1e15" tr="un quadrillion "/>
+        <Res id="2e15" tr="deux quadrillions "/>
+        <Res id="3e15" tr="trois quadrillions "/>
+        <Res id="4e15" tr="quatre quadrillions "/>
+        <Res id="5e15" tr="cinq quadrillions "/>
+        <Res id="6e15" tr="six quadrillions "/>
+        <Res id="7e15" tr="sept quadrillions "/>
+        <Res id="8e15" tr="huit quadrillions "/>
+        <Res id="9e15" tr="neuf quadrillions "/>
+        <Res id="e15s" tr="quadrillions "/>
+        <Res id="and" tr="et "/>
+        <Res id="Page" tr="Page"/>
+        <Res id="NoDPToExp" tr="Aucune donnée à exporter ! Le rapport ne contient aucun tableau de la base !"/>
+        <Res id="ExpToXMLDone" tr="Exportation en XML réussie !"/>
+        <Res id="repErr" tr="Erreur de rapport"/>
+        <Res id="repToPDF" tr="Exporter le rapport en PDF"/>
+        <Res id="repToXML" tr="Exporter le rapport en XML"/>
+    </Translations>
+</DevRes>

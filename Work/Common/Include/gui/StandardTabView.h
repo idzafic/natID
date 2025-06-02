@@ -27,6 +27,7 @@ private:
     std::function<void(int)> _onChangedSelection;
 public:
     enum class TabLocation: unsigned char {Top=0, Bottom, Left, Right};
+    enum class NoTabsStyle : unsigned char {BezelBorder=0, LineBorder, NoBorder};
 protected:
     void measure(CellInfo& cell) override;
     void reMeasure(CellInfo& cell) override;
@@ -49,7 +50,10 @@ public:
     void setCurrentViewPos(int pos);
     //int getViewPos(const BaseView* pView);
     int getNumberOfViews() const;
+    
     void setTabLocation(StandardTabView::TabLocation tabLocation);
+    void setNoTabsStyle(StandardTabView::NoTabsStyle noTabsStyle);
+    
     StandardTabView::TabLocation getTabLocation() const;
 
     const std::function<void(int)>& getChangedSelectionHandler() const;

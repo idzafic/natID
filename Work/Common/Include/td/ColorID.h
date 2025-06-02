@@ -14,23 +14,30 @@
 #pragma once
 #include <td/Types.h>
 #include <mu/muLib.h>
+#include <td/String.h>
 
 namespace td
 {
+
 class Color;
 enum class Accent : unsigned char {Plain = 0, Success, Warning, Error, Critical};
+enum class ColorScheme : unsigned char {Auto=0, Light, Dark};
 
 enum class ColorID : unsigned char
 {
     Maroon=0,
+    Rust,               // New: Reddish-brown tone
     DarkRed,
     Brown,
+    Terracotta,         // New: Earthy reddish-brown
     Firebrick,
     Crimson,
     Red,
+    Vermilion,          // New: Bright red-orange
     Tomato,
     Coral,
     IndianRed,
+    Copper,             // New: Metallic reddish-brown
     LightCoral,
     DarkSalmon,
     Salmon,
@@ -38,6 +45,8 @@ enum class ColorID : unsigned char
     OrangeRed,
     DarkOrange,
     Orange,
+    Tangerine,           // New: Bright orange
+    Apricot,            // New: Soft orange
     Gold,
     DarkGoldenRod,
     GoldenRod,
@@ -59,9 +68,13 @@ enum class ColorID : unsigned char
     LimeGreen,
     LightGreen,
     PaleGreen,
+    Mint,               // Fresh light green
+    Sage,               // New: Muted green
+    Moss,               // New: Earthy green
     DarkSeaGreen,
     MediumSpringGreen,
     SpringGreen,
+    Pine,               // New: Deep forest green
     SeaGreen,
     MediumAquaMarine,
     MediumSeaGreen,
@@ -70,6 +83,7 @@ enum class ColorID : unsigned char
     Teal,
     DarkCyan,
     Cyan,
+    Aqua,               // Bright cyan-blue
     LightCyan,
     DarkTurquoise,
     Turquoise,
@@ -85,6 +99,8 @@ enum class ColorID : unsigned char
     LightBlue,
     SkyBlue,
     LightSkyBlue,
+    Periwinkle,         // New: Soft blue-violet
+    Cerulean,           // New: Deep sky blue
     MidnightBlue,
     Navy,
     DarkBlue,
@@ -102,6 +118,10 @@ enum class ColorID : unsigned char
     DarkOrchid,
     MediumOrchid,
     Purple,
+    Mulberry,           // Rich purplish-red
+    Berry,              // New: Deep reddish-purple
+    Mauve,              // New: Soft purple
+    Eggplant,           // New: Deep purple
     Thistle,
     Plum,
     Violet,
@@ -111,6 +131,7 @@ enum class ColorID : unsigned char
     PaleVioletRed,
     DeepPink,
     HotPink,
+    Flamingo,           // Vibrant pink
     LightPink,
     Pink,
     AntiqueWhite,
@@ -124,8 +145,10 @@ enum class ColorID : unsigned char
     LightYellow,
     SaddleBrown,
     Sienna,
+    Sepia,              // New: Warm brownish tone
     Chocolate,
     Peru,
+    Bronze,             // New: Metallic brownish tone
     SandyBrown,
     BurlyWood,
     Tan,
@@ -152,9 +175,14 @@ enum class ColorID : unsigned char
     Azure,
     Snow,
     Black,
+    ObsidianGray,
+    Ash,                // New: Medium gray
+    Slate,              // New: Bluish-gray
     DimGray,
     Gray,
+    Smoke,              // New: Light gray
     DarkGray,
+    Stone,              // New: Dark gray
     Silver,
     LightGray,
     Gainsboro,
@@ -163,28 +191,47 @@ enum class ColorID : unsigned char
     SysSelectedItemBack, //prvi sistem color
     SysSelectedTextBack,
     SysLabel,
-    SysHeaderText,
     SysHeaderBack,
     SysText, //zanji za color picker
+    SysHeaderText,
     SysSelectedText,
-    SysBackAlternate1,
-    SysBackAlternate2,
+    SysBackAlt1,
+    SysBackAlt2,
     SysTransparentSelection,
-    SysDisabledCtrlColor,
-    SysControlText,
-    SysLabelHighlight,
+    //SysDisabledCtrlColor,
+    SysCtrlText,
+    SysCtrlTextDisabled,
     SysCtrlBack,
+    SysLabelHighlight,
     SysCritical,
     SysConstructive,
     SysDestructive,
     SysWarning,
     SysError,
+    SysHighlightBackground, //e.g. for code editor
     Transparent //Ovaj mora biti zadnji
 };
 
 MAINUTILS_API const char* toString(td::ColorID colorID);
 
-MAINUTILS_API td::ColorID toColorID(const char* pStr, int len = -1);
+MAINUTILS_API td::ColorID toColorID(const char* pStr, int len = -1, td::ColorID defaultColor = td::ColorID::SysText);
+
+MAINUTILS_API const char* toString(td::ColorScheme defaultScheme);
+
+MAINUTILS_API td::ColorScheme toColorScheme(const char* pStr, int len = -1, td::ColorScheme defaultScheme = td::ColorScheme::Auto);
+
+inline td::ColorID toColorID(const td::String& str, td::ColorID defaultColor = td::ColorID::SysText)
+{
+    return toColorID(str.c_str(), (int) str.length(), defaultColor);
+}
+
+inline td::ColorID toColorID(const td::StringExt* pStrExt, td::ColorID defaultColor = td::ColorID::SysText)
+{
+    if (!pStrExt)
+        return td::ColorID::SysText;
+    
+    return toColorID(pStrExt->c_str(), (int) pStrExt->length(), defaultColor);
+}
 
 MAINUTILS_API bool isSystemBackgroundColor(td::ColorID);
 

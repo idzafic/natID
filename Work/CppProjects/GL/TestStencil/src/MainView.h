@@ -185,8 +185,6 @@ private:
 
         _outlinePass.setBuffer(&_outlineBuffer);
 
-        _mainPass.setTextureUniforms();
-
         gui::gl::Context::enable(gui::gl::Context::Flag::DepthTest);
 
         gui::gl::Context::setDepthBufferFunction(gui::gl::DepthBuffer::Function::Less);
@@ -235,13 +233,7 @@ protected:
 
         _lightPos = glm::vec3(-2., 0., 2.);
         
-#ifdef DEBUG_GL
-        GLenum error = glGetError();
-        if (error != GL_NO_ERROR)
-        {
-            mu::dbgLog("OpenGL error: %x", error);
-        }
-#endif
+        dbgCheckGLError();
     }
     
     bool prepareNextFrame() override

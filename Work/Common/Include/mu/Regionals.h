@@ -1137,7 +1137,7 @@ public:
             
             if (trailingTxt)
             {
-                return SNPRINTF(pBuff, BUFFLEN - 1, _TRUNCATE, "%g%s", val, trailingTxt);
+                return SNPRINTF(pBuff, BUFFLEN - 1, _TRUNCATE, "%.*e%s", nDec, val, trailingTxt);
                 
 //                if (nDec < 0)
 //                {
@@ -1152,7 +1152,7 @@ public:
 //                return SNPRINTF(pBuff, BUFFLEN - 1, _TRUNCATE, "%g", val);
 //            }
 
-            return SNPRINTF(pBuff, BUFFLEN - 1, _TRUNCATE, "%g", val);
+            return SNPRINTF(pBuff, BUFFLEN - 1, _TRUNCATE, "%.*e", nDec, val);
 //            return SNPRINTF(pBuff, BUFFLEN - 1, _TRUNCATE, "%.*g", nDec, val);
 		}
 

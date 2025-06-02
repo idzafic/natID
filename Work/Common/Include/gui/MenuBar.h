@@ -24,6 +24,16 @@ class MenuBarHelper;
 class NATGUI_API MenuBar : public Consumer
 {
     friend class MenuBarHelper;
+public:
+    using PathAndShortName = struct _PAndSN
+    {
+        td::String path;
+        td::String shortName;
+    };
+    
+protected:
+    cnt::PushBackVector< cnt::SafeFullVector<PathAndShortName> > _fileNames; //can be open
+private:
     td::UINT4 _GID = 0;
 protected:
     td::BYTE _context = 0;
@@ -36,6 +46,7 @@ protected:
     //void addMenu(MenuItem* item);
     bool loadFromRes(const char* xmlResConfigName);
     void setMenu(td::WORD menuPos, MenuItem* menuItem);
+    void reserveFileNames(td::BYTE nMenuFileNames);
  public:
     enum class Location : td::BYTE {SystemSpecific=0, EmbeddedInWindow};
     
@@ -50,8 +61,14 @@ protected:
     MenuItem* getMenuByID(td::BYTE menuID);
     gui::ObjType getObjType() const override { return ObjType::MenuBar; }
     MenuItem* getItem(td::BYTE menuID, td::BYTE firstSubMenuID, td::BYTE lastSubMenuID, td::BYTE actionID);
-//    bool isAppMenuNameFromExecutable() const;
-//    const td::String* getLeadingName() const;
+    
+    const cnt::SafeFullVector<MenuBar::PathAndShortName>& getFileNames(td::BYTE pos) const;
+    
+    template <typename T>
+    const cnt::SafeFullVector<MenuBar::PathAndShortName>& getFileNames(T pos) const
+    {
+        return getFileNames(td::BYTE(pos));
+    }
 };
 
 } //namespace gui

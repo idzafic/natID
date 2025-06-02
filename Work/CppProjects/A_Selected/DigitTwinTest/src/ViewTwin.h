@@ -18,6 +18,7 @@
 #include <mu/Timer.h>
 #include "SolutionBuffer.h"
 #include <thread>
+#include <sc/TokenizedModel.h>
 
 
 const float scalePendulum = 1.0f;
@@ -30,6 +31,7 @@ static char s_tmpRes[256];
 class ViewTwin : public gui::Canvas
 {
 protected:
+    sc::Naming _naming;
     gui::Symbol _pendulum;
     gui::SymbolDrawingAttribs _drawingAttribs[2];
     gui::DrawableString _x;
@@ -52,65 +54,40 @@ private:
             _pSolver = nullptr;
         }
         
-        fo::fs::path homePath;
-        mu::getHomePath(homePath);
+        //init symbolic computation library
+        sc::reserveNamings(1);
+        sc::setDefaultDataForAllNamings();
+        sc::setDefaultDataForNaming(0);
         
-
 #ifdef USE_ODE_MODEL
-        
-        td::String xmlModelFileName = getResFileName("pendODE");
-        _pSolver = sc::createDblODESolver();
-        
-        if (_pSolver == nullptr)
-        {
-            return false;
-        }
-#ifdef USE_MEMORY_MODELS
-        //Demo of using Memeory model
-        td::String xmlModel;
-        if (!fo::loadBinaryFileAtOnce(xmlModelFileName, xmlModel))
-        {
-            _pSolver->release();
-            _pSolver = nullptr;
-            return false;
-        }
-        
-        if (!_pSolver->init(xmlModel, sc::ISolver<SOLVERTYPE>::SourceType::Memory))
-        {
-            _pSolver->release();
-            _pSolver = nullptr;
-            return false;
-        }
-#else
-        if (!_pSolver->init(xmlModelFileName, sc::ISolver<SOLVERTYPE>::SourceType::File))
-        {
-            _pSolver->release();
-            _pSolver = nullptr;
-            return false;
-        }
-#endif //USE_MEMORY_MODELS
+        //ODE-modl
+        td::String modlModelFileName = getResFileName("pendODEModl");
+        _pSolver = sc::createDblODESolver(nullptr);
         
 #else
-        td::String xmlModelFileName = getResFileName("pendDAE");
-        
-        int maxIter = 50;
-        _pSolver = sc::createDblDAESolver(maxIter);
-        
-        if (_pSolver == nullptr)
-        {
-            return false;
-        }
-        
-//        td::String xmlModelContent = _pSolver->convertDAEToNL(xmlModelFileName);
-        
-//        if (!_pSolver->init(xmlModelContent.c_str(), sc::ISolver<SOLVERTYPE>::SourceType::Memory))
-        if (!_pSolver->init(xmlModelFileName.c_str(), sc::ISolver<SOLVERTYPE>::SourceType::File))
-        {
-            _pSolver->release();
-            _pSolver = nullptr;
-            return false;
-        }
+        //DAE modl
+        td::String modlModelFileName = getResFileName("pendDAEModl");
+        _pSolver = sc::createDblDAESolver(nullptr, 50);
 #endif
+        
+        if (_pSolver == nullptr)
+            return false;
+        
+        cnt::SafeFullVector<td::Variant> headerAttribs; // = me.getHeaderAttribs();
+        sc::ILog* pLog = nullptr;
+        sc::TokenizedModel tm(pLog, headerAttribs, gui::tr, _naming, 0);
+        
+#ifdef USE_MEMORY_MODELS
+        td::String strModelContent = fo::loadFileContent(modlModelFileName);
+        if (!tm.loadFromString(strModelContent))
+            return false;
+#else
+        if (!tm.loadFromFile(modlModelFileName))
+            return false;
+#endif
+        
+        if (!_pSolver->init(&_naming, &tm))
+            return false;
         
         return true;
     }

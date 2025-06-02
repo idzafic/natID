@@ -32,6 +32,7 @@ protected:
 protected:
     void measure(CellInfo& cell) override;
     void reMeasure(CellInfo& cell) override;
+    void setGeometry(const Geometry& cellFrame, const Cell& cell) override;
     virtual BaseView* getBackgroundView();
     //void showBackgroundView();
     ViewSwitcher() = delete;

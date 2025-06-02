@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <DevRes>
 	<Translations>
-		<Res id="something" tr="Meat Ön grill Ä Ö ÜßŒ ÆŸØ..."/>
+		<Res id="something" tr="Another text type"/>
 		<Res id="speedAndTypeTT" tr="speed and type of elements"/>
 		<Res id="exportTT" tr="Export current scene to desktop"/>
 
@@ -13,6 +13,5 @@
 		<Res id="RestartRequiredInfo" tr="Some of the changed settings require restarting the application to take effect"/>
 		<Res id="Restart" tr="Restart"/>
 		<Res id="DoNoRestart" tr="Don't restart"/>
-
 	</Translations>
 </DevRes>

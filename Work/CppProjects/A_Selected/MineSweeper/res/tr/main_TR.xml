@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<DevRes>
+    <Translations>
+        <Res id="appTitle" tr="Mayın Tarlası"/>
+        <Res id="settings" tr="Ayarlar"/>
+        <Res id="settingsTT" tr="Görünümü ve dili ayarla. Dil değişikliği için uygulamanın yeniden başlatılması gerekir."/>
+        <Res id="theApp" tr="Uygulama"/>
+        <Res id="game" tr="Oyun"/>
+        <Res id="Level" tr="Seviye"/>
+        <Res id="Easy" tr="Kolay"/>
+        <Res id="Medium" tr="Orta"/>
+        <Res id="Hard" tr="Zor"/>
+        <Res id="Done" tr="Bomba arayışı tamamlandı."/>
+        <Res id="Dead" tr="Patlama! Tekrar dene!"/>
+        <Res id="AllOK" tr="MÜKEMMEL! Mayın tarlası temizlendi!"/>
+        <Res id="Bombs:" tr="Mayınlar:"/>
+        <Res id="Flags:" tr="Bayraklar:"/>
+        <Res id="Size:" tr="Boyut:"/>
+        <Res id="ClStart" tr="Başlamak için herhangi bir alana tıklayın"/>
+        <Res id="EmptyFieldClicked" tr="Boş alana tıklandı. Buna gerek yok..."/>
+        <Res id="BulkClear" tr="Birden fazla alan temizlendi."/>
+        <Res id="ClearedField" tr="Bir alan temizlendi. Mayın yakında."/>
+        <Res id="FlagRemoved" tr="Bayrak (işaret) kaldırıldı."/>
+        <Res id="FlagAdded" tr="Alana mayın bayrağı yerleştirildi."/>
+        <Res id="FlagFailed" tr="Temiz bir alana işaretçi yerleştirmeye gerek yok!"/>
+        
+        <Res id="dlgSettings" tr="Ayarlar"/>
+        <Res id="lblLang" tr="Uygulamanın mevcut dili:"/>
+        <Res id="lblLang2" tr="Uygulamanın yeniden başlatılmasından sonraki uygulama dili:"/>
+        <Res id="chbTBIcsAndLbls" tr="Araç çubuğu etiketlerini göster."/>
+        <Res id="chbUseCombo" tr="Seviye (zorluk) seçimi için ComboBox kullan."/>
+        <Res id="theme" tr="Tema:"/>
+        <Res id="showStatusBar" tr="Durum çubuğunu göster"/>
+        <Res id="RestartRequired" tr="Uygulamayı yeniden başlat"/>
+        <Res id="RestartRequiredInfo" tr="Değiştirilen ayarların bazılarının etkili olması için uygulamanın yeniden başlatılması gerekir"/>
+        <Res id="Restart" tr="Yeniden başlat"/>
+        <Res id="DoNoRestart" tr="Yeniden başlatma"/>
+
+    </Translations>
+</DevRes>

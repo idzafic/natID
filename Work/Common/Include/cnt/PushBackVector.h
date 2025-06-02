@@ -10,6 +10,8 @@
 #pragma once
 #include <cassert>
 #include <td/Types.h>
+#include <td/Concepts.h>
+
 //#include <ostream>
 
 //inkrementira se a i ima reset method tako da najveca velicina buffera ostaje rezervisana 
@@ -25,7 +27,7 @@ protected:
     T* _data;
     T* _top;
     size_t _capacity;
-    //T* _endPos;
+
     inline const T* getEndPos() const
     {
         return _data + _capacity;
@@ -65,7 +67,8 @@ public:
         reserve(nSize);
         for (size_t i = 0; i<nSize; ++i)
         {
-            push_back(v[i]);
+            _data[i] = std::move(v._data[i]);
+            ++_top;
         }
         return *this;
     }
@@ -117,6 +120,25 @@ public:
         vect._top = nullptr;
         vect._capacity = 0;
     };
+    
+    // Move assignment operator
+//    PushBackVector& operator=(PushBackVector&& vect) noexcept
+//    {
+//        if (this != &vect)
+//        {
+//            release();
+//            
+//            _data = vect._data;
+//            vect._data = nullptr;
+//            
+//            _top = vect._top;
+//            vect._top = nullptr;
+//            
+//            _capacity = vect._capacity;
+//            vect._capacity = 0;
+//        }
+//        return *this;
+//    }
 
     ~PushBackVector()
     {
@@ -231,13 +253,16 @@ public:
 
     void reserve(size_t n)
     {
-        assert(n>0);
         //_container.reserve(n);
         if (_capacity != n)
         {
             if (_data)
                 delete [] _data;
-            _data = new T[n];
+            if (n > 0)
+                _data = new T[n];
+            else
+                _data = nullptr;
+            
             _capacity = n;
         }
         _top = _data;
@@ -356,56 +381,116 @@ public:
             _top = _data;
         return true;
     }
-
-    T& push_back()
+    
+    inline T& push_back() requires td::conc::DefaultConstructor<T>
     {
         const T* endPos = getEndPos();
         if (_top >= endPos)
         {
-            T val;
-            push_back(val);
+            // Calculate new capacity
+            size_t newSize;
+            if constexpr (INCREMENT > 0)
+                newSize = _capacity + INCREMENT;
+            else
+                newSize = (_capacity > 0) ? _capacity * 2 : 1;
+
+            T* pNewData = new T[newSize]; // default-constructed
+//            size_t nBytes = newSize*sizeof(T);
+//            T* pNewData = (T*) new td::BYTE[nBytes]; // default-constructed
+            assert(pNewData != nullptr);
+
+            // Move existing elements into new array
+            if (_capacity > 0)
+            {
+                for (size_t i = 0; i < _capacity; ++i)
+                    pNewData[i] = std::move(_data[i]); // Move construct
+                
+                //apply default constructor for the rest
+//                for (size_t i=0; i < newSize; ++i)
+//                {
+//                    T* pToInit = pNewData+i;
+//                    new (pToInit) T();
+//                }
+                
+                delete[] _data;
+                
+                _data = pNewData;
+                _top = _data + _capacity;
+            }
+            else
+            {
+//                for (size_t i=0; i < newSize; ++i)
+//                {
+//                    T* pToInit = pNewData+i;
+//                    new (pToInit) T();
+//                }
+                
+                _data = pNewData;
+                _top = _data;
+            }
+
+            _capacity = newSize;
         }
-        else
-        {
-            ++_top;
-        }
-        return *(_top - 1);
+        return *(_top++);
     }
     
-    T* push_back2()
+//    inline T& push_back() requires (!td::conc::DefaultConstructor<T>)
+//    {
+//        const T* endPos = getEndPos();
+//        if (_top >= endPos)
+//        {
+//            // Calculate new capacity
+//            size_t newSize;
+//            if constexpr (INCREMENT > 0)
+//                newSize = _capacity + INCREMENT;
+//            else
+//                newSize = (_capacity > 0) ? _capacity * 2 : 1;
+//
+//            size_t nBytes = newSize*sizeof(T);
+//            T* pNewData = (T*) new td::BYTE[nBytes]; // default-constructed
+//            assert(pNewData != nullptr);
+////            memset(pNewData, 0, nBytes);
+//            
+//            // Move existing elements into new array
+//            if (_capacity > 0)
+//            {
+//                for (size_t i = 0; i < _capacity; ++i)
+//                    pNewData[i] = std::move(_data[i]); // Move construct
+//                //set the rest to zero
+//                memset((void*)(&pNewData[_capacity]), 0, (newSize -_capacity) * sizeof(T));
+//
+//                delete[] _data;
+//                _data = pNewData;
+//                _top = _data + _capacity;
+//            }
+//            else
+//            {
+//                memset(pNewData, 0, nBytes);
+//                _data = pNewData;
+//                _top = _data;
+//            }
+//
+//            _capacity = newSize;
+//        }
+//        return *(_top++);
+//    }
+    
+    inline T* push_back2()
     {
-        const T* endPos = getEndPos();
-        if (_top >= endPos)
-        {
-            T val;
-            push_back(val);
-        }
-        else
-        {
-            ++_top;
-        }
-        return _top - 1;
+        return &push_back();
     }
-
-    void push_back(const T& val)
+ 
+    void push_back(const T& val) requires td::conc::CopyAssign<T>
     {
         const T* endPos = getEndPos();
         if (_top >= endPos)
         {
             //detect new size
             size_t newSize;
-            if (INCREMENT > 0)
-            {
+            if constexpr (INCREMENT > 0)
                 newSize = _capacity + INCREMENT;
-            }
             else
-            {
-                //duplicate
-                if (_capacity > 0)
-                    newSize = _capacity * 2;
-                else
-                    newSize = 1;  //worst case
-            }
+                newSize = (_capacity > 0) ? _capacity * 2 : 1; //duplicate
 
             T* pNewData = new T[newSize];
             
@@ -416,7 +501,8 @@ public:
                 //copy old data
                 for (size_t i = 0; i<_capacity; i++)
                 {
-                    pNewData[i] = _data[i];
+                    pNewData[i] = std::move(_data[i]);
+                    //memset((void*)(_data + i), 0, sizeof(T));
                 }
                 size_t delta = size();
                 delete [] _data;
@@ -471,7 +557,7 @@ public:
                 //copy old data
                 for (size_t i = 0; i<_capacity; i++)
                 {
-                    pNewData[i] = _data[i];
+                    pNewData[i] = std::move(_data[i]);
                 }
                 size_t delta = size();
                 delete [] _data;

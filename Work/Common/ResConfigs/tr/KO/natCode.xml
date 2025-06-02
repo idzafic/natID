@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevRes>
+	<Translations>
+		<Res id="@ML.HeaderIncorrect" tr="모델 헤더가 잘못되었거나 누락되었습니다 (@ML.HeaderIncorrectOrMissing)"/>
+		<Res id="@SC.CmplxTypeInReal" tr="실수 영역 모달에서 복소수 타입이 감지되었습니다 (@SC.CmplxTypeInReal)"/>
+		<Res id="@CELH.Type" tr="유형"/>
+		<Res id="@CELHT.TypeTT" tr="메시지 유형 (정보, 경고, 오류)"/>
+		<Res id="@CELH.Editor" tr="편집기"/>
+		<Res id="@CELHT.Editor" tr="로그 항목을 생성한 편집기 (메인-브레인 아이콘 또는 시각화 편집기-피규어 아이콘)"/>
+		<Res id="@CELH.Line#" tr="행 번호"/>
+		<Res id="@CELH.Line#TT" tr="해당 편집기의 행 번호"/>
+		<Res id="@CELH.Col#" tr="열 번호"/>
+		<Res id="@CELH.Col#TT" tr="해당 편집기의 열 번호"/>
+		<Res id="@CELH.Msg" tr="메시지 설명"/>
+		<Res id="@CELH.MsgTT" tr="사용 가능한 모든 세부 정보가 포함된 메시지 설명"/>
+		<Res id="@CE.VarDDVars" tr="주 모델 변수가 이미 변수에 정의되었습니다 (@CE.VarDDVars)"/>
+		<Res id="@CE.SubVarDDSubVars" tr="하위 모델 변수가 이미 하위 모델 변수에 정의되었습니다 (@CE.SubVarDDSubVars)"/>
+		<Res id="@CE.ParDDInPars" tr="주 모델 매개변수가 이미 매개변수에 정의되었습니다 (@CE.ParDDInPars)"/>
+		<Res id="@CE.ParDDInVars" tr="주 모델 매개변수가 이미 주 모델 변수에 정의되었습니다 (@CE.ParDDInVars)"/>
+		<Res id="@CE.SubParDDSubVars" tr="하위 모델 매개변수가 이미 하위 모델 변수에 정의되었습니다 (@CE.SubParDDSubVars)"/>
+		<Res id="@CE.SubParDDSubPars" tr="하위 모델 매개변수가 이미 하위 모델 매개변수에 정의되었습니다 (@CE.SubParDDSubPars)"/>
+		<Res id="@CE.SubParDDInPars" tr="하위 모델 매개변수가 이미 주 모델 매개변수에 정의되었습니다 (@CE.SubParDDInPars)"/>
+		<Res id="@CE.notInModel" tr="토큰이 모델에 없습니다 (@CE.notInModel)"/>
+		<Res id="@CE.endMissing" tr="end가 누락되었습니다 (@CE.endMissing)"/>
+		<Res id="@CE.AttribClosedNoO" tr="속성이 열리지 않고 ']'로 닫혔습니다 ('[' 누락) (@CE.AttribClosedNoOpen)"/>
+		<Res id="@CE.AttribNotClosed" tr="속성 섹션이 열렸지만 ']'로 닫히지 않았습니다 (@CE.AttribNotClosed)"/>
+		<Res id="@CE.wrongModelPos" tr="잘못된 모델 위치 (@CE.wrongModelPos)"/>
+		<Res id="@CE.endMissmatch" tr="end 불일치 (아마도 'end'가 너무 많음) (@CE.endMissmatch)"/>
+		<Res id="@CE.AttribMismatch" tr="속성 유형 불일치 (@CE.AttribMismatch)"/>
+		<Res id="@CE.UnknownLabel" tr="알 수 없는 레이블 (@CE.UnknownLabel)"/>
+		<Res id="@CE.UnexpectedToken" tr="예상치 못한 토큰 (@CE.UnexpectedToken)"/>
+		<Res id="@CESB.NoOfErrors" tr="오류 수:"/>
+		<Res id="@CESB.CursorPositio" tr="커서 위치:"/>
+		<Res id="@SC.EmpryParamName" tr="빈 매개변수 이름 (@SC.EmpryParamName)"/>
+		<Res id="@SC.AssignWith0Toke" tr="토큰이 없는 할당 (@SC.AssignWith0Tokens)"/>
+		<Res id="@SC.AssignWith2Toke" tr="두 토큰으로 할당 (@SC.AssignWith2Tokens)"/>
+		<Res id="@SC.WrongType" tr="잘못된 유형 (@SC.WrongType)"/>
+		<Res id="@ML.HeaderParamInco" tr="불완전한 헤더 매개변수 ('=' 뒤에 값 누락)"/>
+		<Res id="@ML.HeaderTokError" tr="모델 헤더 정의에 예상치 못한 토큰이 있습니다"/>
+		<Res id="@ML.HeaderEndAfter" tr="헤더 선언에서 'end' 뒤에 동일한 줄에 내용이 있습니다"/>
+		<Res id="@ML.HeaderParamUnkn" tr="알 수 없는 헤더 매개변수 이름"/>
+		<Res id="@ML.HeaderParamExp=" tr="헤더 매개변수 이름 뒤에 '='가 필요합니다"/>
+		<Res id="@ML.HeaderReportExp" tr="'Report type' 매개변수 값이 필요합니다"/>
+		<Res id="@ML.HeaderWrong=Pos" tr="헤더 매개변수 정의에서 '=' 기호의 위치가 잘못되었습니다"/>
+		<Res id="@ML.HeaderWrongCons" tr="헤더 매개변수 정의에서 상수 위치가 잘못되었습니다"/>
+		<Res id="@ML.HeaderWrongPara" tr="잘못된 헤더 매개변수 유형 (지정된 값 유형이 이 매개변수 이름에 적합하지 않음)"/>
+		<Res id="@ML.HeaderWrongParT" tr="잘못된 헤더 매개변수 유형 (지정된 값 유형이 이 매개변수 이름에 적합하지 않음)"/>
+		<Res id="@ML.HeaderUnknownPa" tr="알 수 없는 헤더 매개변수 유형/이름"/>
+		<Res id="@ML.HeaderWithout:" tr="헤더 선언에 ':'이 누락되었습니다 ('Header' 뒤의 마지막 토큰)"/>
+		<Res id="@ML.HeaderTokenAfte" tr="'Header'가 정의된 줄에 ':' 뒤에 토큰이 있습니다. ':' 기호는 해당 줄의 마지막 토큰이어야 합니다."/>
+		<Res id="@ML.HeaderFirstToke" tr="헤더 선언은 'Header' 토큰으로 시작해야 합니다."/>
+		<Res id="@CE.ExpEndsWithOper" tr="표현식/방정식이 연산자로 끝납니다!"/>
+		<Res id="@CE.ExpEndsWithAssi" tr="표현식이 할당으로 끝납니다!"/>
+		<Res id="@CE.Mising_)" tr="여는-닫는 괄호 불일치. ')'가 누락되었습니다"/>
+		<Res id="@CE.Mising_(" tr="여는-닫는 괄호 불일치. '('가 누락되었습니다"/>
+		<Res id="@CE.CloseParenthesi" tr="여는-닫는 괄호 불일치."/>
+		<Res id="@ET.FnParamOr()MM" tr="함수 매개변수 오류 또는 닫는 ')' - 닫는 ')' 불일치"/>
+		<Res id="@ET.FnNotPrpFormatt" tr="함수 @가 올바르게 형식화되지 않았습니다"/>
+		<Res id="@ET.FnNeeds_(" tr="함수 @가 올바르게 형식화되지 않았습니다! '(' 누락"/>
+		<Res id="@CE.ExpEndsWithOpen" tr="표현식/방정식이 여는 괄호로 끝납니다!"/>
+		<Res id="@ET.FnNeeds_)" tr="함수 @가 올바르게 형식화되지 않았습니다! ')' 누락"/>
+		<Res id="@ET.LabelAfterOpera" tr="다른 피연산자 뒤에 오는 매개변수/변수 id='@'"/>
+		<Res id="@ET.ConstAfterOpera" tr="다른 피연산자 뒤에 오는 상수=@"/>
+		<Res id="@ET.(_AfterOperand" tr="피연산자 뒤에 오는 여는 괄호"/>
+		<Res id="@ET.OperAfterUnOp" tr="단항 연산자 '@' 뒤에 오는 연산자 '@'"/>
+		<Res id="@ET.UnaryAfterUnOpr" tr="피연산자 뒤에 오는 단항 연산자 '@'"/>
+		<Res id="@ET.OperAfterOper" tr="연산자 '@' 뒤에 오는 연산자 '@'"/>
+		<Res id="@ET.,NeedsOperator" tr="단항 연산자 뒤에 쉼표가 옵니다!"/>
+		<Res id="@ET.,OutsideFn" tr="다중 매개변수 함수 외부에서 쉼표가 사용되었습니다!"/>
+		<Res id="@ET.()_Mismatch" tr="여는-닫는 괄호 불일치!"/>
+		<Res id="@ET.FnParamMising" tr="함수 매개변수 노드가 누락되었습니다!"/>
+		<Res id="@ET.FnParam#Commas" tr="쉼표 수가 함수와 일치하지 않습니다! 모든 함수 매개변수를 제공하세요!"/>
+		<Res id="@ET.FnParam2Err" tr="다중 매개변수 함수의 두 번째 매개변수를 준비할 수 없습니다!"/>
+		<Res id="@ET.,AfterUnFn" tr="단항 함수 뒤에 쉼표!"/>
+		<Res id="@ET.MFnPremEnd" tr="다중 매개변수 fn=@를 구문 분석하는 동안 방정식이 조기에 종료되었습니다!"/>
+		<Res id="@ET.MFnExpOprnd" tr="다중 매개변수 fn=@를 구문 분석하는 동안 피연산자가 예상되었지만 피연산자가 아닌 것이 얻어졌습니다!"/>
+		<Res id="@ET.MFnNoVar2" tr="다중 매개변수 함수 @는 두 번째 매개변수로 변수를 지원하지 않습니다"/>
+		<Res id="@ET.MFnNoVar3" tr="다중 매개변수 함수 @는 세 번째 매개변수로 변수를 지원하지 않습니다"/>
+		<Res id="@ET.ExpPremEnd" tr="방정식/표현식이 조기에 종료되었습니다"/>
+		<Res id="@ET.Exp,InMFn" tr="다중 매개변수 함수에서 쉼표가 예상됨: @"/>
+		<Res id="@ET.ExpPremEndFn" tr="방정식이 조기에 종료되었습니다 (fn=@)!"/>
+		<Res id="@ET.sAfterOprnd" tr="다른 피연산자 뒤에 오는 라플라스 연산자"/>
+		<Res id="@ET.UnexpTokenID" tr="예상치 못한 토큰 ID: @(@)"/>
+		<Res id="@ET.ErrDifIfThen" tr="if-then-else 방정식을 미분할 수 없습니다!"/>
+		<Res id="@SC.TFBadFormat" tr="전달 함수 형식이 잘못되었습니다!"/>
+		<Res id="@ET.ErrInitValueExp" tr="초기 값 표현식에 대한 표현식 트리를 만들 수 없습니다!"/>
+		<Res id="@SC.InitValErr" tr="초기 값을 계산할 수 없습니다!"/>
+		<Res id="@SC.NLReadFail" tr="NL 블록 읽기 오류"/>
+		<Res id="@SC.NLNvars!=NEQsl" tr="변수 수가 방정식 수와 같지 않습니다!"/>
+		<Res id="@SC.CannotSolveSubM" tr="'SubModel'을 해결할 수 없습니다"/>
+		<Res id="@SC.EmptyJacSubMode" tr="'SubModel'에 빈 야코비안이 있습니다"/>
+		<Res id="@SC.EmptyJacobian" tr="빈 야코비안"/>
+		<Res id="@SC.CannotFactorize" tr="'SubModel'에서 행렬을 인수분해할 수 없습니다"/>
+		<Res id="@SC.LUSolveErrorSub" tr="'SubModel'에서 희소 LU 솔루션 오류"/>
+		<Res id="@SC.LUSolveError" tr="희소 LU 솔루션 오류"/>
+		<Res id="@SC.MaxIterLimitSub" tr="'SubModel'에서 최대 반복 한계에 도달했습니다"/>
+		<Res id="@SC.MaxIterLimit" tr="최대 반복 한계에 도달했습니다"/>
+		<Res id="@SC.FactorErrorSubM" tr="'SubModel'에서 희소 행렬 인수분해 오류"/>
+		<Res id="@SC.FactorizationEr" tr="희소 인수분해 오류"/>
+		<Res id="@ET.Expected_)" tr="닫는 괄호 ')'가 예상됩니다"/>
+		<Res id="@ET.FnAfterOperand" tr="피연산자 뒤에 오는 함수"/>
+		<Res id="@ET.LimitFnFormatNo" tr="한계 함수 형식이 올바르지 않습니다"/>
+		<Res id="@ET.LimiFnWo_(" tr="여는 괄호 '('가 없는 한계 함수"/>
+		<Res id="@ET.LimitFnNeeds_)" tr="한계 함수에는 닫는 괄호 ')'가 필요합니다"/>
+		<Res id="@ET.FnNotPrpFmt" tr="함수가 올바르게 형식화되지 않았습니다"/>
+		<Res id="@ET.)_AfterOper" tr="연산자 뒤에 오는 닫는 괄호 ')'"/>
+		<Res id="@ET.EmptyExpression" tr="빈 표현식"/>
+		<Res id="@ET.UnexpectedEnd" tr="예상치 못한 표현식 종료"/>
+		<Res id="@ET.OperatorWoOprnd" tr="피연산자가 없는 연산자"/>
+		<Res id="@SC.ErrInReInit" tr="'ReInit'에서 오류"/>
+		<Res id="@SC.ErrInPreProc" tr="'PreProc'에서 오류"/>
+		<Res id="@SC.ErrInIterPostPr" tr="'IterPostProc'에서 오류"/>
+		<Res id="@SC.ErrInBasePostPr" tr="'BasePostProc'에서 오류"/>
+		<Res id="@SC.ErrInPostProc" tr="'PostProc'에서 오류"/>
+		<Res id="@SC.ErrInLimits" tr="'Limits'에서 오류"/>
+		<Res id="@SC.ErrorInRepeat" tr="'Repeat'에서 오류"/>
+		<Res id="@SC.ODEReadModelErr" tr="'ODE' 섹션 읽기/구문 분석 오류"/>
+		<Res id="@SC.WrongDTForODE" tr="ODE에 대한 잘못된 적분 단계. dT는 양수 값이어야 합니다!"/>
+		<Res id="@SC.NoDeltaT" tr="적분 단계(dT)에 대한 값이 지정되지 않았습니다!"/>
+		<Res id="@SC.WLSReadFail" tr="'WLS' 섹션 읽기 오류"/>
+		<Res id="@CE.WLSEErrorSolve" tr="WLS 모델 해결 중 오류"/>
+		<Res id="@SC.ErrorDAEInit" tr="DAE 초기화 오류"/>
+		<Res id="@SC.DAEFactorizatio" tr="DAE 인수분해 오류"/>
+		<Res id="@SC.WrongDTForDAE" tr="DAE에 대한 잘못된 dt"/>
+		<Res id="@SC.WrongDAEMethod" tr="잘못된 DAE 해결 방법 (허용되는 방법은 Euler, RK2, RK4, RK6 등입니다)"/>
+		<Res id="@SC.WrongDAEMethodS" tr="'SubModel'에서 잘못된 DAE 방법"/>
+		<Res id="@CS.DistNoType" tr="분포 정의에는 'type'이 필요합니다! (허용되는 유형은 Gauss, Student, Normal 등입니다)"/>
+		<Res id="@CS.NoMinInUniformD" tr="균일 분포에서 'min' 값은 필수입니다"/>
+		<Res id="@CS.NoMaxInUniformD" tr="균일 분포에서 'max' 값은 필수입니다"/>
+		<Res id="@CS.NoPimBernoulliD" tr="베르누이 분포에서 'p' 값은 필수입니다"/>
+		<Res id="@CS.NoLamdaInPoisso" tr="포아송 분포에서 'lambda' 값은 필수입니다"/>
+		<Res id="@CS.NoLamdaInExponD" tr="지수 분포에서 'lambda' 값은 필수입니다"/>
+		<Res id="@CS.NoAlphaInGammaD" tr="감마 분포에서 'alpha' 값은 필수입니다"/>
+		<Res id="@CS.NoBetaInGammaDi" tr="감마 분포에서 'beta' 값은 필수입니다"/>
+		<Res id="@CS.NoMeanInGaussDi" tr="가우스 분포에서 'mean' 값은 필수입니다"/>
+		<Res id="@CS.NoDevInGaussDis" tr="가우스 분포에서 'dev' 값은 필수입니다"/>
+		<Res id="@CS.0DevInGaussDist" tr="가우스 분포에서 'dev' 값은 양수여야 합니다!"/>
+		<Res id="@CS.NoMeanInLogGaus" tr="'LogGauss' 분포에서 'mean' 값은 필수입니다"/>
+		<Res id="@CS.NoDevInLogGausD" tr="'LogGauss' 분포에서 'dev' 값은 필수입니다"/>
+		<Res id="@CS.NoKInChiSquared" tr="'ChiSquared' 분포에서 'k' 값은 필수입니다"/>
+		<Res id="@CS.NoNInStudentDis" tr="'Student' 분포에서 'k' 값은 필수입니다"/>
+		<Res id="@CS.UnknowntDistrib" tr="알 수 없는 분포"/>
+		<Res id="@SC.Mising=InAssign" tr="할당 표현식에 할당 토큰이 없습니다"/>
+		<Res id="@SC.NoVarsDeclared" tr="선언된 변수가 없습니다"/>
+		<Res id="@SC.EmptyInitExpr" tr="빈 초기화 표현식"/>
+		<Res id="@SC.MissingDotInAss" tr="할당에 점이 없습니다"/>
+		<Res id="@SC.NoImagRealPartI" tr="할당에 'imag' 또는 'real' 멤버가 없습니다"/>
+		<Res id="@SC.NoParentSolver" tr="상위 솔버가 없습니다"/>
+		<Res id="@SC.WrongAssignment" tr="잘못된 할당 방정식"/>
+		<Res id="@SC.WrongIfConditio" tr="'if' 문에서 잘못된 조건"/>
+		<Res id="@SC.WrongSignalInIf" tr="'if' 문에서 잘못된 신호"/>
+		<Res id="@SC.EmptyIf" tr="빈 'if'"/>
+		<Res id="@SC.IncompleteIf" tr="불완전한 'if' 문"/>
+		<Res id="@SC.ElseExpected" tr="if 방정식에서 'else'가 예상됩니다!"/>
+		<Res id="@SC.NoExprInElse" tr="'else' 문에 표현식이 없습니다"/>
+		<Res id="@SC.WrongSignalInEl" tr="'else' 문에서 잘못된 신호"/>
+		<Res id="@SC.ElseMissingEnd" tr="'else'는 종료 키워드 'end'가 필요합니다"/>
+		<Res id="@SC.IncAssignmentEq" tr="불완전한 할당 표현식"/>
+		<Res id="@SC.UnknownSymbol" tr="알 수 없는 기호"/>
+		<Res id="@SC.CannotMakeExpre" tr="표현식을 만들 수 없습니다"/>
+		<Res id="@SC.CannotMakeIFExp" tr="'if' 표현식을 만들 수 없습니다"/>
+		<Res id="@SC.IncompleteIF" tr="불완전한 'if' 표현식"/>
+		<Res id="@SC.IfInUnsupported" tr="'if'가 'if' 표현식을 지원하지 않는 그룹에 배치되었습니다"/>
+		<Res id="@SC.IncompleteIfEls" tr="불완전한 'if'-'else'"/>
+		<Res id="@ET.ErrDifEqua" tr="미분 방정식 오류"/>
+		<Res id="@SC.UnexpectedExpre" tr="예상치 못한 표현식 유형"/>
+		<Res id="@SC.SymbolicJacobia" tr="심볼릭 야코비안 생성 오류"/>
+		<Res id="@SC.ErrorInLimits0" tr="한계 오류 (0)"/>
+		<Res id="@SC.ErrorInLimits1" tr="한계 오류 (1)"/>
+		<Res id="@SC.LimitGroupEndMi" tr="한계 그룹 'end' 불일치"/>
+		<Res id="@SC.LinitsMustBeGro" tr="한계는 그룹화되어야 합니다"/>
+		<Res id="@CS.StatAssNotOK" tr="통계 객체 할당이 잘못되었습니다"/>
+		<Res id="@CS.StatsToNotStatV" tr="비통계 관리자에 통계 객체 할당 오류"/>
+		<Res id="@CS.StatsStrWrongEx" tr="통계에 대한 잘못된 할당 연산자 (반드시 '&lt;&lt;'이어야 함)"/>
+		<Res id="@CS.EmptyStatAsssig" tr="빈 통계 할당"/>
+		<Res id="@CS.StatsWronExpTyp" tr="통계 객체에서 잘못된 표현식 유형"/>
+		<Res id="@CS.StatsCannotMake" tr="통계 객체에 대한 표현식 트리를 만들 수 없습니다"/>
+		<Res id="@CS.StatsCannotCrea" tr="통계 객체에 대한 표현식 트리를 만들 수 없습니다"/>
+		<Res id="@SC.PrematureEnd" tr="모델이 조기에 종료되었습니다"/>
+		<Res id="@SC.CannotCreateSol" tr="솔버를 만들 수 없습니다"/>
+		<Res id="@SC.ODEWrongFormat" tr="ODE 잘못된 방정식 형식. 변수 뒤에 아포스트로피와 할당 연산자 '='가 와야 합니다"/>
+		<Res id="@SC.ODEExpectedVari" tr="ODE는 변수를 예상합니다"/>
+		<Res id="@SC.ODEExpected=Tok" tr="ODE는 할당 '=' 토큰을 예상합니다"/>
+		<Res id="@SC.DerivAndIntAvai" tr="미분과 적분은 동일한 ODE 표현식에서 사용할 수 없습니다"/>
+		<Res id="@SC.NoDerivNoInt" tr="ODE 방정식에 미분도 적분도 없습니다"/>
+		<Res id="@SC.ODEExpected&apos;or" tr="ODE는 아포스트로피와 할당 연산자가 뒤따르는 변수 또는 할당과 'int' 함수가 뒤따르는 변수 중 하나를 예상합니다"/>
+		<Res id="@SC.WrongODEExp" tr="ODE 방정식이 올바르지 않습니다"/>
+		<Res id="@SC.ODEMissInt" tr="ODE에는 'int' 함수가 필요합니다. 또는 변수 이름 뒤에 아포스트로피를 잊으셨습니다"/>
+		<Res id="@SC.ODEHasMultInts" tr="ODE 방정식에 여러 'int' 메서드가 있습니다. 하나만 가능합니다."/>
+		<Res id="@SC.ODEWithDiffAndI" tr="ODE 방정식에는 diff(아포스트로피)와 'int' 함수가 모두 있습니다. 둘 중 하나만 가능합니다."/>
+		<Res id="@SC.CannotCrODEExpT" tr="ODE 표현식 트리를 만들 수 없습니다"/>
+		<Res id="@SC.ODEIntWrongOper" tr="ODE 방정식에 적절한 'int'가 없습니다"/>
+		<Res id="@SC.ODEEmptyInt" tr="ODE 방정식에 빈 'int'가 있습니다"/>
+		<Res id="@SC.ODEIntWithSS" tr="'int'는 적분에 매개변수를 사용할 수 없습니다. 변수여야 합니다!"/>
+		<Res id="@SC.TFsWrongFormat" tr="전달 함수 형식이 잘못되었습니다"/>
+		<Res id="@SC.TFsNoDiv1Operat" tr="전달 함수 정의에 나누기 토큰 '/'가 없습니다"/>
+		<Res id="@SC.TFsNoAssignOper" tr="전달 함수 정의에 할당 연산자가 없습니다"/>
+		<Res id="@SC.TFsWrongTokens" tr="전달 함수 정의에서 예상치 못한 토큰이 발견되었습니다"/>
+		<Res id="@SC.TFsCannotMakeET" tr="전달 함수에 대한 표현식 트리를 만들 수 없습니다"/>
+		<Res id="@SC.WrongYInTF" tr="전달 함수의 출력 기호는 변수여야 합니다"/>
+		<Res id="@SC.TFYNotVariable" tr="전달 함수의 출력 기호는 변수여야 합니다 (2)"/>
+		<Res id="@SC.WrongUInTF" tr="전달 함수의 입력 기호는 변수여야 합니다"/>
+		<Res id="@SC.TFUNotVarNorPar" tr="전달 함수의 입력 기호는 변수도 매개변수도 아닙니다"/>
+		<Res id="@SC.NoDAEorTFEqs" tr="DAE 모델에 ODE도 TF 블록도 없습니다"/>
+		<Res id="@SC.Vars!=#Eqs" tr="변수 수가 방정식 수와 같지 않습니다"/>
+		<Res id="@SC.ODENotOK" tr="ODE가 올바르지 않습니다. ODE 표현식은 상태 변수로 시작해야 합니다"/>
+		<Res id="@SC.DAE#Eq!=#Vars" tr="DAE 문제에서 변수 수가 방정식 수와 같지 않습니다"/>
+		<Res id="@SC.TFOut!Variable" tr="전달 함수의 출력이 변수가 아닙니다"/>
+		<Res id="@SC.TFOutIsParam" tr="전달 함수의 출력이 매개변수입니다"/>
+		<Res id="@SC.TFIn!Declared" tr="전달 함수에서 사용된 변수가 선언되지 않았습니다"/>
+		<Res id="@SCTFTokListError" tr="전달 함수 선언에 대한 토큰이 충분하지 않습니다. 최소 4개가 필요합니다!"/>
+		<Res id="@SC.TFExprTreeErr" tr="전달 함수에 대한 표현식 트리 생성 오류"/>
+		<Res id="@SC.TFPolyCoefficen" tr="전달 함수에서 다항식 계수를 추출할 수 없습니다"/>
+		<Res id="@SC.TFDenomNoLaplad" tr="전달 함수의 분모에 라플라스 연산자가 없습니다"/>
+		<Res id="@SC.TFNomNoLapladeO" tr="전달 함수의 분자에 라플라스 연산자가 없습니다"/>
+		<Res id="@SC.TF2SSError" tr="전달 함수를 상태-공간 공식으로 변환하는 중 오류"/>
+		<Res id="@SC.DAENLDerivs" tr="DAE 모델의 NL 그룹 오류"/>
+		<Res id="@SC.DAEExpandError" tr="암시적 DAE 솔버 생성 오류 (확장 오류)"/>
+		<Res id="@SC.DAENLJack2" tr="DAE 모델에 대한 희소 야코비안을 만들 수 없습니다 (2)"/>
+		<Res id="@SC.DAENLJack3" tr="DAE 모델에 대한 희소 야코비안을 만들 수 없습니다 (3)"/>
+		<Res id="@SC.0Expansion" tr="0단계로 암시적 DAE 솔버 생성 오류 (0 확장 오류)"/>
+		<Res id="@SC.DAENLJack0Exp" tr="DAE 모델에 대한 희소 야코비안을 만들 수 없습니다 (@SC.DAENLJack0Exp)"/>
+		<Res id="@SC.DAEEqError" tr="DAE 평가기를 만들 수 없습니다"/>
+		<Res id="@SC.DAEEqExpDiffErr" tr="DAE 모델에 대한 희소 야코비안을 만들 수 없습니다 (@SC.DAEEqExpDiffError)"/>
+		<Res id="@SC.DAEEqExp0Error" tr="0단계로 암시적 DAE 솔버 생성 오류 (@SC.DAEEqExp0Error)"/>
+		<Res id="@SC.DAEEqExp0DiffEr" tr="DAE 모델에 대한 희소 야코비안을 만들 수 없습니다 (@SC.DAEEqExp0DiffError)"/>
+		<Res id="@CS.NLEsError" tr="'NLEs' 방정식을 올바르게 구문 분석할 수 없습니다"/>
+		<Res id="@SC.WrongPlotToken" tr="잘못된 플롯 유형/토큰 (@SC.WrongPlotToken)"/>
+		<Res id="@SC.WrongPlotTokenR" tr="잘못된 플롯 유형/토큰 (@SC.WrongPlotTokenRKW)"/>
+		<Res id="@SC.WrongPlotXBound" tr="잘못된 플롯 x-경계"/>
+		<Res id="@SC.WrongPlotYBound" tr="잘못된 플롯 y-경계"/>
+		<Res id="@SC.EmptyPlot" tr="빈 플롯"/>
+		<Res id="@SC.WrongPlotAttrib" tr="잘못된 플롯 속성 이름"/>
+		<Res id="@SC.SecondXAxisInPl" tr="하나의 플롯에는 x-축이 하나만 있을 수 있습니다! 플롯에 1개 이상의 축이 정의되어 있습니다!"/>
+		<Res id="@SC.SecondCondInPlo" tr="하나의 플롯에는 조건이 하나만 있을 수 있습니다! 플롯에 1개 이상의 조건이 정의되어 있습니다!"/>
+		<Res id="@SC.PlotPremEnd" tr="플롯이 조기에 종료되었습니다. 'end'가 없습니다"/>
+		<Res id="@SC.PlotNoYAxis" tr="플롯에 y-축이 없습니다. 플롯에는 최소한 하나의 y-축이 있어야 합니다!"/>
+		<Res id="@SC.PlotHLineErr" tr="플롯 수평선 ('hLine') 정의 오류"/>
+		<Res id="@SC.PlotVLineErr" tr="플롯 수직선 ('vLine') 정의 오류"/>
+		<Res id="@SC.PlotHBandErr" tr="플롯 수평 밴드 ('hBand') 정의 오류"/>
+		<Res id="@SC.PlotVBandErr" tr="플롯 수직 밴드 ('vBand') 정의 오류"/>
+		<Res id="@SC.PlotAxisErr" tr="플롯의 x-축 정의 오류"/>
+		<Res id="@SC.PlotYAxisErr" tr="플롯의 y-축 정의 오류"/>
+		<Res id="@SC.PlotCondErr" tr="플롯의 조건 정의 오류"/>
+		<Res id="@CS.#Vars!=#Eqs" tr="변수 수가 방정식 수와 같지 않습니다!"/>
+		<Res id="@SC.NoODEEqs" tr="ODE 방정식이 없습니다"/>
+		<Res id="@SC.#Vars!=#ODEs" tr="ODE 모델에서 변수 수가 방정식 수와 같지 않습니다!"/>
+		<Res id="@SC.WLSNoVars" tr="WLS 모델에 선언된 변수가 없습니다"/>
+		<Res id="@SC.WLSNoWLSEs" tr="WLS 방정식이 없습니다"/>
+		<Res id="@SC.WLSNotEnoughEQs" tr="WLS 방정식이 충분하지 않습니다"/>
+		<Res id="@CS.WLSEsError" tr="WLS 모델 오류"/>
+		<Res id="@CS.WLSECError" tr="WLS EC (등식 제약) 모델 오류"/>
+		<Res id="@SC.BadExpression" tr="잘못된 표현식"/>
+		<Res id="@SC.WrongExprType" tr="잘못된 표현식 유형"/>
+		<Res id="@SC.MissingColor" tr="색상 누락"/>
+		<Res id="@SC.UnexpectedToken" tr="예상치 못한 토큰"/>
+		<Res id="@SC.Missing(AfterFn" tr="함수 뒤에 여는 괄호 '('가 없습니다"/>
+		<Res id="@SC.SyntaxError" tr="구문 오류"/>
+		<Res id="@SC.NestedConjNotAl" tr="중첩된 켤레 함수 (conj 안의 conj)는 허용되지 않습니다. 수동으로 켤레를 만들고 평평한 켤레 표현식을 생성하세요."/>
+		<Res id="@SC.OperatorAfter=" tr="할당 연산자 뒤에 오는 연산자"/>
+		<Res id="@SC.Double=" tr="이중 할당 연산자 (할당 뒤에 할당)"/>
+		<Res id="@SC.EqEndsWith=" tr="표현식/방정식이 할당 연산자로 끝납니다"/>
+		<Res id="@SC.UnkownSymbol" tr="알 수 없는 기호"/>
+		<Res id="@SC.TwoConsOperands" tr="두 상수 피연산자가 연속적으로 나타납니다 (두 상수가 연속적으로 옴)"/>
+		<Res id="@SC.UnsupportedToke" tr="지원되지 않는 토큰"/>
+	</Translations>
+</DevRes>

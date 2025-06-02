@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevRes>
+	<Translations>
+		<Res id="@ML.HeaderIncorrect" tr="Model header is incorrect or mising (@ML.HeaderIncorrectOrMissing)"/>
+		<Res id="@SC.CmplxTypeInReal" tr="Detected complex type in real domain modal (@SC.CmplxTypeInReal)"/>
+		<Res id="@CELH.Type" tr="Type"/>
+		<Res id="@CELHT.TypeTT" tr="Type of message (Info, Warning, Error)"/>
+		<Res id="@CELH.Editor" tr="Editor"/>
+		<Res id="@CELHT.Editor" tr="Editor that generated log entry (main-brain icon, or visualization editor-figure icon)"/>
+		<Res id="@CELH.Line#" tr="Line#"/>
+		<Res id="@CELH.Line#TT" tr="Line number in corresponding editor"/>
+		<Res id="@CELH.Col#" tr="Col#"/>
+		<Res id="@CELH.Col#TT" tr="Column number if corresponding editor"/>
+		<Res id="@CELH.Msg" tr="Message description"/>
+		<Res id="@CELH.MsgTT" tr="Message description with all available details"/>
+		<Res id="@CE.VarDDVars" tr="Main model variable was already defined in variables (@CE.VarDDVars)"/>
+		<Res id="@CE.SubVarDDSubVars" tr="Submodel variable was already defined in submodel variables (@CE.SubVarDDSubVars)"/>
+		<Res id="@CE.ParDDInPars" tr="Main model parameter was already defined in parameters (@CE.ParDDInPars)"/>
+		<Res id="@CE.ParDDInVars" tr="Main model parameter was already defined in main model vaiables (@CE.ParDDInVars)"/>
+		<Res id="@CE.SubParDDSubVars" tr="Submodel parameter was already defined in submodel variables (@CE.SubParDDSubVars)"/>
+		<Res id="@CE.SubParDDSubPars" tr="Submodel parameter was already defined in submodel parameters (@CE.SubParDDSubPars)"/>
+		<Res id="@CE.SubParDDInPars" tr="Submodel parameter was already defined in main model parameters (@CE.SubParDDInPars)"/>
+		<Res id="@CE.notInModel" tr="Token is not in the model (@CE.notInModel)"/>
+		<Res id="@CE.endMissing" tr="Mising end (@CE.endMissing)"/>
+		<Res id="@CE.AttribClosedNoO" tr="Attrib was closed with &apos;]&apos; without opening it (mising &apos;[&apos;) (@CE.AttribClosedNoOpen)"/>
+		<Res id="@CE.AttribNotClosed" tr="Attrib section was opened but never closed with &apos;]&apos; (@CE.AttribNotClosed)"/>
+		<Res id="@CE.wrongModelPos" tr="Wrong model position (@CE.wrongModelPos)"/>
+		<Res id="@CE.endMissmatch" tr="End mismatch (Probably too many &apos;end&apos;s) (@CE.endMissmatch)"/>
+		<Res id="@CE.AttribMismatch" tr="Attrib type mismatch (@CE.AttribMismatch)"/>
+		<Res id="@CE.UnknownLabel" tr="Uknown label (@CE.UnknownLabel)"/>
+		<Res id="@CE.UnexpectedToken" tr="Unexpected token (@CE.UnexpectedToken)"/>
+		<Res id="@CESB.NoOfErrors" tr="No of errors:"/>
+		<Res id="@CESB.CursorPositio" tr="Cursor position:"/>
+		<Res id="@SC.EmpryParamName" tr="Empty parameter name (@SC.EmpryParamName)"/>
+		<Res id="@SC.AssignWith0Toke" tr="Assignment with zero tokens (@SC.AssignWith0Tokens)"/>
+		<Res id="@SC.AssignWith2Toke" tr="Assignme with two tokens (@SC.AssignWith2Tokens)"/>
+		<Res id="@SC.WrongType" tr="Wrong type (@SC.WrongType)"/>
+		<Res id="@ML.HeaderParamInco" tr="Incomplete header parameter (mising value after&apos;=&apos;)"/>
+		<Res id="@ML.HeaderTokError" tr="Unexpected token in model header definition"/>
+		<Res id="@ML.HeaderEndAfter" tr="There is content in the same line after &apos;end&apos; in header declaration"/>
+		<Res id="@ML.HeaderParamUnkn" tr="Unknown header parameter name"/>
+		<Res id="@ML.HeaderParamExp=" tr="Expected &apos;=&apos; after header parameter name"/>
+		<Res id="@ML.HeaderReportExp" tr="Expected &apos;Report type&apos; parameter value"/>
+		<Res id="@ML.HeaderWrong=Pos" tr="Wrong position of &apos;=&apos; sign in header parameter definition"/>
+		<Res id="@ML.HeaderWrongCons" tr="Wrong constant position in header parameter definition"/>
+		<Res id="@ML.HeaderWrongPara" tr="Wrong header parameter type (specified value type is not appropriate for this param name)"/>
+		<Res id="@ML.HeaderWrongParT" tr="Wrong header parameter type (specified value type is not appropriate for this param name)"/>
+		<Res id="@ML.HeaderUnknownPa" tr="Unknown header parameter type/name"/>
+		<Res id="@ML.HeaderWithout:" tr="Mising &apos;:&apos; in header declaration (last token after &apos;Header&apos;)"/>
+		<Res id="@ML.HeaderTokenAfte" tr="There is a token in same line where &apos;Header&apos; is defined after &apos;:&apos;. Sign &apos;:&apos; must be the last token in that line."/>
+		<Res id="@ML.HeaderFirstToke" tr="Header declaration must start with the &apos;Header&apos; token."/>
+		<Res id="@CE.ExpEndsWithOper" tr="Expression/equation ends with operator!"/>
+		<Res id="@CE.ExpEndsWithAssi" tr="Expression ends with assignment!"/>
+		<Res id="@CE.Mising_)" tr="Open-close parenthesis mismatch. Missing &apos;)&apos;"/>
+		<Res id="@CE.Mising_(" tr="Open-close parenthesis mismatch. Missing &apos;(&apos;"/>
+		<Res id="@CE.CloseParenthesi" tr="Open-close parenthesis mismatch."/>
+		<Res id="@ET.FnParamOr()MM" tr="Function param error or open &apos;)&apos; - close &apos;)&apos; mismatch"/>
+		<Res id="@ET.FnNotPrpFormatt" tr="Function @ not properly formatted"/>
+		<Res id="@ET.FnNeeds_(" tr="Function @ not properly formatted! Missing &apos;(&apos;"/>
+		<Res id="@CE.ExpEndsWithOpen" tr="Expression/equation ends with open parenthesis!"/>
+		<Res id="@ET.FnNeeds_)" tr="Function @ not properly formatted! Missing &apos;)&apos;"/>
+		<Res id="@ET.LabelAfterOpera" tr="Param/variable id=&apos;@&apos; after another operand"/>
+		<Res id="@ET.ConstAfterOpera" tr="Constant=@ after another operand"/>
+		<Res id="@ET.(_AfterOperand" tr="Open parenthesis after operand"/>
+		<Res id="@ET.OperAfterUnOp" tr="Operator &apos;@&apos; after unary operator &apos;@&apos;"/>
+		<Res id="@ET.UnaryAfterUnOpr" tr="Unary operator &apos;@&apos; after operand"/>
+		<Res id="@ET.OperAfterOper" tr="Operator &apos;@&apos; after operator &apos;@&apos;"/>
+		<Res id="@ET.,NeedsOperator" tr="Comma follows unary operator!"/>
+		<Res id="@ET.,OutsideFn" tr="Comma used outside of multiparam functions!"/>
+		<Res id="@ET.()_Mismatch" tr="Open-close parenthesis mismatch!"/>
+		<Res id="@ET.FnParamMising" tr="Missing function param node!"/>
+		<Res id="@ET.FnParam#Commas" tr="Number of commas does not match the function! Provide all function params!"/>
+		<Res id="@ET.FnParam2Err" tr="Cannot prepare second parameter of multiparam function!"/>
+		<Res id="@ET.,AfterUnFn" tr="Comma after unary function!"/>
+		<Res id="@ET.MFnPremEnd" tr="Premature end of equation while parsing multiparam fn=@!"/>
+		<Res id="@ET.MFnExpOprnd" tr="Expected operand obtained non operand while parsing multiparam fn=@!"/>
+		<Res id="@ET.MFnNoVar2" tr="Multiparam function @ doesn&apos;t support variables as the second parameter"/>
+		<Res id="@ET.MFnNoVar3" tr="Multiparam function @ doesn&apos;t support variables as the third parameter"/>
+		<Res id="@ET.ExpPremEnd" tr="Premature end of equation/expression"/>
+		<Res id="@ET.Exp,InMFn" tr="Expected comma in multiparam function: @"/>
+		<Res id="@ET.ExpPremEndFn" tr="Premature end of equation (fn=@)!"/>
+		<Res id="@ET.sAfterOprnd" tr="Laplace operator after another operand"/>
+		<Res id="@ET.UnexpTokenID" tr="Unexpected token id: @(@)"/>
+		<Res id="@ET.ErrDifIfThen" tr="Cannot differentiate if-then-else equation!"/>
+		<Res id="@SC.TFBadFormat" tr="Transfer function is badly formatted!"/>
+		<Res id="@ET.ErrInitValueExp" tr="Cannot make expression tree for the initial value expression!"/>
+		<Res id="@SC.InitValErr" tr="Cannot calculate initial value!"/>
+		<Res id="@SC.NLReadFail" tr="Error reading NL block"/>
+		<Res id="@SC.NLNvars!=NEQsl" tr="Number of variables is not equal to number of equations!"/>
+		<Res id="@SC.CannotSolveSubM" tr="Cannot solve &apos;SubModel&apos;"/>
+		<Res id="@SC.EmptyJacSubMode" tr="Empty Jacobian in &apos;SubModel&apos;"/>
+		<Res id="@SC.EmptyJacobian" tr="Empty Jacobian"/>
+		<Res id="@SC.CannotFactorize" tr="Cannot factorize matrix in &apos;SubModel&apos;"/>
+		<Res id="@SC.LUSolveErrorSub" tr="Sparse LU solution error in &apos;SubModel&apos;"/>
+		<Res id="@SC.LUSolveError" tr="Sparse LU solution error"/>
+		<Res id="@SC.MaxIterLimitSub" tr="Hit max iteration limit in &apos;SubModel&apos;"/>
+		<Res id="@SC.MaxIterLimit" tr="Hit max iteration limit"/>
+		<Res id="@SC.FactorErrorSubM" tr="Sparse matrix factorization error in &apos;SubModel&apos;"/>
+		<Res id="@SC.FactorizationEr" tr="Sparse factorization error"/>
+		<Res id="@ET.Expected_)" tr="Expected close parenthesis &apos;)&apos;"/>
+		<Res id="@ET.FnAfterOperand" tr="Function after operand"/>
+		<Res id="@ET.LimitFnFormatNo" tr="Limit function format isn&apos;t ok"/>
+		<Res id="@ET.LimiFnWo_(" tr="Limit function without open parenthesis &apos;(&apos;"/>
+		<Res id="@ET.LimitFnNeeds_)" tr="Limit function needs close parenthesis &apos;)&apos;"/>
+		<Res id="@ET.FnNotPrpFmt" tr="Function isn&apos;t properly formatted"/>
+		<Res id="@ET.)_AfterOper" tr="Close parenthesis &apos;)&apos; after operator"/>
+		<Res id="@ET.EmptyExpression" tr="Empty expression"/>
+		<Res id="@ET.UnexpectedEnd" tr="Unexpected expression end"/>
+		<Res id="@ET.OperatorWoOprnd" tr="Operator without operand"/>
+		<Res id="@SC.ErrInReInit" tr="Error in &apos;ReInit&apos;"/>
+		<Res id="@SC.ErrInPreProc" tr="Error in &apos;PreProc&apos;"/>
+		<Res id="@SC.ErrInIterPostPr" tr="Error in &apos;IterPostProc&apos;"/>
+		<Res id="@SC.ErrInBasePostPr" tr="Error in &apos;BasePostProc&apos;"/>
+		<Res id="@SC.ErrInPostProc" tr="Error in &apos;PostProc&apos;"/>
+		<Res id="@SC.ErrInLimits" tr="Error in &apos;Limits&apos;"/>
+		<Res id="@SC.ErrorInRepeat" tr="Error in &apos;Repeat&apos;"/>
+		<Res id="@SC.ODEReadModelErr" tr="Error reading/parsing &apos;ODE&apos; section"/>
+		<Res id="@SC.WrongDTForODE" tr="Wrong integration step for ODE. dT must be a positive value!"/>
+		<Res id="@SC.NoDeltaT" tr="Value for integration step (dT) was not specified!"/>
+		<Res id="@SC.WLSReadFail" tr="Error reading &apos;WLS&apos; section"/>
+		<Res id="@CE.WLSEErrorSolve" tr="Error in solving WLS model"/>
+		<Res id="@SC.ErrorDAEInit" tr="Error in DAE init"/>
+		<Res id="@SC.DAEFactorizatio" tr="DAE factorization error"/>
+		<Res id="@SC.WrongDTForDAE" tr="Wrong dt for DAE"/>
+		<Res id="@SC.WrongDAEMethod" tr="Wrong DAE solution method (allowed methods are Euler, RK2, RK4, RK6,...)"/>
+		<Res id="@SC.WrongDAEMethodS" tr="Wrong DAE method in &apos;SubModel&apos;"/>
+		<Res id="@CS.DistNoType" tr="Distribution definition requires &apos;type&apos;! (allowed types are Gauss, Student, Normal,...)"/>
+		<Res id="@CS.NoMinInUniformD" tr="&apos;min&apos; value is mandatory in uniform distribution"/>
+		<Res id="@CS.NoMaxInUniformD" tr="&apos;max&apos; value is mandatory in uniform distribution"/>
+		<Res id="@CS.NoPimBernoulliD" tr="&apos;p&apos; value is mandatory in Bernoulli distribution"/>
+		<Res id="@CS.NoLamdaInPoisso" tr="&apos;lambda&apos; value is mandatory in Poisson distribution"/>
+		<Res id="@CS.NoLamdaInExponD" tr="&apos;lambda&apos; value is mandatory in exponential distribution"/>
+		<Res id="@CS.NoAlphaInGammaD" tr="&apos;alpha&apos; value is mandatory in Gamma distribution"/>
+		<Res id="@CS.NoBetaInGammaDi" tr="&apos;beta&apos; value is mandatory in Gamma distribution"/>
+		<Res id="@CS.NoMeanInGaussDi" tr="&apos;mean&apos; value is mandatory in Gauss distribution"/>
+		<Res id="@CS.NoDevInGaussDis" tr="&apos;dev&apos; value is mandatory in Gauss distribution"/>
+		<Res id="@CS.0DevInGaussDist" tr="&apos;dev&apos; value has to be positive in Gauss distribution!"/>
+		<Res id="@CS.NoMeanInLogGaus" tr="&apos;mean&apos; value is mandatory in &apos;LogGauss&apos; distribution"/>
+		<Res id="@CS.NoDevInLogGausD" tr="&apos;dev&apos; value is mandatory in &apos;LogGauss&apos; distribution"/>
+		<Res id="@CS.NoKInChiSquared" tr="&apos;k&apos; value is mandatory in &apos;ChiSquared&apos; distribution"/>
+		<Res id="@CS.NoNInStudentDis" tr="&apos;k&apos; value is mandatory in &apos;Student&apos; distribution"/>
+		<Res id="@CS.UnknowntDistrib" tr="Unknown distribution"/>
+		<Res id="@SC.Mising=InAssign" tr="Missing assignment token in assignment expression"/>
+		<Res id="@SC.NoVarsDeclared" tr="There are no variables declared"/>
+		<Res id="@SC.EmptyInitExpr" tr="Empty init expr"/>
+		<Res id="@SC.MissingDotInAss" tr="Missing dot in assignment"/>
+		<Res id="@SC.NoImagRealPartI" tr="No &apos;imag&apos; or &apos;real&apos; member in assignment"/>
+		<Res id="@SC.NoParentSolver" tr="No parent solver"/>
+		<Res id="@SC.WrongAssignment" tr="Wrong assignment equation"/>
+		<Res id="@SC.WrongIfConditio" tr="Wrong condition in &apos;if&apos; statement"/>
+		<Res id="@SC.WrongSignalInIf" tr="Wrong signal in &apos;if&apos; statement"/>
+		<Res id="@SC.EmptyIf" tr="Empty &apos;if&apos;"/>
+		<Res id="@SC.IncompleteIf" tr="Incomplete &apos;if&apos; statement"/>
+		<Res id="@SC.ElseExpected" tr="Expected &apos;else&apos; in if equation!"/>
+		<Res id="@SC.NoExprInElse" tr="There is no expression in &apos;else&apos; statement"/>
+		<Res id="@SC.WrongSignalInEl" tr="Wrong signal in &apos;else&apos; statement"/>
+		<Res id="@SC.ElseMissingEnd" tr="&apos;else&apos; requires terminating &apos;end&apos; keyword"/>
+		<Res id="@SC.IncAssignmentEq" tr="Incomplete assignment expression"/>
+		<Res id="@SC.UnknownSymbol" tr="Unknown symbol"/>
+		<Res id="@SC.CannotMakeExpre" tr="Cannot make expression"/>
+		<Res id="@SC.CannotMakeIFExp" tr="Cannot make &apos;if&apos; expression"/>
+		<Res id="@SC.IncompleteIF" tr="Incomplete &apos;if&apos; expression"/>
+		<Res id="@SC.IfInUnsupported" tr="&apos;if&apos; is placed in group which doesn&apos;t support &apos;if&apos; expressions"/>
+		<Res id="@SC.IncompleteIfEls" tr="Incomplete &apos;if&apos;-&apos;else&apos;"/>
+		<Res id="@ET.ErrDifEqua" tr="Error in differential equation"/>
+		<Res id="@SC.UnexpectedExpre" tr="Unexpected expression type"/>
+		<Res id="@SC.SymbolicJacobia" tr="Error in creating symbolic Jacobian"/>
+		<Res id="@SC.ErrorInLimits0" tr="Error in limits (0)"/>
+		<Res id="@SC.ErrorInLimits1" tr="Error in limits (1)"/>
+		<Res id="@SC.LimitGroupEndMi" tr="Limit group &apos;end&apos; mismatch"/>
+		<Res id="@SC.LinitsMustBeGro" tr="Limits must be grouped"/>
+		<Res id="@CS.StatAssNotOK" tr="Assignment of statistics object is wrong"/>
+		<Res id="@CS.StatsToNotStatV" tr="Error assigning statistics object to non-stats manager"/>
+		<Res id="@CS.StatsStrWrongEx" tr="Wrong assignment operator for stats (must be &apos;&lt;&lt;&apos;)"/>
+		<Res id="@CS.EmptyStatAsssig" tr="Empty stats assignment"/>
+		<Res id="@CS.StatsWronExpTyp" tr="Wrong expression type in statistics object"/>
+		<Res id="@CS.StatsCannotMake" tr="Cannot make expression tree for the stats object"/>
+		<Res id="@CS.StatsCannotCrea" tr="Cannot create expression tree for the stats object"/>
+		<Res id="@SC.PrematureEnd" tr="Premature model end"/>
+		<Res id="@SC.CannotCreateSol" tr="Cannot create solver"/>
+		<Res id="@SC.ODEWrongFormat" tr="ODE wrong equation format. Must be variable followed by apostrophe and then assignment operator &apos;=&apos;"/>
+		<Res id="@SC.ODEExpectedVari" tr="ODE expects variable"/>
+		<Res id="@SC.ODEExpected=Tok" tr="ODE expects assignment &apos;=&apos; token"/>
+		<Res id="@SC.DerivAndIntAvai" tr="Differentiation and integration cannot be used in the same ODE expression"/>
+		<Res id="@SC.NoDerivNoInt" tr="There is neither differentiation nor integration in ODE equation"/>
+		<Res id="@SC.WrongODEExp" tr="ODE equation is not ok"/>
+		<Res id="@SC.ODEMissInt" tr="ODE needs &apos;int&apos; function. Or you forgot to put apostrophe after variable name"/>
+		<Res id="@SC.ODEHasMultInts" tr="ODE equation has multiple &apos;int&apos; methods. It can be only one."/>
+		<Res id="@SC.ODEWithDiffAndI" tr="ODE equations has both: diff (apostrophe) and &apos;int&apos; function. It can be one of these."/>
+		<Res id="@SC.CannotCrODEExpT" tr="Cannot create ODE expression tree"/>
+		<Res id="@SC.ODEIntWrongOper" tr="There is no proper &apos;int&apos; in ODE equation"/>
+		<Res id="@SC.ODEEmptyInt" tr="Empty &apos;int&apos; in ODE equation"/>
+		<Res id="@SC.ODEIntWithSS" tr="&apos;int&apos; cannot use parameter for integration. It has to be a variable!"/>
+		<Res id="@SC.TFsWrongFormat" tr="Wrong format of transfer function"/>
+		<Res id="@SC.TFsNoDiv1Operat" tr="No division token &apos;/&apos; in transfer function definition"/>
+		<Res id="@SC.TFsNoAssignOper" tr="There is no assignment operator in transfer function definition"/>
+		<Res id="@SC.TFsWrongTokens" tr="Found unexpected tokens in transfer function definition"/>
+		<Res id="@SC.TFsCannotMakeET" tr="Cannot make expression tree for transfer function"/>
+		<Res id="@SC.WrongYInTF" tr="Output symbol in transfer function must be a variable"/>
+		<Res id="@SC.TFYNotVariable" tr="Output symbol in transfer function must be a variable (2)"/>
+		<Res id="@SC.WrongUInTF" tr="Input symbol in transfer function must be a variable"/>
+		<Res id="@SC.TFUNotVarNorPar" tr="Input symbol for transfer function is neither variable nor parameter"/>
+		<Res id="@SC.NoDAEorTFEqs" tr="There is neither ODE nor TF blocks in DAE model"/>
+		<Res id="@SC.Vars!=#Eqs" tr="Number of variables is not equal to number of equations"/>
+		<Res id="@SC.ODENotOK" tr="ODE is not OK. ODE expression has to start with a state variable"/>
+		<Res id="@SC.DAE#Eq!=#Vars" tr="Number of variables is not equal to number of equations in DAE problem"/>
+		<Res id="@SC.TFOut!Variable" tr="Output of transfer function is not a variable"/>
+		<Res id="@SC.TFOutIsParam" tr="Output of transfer function is a parameter"/>
+		<Res id="@SC.TFIn!Declared" tr="Variable used in transfer function is not declared"/>
+		<Res id="@SCTFTokListError" tr="Not enough tokens for transfer function declaration. Must be at least 4!"/>
+		<Res id="@SC.TFExprTreeErr" tr="Error creating expression tree for transfer function"/>
+		<Res id="@SC.TFPolyCoefficen" tr="Cannot extract polynomial coefficient in transfer function"/>
+		<Res id="@SC.TFDenomNoLaplad" tr="There is no Laplace operator in the denominator of the transfer function"/>
+		<Res id="@SC.TFNomNoLapladeO" tr="There is no Laplace operator in the nominator of the transfer function"/>
+		<Res id="@SC.TF2SSError" tr="Error in converting transfer function to state-space formulation"/>
+		<Res id="@SC.DAENLDerivs" tr="Error in NL group of DAE model"/>
+		<Res id="@SC.DAEExpandError" tr="Error in creating implicit DAE solver (Expansion error)"/>
+		<Res id="@SC.DAENLJack2" tr="Cannot create sparse Jacobian for DAE model (2)"/>
+		<Res id="@SC.DAENLJack3" tr="Cannot create sparse Jacobian for DAE model (3)"/>
+		<Res id="@SC.0Expansion" tr="Error in creating implicit DAE solver with zero stages (Zero Expansion error)"/>
+		<Res id="@SC.DAENLJack0Exp" tr="Cannot create sparse Jacobian for DAE model (@SC.DAENLJack0Exp)"/>
+		<Res id="@SC.DAEEqError" tr="Cannot create DAE evaluators"/>
+		<Res id="@SC.DAEEqExpDiffErr" tr="Cannot create sparse Jacobian for DAE model (@SC.DAEEqExpDiffError)"/>
+		<Res id="@SC.DAEEqExp0Error" tr="Error in creating implicit DAE solver with zero stages (@SC.DAEEqExp0Error)"/>
+		<Res id="@SC.DAEEqExp0DiffEr" tr="Cannot create sparse Jacobian for DAE model (@SC.DAEEqExp0DiffError)"/>
+		<Res id="@CS.NLEsError" tr="Cannot properly parse &apos;NLEs&apos; equations"/>
+		<Res id="@SC.WrongPlotToken" tr="Wrong plot type/token (@SC.WrongPlotToken)"/>
+		<Res id="@SC.WrongPlotTokenR" tr="Wrong plot type/token (@SC.WrongPlotTokenRKW)"/>
+		<Res id="@SC.WrongPlotXBound" tr="Wrong plot x-bounds"/>
+		<Res id="@SC.WrongPlotYBound" tr="Wrong plot y-bounds"/>
+		<Res id="@SC.EmptyPlot" tr="Empty plot"/>
+		<Res id="@SC.WrongPlotAttrib" tr="Wrong plot attrib name"/>
+		<Res id="@SC.SecondXAxisInPl" tr="One plot can have only one x-axis! There is more than 1 axis defined in the plot!"/>
+		<Res id="@SC.SecondCondInPlo" tr="One plot can have only one condition! There is more than 1 condition defined in the plot!"/>
+		<Res id="@SC.PlotPremEnd" tr="Plot ended prematurely. There is no &apos;end&apos;"/>
+		<Res id="@SC.PlotNoYAxis" tr="Plot doesn&apos;t contain any y-axis. Plot must have at least one y-axis!"/>
+		<Res id="@SC.PlotHLineErr" tr="Error in plot horizontal line (&apos;hLine&apos;) definition"/>
+		<Res id="@SC.PlotVLineErr" tr="Error in plot vertical line (&apos;vLine&apos;) definition"/>
+		<Res id="@SC.PlotHBandErr" tr="Error in plot horizontal band (&apos;hBand&apos;) definition"/>
+		<Res id="@SC.PlotVBandErr" tr="Error in plot vertical band (&apos;vBand&apos;) definition"/>
+		<Res id="@SC.PlotAxisErr" tr="Error in plot&apos;s x-axis definition"/>
+		<Res id="@SC.PlotYAxisErr" tr="Error in plot&apos;s y-axis definition"/>
+		<Res id="@SC.PlotCondErr" tr="Error in plot&apos;s condition definition"/>
+		<Res id="@CS.#Vars!=#Eqs" tr="Number of vars is not equal to number of equations!"/>
+		<Res id="@SC.NoODEEqs" tr="There isn&apos;t any ODE equation"/>
+		<Res id="@SC.#Vars!=#ODEs" tr="Number of vars is not equal to number of equations in ODE model!"/>
+		<Res id="@SC.WLSNoVars" tr="WLS model doesn&apos;t have any declared variable"/>
+		<Res id="@SC.WLSNoWLSEs" tr="There isn&apos;t any WLS equation"/>
+		<Res id="@SC.WLSNotEnoughEQs" tr="There isn&apos;t enough WLS equations"/>
+		<Res id="@CS.WLSEsError" tr="Error in WLS model"/>
+		<Res id="@CS.WLSECError" tr="Error in WLS EC (equality constrained) model"/>
+		<Res id="@SC.BadExpression" tr="Bad expression"/>
+		<Res id="@SC.WrongExprType" tr="Wrong expression type"/>
+		<Res id="@SC.MissingColor" tr="Missing color"/>
+		<Res id="@SC.UnexpectedToken" tr="Unexpected token"/>
+		<Res id="@SC.Missing(AfterFn" tr="Missing open parenthesis &apos;(&apos; after function"/>
+		<Res id="@SC.SyntaxError" tr="Syntax error"/>
+		<Res id="@SC.NestedConjNotAl" tr="Nested conjugate functions (conj in conj) are not allowed. Do manual conjugation and create flat conjugate expression."/>
+		<Res id="@SC.OperatorAfter=" tr="Operator after assignment operator"/>
+		<Res id="@SC.Double=" tr="Double assignment operator (assignment after assignment)"/>
+		<Res id="@SC.EqEndsWith=" tr="Expression/equation ends with assignment operator"/>
+		<Res id="@SC.UnkownSymbol" tr="Unknown symbol"/>
+		<Res id="@SC.TwoConsOperands" tr="Two constant operands appear in consecutive order (two constants after another)"/>
+		<Res id="@SC.UnsupportedToke" tr="Unsupported token"/>
+		<Res id="@SC.ODEExpected\&apos;or" tr="Error! ODE Expected ' or assignment operator"/>
+	</Translations>
+</DevRes>

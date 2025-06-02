@@ -5,19 +5,19 @@
 #pragma once
 #include <gui/Window.h>
 #include "MenuBar.h"
-#include "ViewGL.h"
+#include "ViewTestGL.h"
 
 class MainWindow : public gui::Window
 {
 private:
 protected:
     MenuBar _mainMenuBar;
-    ViewGL _viewCubeMap;
+    ViewTestGL _viewTestGL;
 public:
     MainWindow()
     : gui::Window(gui::Geometry(50, 50, 1200, 600))
     {
         _mainMenuBar.setAsMain(this);
-        setCentralView(&_viewCubeMap);
+        setCentralView(&_viewTestGL);
     }
 };

@@ -496,6 +496,16 @@ namespace arch
             lp = (td::DotPattern)iPattern;
             return *this;
         }
+        
+        ArchiveIn& operator >> (td::Anchor& anchor)
+        {
+            //checkGuard(clr);
+            td::BYTE iAnchor = (td::BYTE)td::Anchor::Fixed;
+            checkGuard(iAnchor);
+            *this >> iAnchor;
+            anchor = (td::Anchor)iAnchor;
+            return *this;
+        }
 
 		template<typename THOLDER, int NDEC>
 		ArchiveIn& operator >> (td::Decimal<THOLDER, NDEC>& dec)

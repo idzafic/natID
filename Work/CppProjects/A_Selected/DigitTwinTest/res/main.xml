@@ -9,8 +9,7 @@
         <Res id="pendulum" path="Work/Common/Symbols/Shapes/ETFCircled.xml"/>
     </Symbols>
     <FileNames>
-        <Res id="pendODE" path="Work/DevEnv/TestData/SymbComp/real/PendulumODE.xml"/>
-        <Res id="pendDAE" path="Work/DevEnv/TestData/SymbComp/real/PendulumDAE.xml"/>
+        <Res id="pendODEModl" path=":models/PendulumODE.dmodl"/>
+        <Res id="pendDAEModl" path=":models/PendulumDAE.dmodl"/>
     </FileNames>
 </DevRes>
-

@@ -115,13 +115,13 @@ public:
     }
     
     template <typename TINT>
-    double min(TINT i) const
+    double minVal(TINT i) const
     {
         return _stats[i].min();
     }
     
     template <typename TINT>
-    double max(TINT i) const
+    double maxVal(TINT i) const
     {
         return _stats[i].max();
     }

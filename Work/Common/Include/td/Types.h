@@ -717,7 +717,7 @@ typedef union
 
 typedef enum _tLineStyle : BYTE {SOLID = 0, DASH, DOTDASH, DOT} LineStyle;
 
-typedef enum _tDataType : BYTE {TD_NONE=0, boolean=1, byte, word, int2, uint4, int4, lint8, luint8, real4, real8, string8, string16, string32, enumerator, date, time, dateTime, decimal0, decimal1, decimal2, decimal3, decimal4, ch, nch, chFix, nchFix, ch7,  dbDate, dbTime, dbDateTime, dbDecimal, binary, guid, color, colorID, hAlignment, vAlignment, textAlignment, linePattern, dotPattern, smallDecimal0, smallDecimal1, smallDecimal2, smallDecimal3, smallDecimal4, rect, point, circle, variant,
+typedef enum _tDataType : BYTE {TD_NONE=0, boolean=1, byte, word, int2, uint4, int4, lint8, luint8, real4, real8, string8, string16, string32, enumerator, date, time, dateTime, decimal0, decimal1, decimal2, decimal3, decimal4, ch, nch, chFix, nchFix, ch7,  dbDate, dbTime, dbDateTime, dbDecimal, binary, guid, color, colorID, hAlignment, vAlignment, textAlignment, linePattern, dotPattern, anchor, smallDecimal0, smallDecimal1, smallDecimal2, smallDecimal3, smallDecimal4, rect, point, circle, variant,
     ptrBoolean, ptrByte, ptrWord, ptrInt2, ptrUint4, ptrInt4, ptrLint8, ptrLuint8, ptrReal4, ptrReal8, ptrString8, ptrString16, ptrString32, ptrEnumerator, ptrDate, ptrTime, ptrDateTime, ptrDecimal0, ptrDecimal1, ptrDecimal2, ptrDecimal3, ptrDecimal4, ptrCh, ptrNch, ptrChFix, ptrSmallChFix, ptrNchFix, ptrDbDate, ptrDbTime, ptrDbDateTime, ptrDbDecimal, ptrBinary, ptrGuid, ptrColor, ptrSmalldecimal0, ptrSmalldecimal1, ptrSmalldecimal2, ptrSmalldecimal3, ptrSmalldecimal4, ptrRect, ptrPoint, ptrVariant, ptrVoid,
     TD_LAST } DataType; //ch-ansi char, nch-unicode char
 
@@ -787,6 +787,10 @@ inline bool isDBString(td::DataType type)
     return false;
 }
 
+inline const char* const toString(bool bVal)
+{
+    return bVal ? "true" : "false";
+}
 
 template <size_t size, typename TINT>
 void iToA(const char(&buffer)[size], TINT decValue)

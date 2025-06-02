@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevRes>
+	<Translations>
+		<Res id="@ML.HeaderIncorrect" tr="Model başlığı hatalı veya eksik (@ML.HeaderIncorrectOrMissing)"/>
+		<Res id="@SC.CmplxTypeInReal" tr="Gerçek alan modelinde karmaşık tür algılandı (@SC.CmplxTypeInReal)"/>
+		<Res id="@CELH.Type" tr="Tür"/>
+		<Res id="@CELHT.TypeTT" tr="Mesaj türü (Bilgi, Uyarı, Hata)"/>
+		<Res id="@CELH.Editor" tr="Düzenleyici"/>
+		<Res id="@CELHT.Editor" tr="Günlük girdisini oluşturan düzenleyici (ana-beyin simgesi veya görselleştirme düzenleyici-şekil simgesi)"/>
+		<Res id="@CELH.Line#" tr="Satır#"/>
+		<Res id="@CELH.Line#TT" tr="İlgili düzenleyicideki satır numarası"/>
+		<Res id="@CELH.Col#" tr="Sütun#"/>
+		<Res id="@CELH.Col#TT" tr="İlgili düzenleyicideki sütun numarası"/>
+		<Res id="@CELH.Msg" tr="Mesaj açıklaması"/>
+		<Res id="@CELH.MsgTT" tr="Mevcut tüm detaylarla birlikte mesaj açıklaması"/>
+		<Res id="@CE.VarDDVars" tr="Ana model değişkeni zaten değişkenlerde tanımlandı (@CE.VarDDVars)"/>
+		<Res id="@CE.SubVarDDSubVars" tr="Alt model değişkeni zaten alt model değişkenlerinde tanımlandı (@CE.SubVarDDSubVars)"/>
+		<Res id="@CE.ParDDInPars" tr="Ana model parametresi zaten parametrelerde tanımlandı (@CE.ParDDInPars)"/>
+		<Res id="@CE.ParDDInVars" tr="Ana model parametresi zaten ana model değişkenlerinde tanımlandı (@CE.ParDDInVars)"/>
+		<Res id="@CE.SubParDDSubVars" tr="Alt model parametresi zaten alt model değişkenlerinde tanımlandı (@CE.SubParDDSubVars)"/>
+		<Res id="@CE.SubParDDSubPars" tr="Alt model parametresi zaten alt model parametrelerinde tanımlandı (@CE.SubParDDSubPars)"/>
+		<Res id="@CE.SubParDDInPars" tr="Alt model parametresi zaten ana model parametrelerinde tanımlandı (@CE.SubParDDInPars)"/>
+		<Res id="@CE.notInModel" tr="Token model içinde değil (@CE.notInModel)"/>
+		<Res id="@CE.endMissing" tr="Bitiş eksik (@CE.endMissing)"/>
+		<Res id="@CE.AttribClosedNoO" tr="Öznitelik, açılmadan ']' ile kapatıldı ( '[' eksik) (@CE.AttribClosedNoOpen)"/>
+		<Res id="@CE.AttribNotClosed" tr="Öznitelik bölümü açıldı ancak ']' ile hiç kapatılmadı (@CE.AttribNotClosed)"/>
+		<Res id="@CE.wrongModelPos" tr="Yanlış model pozisyonu (@CE.wrongModelPos)"/>
+		<Res id="@CE.endMissmatch" tr="Bitiş uyuşmazlığı (Muhtemelen çok fazla 'end' var) (@CE.endMissmatch)"/>
+		<Res id="@CE.AttribMismatch" tr="Öznitelik türü uyuşmazlığı (@CE.AttribMismatch)"/>
+		<Res id="@CE.UnknownLabel" tr="Bilinmeyen etiket (@CE.UnknownLabel)"/>
+		<Res id="@CE.UnexpectedToken" tr="Beklenmeyen token (@CE.UnexpectedToken)"/>
+		<Res id="@CESB.NoOfErrors" tr="Hata sayısı:"/>
+		<Res id="@CESB.CursorPositio" tr="İmleç pozisyonu:"/>
+		<Res id="@SC.EmpryParamName" tr="Boş parametre adı (@SC.EmpryParamName)"/>
+		<Res id="@SC.AssignWith0Toke" tr="Sıfır token ile atama (@SC.AssignWith0Tokens)"/>
+		<Res id="@SC.AssignWith2Toke" tr="İki token ile atama (@SC.AssignWith2Tokens)"/>
+		<Res id="@SC.WrongType" tr="Yanlış tür (@SC.WrongType)"/>
+		<Res id="@SC.Missing=InAssig" tr="Atama ifadesinde '=' eksik (@SC.Missing=InAssignement)"/>
+
+		<Res id="@SC.EmpryParamName" tr="Boş parametre adı (@SC.EmpryParamName)"/>
+		<Res id="@SC.AssignWith0Toke" tr="Sıfır token ile atama (@SC.AssignWith0Tokens)"/>
+		<Res id="@SC.AssignWith2Toke" tr="İki token ile atama (@SC.AssignWith2Tokens)"/>
+		<Res id="@SC.WrongType" tr="Yanlış tip (@SC.WrongType)"/>
+		<Res id="@ML.HeaderParamInco" tr="Eksik başlık parametresi ('=' işaretinden sonra değer yok)"/>
+		<Res id="@ML.HeaderTokError" tr="Model başlık tanımında beklenmeyen token"/>
+		<Res id="@ML.HeaderEndAfter" tr="Başlık bildiriminde 'end' den sonra aynı satırda içerik var"/>
+		<Res id="@ML.HeaderParamUnkn" tr="Bilinmeyen başlık parametre adı"/>
+		<Res id="@ML.HeaderParamExp=" tr="Başlık parametre adından sonra '=' bekleniyor"/>
+		<Res id="@ML.HeaderReportExp" tr="'Report type' parametre değeri bekleniyor"/>
+		<Res id="@ML.HeaderWrong=Pos" tr="Başlık parametre tanımında '=' işaretinin yeri yanlış"/>
+		<Res id="@ML.HeaderWrongCons" tr="Başlık parametre tanımında sabitin yeri yanlış"/>
+		<Res id="@ML.HeaderWrongPara" tr="Yanlış başlık parametre tipi (belirtilen değer tipi bu parametre adı için uygun değil)"/>
+		<Res id="@ML.HeaderWrongParT" tr="Yanlış başlık parametre tipi (belirtilen değer tipi bu parametre adı için uygun değil)"/>
+		<Res id="@ML.HeaderUnknownPa" tr="Bilinmeyen başlık parametre tipi/adi"/>
+		<Res id="@ML.HeaderWithout:" tr="Başlık bildiriminde ':' eksik ('Header' dan sonraki son token)"/>
+		<Res id="@ML.HeaderTokenAfte" tr="'Header' tanımının olduğu satırda ':' den sonra token var. ':' işareti o satırda son token olmalıdır."/>
+		<Res id="@ML.HeaderFirstToke" tr="Başlık bildirimi 'Header' tokenı ile başlamalıdır."/>
+		<Res id="@CE.ExpEndsWithOper" tr="İfade/denklem operatör ile bitiyor!"/>
+		<Res id="@CE.ExpEndsWithAssi" tr="İfade atama ile bitiyor!"/>
+		<Res id="@CE.Mising_)" tr="Parantez uyumsuzluğu. ')' eksik"/>
+		<Res id="@CE.Mising_(" tr="Parantez uyumsuzluğu. '(' eksik"/>
+		<Res id="@CE.CloseParenthesi" tr="Parantez uyumsuzluğu."/>
+		<Res id="@ET.FnParamOr()MM" tr="Fonksiyon parametre hatası veya açık ')' - kapalı ')' uyumsuzluğu"/>
+		<Res id="@ET.FnNotPrpFormatt" tr="Fonksiyon @ düzgün biçimlendirilmemiş"/>
+		<Res id="@ET.FnNeeds_(" tr="Fonksiyon @ düzgün biçimlendirilmemiş! '(' eksik"/>
+		<Res id="@CE.ExpEndsWithOpen" tr="İfade/denklem açık parantez ile bitiyor!"/>
+		<Res id="@ET.FnNeeds_)" tr="Fonksiyon @ düzgün biçimlendirilmemiş! ')' eksik"/>
+		<Res id="@ET.LabelAfterOpera" tr="Parametre/değişken id='@' başka bir operandtan sonra"/>
+		<Res id="@ET.ConstAfterOpera" tr="Sabit=@ başka bir operandtan sonra"/>
+		<Res id="@ET.(_AfterOperand" tr="Operandtan sonra açık parantez"/>
+		<Res id="@ET.OperAfterUnOp" tr="'@' operatörü '@' unary operatöründen sonra"/>
+		<Res id="@ET.UnaryAfterUnOpr" tr="'@' unary operatörü operandtan sonra"/>
+		<Res id="@ET.OperAfterOper" tr="'@' operatörü '@' operatöründen sonra"/>
+		<Res id="@ET.,NeedsOperator" tr="Virgül unary operatörü takip ediyor!"/>
+		<Res id="@ET.,OutsideFn" tr="Virgül çoklu parametreli fonksiyonlar dışında kullanılıyor!"/>
+		<Res id="@ET.()_Mismatch" tr="Parantez uyumsuzluğu!"/>
+		<Res id="@ET.FnParamMising" tr="Eksik fonksiyon parametre düğümü!"/>
+		<Res id="@ET.FnParam#Commas" tr="Virgül sayısı fonksiyonla eşleşmiyor! Tüm fonksiyon parametrelerini sağlayın!"/>
+		<Res id="@ET.FnParam2Err" tr="Çoklu parametreli fonksiyonun ikinci parametresi hazırlanamıyor!"/>
+		<Res id="@ET.,AfterUnFn" tr="Unary fonksiyonundan sonra virgül!"/>
+		<Res id="@ET.MFnPremEnd" tr="@ çoklu parametreli fonksiyonu ayrıştırılırken denklem erken sonlandı!"/>
+		<Res id="@ET.MFnExpOprnd" tr="@ çoklu parametreli fonksiyonu ayrıştırılırken operand beklenirken operand olmayan bir şey alındı!"/>
+		<Res id="@ET.MFnNoVar2" tr="@ çoklu parametreli fonksiyonu ikinci parametre olarak değişkenleri desteklemiyor"/>
+		<Res id="@ET.MFnNoVar3" tr="@ çoklu parametreli fonksiyonu üçüncü parametre olarak değişkenleri desteklemiyor"/>
+		<Res id="@ET.ExpPremEnd" tr="Denklem/ifade erken sonlandı"/>
+		<Res id="@ET.Exp,InMFn" tr="Çoklu parametreli fonksiyonda virgül bekleniyor: @"/>
+		<Res id="@ET.ExpPremEndFn" tr="Denklem erken sonlandı (fn=@)!"/>
+		<Res id="@ET.sAfterOprnd" tr="Başka bir operandtan sonra Laplace operatörü"/>
+		<Res id="@ET.UnexpTokenID" tr="Beklenmeyen token id: @(@)"/>
+		<Res id="@ET.ErrDifIfThen" tr="If-then-else denklemi türevlenemez!"/>
+		<Res id="@SC.TFBadFormat" tr="Transfer fonksiyonu hatalı biçimlendirilmiş!"/>
+		<Res id="@ET.ErrInitValueExp" tr="Başlangıç değeri ifadesi için ifade ağacı oluşturulamıyor!"/>
+		<Res id="@SC.InitValErr" tr="Başlangıç değeri hesaplanamıyor!"/>
+		<Res id="@SC.NLReadFail" tr="NL bloğu okunurken hata"/>
+		<Res id="@SC.NLNvars!=NEQsl" tr="Değişken sayısı denklem sayısına eşit değil!"/>
+		<Res id="@SC.CannotSolveSubM" tr="'SubModel' çözülemiyor"/>
+		<Res id="@SC.EmptyJacSubMode" tr="'SubModel' içinde boş Jacobian"/>
+		<Res id="@SC.EmptyJacobian" tr="Boş Jacobian"/>
+		<Res id="@SC.CannotFactorize" tr="'SubModel' içinde matris çarpanlarına ayrılamıyor"/>
+		<Res id="@SC.LUSolveErrorSub" tr="'SubModel' içinde seyrek LU çözüm hatası"/>
+		<Res id="@SC.LUSolveError" tr="Seyrek LU çözüm hatası"/>
+		<Res id="@SC.MaxIterLimitSub" tr="'SubModel' içinde maksimum iterasyon limitine ulaşıldı"/>
+		<Res id="@SC.MaxIterLimit" tr="Maksimum iterasyon limitine ulaşıldı"/>
+		<Res id="@SC.FactorErrorSubM" tr="'SubModel' içinde seyrek matris çarpanlara ayırma hatası"/>
+		<Res id="@SC.FactorizationEr" tr="Seyrek çarpanlara ayırma hatası"/>
+		<Res id="@ET.Expected_)" tr="Kapatma parantezi ')' bekleniyor"/>
+		<Res id="@ET.FnAfterOperand" tr="Operandtan sonra fonksiyon"/>
+		<Res id="@ET.LimitFnFormatNo" tr="Limit fonksiyonu biçimi uygun değil"/>
+		<Res id="@ET.LimiFnWo_(" tr="Limit fonksiyonu açık parantez '(' olmadan"/>
+		<Res id="@ET.LimitFnNeeds_)" tr="Limit fonksiyonu kapatma parantezi ')' gerektiriyor"/>
+		<Res id="@ET.FnNotPrpFmt" tr="Fonksiyon düzgün biçimlendirilmemiş"/>
+		<Res id="@ET.)_AfterOper" tr="Kapatma parantezi ')' operatörden sonra"/>
+		<Res id="@ET.EmptyExpression" tr="Boş ifade"/>
+		<Res id="@ET.UnexpectedEnd" tr="Beklenmeyen ifade sonu"/>
+		<Res id="@ET.OperatorWoOprnd" tr="Operandsız operatör"/>
+		<Res id="@SC.ErrInReInit" tr="'ReInit' içinde hata"/>
+		<Res id="@SC.ErrInPreProc" tr="'PreProc' içinde hata"/>
+		<Res id="@SC.ErrInIterPostPr" tr="'IterPostProc' içinde hata"/>
+		<Res id="@SC.ErrInBasePostPr" tr="'BasePostProc' içinde hata"/>
+		<Res id="@SC.ErrInPostProc" tr="'PostProc' içinde hata"/>
+		<Res id="@SC.ErrInLimits" tr="'Limits' içinde hata"/>
+		<Res id="@SC.ErrorInRepeat" tr="'Repeat' içinde hata"/>
+		<Res id="@SC.ODEReadModelErr" tr="'ODE' bölümü okunurken/ayrıştırılırken hata"/>
+		<Res id="@SC.WrongDTForODE" tr="ODE için yanlış entegrasyon adımı. dT pozitif bir değer olmalıdır!"/>
+		<Res id="@SC.NoDeltaT" tr="Entegrasyon adımı (dT) için değer belirtilmemiş!"/>
+		<Res id="@SC.WLSReadFail" tr="'WLS' bölümü okunurken hata"/>
+		<Res id="@CE.WLSEErrorSolve" tr="WLS modeli çözülürken hata"/>
+		<Res id="@SC.ErrorDAEInit" tr="DAE başlatmada hata"/>
+		<Res id="@SC.DAEFactorizatio" tr="DAE çarpanlara ayırma hatası"/>
+		<Res id="@SC.WrongDTForDAE" tr="DAE için yanlış dt"/>
+		<Res id="@SC.WrongDAEMethod" tr="Yanlış DAE çözüm yöntemi (izin verilen yöntemler Euler, RK2, RK4, RK6,...)"/>
+		<Res id="@SC.WrongDAEMethodS" tr="'SubModel' içinde yanlış DAE yöntemi"/>
+		<Res id="@CS.DistNoType" tr="Dağılım tanımı 'type' gerektirir! (izin verilen tipler Gauss, Student, Normal,...)"/>
+		<Res id="@CS.NoMinInUniformD" tr="Uniform dağılımda 'min' değeri zorunludur"/>
+		<Res id="@CS.NoMaxInUniformD" tr="Uniform dağılımda 'max' değeri zorunludur"/>
+		<Res id="@CS.NoPimBernoulliD" tr="Bernoulli dağılımında 'p' değeri zorunludur"/>
+		<Res id="@CS.NoLamdaInPoisso" tr="Poisson dağılımında 'lambda' değeri zorunludur"/>
+		<Res id="@CS.NoLamdaInExponD" tr="Üstel dağılımda 'lambda' değeri zorunludur"/>
+		<Res id="@CS.NoAlphaInGammaD" tr="Gamma dağılımında 'alpha' değeri zorunludur"/>
+		<Res id="@CS.NoBetaInGammaDi" tr="Gamma dağılımında 'beta' değeri zorunludur"/>
+		<Res id="@CS.NoMeanInGaussDi" tr="Gauss dağılımında 'mean' değeri zorunludur"/>
+		<Res id="@CS.NoDevInGaussDis" tr="Gauss dağılımında 'dev' değeri zorunludur"/>
+		<Res id="@CS.0DevInGaussDist" tr="Gauss dağılımında 'dev' değeri pozitif olmalıdır!"/>
+		<Res id="@CS.NoMeanInLogGaus" tr="'LogGauss' dağılımında 'mean' değeri zorunludur"/>
+		<Res id="@CS.NoDevInLogGausD" tr="'LogGauss' dağılımında 'dev' değeri zorunludur"/>
+		<Res id="@CS.NoKInChiSquared" tr="'ChiSquared' dağılımında 'k' değeri zorunludur"/>
+		<Res id="@CS.NoNInStudentDis" tr="'Student' dağılımında 'k' değeri zorunludur"/>
+		<Res id="@CS.UnknowntDistrib" tr="Bilinmeyen dağılım"/>
+		<Res id="@SC.Mising=InAssign" tr="Atama ifadesinde atama tokenı eksik"/>
+		<Res id="@SC.NoVarsDeclared" tr="Tanımlanmış değişken yok"/>
+		<Res id="@SC.EmptyInitExpr" tr="Boş başlatma ifadesi"/>
+		<Res id="@SC.MissingDotInAss" tr="Atamada nokta eksik"/>
+		<Res id="@SC.NoImagRealPartI" tr="Atamada 'imag' veya 'real' üyesi yok"/>
+		<Res id="@SC.NoParentSolver" tr="Ana çözücü yok"/>
+		<Res id="@SC.WrongAssignment" tr="Yanlış atama denklemi"/>
+		<Res id="@SC.WrongIfConditio" tr="'if' ifadesinde yanlış koşul"/>
+		<Res id="@SC.WrongSignalInIf" tr="'if' ifadesinde yanlış sinyal"/>
+		<Res id="@SC.EmptyIf" tr="Boş 'if'"/>
+		<Res id="@SC.IncompleteIf" tr="Eksik 'if' ifadesi"/>
+		<Res id="@SC.ElseExpected" tr="If denkleminde 'else' bekleniyor!"/>
+		<Res id="@SC.NoExprInElse" tr="'else' ifadesinde ifade yok"/>
+		<Res id="@SC.WrongSignalInEl" tr="'else' ifadesinde yanlış sinyal"/>
+		<Res id="@SC.ElseMissingEnd" tr="'else' sonlandırıcı 'end' anahtar kelimesi gerektirir"/>
+		<Res id="@SC.IncAssignmentEq" tr="Eksik atama ifadesi"/>
+		<Res id="@SC.UnknownSymbol" tr="Bilinmeyen sembol"/>
+		<Res id="@SC.CannotMakeExpre" tr="İfade oluşturulamıyor"/>
+		<Res id="@SC.CannotMakeIFExp" tr="'if' ifadesi oluşturulamıyor"/>
+		<Res id="@SC.IncompleteIF" tr="Eksik 'if' ifadesi"/>
+		<Res id="@SC.IfInUnsupported" tr="'if' ifadesi 'if' ifadelerini desteklemeyen bir grupta yer alıyor"/>
+		<Res id="@SC.IncompleteIfEls" tr="Eksik 'if'-'else'"/>
+		<Res id="@ET.ErrDifEqua" tr="Diferansiyel denklemde hata"/>
+		<Res id="@SC.UnexpectedExpre" tr="Beklenmeyen ifade tipi"/>
+		<Res id="@SC.SymbolicJacobia" tr="Sembolik Jacobian oluşturulurken hata"/>
+		<Res id="@SC.ErrorInLimits0" tr="Limitlerde hata (0)"/>
+		<Res id="@SC.ErrorInLimits1" tr="Limitlerde hata (1)"/>
+		<Res id="@SC.LimitGroupEndMi" tr="Limit grubu 'end' uyumsuzluğu"/>
+		<Res id="@SC.LinitsMustBeGro" tr="Limitler gruplanmış olmalıdır"/>
+		<Res id="@CS.StatAssNotOK" tr="İstatistik nesnesi ataması yanlış"/>
+		<Res id="@CS.StatsToNotStatV" tr="İstatistik nesnesi istatistik olmayan yöneticiye atanırken hata"/>
+		<Res id="@CS.StatsStrWrongEx" tr="İstatistikler için yanlış atama operatörü (operatör '<<' olmalıdır)"/>
+		<Res id="@CS.EmptyStatAsssig" tr="Boş istatistik ataması"/>
+		<Res id="@CS.StatsWronExpTyp" tr="İstatistik nesnesinde yanlış ifade tipi"/>
+		<Res id="@CS.StatsCannotMake" tr="İstatistik nesnesi için ifade ağacı oluşturulamıyor"/>
+		<Res id="@CS.StatsCannotCrea" tr="İstatistik nesnesi için ifade ağacı oluşturulamıyor"/>
+		<Res id="@SC.PrematureEnd" tr="Model erken sonlandı"/>
+		<Res id="@SC.CannotCreateSol" tr="Çözücü oluşturulamıyor"/>
+		<Res id="@SC.ODEWrongFormat" tr="ODE yanlış denklem biçimi. Değişkenin ardından kesme işareti ve sonra atama operatörü '=' olmalıdır"/>
+		<Res id="@SC.ODEExpectedVari" tr="ODE değişken bekliyor"/>
+		<Res id="@SC.ODEExpected=Tok" tr="ODE atama '=' tokenı bekliyor"/>
+		<Res id="@SC.DerivAndIntAvai" tr="Türev ve integral aynı ODE ifadesinde kullanılamaz"/>
+		<Res id="@SC.NoDerivNoInt" tr="ODE denkleminde ne türev ne de integral var"/>
+		<Res id="@SC.ODEExpected&apos;or" tr="ODE ya değişkenin ardından kesme işareti ve sonra atama operatörü ya da değişkenin ardından atama ve sonra 'int' fonksiyonu bekliyor"/>
+		<Res id="@SC.WrongODEExp" tr="ODE denklemi uygun değil"/>
+		<Res id="@SC.ODEMissInt" tr="ODE 'int' fonksiyonu gerektiriyor. Veya değişken adından sonra kesme işareti koymayı unuttunuz"/>
+		<Res id="@SC.ODEHasMultInts" tr="ODE denkleminde birden fazla 'int' yöntemi var. Sadece bir tane olabilir."/>
+		<Res id="@SC.ODEWithDiffAndI" tr="ODE denklemlerinde hem türev (kesme işareti) hem de 'int' fonksiyonu var. Bunlardan sadece biri olabilir."/>
+		<Res id="@SC.CannotCrODEExpT" tr="ODE ifade ağacı oluşturulamıyor"/>
+		<Res id="@SC.ODEIntWrongOper" tr="ODE denkleminde uygun 'int' yok"/>
+		<Res id="@SC.ODEEmptyInt" tr="ODE denkleminde boş 'int'"/>
+		<Res id="@SC.ODEIntWithSS" tr="'int' entegrasyon için parametre kullanamaz. Bir değişken olmalıdır!"/>
+		<Res id="@SC.TFsWrongFormat" tr="Transfer fonksiyonunun yanlış biçimi"/>
+		<Res id="@SC.TFsNoDiv1Operat" tr="Transfer fonksiyonu tanımında bölme tokenı '/' yok"/>
+		<Res id="@SC.TFsNoAssignOper" tr="Transfer fonksiyonu tanımında atama operatörü yok"/>
+		<Res id="@SC.TFsWrongTokens" tr="Transfer fonksiyonu tanımında beklenmeyen tokenlar bulundu"/>
+		<Res id="@SC.TFsCannotMakeET" tr="Transfer fonksiyonu için ifade ağacı oluşturulamıyor"/>
+		<Res id="@SC.WrongYInTF" tr="Transfer fonksiyonundaki çıktı sembolü bir değişken olmalıdır"/>
+		<Res id="@SC.TFYNotVariable" tr="Transfer fonksiyonundaki çıktı sembolü bir değişken olmalıdır (2)"/>
+		<Res id="@SC.WrongUInTF" tr="Transfer fonksiyonundaki giriş sembolü bir değişken olmalıdır"/>
+		<Res id="@SC.TFUNotVarNorPar" tr="Transfer fonksiyonu için giriş sembolü ne değişken ne de parametredir"/>
+		<Res id="@SC.NoDAEorTFEqs" tr="DAE modelinde ne ODE ne de TF blokları var"/>
+		<Res id="@SC.Vars!=#Eqs" tr="Değişken sayısı denklem sayısına eşit değil"/>
+		<Res id="@SC.ODENotOK" tr="ODE uygun değil. ODE ifadesi bir durum değişkeni ile başlamalıdır"/>
+		<Res id="@SC.DAE#Eq!=#Vars" tr="DAE probleminde değişken sayısı denklem sayısına eşit değil"/>
+		<Res id="@SC.TFOut!Variable" tr="Transfer fonksiyonunun çıktısı bir değişken değil"/>
+		<Res id="@SC.TFOutIsParam" tr="Transfer fonksiyonunun çıktısı bir parametredir"/>
+		<Res id="@SC.TFIn!Declared" tr="Transfer fonksiyonunda kullanılan değişken tanımlanmamış"/>
+		<Res id="@SCTFTokListError" tr="Transfer fonksiyonu bildirimi için yeterli token yok. En az 4 olmalı!"/>
+		<Res id="@SC.TFExprTreeErr" tr="Transfer fonksiyonu için ifade ağacı oluşturulurken hata"/>
+		<Res id="@SC.TFPolyCoefficen" tr="Transfer fonksiyonunda polinom katsayısı çıkarılamıyor"/>
+		<Res id="@SC.TFDenomNoLaplad" tr="Transfer fonksiyonunun paydasında Laplace operatörü yok"/>
+		<Res id="@SC.TFNomNoLapladeO" tr="Transfer fonksiyonunun payında Laplace operatörü yok"/>
+		<Res id="@SC.TF2SSError" tr="Transfer fonksiyonunu durum-uzay formülasyonuna dönüştürürken hata"/>
+		<Res id="@SC.DAENLDerivs" tr="DAE modelinin NL grubunda hata"/>
+		<Res id="@SC.DAEExpandError" tr="Örtük DAE çözücü oluşturulurken hata (Genişletme hatası)"/>
+		<Res id="@SC.DAENLJack2" tr="DAE modeli için seyrek Jacobian oluşturulamıyor (2)"/>
+		<Res id="@SC.DAENLJack3" tr="DAE modeli için seyrek Jacobian oluşturulamıyor (3)"/>
+		<Res id="@SC.0Expansion" tr="Sıfır aşamalı örtük DAE çözücü oluşturulurken hata (Sıfır Genişletme hatası)"/>
+		<Res id="@SC.DAENLJack0Exp" tr="DAE modeli için seyrek Jacobian oluşturulamıyor (@SC.DAENLJack0Exp)"/>
+		<Res id="@SC.DAEEqError" tr="DAE değerlendiricileri oluşturulamıyor"/>
+		<Res id="@SC.DAEEqExpDiffErr" tr="DAE modeli için seyrek Jacobian oluşturulamıyor (@SC.DAEEqExpDiffError)"/>
+		<Res id="@SC.DAEEqExp0Error" tr="Sıfır aşamalı örtük DAE çözücü oluşturulurken hata (@SC.DAEEqExp0Error)"/>
+		<Res id="@SC.DAEEqExp0DiffEr" tr="DAE modeli için seyrek Jacobian oluşturulamıyor (@SC.DAEEqExp0DiffError)"/>
+		<Res id="@CS.NLEsError" tr="'NLEs' denklemleri düzgün ayrıştırılamıyor"/>
+		<Res id="@SC.WrongPlotToken" tr="Yanlış çizim tipi/tokenı (@SC.WrongPlotToken)"/>
+		<Res id="@SC.WrongPlotTokenR" tr="Yanlış çizim tipi/tokenı (@SC.WrongPlotTokenRKW)"/>
+		<Res id="@SC.WrongPlotXBound" tr="Yanlış çizim x-sınırları"/>
+		<Res id="@SC.WrongPlotYBound" tr="Yanlış çizim y-sınırları"/>
+		<Res id="@SC.EmptyPlot" tr="Boş çizim"/>
+		<Res id="@SC.WrongPlotAttrib" tr="Yanlış çizim özellik adı"/>
+		<Res id="@SC.SecondXAxisInPl" tr="Bir çizimde sadece bir x-ekseni olabilir! Çizimde birden fazla eksen tanımlı!"/>
+		<Res id="@SC.SecondCondInPlo" tr="Bir çizimde sadece bir koşul olabilir! Çizimde birden fazla koşul tanımlı!"/>
+		<Res id="@SC.PlotPremEnd" tr="Çizim erken sonlandı. 'end' yok"/>
+		<Res id="@SC.PlotNoYAxis" tr="Çizimde y-ekseni yok. Çizimde en az bir y-ekseni olmalıdır!"/>
+		<Res id="@SC.PlotHLineErr" tr="Çizim yatay çizgi ('hLine') tanımında hata"/>
+		<Res id="@SC.PlotVLineErr" tr="Çizim dikey çizgi ('vLine') tanımında hata"/>
+		<Res id="@SC.PlotHBandErr" tr="Çizim yatay bant ('hBand') tanımında hata"/>
+		<Res id="@SC.PlotVBandErr" tr="Çizim dikey bant ('vBand') tanımında hata"/>
+		<Res id="@SC.PlotAxisErr" tr="Çizimin x-ekseni tanımında hata"/>
+		<Res id="@SC.PlotYAxisErr" tr="Çizimin y-ekseni tanımında hata"/>
+		<Res id="@SC.PlotCondErr" tr="Çizimin koşul tanımında hata"/>
+		<Res id="@CS.#Vars!=#Eqs" tr="Değişken sayısı denklem sayısına eşit değil!"/>
+		<Res id="@SC.NoODEEqs" tr="Hiç ODE denklemi yok"/>
+		<Res id="@SC.#Vars!=#ODEs" tr="ODE modelinde değişken sayısı denklem sayısına eşit değil!"/>
+		<Res id="@SC.WLSNoVars" tr="WLS modelinde tanımlanmış değişken yok"/>
+		<Res id="@SC.WLSNoWLSEs" tr="Hiç WLS denklemi yok"/>
+		<Res id="@SC.WLSNotEnoughEQs" tr="Yeterli WLS denklemi yok"/>
+		<Res id="@CS.WLSEsError" tr="WLS modelinde hata"/>
+		<Res id="@CS.WLSECError" tr="WLS EC (eşitlik kısıtlı) modelinde hata"/>
+		<Res id="@SC.BadExpression" tr="Hatalı ifade"/>
+		<Res id="@SC.WrongExprType" tr="Yanlış ifade tipi"/>
+		<Res id="@SC.MissingColor" tr="Eksik renk"/>
+		<Res id="@SC.UnexpectedToken" tr="Beklenmeyen token"/>
+		<Res id="@SC.Missing(AfterFn" tr="Fonksiyondan sonra açık parantez '(' eksik"/>
+		<Res id="@SC.SyntaxError" tr="Sözdizimi hatası"/>
+		<Res id="@SC.NestedConjNotAl" tr="İç içe eşlenik fonksiyonlar (conj içinde conj) izin verilmez. Manuel eşlenik oluşturun ve düz eşlenik ifadesi yapın."/>
+		<Res id="@SC.OperatorAfter=" tr="Atama operatöründen sonra operatör"/>
+		<Res id="@SC.Double=" tr="Çift atama operatörü (atamadan sonra atama)"/>
+		<Res id="@SC.EqEndsWith=" tr="İfade/denklem atama operatörü ile bitiyor"/>
+		<Res id="@SC.UnkownSymbol" tr="Bilinmeyen sembol"/>
+		<Res id="@SC.TwoConsOperands" tr="Ardışık sırada iki sabit operand var (birbirini takip eden iki sabit)"/>
+		<Res id="@SC.UnsupportedToke" tr="Desteklenmeyen token"/>
+	</Translations>
+</DevRes>

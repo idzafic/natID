@@ -1,0 +1,21 @@
+Header:
+	startTime = 0.0
+	dTime = 0.001
+	endTime = 5.0
+	maxIter= 20
+	report = Solved
+end  //end of header
+//Model created by xml -> modl converter
+Model [type=ODE name="Pendulum using direct ODE solver"]:
+Vars [out=true]:
+	theta=pi/6		// Variable name and initial value (optional) 
+	omega=0		// Variable name and initial value (optional) 
+Params:
+	l=1		// Parameter name and its value 
+	m=1		// Parameter name and its value 
+	g=9.81		// Parameter name and its value 
+	k=0		// koeficijent otpora zraka 
+ODEs:
+	theta'=omega		// First state variable
+	omega'=-g*sin(theta)/l-k*omega/(m*l)		// Second state variable
+end

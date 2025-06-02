@@ -35,12 +35,13 @@ protected:
     void reMeasure(CellInfo&) override;
     bool _processFrameworkMessage(gui::Message& msg) override;
     void remove(int posToRemove, int posToSelect, const Size& newSize);
+    bool onActionItem(gui::ActionItemDescriptor& aiDesc) override; //system context menus
 public:
     TabView(TabHeader::Type type, td::BYTE minWidthInChars, td::BYTE maxWidthInChars, gui::Font::ID selFontID = gui::Font::ID::SystemBold, gui::Font::ID fontID = gui::Font::ID::SystemNormal);
-    ~TabView();
+//    ~TabView();
     gui::ObjType getObjType() const override { return ObjType::TabView;}
-    int addView(BaseView* pView, const td::String& strTitle, const Image* pImage, td::BYTE cntType = 0, td::ColorID selColor = td::ColorID::Transparent);
-    int addView(BaseView* pView, const td::String& strTitle, const Symbol* pSymbol, td::BYTE cntType = 0, td::ColorID selColor = td::ColorID::Transparent);
+    int addView(BaseView* pView, const td::String& strTitle, const Image* pImage, td::ColorID selColor = td::ColorID::SysTransparentSelection);
+    int addView(BaseView* pView, const td::String& strTitle, const Symbol* pSymbol, td::ColorID selColor = td::ColorID::SysTransparentSelection);
     void setViewOwnership(int viewPos, td::Ownership ownership); //Intern - TabView will delete the view (default)
     td::Ownership getViewOwnership() const;
     BaseView* detach(int viewPos); //if OwnerShip == Extern, otherwise fails
@@ -66,7 +67,9 @@ public:
     void setHeaderContextMenu(int pos, td::BYTE contextMenuID, td::UINT2 contextMenuGroup = 0);
     void forwardContextMenuEvents(int pos, Frame* pFrameToHandleCtxEvents);
     
+    ///Sets visible tab title
     void setTitle(int pos, const td::String& strTitle);
+    td::String getTitle(int pos) const;
 
     const std::function<void(int)>& getChangedSelectionHandler() const;
     void onChangedSelection(const std::function<void(int)>& fnToCall);
@@ -76,6 +79,8 @@ public:
     
     void setModified(int pos, bool bModified);
     bool isModified(int pos) const;
+    
+    void systemColorModeChanged(bool bDarkMode) override;
     
     void setContentTypeID(int pos, td::BYTE cntType);
     td::BYTE getContentTypeID(int pos) const;
@@ -91,6 +96,7 @@ public:
     {
         contentType = (T) getContentTypeID(pos);
     }
+    
 };
 
 } //namespace gui

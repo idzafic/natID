@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevRes>
+    <Translations>
+        <Res id="@GUI.fdFileType" tr="Tipo de archivo:"/>
+        <Res id="Ok" tr="Aceptar"/>
+        <Res id="Cancel" tr="Cancelar"/>
+        <Res id="@msgInfo" tr="Información"/>
+        <Res id="@msgWarning" tr="Advertencia"/>
+        <Res id="@msgError" tr="Error"/>
+        <Res id="@AppMenu" tr="Menú de la aplicación"/>
+        <Res id="@CTX.CloseAllOnLeft" tr="Cerrar todo a la izquierda"/>
+        <Res id="@CTX.CloseAllOnRigh" tr="Cerrar todo a la derecha"/>
+        <Res id="@CTX.CloseAllButThi" tr="Cerrar todo excepto este"/>
+        <Res id="@CTX.CloseAll" tr="Cerrar todo"/>
+        <Res id="@CTX.TEExport2XML" tr="Exportar contenido a XML"/>
+        <Res id="@CTX.TEExport2TXT" tr="Exportar contenido a TXT"/>
+        <Res id="@CTX.TECopy" tr="Copiar la fila seleccionada"/>
+        <Res id="@TE.find:" tr="Buscar:"/>
+        <Res id="@TE.replace:" tr="Reemplazar:"/>
+        <Res id="@TE.GoToLine:" tr="Ir a la línea:"/>
+        <Res id="@TE.Info:" tr="Info:"/>
+        <Res id="@TE.LEfindTT" tr="Contenido para buscar"/>
+        <Res id="@TE.BtnfindTT" tr="Buscar el siguiente"/>
+        <Res id="@TE.replaceTT" tr="Contenido para usar en el reemplazo"/>
+        <Res id="@TE.findAllTT" tr="Buscar desde el principio después de alcanzar la última posición"/>
+        <Res id="@TE.ReplaceTT" tr="Reemplazar el siguiente"/>
+        <Res id="@TE.ReplaceAllTT" tr="Reemplazar todo (desde el inicio hasta el final del documento)"/>
+        <Res id="@TE.GoToLineTT" tr="Ir a la línea especificada en el editor"/>
+        <Res id="@TE.found" tr="Encontrado:"/>
+        <Res id="@TE.NotFound" tr="Nada encontrado"/>
+        <Res id="@TE.replaced" tr="Reemplazado"/>
+        <Res id="@TE.NotReplaced" tr="Nada reemplazado"/>
+        <Res id="@TE.replacedAll:" tr="Reemplazar todo:"/>
+        <Res id="@TE.LineNoTooLarge" tr="El número de línea es demasiado grande"/>
+        <Res id="@TE.OnLine" tr="Número de línea encontrado"/>
+        <Res id="@TE.Export2XML" tr="Exportar contenido a XML"/>
+        <Res id="@TE.Export2TXT" tr="Exportar contenido a TXT"/>
+        <Res id="@TE.findReplaceDlg" tr="Buscar y reemplazar"/>
+    </Translations>
+</DevRes>

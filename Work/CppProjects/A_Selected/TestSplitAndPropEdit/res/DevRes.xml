@@ -10,6 +10,6 @@
 	</ArtWork>
 	<Translation>
 		<Config path="Work/Common/ResConfigs/tr/%s/natGUI.xml"/>
-		<Config path=":tr/%s/main.xml"/>
+		<Config path=":tr/main_%s.xml"/>
 	</Translation>
 </DevRes>

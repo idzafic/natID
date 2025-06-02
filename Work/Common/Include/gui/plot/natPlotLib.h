@@ -7,16 +7,6 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
-// ##################################################################################
-// # native Interface Design (natID) ver. 3.2.7 (2024-12-16)
-// # Licensed under the Academic Free License, version 3
-// # Copyright (C) 2024 Prof. dr Izudin Dzafic 
-// # 
-// # You may use this code under the terms of the Academic Free License, version 3.
-// # 
-// # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
-// ###################################################################################
-
 #pragma once
 #ifdef NATPLOT_EXPORTS
     #ifdef MU_WINDOWS

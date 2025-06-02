@@ -20,6 +20,8 @@ source_group("inc\\rnd"        FILES ${TESTPERLIN_INC_RND})
 source_group("inc\\syst"        FILES ${TESTPERLIN_INC_SYST})
 source_group("src"            FILES ${TESTPERLIN_SOURCES})
 
-target_link_libraries(${TESTPERLIN_NAME} debug ${MU_LIB_DEBUG} optimized ${MU_LIB_RELEASE})
+target_link_libraries(${TESTPERLIN_NAME} 
+                debug ${MU_LIB_DEBUG} optimized ${MU_LIB_RELEASE}
+                ${ZLIB})
 
 setIDEPropertiesForExecutable(${TESTPERLIN_NAME})

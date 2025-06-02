@@ -30,6 +30,8 @@ namespace mu
 		virtual void getTracerPath(td::String& outPathName) = 0;		
 
 		virtual void getLocalDataAppPath(td::String& outPathName) const = 0;
+        
+        virtual td::String getLocalDataAppPath(bool bMakeNative = false) const = 0;
 		
 		virtual bool createFolder(fo::FolderType parentFolderType, const td::String& folderName, td::String& outFolderName) const = 0;
 

@@ -7,21 +7,12 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
-// ##################################################################################
-// # native Interface Design (natID) ver. 3.2.7 (2024-12-16)
-// # Licensed under the Academic Free License, version 3
-// # Copyright (C) 2024 Prof. dr Izudin Dzafic 
-// # 
-// # You may use this code under the terms of the Academic Free License, version 3.
-// # 
-// # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
-// ###################################################################################
-
 #pragma once
 #include <gui/plot/natPlotLib.h>
 #include <gui/plot/Renderer.h>
 #include <gui/Canvas.h>
 #include <gui/Transformation.h>
+#include <td/ColorID.h>
 
 namespace gui
 {
@@ -32,40 +23,35 @@ class Settings;
 
 class NATPLOT_API View : public gui::Canvas, public gui::plot::Renderer
 {
+public:
+    
+    
+    using Pattern = Plot::Pattern;
+    enum class Action : td::BYTE {Reset=0, GridOnOf, LegendOnOff, Export, Settings, MinMarginOnOff, ShowInfo, DeleteInfo, Help};
+private:
+    enum class InternAction : td::BYTE { None=0, Select, SecondaryClick, Drag, PointPeek, MoveLegend };
     friend class gui::plot::Settings;
     static const std::initializer_list<gui::InputDevice::Event> inputs;
     static const std::initializer_list<gui::InputDevice::Event> noInputs;
-    
-    enum class Actions { none, select, secondaryClick, drag, pointPeek, moveLegend } action = Actions::none;
     gui::Point _lastMousePos;
-    
-    td::ColorID _backgroundColor;
-    
-    struct imageButton {
-        gui::Image image;
-        gui::Rect rect;
-        
-        imageButton(const gui::Image& image, const gui::Rect& rect) : image(image), rect(rect) {};
-    };
-    
-    
-    std::vector<imageButton> _slike;
-    bool _drawButtons = true;
     gui::Transformation _tr;
     gui::Point _trPoint;
     gui::Size _realSize;
-    
     gui::Rect _selectRect;
     td::String _txtPut, _lastPath;
-
-    struct ImageSaveSettings{
-    enum class ImageSaveStyle{windowSize, fixedWidth, fixedHeight, fixed};
-
-    ImageSaveStyle _mode;
-    double _width, _height;
-    } _imageSaveSettings;
+//    struct ImageSaveSettings
+//    {
+//        enum class ImageSaveStyle{WindowSize=0, FixedWidth, FixedHeight, Fixed};
+//        double _width, _height;
+//        ImageSaveStyle _mode;
+//    } _imageSaveSettings;
     
-    
+    InternAction _internAction = InternAction::None;
+    td::ColorID _backgroundColor;
+private:
+//    void setColorsAndPatternStack();
+    void resetGraph() override;
+
 protected:
     
     void onPrimaryButtonPressed(const gui::InputDevice& inputDevice) override;
@@ -85,9 +71,9 @@ protected:
     void onResize(const gui::Size& newSize) override;
     
 public:
-    enum class Action : td::BYTE {MinMarginOnOff=0, GridOnOf, LegendOnOff, Export, Reset, Settings, ShowInfo, DeleteInfo, Help};
     
-    View(gui::Font *fontAxis, gui::Font *fontLegend, td::ColorID backgroundColor = td::ColorID::SysCtrlBack, bool drawButtons = true, bool takeUserInput = true);
+    
+    View(gui::Font *fontAxis, gui::Font *fontLegend, td::ColorScheme colorScheme, bool takeUserInput = true);
     
     View(const View&) = delete;
     View& operator=(const View&) = delete;
@@ -110,9 +96,13 @@ public:
     bool openFile(td::String path, bool readOnlyFunctions = false);
     bool save(const td::String& path);
     
-    void drawAgain() override{
+    void drawAgain() override
+    {
         reDraw();
-    };
+    }
+    
+    static double ExportToImageResolutionScale;
+    void systemColorModeChanged(bool bDarkMode) override;
 };
 
 } //namepsace plot

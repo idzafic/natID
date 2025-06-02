@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevRes>
+	<Translations>
+		<Res id="repView" tr="レポート"/>
+		<Res id="repNoView" tr="開いているレポートがありません！操作を完了できません！"/>
+		<Res id="repError" tr="エラー"/>
+		<Res id="print" tr="印刷"/>
+		<Res id="expXML" tr="XMLにエクスポート"/>
+		<Res id="printTT" tr="印刷"/>
+		<Res id="expPDF" tr="PDFへ"/>
+		<Res id="expPDFTT" tr="PDFにエクスポート"/>
+		<Res id="expXMLTT" tr="XMLにエクスポート"/>
+		<Res id="zoom11" tr="1:1"/>
+		<Res id="zoom11TT" tr="印刷版と1:1の比率にする"/>
+		<Res id="repZoom" tr="ズーム"/>
+		<Res id="repZoomTT" tr="ズーム値（パーセント）"/>
+		<Res id="zoomW" tr="幅に合わせる"/>
+		<Res id="zoomWTT" tr="ページ幅に合わせる"/>
+		<Res id="zoomH" tr="高さに合わせる"/>
+		<Res id="zoomHTT" tr="ページの高さに合わせる"/>
+		<Res id="vwSingle" tr="1ページ"/>
+		<Res id="vwSingleTT" tr="1ページを表示"/>
+		<Res id="vwTwo" tr="2ページ"/>
+		<Res id="vwTwoTT" tr="2ページを表示"/>
+		<Res id="vwThree" tr="3ページ"/>
+		<Res id="vwThreeTT" tr="3ページを表示"/>
+		<Res id="vwFour" tr="4ページ"/>
+		<Res id="vwFourTT" tr="4ページを表示"/>
+		<Res id="repPg#" tr="ページ/総ページ数"/>
+		<Res id="repPg#TT" tr="ページ番号/総ページ数"/>
+		<Res id="goToFirst" tr="最初へ"/>
+		<Res id="goToFirstTT" tr="最初のページを表示（移動）"/>
+		<Res id="goToLast" tr="最後へ"/>
+		<Res id="goToLastTT" tr="最後のページを表示（移動）"/>
+		<Res id="rep2XML" tr="XMLにエクスポート"/>
+		<Res id="0" tr="ゼロ "/>
+		<Res id="1" tr="一 "/>
+		<Res id="2" tr="二 "/>
+		<Res id="3" tr="三 "/>
+		<Res id="4" tr="四 "/>
+		<Res id="5" tr="五 "/>
+		<Res id="6" tr="六 "/>
+		<Res id="7" tr="七 "/>
+		<Res id="8" tr="八 "/>
+		<Res id="9" tr="九 "/>
+		<Res id="10" tr="十 "/>
+		<Res id="11" tr="十一 "/>
+		<Res id="12" tr="十二 "/>
+		<Res id="13" tr="十三 "/>
+		<Res id="14" tr="十四 "/>
+		<Res id="15" tr="十五 "/>
+		<Res id="16" tr="十六 "/>
+		<Res id="17" tr="十七 "/>
+		<Res id="18" tr="十八 "/>
+		<Res id="19" tr="十九 "/>
+		<Res id="20" tr="二十 "/>
+		<Res id="30" tr="三十 "/>
+		<Res id="40" tr="四十 "/>
+		<Res id="50" tr="五十 "/>
+		<Res id="60" tr="六十 "/>
+		<Res id="70" tr="七十 "/>
+		<Res id="80" tr="八十 "/>
+		<Res id="90" tr="九十 "/>
+		<Res id="100_beg" tr="百 "/>
+		<Res id="200" tr="二百 "/>
+		<Res id="300" tr="三百 "/>
+		<Res id="400" tr="四百 "/>
+		<Res id="500" tr="五百 "/>
+		<Res id="600" tr="六百 "/>
+		<Res id="700" tr="七百 "/>
+		<Res id="800" tr="八百 "/>
+		<Res id="900" tr="九百 "/>
+		<Res id="1e3" tr="千 "/>
+		<Res id="2e3" tr="二千 "/>
+		<Res id="3e3" tr="三千 "/>
+		<Res id="4e3" tr="四千 "/>
+		<Res id="5e3" tr="五千 "/>
+		<Res id="6e3" tr="六千 "/>
+		<Res id="7e3" tr="七千 "/>
+		<Res id="8e3" tr="八千 "/>
+		<Res id="9e3" tr="九千 "/>
+		<Res id="e3s" tr="千 "/>
+		<Res id="1e6" tr="百万 "/>
+		<Res id="2e6" tr="二百万 "/>
+		<Res id="3e6" tr="三百万 "/>
+		<Res id="4e6" tr="四百万 "/>
+		<Res id="5e6" tr="五百万 "/>
+		<Res id="6e6" tr="六百万 "/>
+		<Res id="7e6" tr="七百万 "/>
+		<Res id="8e6" tr="八百万 "/>
+		<Res id="9e6" tr="九百万 "/>
+		<Res id="e6s" tr="百万 "/>
+		<Res id="1e9" tr="十億 "/>
+		<Res id="2e9" tr="二十億 "/>
+		<Res id="3e9" tr="三十億 "/>
+		<Res id="4e9" tr="四十億 "/>
+		<Res id="5e9" tr="五十億 "/>
+		<Res id="6e9" tr="六十億 "/>
+		<Res id="7e9" tr="七十億 "/>
+		<Res id="8e9" tr="八十億 "/>
+		<Res id="9e9" tr="九十億 "/>
+		<Res id="e9s" tr="十億 "/>
+		<Res id="1e12" tr="一兆 "/>
+		<Res id="2e12" tr="二兆 "/>
+		<Res id="3e12" tr="三兆 "/>
+		<Res id="4e12" tr="四兆 "/>
+		<Res id="5e12" tr="五兆 "/>
+		<Res id="6e12" tr="六兆 "/>
+		<Res id="7e12" tr="七兆 "/>
+		<Res id="8e12" tr="八兆 "/>
+		<Res id="9e12" tr="九兆 "/>
+		<Res id="e12s" tr="兆 "/>
+		<Res id="1e15" tr="千兆 "/>
+		<Res id="2e15" tr="二千兆 "/>
+		<Res id="3e15" tr="三千兆 "/>
+		<Res id="4e15" tr="四千兆 "/>
+		<Res id="5e15" tr="五千兆 "/>
+		<Res id="6e15" tr="六千兆 "/>
+		<Res id="7e15" tr="七千兆 "/>
+		<Res id="8e15" tr="八千兆 "/>
+		<Res id="9e15" tr="九千兆 "/>
+		<Res id="e15s" tr="千兆 "/>
+		<Res id="and" tr="と "/>
+		<Res id="Page" tr="ページ"/>
+		<Res id="NoDPToExp" tr="エクスポートするデータがありません！レポートにベースからのテーブルが含まれていません！"/>
+		<Res id="ExpToXMLDone" tr="XMLへのエクスポートが成功しました！"/>
+		<Res id="repErr" tr="レポートエラー"/>
+		<Res id="repToPDF" tr="PDFにエクスポート"/>
+		<Res id="repToXML" tr="XMLにエクスポート"/>
+	</Translations>
+</DevRes>

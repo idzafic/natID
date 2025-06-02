@@ -17,34 +17,34 @@ public:
     {
     }
 
-    virtual Type getType() const
+    Type getType() const override
     {
         return Type::Rect;
     }
     
-    void init()
+    void init() override
     {
         if (_rect.width() > 0 && _rect.height() > 0)
             _shape.createRect(_rect, _lineWidth, _linePattern);
     }
     
-    virtual void getBoundingRect(gui::Rect& boundRect)
+    void getBoundingRect(gui::Rect& boundRect) override
     {
         boundRect = _rect;
     }
     
-    virtual bool containsPoint(const gui::Point& pt) const
+    bool containsPoint(const gui::Point& pt) const override
     {
         return _rect.contains(pt);
     }
     
-    virtual void load(arch::ArchiveIn& ar)
+    void load(arch::ArchiveIn& ar) override
     {
         Shape2D::load(ar);
         ar >> _rect;
     }
     
-    virtual void save(arch::ArchiveOut& ar) const
+    void save(arch::ArchiveOut& ar) const override
     {
         Shape2D::save(ar);
         ar << _rect;
@@ -83,7 +83,7 @@ public:
         }
     }
     
-    virtual void getValues(gui::PropertyValues& propValues) const
+    void getValues(gui::PropertyValues& propValues) const override
     {
         td::Variant x(_rect.left);
         propValues.setValueByKey((td::UINT4)PropID::Xr, x);
@@ -100,7 +100,7 @@ public:
         Shape2D::getValues(propValues);
     }
     
-    virtual void setValues(gui::PropertyValues& propValues)
+    void setValues(gui::PropertyValues& propValues) override
     {
         gui::Rect rBefore(_rect);
         if (isWithLine())
@@ -139,7 +139,7 @@ public:
         }
     }
     
-    virtual bool canBeSelected(const gui::Point& pt) const
+    bool canBeSelected(const gui::Point& pt) const override
     {
         if (_rect.contains(pt))
         {
@@ -152,7 +152,7 @@ public:
         return false;
     }
     
-    virtual void translate(const gui::Point& delta)
+    void translate(const gui::Point& delta) override
     {
         _rect.translate(delta);
         _shape.translateRectNodes(delta);

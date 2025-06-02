@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<DevRes>
+    <Translations>
+        <Res id="appTitle" tr="Minesweeper"/>
+        <Res id="settings" tr="Einstellungen"/>
+        <Res id="settingsTT" tr="Passen Sie Darstellung und Sprache an. Für die Sprache ist ein Neustart der App erforderlich."/>
+        <Res id="theApp" tr="Anwendung"/>
+        <Res id="game" tr="Spiel"/>
+        <Res id="Level" tr="Niveau"/>
+        <Res id="Easy" tr="Einfach"/>
+        <Res id="Medium" tr="Mittel"/>
+        <Res id="Hard" tr="Schwer"/>
+        <Res id="Done" tr="Die Suche nach Bomben ist abgeschlossen."/>
+        <Res id="Dead" tr="Explosion! Versuch es nochmal!"/>
+        <Res id="AllOK" tr="AUSGEZEICHNET! Minenfeld ist geräumt!"/>
+        <Res id="Bombs:" tr="Minen:"/>
+        <Res id="Flags:" tr="Markierungen:"/>
+        <Res id="Size:" tr="Größe:"/>
+        <Res id="ClStart" tr="Klicken Sie zum Starten auf ein beliebiges Feld"/>
+        <Res id="EmptyFieldClicked" tr="Auf leeres Feld geklickt. Nicht nötig..."/>
+        <Res id="BulkClear" tr="Mehr als ein Feld geräumt."/>
+        <Res id="ClearedField" tr="Ein Feld geräumt. Mine ist in der Nähe."/>
+        <Res id="FlagRemoved" tr="Flagge (Markierung) entfernt."/>
+        <Res id="FlagAdded" tr="Minenmarkierung auf Feld platziert."/>
+        <Res id="FlagFailed" tr="Es ist nicht nötig, auf einer freien Fläche eine Markierung zu platzieren!"/>
+        
+        <Res id="dlgSettings" tr="Einstellungen"/>
+        <Res id="lblLang" tr="Aktuelle Anwendungssprache:"/>
+        <Res id="lblLang2" tr="Anwendungssprache nach Neustart der Anwendung:"/>
+        <Res id="chbTBIcsAndLbls" tr="Symbolbeschriftungen anzeigen."/>
+        <Res id="chbUseCombo" tr="Verwenden Sie ComboBox für die Levelauswahl (Schwierigkeit)."/>
+        <Res id="theme" tr="Thema:"/>
+        <Res id="showStatusBar" tr="Statusleiste anzeigen"/>
+        <Res id="RestartRequired" tr="Starte die Anwendung neu"/>
+        <Res id="RestartRequiredInfo" tr="Einige der geänderten Einstellungen erfordern einen Neustart der Anwendung, um wirksam zu werden"/>
+        <Res id="Restart" tr="Neustart"/>
+        <Res id="DoNoRestart" tr="Nicht neu starten"/>
+
+    </Translations>
+</DevRes>

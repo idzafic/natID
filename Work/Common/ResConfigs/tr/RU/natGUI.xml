@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevRes>
+    <Translations>
+        <Res id="@GUI.fdFileType" tr="Тип файла:"/>
+        <Res id="Ok" tr="Ок"/>
+        <Res id="Cancel" tr="Отмена"/>
+        <Res id="@msgInfo" tr="Информация"/>
+        <Res id="@msgWarning" tr="Предупреждение"/>
+        <Res id="@msgError" tr="Ошибка"/>
+        <Res id="@AppMenu" tr="Меню приложения"/>
+        <Res id="@CTX.CloseAllOnLeft" tr="Закрыть все слева"/>
+        <Res id="@CTX.CloseAllOnRigh" tr="Закрыть все справа"/>
+        <Res id="@CTX.CloseAllButThi" tr="Закрыть все, кроме этого"/>
+        <Res id="@CTX.CloseAll" tr="Закрыть все"/>
+        <Res id="@CTX.TEExport2XML" tr="Экспортировать содержимое в XML"/>
+        <Res id="@CTX.TEExport2TXT" tr="Экспортировать содержимое в TXT"/>
+        <Res id="@CTX.TECopy" tr="Копировать выбранную строку"/>
+        <Res id="@TE.find:" tr="Найти:"/>
+        <Res id="@TE.replace:" tr="Заменить:"/>
+        <Res id="@TE.GoToLine:" tr="Перейти к строке:"/>
+        <Res id="@TE.Info:" tr="Инфо:"/>
+        <Res id="@TE.LEfindTT" tr="Содержимое для поиска"/>
+        <Res id="@TE.BtnfindTT" tr="Найти следующее"/>
+        <Res id="@TE.replaceTT" tr="Содержимое для замены"/>
+        <Res id="@TE.findAllTT" tr="Искать с начала после достижения последней позиции"/>
+        <Res id="@TE.ReplaceTT" tr="Заменить следующее"/>
+        <Res id="@TE.ReplaceAllTT" tr="Заменить все (с начала до конца документа)"/>
+        <Res id="@TE.GoToLineTT" tr="Перейти к указанной строке в редакторе"/>
+        <Res id="@TE.found" tr="Найдено:"/>
+        <Res id="@TE.NotFound" tr="Ничего не найдено"/>
+        <Res id="@TE.replaced" tr="Заменено"/>
+        <Res id="@TE.NotReplaced" tr="Ничего не заменено"/>
+        <Res id="@TE.replacedAll:" tr="Заменить все:"/>
+        <Res id="@TE.LineNoTooLarge" tr="Номер строки слишком большой"/>
+        <Res id="@TE.OnLine" tr="Номер строки найден"/>
+        <Res id="@TE.Export2XML" tr="Экспортировать содержимое в XML"/>
+        <Res id="@TE.Export2TXT" tr="Экспортировать содержимое в TXT"/>
+        <Res id="@TE.findReplaceDlg" tr="Найти и заменить"/>
+    </Translations>
+</DevRes>

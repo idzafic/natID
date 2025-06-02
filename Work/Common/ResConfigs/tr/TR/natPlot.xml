@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevRes>
+    <Translations>
+        <Res id="@Plot_settings" tr="Grafik ayarları"/>
+        <Res id="@Plot_zatvori" tr="Kapat"/>
+        <Res id="@Plot_legendCols" tr="Grafik göstergesindeki sütun sayısı:"/>
+        <Res id="@Plot_marginLeft" tr="Sol kenar boşluğu:"/>
+        <Res id="@Plot_marginRight" tr="Sağ kenar boşluğu:"/>
+        <Res id="@Plot_marginTop" tr="Üst kenar boşluğu:"/>
+        <Res id="@Plot_marginBottom" tr="Alt kenar boşluğu:"/>
+        <Res id="@Plot_xSpace" tr="X ekseni etiketine olan mesafe:"/>
+        <Res id="@Plot_ySpace" tr="Y ekseni etiketine olan mesafe:"/>
+        <Res id="@Plot_savedImageRes" tr="Kaydedilen görüntü çözünürlüğü:"/>
+        <Res id="@Plot_height" tr="Görüntü yüksekliği:"/>
+        <Res id="@Plot_width" tr="Görüntü genişliği"/>
+        <Res id="@Plot_colorDef" tr="Renkler şunun için tanımlandı:"/>
+        <Res id="@Plot_defLineProps" tr="Varsayılan çizgi özellikleri"/>
+        <Res id="@Plot_allMode" tr="Herhangi bir tema"/>
+        <Res id="@Plot_darkMode" tr="Koyu mod"/>
+        <Res id="@Plot_whiteMode" tr="Açık mod"/>
+        <Res id="@Plot2JPG" tr="JPG Görüntü formatı"/>
+        <Res id="@Plot2PNG" tr="PNG Görüntü formatı"/>
+        <Res id="@Plot2PDF" tr="PDF Belge formatı"/>
+        <Res id="@Plot2EPS" tr="EPS Görüntü formatı"/>
+        <Res id="@Plot2SVG" tr="SVG Görüntü formatı"/>
+        <Res id="@Plot2TXT" tr="TXT (metin) formatı"/>
+        <Res id="Fig_AllMode" tr="Tüm renk modları"/>
+        <Res id="Fig_DarkMode" tr="Koyu renk modu"/>
+        <Res id="Fig_LightMode" tr="Açık renk modu"/>
+        <Res id="Fig_DefLineProps" tr="Çizgi Özellikleri"/>
+        <Res id="@Plot_AxisFS" tr="Yazı tipi boyutu:"/>
+        <Res id="@Plot_AxisFN" tr="Yazı tipi adı:"/>
+    </Translations>
+</DevRes>

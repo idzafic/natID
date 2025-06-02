@@ -11,7 +11,6 @@ extern DefaultSettings g_defaultSettings;
 
 class DefaultSettingsPropertyEditor : public gui::PropertyEditor
 {
-private:
 protected:
     gui::Properties _properties;
 public:

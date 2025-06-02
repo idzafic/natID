@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DevRes>
+    <Translations>
+        <Res id="@ML.HeaderIncorrect" tr="模型头不正确或缺失 (@ML.HeaderIncorrectOrMissing)"/>
+        <Res id="@SC.CmplxTypeInReal" tr="在实数域模型中检测到复数类型 (@SC.CmplxTypeInReal)"/>
+        <Res id="@CELH.Type" tr="类型"/>
+        <Res id="@CELHT.TypeTT" tr="消息类型 (信息, 警告, 错误)"/>
+        <Res id="@CELH.Editor" tr="编辑器"/>
+        <Res id="@CELHT.Editor" tr="生成日志条目的编辑器 (主脑图标或可视化编辑器-图形图标)"/>
+        <Res id="@CELH.Line#" tr="行号"/>
+        <Res id="@CELH.Line#TT" tr="对应编辑器中的行号"/>
+        <Res id="@CELH.Col#" tr="列号"/>
+        <Res id="@CELH.Col#TT" tr="对应编辑器中的列号"/>
+        <Res id="@CELH.Msg" tr="消息描述"/>
+        <Res id="@CELH.MsgTT" tr="包含所有可用细节的消息描述"/>
+        <Res id="@CE.VarDDVars" tr="主模型变量已在变量中定义 (@CE.VarDDVars)"/>
+        <Res id="@CE.SubVarDDSubVars" tr="子模型变量已在子模型变量中定义 (@CE.SubVarDDSubVars)"/>
+        <Res id="@CE.ParDDInPars" tr="主模型参数已在参数中定义 (@CE.ParDDInPars)"/>
+        <Res id="@CE.ParDDInVars" tr="主模型参数已在主模型变量中定义 (@CE.ParDDInVars)"/>
+        <Res id="@CE.SubParDDSubVars" tr="子模型参数已在子模型变量中定义 (@CE.SubParDDSubVars)"/>
+        <Res id="@CE.SubParDDSubPars" tr="子模型参数已在子模型参数中定义 (@CE.SubParDDSubPars)"/>
+        <Res id="@CE.SubParDDInPars" tr="子模型参数已在主模型参数中定义 (@CE.SubParDDInPars)"/>
+        <Res id="@CE.notInModel" tr="标记不在模型中 (@CE.notInModel)"/>
+        <Res id="@CE.endMissing" tr="缺少end (@CE.endMissing)"/>
+        <Res id="@CE.AttribClosedNoO" tr="尝试用']'关闭属性部分但未打开(缺少'[') (@CE.AttribClosedNoOpen)"/>
+        <Res id="@CE.AttribNotClosed" tr="属性部分已打开但未用']'关闭 (@CE.AttribNotClosed)"/>
+        <Res id="@CE.wrongModelPos" tr="模型位置错误 (@CE.wrongModelPos)"/>
+        <Res id="@CE.endMissmatch" tr="end不匹配 (可能end过多) (@CE.endMissmatch)"/>
+        <Res id="@CE.AttribMismatch" tr="属性类型不匹配 (@CE.AttribMismatch)"/>
+        <Res id="@CE.UnknownLabel" tr="未知标签 (@CE.UnknownLabel)"/>
+        <Res id="@CE.UnexpectedToken" tr="意外标记 (@CE.UnexpectedToken)"/>
+        <Res id="@CESB.NoOfErrors" tr="错误数量:"/>
+        <Res id="@CESB.CursorPositio" tr="光标位置:"/>
+        <Res id="@SC.EmpryParamName" tr="参数名为空 (@SC.EmpryParamName)"/>
+        <Res id="@SC.AssignWith0Toke" tr="分配时无标记 (@SC.AssignWith0Tokens)"/>
+        <Res id="@SC.AssignWith2Toke" tr="分配时有两个标记 (@SC.AssignWith2Tokens)"/>
+        <Res id="@SC.WrongType" tr="类型错误 (@SC.WrongType)"/>
+        <Res id="@SC.Missing=InAssig" tr="赋值表达式中缺少'=' (@SC.Missing=InAssignement)"/>
+
+        <Res id="@SC.EmpryParamName" tr="参数名为空 (@SC.EmpryParamName)"/>
+        <Res id="@SC.AssignWith0Toke" tr="零标记赋值 (@SC.AssignWith0Tokens)"/>
+        <Res id="@SC.AssignWith2Toke" tr="双标记赋值 (@SC.AssignWith2Tokens)"/>
+        <Res id="@SC.WrongType" tr="类型错误 (@SC.WrongType)"/>
+        <Res id="@ML.HeaderParamInco" tr="不完整的头部参数（'='后缺少值）"/>
+        <Res id="@ML.HeaderTokError" tr="模型头部定义中出现意外标记"/>
+        <Res id="@ML.HeaderEndAfter" tr="头部声明中'end'后同一行还有内容"/>
+        <Res id="@ML.HeaderParamUnkn" tr="未知的头部参数名称"/>
+        <Res id="@ML.HeaderParamExp=" tr="头部参数名称后应有'='"/>
+        <Res id="@ML.HeaderReportExp" tr="缺少'Report type'参数值"/>
+        <Res id="@ML.HeaderWrong=Pos" tr="头部参数定义中'='符号位置错误"/>
+        <Res id="@ML.HeaderWrongCons" tr="头部参数定义中常量位置错误"/>
+        <Res id="@ML.HeaderWrongPara" tr="错误的头部参数类型（指定值类型不适用于此参数名）"/>
+        <Res id="@ML.HeaderWrongParT" tr="错误的头部参数类型（指定值类型不适用于此参数名）"/>
+        <Res id="@ML.HeaderUnknownPa" tr="未知的头部参数类型/名称"/>
+        <Res id="@ML.HeaderWithout:" tr="头部声明中缺少':'（'Header'后的最后一个标记）"/>
+        <Res id="@ML.HeaderTokenAfte" tr="定义'Header'的行中':'后还有标记。':'必须是该行最后一个标记。"/>
+        <Res id="@ML.HeaderFirstToke" tr="头部声明必须以'Header'标记开头。"/>
+        <Res id="@CE.ExpEndsWithOper" tr="表达式/方程以运算符结尾！"/>
+        <Res id="@CE.ExpEndsWithAssi" tr="表达式以赋值结尾！"/>
+        <Res id="@CE.Mising_)" tr="括号不匹配。缺少')'"/>
+        <Res id="@CE.Mising_(" tr="括号不匹配。缺少'('"/>
+        <Res id="@CE.CloseParenthesi" tr="括号不匹配。"/>
+        <Res id="@ET.FnParamOr()MM" tr="函数参数错误或')'不匹配"/>
+        <Res id="@ET.FnNotPrpFormatt" tr="函数@格式不正确"/>
+        <Res id="@ET.FnNeeds_(" tr="函数@格式不正确！缺少'('"/>
+        <Res id="@CE.ExpEndsWithOpen" tr="表达式/方程以开括号结尾！"/>
+        <Res id="@ET.FnNeeds_)" tr="函数@格式不正确！缺少')'"/>
+        <Res id="@ET.LabelAfterOpera" tr="参数/变量id='@'在另一个操作数后"/>
+        <Res id="@ET.ConstAfterOpera" tr="常量=@在另一个操作数后"/>
+        <Res id="@ET.(_AfterOperand" tr="操作数后出现开括号"/>
+        <Res id="@ET.OperAfterUnOp" tr="运算符'@'在单目运算符'@'后"/>
+        <Res id="@ET.UnaryAfterUnOpr" tr="单目运算符'@'在操作数后"/>
+        <Res id="@ET.OperAfterOper" tr="运算符'@'在运算符'@'后"/>
+        <Res id="@ET.,NeedsOperator" tr="逗号跟在单目运算符后！"/>
+        <Res id="@ET.,OutsideFn" tr="逗号在多参数函数外使用！"/>
+        <Res id="@ET.()_Mismatch" tr="括号不匹配！"/>
+        <Res id="@ET.FnParamMising" tr="缺少函数参数节点！"/>
+        <Res id="@ET.FnParam#Commas" tr="逗号数量与函数不匹配！请提供所有函数参数！"/>
+        <Res id="@ET.FnParam2Err" tr="无法准备多参数函数的第二个参数！"/>
+        <Res id="@ET.,AfterUnFn" tr="单目函数后出现逗号！"/>
+        <Res id="@ET.MFnPremEnd" tr="解析多参数函数fn=@时方程提前结束！"/>
+        <Res id="@ET.MFnExpOprnd" tr="解析多参数函数fn=@时期望操作数但得到非操作数！"/>
+        <Res id="@ET.MFnNoVar2" tr="多参数函数@不支持变量作为第二个参数"/>
+        <Res id="@ET.MFnNoVar3" tr="多参数函数@不支持变量作为第三个参数"/>
+        <Res id="@ET.ExpPremEnd" tr="方程/表达式提前结束"/>
+        <Res id="@ET.Exp,InMFn" tr="多参数函数中缺少逗号：@"/>
+        <Res id="@ET.ExpPremEndFn" tr="方程提前结束（fn=@）！"/>
+        <Res id="@ET.sAfterOprnd" tr="Laplace运算符在另一个操作数后"/>
+        <Res id="@ET.UnexpTokenID" tr="意外的标记ID：@(@)"/>
+        <Res id="@ET.ErrDifIfThen" tr="无法对if-then-else方程求导！"/>
+        <Res id="@SC.TFBadFormat" tr="传递函数格式错误！"/>
+        <Res id="@ET.ErrInitValueExp" tr="无法为初始值表达式创建表达式树！"/>
+        <Res id="@SC.InitValErr" tr="无法计算初始值！"/>
+        <Res id="@SC.NLReadFail" tr="读取NL块时出错"/>
+        <Res id="@SC.NLNvars!=NEQsl" tr="变量数量与方程数量不相等！"/>
+        <Res id="@SC.CannotSolveSubM" tr="无法求解'SubModel'"/>
+        <Res id="@SC.EmptyJacSubMode" tr="'SubModel'中Jacobian为空"/>
+        <Res id="@SC.EmptyJacobian" tr="Jacobian为空"/>
+        <Res id="@SC.CannotFactorize" tr="无法分解'SubModel'中的矩阵"/>
+        <Res id="@SC.LUSolveErrorSub" tr="'SubModel'中稀疏LU求解错误"/>
+        <Res id="@SC.LUSolveError" tr="稀疏LU求解错误"/>
+        <Res id="@SC.MaxIterLimitSub" tr="在'SubModel'中达到最大迭代限制"/>
+        <Res id="@SC.MaxIterLimit" tr="达到最大迭代限制"/>
+        <Res id="@SC.FactorErrorSubM" tr="'SubModel'中稀疏矩阵分解错误"/>
+        <Res id="@SC.FactorizationEr" tr="稀疏分解错误"/>
+        <Res id="@ET.Expected_)" tr="期望关闭括号')'"/>
+        <Res id="@ET.FnAfterOperand" tr="操作数后出现函数"/>
+        <Res id="@ET.LimitFnFormatNo" tr="极限函数格式不正确"/>
+        <Res id="@ET.LimiFnWo_(" tr="极限函数缺少开括号'('"/>
+        <Res id="@ET.LimitFnNeeds_)" tr="极限函数需要关闭括号')'"/>
+        <Res id="@ET.FnNotPrpFmt" tr="函数格式不正确"/>
+        <Res id="@ET.)_AfterOper" tr="关闭括号')'在运算符后"/>
+        <Res id="@ET.EmptyExpression" tr="空表达式"/>
+        <Res id="@ET.UnexpectedEnd" tr="表达式意外结束"/>
+        <Res id="@ET.OperatorWoOprnd" tr="运算符缺少操作数"/>
+        <Res id="@SC.ErrInReInit" tr="'ReInit'中出错"/>
+        <Res id="@SC.ErrInPreProc" tr="'PreProc'中出错"/>
+        <Res id="@SC.ErrInIterPostPr" tr="'IterPostProc'中出错"/>
+        <Res id="@SC.ErrInBasePostPr" tr="'BasePostProc'中出错"/>
+        <Res id="@SC.ErrInPostProc" tr="'PostProc'中出错"/>
+        <Res id="@SC.ErrInLimits" tr="'Limits'中出错"/>
+        <Res id="@SC.ErrorInRepeat" tr="'Repeat'中出错"/>
+        <Res id="@SC.ODEReadModelErr" tr="读取/解析'ODE'部分时出错"/>
+        <Res id="@SC.WrongDTForODE" tr="ODE的积分步长错误。dT必须是正值！"/>
+        <Res id="@SC.NoDeltaT" tr="未指定积分步长(dT)的值！"/>
+        <Res id="@SC.WLSReadFail" tr="读取'WLS'部分时出错"/>
+        <Res id="@CE.WLSEErrorSolve" tr="求解WLS模型时出错"/>
+        <Res id="@SC.ErrorDAEInit" tr="DAE初始化错误"/>
+        <Res id="@SC.DAEFactorizatio" tr="DAE分解错误"/>
+        <Res id="@SC.WrongDTForDAE" tr="DAE的dt值错误"/>
+        <Res id="@SC.WrongDAEMethod" tr="错误的DAE求解方法（允许的方法有Euler、RK2、RK4、RK6等）"/>
+        <Res id="@SC.WrongDAEMethodS" tr="'SubModel'中错误的DAE方法"/>
+        <Res id="@CS.DistNoType" tr="分布定义需要'type'！（允许的类型有Gauss、Student、Normal等）"/>
+        <Res id="@CS.NoMinInUniformD" tr="均匀分布中'min'值是必需的"/>
+        <Res id="@CS.NoMaxInUniformD" tr="均匀分布中'max'值是必需的"/>
+        <Res id="@CS.NoPimBernoulliD" tr="伯努利分布中'p'值是必需的"/>
+        <Res id="@CS.NoLamdaInPoisso" tr="泊松分布中'lambda'值是必需的"/>
+        <Res id="@CS.NoLamdaInExponD" tr="指数分布中'lambda'值是必需的"/>
+        <Res id="@CS.NoAlphaInGammaD" tr="Gamma分布中'alpha'值是必需的"/>
+        <Res id="@CS.NoBetaInGammaDi" tr="Gamma分布中'beta'值是必需的"/>
+        <Res id="@CS.NoMeanInGaussDi" tr="高斯分布中'mean'值是必需的"/>
+        <Res id="@CS.NoDevInGaussDis" tr="高斯分布中'dev'值是必需的"/>
+        <Res id="@CS.0DevInGaussDist" tr="高斯分布中'dev'值必须为正！"/>
+        <Res id="@CS.NoMeanInLogGaus" tr="'LogGauss'分布中'mean'值是必需的"/>
+        <Res id="@CS.NoDevInLogGausD" tr="'LogGauss'分布中'dev'值是必需的"/>
+        <Res id="@CS.NoKInChiSquared" tr="'ChiSquared'分布中'k'值是必需的"/>
+        <Res id="@CS.NoNInStudentDis" tr="'Student'分布中'k'值是必需的"/>
+        <Res id="@CS.UnknowntDistrib" tr="未知分布"/>
+        <Res id="@SC.Mising=InAssign" tr="赋值表达式中缺少赋值标记"/>
+        <Res id="@SC.NoVarsDeclared" tr="没有声明任何变量"/>
+        <Res id="@SC.EmptyInitExpr" tr="空的初始化表达式"/>
+        <Res id="@SC.MissingDotInAss" tr="赋值中缺少点"/>
+        <Res id="@SC.NoImagRealPartI" tr="赋值中没有'imag'或'real'成员"/>
+        <Res id="@SC.NoParentSolver" tr="没有父求解器"/>
+        <Res id="@SC.WrongAssignment" tr="错误的赋值方程"/>
+        <Res id="@SC.WrongIfConditio" tr="'if'语句中的条件错误"/>
+        <Res id="@SC.WrongSignalInIf" tr="'if'语句中的信号错误"/>
+        <Res id="@SC.EmptyIf" tr="空的'if'"/>
+        <Res id="@SC.IncompleteIf" tr="不完整的'if'语句"/>
+        <Res id="@SC.ElseExpected" tr="if方程中应有'else'！"/>
+        <Res id="@SC.NoExprInElse" tr="'else'语句中没有表达式"/>
+        <Res id="@SC.WrongSignalInEl" tr="'else'语句中的信号错误"/>
+        <Res id="@SC.ElseMissingEnd" tr="'else'需要以'end'关键字结束"/>
+        <Res id="@SC.IncAssignmentEq" tr="不完整的赋值表达式"/>
+        <Res id="@SC.UnknownSymbol" tr="未知符号"/>
+        <Res id="@SC.CannotMakeExpre" tr="无法创建表达式"/>
+        <Res id="@SC.CannotMakeIFExp" tr="无法创建'if'表达式"/>
+        <Res id="@SC.IncompleteIF" tr="不完整的'if'表达式"/>
+        <Res id="@SC.IfInUnsupported" tr="'if'在不支持'if'表达式的组中"/>
+        <Res id="@SC.IncompleteIfEls" tr="不完整的'if'-'else'"/>
+        <Res id="@ET.ErrDifEqua" tr="微分方程错误"/>
+        <Res id="@SC.UnexpectedExpre" tr="意外的表达式类型"/>
+        <Res id="@SC.SymbolicJacobia" tr="创建符号Jacobian时出错"/>
+        <Res id="@SC.ErrorInLimits0" tr="限制错误(0)"/>
+        <Res id="@SC.ErrorInLimits1" tr="限制错误(1)"/>
+        <Res id="@SC.LimitGroupEndMi" tr="限制组'end'不匹配"/>
+        <Res id="@SC.LinitsMustBeGro" tr="限制必须分组"/>
+        <Res id="@CS.StatAssNotOK" tr="统计对象赋值错误"/>
+        <Res id="@CS.StatsToNotStatV" tr="将统计对象分配给非统计管理器时出错"/>
+        <Res id="@CS.StatsStrWrongEx" tr="统计的错误赋值运算符（必须是'<<'）"/>
+        <Res id="@CS.EmptyStatAsssig" tr="空的统计赋值"/>
+        <Res id="@CS.StatsWronExpTyp" tr="统计对象中错误的表达式类型"/>
+        <Res id="@CS.StatsCannotMake" tr="无法为统计对象创建表达式树"/>
+        <Res id="@CS.StatsCannotCrea" tr="无法为统计对象创建表达式树"/>
+        <Res id="@SC.PrematureEnd" tr="模型提前结束"/>
+        <Res id="@SC.CannotCreateSol" tr="无法创建求解器"/>
+        <Res id="@SC.ODEWrongFormat" tr="ODE方程格式错误。必须是变量后跟撇号然后是赋值运算符'='"/>
+        <Res id="@SC.ODEExpectedVari" tr="ODE需要变量"/>
+        <Res id="@SC.ODEExpected=Tok" tr="ODE需要赋值'='标记"/>
+        <Res id="@SC.DerivAndIntAvai" tr="微分和积分不能用于同一个ODE表达式"/>
+        <Res id="@SC.NoDerivNoInt" tr="ODE方程中既没有微分也没有积分"/>
+        <Res id="@SC.ODEExpected&apos;or" tr="ODE需要变量后跟撇号然后是赋值运算符，或者变量后跟赋值然后是'int'函数"/>
+        <Res id="@SC.WrongODEExp" tr="ODE方程不正确"/>
+        <Res id="@SC.ODEMissInt" tr="ODE需要'int'函数。或者您忘记在变量名后加撇号"/>
+        <Res id="@SC.ODEHasMultInts" tr="ODE方程有多个'int'方法。只能有一个。"/>
+        <Res id="@SC.ODEWithDiffAndI" tr="ODE方程同时有微分(撇号)和'int'函数。只能有其中一个。"/>
+        <Res id="@SC.CannotCrODEExpT" tr="无法创建ODE表达式树"/>
+        <Res id="@SC.ODEIntWrongOper" tr="ODE方程中没有正确的'int'"/>
+        <Res id="@SC.ODEEmptyInt" tr="ODE方程中'int'为空"/>
+        <Res id="@SC.ODEIntWithSS" tr="'int'不能使用参数进行积分。必须是变量！"/>
+        <Res id="@SC.TFsWrongFormat" tr="传递函数格式错误"/>
+        <Res id="@SC.TFsNoDiv1Operat" tr="传递函数定义中没有除法标记'/'"/>
+        <Res id="@SC.TFsNoAssignOper" tr="传递函数定义中没有赋值运算符"/>
+        <Res id="@SC.TFsWrongTokens" tr="传递函数定义中发现意外标记"/>
+        <Res id="@SC.TFsCannotMakeET" tr="无法为传递函数创建表达式树"/>
+        <Res id="@SC.WrongYInTF" tr="传递函数中的输出符号必须是变量"/>
+        <Res id="@SC.TFYNotVariable" tr="传递函数中的输出符号必须是变量(2)"/>
+        <Res id="@SC.WrongUInTF" tr="传递函数中的输入符号必须是变量"/>
+        <Res id="@SC.TFUNotVarNorPar" tr="传递函数的输入符号既不是变量也不是参数"/>
+        <Res id="@SC.NoDAEorTFEqs" tr="DAE模型中既没有ODE也没有TF块"/>
+        <Res id="@SC.Vars!=#Eqs" tr="变量数量与方程数量不相等"/>
+        <Res id="@SC.ODENotOK" tr="ODE不正确。ODE表达式必须以状态变量开头"/>
+        <Res id="@SC.DAE#Eq!=#Vars" tr="DAE问题中变量数量与方程数量不相等"/>
+        <Res id="@SC.TFOut!Variable" tr="传递函数的输出不是变量"/>
+        <Res id="@SC.TFOutIsParam" tr="传递函数的输出是参数"/>
+        <Res id="@SC.TFIn!Declared" tr="传递函数中使用的变量未声明"/>
+        <Res id="@SCTFTokListError" tr="传递函数声明的标记不足。至少需要4个！"/>
+        <Res id="@SC.TFExprTreeErr" tr="创建传递函数表达式树时出错"/>
+        <Res id="@SC.TFPolyCoefficen" tr="无法提取传递函数中的多项式系数"/>
+        <Res id="@SC.TFDenomNoLaplad" tr="传递函数分母中没有Laplace运算符"/>
+        <Res id="@SC.TFNomNoLapladeO" tr="传递函数分子中没有Laplace运算符"/>
+        <Res id="@SC.TF2SSError" tr="将传递函数转换为状态空间公式时出错"/>
+        <Res id="@SC.DAENLDerivs" tr="DAE模型的NL组错误"/>
+        <Res id="@SC.DAEExpandError" tr="创建隐式DAE求解器时出错（扩展错误）"/>
+        <Res id="@SC.DAENLJack2" tr="无法为DAE模型创建稀疏Jacobian(2)"/>
+        <Res id="@SC.DAENLJack3" tr="无法为DAE模型创建稀疏Jacobian(3)"/>
+        <Res id="@SC.0Expansion" tr="创建零阶段隐式DAE求解器时出错（零扩展错误）"/>
+        <Res id="@SC.DAENLJack0Exp" tr="无法为DAE模型创建稀疏Jacobian(@SC.DAENLJack0Exp)"/>
+        <Res id="@SC.DAEEqError" tr="无法创建DAE评估器"/>
+        <Res id="@SC.DAEEqExpDiffErr" tr="无法为DAE模型创建稀疏Jacobian(@SC.DAEEqExpDiffError)"/>
+        <Res id="@SC.DAEEqExp0Error" tr="创建零阶段隐式DAE求解器时出错(@SC.DAEEqExp0Error)"/>
+        <Res id="@SC.DAEEqExp0DiffEr" tr="无法为DAE模型创建稀疏Jacobian(@SC.DAEEqExp0DiffError)"/>
+        <Res id="@CS.NLEsError" tr="无法正确解析'NLEs'方程"/>
+        <Res id="@SC.WrongPlotToken" tr="错误的绘图类型/标记(@SC.WrongPlotToken)"/>
+        <Res id="@SC.WrongPlotTokenR" tr="错误的绘图类型/标记(@SC.WrongPlotTokenRKW)"/>
+        <Res id="@SC.WrongPlotXBound" tr="错误的绘图x边界"/>
+        <Res id="@SC.WrongPlotYBound" tr="错误的绘图y边界"/>
+        <Res id="@SC.EmptyPlot" tr="空绘图"/>
+        <Res id="@SC.WrongPlotAttrib" tr="错误的绘图属性名称"/>
+        <Res id="@SC.SecondXAxisInPl" tr="一个绘图只能有一个x轴！绘图中有多个轴定义！"/>
+        <Res id="@SC.SecondCondInPlo" tr="一个绘图只能有一个条件！绘图中有多个条件定义！"/>
+        <Res id="@SC.PlotPremEnd" tr="绘图提前结束。没有'end'"/>
+        <Res id="@SC.PlotNoYAxis" tr="绘图不包含任何y轴。绘图必须至少有一个y轴！"/>
+        <Res id="@SC.PlotHLineErr" tr="绘图水平线('hLine')定义错误"/>
+        <Res id="@SC.PlotVLineErr" tr="绘图垂直线('vLine')定义错误"/>
+        <Res id="@SC.PlotHBandErr" tr="绘图水平带('hBand')定义错误"/>
+        <Res id="@SC.PlotVBandErr" tr="绘图垂直带('vBand')定义错误"/>
+        <Res id="@SC.PlotAxisErr" tr="绘图的x轴定义错误"/>
+        <Res id="@SC.PlotYAxisErr" tr="绘图的y轴定义错误"/>
+        <Res id="@SC.PlotCondErr" tr="绘图的条件定义错误"/>
+        <Res id="@CS.#Vars!=#Eqs" tr="变量数量与方程数量不相等！"/>
+        <Res id="@SC.NoODEEqs" tr="没有任何ODE方程"/>
+        <Res id="@SC.#Vars!=#ODEs" tr="ODE模型中变量数量与方程数量不相等！"/>
+        <Res id="@SC.WLSNoVars" tr="WLS模型没有任何声明的变量"/>
+        <Res id="@SC.WLSNoWLSEs" tr="没有任何WLS方程"/>
+        <Res id="@SC.WLSNotEnoughEQs" tr="WLS方程不足"/>
+        <Res id="@CS.WLSEsError" tr="WLS模型错误"/>
+        <Res id="@CS.WLSECError" tr="WLS EC（等式约束）模型错误"/>
+        <Res id="@SC.BadExpression" tr="错误的表达式"/>
+        <Res id="@SC.WrongExprType" tr="错误的表达式类型"/>
+        <Res id="@SC.MissingColor" tr="缺少颜色"/>
+        <Res id="@SC.UnexpectedToken" tr="意外的标记"/>
+        <Res id="@SC.Missing(AfterFn" tr="函数后缺少开括号'('"/>
+        <Res id="@SC.SyntaxError" tr="语法错误"/>
+        <Res id="@SC.NestedConjNotAl" tr="不允许嵌套共轭函数（conj中的conj）。请手动共轭并创建平面共轭表达式。"/>
+        <Res id="@SC.OperatorAfter=" tr="赋值运算符后出现运算符"/>
+        <Res id="@SC.Double=" tr="双重赋值运算符（赋值后的赋值）"/>
+        <Res id="@SC.EqEndsWith=" tr="表达式/方程以赋值运算符结尾"/>
+        <Res id="@SC.UnkownSymbol" tr="未知符号"/>
+        <Res id="@SC.TwoConsOperands" tr="连续出现两个常量操作数（两个常量连续出现）"/>
+        <Res id="@SC.UnsupportedToke" tr="不支持的标记"/>
+    </Translations>
+</DevRes>

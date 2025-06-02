@@ -13,6 +13,7 @@
 //
 #pragma once
 #include "Canvas.h"
+#include <gui/IPopoverUpdater.h>
 
 namespace gui
 {
@@ -32,6 +33,7 @@ public:
 protected:
     IPopoverButton* _btnPopover;
     Handle _popoverFrame = nullptr;
+    IPopoverUpdater* _popoverUpdater = nullptr;
     td::UINT2 _nItems;
     td::UINT2 _currentSelection;
     td::UINT2 _hoverSelection;
@@ -67,20 +69,18 @@ protected:
     void onCursorMoved(const gui::InputDevice& inputDevice) override final;
     void onCursorExited(const gui::InputDevice& inputDevice) override final;
     
-    //virtual BaseView::PopoverType getPopoverType() const;
     void getToolSize(gui::Size& sz);
     void getPopoverSize(Size& sz);
     
     td::UINT2 getPopoverNumberOfItems() const;
     td::UINT2 getHoverSelection(const gui::Point& viewPoint) const;
-//    td::UINT2 getPopoverCurrentSelection() const;    
+ 
     void highlightCurrentSelection(bool bHighlight);
     
     virtual void calcCellSize();
     virtual const td::String& getPopoverLabel(td::UINT2 itemPos) const = 0;
     virtual const td::String& getPopoverToolTip(td::UINT2 itemPos) const = 0;
     
-    //virtual std::tuple<const td::String&, const td::String&> getPopoverLabelAndToolTip(td::UINT2 itemPos) const = 0;
     virtual void drawItem(td::UINT2 itemPos, const gui::Rect& r) = 0;
     virtual void drawToolTipText(td::UINT2 itemPos, const gui::Rect& r);
     void setNumberOfToolTipRows(td::BYTE nToolTipRows);
@@ -88,7 +88,8 @@ protected:
     virtual bool isResizible() const;
     virtual td::UINT2 getRequiredButtonWidth() const;
     
-    PopoverView(){}
+protected:
+    PopoverView(){};
     
 public:
     PopoverView(Type type, td::UINT2 nItems, td::BYTE nCols, td::UINT2 cellWidth, td::UINT2 cellHeight, td::BYTE numberOfToolTipRows, td::BYTE spaceBetweenItems = 2);
@@ -96,6 +97,7 @@ public:
     gui::ObjType getObjType() const override { return ObjType::PopoverView;}
     void styleOnParent(bool bStyleOnParent);
     void setPopoverButton(gui::IPopoverButton* pIBtn);
+    gui::IPopoverButton* getPopoverButton();
     void setCurrentSelection(td::UINT2 currentSelection);
     td::UINT2 getCurrentSelection() const;
     void setLocation(Location location);
@@ -105,6 +107,13 @@ public:
     void keepSymboWHRatio(bool bKeepWHRatio);
     bool isEnabled() const;
     bool isDisabled() const;
+    
+    void setUpdater(IPopoverUpdater* pUpdater);
+    IPopoverUpdater* getUpdater();
+    
+    //IPopoverUpdater should call these methods
+    virtual void setChecked(size_t iPos, bool bChecked);
+    virtual void setDisabled(size_t iPos, bool bDisabled);
 };
 
 } //namespace gui

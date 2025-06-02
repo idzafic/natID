@@ -1,28 +1,40 @@
-<?xml version='1.0'?>
+<?xml version="1.0" encoding="utf-8"?>
 <DevRes>
 	<Translations>
-		<Res id="Properties" tr="Podešenja"/>
-		<Res id="Quit" tr="Kraj"/>	
-		<Res id="pointer" tr="Pokazivač"/>
-		<Res id="pointerTT" tr="Pokazivač/selektor elemenata"/>
-		<Res id="Save" tr="Snimi"/>
-		<Res id="SaveTT" tr="Snimi - sačuvaj sve promjene"/>
-		<Res id="Reload" tr="Učitaj ponovo"/>
-		<Res id="ReloadTT" tr="Učitaj ponovo uz gubitak postojećih promjena"/>
-		<Res id="Delete" tr="Izbriši"/>
-		<Res id="DeleteTT" tr="Izbriši selektirani element"/>
-		<Res id="DelAll" tr="Izbriši sve"/>
-		<Res id="DelAllTT" tr="Izbriši sve elemente"/>
-		<Res id="Insert" tr="Ubaci"/>
-		<Res id="InsertTT" tr="Ubaci iznad selektiranog"/>
-		<Res id="PushBack" tr="Dodaj"/>
-		<Res id="PushBackTT" tr="Dodaj na kraj"/>
-		<Res id="_fdFileType" tr="Tip fajla:"/>
 		<Res id="Ok" tr="Ok"/>
 		<Res id="Cancel" tr="Odustani"/>
 		<Res id="@msgInfo" tr="Informacija"/>
 		<Res id="@msgWarning" tr="Upozorenje"/>
 		<Res id="@msgError" tr="Greška"/>
 		<Res id="@AppMenu" tr="Aplikacioni meni"/>
+		<Res id="@CTX.CloseAllOnLeft" tr="Zatvori sve sa lijeve strane"/>
+		<Res id="@CTX.CloseAllOnRigh" tr="Zatvori sve sa desne strane"/>
+		<Res id="@CTX.CloseAllButThi" tr="Zatvori sve osim ovog"/>
+		<Res id="@CTX.CloseAll" tr="Zatvori sve"/>
+		<Res id="@CTX.TEExport2XML" tr="Eksportuj sadržaj u XML"/>
+		<Res id="@CTX.TEExport2TXT" tr="Eksportuj sadržaj u TXT"/>
+		<Res id="@CTX.TECopy" tr="Kopiraj selektirani red"/>
+		<Res id="@GUI.fdFileType" tr="Tip dokumenta:"/>
+		<Res id="@TE.find:" tr="Traži:"/>
+		<Res id="@TE.replace:" tr="Zamijeni:"/>
+		<Res id="@TE.GoToLine:" tr="Idi na liniju:"/>
+		<Res id="@TE.Info:" tr="Info:"/>
+		<Res id="@TE.LEfindTT" tr="Sadržaj koji se traži"/>
+		<Res id="@TE.replaceTT" tr="Sadržaj koji će biti korišten za zamjenu"/>
+		<Res id="@TE.BtnfindTT" tr="Traži sljedeće pojavljivanje"/>
+		<Res id="@TE.findAllTT" tr="Traži ispočetka nakon dosezanja kraja dokumenta"/>
+		<Res id="@TE.ReplaceTT" tr="Zamijeni sljedeći"/>
+		<Res id="@TE.ReplaceAllTT" tr="Zamijenni sve (od početka do kraja dokumenta)"/>
+		<Res id="@TE.GoToLineTT" tr="Idi na specificiranu liniju u editoru"/>
+		<Res id="@TE.found" tr="Pronađeno:"/>
+		<Res id="@TE.NotFound" tr="Niša nije pronađeno"/>
+		<Res id="@TE.replaced" tr="Zamijenjeno"/>
+		<Res id="@TE.NotReplaced" tr="Ništa nije zamijenjeno"/>
+		<Res id="@TE.replacedAll:" tr="Zamijeni sve:"/>
+		<Res id="@TE.LineNoTooLarge" tr="Broj linije je prevelik"/>
+		<Res id="@TE.OnLine" tr="Pronašao liniju"/>
+		<Res id="@TE.Export2XML" tr="Eksportuj sadržaj u XML"/>
+		<Res id="@TE.Export2TXT" tr="Eksportuj sadržaj u TXT"/>
+		<Res id="@TE.findReplaceDlg" tr="Traži i zamijeni"/>
 	</Translations>
 </DevRes>

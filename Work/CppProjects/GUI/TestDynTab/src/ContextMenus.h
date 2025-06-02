@@ -50,7 +50,7 @@ protected:
     CtxHandleInView _cmHandleInView;
 public:
     ContextMenus()
-    : gui::ContextMenus(2) //one menu
+    : gui::ContextMenus(2) //two menuw
     {
         setItem(0, &_cmRemoveTBViews);
         setItem(1, &_cmHandleInView);

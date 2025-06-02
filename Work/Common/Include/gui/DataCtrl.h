@@ -27,24 +27,26 @@ namespace gui
         td::UINT2 _maxLen;
         td::BYTE _tmpBlockMsg;
         td::BYTE _nDec : 4;
+        td::BYTE _sendingMessagesIsActivated : 2;
         td::BYTE _showThSep : 1;
         td::BYTE _disableMsg : 1;
         td::BYTE _popover : 1;
-        td::BYTE _sendingMessagesIsActivated : 1;
+        
     protected:
         DataCtrl(td::DataType dataType);
         void setAsPopover();
         void setControlID(td::UINT2 ctrlID);
         
         void sendBeginEditingMessage();
+        void sendChangedContentMessage();
         void sendFinishedEditingMessage();
-        void sendEnterPressMessage();
+        void sendEnterPressMessage(bool bCmd);
         void sendSelChangedMessage();
         void sendChkBoxMessage();
         void sendSliderMessage();
         void sendDateTimeMessage();
         void sendColorMessage();
-        bool isSendingMessagesActivated() const;
+        bool isSendingMessagesActivated(td::BYTE level) const;
         virtual const char* getTrailingTxt() const;
     public:
         virtual bool setValue(const td::Variant& val, bool sendMessage=true);

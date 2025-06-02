@@ -106,7 +106,7 @@ protected:
                     //PRIMJER Otvaranja fajla/modela
 //                    pAI->disable();
                     td::String dlgTitle(tr("openF"));
-                    gui::OpenFileDialog::show(this, dlgTitle,  { {tr("Vector graphics format"),"*.getf"}, {tr("Binary format graphics"), "*.bin"}}, actionID, [this](gui::FileDialog* pFileDlg)
+                    gui::OpenFileDialog::show(this, dlgTitle,  { {tr("VGF"),"*.getf"}, {tr("BGF"), "*.bin"}}, actionID, [this](gui::FileDialog* pFileDlg)
                       {
                           auto status = pFileDlg->getStatus();
                           if (status == gui::FileDialog::Status::OK)
@@ -117,10 +117,12 @@ protected:
                               mu::dbgLog("User pressed OK! Selected file to open =%s", fileName.c_str());
                           }
                           else
+                          {
                               mu::dbgLog("User cancelled opening!");
+                          }
                       });
                     
-//                    gui::OpenFileDialog* pFD = new gui::OpenFileDialog(this, dlgTitle,  { {tr("Vector graphics format"),"*.getf"}, {tr("Binary format graphics"), "*.bin"}});
+//                    gui::OpenFileDialog* pFD = new gui::OpenFileDialog(this, dlgTitle,  { {tr("VGF"),"*.getf"}, {tr("BGF"), "*.bin"}});
 ////                    pFD->openModal(&_callBackHandleOpenDlg);
 //                    pFD->open([this](gui::FileDialog* pFileDlg)
 //                    {
@@ -144,7 +146,7 @@ protected:
                     td::String dlgTitle(tr("SaveT"));
                     const char* defaultFileName ="ImeFajla";
                     
-                    gui::SaveFileDialog::show(this, dlgTitle, { {tr("Vector graphics format"),"*.getf"}, {tr("Binary format graphics"), "*.bin"}}, actionID, [this](gui::FileDialog* pFileDlg)
+                    gui::SaveFileDialog::show(this, dlgTitle, { {tr("VGF"),"*.getf"}, {tr("BGF"), "*.bin"}}, actionID, [this](gui::FileDialog* pFileDlg)
                       {
                           auto status = pFileDlg->getStatus();
                           if (status == gui::FileDialog::Status::OK)
@@ -162,8 +164,8 @@ protected:
                           else
                               mu::dbgLog("User cancelled saving!");
                       }, defaultFileName);
-//                    gui::SaveFileDialog* pFD = new gui::SaveFileDialog(this, dlgTitle, { {tr("Vector graphics format"),"*.getf"}, {tr("Binary format graphics"), "*.bin"}}, defaultFileName);
-//                    
+//                    gui::SaveFileDialog* pFD = new gui::SaveFileDialog(this, dlgTitle, { {tr("VGF"),"*.getf"}, {tr("BGF"), "*.bin"}}, defaultFileName);
+//
 //                    pFD->open([this](gui::FileDialog* pFileDlg)
 //                    {
 //                        auto status = pFileDlg->getStatus();

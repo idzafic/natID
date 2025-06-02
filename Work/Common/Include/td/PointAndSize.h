@@ -46,6 +46,14 @@ namespace td
 			size = ps.size;
 		};
 
+        void makeNonNegative()
+        {
+            if (size.width < 0)
+                size.width = 0;
+            if (size.height < 0)
+                size.height = 0;
+        }
+
 
 //		template<class Archive>
 //		void serialize(Archive& ar, [[maybe_unused]] const unsigned int file_version) const

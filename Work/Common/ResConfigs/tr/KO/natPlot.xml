@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevRes>
+	<Translations>
+		<Res id="@Plot_settings" tr="플롯 설정"/>
+		<Res id="@Plot_zatvori" tr="닫기"/>
+		<Res id="@Plot_legendCols" tr="플롯 범례의 열 개수: "/>
+		<Res id="@Plot_marginLeft" tr="왼쪽 여백: "/>
+		<Res id="@Plot_marginRight" tr="오른쪽 여백: "/>
+		<Res id="@Plot_marginTop" tr="상단 여백: "/>
+		<Res id="@Plot_marginBottom" tr="하단 여백: "/>
+		<Res id="@Plot_xSpace" tr="X 축 레이블 간격: "/>
+		<Res id="@Plot_ySpace" tr="Y 축 레이블 간격: "/>
+		<Res id="@Plot_savedImageRes" tr="저장된 이미지 해상도: "/>
+		<Res id="@Plot_height" tr="이미지 높이: "/>
+		<Res id="@Plot_width" tr="이미지 너비"/>
+		<Res id="@Plot_colorDef" tr="정의된 색상:"/>
+		<Res id="@Plot_defLineProps" tr="기본 선 속성"/>
+		<Res id="@Plot_allMode" tr="모든 테마"/>
+		<Res id="@Plot_darkMode" tr="다크 모드"/>
+		<Res id="@Plot_whiteMode" tr="라이트 모드"/>
+		<Res id="@Plot2JPG" tr="JPG 이미지 형식"/>
+		<Res id="@Plot2PNG" tr="PNG 이미지 형식"/>
+		<Res id="@Plot2PDF" tr="PDF 문서 형식"/>
+		<Res id="@Plot2EPS" tr="EPS 이미지 형식"/>
+		<Res id="@Plot2SVG" tr="SVG 이미지 형식"/>
+		<Res id="@Plot2TXT" tr="TXT (텍스트) 형식"/>
+		<Res id="Fig_AllMode" tr="모든 색상 모드"/>
+		<Res id="Fig_DarkMode" tr="다크 색상 모드"/>
+		<Res id="Fig_LightMode" tr="라이트 색상 모드"/>
+		<Res id="Fig_DefLineProps" tr="선 속성"/>
+		<Res id="@Plot_AxisFS" tr="글꼴 크기:"/>
+		<Res id="@Plot_AxisFN" tr="글꼴 이름:"/>
+	</Translations>
+</DevRes>

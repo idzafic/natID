@@ -117,6 +117,8 @@ public:
     
     void initAsSpace();
     
+    void systemColorModeChanged(bool bDarkMode);
+    
     bool hasStrID(const char *strID, size_t nCh) const;
 };
 

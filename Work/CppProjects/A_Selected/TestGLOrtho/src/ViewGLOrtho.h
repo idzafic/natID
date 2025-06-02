@@ -46,14 +46,7 @@ private:
         assert(_colorLoc >= 0);
         if (_colorLoc < 0)
             return false;
-#ifdef DEBUG_GL
-        GLenum error = glGetError();
-        if (error != GL_NO_ERROR)
-        {
-            mu::dbgLog("ERROR! OpenGL error in setupVBO! Error code = %x", error);
-            return false;
-        }
-#endif
+        dbgCheckGLError();
         return true;
     }
     //setup data and send it to GPU
@@ -125,14 +118,7 @@ private:
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindVertexArray(0);
-#ifdef DEBUG_GL
-        GLenum error = glGetError();
-        if (error != GL_NO_ERROR)
-        {
-            mu::dbgLog("ERROR! OpenGL error in setupVBO! Error code = %x", error);
-            assert(false);
-        }
-#endif
+        dbgCheckGLError();
     }
 protected:
     
@@ -150,20 +136,13 @@ protected:
             return;
         }
         setupVBO();
-#ifdef DEBUG_GL
-        GLenum error = glGetError();
-        if (error != GL_NO_ERROR)
-        {
-            mu::dbgLog("OpenGL error: %x", error);
-        }
-#endif
     }
     
     void onDraw(const gui::Rect& rect) override
     {
 //        static int drawNo = 1;
 //        mu::dbgLog("onDraw no = %d", drawNo++);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // Use the shader program
         glUseProgram(_shaderProgram);

@@ -54,14 +54,7 @@ private:
         if (_textureSamplerLoc < 0)
             return false;
 
-#ifdef DEBUG_GL
-        GLenum error = glGetError();
-        if (error != GL_NO_ERROR)
-        {
-            mu::dbgLog("ERROR! OpenGL error in setupVBO! Error code = %x", error);
-            return false;
-        }
-#endif
+        dbgCheckGLError();
         return true;
     }
     
@@ -154,14 +147,7 @@ private:
         // Unbind to prevent accidental modification
         glBindVertexArray(0);
     
-#ifdef DEBUG_GL
-        GLenum error = glGetError();
-        if (error != GL_NO_ERROR)
-        {
-            mu::dbgLog("ERROR! OpenGL error in setupVBO! Error code = %x", error);
-            assert(false);
-        }
-#endif
+        dbgCheckGLError();
     }
 protected:
     
@@ -228,13 +214,7 @@ protected:
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
         
-#ifdef DEBUG_GL
-        GLenum error = glGetError();
-        if (error != GL_NO_ERROR)
-        {
-            mu::dbgLog("OpenGL error: %x", error);
-        }
-#endif
+        dbgCheckGLError();
     }
     
     bool prepareNextFrame() override

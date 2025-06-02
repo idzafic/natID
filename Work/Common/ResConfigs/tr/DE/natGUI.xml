@@ -1,28 +1,40 @@
-<?xml version='1.0'?>
+<?xml version="1.0" encoding="utf-8"?>
 <DevRes>
-	<Translations>
-		<Res id="Properties" tr="Properties"/>
-		<Res id="Quit" tr="Quit"/>		
-		<Res id="pointer" tr="Pointer"/>
-		<Res id="pointerTT" tr="Pointer/selector of other elements"/>
-		<Res id="Save" tr="Save"/>
-		<Res id="SaveTT" tr="Save the document"/>
-		<Res id="Reload" tr="Reload"/>
-		<Res id="ReloadTT" tr="Reload all elements with loosing changes"/>
-		<Res id="Delete" tr="Delete"/>
-		<Res id="DeleteTT" tr="Delete selected element"/>
-		<Res id="DelAll" tr="Delete all"/>
-		<Res id="DelAllTT" tr="Delete all content"/>
-		<Res id="Insert" tr="Insert"/>
-		<Res id="InsertTT" tr="Insert above selected row"/>
-		<Res id="PushBack" tr="Push back"/>
-		<Res id="PushBackTT" tr="Add it as last element"/>
-		<Res id="_fdFileType" tr="Dateityp:"/>
-		<Res id="Ok" tr="Ok"/>
-		<Res id="Cancel" tr="Absagen"/>
-		<Res id="@msgInfo" tr="Auskunft"/>
-		<Res id="@msgWarning" tr="Warnung"/>
-		<Res id="@msgError" tr="Fehler"/>
-		<Res id="@AppMenu" tr="App menu"/>
-	</Translations>
+    <Translations>
+        <Res id="@GUI.fdFileType" tr="Dateityp:"/>
+        <Res id="Ok" tr="Ok"/>
+        <Res id="Cancel" tr="Abbrechen"/>
+        <Res id="@msgInfo" tr="Information"/>
+        <Res id="@msgWarning" tr="Warnung"/>
+        <Res id="@msgError" tr="Fehler"/>
+        <Res id="@AppMenu" tr="Anwendungsmenü"/>
+        <Res id="@CTX.CloseAllOnLeft" tr="Alle links schließen"/>
+        <Res id="@CTX.CloseAllOnRigh" tr="Alle rechts schließen"/>
+        <Res id="@CTX.CloseAllButThi" tr="Alle außer diesem schließen"/>
+        <Res id="@CTX.CloseAll" tr="Alle schließen"/>
+        <Res id="@CTX.TEExport2XML" tr="Inhalt nach XML exportieren"/>
+        <Res id="@CTX.TEExport2TXT" tr="Inhalt nach TXT exportieren"/>
+        <Res id="@CTX.TECopy" tr="Die ausgewählte Zeile kopieren"/>
+        <Res id="@TE.find:" tr="Suchen:"/>
+        <Res id="@TE.replace:" tr="Ersetzen:"/>
+        <Res id="@TE.GoToLine:" tr="Gehe zu Zeile:"/>
+        <Res id="@TE.Info:" tr="Info:"/>
+        <Res id="@TE.LEfindTT" tr="Zu suchender Inhalt"/>
+        <Res id="@TE.BtnfindTT" tr="Nächsten suchen"/>
+        <Res id="@TE.replaceTT" tr="Inhalt für die Ersetzung"/>
+        <Res id="@TE.findAllTT" tr="Suche von Anfang an nach Erreichen der letzten Position"/>
+        <Res id="@TE.ReplaceTT" tr="Nächsten ersetzen"/>
+        <Res id="@TE.ReplaceAllTT" tr="Alle ersetzen (vom Anfang bis zum Ende des Dokuments)"/>
+        <Res id="@TE.GoToLineTT" tr="Gehe zur angegebenen Zeile im Editor"/>
+        <Res id="@TE.found" tr="Gefunden:"/>
+        <Res id="@TE.NotFound" tr="Nichts gefunden"/>
+        <Res id="@TE.replaced" tr="Ersetzt"/>
+        <Res id="@TE.NotReplaced" tr="Nichts ersetzt"/>
+        <Res id="@TE.replacedAll:" tr="Alle ersetzen:"/>
+        <Res id="@TE.LineNoTooLarge" tr="Zeilennummer ist zu groß"/>
+        <Res id="@TE.OnLine" tr="Zeilennummer gefunden"/>
+        <Res id="@TE.Export2XML" tr="Inhalt nach XML exportieren"/>
+        <Res id="@TE.Export2TXT" tr="Inhalt nach TXT exportieren"/>
+        <Res id="@TE.findReplaceDlg" tr="Suchen und ersetzen"/>
+    </Translations>
 </DevRes>

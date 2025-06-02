@@ -6,19 +6,27 @@
 #include <gui/Shape.h>
 #include <gui/IProperty.h>
 #include <gui/Properties.h>
+#include <gui/PropertyEditor.h>
 #include "../model/IShape2D.h"
 
 
 class DefaultSettings : public gui::IProperty
 {
-    enum class PropID : td::UINT4 {LineWidth=100, RectWidth, RectHeight, CircRadius, RoundedRectRadius, Attribs= 200, FillColor, LineColor, LinePattern, TestBool};
+    enum class PropID : td::UINT4 {LineWidth=100, RectWidth, RectHeight, CircRadius, RoundedRectRadius, Attribs= 200, FillColor, LineColor, LinePattern, TestBool, NoOfRects=300, NoOfRRects, NoOfCircles};
 protected:
+    gui::PropertyEditor* _propEditor = nullptr;
     float _lineWidth = 2;
     float _rectWidth = 50;
     float _rectHeight = 20;
     float _circRadius = 25;
     float _roundedRectRadius = 5;
+    
+    td::UINT4 _noOfRects = 0; //number of rects
+    td::UINT4 _noOfRRects = 0; //number of rounded rects
+    td::UINT4 _noOfCircles = 0; //number of circles
+    
     bool _testBool = true;
+    
     gui::Shape::Attribs _attribs = gui::Shape::Attribs::LineAndFill;
     td::ColorID _lineColor = td::ColorID::Yellow;
     td::ColorID _fillColor = td::ColorID::Blue;
@@ -39,18 +47,51 @@ public:
     DefaultSettings()
     {
     }
+    
+    void setNoOfShapes(td::UINT4 noOfShapes, IShape2D::Type shapeType, bool updateViewer)
+    {
+        switch (shapeType)
+        {
+            case IShape2D::Type::Rect:
+                _noOfRects = noOfShapes;
+                break;
+            case IShape2D::Type::RoundRect:
+                _noOfRRects = noOfShapes;
+                break;
+            case IShape2D::Type::Circle:
+                _noOfCircles = noOfShapes;
+                break;
+            default:
+                assert(false);
+        }
+        
+        if (updateViewer)
+        {
+            if (_propEditor)
+                _propEditor->updateValues();
+        }
+    }
+
+    void setPropViewer(gui::PropertyEditor* propEditor)
+    {
+        _propEditor = propEditor;
+    }
+    
     float getLineWidth() const
     {
         return _lineWidth;
     }
+    
     float getRectWidth() const
     {
         return _rectWidth;
     }
+    
     float getRectHeight() const
     {
         return _rectHeight;
     }
+    
     float getCircleRadius() const
     {
         return _circRadius;
@@ -82,8 +123,17 @@ public:
     }
     
     //IProperty
-    virtual void getValues(gui::PropertyValues& propValues) const
+    void getValues(gui::PropertyValues& propValues) const override
     {
+        td::Variant noOfRects(_noOfRects);
+        setValueByKey(propValues, PropID::NoOfRects, noOfRects);
+        
+        td::Variant noOfRRects(_noOfRRects);
+        setValueByKey(propValues, PropID::NoOfRRects, noOfRRects);
+        
+        td::Variant noOfCircles(_noOfCircles);
+        setValueByKey(propValues, PropID::NoOfCircles, noOfCircles);
+        
         td::Variant lineWidth(_lineWidth);
         setValueByKey(propValues, PropID::LineWidth, lineWidth);
         
@@ -116,7 +166,7 @@ public:
         setValueByKey(propValues, PropID::TestBool, testBool);
     }
     
-    virtual void setValues(gui::PropertyValues& propValues)
+    void setValues(gui::PropertyValues& propValues) override
     {
         td::Variant lineWidth = getValueByKey(propValues, PropID::LineWidth);
         lineWidth.getValue(_lineWidth);
@@ -152,7 +202,7 @@ public:
         
     }
     
-    virtual void setValue(td::UINT4 key, gui::PropertyValues& propValues)
+    void setValue(td::UINT4 key, gui::PropertyValues& propValues) override
     {
         auto propValue = propValues.getLastChangedValue();
         PropID propID = (PropID) key;
@@ -183,6 +233,8 @@ public:
             case PropID::LinePattern: propValue.getValue(_linePattern); break;
             case PropID::TestBool: propValue.getValue(_testBool); break;
                 
+                //no need to make handler for read only properties
+                
             default:
             {
                 assert(false);
@@ -192,10 +244,45 @@ public:
     
     void createPropertiesForEditor(gui::Properties& properties) const
     {
-        properties.reserve(12);
+        properties.reserve(16);
         {
             using namespace gui;
-            //first group
+            
+            //first group:Info - read only props
+            {
+                td::String lbl(tr("Info"));
+                auto& prop = properties.push_back();
+                prop.setGroup(lbl);
+            }
+            
+            {
+                td::String lbl(tr("Rect#"));
+                td::Variant var(td::uint4);
+                td::String toolTip(tr("Rect#TT"));
+                auto& prop = properties.push_back();
+                prop.set((td::UINT4) PropID::NoOfRects, lbl, var, toolTip);
+                prop.setReadOnly();
+            }
+            
+            {
+                td::String lbl(tr("RRect#"));
+                td::Variant var(td::uint4);
+                td::String toolTip(tr("RRect#TT"));
+                auto& prop = properties.push_back();
+                prop.set((td::UINT4) PropID::NoOfRRects, lbl, var, toolTip);
+                prop.setReadOnly();
+            }
+            
+            {
+                td::String lbl(tr("Circle#"));
+                td::Variant var(td::uint4);
+                td::String toolTip(tr("Circle#TT"));
+                auto& prop = properties.push_back();
+                prop.set((td::UINT4) PropID::NoOfCircles, lbl, var, toolTip);
+                prop.setReadOnly();
+            }
+            
+            //second group
             {
                 td::String lbl(tr("GeomData"));
                 auto& prop = properties.push_back();
@@ -251,7 +338,7 @@ public:
                 prop.setDecimalPointsAndThSep(1, true);
             }
             
-            //second group
+            //third group
             {
                 td::String lbl(tr("VisualData"));
                 auto& prop = properties.push_back();
@@ -296,8 +383,6 @@ public:
                 prop.set((td::UINT4) PropID::TestBool, lbl, var);
             }
         }
-        
-        
-        assert(properties.size() == 12);
+        assert(properties.size() == 16);
     }
 };

@@ -61,7 +61,7 @@ int main()
 
 		const rnd::Perlin perlin(seed);
         //create BMP image and store it on RAMDisk
-        cnt::BMPImage image(2*perlin.size(), 2*perlin.size());
+        cnt::BMPImage image(4*perlin.size(), 4*perlin.size());
         
 		const double fx = image.width() / frequency;
 		const double fy = image.height() / frequency;
@@ -70,8 +70,10 @@ int main()
 		{
 			for (td::UINT4 x = 0; x < image.width(); ++x)
 			{
-				const cnt::BMPImage::RGB color(perlin.accumulatedOctaveNoise2D_0_1(x / fx, y / fy, octaves));
-				image.set(x, y, color);
+                //generate perlin noise at x,y point
+				float perlinNoiseAtXandY = perlin.accumulatedOctaveNoise2D_0_1(x / fx, y / fy, octaves);
+                //put it in image (just for visualization purposes)
+				image.set(x, y, perlinNoiseAtXandY);
 			}
 		}
 
@@ -82,11 +84,12 @@ int main()
         ss << "R:/";
 #endif
         
-		ss << 'f' << frequency << 'o' << octaves << '_' << seed << ".bmp";
+		ss << 'f' << frequency << 'o' << octaves << '_' << seed << ".png";
         
         td::String str = ss.toString();
 
-		if (image.save(str))
+        //if (image.save(str))
+        if (image.save(str, cnt::BMPImage::Type::PNGr)) //save single channel
 		{
             std::cout << "...saved \"" << str << "\"" << std::endl;
 		}
@@ -98,7 +101,8 @@ int main()
 		char c;
 		std::cout << "To create another image enter [y], [y/n]?:";
 		std::cin >> c;
-		if (c != 'y') break;
+		if (c != 'y')
+            break;
 		std::cout << std::endl;
 	}
 }

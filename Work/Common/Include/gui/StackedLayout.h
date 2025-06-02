@@ -30,6 +30,9 @@ namespace gui
         void measure(CellInfo& cell) override;
         void reMeasure(CellInfo& cell) override;
         virtual void updateCell(CellInfo& cell, const CellInfo& ci, int iPos) const;
+        bool freeze() override;
+        void unFreeze() override;
+        bool onActionItem(gui::ActionItemDescriptor& aiDesc) override;
         
         td::BYTE getXMargin() const;
         td::BYTE getYMargin() const;        

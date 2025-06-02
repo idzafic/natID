@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevRes>
+	<Translations>
+		<Res id="@GUI.fdFileType" tr="ファイルタイプ:"/>
+		<Res id="Ok" tr="OK"/>
+		<Res id="Cancel" tr="キャンセル"/>
+		<Res id="@msgInfo" tr="情報"/>
+		<Res id="@msgWarning" tr="警告"/>
+		<Res id="@msgError" tr="エラー"/>
+		<Res id="@AppMenu" tr="アプリケーションメニュー"/>
+		<Res id="@CTX.CloseAllOnLeft" tr="左側をすべて閉じる"/>
+		<Res id="@CTX.CloseAllOnRigh" tr="右側をすべて閉じる"/>
+		<Res id="@CTX.CloseAllButThi" tr="これ以外をすべて閉じる"/>
+		<Res id="@CTX.CloseAll" tr="すべて閉じる"/>
+		<Res id="@CTX.TEExport2XML" tr="コンテンツをXMLにエクスポート"/>
+		<Res id="@CTX.TEExport2TXT" tr="コンテンツをTXTにエクスポート"/>
+		<Res id="@CTX.TECopy" tr="選択行をコピー"/>
+		<Res id="@TE.find:" tr="検索:"/>
+		<Res id="@TE.replace:" tr="置換:"/>
+		<Res id="@TE.GoToLine:" tr="行へ移動:"/>
+		<Res id="@TE.Info:" tr="情報:"/>
+		<Res id="@TE.LEfindTT" tr="検索するコンテンツ"/>
+		<Res id="@TE.BtnfindTT" tr="次を検索"/>
+		<Res id="@TE.replaceTT" tr="置換に使用するコンテンツ"/>
+		<Res id="@TE.findAllTT" tr="最後の位置に到達後、最初から再検索"/>
+		<Res id="@TE.ReplaceTT" tr="次を置換"/>
+		<Res id="@TE.ReplaceAllTT" tr="すべて置換 (ドキュメントの最初から最後まで)"/>
+		<Res id="@TE.GoToLineTT" tr="エディタで指定行へ移動"/>
+		<Res id="@TE.found" tr="検出:"/>
+		<Res id="@TE.NotFound" tr="見つかりませんでした"/>
+		<Res id="@TE.replaced" tr="置換しました"/>
+		<Res id="@TE.NotReplaced" tr="置換されませんでした"/>
+		<Res id="@TE.replacedAll:" tr="すべて置換:"/>
+		<Res id="@TE.LineNoTooLarge" tr="行番号が大きすぎます"/>
+		<Res id="@TE.OnLine" tr="検出された行番号"/>
+		<Res id="@TE.Export2XML" tr="コンテンツをXMLにエクスポート"/>
+		<Res id="@TE.Export2TXT" tr="コンテンツをTXTにエクスポート"/>
+		<Res id="@TE.findReplaceDlg" tr="検索と置換"/>
+	</Translations>
+</DevRes>

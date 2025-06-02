@@ -11,5 +11,5 @@
 
 namespace mu
 {
-	extern MAINUTILS_API const td::UTF8 __zeroBuffer[4];
+	extern MAINUTILS_API const td::UTF8 __zeroBuffer[8];
 };

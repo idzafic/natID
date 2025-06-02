@@ -2,16 +2,14 @@
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(MY_BIN "${HOME_ROOT}/other_bin")
-set(MY_LIB "${MY_BIN}/myLib")
-
 if (WIN32)
     add_compile_options(/MP)
-	set(CMAKE_SKIP_INSTALL_ALL_DEPENDENCY True)
-	set(CMAKE_SKIP_PACKAGE_ALL_DEPENDENCY True)
 endif()
 
 set(CMAKE_SUPPRESS_REGENERATION True)
+
+set(MY_BIN ${HOME_ROOT}/other_bin)
+set(MY_LIB ${MY_BIN}/myLib)
 
 if (WIN32)
     #output folder - RamDisk
@@ -24,27 +22,63 @@ endif()
 #compile folder is on RAMDisk
 set(CMAKE_BINARY_DIR ${RAM_DISK}/Out)
 
-#set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-#set_property(TARGET MyFile PROPERTY FOLDER "Scripts")
-
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configuration types" FORCE)
 if (APPLE)
-    #set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configuration types" FORCE)
-    set(CMAKE_OSX_ARCHITECTURES "x86_64" CACHE STRING "Mac OS X build architectures" FORCE)
+	set(CMAKE_OSX_ARCHITECTURES "${CMAKE_HOST_SYSTEM_PROCESSOR}" CACHE STRING "Mac OS X build architectures" FORCE)
     set(CMAKE_OSX_DEPLOYMENT_TARGET "12.3" CACHE STRING "Minimum OS X deployment version" FORCE)
 	set(CMAKE_CXX_FLAGS_DEBUG "-g")
 	set(CMAKE_CXX_FLAGS_RELEASE "-O3")
-    #set(CMAKE_INSTALL_PREFIX "${MY_BIN}" CACHE STRING "Install location of my project" FORCE)
+	set(CMAKE_VERBOSE_MAKEFILE ON)
 elseif (WIN32)
 	#dodati opcije za MS Visual Studio
+	set(CMAKE_CXX_FLAGS_RELEASE "/O2 /Ot /Ob2")
+	set(CMAKE_C_FLAGS_RELEASE "/O2")
+	# Define minimum supported Windows version (Windows 10, later)
+	add_compile_definitions(_WIN32_WINNT=0x0A00)
+	add_compile_definitions(WINVER=0x0A00)
+	add_compile_definitions(NTDDI_VERSION=0x0A000008)  #NTDDI_WIN10_19H2
+
+	#QtCreator:
+	if(CMAKE_VERSION VERSION_GREATER "3.12")
+    	include(ProcessorCount)
+    	ProcessorCount(NCores)
+    	if(NOT NCores EQUAL 0)
+        	set(CMAKE_BUILD_PARALLEL_LEVEL ${NCores})
+			message(STATUS "Detected ${NCores} CPU cores which will be used for compilation..")
+			if (MSVC)
+				set(CMAKE_BUILD_OPTIONS "/maxcpucount:${NCores}")
+				message(STATUS "Building with ${NCores} parallel threads on Visual Studio....")
+			endif()
+		else()
+			message(WARNING "WARNING! Unable to detect number of CPU cores, defaulting to 8 cores.")
+			set(CMAKE_BUILD_PARALLEL_LEVEL 8)
+			if (MSVC)
+				set(CMAKE_BUILD_OPTIONS "/maxcpucount:8")
+				message(STATUS "Building with 8 parallel threads on Visual Studio")
+			endif()
+    	endif()
+	endif()
 else()
+	#Linux
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+
+	set(CMAKE_EXE_LINKER_FLAGS "-fuse-ld=gold")
+	set(ENV{LD_LIBRARY_PATH} "/lib/x86_64-linux-gnu/:$ENV{LD_LIBRARY_PATH}")
+
+	if(CMAKE_VERSION VERSION_GREATER "3.12")
+		include(ProcessorCount)
+		ProcessorCount(NCores)
+		if(NOT NCores EQUAL 0)
+			set(CMAKE_BUILD_PARALLEL_LEVEL ${NCores})
+			message(STATUS "Detected ${NCores} CPU cores which will be used for compilation..")
+		else()
+			message(WARNING "Unable to detect number of CPU cores, defaulting to 4 cores.")
+			set(CMAKE_BUILD_PARALLEL_LEVEL 4)
+		endif()
+	endif()
+
 endif()
-
-#sepcify C++ warning and optimization flags 
-#set(CMAKE_CXX_FLAGS "-Wall -mavx2 -mfma")
-
 
 #Output folder-i za executables i dlls
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/${SOLUTION_NAME}/Debug)
@@ -78,6 +112,7 @@ endif()
 
 include_directories(${MY_INC})
 
+#MU_WINDOWS, MU_MACOS, MU_LINUX, MU_64BIT, MU_32BIT
 if (WIN32)
 	add_compile_definitions(MU_WINDOWS)
 elseif(APPLE)
@@ -91,6 +126,17 @@ if( CMAKE_SIZEOF_VOID_P EQUAL 4 )
 else()
 	add_compile_definitions(MU_64BIT)
 endif()
+
+# Detect ARM architecture
+if("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "arm")
+    message(STATUS "ARM Architecture Detected in Common.cmake")
+	add_compile_definitions(MU_ARM)
+    # Your ARM-specific configuration here
+else()
+	message(STATUS "x86 Architecture Detected in Common.cmake")
+	add_compile_definitions(MU_X86)
+endif()
+
 
 add_compile_definitions("$<$<CONFIG:Release>:MU_RELEASE>$<$<CONFIG:Debug>:MU_DEBUG>")
 
@@ -315,4 +361,3 @@ function(setAppIcon targetID currPath)
 		target_sources(${targetID}  PRIVATE ${APP_ICON_MACOS})
 	endif()
 endfunction()
-

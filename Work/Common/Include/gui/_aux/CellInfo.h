@@ -32,7 +32,7 @@ public:
     td::BYTE _rowSpan : 1; //set if cell is spanned over several rows
     td::BYTE _colSpan : 1; //set if cell is spanned over several cols
     //td::BYTE spanRedistributed: 1; //set if initial redistribution was done
-    td::BYTE freezed : 1;
+    td::BYTE frozen : 1;
     td::BYTE keepAspectRatio : 1;
 //    td::BYTE handledInitialAppearance : 1;
     //td::BYTE autoResize: 1; //

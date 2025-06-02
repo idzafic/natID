@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<DevRes>
+    <Translations>
+        <Res id="appTitle" tr="Démineur"/>
+        <Res id="settings" tr="Paramètres"/>
+        <Res id="settingsTT" tr="Ajustez l'apparence et la langue. La langue nécessite un redémarrage de l'application."/>
+        <Res id="theApp" tr="Application"/>
+        <Res id="game" tr="Jeu"/>
+        <Res id="Level" tr="Niveau"/>
+        <Res id="Easy" tr="Facile"/>
+        <Res id="Medium" tr="Moyen"/>
+        <Res id="Hard" tr="Difficile"/>
+        <Res id="Done" tr="La quête des bombes est terminée."/>
+        <Res id="Dead" tr="Explosion ! Essayez à nouveau !"/>
+        <Res id="AllOK" tr="EXCELLENT ! Le champ de mines est nettoyé !"/>
+        <Res id="Bombs:" tr="Mines :"/>
+        <Res id="Flags:" tr="Drapeaux :"/>
+        <Res id="Size:" tr="Taille :"/>
+        <Res id="ClStart" tr="Cliquez sur n'importe quelle case pour commencer"/>
+        <Res id="EmptyFieldClicked" tr="Clic sur une case vide. Pas besoin de ça..."/>
+        <Res id="BulkClear" tr="Plus d'une case dégagée."/>
+        <Res id="ClearedField" tr="Une case dégagée. Une mine est proche."/>
+        <Res id="FlagRemoved" tr="Drapeau (marque) retiré."/>
+        <Res id="FlagAdded" tr="Drapeau de mine placé sur une case."/>
+        <Res id="FlagFailed" tr="Pas besoin de placer un marqueur sur une zone dégagée !"/>
+        
+        <Res id="dlgSettings" tr="Paramètres"/>
+        <Res id="lblLang" tr="Langue actuelle de l'application :"/>
+        <Res id="lblLang2" tr="Langue de l'application après le redémarrage de l'application :"/>
+        <Res id="chbTBIcsAndLbls" tr="Afficher les étiquettes de la barre d'outils."/>
+        <Res id="chbUseCombo" tr="Utiliser ComboBox pour la sélection du niveau (difficulté)."/>
+        <Res id="theme" tr="Thème :"/>
+        <Res id="showStatusBar" tr="Afficher la barre d'état"/>
+        <Res id="RestartRequired" tr="Redémarrez l'application"/>
+        <Res id="RestartRequiredInfo" tr="Certains paramètres modifiés nécessitent un redémarrage de l'application pour prendre effet"/>
+        <Res id="Restart" tr="Redémarrer"/>
+        <Res id="DoNoRestart" tr="Ne pas redémarrer"/>
+
+    </Translations>
+</DevRes>

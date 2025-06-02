@@ -15,7 +15,7 @@ namespace sc
 class ISolutionBuffer
 {
 public:
-    enum class Status {Error, UserStop, SuccessfullyCompleted};
+    enum class Status {Error, UserStop, SuccessfullyCompleted, BatchCompleted};
     
     virtual void put() = 0;
     virtual void finalize(Status status) = 0;

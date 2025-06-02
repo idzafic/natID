@@ -14,6 +14,7 @@
 #pragma once
 #include <gui/Canvas.h>
 #include <gui/Shape.h>
+#include <gui/ISwitch.h>
 
 namespace gui
 {
@@ -24,12 +25,13 @@ class NATGUI_API SplitterCell : public Canvas
 {
     friend class SplitterLayout;
 public:
-    enum class Status : unsigned char {Minimized, Normal};
+    enum class Status : unsigned char {Minimized=0, Normal};
 private:
     void initSymbols();
 protected:
     SplitterLayout* _pSplitter = nullptr;
     NatString _toolTipStr = nullptr;
+    ISwitchState* _pSwitchStateUpdater = nullptr;
     Shape _minimizedArea; //background
     //Path _minimizedBorder; //border
     Shape _minizedSymbol1;
@@ -44,11 +46,15 @@ protected:
     
     void onDraw(const gui::Rect& rect) override;
     
+    void toggle();
+    
     void onPrimaryButtonPressed(const gui::InputDevice& inputDevice) override;
     void onPrimaryButtonReleased(const gui::InputDevice& inputDevice) override;
 //    virtual void onCursorEntered(const gui::InputDevice& inputDevice);
     void onCursorDragged(const gui::InputDevice& inputDevice) override;
 //    virtual void onCursorExited(const gui::InputDevice& inputDevice);
+    
+    void setUpdater(ISwitchState* pUpdater);
     
 public:
     SplitterCell(SplitterLayout* pSplitter);

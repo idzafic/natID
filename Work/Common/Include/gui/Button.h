@@ -42,11 +42,12 @@ protected:
     void measure(CellInfo&) override;
     void reMeasure(CellInfo&) override;    
 public:
+    Button(); //creates txt button with empty title
     Button(const char* lbl);
     Button(const td::String& lbl);
     Button(const td::String& lbl, const td::String& toolTip);
     Button(const gui::Image* img, const td::String& toolTip = td::String());
-    ~Button();
+//    ~Button();
     
     gui::ObjType getObjType() const override { return ObjType::Button;}
     
@@ -57,6 +58,8 @@ public:
     void setImage(const gui::Image* img);
     void setFlat();
     void setCircular();
+    void setToMinSize();
+    void setChecked(bool bCheck);
     
     Type getType() const;
     ContentType getContentType() const;

@@ -124,10 +124,15 @@ namespace td
 
 		char* buffer = nullptr;
 	public:
-		typedef T_CHAR* iterator;
-		typedef const T_CHAR* const_iterator;
-		typedef T_CHAR CHAR_TYPE;
+		using iterator = T_CHAR*;
+		using const_iterator = const T_CHAR*;
+		using CHAR_TYPE = T_CHAR;
 
+        constexpr bool isExtern() const
+        {
+            return EXTERN_ALLOCATOR;
+        }
+        
 		inline iterator begin()
 		{
 			return (iterator) getBegin();
@@ -145,7 +150,7 @@ namespace td
 
 		inline td::UINT4 getNumberOfRefs() const
 		{
-			if (SPACE_FOR_SIZE != 4)
+            if constexpr (SPACE_FOR_SIZE != 4)
 				return 0;
 
 			if (!buffer)
@@ -218,13 +223,36 @@ namespace td
             }
             setTrailingZero(byteLen + SPACE_FOR_SIZE);
         }
+        
+        inline void setRefsToMaximum()
+        {
+            if constexpr (EXTERN_ALLOCATOR)
+                return;
+            
+            if constexpr (SPACE_FOR_SIZE != 4)
+                return; //has to copy
+            
+            if (!buffer)
+                return;
+            
+            td::UINT4* pUINT4 = (td::UINT4*) buffer;
+            td::UINT4 nRefs = (*pUINT4) >> TD_STR_SHIFT_REF;
+            if (nRefs == TD_STR_MAX_REF)
+                return; //string has to be copied
+            nRefs = TD_STR_MAX_REF;
+            assert(nRefs <= 15);
+            nRefs <<= TD_STR_SHIFT_REF;
+            *pUINT4 &= TD_STR_CLEAN_REF;
+            *pUINT4 |= nRefs;
+        }
 
 		//if false, string has to be copied
 		inline bool addRef()
 		{
-			if (EXTERN_ALLOCATOR)
+			if constexpr (EXTERN_ALLOCATOR)
 				return true;
-			if (SPACE_FOR_SIZE != 4)
+            
+			if constexpr (SPACE_FOR_SIZE != 4)
 				return false; //has to copy
 			
 			if (!buffer)
@@ -255,10 +283,10 @@ namespace td
 		//if true, string can be deleted
 		inline bool relRef()
 		{
-			if (EXTERN_ALLOCATOR)
+			if constexpr (EXTERN_ALLOCATOR)
 				return false;
 
-			if (SPACE_FOR_SIZE != 4)
+			if constexpr (SPACE_FOR_SIZE != 4)
 				return true; //has to delete
 
 			if (!buffer)
@@ -278,7 +306,7 @@ namespace td
 
 		inline void cleanBuffer()
 		{
-			if (!EXTERN_ALLOCATOR)
+			if constexpr (!EXTERN_ALLOCATOR)
 			{
 				if (buffer)
 				{
@@ -294,7 +322,7 @@ namespace td
 
 		T_CHAR getLastChar() const
 		{
-			td::UINT4 len = length();
+            td::UINT4 len = unitLength();
 			if (len > 0)
 				return getAt(len - 1);
 			return (T_CHAR)0;
@@ -346,7 +374,7 @@ namespace td
 
 		bool isInUpperCase() const
 		{
-			td::UINT4 nLen = length();
+            td::UINT4 nLen = unitLength();
 			if (nLen == 0)
 				return false;
 			const T_CHAR* pStr = c_str();
@@ -361,7 +389,7 @@ namespace td
 
 		bool isInLowerCase() const
 		{
-			td::UINT4 nLen = length();
+            td::UINT4 nLen = unitLength();
 			if (nLen == 0)
 				return false;
 			const T_CHAR* pStr = c_str();
@@ -376,7 +404,7 @@ namespace td
 
 		td::UINT4 isAnyUpperCase() const
 		{
-			td::UINT4 nLen = length();
+            td::UINT4 nLen = unitLength();
 			if (nLen == 0)
 				return false;
 			const T_CHAR* pStr = c_str();
@@ -391,7 +419,7 @@ namespace td
 
 		td::UINT4 isAnyLowerCase() const
 		{
-			td::UINT4 nLen = length();
+            td::UINT4 nLen = unitLength();
 			if (nLen == 0)
 				return false;
 			const T_CHAR* pStr = c_str();
@@ -411,7 +439,7 @@ namespace td
 
 		bool isNumeric() const
 		{
-			td::UINT4 nLen = length();
+            td::UINT4 nLen = unitLength();
 			if (nLen == 0)
 				return false;
 
@@ -442,11 +470,11 @@ namespace td
 			{
 				int nToReserve = size + SPACE_FOR_SIZE;
 
-				if (Encoding == EncodingUTF8)
+				if constexpr (Encoding == EncodingUTF8)
 				{
 					nToReserve += 1;
 				}
-				else if (Encoding == EncodingUTF16)
+				else if constexpr (Encoding == EncodingUTF16)
 				{
 					nToReserve += 2;
 				}
@@ -457,18 +485,18 @@ namespace td
 
 				char* pBuffer = new char[nToReserve];
 
-				if (Encoding == EncodingUTF8)
+				if constexpr (Encoding == EncodingUTF8)
 				{
 					char* pZero = pBuffer + nToReserve - 1;
 					*pZero = (char)0;
 				}
-				else if (Encoding == EncodingUTF16)
+				else if constexpr (Encoding == EncodingUTF16)
 				{
 					char* pZero = pBuffer + nToReserve - 2;
 					td::WORD* pZ = (td::WORD*) pZero;
 					*pZ = (td::WORD)0;					
 				}
-				else
+				else if constexpr (Encoding == EncodingUTF32)
 				{
 					//32
 					char* pZero = pBuffer + nToReserve - 4;
@@ -476,15 +504,15 @@ namespace td
 					*pZ = (td::UINT4)0;					
 				}
 
-				if (SPACE_FOR_SIZE == 2)
+				if constexpr (SPACE_FOR_SIZE == 2)
 				{
 					td::WORD* pBegin = (td::WORD*) pBuffer;
 					*pBegin = (td::WORD) size;
 				}
-				else if (SPACE_FOR_SIZE == 4)
+				else if constexpr (SPACE_FOR_SIZE == 4)
 				{
-					td::INT4* pBegin = (td::INT4*) pBuffer;
-					*pBegin = (td::INT4) size;
+					td::UINT4* pBegin = (td::UINT4*) pBuffer;
+					*pBegin = (td::UINT4) size;
 				}
 
 				return pBuffer;
@@ -494,18 +522,38 @@ namespace td
 
 		inline void resetSize(size_t size)
 		{
+            if (!buffer)
+            {
+                if (size == 0)
+                    return;
+            }
+            
 			assert(buffer);
 
-			if (SPACE_FOR_SIZE == 2)
+			if constexpr (SPACE_FOR_SIZE == 2)
 			{
 				td::WORD* pBegin = (td::WORD*) buffer;
 				td::WORD wsize = (td::WORD) size;
 				*pBegin = wsize;
 			}
-			else if (SPACE_FOR_SIZE == 4)
+			else if constexpr(SPACE_FOR_SIZE == 4)
 			{
-				td::INT4* pBegin = (td::INT4*) buffer;
-				*pBegin = (td::INT4) size;
+                td::UINT4* pUINT4 = (td::UINT4*) buffer;
+                td::UINT4 nRefs = (*pUINT4) >> TD_STR_SHIFT_REF;
+                assert(nRefs <= 15);
+                
+                if (nRefs == 0)
+                {
+                    td::UINT4 sz = (td::UINT4) size;
+                    sz &= TD_STR_CLEAN_REF;
+                    *pUINT4 = sz;
+                    return;
+                }
+                nRefs <<= TD_STR_SHIFT_REF;
+                *pUINT4 &= TD_STR_EXTRACT_REF;
+                td::UINT4 sz = (td::UINT4) size;
+                sz &= TD_STR_CLEAN_REF;
+                *pUINT4 |= sz;
 			}
 		}
 		public:
@@ -513,7 +561,7 @@ namespace td
 			{
 				if (getNoOfRefs() != 0)
 					return false;				
-				size_t currSize = length();
+                size_t currSize = unitLength();
 				if (currSize < deltaSize)
 					return false;
 				currSize -= deltaSize;
@@ -534,18 +582,18 @@ namespace td
 
 		inline void setTrailingZero(size_t nToReserve)
 		{
-			if (Encoding == EncodingUTF8)
+			if constexpr (Encoding == EncodingUTF8)
 			{
 				char* pZero = buffer + nToReserve - 1;
 				*pZero = (char)0;
 			}
-			else if (Encoding == EncodingUTF16)
+			else if constexpr (Encoding == EncodingUTF16)
 			{
 				char* pZero = buffer + nToReserve - 2;
 				td::WORD* pZ = (td::WORD*) pZero;
 				*pZ = (td::WORD)0;
 			}
-			else
+			else if constexpr (Encoding == EncodingUTF32)
 			{
 				//32
 				char* pZero = buffer + nToReserve - 4;
@@ -569,20 +617,31 @@ namespace td
 				size_t nToReserve = size + SPACE_FOR_SIZE;
 
 				//add space for zero character
-				if (Encoding == EncodingUTF8)
+				if constexpr (Encoding == EncodingUTF8)
 				{
 					nToReserve += 1;
 				}
-				else if (Encoding == EncodingUTF16)
+				else if constexpr (Encoding == EncodingUTF16)
 				{
 					nToReserve += 2;
 				}
-				else //if (Encoding == EncodingUTF32)
+				else if constexpr (Encoding == EncodingUTF32)
 				{
 					nToReserve += 4;
 				}				
 
 				buffer = new char[nToReserve];
+                
+                if constexpr (SPACE_FOR_SIZE == 4)
+                {
+                    td::UINT4* pUint4 = (td::UINT4*) buffer;
+                    *pUint4 = 0;
+                }
+                else if constexpr (SPACE_FOR_SIZE == 2)
+                {
+                    td::UINT2* pUint2 = (td::UINT2*) buffer;
+                    *pUint2 = 0;
+                }
 
 				setTrailingZero(nToReserve);
 
@@ -735,7 +794,7 @@ namespace td
 		{
 			//static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 			assert(!EXTERN_ALLOCATOR);
-			if (Encoding == EncodingUTF16)
+			if constexpr (Encoding == EncodingUTF16)
 			{
 				//32 -> 16
 				const mu::UTF32* sourceStart = reinterpret_cast<const mu::UTF32*>(pStr);
@@ -750,7 +809,7 @@ namespace td
 					mu::UTFConverter::convertUTF32toUTF16(sourceStart, sourceEnd, pBeg, pEnd);
 				}
 			}
-			else if (Encoding == EncodingUTF32)
+			else if constexpr (Encoding == EncodingUTF32)
 			{
 				// 32 -> 32
                 int nLen = inputLen * 4;
@@ -760,7 +819,7 @@ namespace td
 					copyString(pBeg, pStr, inputLen);
 				}
 			}
-			else  //UTF8
+			else if constexpr (Encoding == EncodingUTF8) //UTF8
 			{
 				//32 -> 8
 				const mu::UTF32* sourceStart = reinterpret_cast<const mu::UTF32*>(pStr);
@@ -775,6 +834,8 @@ namespace td
 					mu::UTFConverter::convertUTF32toUTF8(sourceStart, sourceEnd, pBeg, pEnd);
 				}
 			}
+            
+            assert(false);
 //#ifdef _DEBUG
 //			txt = (T_CHAR*) getBegin();
 //			txtUnitLen = unitLength();
@@ -791,7 +852,7 @@ namespace td
 
 		inline const char* createTmpString(const UTF32* pStr, int inputLen, int& bytesNeeded, bool& bDeleteString)
 		{
-			if (Encoding == EncodingUTF16)
+			if constexpr (Encoding == EncodingUTF16)
 			{
 				//32 -> 16
 				const mu::UTF32* sourceStart = reinterpret_cast<const mu::UTF32*>(pStr);
@@ -811,7 +872,7 @@ namespace td
 				}
 				return 0;
 			}
-			else if (Encoding == EncodingUTF32)
+			else if constexpr (Encoding == EncodingUTF32)
 			{
 				// 32 -> 32
 				bytesNeeded = inputLen * 4;
@@ -822,7 +883,7 @@ namespace td
 				}
 				return 0;
 			}
-			else  //UTF8
+			else if constexpr (Encoding == EncodingUTF8)
 			{
 				//32 -> 8
 				const mu::UTF32* sourceStart = reinterpret_cast<const mu::UTF32*>(pStr);
@@ -842,6 +903,8 @@ namespace td
 				}
 				return 0;
 			}
+            assert(false);
+            return 0;
 		}
 #else
 		int getStrLength(const UTF16* pStr) const
@@ -869,7 +932,7 @@ namespace td
 
 		inline const char* createTmpString(const UTF16* pStr, int inputLen, int& bytesNeeded, bool& bDeleteString)
 		{
-			if (Encoding == EncodingUTF16)
+            if constexpr (Encoding == EncodingUTF16)
 			{
 				// 16 -> 16				
                 bytesNeeded = inputLen * 2;
@@ -880,7 +943,7 @@ namespace td
 				}
 				return 0;
 			}
-			else if (Encoding == EncodingUTF32)
+			else if constexpr (Encoding == EncodingUTF32)
 			{
 				//16 -> 32			
                 const mu::UTF16* sourceStart = reinterpret_cast<const mu::UTF16*>(pStr);
@@ -900,7 +963,7 @@ namespace td
 				}
 				return 0;
 			}
-			else  //UTF8
+			else  if constexpr (Encoding == EncodingUTF8)
 			{
 				//16 -> 8
 				const mu::UTF16* sourceStart = reinterpret_cast<const mu::UTF16*>(pStr);
@@ -920,11 +983,13 @@ namespace td
 				}
 				return 0;
 			}
+            assert(false);
+            return 0;
 		}
 
 		inline void setString(const UTF16* pStr, int inputLen)
 		{
-			if (Encoding == EncodingUTF16)
+			if constexpr (Encoding == EncodingUTF16)
 			{
 				// 16 -> 16
 				int nLen = inputLen * 2;
@@ -934,7 +999,7 @@ namespace td
 					copyString(pBeg, pStr, inputLen);
 				}				
 			}
-			else if (Encoding == EncodingUTF32)
+			else if constexpr (Encoding == EncodingUTF32)
 			{
 				//16 -> 32			
 				const mu::UTF16* sourceStart = reinterpret_cast<const mu::UTF16*>(pStr);
@@ -949,7 +1014,7 @@ namespace td
 					mu::UTFConverter::convertUTF16toUTF32(sourceStart, sourceEnd, pBeg, pEnd);
 				}
 			}
-			else  //UTF8
+			else if constexpr (Encoding == EncodingUTF8)
 			{
 				//16 -> 8
 				const mu::UTF16* sourceStart = reinterpret_cast<const mu::UTF16*>(pStr);
@@ -964,6 +1029,8 @@ namespace td
 					mu::UTFConverter::convertUTF16toUTF8(sourceStart, sourceEnd, pBeg, pEnd);
 				}
 			}
+            
+            assert(false);
 //#ifdef _DEBUG
 //			txt = (T_CHAR*) getBegin();
 //			txtUnitLen = unitLength();
@@ -975,7 +1042,7 @@ namespace td
 			//static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 			assert(!EXTERN_ALLOCATOR);
 
-			if (Encoding == EncodingUTF16)
+			if constexpr (Encoding == EncodingUTF16)
 			{
 				//8->16
 				const mu::UTF8* sourceStart = (const mu::UTF8*) pStr;
@@ -995,7 +1062,7 @@ namespace td
 				}
 				return 0;
 			}
-			else if (Encoding == EncodingUTF32)
+			else if constexpr(Encoding == EncodingUTF32)
 			{
 				//8->32
 				const mu::UTF8* sourceStart = reinterpret_cast<const mu::UTF8*>(pStr);
@@ -1015,8 +1082,8 @@ namespace td
 				}
 				return 0;
 			}
-			else  //UTF8
-			{		
+			else if constexpr(Encoding == EncodingUTF8)
+			{
 				//8->8
 				bytesNeeded = inputLen;
 				if (bytesNeeded > 0)
@@ -1026,13 +1093,15 @@ namespace td
 				}
 				return 0;
 			}
+            assert(false);
+            return 0;
 		}
 
 		inline void setString(const char* pStr, size_t inputLen)
 		{
 			//static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 			assert(!EXTERN_ALLOCATOR);
-			if (Encoding == EncodingUTF16)
+			if constexpr (Encoding == EncodingUTF16)
 			{
 				const mu::UTF8* sourceStart = reinterpret_cast<const mu::UTF8*>(pStr);
 				const mu::UTF8* sourceEnd = sourceStart + inputLen;
@@ -1046,8 +1115,8 @@ namespace td
 					mu::UTFConverter::convertUTF8toUTF16(sourceStart, sourceEnd, pBeg, pEnd);					
 				}
 			}
-			else if (Encoding == EncodingUTF32)
-			{				
+			else if constexpr (Encoding == EncodingUTF32)
+			{
 				const mu::UTF8* sourceStart = reinterpret_cast<const mu::UTF8*>(pStr);
 				const mu::UTF8* sourceEnd = sourceStart + inputLen;
 
@@ -1060,8 +1129,8 @@ namespace td
 					mu::UTFConverter::convertUTF8toUTF32(sourceStart, sourceEnd, pBeg, pEnd);
 				}
 			}
-			else  //UTF8
-			{				
+			else if constexpr (Encoding == EncodingUTF8)
+			{
 				// UTF8 -> UTF8
 				if (prepareBuffer((int) inputLen))
 				{
@@ -1081,7 +1150,7 @@ namespace td
 		{
 			//static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 			assert(!EXTERN_ALLOCATOR);
-			if ((Encoding == EncodingUTF8) && (_G_SIZE_OF_WCHAR_ == 2))
+            if constexpr ((Encoding == EncodingUTF8) && (_G_SIZE_OF_WCHAR_ == 2))
 			{
 				//16 -> 8
 				const mu::UTF16* sourceStart = reinterpret_cast<const mu::UTF16*>(pStr);
@@ -1101,7 +1170,7 @@ namespace td
 				}
 				return 0;
 			}
-			else if ((Encoding == EncodingUTF8) && (_G_SIZE_OF_WCHAR_ == 4))
+			else if constexpr ((Encoding == EncodingUTF8) && (_G_SIZE_OF_WCHAR_ == 4))
 			{
 				// 32 -> 8
 				// linux
@@ -1122,7 +1191,7 @@ namespace td
 				}
 				return 0;
 			}
-			else if ( (Encoding == EncodingUTF16) && (_G_SIZE_OF_WCHAR_ == 2))
+			else if constexpr ( (Encoding == EncodingUTF16) && (_G_SIZE_OF_WCHAR_ == 2))
 			{
 				//windows
 				// 16 -> 16
@@ -1134,7 +1203,7 @@ namespace td
 				}
 				return 0;
 			}
-			else if ( (Encoding == EncodingUTF32)  && (_G_SIZE_OF_WCHAR_ == 4))
+			else if constexpr ( (Encoding == EncodingUTF32)  && (_G_SIZE_OF_WCHAR_ == 4))
 			{
 				//32 -> 32
 				//linux & OSX
@@ -1146,7 +1215,7 @@ namespace td
 				}
 				return 0;
 			}			
-			else if ( (Encoding == EncodingUTF32)  && (_G_SIZE_OF_WCHAR_ == 2))
+			else if constexpr ( (Encoding == EncodingUTF32)  && (_G_SIZE_OF_WCHAR_ == 2))
 			{
 				//16 -> 32
 				//Windows
@@ -1167,7 +1236,7 @@ namespace td
 				}
 				return 0;
 			}
-			else  if ( (Encoding == EncodingUTF16) && (_G_SIZE_OF_WCHAR_ == 4))
+			else if constexpr ( (Encoding == EncodingUTF16) && (_G_SIZE_OF_WCHAR_ == 4))
 			{
 				//linux
 				//32 -> 16
@@ -1188,13 +1257,16 @@ namespace td
 				}
 				return 0;
 			}
+            
+            assert(false);
+            return 0;
 		}
 
 		inline void setString(const wchar_t* pStr, int inputLen)
 		{
 			//static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 			assert(!EXTERN_ALLOCATOR);
-			if ((Encoding == EncodingUTF8) && (_G_SIZE_OF_WCHAR_ == 2))
+			if constexpr ((Encoding == EncodingUTF8) && (_G_SIZE_OF_WCHAR_ == 2))
 			{
 				//16 -> 8
 				const mu::UTF16* sourceStart = reinterpret_cast<const mu::UTF16*>(pStr);
@@ -1209,7 +1281,7 @@ namespace td
 					mu::UTFConverter::convertUTF16toUTF8(sourceStart, sourceEnd, pBeg, pEnd);
 				}
 			}
-			else if ((Encoding == EncodingUTF8) && (_G_SIZE_OF_WCHAR_ == 4))
+			else if constexpr ((Encoding == EncodingUTF8) && (_G_SIZE_OF_WCHAR_ == 4))
 			{
 				// 32 -> 8
 				// linux
@@ -1225,7 +1297,7 @@ namespace td
 					mu::UTFConverter::convertUTF32toUTF8(sourceStart, sourceEnd, pBeg, pEnd);
 				}
 			}
-			else if ( (Encoding == EncodingUTF16) && (_G_SIZE_OF_WCHAR_ == 2))
+			else if constexpr ( (Encoding == EncodingUTF16) && (_G_SIZE_OF_WCHAR_ == 2))
 			{
 				//windows
 				// 16 -> 16
@@ -1236,7 +1308,7 @@ namespace td
 					WMEMCPYS(pBeg, inputLen+1, pStr, inputLen); //OVO JE OK
 				}
 			}
-			else if ( (Encoding == EncodingUTF32)  && (_G_SIZE_OF_WCHAR_ == 4))
+			else if constexpr ( (Encoding == EncodingUTF32)  && (_G_SIZE_OF_WCHAR_ == 4))
 			{
 				//32 -> 32
 				//linux & OSX
@@ -1247,7 +1319,7 @@ namespace td
 					WMEMCPYS(pBeg, inputLen+1, pStr, inputLen);
 				}
 			}
-			else if ( (Encoding == EncodingUTF32)  && (_G_SIZE_OF_WCHAR_ == 2))
+			else if constexpr ( (Encoding == EncodingUTF32)  && (_G_SIZE_OF_WCHAR_ == 2))
 			{
 				//16 -> 32
 				//Windows
@@ -1263,7 +1335,7 @@ namespace td
 					mu::UTFConverter::convertUTF16toUTF32(sourceStart, sourceEnd, pBeg, pEnd);
 				}
 			}
-			else  if ( (Encoding == EncodingUTF16) && (_G_SIZE_OF_WCHAR_ == 4))
+			else if constexpr ( (Encoding == EncodingUTF16) && (_G_SIZE_OF_WCHAR_ == 4))
 			{
 				//linux
 				//32 ->16
@@ -1279,6 +1351,12 @@ namespace td
 					mu::UTFConverter::convertUTF32toUTF16(sourceStart, sourceEnd, pBeg, pEnd);
 				}
 			}
+			else
+			{
+				assert(false);
+			}
+            
+            //assert(false);
 //#ifdef _DEBUG
 //			txt = (T_CHAR*) getBegin();
 //			txtUnitLen = unitLength();
@@ -1306,23 +1384,22 @@ namespace td
 	public:
 		~StringBase()			
 		{
-			if (!EXTERN_ALLOCATOR)
+			if constexpr (!EXTERN_ALLOCATOR)
 				cleanBuffer();
-			
 		}
 
 		inline StringBase()
-			: buffer(0)
+			: buffer(nullptr)
 		{
 		}
 
 
 		inline StringBase(const char* pStr)
-			: buffer(0)
+			: buffer(nullptr)
 		{
 			static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 			assert(!EXTERN_ALLOCATOR);
-			if (!EXTERN_ALLOCATOR)
+			if constexpr (!EXTERN_ALLOCATOR)
 			{
 				if (pStr != nullptr)
 				{
@@ -1333,11 +1410,11 @@ namespace td
 		}
 
 		inline StringBase(const char* pStr, size_t inputLen)
-			: buffer(0)
+			: buffer(nullptr)
 		{
 			static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 			assert(!EXTERN_ALLOCATOR);
-			if (!EXTERN_ALLOCATOR)
+			if constexpr (!EXTERN_ALLOCATOR)
 			{
 				if (pStr != nullptr)
 				{				
@@ -1347,11 +1424,11 @@ namespace td
 		}
 
 		inline StringBase(const std::string& str)
-			: buffer(0)
+			: buffer(nullptr)
 		{
 			static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 			assert(!EXTERN_ALLOCATOR);
-			if (!EXTERN_ALLOCATOR)
+			if constexpr (!EXTERN_ALLOCATOR)
 			{
 				
 				int inputLen = (int)str.length();
@@ -1365,7 +1442,7 @@ namespace td
 		{
 			static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 			assert(!EXTERN_ALLOCATOR);
-			if (!EXTERN_ALLOCATOR)
+			if constexpr (!EXTERN_ALLOCATOR)
 			{
 				//if (pStr != nullptr)
 				{
@@ -1376,11 +1453,11 @@ namespace td
 		}
         
         inline StringBase(const std::filesystem::path& path)
-            : buffer(0)
+            : buffer(nullptr)
         {
             static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
             assert(!EXTERN_ALLOCATOR);
-            if (!EXTERN_ALLOCATOR)
+            if constexpr (!EXTERN_ALLOCATOR)
             {
                 auto str = path.string();
                 auto strLen = str.length();
@@ -1408,33 +1485,33 @@ namespace td
 
 		
 		inline StringBase(const FileString8& buf)
-			: buffer(0)
+			: buffer(nullptr)
 		{
 			static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 			assert(!EXTERN_ALLOCATOR);
-			if (!EXTERN_ALLOCATOR)
+			if constexpr (!EXTERN_ALLOCATOR)
 			{
 				fromKnownString(buf.c_str(), buf.length());
 			}
 		}
 
 		inline StringBase(const FileBuffer1k& buf)
-			: buffer(0)
+			: buffer(nullptr)
 		{
 			static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 			assert(!EXTERN_ALLOCATOR);
-			if (!EXTERN_ALLOCATOR)
+			if constexpr (!EXTERN_ALLOCATOR)
 			{
 				fromKnownString(buf.c_str(), buf.length());
 			}
 		}
 
 		inline StringBase(const FileBuffer4k& buf)
-			: buffer(0)
+			: buffer(nullptr)
 		{
 			static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 			assert(!EXTERN_ALLOCATOR);
-			if (!EXTERN_ALLOCATOR)
+			if constexpr (!EXTERN_ALLOCATOR)
 			{
 				fromKnownString(buf.c_str(), buf.length());
 			}
@@ -1445,18 +1522,18 @@ namespace td
 		{
 			static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 			assert(!EXTERN_ALLOCATOR);
-			if (!EXTERN_ALLOCATOR)
+			if constexpr (!EXTERN_ALLOCATOR)
 			{
 				fromKnownString(buf.c_str(), buf.length());
 			}
 		}
 
 		inline StringBase(const wchar_t* pStr)
-			: buffer(0)
+			: buffer(nullptr)
 		{
 			static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 			assert(!EXTERN_ALLOCATOR);
-			if (!EXTERN_ALLOCATOR)
+			if constexpr (!EXTERN_ALLOCATOR)
 			{
 				int inputLen = (int)wcslen(pStr);
 				setString(pStr, inputLen);
@@ -1465,11 +1542,11 @@ namespace td
 
 #ifdef WINDOWS_UNICODE
 		inline StringBase(const UTF32* pStr)
-			: buffer(0)
+			: buffer(nullptr)
 		{
 			static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 			assert(!EXTERN_ALLOCATOR);
-			if (!EXTERN_ALLOCATOR)
+			if constexpr (!EXTERN_ALLOCATOR)
 			{
 				int inputLen = getStrLength(pStr);
 				setString(pStr, inputLen);
@@ -1480,11 +1557,11 @@ namespace td
 
 #else
 		inline StringBase(const UTF16* pStr)
-			: buffer(0)
+			: buffer(nullptr)
 		{
 			static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 			assert(!EXTERN_ALLOCATOR);
-			if (!EXTERN_ALLOCATOR)
+			if constexpr (!EXTERN_ALLOCATOR)
 			{
 				int inputLen = getStrLength(pStr);
 				setString(pStr, inputLen);
@@ -1496,16 +1573,18 @@ namespace td
 
 		template <bool EXTERN_ALLOCATOR_INSTR>
 		void clone(const StringBase<T_CHAR, Encoding, SPACE_FOR_SIZE, EXTERN_ALLOCATOR_INSTR>& inStr)
-		{
-			//StringBase<UTF8, td::EncodingUTF8, 4, false> tmp;		
+		{	
 			static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
-			assert(!EXTERN_ALLOCATOR);			
+			assert(!EXTERN_ALLOCATOR);
 			fromKnownString(inStr.c_str(), inStr.unitLength());
-			//tmp = *this;
-			//tmp.addRef();
-			//tmp.fromKnownString(c_str(), length());			
-			//return tmp;
 		}
+        
+        [[nodiscard]] StringBase<T_CHAR, Encoding, SPACE_FOR_SIZE, false> clone() const
+        {
+            StringBase<T_CHAR, Encoding, SPACE_FOR_SIZE, false> toRet;
+            toRet.clone(*this);
+            return toRet;
+        }
 
 		inline const char* getBuffer() const
 		{
@@ -1516,11 +1595,16 @@ namespace td
 		inline StringBase(const String8Int& str)
 			: buffer(nullptr)
 		{
-			static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
+			//static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 
-			if (!EXTERN_ALLOCATOR)
-			{				
-				if (Encoding == td::EncodingUTF8)
+            if constexpr (EXTERN_ALLOCATOR)
+            {
+                buffer = str.buffer;
+            }
+            
+			if constexpr (!EXTERN_ALLOCATOR)
+			{
+				if constexpr (Encoding == td::EncodingUTF8)
 				{
 					//StringBase<UTF8, td::EncodingUTF8, 4>& str2 = const_cast<StringBase<UTF8, td::EncodingUTF8, 4>&> (str);
 					buffer = const_cast<char*> (str.getBuffer());
@@ -1534,8 +1618,6 @@ namespace td
 				int inputLen = str.unitLength();
 				setString(pTxt, inputLen);
 			}
-			else
-				assert(false);
 		}
 				
 		inline StringBase(const String8Ext& str)
@@ -1543,9 +1625,9 @@ namespace td
 		{
 			//IDz: ovaj se moze zvati svakako
 			//static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");			
-			if (!EXTERN_ALLOCATOR)
-			{				
-				if (Encoding == td::EncodingUTF8)
+			if constexpr (!EXTERN_ALLOCATOR)
+			{
+				if constexpr (Encoding == td::EncodingUTF8)
 				{
 					StringBase strTmp;
 					strTmp.fromKnownString(str.c_str(), str.length());
@@ -1565,19 +1647,35 @@ namespace td
 		//{
 		//	takeFromAlloc(pStr);
 		//}
-
-		//inline StringBase(const StringBase&& str)
-		//	: buffer(nullptr)
-		//{
-		//	takeFromAlloc(str);
-		//}
+        
+        // Move constructor
+        inline StringBase(StringBase&& str) noexcept
+            : buffer(str.buffer)
+        {
+            if (!str.isExtern())
+                str.buffer = nullptr;
+        }
+        
+        // Move assignment operator
+        inline StringBase& operator=(StringBase&& str) noexcept
+        {
+            if (this != &str)
+            {
+                relRef();
+                buffer = str.buffer;
+                if (!str.isExtern())
+                    str.buffer = nullptr;
+            }
+            return *this;
+        }
+        
 		inline StringBase(const String16Int& str)
 			: buffer(nullptr)
 		{
 			static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 			assert(!EXTERN_ALLOCATOR);
 
-			if (Encoding == td::EncodingUTF16)
+			if constexpr (Encoding == td::EncodingUTF16)
 			{
 				buffer = const_cast<char*> (str.getBuffer());
 				if (addRef())
@@ -1596,7 +1694,7 @@ namespace td
 		{
 			static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 			assert(!EXTERN_ALLOCATOR);
-			if (Encoding == td::EncodingUTF32)
+			if constexpr (Encoding == td::EncodingUTF32)
 			{
 				buffer = const_cast<char*> (str.getBuffer());
 				if (addRef())
@@ -1612,7 +1710,7 @@ namespace td
 		}
 
 		inline StringBase(const StringBase<UTF8, td::EncodingUTF8, 2, false>& str)
-			: buffer(0)
+			: buffer(nullptr)
 		{
 			static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 			assert(!EXTERN_ALLOCATOR);
@@ -1622,7 +1720,7 @@ namespace td
 		}
 
 		inline StringBase(const StringBase<UTF16, td::EncodingUTF16, 2, false>& str)
-			: buffer(0)
+			: buffer(nullptr)
 		{
 			static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 			assert(!EXTERN_ALLOCATOR);
@@ -1632,7 +1730,7 @@ namespace td
 		}
 
 		inline StringBase(const StringBase<UTF32, td::EncodingUTF32, 2, false>& str)
-			: buffer(0)
+			: buffer(nullptr)
 		{
 			static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 			assert(!EXTERN_ALLOCATOR);
@@ -1642,7 +1740,7 @@ namespace td
 		}
 
 		inline StringBase(const StringBase<UTF8, td::EncodingUTF8, 0, false>& str)
-			: buffer(0)
+			: buffer(nullptr)
 		{
 			static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 			assert(!EXTERN_ALLOCATOR);
@@ -1652,7 +1750,7 @@ namespace td
 		}
 
 		inline StringBase(const StringBase<UTF16, td::EncodingUTF16, 0, false>& str)
-			: buffer(0)
+			: buffer(nullptr)
 		{
 			static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 			assert(!EXTERN_ALLOCATOR);
@@ -1662,7 +1760,7 @@ namespace td
 		}
 
 		inline StringBase(const StringBase<UTF32, td::EncodingUTF32, 0, false>& str)
-			: buffer(0)
+			: buffer(nullptr)
 		{
 			static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 			assert(!EXTERN_ALLOCATOR);
@@ -2030,13 +2128,13 @@ namespace td
 				
 		inline StringBase& operator = (const String8Int& str)
 		{
-			static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
-			if (!EXTERN_ALLOCATOR)
+			//static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
+			if constexpr (!EXTERN_ALLOCATOR)
 			{
                 if (buffer == str.buffer)
                     return *this;
 				cleanBuffer();
-				if (Encoding == td::EncodingUTF8)
+				if constexpr (Encoding == td::EncodingUTF8)
 				{
 					//StringBase<UTF8, td::EncodingUTF8, 4>& str2 = const_cast<StringBase<UTF8, td::EncodingUTF8, 4>&> (str);
 					buffer = const_cast<char*> (str.getBuffer());
@@ -2051,16 +2149,18 @@ namespace td
 				setString(pTxt, inputLen);
 			}
 			else
-				assert(false);
+            {
+                buffer = str.buffer;
+            }
 			return *this;
 		}
 
 		inline StringBase& operator = (const String8Ext& str)
 		{			
-			if (!EXTERN_ALLOCATOR)
+			if constexpr (!EXTERN_ALLOCATOR)
 			{
 				cleanBuffer();
-				if (Encoding == td::EncodingUTF8)
+				if constexpr (Encoding == td::EncodingUTF8)
 				{
 					StringBase strTmp;
 					strTmp.fromKnownString(str.c_str(), str.length());
@@ -2123,7 +2223,7 @@ namespace td
 			static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 			assert(!EXTERN_ALLOCATOR);
 			cleanBuffer();
-			if (Encoding == td::EncodingUTF16)
+			if constexpr (Encoding == td::EncodingUTF16)
 			{
 				//StringBase<UTF8, td::EncodingUTF8, 4>& str2 = const_cast<StringBase<UTF8, td::EncodingUTF8, 4>&> (str);
 				buffer = const_cast<char*> (str.getBuffer());
@@ -2144,7 +2244,7 @@ namespace td
 			static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 			assert(!EXTERN_ALLOCATOR);
 			cleanBuffer();
-			if (Encoding == td::EncodingUTF32)
+			if constexpr (Encoding == td::EncodingUTF32)
 			{
 				//StringBase<UTF8, td::EncodingUTF8, 4>& str2 = const_cast<StringBase<UTF8, td::EncodingUTF8, 4>&> (str);
 				buffer = const_cast<char*> (str.getBuffer());
@@ -2350,13 +2450,13 @@ namespace td
 		//#pragma endregion
 
 		//#pragma region Comparison operators
-
 		template <class TSTR>
 		inline bool operator == (const TSTR& str) const
 		{
             td::UINT4 nLen = length();
+            td::UINT4 extLen = td::UINT4(str.length());
 
-			if (str.length() != nLen)
+			if (extLen != nLen)
 				return false;
 
 			void* pMy = (void*) getBegin();
@@ -2373,7 +2473,7 @@ namespace td
 		{
             if (len <= 0)
                 return false;
-            if ((td::UINT4)len != length())
+            if ((td::UINT4)len != unitLength())
 				return false;
 			return mem::fastCompare(pStr, c_str(), len);
 		}
@@ -2465,9 +2565,9 @@ namespace td
 		{
 			assert(pStr);
 
-			if (_G_SIZE_OF_WCHAR_ == 2)
+			if constexpr (_G_SIZE_OF_WCHAR_ == 2)
 				assert(Encoding == EncodingUTF16);
-			else if (_G_SIZE_OF_WCHAR_ == 4)
+			else if constexpr (_G_SIZE_OF_WCHAR_ == 4)
 				assert(Encoding == EncodingUTF32);
 
 			return wcscmp(c_str(), pStr);
@@ -2500,16 +2600,16 @@ namespace td
 			}
 
 			int toRet;
-			if (Encoding == EncodingUTF8)
+			if constexpr (Encoding == EncodingUTF8)
 			{
 				const void* pMy = (const void*) getBegin();
 				const void* pOut = (const void*) str.c_str();
 
 				toRet = memcmp(pMy, pOut, nLen);
 			}
-			else if (Encoding == EncodingUTF16)
+			else if constexpr (Encoding == EncodingUTF16)
 			{
-				if (_G_SIZE_OF_WCHAR_ == 2)
+				if constexpr (_G_SIZE_OF_WCHAR_ == 2)
 				{
 					const wchar_t* pMy = (const wchar_t*) getBegin();
 					const wchar_t* pOut = (const wchar_t*) str.c_str();
@@ -2524,9 +2624,9 @@ namespace td
 					toRet = compareStrings(pMy, pOut, nLen / 2);
 				}
 			}
-			else if (Encoding == EncodingUTF32)
+			else if constexpr (Encoding == EncodingUTF32)
 			{
-				if (_G_SIZE_OF_WCHAR_ == 4)
+				if constexpr (_G_SIZE_OF_WCHAR_ == 4)
 				{
 					//linux
 					const wchar_t* pMy = (const wchar_t*) getBegin();
@@ -2590,8 +2690,7 @@ namespace td
 
 		//#pragma endregion		
 		inline void left(int len, StringBase<T_CHAR, Encoding, SPACE_FOR_SIZE, false>& str) const
-		{			
-
+		{
 			int nLen = length();
 
 			if (len > nLen)
@@ -2717,7 +2816,9 @@ namespace td
 
 		inline td::UINT4 getCount(T_CHAR ch) const
 		{
-			td::UINT4 nChars = length();			
+			td::UINT4 nChars = unitLength();
+            if (nChars == 0)
+                return 0;
 			td::UINT4 toRet = 0;
 			const T_CHAR* pStr = c_str();
 			for (td::UINT4 i = 0; i < nChars; ++i)
@@ -2730,7 +2831,9 @@ namespace td
 
 		inline bool hasAny(T_CHAR ch) const
 		{
-			td::UINT4 nChars = length();			
+			td::UINT4 nChars = length();
+            if (nChars == 0)
+                return 0;
 			const T_CHAR* pStr = c_str();
 			for (td::UINT4 i = 0; i < nChars; ++i)
 			{
@@ -2743,6 +2846,9 @@ namespace td
 		int getNoOfUpper() const
 		{
 			td::UINT4 nChars = length();
+            if (nChars == 0)
+                return 0;
+            
 			td::UINT4 toRet = 0;
 			const T_CHAR* pStr = c_str();
 			for (td::UINT4 i = 0; i < nChars; ++i)
@@ -2752,10 +2858,30 @@ namespace td
 			}
 			return toRet;
 		}
-
+        
+        int getNoOfLeading(T_CHAR ch) const
+        {
+            if (length() == 0)
+                return 0;
+            
+            int nCh = 0;
+            const T_CHAR* pStr = c_str();
+            while (pStr)
+            {
+                if (*pStr == ch)
+                    ++nCh;
+                else
+                    return nCh;
+                ++pStr;
+            }
+            return nCh;
+        }
+        
 		int getNoOfNonAscii() const
 		{
 			td::UINT4 nChars = length();
+            if (nChars == 0)
+                return 0;
 			td::UINT4 toRet = 0;
 			const T_CHAR* pStr = c_str();
 			for (td::UINT4 i = 0; i < nChars; ++i)
@@ -2768,7 +2894,9 @@ namespace td
 
 		bool hasAnyNonAscii() const
 		{
-			td::UINT4 nChars = length();			
+			td::UINT4 nChars = length();
+            if (nChars == 0)
+                return 0;
 			const T_CHAR* pStr = c_str();
 			for (td::UINT4 i = 0; i < nChars; ++i)
 			{
@@ -2782,29 +2910,24 @@ namespace td
 		{
 			if (buffer)
 			{
-				if (SPACE_FOR_SIZE == 4)
+				if constexpr (SPACE_FOR_SIZE == 4)
 				{
-					//td::INT4* pSize = (td::INT4*) buffer;	
 					td::UINT4* pSize = (td::UINT4*)buffer;
 					td::UINT4 len = *pSize;
-					if (EXTERN_ALLOCATOR)
-						return len;
 
 					len &= TD_STR_CLEAN_REF;
 
 					return len;
 				}
-				else if (SPACE_FOR_SIZE == 2)
+				else if constexpr (SPACE_FOR_SIZE == 2)
 				{
-					//td::WORD* pSize = (td::WORD*) buffer;
-					//td::WORD size = *pSize;
 					td::WORD* pSize = (td::WORD*)buffer;
 					td::WORD size = *pSize;
 					return size;
 				}				
 				else
 				{
-					if (Encoding == td::EncodingUTF8)
+					if constexpr (Encoding == td::EncodingUTF8)
 						return (td::UINT4)strlen(buffer);
 					else
 					{
@@ -2817,9 +2940,9 @@ namespace td
 
 		inline td::UINT4 unitLength() const
 		{
-			if (Encoding == EncodingUTF16)
+			if constexpr (Encoding == EncodingUTF16)
 				return length() / 2;
-			else if (Encoding == EncodingUTF32)
+			else if constexpr (Encoding == EncodingUTF32)
 				return length() / 4;
 			return length();
 		}
@@ -2915,17 +3038,17 @@ namespace td
 			return Encoding;
 		}
 
-		inline bool isSizeEmbeded() const
+		inline constexpr bool isSizeEmbeded() const
 		{
 			return (SPACE_FOR_SIZE == 0);
 		}
 
-        inline int spaceForSize() const
+        inline constexpr int spaceForSize() const
 		{
 			return SPACE_FOR_SIZE;			
 		}
 
-		bool isExternAllocatorUsed() const
+		bool constexpr isExternAllocatorUsed() const
 		{
 			return EXTERN_ALLOCATOR;
 		}
@@ -2939,41 +3062,35 @@ namespace td
 			va_list argptr;	
 			{
 				va_start(argptr, format);
-				char buffer[1024 * 2];
-				int nLen = vsnprintf(buffer, 1024 * 2, format, argptr);
+				char buffer[1024];
+				int nLen = vsnprintf(buffer, 1024, format, argptr);
 				va_end(argptr);
-
-				//assert(nLen >= 0);
 
 				if (nLen > 0)
 				{
 					cleanBuffer();
-					//pRegional->formatBuffer[nLen] = 0;
 					setString(&buffer[0], nLen);
 					return;
 				}
 			}
 
 			{	
-				int nLen = 0xFFFF - 1; //maximum string length 64 kB
+				int nLen = 0;
 #ifdef MU_WINDOWS
 				va_start(argptr, format);
 				nLen = _vscprintf(format, argptr);
 				va_end(argptr);
 #else
-				//make some estimation here
-				assert(0);
-#endif				
+                va_start(argptr, format);
+                nLen = vsnprintf(nullptr, 0, format, argptr);
+                va_end(argptr);
+#endif
 
-				if ((nLen > 0) && (nLen <= 0x0000FFFF) )
+				if ((nLen > 0) && (nLen <= 0x0000FFFF) ) //maximum string length for format is 64 kB
 				{
 					char* tmp = new char[nLen + 1];
 					va_start(argptr, format);
-//#ifdef MU_WINDOWS
 					nLen = SNPRINTF(tmp, nLen, _TRUNCATE, format, argptr);
-//#else
-					//nLen = SNPRINTF(tmp, nLen, format, argptr);
-//#endif
 					va_end(argptr);
 					if (nLen > 0)
 					{
@@ -2983,164 +3100,14 @@ namespace td
 						return;
 					}
 					delete [] tmp;
-				}				
-			}			
+				}
+                else if (nLen > 0)
+                {
+                    assert(false && "String is too long for format!");
+                }
+			}
 			cleanBuffer();
 		}
-
-//		inline void cFormat(mu::Regionals* pRegional, const char* format, ...)
-//		{
-//			static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
-//			assert(!EXTERN_ALLOCATOR);
-//			va_list argptr;	
-//			va_start(argptr, format);
-//#ifdef MU_WINDOWS		
-//			int nLen = vsnprintf_s(pRegional->formatBuffer, _TRUNCATE, pRegional->getBuffLen() - 1, format, argptr);
-//#else
-//			int nLen = vsnprintf(pRegional->formatBuffer, pRegional->getBuffLen() - 1, format, argptr);
-//#endif
-//			
-//			va_end(argptr);
-//
-//			//assert(nLen >= 0);
-//
-//			if (nLen > 0)
-//			{
-//				//pRegional->formatBuffer[nLen] = 0;
-//				cleanBuffer();
-//				setString(pRegional->formatBuffer, nLen);
-//				return;
-//			}
-//			else
-//			{	
-//				nLen = 0xFFFF - 1; //maximum string length 64 kB
-//#ifdef MU_WINDOWS
-//				va_start(argptr, format);
-//				nLen = _vscprintf(format, argptr);
-//				va_end(argptr);
-//#else
-//				//make some estimation here
-//				assert(0);
-//#endif				
-//
-//				if ((nLen > 0) && (nLen <= 0x0000FFFF) )
-//				{
-//					char* tmp = new char[nLen + 1];
-//					va_start(argptr, format);
-//#ifdef MU_WINDOWS
-//					nLen = vsnprintf_s(tmp, nLen, _TRUNCATE, format, argptr);
-//#else
-//					nLen = vsnprintf(tmp, nLen, format, argptr);
-//#endif
-//					va_end(argptr);
-//					if (nLen > 0)
-//					{
-//						//tmpBuff[nLen] = 0;
-//						setString(tmp, nLen);
-//						delete [] tmp;
-//						return;
-//					}
-//					delete [] tmp;
-//				}				
-//			}			
-//			cleanBuffer();				
-//		}
-//
-//		inline void cFormat(mu::Regionals* pRegional, const wchar_t* wFormat, ...)
-//		{
-//			static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
-//			assert(!EXTERN_ALLOCATOR);
-//			va_list argptr;	
-//			va_start(argptr, wFormat);
-//
-//			StringBase<char, EncodingUTF8, SPACE_FOR_SIZE, EXTERN_ALLOCATOR> tmp(wFormat);
-//
-//			//int nLen = vsnprintf(pRegional->formatBuffer, pRegional->getBuffLen()-1, tmp.c_str(), argptr);
-//#ifdef MU_WINDOWS		
-//			int nLen = vsnprintf_s(pRegional->formatBuffer, _TRUNCATE, pRegional->getBuffLen() - 1, tmp.c_str(), argptr);
-//#else
-//			int nLen = vsnprintf(pRegional->formatBuffer, pRegional->getBuffLen() - 1, tmp.c_str(), argptr);
-//#endif
-//
-//			va_end(argptr);
-//
-//			//assert(nLen >= 0);
-//
-//			if (nLen > 0)
-//			{
-//				//pRegional->formatBuffer[nLen] = 0;
-//				cleanBuffer();
-//				setString(pRegional->formatBuffer, nLen);
-//				return;
-//			}
-//			else
-//			{	
-//				nLen = 0xFFFF; //maximum string length 64 kB
-//#ifdef MU_WINDOWS
-//				va_start(argptr, wFormat);
-//				nLen = _vscprintf(tmp.c_str(), argptr);
-//				va_end(argptr);
-//#else
-//				//make some estimation here
-//				assert(0);
-//#endif
-//				if ((nLen > 0) && (nLen <= 0x0000FFFF) )
-//				{
-//					char* tmpBuff = new char[nLen + 1];
-//					va_start(argptr, wFormat);
-//					//nLen = vsnprintf(tmpBuff, nLen, tmp.c_str(), argptr);
-//#ifdef MU_WINDOWS		
-//					nLen = vsnprintf_s(tmpBuff, _TRUNCATE, nLen, tmp.c_str(), argptr);
-//#else
-//					nLen = vsnprintf_s(tmpBuff, nLen, tmp.c_str(), argptr);
-//#endif
-//
-//					va_end(argptr);
-//					if (nLen > 0)
-//					{
-//						//tmpBuff[nLen] = 0;
-//						setString(tmpBuff, nLen);
-//						delete [] tmpBuff;
-//						return;
-//					}
-//					delete [] tmpBuff;
-//				}				
-//			}			
-//			cleanBuffer();
-//		}
-
-//		void cFormat(const char* wFormat, ...)
-//		{			
-//			va_list argptr;	
-//			int nLen = 1024; //maximum string length 1 kB
-//			StringBase<char, EncodingUTF8, 0> tmp = wFormat;			
-//#ifdef MU_WINDOWS
-//			va_start(argptr, wFormat);
-//			nLen = _vscprintf(tmp.c_str(), argptr);
-//			va_end(argptr);
-//#else
-//#pragma message( __FILE__ " : Za LINUX korigovati estimaciju duzine stringa u cFormat")
-//			//make some estimation here
-//			//#pragma 
-//			//assert(0);
-//#endif
-//			if ((nLen > 0) && (nLen <= 0x0000FFFF) )
-//			{
-//				char* tmpBuff = new char[nLen + 1];
-//				va_start(argptr, wFormat);
-//				nLen = vsnprintf(tmpBuff, nLen, tmp.c_str(), argptr);
-//				va_end(argptr);
-//				if (nLen > 0)
-//				{
-//					setString(tmpBuff, nLen);
-//					delete [] tmpBuff;
-//					return;
-//				}
-//				delete [] tmpBuff;
-//			}
-//
-//			cleanBuffer();
-//		}
 
 		inline T_CHAR getAt(size_t pos) const
 		{			
@@ -3151,15 +3118,16 @@ namespace td
         
         inline T_CHAR at(size_t pos) const
         {
-            assert(pos < length());
+            assert(pos < unitLength());
             T_CHAR* pStr = (T_CHAR*) getBegin();
             return pStr[pos];
         }
 
 		inline void setAt(size_t pos, T_CHAR ch)
 		{
-			assert(pos < length());
-			td::UINT4 len = length();
+            td::UINT4 len = unitLength();
+			assert(pos < len);
+            
 			if (pos < len)
 			{
 				T_CHAR* pStr = (T_CHAR*)getBegin();
@@ -3222,7 +3190,7 @@ namespace td
 
 		inline int findOneOf(const T_CHAR* pOneOfToFind, td::UINT4 searchStartPos = 0) const
 		{
-			td::UINT4  nLen = length();
+            td::UINT4 nLen = unitLength();
 			const T_CHAR* pStr = c_str();
 			for (td::UINT4 i = searchStartPos; i < nLen; ++i)
 			{
@@ -3236,7 +3204,7 @@ namespace td
 
 		inline td::UINT4 getChCounts(const T_CHAR* pCharsToFind) const
 		{
-			td::UINT4 nChars = length();
+            td::UINT4 nChars = unitLength();
 			td::UINT4 toRet = 0;
 			const T_CHAR* pStr = c_str();
 			for (td::UINT4 i = 0; i < nChars; ++i)
@@ -3299,7 +3267,7 @@ namespace td
 			if (buffer == nullptr)
 				return;
 
-			if (!EXTERN_ALLOCATOR)
+			if constexpr (!EXTERN_ALLOCATOR)
 				duplicate();
 
 			T_CHAR* pStr = (T_CHAR*) getBegin();
@@ -3325,7 +3293,6 @@ namespace td
 			duplicate();
 
 			T_CHAR* pStr = (T_CHAR*) getBegin();
-			
 
 			bool convert = true;
 			while (*pStr)
@@ -3352,7 +3319,7 @@ namespace td
 
 			assert(!EXTERN_ALLOCATOR);
 
-			if (!EXTERN_ALLOCATOR)
+			if constexpr (!EXTERN_ALLOCATOR)
 				duplicate();
 
 			T_CHAR* pStr = (T_CHAR*) getBegin();
@@ -3372,7 +3339,7 @@ namespace td
 
 			assert(!EXTERN_ALLOCATOR);
 
-			if (!EXTERN_ALLOCATOR)
+			if constexpr (!EXTERN_ALLOCATOR)
 				duplicate();
 
 			T_CHAR* pStr = (T_CHAR*)getBegin();
@@ -3421,7 +3388,7 @@ namespace td
 		template <class TSTRIN>
 		inline bool beginsWith(const TSTRIN& str) const
 		{			
-			td::UINT4  nLen2 = str.length();
+			td::UINT4 nLen2 = str.length();
 			if (length() < nLen2)
 				return false;		
 
@@ -3499,7 +3466,7 @@ namespace td
 
 		inline bool endsWith(const T_CHAR* pStr, size_t len) const
 		{
-			size_t myLen = length();
+            size_t myLen = unitLength();
 			if (len > myLen)
 				return false;
 			const T_CHAR* pMy = getEnd();
@@ -3511,7 +3478,7 @@ namespace td
         
         inline bool endsWithCI(const T_CHAR* pStr, size_t len) const
         {
-            size_t myLen = length();
+            size_t myLen = unitLength();
             if (len > myLen)
                 return false;
             const T_CHAR* pMy = getEnd();
@@ -3569,6 +3536,22 @@ namespace td
 			return nCount;
 		}
 
+        inline td::UINT4 countLeading(T_CHAR chToCount) const
+        {
+            td::UINT4 nLen = unitLength();
+            const T_CHAR* pStr = c_str();
+            td::UINT4 nCount = 0;
+            for (td::UINT4 i = 0; i < nLen; ++i)
+            {
+                T_CHAR ch = pStr[i];
+                if (ch == chToCount)
+                    ++nCount;
+                else
+                    break;
+            }
+            return nCount;
+        }
+        
 		inline int find(T_CHAR ch, td::UINT4 searchStartPos = 0) const
 		{
 			td::UINT4  nLen = unitLength();
@@ -3580,7 +3563,101 @@ namespace td
 					return i;
 			}
 			return -1;
-		}		
+		}
+        
+        
+        inline int findNewLinePosition(td::UINT4 searchStartPos = 0) const
+        {
+            td::UINT4  nLen = unitLength();
+            const T_CHAR* pStr = c_str();
+            for (td::UINT4 i = searchStartPos; i < nLen; ++i)
+            {
+                T_CHAR ch = pStr[i];
+                if ((ch == (T_CHAR) '\r') || (ch == (T_CHAR) '\n'))
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+        
+        inline int findNextNewLinePosition(td::UINT4 searchStartPos = 0) const
+        {
+            td::UINT4  nLen = unitLength();
+            const T_CHAR* pStr = c_str();
+            for (td::UINT4 i = searchStartPos; i < nLen; ++i)
+            {
+                T_CHAR ch = pStr[i];
+                if ((ch == (T_CHAR) '\r') || (ch == (T_CHAR) '\n'))
+                {
+                    if (ch == (T_CHAR) '\r')
+                    {
+                        ch = pStr[i+1]; //check if next one is new line (Windows CR/LF)
+                        if (ch == (T_CHAR)'\n')
+                            return i+1;
+                    }
+                    return i;
+                }
+            }
+            return -1;
+        }
+        
+        
+        
+        template <bool GoOverNewLines>
+        inline int findNonWhiteSpace(td::UINT4 searchStartPos = 0) const
+        {
+            td::UINT4  nLen = unitLength();
+            const T_CHAR* pStr = c_str();
+            for (td::UINT4 i = searchStartPos; i < nLen; ++i)
+            {
+                T_CHAR ch = pStr[i];
+                if ((ch == (T_CHAR) ' ') || (ch == (T_CHAR) '\t'))
+                    continue;
+                if constexpr (GoOverNewLines)
+                {
+                    if ((ch == (T_CHAR) '\r') || (ch == (T_CHAR) '\n'))
+                        continue;
+                }
+                return i;
+            }
+            return -1;
+        }
+        
+        template <bool ConsiderNewLineAsWhiteSpace>
+        inline int findWhiteSpace(td::UINT4 searchStartPos = 0) const
+        {
+            td::UINT4  nLen = unitLength();
+            const T_CHAR* pStr = c_str();
+            for (td::UINT4 i = searchStartPos; i < nLen; ++i)
+            {
+                T_CHAR ch = pStr[i];
+                if ((ch == (T_CHAR) ' ') || (ch == (T_CHAR) '\t'))
+                    return i;
+                if constexpr (ConsiderNewLineAsWhiteSpace)
+                {
+                    if ((ch == (T_CHAR) '\r') || (ch == (T_CHAR) '\n'))
+                        return i;
+                }
+            }
+            return -1;
+        }
+        
+        inline int findNonLetter(td::UINT4 searchStartPos = 0) const
+        {
+            td::UINT4  nLen = unitLength();
+            const T_CHAR* pStr = c_str();
+            for (td::UINT4 i = searchStartPos; i < nLen; ++i)
+            {
+                T_CHAR ch = pStr[i];
+                if ((ch >= (T_CHAR) 'A') && (ch <= (T_CHAR) 'Z'))
+                    continue;
+                if ((ch >= (T_CHAR) 'a') && (ch <= (T_CHAR) 'z'))
+                    continue;
+                return i;
+            }
+            return -1;
+        }
 
 
 		//ODAVDE - MODELEXP Corrections
@@ -3606,6 +3683,27 @@ namespace td
 			}
 			return -1;
 		}
+        
+        inline const T_CHAR* getExtension() const
+        {
+            int dotPos = findFromRight('.');
+            if (dotPos > 0)
+            {
+                const T_CHAR* pExt = c_str() + dotPos;
+                return pExt;
+            }
+            return nullptr;
+        }
+        
+        inline bool hasExtension(const T_CHAR* pExtWithDot) const
+        {
+            const T_CHAR* pExt = getExtension();
+            if (!pExt)
+                return false;
+            if (std::strcmp(pExt, pExtWithDot) == 0)
+                return true;
+            return false;
+        }
         
         inline int findWhiteSpaceFromRight(int searchStartPos = -1) const
         {
@@ -3667,17 +3765,14 @@ namespace td
 				strToRet = subStr(0, startPos);
 			}
 
-			int n = length();
+			int n = unitLength();
 			int prev = 0;
 			for (int i = startPos+1; i < n; ++i)
 			{
 				T_CHAR ch = getAt(i);
 				if (td::isAlpha(ch) || td::isNumeric(ch))
 					continue;
-				//if (prev != startPos)
-				//{
-				//	strToRet += subStr(prev, startPos);
-				//}
+
 				td::StringBase<T_CHAR, Encoding, SPACE_FOR_SIZE, false> sysVariable = subStr(startPos+1, i-1);
 				char *pEnvVar = nullptr;
 				size_t len = 0;
@@ -3879,6 +3974,11 @@ namespace td
 			strRet.fromKnownString(buff.c_str(), buff.length());
 			return strRet;
 		}
+        
+        inline StringBase<T_CHAR, Encoding, SPACE_FOR_SIZE, false> replace(const T_CHAR* pPattern, const StringBase<T_CHAR, Encoding, SPACE_FOR_SIZE, false>& strToPlace) const
+        {
+            return replace(pPattern, strToPlace.c_str());
+        }
 
 		inline bool replace(T_CHAR toSearch, T_CHAR toPlace) 
 		{	
@@ -4869,6 +4969,7 @@ namespace td
         template <size_t NCHBUFF>
         size_t toAnsiCNumber(char (&buff)[NCHBUFF], char decPoint, char thSep)
         {
+            static_assert(typeid(T_CHAR) == typeid(td::UTF8), "This method works with UTF8 only!");
             const char* pStr = c_str();
             size_t nLen = length();
             return toAnsiCNumber(pStr, nLen, buff, decPoint, thSep);
@@ -4877,6 +4978,7 @@ namespace td
         template <size_t NCHBUFF>
         std::tuple<size_t, bool> extractNumbers(td::DataType /*dt*/, char (&buff)[NCHBUFF], char decPoint, char thSep, bool sci= false)
         {
+            static_assert(typeid(T_CHAR) == typeid(td::UTF8), "This method works with UTF8 only!");
             const char* pStr = c_str();
             size_t nLen = length();
             return td::extractNumbers(pStr, nLen, buff, decPoint, thSep, sci);
@@ -4903,15 +5005,12 @@ namespace td
 		template<class CharT, class Traits>
 		friend std::basic_ostream<CharT, Traits>&
 			operator<<(std::basic_ostream<CharT, Traits>& os,  const StringBase& rhs)
-		{			
-			os  << rhs.c_str();
+		{
+            if (rhs.length() == 0)
+                return os;
+			os << rhs.c_str();
 			return os;
 		}
-		//#pragma endregion
-		//inline bool isZeroEnded() const
-		//{
-		//	return zeroEnded;
-		//}
 	};
 
     typedef StringBase<UTF8, td::EncodingUTF8, 0, false> ZStringUTF8;
@@ -4929,128 +5028,6 @@ namespace td
     typedef StringBase<UTF8, td::EncodingUTF8, 0, false> ZString;
     typedef StringBase<UTF8, td::EncodingUTF8, 4, false> String;
 	typedef StringBase<UTF8, td::EncodingUTF8, 4, true> StringExt;
-
-	//#pragma region Global Operators
-	//template <typename T_CHAR, StringEncoding Encoding, int SIZEINSIDE, bool EXTERN_ALLOCATOR>
-	//bool operator == (const StringBase<T_CHAR, Encoding, SIZEINSIDE, EXTERN_ALLOCATOR>& str1, const StringBase<T_CHAR, Encoding, 0, EXTERN_ALLOCATOR>& str2)
-	//{
-	//	return str1.operator == (str2);
-	//}
-
-	//template <typename T_CHAR, StringEncoding Encoding, int SIZEINSIDE, bool EXTERN_ALLOCATOR>
-	//bool operator == (const StringBase<T_CHAR, Encoding, SIZEINSIDE, EXTERN_ALLOCATOR>& str1, const StringBase<T_CHAR, Encoding, 2, EXTERN_ALLOCATOR>& str2)
-	//{
-	//	return str1.operator == (str2);
-	//}
-
-	//template <typename T_CHAR, StringEncoding Encoding, int SIZEINSIDE, bool EXTERN_ALLOCATOR>
-	//bool operator == (const StringBase<T_CHAR, Encoding, SIZEINSIDE, EXTERN_ALLOCATOR>& str1, const StringBase<T_CHAR, Encoding, 4, EXTERN_ALLOCATOR>& str2)
-	//{
-	//	return str1.operator == (str2);
-	//}
-
-	//template <typename T_CHAR, StringEncoding Encoding, int SIZEINSIDE, bool EXTERN_ALLOCATOR>
-	//bool operator != (const StringBase<T_CHAR, Encoding, SIZEINSIDE, EXTERN_ALLOCATOR>& str1, const StringBase<T_CHAR, Encoding, 0, EXTERN_ALLOCATOR>& str2)
-	//{
-	//	return str1.operator != (str2);
-	//}
-
-	//template <typename T_CHAR, StringEncoding Encoding, int SIZEINSIDE, bool EXTERN_ALLOCATOR>
-	//bool operator != (const StringBase<T_CHAR, Encoding, SIZEINSIDE, EXTERN_ALLOCATOR>& str1, const StringBase<T_CHAR, Encoding, 2, EXTERN_ALLOCATOR>& str2)
-	//{
-	//	return str1.operator != (str2);
-	//}
-
-	//template <typename T_CHAR, StringEncoding Encoding, int SIZEINSIDE, bool EXTERN_ALLOCATOR>
-	//bool operator != (const StringBase<T_CHAR, Encoding, SIZEINSIDE, EXTERN_ALLOCATOR>& str1, const StringBase<T_CHAR, Encoding, 4, EXTERN_ALLOCATOR>& str2)
-	//{
-	//	return str1.operator != (str2);
-	//}
-
-	//template <typename T_CHAR, StringEncoding Encoding, int SIZEINSIDE, bool EXTERN_ALLOCATOR>
-	//bool operator < (const StringBase<T_CHAR, Encoding, SIZEINSIDE, EXTERN_ALLOCATOR>& str1, const StringBase<T_CHAR, Encoding, 0, EXTERN_ALLOCATOR>& str2)
-	//{
-	//	return str1.operator < (str2);
-	//}
-
-	//template <typename T_CHAR, StringEncoding Encoding, int SIZEINSIDE, bool EXTERN_ALLOCATOR>
-	//bool operator < (const StringBase<T_CHAR, Encoding, SIZEINSIDE, EXTERN_ALLOCATOR>& str1, const StringBase<T_CHAR, Encoding, 2, EXTERN_ALLOCATOR>& str2)
-	//{
-	//	return str1.operator < (str2);
-	//}
-
-	//template <typename T_CHAR, StringEncoding Encoding, int SIZEINSIDE, bool EXTERN_ALLOCATOR>
-	//bool operator < (const StringBase<T_CHAR, Encoding, SIZEINSIDE, EXTERN_ALLOCATOR>& str1, const StringBase<T_CHAR, Encoding, 4, EXTERN_ALLOCATOR>& str2)
-	//{
-	//	return str1.operator < (str2);
-	//}
-
-	//template <typename T_CHAR, StringEncoding Encoding, int SIZEINSIDE, bool EXTERN_ALLOCATOR>
-	//bool operator > (const StringBase<T_CHAR, Encoding, SIZEINSIDE, EXTERN_ALLOCATOR>& str1, const StringBase<T_CHAR, Encoding, 0, EXTERN_ALLOCATOR>& str2)
-	//{
-	//	return str1.operator > (str2);
-	//}
-
-	//template <typename T_CHAR, StringEncoding Encoding, int SIZEINSIDE, bool EXTERN_ALLOCATOR>
-	//bool operator > (const StringBase<T_CHAR, Encoding, SIZEINSIDE, EXTERN_ALLOCATOR>& str1, const StringBase<T_CHAR, Encoding, 2, EXTERN_ALLOCATOR>& str2)
-	//{
-	//	return str1.operator > (str2);
-	//}
-
-	//template <typename T_CHAR, StringEncoding Encoding, int SIZEINSIDE, bool EXTERN_ALLOCATOR>
-	//bool operator > (const StringBase<T_CHAR, Encoding, SIZEINSIDE, EXTERN_ALLOCATOR>& str1, const StringBase<T_CHAR, Encoding, 4, EXTERN_ALLOCATOR>& str2)
-	//{
-	//	return str1.operator > (str2);
-	//}
-
-	//template <typename T_CHAR, StringEncoding Encoding, int SIZEINSIDE, bool EXTERN_ALLOCATOR>
-	//bool operator <= (const StringBase<T_CHAR, Encoding, SIZEINSIDE, EXTERN_ALLOCATOR>& str1, const StringBase<T_CHAR, Encoding, 0, EXTERN_ALLOCATOR>& str2)
-	//{
-	//	return str1.operator <= (str2);
-	//}
-
-	//template <typename T_CHAR, StringEncoding Encoding, int SIZEINSIDE, bool EXTERN_ALLOCATOR>
-	//bool operator <= (const StringBase<T_CHAR, Encoding, SIZEINSIDE, EXTERN_ALLOCATOR>& str1, const StringBase<T_CHAR, Encoding, 2, EXTERN_ALLOCATOR>& str2)
-	//{
-	//	return str1.operator <= (str2);
-	//}
-
-	//template <typename T_CHAR, StringEncoding Encoding, int SIZEINSIDE, bool EXTERN_ALLOCATOR>
-	//bool operator <= (const StringBase<T_CHAR, Encoding, SIZEINSIDE, EXTERN_ALLOCATOR>& str1, const StringBase<T_CHAR, Encoding, 4, EXTERN_ALLOCATOR>& str2)
-	//{
-	//	return str1.operator <= (str2);
-	//}
-
-	//template <typename T_CHAR, StringEncoding Encoding, int SIZEINSIDE, bool EXTERN_ALLOCATOR>
-	//bool operator >= (const StringBase<T_CHAR, Encoding, SIZEINSIDE, EXTERN_ALLOCATOR>& str1, const StringBase<T_CHAR, Encoding, 0, EXTERN_ALLOCATOR>& str2)
-	//{
-	//	return str1.operator >= (str2);
-	//}
-
-	//template <typename T_CHAR, StringEncoding Encoding, int SIZEINSIDE, bool EXTERN_ALLOCATOR>
-	//bool operator >= (const StringBase<T_CHAR, Encoding, SIZEINSIDE, EXTERN_ALLOCATOR>& str1, const StringBase<T_CHAR, Encoding, 2, EXTERN_ALLOCATOR>& str2)
-	//{
-	//	return str1.operator >= (str2);
-	//}
-
-	//template <typename T_CHAR, StringEncoding Encoding, int SIZEINSIDE, bool EXTERN_ALLOCATOR>
-	//bool operator >= (const StringBase<T_CHAR, Encoding, SIZEINSIDE, EXTERN_ALLOCATOR>& str1, const StringBase<T_CHAR, Encoding, 4, EXTERN_ALLOCATOR>& str2)
-	//{
-	//	return str1.operator >= (str2);
-	//}
-
-//        //template <typename T_CHAR, StringEncoding Encoding, int SPACE_FOR_SIZE, bool EXTERN_ALLOCATOR>
-//        size_t hash_value(const StringBase<T_CHAR, Encoding, SPACE_FOR_SIZE, EXTERN_ALLOCATOR>& str); //incude td/StringConver.h
-////	{
-////		return (std::size_t) mu::Utils::calcHashNo(str.c_str());
-////	}
-
-//        template <typename T_CHAR, StringEncoding Encoding, int SPACE_FOR_SIZE, bool EXTERN_ALLOCATOR>
-//        size_t hash_value(StringBase<T_CHAR, Encoding, SPACE_FOR_SIZE, EXTERN_ALLOCATOR>& str);   //incude td/StringConver.h
-////	{
-////		return (std::size_t) mu::Utils::calcHashNo(str.c_str());
-////	}
-	
 
 	inline DataType getType(const String&) {return string8;}
 	inline DataType getType(const StringUTF16&) {return string16;}

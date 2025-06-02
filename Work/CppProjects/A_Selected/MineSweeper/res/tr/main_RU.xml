@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<DevRes>
+    <Translations>
+        <Res id="appTitle" tr="Сапер"/>
+        <Res id="settings" tr="Настройки"/>
+        <Res id="settingsTT" tr="Настройте внешний вид и язык. Для смены языка требуется перезапуск приложения."/>
+        <Res id="theApp" tr="Приложение"/>
+        <Res id="game" tr="Игра"/>
+        <Res id="Level" tr="Уровень"/>
+        <Res id="Easy" tr="Легкий"/>
+        <Res id="Medium" tr="Средний"/>
+        <Res id="Hard" tr="Сложный"/>
+        <Res id="Done" tr="Поиск мин завершен."/>
+        <Res id="Dead" tr="Взрыв! Попробуйте еще раз!"/>
+        <Res id="AllOK" tr="ОТЛИЧНО! Минное поле чисто!"/>
+        <Res id="Bombs:" tr="Мины:"/>
+        <Res id="Flags:" tr="Флаги:"/>
+        <Res id="Size:" tr="Размер:"/>
+        <Res id="ClStart" tr="Нажмите на любое поле, чтобы начать"/>
+        <Res id="EmptyFieldClicked" tr="Нажатие на пустое поле. В этом нет необходимости..."/>
+        <Res id="BulkClear" tr="Очищено более одного поля."/>
+        <Res id="ClearedField" tr="Очищено одно поле. Мина рядом."/>
+        <Res id="FlagRemoved" tr="Флаг (метка) удален."/>
+        <Res id="FlagAdded" tr="Флаг мины установлен на поле."/>
+        <Res id="FlagFailed" tr="Нет необходимости ставить отметку на чистой области!"/>
+        
+        <Res id="dlgSettings" tr="Настройки"/>
+        <Res id="lblLang" tr="Текущий язык приложения:"/>
+        <Res id="lblLang2" tr="Язык приложения после перезапуска:"/>
+        <Res id="chbTBIcsAndLbls" tr="Показывать подписи значков на панели инструментов."/>
+        <Res id="chbUseCombo" tr="Использовать ComboBox для выбора уровня (сложности)."/>
+        <Res id="theme" tr="Тема:"/>
+        <Res id="showStatusBar" tr="Показать строку состояния"/>
+        <Res id="RestartRequired" tr="Перезапустите приложение"/>
+        <Res id="RestartRequiredInfo" tr="Некоторые измененные настройки требуют перезапуска приложения для вступления в силу"/>
+        <Res id="Restart" tr="Перезапустить"/>
+        <Res id="DoNoRestart" tr="Не перезапускать"/>
+
+    </Translations>
+</DevRes>

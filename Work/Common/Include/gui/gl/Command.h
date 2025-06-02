@@ -187,7 +187,7 @@ public:
     
     typedef struct _mvp
     {
-        glm::mat4x4* pMatrix;
+        const glm::mat4x4* pMatrix;
         Uniform firstUniform;
         td::BYTE firstUniformPos;
         td::BYTE uniforms[5];
@@ -259,7 +259,7 @@ public:
     Command& createDrawArrays(gui::gl::Primitive primType, size_t vertexStartPos, td::UINT4 nVertices);
     Command& createDrawElementsInstanced(gui::gl::Primitive primType, size_t indexStartPos, td::UINT4 nIndices, td::UINT4 nInstances);
     Command& createDrawArraysInstanced(gui::gl::Primitive primType, size_t vertexStartPos, td::UINT4 nVertices, td::UINT4 nInstances);
-    Command& createMVPSetter(glm::mat4x4* pUniformMatrix, AdditionalUniform* pAdditionalUniforms = nullptr, td::BYTE nUniforms=0);
+    Command& createMVPSetter(const glm::mat4x4* pUniformMatrix, AdditionalUniform* pAdditionalUniforms = nullptr, td::BYTE nUniforms=0);
     bool createUniformSetter(AdditionalUniform* pUniforms, td::BYTE nUniforms);
     
     Command& createDrawArrayPoints(size_t vertexStartPos, td::UINT4 nVertices, float pointSize);

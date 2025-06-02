@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<DevRes>
+    <Translations>
+        <Res id="appTitle" tr="扫雷"/>
+        <Res id="settings" tr="设置"/>
+        <Res id="settingsTT" tr="调整外观和语言。语言更改需要重启应用。"/>
+        <Res id="theApp" tr="应用程序"/>
+        <Res id="game" tr="游戏"/>
+        <Res id="Level" tr="级别"/>
+        <Res id="Easy" tr="简单"/>
+        <Res id="Medium" tr="中等"/>
+        <Res id="Hard" tr="困难"/>
+        <Res id="Done" tr="扫雷完成。"/>
+        <Res id="Dead" tr="爆炸！再试一次！"/>
+        <Res id="AllOK" tr="太棒了！雷区已清除！"/>
+        <Res id="Bombs:" tr="地雷:"/>
+        <Res id="Flags:" tr="旗标:"/>
+        <Res id="Size:" tr="大小:"/>
+        <Res id="ClStart" tr="点击任意方格开始"/>
+        <Res id="EmptyFieldClicked" tr="点击了空白方格。无需此操作..."/>
+        <Res id="BulkClear" tr="清除了多个方格。"/>
+        <Res id="ClearedField" tr="清除一个方格。地雷就在附近。"/>
+        <Res id="FlagRemoved" tr="移除旗标（标记）。"/>
+        <Res id="FlagAdded" tr="在方格上放置了地雷旗标。"/>
+        <Res id="FlagFailed" tr="无需在干净区域放置标记！"/>
+        
+        <Res id="dlgSettings" tr="设置"/>
+        <Res id="lblLang" tr="当前应用程序语言:"/>
+        <Res id="lblLang2" tr="应用程序重启后的语言:"/>
+        <Res id="chbTBIcsAndLbls" tr="显示工具栏标签。"/>
+        <Res id="chbUseCombo" tr="使用 ComboBox 选择级别（难度）。"/>
+        <Res id="theme" tr="主题:"/>
+        <Res id="showStatusBar" tr="显示状态栏"/>
+        <Res id="RestartRequired" tr="重启应用程序"/>
+        <Res id="RestartRequiredInfo" tr="某些更改的设置需要重启应用程序才能生效"/>
+        <Res id="Restart" tr="重启"/>
+        <Res id="DoNoRestart" tr="不重启"/>
+
+    </Translations>
+</DevRes>

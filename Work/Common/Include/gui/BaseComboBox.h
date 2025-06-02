@@ -28,7 +28,7 @@ namespace gui
 //        void removeItem(int pos);
     public:
         ~BaseComboBox();
-        void selectIndex(int index);
+        void selectIndex(int index, bool bSendMessage = true);
         int getSelectedIndex() const;
         td::String getSelectedText() const;
         int getNoOfItems() const;

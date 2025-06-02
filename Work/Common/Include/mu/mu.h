@@ -84,7 +84,11 @@ MAINUTILS_API mem::IBufferAllocator* getMainThreadBufferAllocator();
 //MAINUTILS_API void genRandomString(char* pBuff, size_t strLen);
 #ifdef MU_DEBUG
 #ifdef MU_MACOS
+
 MAINUTILS_API void __impDbgLog(const char* format, va_list& argptr);
+
+MAINUTILS_API void __impDbgLog(const char* msg);
+
 MAINUTILS_API bool __logInFileToo();
 MAINUTILS_API void __showLogInFile(const char* strLog);
 
@@ -96,8 +100,23 @@ MAINUTILS_API void __impDbgLog(const char* msg);
 
 inline void dbgLog( [[maybe_unused]]  const char* format, ... )
 {
+
 #ifdef MU_DEBUG
 #ifdef MU_MACOS
+    //macOS only
+    if (!format)
+        return;
+
+    if (strpbrk(format, "%") == nullptr)
+    {
+        mu::__impDbgLog(format);
+
+        if (mu::__logInFileToo())
+        {
+            mu::__showLogInFile(format);
+        }
+        return;
+    }
     va_list argptr;
     va_start(argptr, format);
     mu::__impDbgLog(format, argptr);
@@ -109,6 +128,16 @@ inline void dbgLog( [[maybe_unused]]  const char* format, ... )
     }
     va_end(argptr);
 #else
+    //non macOS
+    //Windows, Linux
+    if (!format)
+        return;
+
+    if (strpbrk(format, "%") == nullptr)
+    {
+        mu::__impDbgLog(format);
+        return;
+    }
 	
 	va_list argptr;
 	va_start(argptr, format);

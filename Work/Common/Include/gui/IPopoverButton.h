@@ -24,10 +24,7 @@ public:
     virtual void setPopoverCurrentSelection(td::UINT2 pos, bool closePopover) = 0;
     virtual void sendPopoverMessage() = 0;
     virtual void enablePopover(bool bEnable) = 0;
-    //virtual void drawPopoverSymbolText(gui::CoordType x, gui::CoordType y, td::UINT2 itemPos) const = 0;
     virtual void closePopover() = 0;
-    
-    
 };
 
 }  //namespace gui

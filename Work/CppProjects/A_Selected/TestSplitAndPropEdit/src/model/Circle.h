@@ -17,33 +17,34 @@ public:
     {
     }
     
-    virtual Type getType() const
+    Type getType() const override
     {
         return Type::Circle;
     }
     
-    void init()
+    void init() override
     {
         if (_circle.r > 0)
             _shape.createCircle(_circle, _lineWidth, _linePattern);
     }
     
-    virtual void getBoundingRect(gui::Rect& boundRect)
+    void getBoundingRect(gui::Rect& boundRect) override
     {
         _circle.getBoundingRect(boundRect);
     }
     
-    virtual bool containsPoint(const gui::Point& pt) const
+    bool containsPoint(const gui::Point& pt) const override
     {
         return false;
     }
     
-    virtual void load(arch::ArchiveIn& ar)
+    void load(arch::ArchiveIn& ar) override
     {
         ar >> _circle;
         Shape2D::load(ar);
     }
-    virtual void save(arch::ArchiveOut& ar) const
+    
+    void save(arch::ArchiveOut& ar) const override
     {
         ar << _circle;
         Shape2D::save(ar);
@@ -77,7 +78,7 @@ public:
         }
     }
     
-    virtual void getValues(gui::PropertyValues& propValues) const
+    void getValues(gui::PropertyValues& propValues) const override
     {
         td::Variant x(_circle.center.x);
         propValues.setValueByKey((td::UINT4)PropID::Xc, x);
@@ -91,7 +92,7 @@ public:
         Shape2D::getValues(propValues);
     }
     
-    virtual void setValues(gui::PropertyValues& propValues)
+    void setValues(gui::PropertyValues& propValues) override
     {
         gui::Rect rBefore;
         getBoundingRect(rBefore);
@@ -120,7 +121,7 @@ public:
             _shape.updateCircleNodes(_circle);
     }
     
-    virtual bool canBeSelected(const gui::Point& pt) const
+    bool canBeSelected(const gui::Point& pt) const override
     {
         if (_circle.contains(pt))
         {
@@ -133,7 +134,7 @@ public:
         return false;
     }
     
-    virtual void translate(const gui::Point& delta)
+    void translate(const gui::Point& delta) override
     {
         _circle.translate(delta);
         _shape.translateCircleNodes(delta);

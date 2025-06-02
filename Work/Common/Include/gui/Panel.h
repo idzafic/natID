@@ -91,6 +91,25 @@ inline void showOK(Frame* pParentFrame, td::UINT4 dlgID, const td::String& title
     panel->open();
 }
 
+template <class ViewDlg>
+inline void showOK(Frame* pParentFrame, td::UINT4 dlgID, const td::String& title, std::function<void(gui::Dialog*)> fnToCall)
+{
+    auto pApp = gui::getApplication();
+    auto wnd = pApp->getMainWnd();
+    gui::Window* pMainWnd = (gui::Window*) wnd;
+    assert(pMainWnd);
+    auto dlg = pMainWnd->getAttachedWindow(dlgID);
+    if (dlg)
+    {
+        dlg->setFocus();
+        return;
+    }
+    
+    auto panel = new __Panel<ViewDlg>(pParentFrame, dlgID, title, {{gui::Dialog::Button::ID::OK, tr("Ok"), gui::Button::Type::Default}}, MinDlgSize);
+    panel->keepOnTopOfParent();
+    panel->openNonModal(fnToCall);
+}
+
 //show dialog without handler with arguments to the view
 template <class ViewDlg, typename... Args>
 inline void show(Frame* pParentFrame, td::UINT4 dlgID, const td::String& title, const std::initializer_list<Dialog::ButtonDesc>& buttons, Args&&... args)
@@ -174,6 +193,14 @@ inline void show(Frame* pParentFrame, const td::String& title, td::UINT4 dlgID, 
         gui::Dialog::Button::ID clickedBtnID = pDlg->getClickedButtonID();
         fnToCall(clickedBtnID, view);
     });
+}
+
+template <class ViewDlg, typename... Args>
+inline void showWithoutButtons(Frame* pParentFrame, const td::String& title, td::UINT4 dlgID, Args&&... args)
+{
+    auto panel = new _Panel<ViewDlg, Args...>(pParentFrame, title, MinDlgSize, dlgID, {}, std::forward<Args>(args)...);
+    panel->keepOnTopOfParent();
+    panel->openNonModal();
 }
 
 

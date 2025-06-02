@@ -23,6 +23,8 @@ class NATGUI_API Label : public Control
 protected:
     void measure(CellInfo&) override;
     void reMeasure(CellInfo&) override;
+    bool freeze() override;
+    void unFreeze() override;
 public:
     Label(const char* lblText=nullptr);
     Label(const td::String& lblText);

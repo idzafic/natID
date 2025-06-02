@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevRes>
+	<Translations>
+		<Res id="@ML.HeaderIncorrect" tr="モデルヘッダーが不正または欠落しています (@ML.HeaderIncorrectOrMissing)"/>
+		<Res id="@SC.CmplxTypeInReal" tr="実数領域モーダルで複素数型が検出されました (@SC.CmplxTypeInReal)"/>
+		<Res id="@CELH.Type" tr="タイプ"/>
+		<Res id="@CELHT.TypeTT" tr="メッセージのタイプ (情報、警告、エラー)"/>
+		<Res id="@CELH.Editor" tr="エディタ"/>
+		<Res id="@CELHT.Editor" tr="ログエントリを生成したエディタ (メインブレインアイコン、または可視化エディタ-図アイコン)"/>
+		<Res id="@CELH.Line#" tr="行番号"/>
+		<Res id="@CELH.Line#TT" tr="対応するエディタの行番号"/>
+		<Res id="@CELH.Col#" tr="列番号"/>
+		<Res id="@CELH.Col#TT" tr="対応するエディタの列番号"/>
+		<Res id="@CELH.Msg" tr="メッセージ説明"/>
+		<Res id="@CELH.MsgTT" tr="利用可能なすべての詳細を含むメッセージ説明"/>
+		<Res id="@CE.VarDDVars" tr="メインモデル変数は変数ですでに定義されています (@CE.VarDDVars)"/>
+		<Res id="@CE.SubVarDDSubVars" tr="サブモデル変数はサブモデル変数ですでに定義されています (@CE.SubVarDDSubVars)"/>
+		<Res id="@CE.ParDDInPars" tr="メインモデルパラメータはパラメータですでに定義されています (@CE.ParDDInPars)"/>
+		<Res id="@CE.ParDDInVars" tr="メインモデルパラメータはメインモデル変数ですでに定義されています (@CE.ParDDInVars)"/>
+		<Res id="@CE.SubParDDSubVars" tr="サブモデルパラメータはサブモデル変数ですでに定義されています (@CE.SubParDDSubVars)"/>
+		<Res id="@CE.SubParDDSubPars" tr="サブモデルパラメータはサブモデルパラメータですでに定義されています (@CE.SubParDDSubPars)"/>
+		<Res id="@CE.SubParDDInPars" tr="サブモデルパラメータはメインモデルパラメータですでに定義されています (@CE.SubParDDInPars)"/>
+		<Res id="@CE.notInModel" tr="トークンがモデル内にありません (@CE.notInModel)"/>
+		<Res id="@CE.endMissing" tr="endが欠落しています (@CE.endMissing)"/>
+		<Res id="@CE.AttribClosedNoO" tr="属性が開かれずに']'で閉じられました ('['が欠落しています) (@CE.AttribClosedNoOpen)"/>
+		<Res id="@CE.AttribNotClosed" tr="属性セクションが開かれましたが']'で閉じられていません (@CE.AttribNotClosed)"/>
+		<Res id="@CE.wrongModelPos" tr="モデル位置が不正です (@CE.wrongModelPos)"/>
+		<Res id="@CE.endMissmatch" tr="endの不一致 (おそらく'end'が多すぎます) (@CE.endMissmatch)"/>
+		<Res id="@CE.AttribMismatch" tr="属性タイプの不一致 (@CE.AttribMismatch)"/>
+		<Res id="@CE.UnknownLabel" tr="不明なラベル (@CE.UnknownLabel)"/>
+		<Res id="@CE.UnexpectedToken" tr="予期しないトークン (@CE.UnexpectedToken)"/>
+		<Res id="@CESB.NoOfErrors" tr="エラー数:"/>
+		<Res id="@CESB.CursorPositio" tr="カーソル位置:"/>
+		<Res id="@SC.EmpryParamName" tr="パラメータ名が空です (@SC.EmpryParamName)"/>
+		<Res id="@SC.AssignWith0Toke" tr="トークンが0個の代入 (@SC.AssignWith0Tokens)"/>
+		<Res id="@SC.AssignWith2Toke" tr="トークンが2個の代入 (@SC.AssignWith2Tokens)"/>
+		<Res id="@SC.WrongType" tr="タイプが不正です (@SC.WrongType)"/>
+		<Res id="@ML.HeaderParamInco" tr="ヘッダーパラメータが不完全です ('='の後に値がありません)"/>
+		<Res id="@ML.HeaderTokError" tr="モデルヘッダー定義に予期しないトークンがあります"/>
+		<Res id="@ML.HeaderEndAfter" tr="ヘッダー宣言の'end'の後に同じ行にコンテンツがあります"/>
+		<Res id="@ML.HeaderParamUnkn" tr="不明なヘッダーパラメータ名"/>
+		<Res id="@ML.HeaderParamExp=" tr="ヘッダーパラメータ名の後に'='が必要です"/>
+		<Res id="@ML.HeaderReportExp" tr="'Report type'パラメータ値が必要です"/>
+		<Res id="@ML.HeaderWrong=Pos" tr="ヘッダーパラメータ定義での'='記号の位置が不正です"/>
+		<Res id="@ML.HeaderWrongCons" tr="ヘッダーパラメータ定義での定数の位置が不正です"/>
+		<Res id="@ML.HeaderWrongPara" tr="ヘッダーパラメータタイプが不正です (指定された値のタイプがこのパラメータ名に適切ではありません)"/>
+		<Res id="@ML.HeaderWrongParT" tr="ヘッダーパラメータタイプが不正です (指定された値のタイプがこのパラメータ名に適切ではありません)"/>
+		<Res id="@ML.HeaderUnknownPa" tr="不明なヘッダーパラメータタイプ/名前"/>
+		<Res id="@ML.HeaderWithout:" tr="ヘッダー宣言に':'がありません ('Header'の後の最後のトークン)"/>
+		<Res id="@ML.HeaderTokenAfte" tr="'Header'が定義されている行に':'の後にトークンがあります。記号':'はその行の最後のトークンでなければなりません。"/>
+		<Res id="@ML.HeaderFirstToke" tr="ヘッダー宣言は'Header'トークンで始まる必要があります。"/>
+		<Res id="@CE.ExpEndsWithOper" tr="式/方程式が演算子で終わっています!"/>
+		<Res id="@CE.ExpEndsWithAssi" tr="式が代入で終わっています!"/>
+		<Res id="@CE.Mising_)" tr="開閉括弧の不一致。')'がありません"/>
+		<Res id="@CE.Mising_(" tr="開閉括弧の不一致。'('がありません"/>
+		<Res id="@CE.CloseParenthesi" tr="開閉括弧の不一致。"/>
+		<Res id="@ET.FnParamOr()MM" tr="関数パラメータエラーまたは開き')' - 閉じ')'の不一致"/>
+		<Res id="@ET.FnNotPrpFormatt" tr="関数@が正しくフォーマットされていません"/>
+		<Res id="@ET.FnNeeds_(" tr="関数@が正しくフォーマットされていません! '('がありません"/>
+		<Res id="@CE.ExpEndsWithOpen" tr="式/方程式が開き括弧で終わっています!"/>
+		<Res id="@ET.FnNeeds_)" tr="関数@が正しくフォーマットされていません! ')'がありません"/>
+		<Res id="@ET.LabelAfterOpera" tr="別のオペランドの後のパラメータ/変数id='@'"/>
+		<Res id="@ET.ConstAfterOpera" tr="オペランドの後の定数=@"/>
+		<Res id="@ET.(_AfterOperand" tr="オペランドの後の開き括弧"/>
+		<Res id="@ET.OperAfterUnOp" tr="単項演算子'@'の後の演算子'@'"/>
+		<Res id="@ET.UnaryAfterUnOpr" tr="オペランドの後の単項演算子'@'"/>
+		<Res id="@ET.OperAfterOper" tr="演算子'@'の後の演算子'@'"/>
+		<Res id="@ET.,NeedsOperator" tr="単項演算子の後にコンマが続いています!"/>
+		<Res id="@ET.,OutsideFn" tr="複数パラメータ関数の外でコンマが使用されています!"/>
+		<Res id="@ET.()_Mismatch" tr="開閉括弧の不一致!"/>
+		<Res id="@ET.FnParamMising" tr="関数パラメータノードがありません!"/>
+		<Res id="@ET.FnParam#Commas" tr="コンマの数が関数と一致しません! すべての関数パラメータを提供してください!"/>
+		<Res id="@ET.FnParam2Err" tr="複数パラメータ関数の2番目のパラメータを準備できません!"/>
+		<Res id="@ET.,AfterUnFn" tr="単項関数の後のコンマ!"/>
+		<Res id="@ET.MFnPremEnd" tr="複数パラメータfn=@の解析中に式が途中で終了しました!"/>
+		<Res id="@ET.MFnExpOprnd" tr="複数パラメータfn=@の解析中にオペランドが期待されましたが、オペランドでないものが取得されました!"/>
+		<Res id="@ET.MFnNoVar2" tr="複数パラメータ関数@は2番目のパラメータとして変数をサポートしていません"/>
+		<Res id="@ET.MFnNoVar3" tr="複数パラメータ関数@は3番目のパラメータとして変数をサポートしていません"/>
+		<Res id="@ET.ExpPremEnd" tr="式/方程式が途中で終了しました"/>
+		<Res id="@ET.Exp,InMFn" tr="複数パラメータ関数: @でコンマが期待されました"/>
+		<Res id="@ET.ExpPremEndFn" tr="式が途中で終了しました (fn=@)!"/>
+		<Res id="@ET.sAfterOprnd" tr="別のオペランドの後のラプラス演算子"/>
+		<Res id="@ET.UnexpTokenID" tr="予期しないトークンID: @(@)"/>
+		<Res id="@ET.ErrDifIfThen" tr="if-then-else式を微分できません!"/>
+		<Res id="@SC.TFBadFormat" tr="伝達関数のフォーマットが不正です!"/>
+		<Res id="@ET.ErrInitValueExp" tr="初期値式の式ツリーを作成できません!"/>
+		<Res id="@SC.InitValErr" tr="初期値を計算できません!"/>
+		<Res id="@SC.NLReadFail" tr="NLブロックの読み取りエラー"/>
+		<Res id="@SC.NLNvars!=NEQsl" tr="変数の数が方程式の数と等しくありません!"/>
+		<Res id="@SC.CannotSolveSubM" tr="'SubModel'を解けません"/>
+		<Res id="@SC.EmptyJacSubMode" tr="'SubModel'に空のヤコビアンがあります"/>
+		<Res id="@SC.EmptyJacobian" tr="空のヤコビアン"/>
+		<Res id="@SC.CannotFactorize" tr="'SubModel'で行列を因数分解できません"/>
+		<Res id="@SC.LUSolveErrorSub" tr="'SubModel'でスパースLU解法エラーが発生しました"/>
+		<Res id="@SC.LUSolveError" tr="スパースLU解法エラー"/>
+		<Res id="@SC.MaxIterLimitSub" tr="'SubModel'で最大反復回数制限に達しました"/>
+		<Res id="@SC.MaxIterLimit" tr="最大反復回数制限に達しました"/>
+		<Res id="@SC.FactorErrorSubM" tr="'SubModel'でスパース行列因数分解エラーが発生しました"/>
+		<Res id="@SC.FactorizationEr" tr="スパース因数分解エラー"/>
+		<Res id="@ET.Expected_)" tr="閉じ括弧')'が期待されました"/>
+		<Res id="@ET.FnAfterOperand" tr="オペランドの後の関数"/>
+		<Res id="@ET.LimitFnFormatNo" tr="Limit関数のフォーマットが正しくありません"/>
+		<Res id="@ET.LimiFnWo_(" tr="開き括弧'('のないLimit関数"/>
+		<Res id="@ET.LimitFnNeeds_)" tr="Limit関数には閉じ括弧')'が必要です"/>
+		<Res id="@ET.FnNotPrpFmt" tr="関数が正しくフォーマットされていません"/>
+		<Res id="@ET.)_AfterOper" tr="演算子の後の閉じ括弧')'"/>
+		<Res id="@ET.EmptyExpression" tr="空の式"/>
+		<Res id="@ET.UnexpectedEnd" tr="予期しない式の終了"/>
+		<Res id="@ET.OperatorWoOprnd" tr="オペランドのない演算子"/>
+		<Res id="@SC.ErrInReInit" tr="'ReInit'でエラーが発生しました"/>
+		<Res id="@SC.ErrInPreProc" tr="'PreProc'でエラーが発生しました"/>
+		<Res id="@SC.ErrInIterPostPr" tr="'IterPostProc'でエラーが発生しました"/>
+		<Res id="@SC.ErrInBasePostPr" tr="'BasePostProc'でエラーが発生しました"/>
+		<Res id="@SC.ErrInPostProc" tr="'PostProc'でエラーが発生しました"/>
+		<Res id="@SC.ErrInLimits" tr="'Limits'でエラーが発生しました"/>
+		<Res id="@SC.ErrorInRepeat" tr="'Repeat'でエラーが発生しました"/>
+		<Res id="@SC.ODEReadModelErr" tr="'ODE'セクションの読み取り/解析エラー"/>
+		<Res id="@SC.WrongDTForODE" tr="ODEの積分ステップが不正です。dTは正の値でなければなりません!"/>
+		<Res id="@SC.NoDeltaT" tr="積分ステップ(dT)の値が指定されていません!"/>
+		<Res id="@SC.WLSReadFail" tr="'WLS'セクションの読み取りエラー"/>
+		<Res id="@CE.WLSEErrorSolve" tr="WLSモデルの解法エラー"/>
+		<Res id="@SC.ErrorDAEInit" tr="DAE初期化エラー"/>
+		<Res id="@SC.DAEFactorizatio" tr="DAE因数分解エラー"/>
+		<Res id="@SC.WrongDTForDAE" tr="DAEのdtが不正です"/>
+		<Res id="@SC.WrongDAEMethod" tr="DAE解法メソッドが不正です (許可されているメソッドはEuler、RK2、RK4、RK6などです)"/>
+		<Res id="@SC.WrongDAEMethodS" tr="'SubModel'のDAEメソッドが不正です"/>
+		<Res id="@CS.DistNoType" tr="分布定義には'type'が必要です! (許可されているタイプはGauss、Student、Normalなどです)"/>
+		<Res id="@CS.NoMinInUniformD" tr="一様分布では'min'値が必須です"/>
+		<Res id="@CS.NoMaxInUniformD" tr="一様分布では'max'値が必須です"/>
+		<Res id="@CS.NoPimBernoulliD" tr="ベルヌーイ分布では'p'値が必須です"/>
+		<Res id="@CS.NoLamdaInPoisso" tr="ポアソン分布では'lambda'値が必須です"/>
+		<Res id="@CS.NoLamdaInExponD" tr="指数分布では'lambda'値が必須です"/>
+		<Res id="@CS.NoAlphaInGammaD" tr="ガンマ分布では'alpha'値が必須です"/>
+		<Res id="@CS.NoBetaInGammaDi" tr="ガンマ分布では'beta'値が必須です"/>
+		<Res id="@CS.NoMeanInGaussDi" tr="ガウス分布では'mean'値が必須です"/>
+		<Res id="@CS.NoDevInGaussDis" tr="ガウス分布では'dev'値が必須です"/>
+		<Res id="@CS.0DevInGaussDist" tr="ガウス分布では'dev'値は正でなければなりません!"/>
+		<Res id="@CS.NoMeanInLogGaus" tr="'LogGauss'分布では'mean'値が必須です"/>
+		<Res id="@CS.NoDevInLogGausD" tr="'LogGauss'分布では'dev'値が必須です"/>
+		<Res id="@CS.NoKInChiSquared" tr="'ChiSquared'分布では'k'値が必須です"/>
+		<Res id="@CS.NoNInStudentDis" tr="'Student'分布では'k'値が必須です"/>
+		<Res id="@CS.UnknowntDistrib" tr="不明な分布"/>
+		<Res id="@SC.Mising=InAssign" tr="代入式に代入トークンがありません"/>
+		<Res id="@SC.NoVarsDeclared" tr="宣言された変数がありません"/>
+		<Res id="@SC.EmptyInitExpr" tr="空の初期化式"/>
+		<Res id="@SC.MissingDotInAss" tr="代入にドットがありません"/>
+		<Res id="@SC.NoImagRealPartI" tr="代入に'imag'または'real'メンバーがありません"/>
+		<Res id="@SC.NoParentSolver" tr="親ソルバーがありません"/>
+		<Res id="@SC.WrongAssignment" tr="代入式が不正です"/>
+		<Res id="@SC.WrongIfConditio" tr="'if'文の条件が不正です"/>
+		<Res id="@SC.WrongSignalInIf" tr="'if'文の信号が不正です"/>
+		<Res id="@SC.EmptyIf" tr="空の'if'"/>
+		<Res id="@SC.IncompleteIf" tr="不完全な'if'文"/>
+		<Res id="@SC.ElseExpected" tr="if式で'else'が期待されました!"/>
+		<Res id="@SC.NoExprInElse" tr="'else'文に式がありません"/>
+		<Res id="@SC.WrongSignalInEl" tr="'else'文の信号が不正です"/>
+		<Res id="@SC.ElseMissingEnd" tr="'else'には終了キーワード'end'が必要です"/>
+		<Res id="@SC.IncAssignmentEq" tr="不完全な代入式"/>
+		<Res id="@SC.UnknownSymbol" tr="不明なシンボル"/>
+		<Res id="@SC.CannotMakeExpre" tr="式を作成できません"/>
+		<Res id="@SC.CannotMakeIFExp" tr="'if'式を作成できません"/>
+		<Res id="@SC.IncompleteIF" tr="不完全な'if'式"/>
+		<Res id="@SC.IfInUnsupported" tr="'if'が'if'式をサポートしていないグループに配置されています"/>
+		<Res id="@SC.IncompleteIfEls" tr="不完全な'if'-'else'"/>
+		<Res id="@ET.ErrDifEqua" tr="微分方程式のエラー"/>
+		<Res id="@SC.UnexpectedExpre" tr="予期しない式タイプ"/>
+		<Res id="@SC.SymbolicJacobia" tr="シンボリックヤコビアンの作成エラー"/>
+		<Res id="@SC.ErrorInLimits0" tr="limitsのエラー (0)"/>
+		<Res id="@SC.ErrorInLimits1" tr="limitsのエラー (1)"/>
+		<Res id="@SC.LimitGroupEndMi" tr="Limitグループの'end'の不一致"/>
+		<Res id="@SC.LinitsMustBeGro" tr="Limitsはグループ化する必要があります"/>
+		<Res id="@CS.StatAssNotOK" tr="統計オブジェクトの代入が不正です"/>
+		<Res id="@CS.StatsToNotStatV" tr="統計オブジェクトを非統計マネージャーに代入する際のエラー"/>
+		<Res id="@CS.StatsStrWrongEx" tr="統計の代入演算子が不正です (必須: '&lt;&lt;')"/>
+		<Res id="@CS.EmptyStatAsssig" tr="空の統計代入"/>
+		<Res id="@CS.StatsWronExpTyp" tr="統計オブジェクト内の式タイプが不正です"/>
+		<Res id="@CS.StatsCannotMake" tr="統計オブジェクトの式ツリーを作成できません"/>
+		<Res id="@CS.StatsCannotCrea" tr="統計オブジェクトの式ツリーを作成できません"/>
+		<Res id="@SC.PrematureEnd" tr="モデルが途中で終了しました"/>
+		<Res id="@SC.CannotCreateSol" tr="ソルバーを作成できません"/>
+		<Res id="@SC.ODEWrongFormat" tr="ODEの方程式フォーマットが不正です。変数の後にアポストロフィと代入演算子'='が続く必要があります"/>
+		<Res id="@SC.ODEExpectedVari" tr="ODEには変数が必要です"/>
+		<Res id="@SC.ODEExpected=Tok" tr="ODEには代入'='トークンが必要です"/>
+		<Res id="@SC.DerivAndIntAvai" tr="微分と積分を同じODE式で使用することはできません"/>
+		<Res id="@SC.NoDerivNoInt" tr="ODE式に微分も積分もありません"/>
+		<Res id="@SC.ODEExpected&apos;or" tr="ODEには、アポストロフィと代入演算子が続く変数、または代入と'int'関数が続く変数のいずれかが必要です"/>
+		<Res id="@SC.WrongODEExp" tr="ODE式が不正です"/>
+		<Res id="@SC.ODEMissInt" tr="ODEには'int'関数が必要です。または変数名の後にアポストロフィを忘れています"/>
+		<Res id="@SC.ODEHasMultInts" tr="ODE式に複数の'int'メソッドがあります。1つだけにしてください。"/>
+		<Res id="@SC.ODEWithDiffAndI" tr="ODE式にdiff(アポストロフィ)と'int'関数の両方があります。どちらか一方にしてください。"/>
+		<Res id="@SC.CannotCrODEExpT" tr="ODE式ツリーを作成できません"/>
+		<Res id="@SC.ODEIntWrongOper" tr="ODE式に適切な'int'がありません"/>
+		<Res id="@SC.ODEEmptyInt" tr="ODE式に空の'int'があります"/>
+		<Res id="@SC.ODEIntWithSS" tr="'int'は積分にパラメータを使用できません。変数でなければなりません!"/>
+		<Res id="@SC.TFsWrongFormat" tr="伝達関数のフォーマットが不正です"/>
+		<Res id="@SC.TFsNoDiv1Operat" tr="伝達関数定義に除算トークン'/'がありません"/>
+		<Res id="@SC.TFsNoAssignOper" tr="伝達関数定義に代入演算子がありません"/>
+		<Res id="@SC.TFsWrongTokens" tr="伝達関数定義に予期しないトークンが見つかりました"/>
+		<Res id="@SC.TFsCannotMakeET" tr="伝達関数の式ツリーを作成できません"/>
+		<Res id="@SC.WrongYInTF" tr="伝達関数の出力シンボルは変数でなければなりません"/>
+		<Res id="@SC.TFYNotVariable" tr="伝達関数の出力シンボルは変数でなければなりません (2)"/>
+		<Res id="@SC.WrongUInTF" tr="伝達関数の入力シンボルは変数でなければなりません"/>
+		<Res id="@SC.TFUNotVarNorPar" tr="伝達関数の入力シンボルは変数でもパラメータでもありません"/>
+		<Res id="@SC.NoDAEorTFEqs" tr="DAEモデルにODEもTFブロックもありません"/>
+		<Res id="@SC.Vars!=#Eqs" tr="変数の数が方程式の数と等しくありません"/>
+		<Res id="@SC.ODENotOK" tr="ODEが不正です。ODE式は状態変数で始まる必要があります"/>
+		<Res id="@SC.DAE#Eq!=#Vars" tr="DAE問題の変数の数が方程式の数と等しくありません"/>
+		<Res id="@SC.TFOut!Variable" tr="伝達関数の出力が変数ではありません"/>
+		<Res id="@SC.TFOutIsParam" tr="伝達関数の出力がパラメータです"/>
+		<Res id="@SC.TFIn!Declared" tr="伝達関数で使用されている変数が宣言されていません"/>
+		<Res id="@SCTFTokListError" tr="伝達関数宣言のトークンが不足しています。少なくとも4つ必要です!"/>
+		<Res id="@SC.TFExprTreeErr" tr="伝達関数の式ツリー作成エラー"/>
+		<Res id="@SC.TFPolyCoefficen" tr="伝達関数で多項式係数を抽出できません"/>
+		<Res id="@SC.TFDenomNoLaplad" tr="伝達関数の分母にラプラス演算子がありません"/>
+		<Res id="@SC.TFNomNoLapladeO" tr="伝達関数の分子にラプラス演算子がありません"/>
+		<Res id="@SC.TF2SSError" tr="伝達関数から状態空間形式への変換エラー"/>
+		<Res id="@SC.DAENLDerivs" tr="DAEモデルのNLグループのエラー"/>
+		<Res id="@SC.DAEExpandError" tr="暗黙的DAEソルバーの作成エラー (展開エラー)"/>
+		<Res id="@SC.DAENLJack2" tr="DAEモデルのスパースヤコビアンを作成できません (2)"/>
+		<Res id="@SC.DAENLJack3" tr="DAEモデルのスパースヤコビアンを作成できません (3)"/>
+		<Res id="@SC.0Expansion" tr="ゼロステージでの暗黙的DAEソルバーの作成エラー (ゼロ展開エラー)"/>
+		<Res id="@SC.DAENLJack0Exp" tr="DAEモデルのスパースヤコビアンを作成できません (@SC.DAENLJack0Exp)"/>
+		<Res id="@SC.DAEEqError" tr="DAE評価器を作成できません"/>
+		<Res id="@SC.DAEEqExpDiffErr" tr="DAEモデルのスパースヤコビアンを作成できません (@SC.DAEEqExpDiffError)"/>
+		<Res id="@SC.DAEEqExp0Error" tr="ゼロステージでの暗黙的DAEソルバーの作成エラー (@SC.DAEEqExp0Error)"/>
+		<Res id="@SC.DAEEqExp0DiffEr" tr="DAEモデルのスパースヤコビアンを作成できません (@SC.DAEEqExp0DiffError)"/>
+		<Res id="@CS.NLEsError" tr="'NLEs'方程式を適切に解析できません"/>
+		<Res id="@SC.WrongPlotToken" tr="プロットタイプ/トークンが不正です (@SC.WrongPlotToken)"/>
+		<Res id="@SC.WrongPlotTokenR" tr="プロットタイプ/トークンが不正です (@SC.WrongPlotTokenRKW)"/>
+		<Res id="@SC.WrongPlotXBound" tr="プロットのx境界が不正です"/>
+		<Res id="@SC.WrongPlotYBound" tr="プロットのy境界が不正です"/>
+		<Res id="@SC.EmptyPlot" tr="空のプロット"/>
+		<Res id="@SC.WrongPlotAttrib" tr="プロット属性名が不正です"/>
+		<Res id="@SC.SecondXAxisInPl" tr="1つのプロットにx軸は1つしか持てません! プロットに1つ以上の軸が定義されています!"/>
+		<Res id="@SC.SecondCondInPlo" tr="1つのプロットに条件は1つしか持てません! プロットに1つ以上の条件が定義されています!"/>
+		<Res id="@SC.PlotPremEnd" tr="プロットが途中で終了しました。'end'がありません"/>
+		<Res id="@SC.PlotNoYAxis" tr="プロットにy軸がありません。プロットには少なくとも1つのy軸が必要です!"/>
+		<Res id="@SC.PlotHLineErr" tr="プロット水平線('hLine')定義のエラー"/>
+		<Res id="@SC.PlotVLineErr" tr="プロット垂直線('vLine')定義のエラー"/>
+		<Res id="@SC.PlotHBandErr" tr="プロット水平バンド('hBand')定義のエラー"/>
+		<Res id="@SC.PlotVBandErr" tr="プロット垂直バンド('vBand')定義のエラー"/>
+		<Res id="@SC.PlotAxisErr" tr="プロットのx軸定義のエラー"/>
+		<Res id="@SC.PlotYAxisErr" tr="プロットのy軸定義のエラー"/>
+		<Res id="@SC.PlotCondErr" tr="プロットの条件定義のエラー"/>
+		<Res id="@CS.#Vars!=#Eqs" tr="変数の数が方程式の数と等しくありません!"/>
+		<Res id="@SC.NoODEEqs" tr="ODE方程式がありません"/>
+		<Res id="@SC.#Vars!=#ODEs" tr="ODEモデルの変数の数が方程式の数と等しくありません!"/>
+		<Res id="@SC.WLSNoVars" tr="WLSモデルに宣言された変数がありません"/>
+		<Res id="@SC.WLSNoWLSEs" tr="WLS方程式がありません"/>
+		<Res id="@SC.WLSNotEnoughEQs" tr="WLS方程式が不足しています"/>
+		<Res id="@CS.WLSEsError" tr="WLSモデルのエラー"/>
+		<Res id="@CS.WLSECError" tr="WLS EC (等式制約付き)モデルのエラー"/>
+		<Res id="@SC.BadExpression" tr="不正な式"/>
+		<Res id="@SC.WrongExprType" tr="式タイプが不正です"/>
+		<Res id="@SC.MissingColor" tr="色がありません"/>
+		<Res id="@SC.UnexpectedToken" tr="予期しないトークン"/>
+		<Res id="@SC.Missing(AfterFn" tr="関数の後の開き括弧'('がありません"/>
+		<Res id="@SC.SyntaxError" tr="構文エラー"/>
+		<Res id="@SC.NestedConjNotAl" tr="ネストされた共役関数(conj内のconj)は許可されていません。手動で共役を作成し、フラットな共役式を作成してください。"/>
+		<Res id="@SC.OperatorAfter=" tr="代入演算子の後の演算子"/>
+		<Res id="@SC.Double=" tr="二重代入演算子 (代入の後の代入)"/>
+		<Res id="@SC.EqEndsWith=" tr="式/方程式が代入演算子で終わっています"/>
+		<Res id="@SC.UnkownSymbol" tr="不明なシンボル"/>
+		<Res id="@SC.TwoConsOperands" tr="2つの定数オペランドが連続して出現しています (2つの定数が連続しています)"/>
+		<Res id="@SC.UnsupportedToke" tr="サポートされていないトークン"/>
+	</Translations>
+</DevRes>

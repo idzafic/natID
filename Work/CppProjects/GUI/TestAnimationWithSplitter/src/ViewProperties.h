@@ -58,7 +58,7 @@ public:
     , _vl(10)
     , _hl(3)
     {
-        _neFrequency.setNoDec(2);
+        _neFrequency.setNumberOfDigitsAfterDecimalPoint(2);
         _neFrequency.setValue(_frequency);
         _neFrequency.setMaxValue(60);
         _neFrequency.setMinValue(0.01);

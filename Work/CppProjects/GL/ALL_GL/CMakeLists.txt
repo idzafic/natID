@@ -28,6 +28,10 @@ include(../TestGLTriang2/testGLTriang2.cmake)
 
 include(../TestGLTexture/testGLTexture.cmake)
 
+include(../TextureChess/textureChess.cmake)
+
+include(../TextureChess2/textureChess2.cmake)
+
 include(../TestGLAnimationFlat/testGLAnimationFlat.cmake)
 
 include(../TestGLAnimation3DTexture/testGLAnimation3DTexture.cmake)
@@ -40,7 +44,13 @@ include(../TestGLLight/testLight.cmake)
 
 include(../TestStencil/testStencil.cmake)
 
-include(../TestPerlin/testPerlin.cmake)
+include(../Radar2/Radar2.cmake)
 
 include(../TestGLTess2/testGLTess2.cmake)
+
+include(${WORK_ROOT}/DevEnv/ZipperLib.cmake)
+
+include(../TestPerlin/testPerlin.cmake)
+
+include(../Terrain/terrain.cmake)
 

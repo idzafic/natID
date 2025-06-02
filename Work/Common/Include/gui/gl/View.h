@@ -34,6 +34,10 @@ class NATGL_API View : public gui::DrawableView
     
 private:
     std::function<void()> _onTextureRead;
+protected:
+    float _logicalToPhysicalPixelScale = 1.0f;
+    float _logicaToPhysicalSizeScale = 1.0f;
+private:
     td::UINT4 _screenFB = 0xFFFFFFFF;
     td::BYTE _contRenderMode = 0;
 private:
@@ -70,7 +74,62 @@ protected:
     void registerForFocusEvents() const;
     
     void activateScreenFB();
-//    void setPreferredFrameRateRange(float minFPS, float maxFPS);
+    
+    float getLogicalToPhysicalPixelScale() const
+    {
+        return _logicalToPhysicalPixelScale;
+    }
+    
+    float getLogicalToPhysicalSizeScale() const
+    {
+        return _logicaToPhysicalSizeScale;
+    }
+#ifdef MU_DEBUG
+    const char* const dbgGetErrorStringCode(GLenum error) const
+    {
+        switch (error) {
+            case GL_NO_ERROR:
+                return "GL_NO_ERROR: No error has been recorded.";
+            case GL_INVALID_ENUM:
+                return "GL_INVALID_ENUM: An unacceptable value is specified for an enumerated argument.";
+            case GL_INVALID_VALUE:
+                return "GL_INVALID_VALUE: A numeric argument is out of range.";
+            case GL_INVALID_OPERATION:
+                return "GL_INVALID_OPERATION: The specified operation is not allowed in the current state.";
+#ifdef GL_STACK_OVERFLOW
+            case GL_STACK_OVERFLOW:
+                return "GL_STACK_OVERFLOW: This command would cause a stack overflow. (Deprecated in modern OpenGL)";
+#endif
+#ifdef GL_STACK_UNDERFLOW
+            case GL_STACK_UNDERFLOW:
+                return "GL_STACK_UNDERFLOW: This command would cause a stack underflow. (Deprecated in modern OpenGL)";
+#endif
+            case GL_OUT_OF_MEMORY:
+                return "GL_OUT_OF_MEMORY: There is not enough memory left to execute the command.";
+            case GL_INVALID_FRAMEBUFFER_OPERATION:
+                return "GL_INVALID_FRAMEBUFFER_OPERATION: The framebuffer object is not complete.";
+    #ifdef GL_CONTEXT_LOST
+            case GL_CONTEXT_LOST:
+                return "GL_CONTEXT_LOST: The OpenGL context has been lost (typically due to a graphics reset).";
+    #endif
+            default:
+                return "Unknown OpenGL error.";
+        }
+    }
+#endif
+    
+    inline void dbgCheckGLError() const
+    {
+#ifdef MU_DEBUG
+        GLenum error = glGetError();
+        if (error != GL_NO_ERROR)
+        {
+            const char* const pErr = dbgGetErrorStringCode(error);
+            mu::dbgLog("ERROR! OpenGL error in setupVBO! Error code = %x, desc=%s", error, pErr);
+            assert(false);
+        }
+#endif
+    }
     
     View();
 public:

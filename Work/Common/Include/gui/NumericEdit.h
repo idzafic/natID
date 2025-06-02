@@ -14,6 +14,7 @@
 #pragma once
 #include "LineEdit.h"
 #include <tuple>
+#include <td/Concepts.h>
 
 namespace gui
 {
@@ -35,10 +36,19 @@ public:
     NumericEdit(td::DataType dataType, LineEdit::Messages sendMsg = LineEdit::Messages::DoNotSend, bool bShowThSep = true, const td::String& toolTip = "", int nDec = -1);
     ~NumericEdit();
     bool getValue(td::Variant& val, bool checkType = false) const override;
+    
     td::Variant getValue() const;
+    
+    template <td::conc::NumericNotBool T>
+    void getValue(T& val) const
+    {
+        td::Variant varVal = getValue();
+        varVal.getValue(val);
+    }
+    
     gui::ObjType getObjType() const override { return ObjType::NumericEdit;}
-    void setNoDec(char nDec);
-    int getNoDec() const;
+    void setNumberOfDigitsAfterDecimalPoint(td::BYTE nDecPlace);
+    td::BYTE getNumberOfDigitsAfterDecimalPoint() const;
     void showThSep(bool bShowThSep);
     bool isThSepVisible() const;
     void setMinValue(double minVal);

@@ -159,6 +159,27 @@ public:
         return _buf;
     }
 
+    const char* c_str(float val, int nDec)
+    {
+        char* old_locale = setlocale(LC_NUMERIC, NULL);  // Save current locale
+        setlocale(LC_NUMERIC, "C");  // Set locale to "C"
+
+        if (SNPRINTF(_buf, MU_BUFFLEN, _TRUNCATE, "%.*f", nDec, val) <0)
+            _buf[MU_BUFFLEN] = 0;
+        setlocale(LC_NUMERIC, old_locale);  // Restore original locale
+        return _buf;
+    }
+
+    const char* c_str(double val, int nDec)
+    {
+        char* old_locale = setlocale(LC_NUMERIC, NULL);  // Save current locale
+        setlocale(LC_NUMERIC, "C");  // Set locale to "C"
+        if (SNPRINTF(_buf, MU_BUFFLEN, _TRUNCATE, "%.*lf", nDec, val) < 0)
+            _buf[MU_BUFFLEN] = 0;
+        setlocale(LC_NUMERIC, old_locale);  // Restore original locale
+        return _buf;
+    }
+
     const char* c_str(td::INT4 val)
     {
         if (SNPRINTF(_buf, MU_BUFFLEN, _TRUNCATE, "%d", val) < 0)
@@ -532,6 +553,11 @@ public:
     }
     
     static const char* c_str(td::DotPattern val)
+    {
+        return td::toString(val);
+    }
+    
+    static const char* c_str(td::Anchor val)
     {
         return td::toString(val);
     }

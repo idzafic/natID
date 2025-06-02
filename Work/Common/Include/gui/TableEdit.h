@@ -17,15 +17,22 @@
 #include <dp/IDataSet.h>
 #include <gui/Columns.h>
 #include <initializer_list>
+#include <cnt/SafeFullVector.h>
+#include <gui/InputDevice.h>
 
 namespace gui
 {
-class TableEditHelper;
 
+class TableEditHelper;
 
 class NATGUI_API TableEdit : public Control
 {
 public:
+    enum class BoolStyle : td::BYTE {Text=0, CheckCrossGreenRed, CircleGreenRed};
+    
+    using SelChCallBack = std::function<void(td::INT4)>;
+    using ActivateCallBack = std::function<void(td::INT4)>;
+    
     enum class RowNumberVisibility : td::BYTE
     {
         NotVisible = 0,         // Row number column is not displayed
@@ -34,7 +41,8 @@ public:
     };
 private:
     friend class TableEditHelper;
-    std::function<void()> _onChangedSelection;
+    SelChCallBack _onChangedSelection;
+    ActivateCallBack _onActivate;
 private:
     const char* getFormattedValue(int iRow, int iCol) const;
 protected:
@@ -42,16 +50,21 @@ protected:
     cnt::SafeFullVector<gui::Column> _columns;
     const char* _id;
     td::WORD _rowNumberWidth = 50;
+    td::UINT2 _contextMenuGroup; //system context menu group
     td::Ownership _dsOwnership;
     RowNumberVisibility _rowNumberVisibility;
     td::BYTE _tmpBlockMsg;
     td::BYTE _disableMsg;
-    
+    BoolStyle _boolStyle = BoolStyle::Text;
+    td::BYTE _contextMenuID;
+private:
     void measure(CellInfo&) override;
     void reMeasure(CellInfo&) override;
-    void sendSelChangedMessage();
-    
+    void sendSelChangedMessage(td::INT4 rowNo);
+    bool sendActivateMessage(td::INT4 rowNo);
+    void showContextMenu(const gui::InputDevice& inputDevice);
     void initVisualDefaults(size_t iCol, td::DataType dt);
+    bool onActionItem(gui::ActionItemDescriptor& aiDesc) override; //system context menus
 public:
     TableEdit(td::Ownership dataSetOwnerShip = td::Ownership::Extern, RowNumberVisibility rowNumberVisibility = RowNumberVisibility::NotVisible);
     ~TableEdit();
@@ -93,12 +106,29 @@ public:
     dp::IDataSet::Row getEmptyRow();
     //bool getDRow(size_t iRow, dp::RowWrapper& rowData);
 
-    const std::function<void()>& getChangedSelectionHandler() const;
-    void onChangedSelection(const std::function<void()>& fnToCall);
+    const SelChCallBack& getChangedSelectionHandler() const;
+    void onChangedSelection(const SelChCallBack& fnToCall);
+    void onActivate(const ActivateCallBack& fnToCall);
     RowNumberVisibility getRowNumberVisibility() const;
-    void setRowNumberWidth(td::WORD width);
-    td::WORD getRowNumberWidth() const;
-    void setColumnNumericFormat(int iCol, td::FormatFloat fmt);
+    void setColumnWidthWithRowNumber(td::WORD width);
+    td::WORD getColumnWidthWithRowNumber() const;
+    void setColumnNumericFormat(int iCol, td::FormatFloat fmt, int nDec = 6);
+    
+    void setColumnWidth(int iCol, td::WORD width);
+    td::WORD getColumnWidth(int iCol) const;
+    
+    void setEnumStrings(int iCol, const cnt::SafeFullVector<td::String>* pEnumStrings);
+    
+    void setBoolStyle(BoolStyle boolStyle);
+    BoolStyle getBoolStale() const;
+    
+    void setContextMenu(td::BYTE contextMenuID, td::UINT2 contextMenuGroup = 0);
+};
+
+class IDataSetPresenter
+{
+public:
+    virtual void show(dp::IDataSet* pDS) = 0;
 };
 
 } //namespace gui

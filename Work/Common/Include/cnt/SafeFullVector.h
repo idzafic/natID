@@ -106,6 +106,14 @@ namespace cnt
 			if (!EXTERN_ALLOCATOR && _data)
 				delete [] _data;
 		}
+        
+        void transferTo(SafeFullVector& vect)
+        {
+            vect._data = _data;
+            vect._size = _size;
+            _data = nullptr;
+            _size = 0;
+        }
 
 		inline void resize(size_t newSize)
 		{			
@@ -122,7 +130,7 @@ namespace cnt
 			{
 				//delete [] _data;
 				for (size_t i=0; i<_size; ++i)
-					pNew[i] = _data[i];
+					pNew[i] = std::move(_data[i]);
 				delete [] _data;
 			}
 			_data = pNew;
@@ -314,14 +322,11 @@ namespace cnt
 			if (!EXTERN_ALLOCATOR)
 			{
 				if (_size == size)
-				{
 					return;
-				}
 
 				if (_data)
-				{
 					delete[] _data;
-				}
+                
                 if (size > 0)
                     _data = new T[size];
                 else

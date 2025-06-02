@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevRes>
+    <Translations>
+        <Res id="@Plot_settings" tr="Diagrammeinstellungen"/>
+        <Res id="@Plot_zatvori" tr="Schließen"/>
+        <Res id="@Plot_legendCols" tr="Anzahl der Spalten in der Diagrammlegende:"/>
+        <Res id="@Plot_marginLeft" tr="Linker Rand:"/>
+        <Res id="@Plot_marginRight" tr="Rechter Rand:"/>
+        <Res id="@Plot_marginTop" tr="Oberer Rand:"/>
+        <Res id="@Plot_marginBottom" tr="Unterer Rand:"/>
+        <Res id="@Plot_xSpace" tr="Abstand zur X-Achsenbeschriftung:"/>
+        <Res id="@Plot_ySpace" tr="Abstand zur Y-Achsenbeschriftung:"/>
+        <Res id="@Plot_savedImageRes" tr="Auflösung des gespeicherten Bildes:"/>
+        <Res id="@Plot_height" tr="Bildhöhe:"/>
+        <Res id="@Plot_width" tr="Bildbreite"/>
+        <Res id="@Plot_colorDef" tr="Für Farben definiert:"/>
+        <Res id="@Plot_defLineProps" tr="Standardlinien Eigenschaften"/>
+        <Res id="@Plot_allMode" tr="Jedes Thema"/>
+        <Res id="@Plot_darkMode" tr="Dunkler Modus"/>
+        <Res id="@Plot_whiteMode" tr="Heller Modus"/>
+        <Res id="@Plot2JPG" tr="JPG Bildformat"/>
+        <Res id="@Plot2PNG" tr="PNG Bildformat"/>
+        <Res id="@Plot2PDF" tr="PDF Dokumentenformat"/>
+        <Res id="@Plot2EPS" tr="EPS Bildformat"/>
+        <Res id="@Plot2SVG" tr="SVG Bildformat"/>
+        <Res id="@Plot2TXT" tr="TXT (Text) Format"/>
+        <Res id="Fig_AllMode" tr="Alle Farbmodi"/>
+        <Res id="Fig_DarkMode" tr="Dunkler Farbmodus"/>
+        <Res id="Fig_LightMode" tr="Heller Farbmodus"/>
+        <Res id="Fig_DefLineProps" tr="Linieneigenschaften"/>
+        <Res id="@Plot_AxisFS" tr="Schriftgröße:"/>
+        <Res id="@Plot_AxisFN" tr="Schriftart:"/>
+    </Translations>
+</DevRes>

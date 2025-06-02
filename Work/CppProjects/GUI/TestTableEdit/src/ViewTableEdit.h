@@ -459,6 +459,11 @@ protected:
                 _imgView.setImage(&_symbolToShowInView);
             else
                 _imgView.setImage(&_imageToShowInView);
+            
+            //just to test
+            cnt::SafeFullVector<td::Color> content;
+            _imageToShowInView.getContent(content);
+            return true;
         }
         
         if (pBtn == &_btnRemoveAll)

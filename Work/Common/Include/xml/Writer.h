@@ -16,6 +16,7 @@
 #include <mu/EnumSerializerManager.h>
 #include <td/BoolCh.h>
 #include <mem/Buffer.h>
+#include <td/Concepts.h>
 
 namespace xml
 {	
@@ -648,21 +649,7 @@ namespace xml
 		{
 			attribute(attribName, val());
 		}
-
-		template <typename ATTTYPE>
-		void attribute(const char* attribName, const ATTTYPE& val)
-		{
-			if (!_nodeStarted)
-				throw td::String("Cannot add attrib! There is no node started!");
-
-			
-			putCStr(" ");
-			writeString(attribName);
-			putCStr("=\"");
-			assert(_pConverter != nullptr);
-			writeStringWithChecking(_pConverter->c_str(val));
-			putCStr("\"");
-		}
+        
 		
 		void attribute(const char* attribName, const td::Variant& val, bool writeTD_NONE = true)
 		{
@@ -703,9 +690,9 @@ namespace xml
 			putCStr("\"");
 		}
 		
-		void attribute(const char* attribName, const td::String& attribValue)
+		void attribute(const char* attribName, const td::String& attribValue, bool checkValue=true)
 		{
-			attributeString(attribName, attribValue.c_str(), true);
+            attributeString(attribName, attribValue.c_str(), checkValue);
 		}
 
 		void attribute(const char* attribName, bool val)
@@ -733,8 +720,38 @@ namespace xml
                 char tmp[2];
                 tmp[0] = chVal;
                 tmp[1]=0;
-                writeStringWithChecking(tmp);
+                writeString(tmp);
             }
+            putCStr("\"");
+        }
+        
+        template <td::conc::NumericNotBool TVAL>
+        void attribute(const char* attribName, TVAL val)
+        {
+            if (!_nodeStarted)
+                throw td::String("Cannot add attrib! There is no node started!");
+
+            
+            putCStr(" ");
+            writeString(attribName);
+            putCStr("=\"");
+            assert(_pConverter != nullptr);
+            writeString(_pConverter->c_str(val));
+            putCStr("\"");
+        }
+
+        template <td::conc::NonNumeric ATTTYPE>
+        void attribute(const char* attribName, const ATTTYPE& val)
+        {
+            if (!_nodeStarted)
+                throw td::String("Cannot add attrib! There is no node started!");
+
+            
+            putCStr(" ");
+            writeString(attribName);
+            putCStr("=\"");
+            assert(_pConverter != nullptr);
+            writeStringWithChecking(_pConverter->c_str(val));
             putCStr("\"");
         }
         
@@ -903,7 +920,7 @@ namespace xml
 			putCStr("-->");
 		}
 
-		void commentInNewLine(const char* comment)
+		void commentInNewLine(const char* comment, size_t nTabsAfterNewLine = 0)
 		{
 			if (_nodeStarted)
 			{
@@ -911,7 +928,15 @@ namespace xml
 				_nodeStarted = 0;
 			}
 
-			putCStr("\n<!--");
+            if (nTabsAfterNewLine == 0)
+                putCStr("\n<!--");
+            else
+            {
+                putCStr("\n");
+                for (size_t i=0; i<nTabsAfterNewLine; ++i)
+                    putCStr("\t");
+                putCStr("<!--");
+            }
 			writeString(comment);
 			putCStr("-->");
 		}

@@ -23,6 +23,7 @@
 namespace gui
 {
 
+class Application;
 class ToolBar;
 class BaseView;
 class WindowHelper;
@@ -33,9 +34,10 @@ class FileDialog;
 
 class NATGUI_API Window : public Frame
 {
+    friend class Application;
     friend class WindowHelper;
     friend class Dialog;
-    
+protected:
 public:
     enum class FrameSize : td::BYTE {Minimized=0, UseSpecified, AdjustToContent, Maximized, FullScreen};
 private:
@@ -46,20 +48,21 @@ protected:
     BaseView* _pCentralView = nullptr;
     StatusBar* _pStatusBar = nullptr;
     BaseView* _pAuxView = nullptr;
-//    td::PointAndSize<int> _initialRequestedGeometry;
+    void* _menuActions = nullptr;
     td::Size<int> _initialSize;
     cnt::PushBackVector<NatObject*> _attachments;
     td::UINT4 _wndID = 0;
     Frame::FixSizes _fixSizes = Frame::FixSizes::No;
     td::BYTE _wndCloseFlag : 1;
     td::BYTE _isDialog : 1;
-    //    td::BYTE _firstAppearance : 1;
     td::BYTE _isModal : 1;
     td::BYTE _keepOnTop : 1;
     td::BYTE _resizable : 1;
     td::BYTE _isOpen : 1;
     td::BYTE _attachToParent : 1;
-    //td::BYTE _generateOnCloseEvent : 1;
+    td::BYTE _frozen : 1;
+    td::BYTE _focusEvents : 1;
+//    td::BYTE _bulkActionItemInsert : 1;
     
 private:
     Window() = delete;
@@ -82,9 +85,15 @@ protected:
     void setContextMenus(ContextMenus* pContextMenus);
     virtual void onInitialAppearance(); //will be called only once
     
+    //onFocus & onFocusLost needs to enabled with enableFocusEvents
+    void enableFocusEvents();
+    virtual void onFocus(); //will be called when window obtains focus
+    virtual void onFocusLost(); //will be called when window is not in focus anymore
+    
     virtual bool shouldClose(); //window will not be closed if this method returns false
     void invokeOnCloseEnvent();
     virtual void onClose(); //will be called only once
+    virtual void systemColorModeChanged(bool bDarkMode);
     
     Window(Frame* parent, const gui::Size& size, td::UINT4 wndID); //for dialog
 public:
@@ -114,6 +123,16 @@ public:
     }
     
     template <typename TID>
+    gui::Dialog* getAttachedDialog(TID wndID)
+    {
+        gui::Window* pWnd = getAttachedWindow((td::UINT4) wndID);
+        if (!pWnd)
+            return nullptr;
+        gui::Dialog* pDlg = reinterpret_cast<gui::Dialog*>(pWnd);
+        return pDlg;
+    }
+    
+    template <typename TID>
     gui::FileDialog* getAttachedFileDialog(TID wndID)
     {
         return getAttachedFileDialog((td::UINT4) wndID);
@@ -133,6 +152,7 @@ public:
     Frame::FixSizes getFixSizes() const;
     const ToolBar* getToolBar() const;
     ToolBar* getToolBar();
+    BaseView* getCentralView();
     const BaseView* getCentralView() const;
     const StatusBar* getStatusBar() const;
     bool isModal() const;
@@ -142,9 +162,22 @@ public:
     bool isOnTopOfParent() const;
     void setResizable(bool bResizable);
     bool isResizable() const;
+    
+    //event handlers
+    bool onActionItem(gui::ActionItemDescriptor& aiDesc) override;
+    void onActionItem(td::BYTE menuID, td::BYTE actionID, const std::function<void()>& fnToCall); //first and last submenu = 0
+    void onActionItem(td::BYTE menuID, td::BYTE firstSubMenuID, td::BYTE actionID, td::BYTE lastMenuID, const std::function<void()>& fnToCall);
+    
+    void freeze();
+    void unFreeze();
+    bool isFrozen() const;
+    
     bool isClosing() const;
     bool isMain() const; //returns true if this window is the main window
+    
+    float getLogicalToPhysicalPixelScale() const;
 };
+
 } //namespace gui
 
 #else

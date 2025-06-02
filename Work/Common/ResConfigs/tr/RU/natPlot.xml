@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevRes>
+    <Translations>
+        <Res id="@Plot_settings" tr="Настройки графика"/>
+        <Res id="@Plot_zatvori" tr="Закрыть"/>
+        <Res id="@Plot_legendCols" tr="Количество столбцов в легенде графика:"/>
+        <Res id="@Plot_marginLeft" tr="Левое поле:"/>
+        <Res id="@Plot_marginRight" tr="Правое поле:"/>
+        <Res id="@Plot_marginTop" tr="Верхнее поле:"/>
+        <Res id="@Plot_marginBottom" tr="Нижнее поле:"/>
+        <Res id="@Plot_xSpace" tr="Расстояние до метки оси X:"/>
+        <Res id="@Plot_ySpace" tr="Расстояние до метки оси Y:"/>
+        <Res id="@Plot_savedImageRes" tr="Разрешение сохраненного изображения:"/>
+        <Res id="@Plot_height" tr="Высота изображения:"/>
+        <Res id="@Plot_width" tr="Ширина изображения"/>
+        <Res id="@Plot_colorDef" tr="Цвета, определенные для:"/>
+        <Res id="@Plot_defLineProps" tr="Свойства линии по умолчанию"/>
+        <Res id="@Plot_allMode" tr="Любая тема"/>
+        <Res id="@Plot_darkMode" tr="Темный режим"/>
+        <Res id="@Plot_whiteMode" tr="Светлый режим"/>
+        <Res id="@Plot2JPG" tr="Формат изображения JPG"/>
+        <Res id="@Plot2PNG" tr="Формат изображения PNG"/>
+        <Res id="@Plot2PDF" tr="Формат документа PDF"/>
+        <Res id="@Plot2EPS" tr="Формат изображения EPS"/>
+        <Res id="@Plot2SVG" tr="Формат изображения SVG"/>
+        <Res id="@Plot2TXT" tr="Формат TXT (текст)"/>
+        <Res id="Fig_AllMode" tr="Все цветовые режимы"/>
+        <Res id="Fig_DarkMode" tr="Тёмный цветовой режим"/>
+        <Res id="Fig_LightMode" tr="Светлый цветовой режим"/>
+        <Res id="Fig_DefLineProps" tr="Свойства линии"/>
+        <Res id="@Plot_AxisFS" tr="Размер шрифта:"/>
+        <Res id="@Plot_AxisFN" tr="Название шрифта:"/>
+    </Translations>
+</DevRes>

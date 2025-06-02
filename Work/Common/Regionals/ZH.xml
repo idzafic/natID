@@ -1,0 +1,29 @@
+<?xml version='1.0'?>
+<Regionals id="zh-CN">
+    <Numeric decSeparator="." thSeparator=","/>
+    <Date separator="/" winShort="YYYY/mm/dd" winLong="YYYY年mm月dd日 dddd" shortDM="mm/dd" shortY2="YY/mm/dd" shortY4="YYYY/mm/dd"/>
+    <Time separator=":" winShort="hh:mm:ss" winLong="hh:mm:ss.u" shortHMM="h:mm" shortHMMSS="h:mm:ss" shortHMMSSu="h:mm:ss.u"/>
+    <Days>
+        <Day name="星期日" shortName="日"/>
+        <Day name="星期一" shortName="一"/>
+        <Day name="星期二" shortName="二"/>
+        <Day name="星期三" shortName="三"/>
+        <Day name="星期四" shortName="四"/>
+        <Day name="星期五" shortName="五"/>
+        <Day name="星期六" shortName="六"/>
+    </Days>
+    <Months>
+        <Month name="一月" shortName="1月"/>
+        <Month name="二月" shortName="2月"/>
+        <Month name="三月" shortName="3月"/>
+        <Month name="四月" shortName="4月"/>
+        <Month name="五月" shortName="5月"/>
+        <Month name="六月" shortName="6月"/>
+        <Month name="七月" shortName="7月"/>
+        <Month name="八月" shortName="8月"/>
+        <Month name="九月" shortName="9月"/>
+        <Month name="十月" shortName="10月"/>
+        <Month name="十一月" shortName="11月"/>
+        <Month name="十二月" shortName="12月"/>
+    </Months>
+</Regionals>

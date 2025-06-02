@@ -1,0 +1,29 @@
+<?xml version='1.0'?>
+<Regionals id="ko-KR">
+	<Numeric decSeparator="." thSeparator=","/>
+	<Date separator="-" winShort="YYYY-mm-dd" winLong="YYYY년 mm월 dd일 dddd" shortDM="mm-dd" shortY2="YY-mm-dd" shortY4="YYYY-mm-dd"/>
+	<Time separator=":" winShort="tt h:mm:ss" winLong="tt h:mm:ss.u" shortHMM="tt h:mm" shortHMMSS="tt h:mm:ss" shortHMMSSu="tt h:mm:ss.u"/>
+	<Days>
+		<Day name="일요일" shortName="일"/>
+		<Day name="월요일" shortName="월"/>
+		<Day name="화요일" shortName="화"/>
+		<Day name="수요일" shortName="수"/>
+		<Day name="목요일" shortName="목"/>
+		<Day name="금요일" shortName="금"/>
+		<Day name="토요일" shortName="토"/>
+	</Days>
+	<Months>
+		<Month name="1월" shortName="1월"/>
+		<Month name="2월" shortName="2월"/>
+		<Month name="3월" shortName="3월"/>
+		<Month name="4월" shortName="4월"/>
+		<Month name="5월" shortName="5월"/>
+		<Month name="6월" shortName="6월"/>
+		<Month name="7월" shortName="7월"/>
+		<Month name="8월" shortName="8월"/>
+		<Month name="9월" shortName="9월"/>
+		<Month name="10월" shortName="10월"/>
+		<Month name="11월" shortName="11월"/>
+		<Month name="12월" shortName="12월"/>
+	</Months>
+</Regionals>

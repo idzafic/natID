@@ -26,6 +26,7 @@ class ViewGLAnimation3DTexture2 : public gui::gl::View
     glm::mat4 _viewMatrix;
     glm::mat4 _mvpMatrix;
     
+    
 //    GLuint _textureIDs[2];  //two textures
     gui::gl::Textures _textures;
     gui::gl::Buffer _gpuBuffer;
@@ -179,13 +180,7 @@ protected:
         gui::gl::Context::enable(gui::gl::Context::Flag::DepthTest);
         gui::gl::Context::enable(gui::gl::Context::Flag::CullFace);
         
-#ifdef DEBUG_GL
-        GLenum error = glGetError();
-        if (error != GL_NO_ERROR)
-        {
-            mu::dbgLog("OpenGL error: %x", error);
-        }
-#endif
+        dbgCheckGLError();
     }
     
     bool prepareNextFrame() override
@@ -210,7 +205,6 @@ protected:
         gui::gl::Context::clear({gui::gl::Context::Clear::Color, gui::gl::Context::Clear::Depth});
 
         _program.activate();
-        
         _program.execute();
 
         // Unbind program

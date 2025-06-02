@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevRes>
+	<Translations>
+		<Res id="@ML.HeaderIncorrect" tr="Заголовок модели неправильный или отсутствует (@ML.HeaderIncorrectOrMissing)"/>
+		<Res id="@SC.CmplxTypeInReal" tr="Обнаружен комплексный тип в модальном режиме реальной области (@SC.CmplxTypeInReal)"/>
+		<Res id="@CELH.Type" tr="Тип"/>
+		<Res id="@CELHT.TypeTT" tr="Тип сообщения (Инфо, Предупреждение, Ошибка)"/>
+		<Res id="@CELH.Editor" tr="Редактор"/>
+		<Res id="@CELHT.Editor" tr="Редактор, сгенерировавший запись журнала (значок главного мозга или значок редактора визуализации)"/>
+		<Res id="@CELH.Line#" tr="Линия #"/>
+		<Res id="@CELH.Line#TT" tr="Номер строки в соответствующем редакторе"/>
+		<Res id="@CELH.Col#" tr="Столбец #"/>
+		<Res id="@CELH.Col#TT" tr="Номер столбца в соответствующем редакторе"/>
+		<Res id="@CELH.Msg" tr="Описание сообщения"/>
+		<Res id="@CELH.MsgTT" tr="Описание сообщения со всеми доступными подробностями"/>
+		<Res id="@CE.VarDDVars" tr="Переменная главной модели уже была определена в переменных (@CE.VarDDVars)"/>
+		<Res id="@CE.SubVarDDSubVars" tr="Переменная подмодели уже была определена в переменных подмодели (@CE.SubVarDDSubVars)"/>
+		<Res id="@CE.ParDDInPars" tr="Параметр главной модели уже был определен в параметрах (@CE.ParDDInPars)"/>
+		<Res id="@CE.ParDDInVars" tr="Параметр главной модели уже был определен в переменных главной модели (@CE.ParDDInVars)"/>
+		<Res id="@CE.SubParDDSubVars" tr="Параметр подмодели уже был определен в переменных подмодели (@CE.SubParDDSubVars)"/>
+		<Res id="@CE.SubParDDSubPars" tr="Параметр подмодели уже был определен в параметрах подмодели (@CE.SubParDDSubPars)"/>
+		<Res id="@CE.SubParDDInPars" tr="Параметр подмодели уже был определен в параметрах главной модели (@CE.SubParDDInPars)"/>
+		<Res id="@CE.notInModel" tr="Токен отсутствует в модели (@CE.notInModel)"/>
+		<Res id="@CE.endMissing" tr="Отсутствует end (@CE.endMissing)"/>
+		<Res id="@CE.AttribClosedNoO" tr="Атрибут был закрыт с помощью ']' без его открытия (отсутствует '[') (@CE.AttribClosedNoOpen)"/>
+		<Res id="@CE.AttribNotClosed" tr="Раздел атрибутов был открыт, но так и не был закрыт с помощью ']' (@CE.AttribNotClosed)"/>
+		<Res id="@CE.wrongModelPos" tr="Неправильное положение модели (@CE.wrongModelPos)"/>
+		<Res id="@CE.endMissmatch" tr="Несоответствие End (Вероятно, слишком много End) (@CE.endMissmatch)"/>
+		<Res id="@CE.AttribMismatch" tr="Несоответствие типа атрибута (@CE.AttribMismatch)"/>
+		<Res id="@CE.UnknownLabel" tr="Неизвестная метка (@CE.UnknownLabel)"/>
+		<Res id="@CE.UnexpectedToken" tr="Неожиданный токен (@CE.UnexpectedToken)"/>
+		<Res id="@CESB.NoOfErrors" tr="Количество ошибок:"/>
+		<Res id="@CESB.CursorPositio" tr="Положение курсора:"/>
+		<Res id="@SC.EmpryParamName" tr="Пустое имя параметра (@SC.EmpryParamName)"/>
+		<Res id="@SC.AssignWith0Toke" tr="Присвоение с нулевыми токенами (@SC.AssignWith0Tokens)"/>
+		<Res id="@SC.AssignWith2Toke" tr="Присвоение с двумя токенами (@SC.AssignWith2Tokens)"/>
+		<Res id="@SC.WrongType" tr="Неправильный тип (@SC.WrongType)"/>
+		<Res id="@SC.Missing=InAssig" tr="Отсутствует '=' в выражении присваивания (@SC.Missing=InAssignement)"/>
+
+		<Res id="@SC.EmpryParamName" tr="Пустое имя параметра (@SC.EmpryParamName)"/>
+		<Res id="@SC.AssignWith0Toke" tr="Присваивание с нулевым количеством токенов (@SC.AssignWith0Tokens)"/>
+		<Res id="@SC.AssignWith2Toke" tr="Присваивание с двумя токенами (@SC.AssignWith2Tokens)"/>
+		<Res id="@SC.WrongType" tr="Неверный тип (@SC.WrongType)"/>
+		<Res id="@ML.HeaderParamInco" tr="Неполный параметр заголовка (отсутствует значение после &apos;=&apos;)"/>
+		<Res id="@ML.HeaderTokError" tr="Неожиданный токен в определении заголовка модели"/>
+		<Res id="@ML.HeaderEndAfter" tr="Содержимое в той же строке после &apos;end&apos; в объявлении заголовка"/>
+		<Res id="@ML.HeaderParamUnkn" tr="Неизвестное имя параметра заголовка"/>
+		<Res id="@ML.HeaderParamExp=" tr="Ожидается &apos;=&apos; после имени параметра заголовка"/>
+		<Res id="@ML.HeaderReportExp" tr="Ожидается значение параметра &apos;Report type&apos;"/>
+		<Res id="@ML.HeaderWrong=Pos" tr="Неверная позиция знака &apos;=&apos; в определении параметра заголовка"/>
+		<Res id="@ML.HeaderWrongCons" tr="Неверная позиция константы в определении параметра заголовка"/>
+		<Res id="@ML.HeaderWrongPara" tr="Неверный тип параметра заголовка (указанный тип значения не подходит для этого имени параметра)"/>
+		<Res id="@ML.HeaderWrongParT" tr="Неверный тип параметра заголовка (указанный тип значения не подходит для этого имени параметра)"/>
+		<Res id="@ML.HeaderUnknownPa" tr="Неизвестный тип/имя параметра заголовка"/>
+		<Res id="@ML.HeaderWithout:" tr="Отсутствует &apos;:&apos; в объявлении заголовка (последний токен после &apos;Header&apos;)"/>
+		<Res id="@ML.HeaderTokenAfte" tr="Есть токен в той же строке, где определен &apos;Header&apos; после &apos;:&apos;. Знак &apos;:&apos; должен быть последним токеном в этой строке."/>
+		<Res id="@ML.HeaderFirstToke" tr="Объявление заголовка должно начинаться с токена &apos;Header&apos;."/>
+		<Res id="@CE.ExpEndsWithOper" tr="Выражение/уравнение заканчивается оператором!"/>
+		<Res id="@CE.ExpEndsWithAssi" tr="Выражение заканчивается присваиванием!"/>
+		<Res id="@CE.Mising_)" tr="Несоответствие открывающих-закрывающих скобок. Отсутствует &apos;)&apos;"/>
+		<Res id="@CE.Mising_(" tr="Несоответствие открывающих-закрывающих скобок. Отсутствует &apos;(&apos;"/>
+		<Res id="@CE.CloseParenthesi" tr="Несоответствие открывающих-закрывающих скобок."/>
+		<Res id="@ET.FnParamOr()MM" tr="Ошибка параметра функции или несоответствие &apos;)&apos; открывающей - &apos;)&apos; закрывающей"/>
+		<Res id="@ET.FnNotPrpFormatt" tr="Функция @ неправильно отформатирована"/>
+		<Res id="@ET.FnNeeds_(" tr="Функция @ неправильно отформатирована! Отсутствует &apos;(&apos;"/>
+		<Res id="@CE.ExpEndsWithOpen" tr="Выражение/уравнение заканчивается открывающей скобкой!"/>
+		<Res id="@ET.FnNeeds_)" tr="Функция @ неправильно отформатирована! Отсутствует &apos;)&apos;"/>
+		<Res id="@ET.LabelAfterOpera" tr="ID параметра/переменной=&apos;@&apos; после другого операнда"/>
+		<Res id="@ET.ConstAfterOpera" tr="Константа=@ после другого операнда"/>
+		<Res id="@ET.(_AfterOperand" tr="Открывающая скобка после операнда"/>
+		<Res id="@ET.OperAfterUnOp" tr="Оператор &apos;@&apos; после унарного оператора &apos;@&apos;"/>
+		<Res id="@ET.UnaryAfterUnOpr" tr="Унарный оператор &apos;@&apos; после операнда"/>
+		<Res id="@ET.OperAfterOper" tr="Оператор &apos;@&apos; после оператора &apos;@&apos;"/>
+		<Res id="@ET.,NeedsOperator" tr="Запятая следует за унарным оператором!"/>
+		<Res id="@ET.,OutsideFn" tr="Запятая используется вне многопараметрических функций!"/>
+		<Res id="@ET.()_Mismatch" tr="Несоответствие открывающих-закрывающих скобок!"/>
+		<Res id="@ET.FnParamMising" tr="Отсутствует узел параметра функции!"/>
+		<Res id="@ET.FnParam#Commas" tr="Количество запятых не соответствует функции! Укажите все параметры функции!"/>
+		<Res id="@ET.FnParam2Err" tr="Невозможно подготовить второй параметр многопараметрической функции!"/>
+		<Res id="@ET.,AfterUnFn" tr="Запятая после унарной функции!"/>
+		<Res id="@ET.MFnPremEnd" tr="Преждевременное завершение уравнения при разборе многопараметрической функции fn=@!"/>
+		<Res id="@ET.MFnExpOprnd" tr="Ожидался операнд, но получен не-операнд при разборе многопараметрической функции fn=@!"/>
+		<Res id="@ET.MFnNoVar2" tr="Многопараметрическая функция @ не поддерживает переменные в качестве второго параметра"/>
+		<Res id="@ET.MFnNoVar3" tr="Многопараметрическая функция @ не поддерживает переменные в качестве третьего параметра"/>
+		<Res id="@ET.ExpPremEnd" tr="Преждевременное завершение уравнения/выражения"/>
+		<Res id="@ET.Exp,InMFn" tr="Ожидается запятая в многопараметрической функции: @"/>
+		<Res id="@ET.ExpPremEndFn" tr="Преждевременное завершение уравнения (fn=@)!"/>
+		<Res id="@ET.sAfterOprnd" tr="Оператор Лапласа после другого операнда"/>
+		<Res id="@ET.UnexpTokenID" tr="Неожиданный ID токена: @(@)"/>
+		<Res id="@ET.ErrDifIfThen" tr="Невозможно продифференцировать уравнение if-then-else!"/>
+		<Res id="@SC.TFBadFormat" tr="Функция передачи неправильно отформатирована!"/>
+		<Res id="@ET.ErrInitValueExp" tr="Невозможно создать дерево выражений для выражения начального значения!"/>
+		<Res id="@SC.InitValErr" tr="Невозможно вычислить начальное значение!"/>
+		<Res id="@SC.NLReadFail" tr="Ошибка чтения блока NL"/>
+		<Res id="@SC.NLNvars!=NEQsl" tr="Количество переменных не равно количеству уравнений!"/>
+		<Res id="@SC.CannotSolveSubM" tr="Невозможно решить &apos;SubModel&apos;"/>
+		<Res id="@SC.EmptyJacSubMode" tr="Пустой якобиан в &apos;SubModel&apos;"/>
+		<Res id="@SC.EmptyJacobian" tr="Пустой якобиан"/>
+		<Res id="@SC.CannotFactorize" tr="Невозможно факторизовать матрицу в &apos;SubModel&apos;"/>
+		<Res id="@SC.LUSolveErrorSub" tr="Ошибка разреженного решения LU в &apos;SubModel&apos;"/>
+		<Res id="@SC.LUSolveError" tr="Ошибка разреженного решения LU"/>
+		<Res id="@SC.MaxIterLimitSub" tr="Достигнут максимальный предел итераций в &apos;SubModel&apos;"/>
+		<Res id="@SC.MaxIterLimit" tr="Достигнут максимальный предел итераций"/>
+		<Res id="@SC.FactorErrorSubM" tr="Ошибка факторизации разреженной матрицы в &apos;SubModel&apos;"/>
+		<Res id="@SC.FactorizationEr" tr="Ошибка разреженной факторизации"/>
+		<Res id="@ET.Expected_)" tr="Ожидается закрывающая скобка &apos;)&apos;"/>
+		<Res id="@ET.FnAfterOperand" tr="Функция после операнда"/>
+		<Res id="@ET.LimitFnFormatNo" tr="Формат функции предела не в порядке"/>
+		<Res id="@ET.LimiFnWo_(" tr="Функция предела без открывающей скобки &apos;(&apos;"/>
+		<Res id="@ET.LimitFnNeeds_)" tr="Функция предела требует закрывающую скобку &apos;)&apos;"/>
+		<Res id="@ET.FnNotPrpFmt" tr="Функция неправильно отформатирована"/>
+		<Res id="@ET.)_AfterOper" tr="Закрывающая скобка &apos;)&apos; после оператора"/>
+		<Res id="@ET.EmptyExpression" tr="Пустое выражение"/>
+		<Res id="@ET.UnexpectedEnd" tr="Неожиданное завершение выражения"/>
+		<Res id="@ET.OperatorWoOprnd" tr="Оператор без операнда"/>
+		<Res id="@SC.ErrInReInit" tr="Ошибка в &apos;ReInit&apos;"/>
+		<Res id="@SC.ErrInPreProc" tr="Ошибка в &apos;PreProc&apos;"/>
+		<Res id="@SC.ErrInIterPostPr" tr="Ошибка в &apos;IterPostProc&apos;"/>
+		<Res id="@SC.ErrInBasePostPr" tr="Ошибка в &apos;BasePostProc&apos;"/>
+		<Res id="@SC.ErrInPostProc" tr="Ошибка в &apos;PostProc&apos;"/>
+		<Res id="@SC.ErrInLimits" tr="Ошибка в &apos;Limits&apos;"/>
+		<Res id="@SC.ErrorInRepeat" tr="Ошибка в &apos;Repeat&apos;"/>
+		<Res id="@SC.ODEReadModelErr" tr="Ошибка чтения/разбора раздела &apos;ODE&apos;"/>
+		<Res id="@SC.WrongDTForODE" tr="Неверный шаг интегрирования для ODE. dT должен быть положительным значением!"/>
+		<Res id="@SC.NoDeltaT" tr="Значение для шага интегрирования (dT) не указано!"/>
+		<Res id="@SC.WLSReadFail" tr="Ошибка чтения раздела &apos;WLS&apos;"/>
+		<Res id="@CE.WLSEErrorSolve" tr="Ошибка при решении модели WLS"/>
+		<Res id="@SC.ErrorDAEInit" tr="Ошибка в инициализации DAE"/>
+		<Res id="@SC.DAEFactorizatio" tr="Ошибка факторизации DAE"/>
+		<Res id="@SC.WrongDTForDAE" tr="Неверный dt для DAE"/>
+		<Res id="@SC.WrongDAEMethod" tr="Неверный метод решения DAE (разрешенные методы: Euler, RK2, RK4, RK6,...)"/>
+		<Res id="@SC.WrongDAEMethodS" tr="Неверный метод DAE в &apos;SubModel&apos;"/>
+		<Res id="@CS.DistNoType" tr="Определение распределения требует &apos;type&apos;! (разрешенные типы: Gauss, Student, Normal,...)"/>
+		<Res id="@CS.NoMinInUniformD" tr="Значение &apos;min&apos; обязательно для равномерного распределения"/>
+		<Res id="@CS.NoMaxInUniformD" tr="Значение &apos;max&apos; обязательно для равномерного распределения"/>
+		<Res id="@CS.NoPimBernoulliD" tr="Значение &apos;p&apos; обязательно для распределения Бернулли"/>
+		<Res id="@CS.NoLamdaInPoisso" tr="Значение &apos;lambda&apos; обязательно для распределения Пуассона"/>
+		<Res id="@CS.NoLamdaInExponD" tr="Значение &apos;lambda&apos; обязательно для экспоненциального распределения"/>
+		<Res id="@CS.NoAlphaInGammaD" tr="Значение &apos;alpha&apos; обязательно для гамма-распределения"/>
+		<Res id="@CS.NoBetaInGammaDi" tr="Значение &apos;beta&apos; обязательно для гамма-распределения"/>
+		<Res id="@CS.NoMeanInGaussDi" tr="Значение &apos;mean&apos; обязательно для распределения Гаусса"/>
+		<Res id="@CS.NoDevInGaussDis" tr="Значение &apos;dev&apos; обязательно для распределения Гаусса"/>
+		<Res id="@CS.0DevInGaussDist" tr="Значение &apos;dev&apos; должно быть положительным для распределения Гаусса!"/>
+		<Res id="@CS.NoMeanInLogGaus" tr="Значение &apos;mean&apos; обязательно для распределения &apos;LogGauss&apos;"/>
+		<Res id="@CS.NoDevInLogGausD" tr="Значение &apos;dev&apos; обязательно для распределения &apos;LogGauss&apos;"/>
+		<Res id="@CS.NoKInChiSquared" tr="Значение &apos;k&apos; обязательно для распределения &apos;ChiSquared&apos;"/>
+		<Res id="@CS.NoNInStudentDis" tr="Значение &apos;k&apos; обязательно для распределения &apos;Student&apos;"/>
+		<Res id="@CS.UnknowntDistrib" tr="Неизвестное распределение"/>
+		<Res id="@SC.Mising=InAssign" tr="Отсутствует токен присваивания в выражении присваивания"/>
+		<Res id="@SC.NoVarsDeclared" tr="Нет объявленных переменных"/>
+		<Res id="@SC.EmptyInitExpr" tr="Пустое выражение инициализации"/>
+		<Res id="@SC.MissingDotInAss" tr="Отсутствует точка в присваивании"/>
+		<Res id="@SC.NoImagRealPartI" tr="Нет члена &apos;imag&apos; или &apos;real&apos; в присваивании"/>
+		<Res id="@SC.NoParentSolver" tr="Нет родительского решателя"/>
+		<Res id="@SC.WrongAssignment" tr="Неверное уравнение присваивания"/>
+		<Res id="@SC.WrongIfConditio" tr="Неверное условие в операторе &apos;if&apos;"/>
+		<Res id="@SC.WrongSignalInIf" tr="Неверный сигнал в операторе &apos;if&apos;"/>
+		<Res id="@SC.EmptyIf" tr="Пустой &apos;if&apos;"/>
+		<Res id="@SC.IncompleteIf" tr="Неполный оператор &apos;if&apos;"/>
+		<Res id="@SC.ElseExpected" tr="Ожидается &apos;else&apos; в уравнении if!"/>
+		<Res id="@SC.NoExprInElse" tr="Нет выражения в операторе &apos;else&apos;"/>
+		<Res id="@SC.WrongSignalInEl" tr="Неверный сигнал в операторе &apos;else&apos;"/>
+		<Res id="@SC.ElseMissingEnd" tr="&apos;else&apos; требует завершающего ключевого слова &apos;end&apos;"/>
+		<Res id="@SC.IncAssignmentEq" tr="Неполное выражение присваивания"/>
+		<Res id="@SC.UnknownSymbol" tr="Неизвестный символ"/>
+		<Res id="@SC.CannotMakeExpre" tr="Невозможно создать выражение"/>
+		<Res id="@SC.CannotMakeIFExp" tr="Невозможно создать выражение &apos;if&apos;"/>
+		<Res id="@SC.IncompleteIF" tr="Неполное выражение &apos;if&apos;"/>
+		<Res id="@SC.IfInUnsupported" tr="&apos;if&apos; размещен в группе, которая не поддерживает выражения &apos;if&apos;"/>
+		<Res id="@SC.IncompleteIfEls" tr="Неполное &apos;if&apos;-&apos;else&apos;"/>
+		<Res id="@ET.ErrDifEqua" tr="Ошибка в дифференциальном уравнении"/>
+		<Res id="@SC.UnexpectedExpre" tr="Неожиданный тип выражения"/>
+		<Res id="@SC.SymbolicJacobia" tr="Ошибка при создании символического якобиана"/>
+		<Res id="@SC.ErrorInLimits0" tr="Ошибка в пределах (0)"/>
+		<Res id="@SC.ErrorInLimits1" tr="Ошибка в пределах (1)"/>
+		<Res id="@SC.LimitGroupEndMi" tr="Несоответствие &apos;end&apos; в группе пределов"/>
+		<Res id="@SC.LinitsMustBeGro" tr="Пределы должны быть сгруппированы"/>
+		<Res id="@CS.StatAssNotOK" tr="Присваивание статистического объекта неверно"/>
+		<Res id="@CS.StatsToNotStatV" tr="Ошибка присваивания статистического объекта не-статистическому менеджеру"/>
+		<Res id="@CS.StatsStrWrongEx" tr="Неверный оператор присваивания для статистики (должен быть &apos;&lt;&lt;&apos;)"/>
+		<Res id="@CS.EmptyStatAsssig" tr="Пустое присваивание статистики"/>
+		<Res id="@CS.StatsWronExpTyp" tr="Неверный тип выражения в статистическом объекте"/>
+		<Res id="@CS.StatsCannotMake" tr="Невозможно создать дерево выражений для статистического объекта"/>
+		<Res id="@CS.StatsCannotCrea" tr="Невозможно создать дерево выражений для статистического объекта"/>
+		<Res id="@SC.PrematureEnd" tr="Преждевременное завершение модели"/>
+		<Res id="@SC.CannotCreateSol" tr="Невозможно создать решатель"/>
+		<Res id="@SC.ODEWrongFormat" tr="Неверный формат уравнения ODE. Должна быть переменная, за которой следует апостроф, а затем оператор присваивания &apos;=&apos;"/>
+		<Res id="@SC.ODEExpectedVari" tr="ODE ожидает переменную"/>
+		<Res id="@SC.ODEExpected=Tok" tr="ODE ожидает токен присваивания &apos;=&apos;"/>
+		<Res id="@SC.DerivAndIntAvai" tr="Дифференцирование и интегрирование не могут использоваться в одном выражении ODE"/>
+		<Res id="@SC.NoDerivNoInt" tr="В уравнении ODE нет ни дифференцирования, ни интегрирования"/>
+		<Res id="@SC.ODEExpected&apos;or" tr="ODE ожидает либо переменную, за которой следует апостроф, а затем оператор присваивания, либо переменную, за которой следует присваивание, а затем функция &apos;int&apos;"/>
+		<Res id="@SC.WrongODEExp" tr="Уравнение ODE не в порядке"/>
+		<Res id="@SC.ODEMissInt" tr="ODE требует функцию &apos;int&apos;. Или вы забыли поставить апостроф после имени переменной"/>
+		<Res id="@SC.ODEHasMultInts" tr="Уравнение ODE имеет несколько методов &apos;int&apos;. Должен быть только один."/>
+		<Res id="@SC.ODEWithDiffAndI" tr="Уравнения ODE имеют и diff (апостроф), и функцию &apos;int&apos;. Должен быть только один из них."/>
+		<Res id="@SC.CannotCrODEExpT" tr="Невозможно создать дерево выражений ODE"/>
+		<Res id="@SC.ODEIntWrongOper" tr="Нет правильного &apos;int&apos; в уравнении ODE"/>
+		<Res id="@SC.ODEEmptyInt" tr="Пустой &apos;int&apos; в уравнении ODE"/>
+		<Res id="@SC.ODEIntWithSS" tr="&apos;int&apos; не может использовать параметр для интегрирования. Это должна быть переменная!"/>
+		<Res id="@SC.TFsWrongFormat" tr="Неверный формат передаточной функции"/>
+		<Res id="@SC.TFsNoDiv1Operat" tr="Нет токена деления &apos;/&apos; в определении передаточной функции"/>
+		<Res id="@SC.TFsNoAssignOper" tr="Нет оператора присваивания в определении передаточной функции"/>
+		<Res id="@SC.TFsWrongTokens" tr="Обнаружены неожиданные токены в определении передаточной функции"/>
+		<Res id="@SC.TFsCannotMakeET" tr="Невозможно создать дерево выражений для передаточной функции"/>
+		<Res id="@SC.WrongYInTF" tr="Символ выхода в передаточной функции должен быть переменной"/>
+		<Res id="@SC.TFYNotVariable" tr="Символ выхода в передаточной функции должен быть переменной (2)"/>
+		<Res id="@SC.WrongUInTF" tr="Символ входа в передаточной функции должен быть переменной"/>
+		<Res id="@SC.TFUNotVarNorPar" tr="Символ входа для передаточной функции не является ни переменной, ни параметром"/>
+		<Res id="@SC.NoDAEorTFEqs" tr="Нет ни блоков ODE, ни TF в модели DAE"/>
+		<Res id="@SC.Vars!=#Eqs" tr="Количество переменных не равно количеству уравнений"/>
+		<Res id="@SC.ODENotOK" tr="ODE не в порядке. Выражение ODE должно начинаться с переменной состояния"/>
+		<Res id="@SC.DAE#Eq!=#Vars" tr="Количество переменных не равно количеству уравнений в задаче DAE"/>
+		<Res id="@SC.TFOut!Variable" tr="Выход передаточной функции не является переменной"/>
+		<Res id="@SC.TFOutIsParam" tr="Выход передаточной функции является параметром"/>
+		<Res id="@SC.TFIn!Declared" tr="Переменная, используемая в передаточной функции, не объявлена"/>
+		<Res id="@SCTFTokListError" tr="Недостаточно токенов для объявления передаточной функции. Должно быть не менее 4!"/>
+		<Res id="@SC.TFExprTreeErr" tr="Ошибка при создании дерева выражений для передаточной функции"/>
+		<Res id="@SC.TFPolyCoefficen" tr="Невозможно извлечь полиномиальный коэффициент в передаточной функции"/>
+		<Res id="@SC.TFDenomNoLaplad" tr="Нет оператора Лапласа в знаменателе передаточной функции"/>
+		<Res id="@SC.TFNomNoLapladeO" tr="Нет оператора Лапласа в числителе передаточной функции"/>
+		<Res id="@SC.TF2SSError" tr="Ошибка при преобразовании передаточной функции в форму пространства состояний"/>
+		<Res id="@SC.DAENLDerivs" tr="Ошибка в группе NL модели DAE"/>
+		<Res id="@SC.DAEExpandError" tr="Ошибка при создании неявного решателя DAE (Ошибка расширения)"/>
+		<Res id="@SC.DAENLJack2" tr="Невозможно создать разреженный якобиан для модели DAE (2)"/>
+		<Res id="@SC.DAENLJack3" tr="Невозможно создать разреженный якобиан для модели DAE (3)"/>
+		<Res id="@SC.0Expansion" tr="Ошибка при создании неявного решателя DAE с нулевыми стадиями (Ошибка нулевого расширения)"/>
+		<Res id="@SC.DAENLJack0Exp" tr="Невозможно создать разреженный якобиан для модели DAE (@SC.DAENLJack0Exp)"/>
+		<Res id="@SC.DAEEqError" tr="Невозможно создать вычислители DAE"/>
+		<Res id="@SC.DAEEqExpDiffErr" tr="Невозможно создать разреженный якобиан для модели DAE (@SC.DAEEqExpDiffError)"/>
+		<Res id="@SC.DAEEqExp0Error" tr="Ошибка при создании неявного решателя DAE с нулевыми стадиями (@SC.DAEEqExp0Error)"/>
+		<Res id="@SC.DAEEqExp0DiffEr" tr="Невозможно создать разреженный якобиан для модели DAE (@SC.DAEEqExp0DiffError)"/>
+		<Res id="@CS.NLEsError" tr="Невозможно правильно разобрать уравнения &apos;NLEs&apos;"/>
+		<Res id="@SC.WrongPlotToken" tr="Неверный тип/токен графика (@SC.WrongPlotToken)"/>
+		<Res id="@SC.WrongPlotTokenR" tr="Неверный тип/токен графика (@SC.WrongPlotTokenRKW)"/>
+		<Res id="@SC.WrongPlotXBound" tr="Неверные границы x графика"/>
+		<Res id="@SC.WrongPlotYBound" tr="Неверные границы y графика"/>
+		<Res id="@SC.EmptyPlot" tr="Пустой график"/>
+		<Res id="@SC.WrongPlotAttrib" tr="Неверное имя атрибута графика"/>
+		<Res id="@SC.SecondXAxisInPl" tr="График может иметь только одну ось x! В графике определено более 1 оси!"/>
+		<Res id="@SC.SecondCondInPlo" tr="График может иметь только одно условие! В графике определено более 1 условия!"/>
+		<Res id="@SC.PlotPremEnd" tr="График завершен преждевременно. Нет &apos;end&apos;"/>
+		<Res id="@SC.PlotNoYAxis" tr="График не содержит ни одной оси y. График должен иметь хотя бы одну ось y!"/>
+		<Res id="@SC.PlotHLineErr" tr="Ошибка в определении горизонтальной линии (&apos;hLine&apos;) графика"/>
+		<Res id="@SC.PlotVLineErr" tr="Ошибка в определении вертикальной линии (&apos;vLine&apos;) графика"/>
+		<Res id="@SC.PlotHBandErr" tr="Ошибка в определении горизонтальной полосы (&apos;hBand&apos;) графика"/>
+		<Res id="@SC.PlotVBandErr" tr="Ошибка в определении вертикальной полосы (&apos;vBand&apos;) графика"/>
+		<Res id="@SC.PlotAxisErr" tr="Ошибка в определении оси x графика"/>
+		<Res id="@SC.PlotYAxisErr" tr="Ошибка в определении оси y графика"/>
+		<Res id="@SC.PlotCondErr" tr="Ошибка в определении условия графика"/>
+		<Res id="@CS.#Vars!=#Eqs" tr="Количество переменных не равно количеству уравнений!"/>
+		<Res id="@SC.NoODEEqs" tr="Нет ни одного уравнения ODE"/>
+		<Res id="@SC.#Vars!=#ODEs" tr="Количество переменных не равно количеству уравнений в модели ODE!"/>
+		<Res id="@SC.WLSNoVars" tr="Модель WLS не имеет объявленных переменных"/>
+		<Res id="@SC.WLSNoWLSEs" tr="Нет ни одного уравнения WLS"/>
+		<Res id="@SC.WLSNotEnoughEQs" tr="Недостаточно уравнений WLS"/>
+		<Res id="@CS.WLSEsError" tr="Ошибка в модели WLS"/>
+		<Res id="@CS.WLSECError" tr="Ошибка в модели WLS EC (с ограничениями равенства)"/>
+		<Res id="@SC.BadExpression" tr="Плохое выражение"/>
+		<Res id="@SC.WrongExprType" tr="Неверный тип выражения"/>
+		<Res id="@SC.MissingColor" tr="Отсутствует цвет"/>
+		<Res id="@SC.UnexpectedToken" tr="Неожиданный токен"/>
+		<Res id="@SC.Missing(AfterFn" tr="Отсутствует открывающая скобка &apos;(&apos; после функции"/>
+		<Res id="@SC.SyntaxError" tr="Синтаксическая ошибка"/>
+		<Res id="@SC.NestedConjNotAl" tr="Вложенные сопряженные функции (conj в conj) не допускаются. Выполните ручное сопряжение и создайте плоское сопряженное выражение."/>
+		<Res id="@SC.OperatorAfter=" tr="Оператор после оператора присваивания"/>
+		<Res id="@SC.Double=" tr="Двойной оператор присваивания (присваивание после присваивания)"/>
+		<Res id="@SC.EqEndsWith=" tr="Выражение/уравнение заканчивается оператором присваивания"/>
+		<Res id="@SC.UnkownSymbol" tr="Неизвестный символ"/>
+		<Res id="@SC.TwoConsOperands" tr="Два постоянных операнда появляются в последовательном порядке (две константы одна за другой)"/>
+		<Res id="@SC.UnsupportedToke" tr="Неподдерживаемый токен"/>
+	</Translations>
+</DevRes>

@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<DevRes>
+    <Translations>
+        <Res id="appTitle" tr="Schlange"/>
+        <Res id="start" tr="Neues Spiel"/>
+        <Res id="startTT" tr="Starte ein neues Spiel"/>
+        <Res id="stop" tr="Aufgeben"/>
+        <Res id="stopTT" tr="Aufgeben und Spiel beenden"/>
+        <Res id="Update" tr="Aktualisieren"/>
+        
+        <Res id="GZBeatHS:" tr="Glückwunsch! Sie haben den bisherigen Highscore mit folgendem Ergebnis übertroffen: "/>
+        <Res id="Score:" tr="Punktestand: "/>
+        <Res id="Highscore: " tr="Highscore: "/>
+
+        <Res id="closeNOK" tr="Fehler! Animation läuft!"/>
+        <Res id="cloeErr" tr="Stoppen Sie die Animation bevor Sie die App schließen!"/>
+        <Res id="settings" tr="Einstellungen"/>
+        <!-- Settings -->
+        <Res id="dlgSettings" tr="Einstellungen"/>
+        <Res id="lblLang" tr="Aktuelle Anwendungssprache:"/>
+        <Res id="lblLang2" tr="Anwendungssprache nach Neustart:"/>
+        <Res id="chbTBIcsAndLbls" tr="Zeige Beschriftungen unter Symbolen in der Toolbar"/>
+        <Res id="lblLevel" tr="Schwierigkeit:"/>
+        <Res id="RestartRequired" tr="Anwendung neustarten"/>
+        <Res id="RestartRequiredInfo" tr="Einige geänderte Einstellungen erfordern einen Neustart der Anwendung"/>
+        <Res id="Restart" tr="Neustarten"/>
+        <Res id="DoNoRestart" tr="Nicht neustarten"/>
+        <!-- Status Bar -->
+        <Res id="ClStart" tr="Klicken Sie 'Neues Spiel' um zu beginnen..."/>
+        <Res id="clickArrK" tr="Klicken Sie eine Pfeiltaste um die Schlange zu bewegen."/>
+        <Res id="+apple" tr="Großartig! Noch ein Apfel!"/>
+        <Res id="+pear" tr="Großartig! Ich mag Birnen!"/>
+        <Res id="+banana" tr="Ausgezeichnet! Bananen sind meine Lieblingsfrüchte!"/>
+        <Res id="Total:" tr="Gesamt: "/>
+        <!-- Other -->
+        <Res id="theApp" tr="Anwendung"/>
+        <Res id="game" tr="Spiel"/>
+        <Res id="Easy" tr="Einfach"/>
+        <Res id="Medium" tr="Mittel"/>
+        <Res id="Hard" tr="Schwer"/>
+    </Translations>
+</DevRes>

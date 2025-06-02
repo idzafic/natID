@@ -8,6 +8,7 @@
 // ################################################################################################################
 
 #pragma once
+#ifdef MU_USE_MEM_LEAK
 #include <mu/muLib.h>
 
 #ifdef MU_DEBUG
@@ -96,6 +97,6 @@ namespace mem
 
 #endif //MU_DEBUG
 
-
+#endif // MU_USE_MEM_LEAK
 
 

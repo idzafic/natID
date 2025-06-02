@@ -1,0 +1,29 @@
+<?xml version='1.0'?>
+<Regionals id="tr-TR">
+    <Numeric decSeparator="," thSeparator="."/>
+    <Date separator="." winShort="dd.mm.YYYY" winLong="dddd, d mmmm YYYY" shortDM="dd.mm" shortY2="dd.mm.YY" shortY4="dd.mm.YYYY"/>
+    <Time separator=":" winShort="hh:mm:ss" winLong="hh:mm:ss.u" shortHMM="h:mm" shortHMMSS="h:mm::ss" shortHMMSSu="h::mm::ss.u"/>
+    <Days>
+        <Day name="pazar" shortName="paz"/>
+        <Day name="pazartesi" shortName="pzt"/>
+        <Day name="salı" shortName="sal"/>
+        <Day name="çarşamba" shortName="çar"/>
+        <Day name="perşembe" shortName="per"/>
+        <Day name="cuma" shortName="cum"/>
+        <Day name="cumartesi" shortName="cmt"/>
+    </Days>
+    <Months>
+        <Month name="ocak" shortName="oca"/>
+        <Month name="şubat" shortName="şub"/>
+        <Month name="mart" shortName="mar"/>
+        <Month name="nisan" shortName="nis"/>
+        <Month name="mayıs" shortName="may"/>
+        <Month name="haziran" shortName="haz"/>
+        <Month name="temmuz" shortName="tem"/>
+        <Month name="ağustos" shortName="ağu"/>
+        <Month name="eylül" shortName="eyl"/>
+        <Month name="ekim" shortName="eki"/>
+        <Month name="kasım" shortName="kas"/>
+        <Month name="aralık" shortName="ara"/>
+    </Months>
+</Regionals>

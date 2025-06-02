@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevRes>
+    <Translations>
+        <Res id="repView" tr="보고서"/>
+        <Res id="repNoView" tr="열린 보고서가 없습니다! 작업을 완료할 수 없습니다!"/>
+        <Res id="repError" tr="오류"/>
+        <Res id="print" tr="인쇄"/>
+        <Res id="expXML" tr="XML로 내보내기"/>
+        <Res id="printTT" tr="인쇄"/>
+        <Res id="expPDF" tr="PDF로"/>
+        <Res id="expPDFTT" tr="PDF로 내보내기"/>
+        <Res id="expXMLTT" tr="XML로 내보내기"/>
+        <Res id="zoom11" tr="1:1"/>
+        <Res id="zoom11TT" tr="인쇄 버전과 1:1 비율로 맞추기"/>
+        <Res id="repZoom" tr="확대/축소"/>
+        <Res id="repZoomTT" tr="백분율로 표시된 확대/축소 값"/>
+        <Res id="zoomW" tr="너비에 맞추기"/>
+        <Res id="zoomWTT" tr="페이지 너비에 맞추기"/>
+        <Res id="zoomH" tr="높이에 맞추기"/>
+        <Res id="zoomHTT" tr="페이지 높이에 맞추기"/>
+        <Res id="vwSingle" tr="한 페이지"/>
+        <Res id="vwSingleTT" tr="한 페이지를 열로 표시"/>
+        <Res id="vwTwo" tr="두 페이지"/>
+        <Res id="vwTwoTT" tr="두 페이지를 열로 표시"/>
+        <Res id="vwThree" tr="세 페이지"/>
+        <Res id="vwThreeTT" tr="세 페이지를 열로 표시"/>
+        <Res id="vwFour" tr="네 페이지"/>
+        <Res id="vwFourTT" tr="네 페이지를 열로 표시"/>
+        <Res id="repPg#" tr="페이지/총 #페이지"/>
+        <Res id="repPg#TT" tr="페이지 번호 / 총 페이지 수"/>
+        <Res id="goToFirst" tr="처음으로"/>
+        <Res id="goToFirstTT" tr="첫 페이지 표시(이동)"/>
+        <Res id="goToLast" tr="마지막으로"/>
+        <Res id="goToLastTT" tr="마지막 페이지 표시(이동)"/>
+        <Res id="rep2XML" tr="XML로 내보내기"/>
+        <Res id="0" tr="영 "/>
+        <Res id="1" tr="일 "/>
+        <Res id="2" tr="이 "/>
+        <Res id="3" tr="삼 "/>
+        <Res id="4" tr="사 "/>
+        <Res id="5" tr="오 "/>
+        <Res id="6" tr="육 "/>
+        <Res id="7" tr="칠 "/>
+        <Res id="8" tr="팔 "/>
+        <Res id="9" tr="구 "/>
+        <Res id="10" tr="십 "/>
+        <Res id="11" tr="십일 "/>
+        <Res id="12" tr="십이 "/>
+        <Res id="13" tr="십삼 "/>
+        <Res id="14" tr="십사 "/>
+        <Res id="15" tr="십오 "/>
+        <Res id="16" tr="십육 "/>
+        <Res id="17" tr="십칠 "/>
+        <Res id="18" tr="십팔 "/>
+        <Res id="19" tr="십구 "/>
+        <Res id="20" tr="이십 "/>
+        <Res id="30" tr="삼십 "/>
+        <Res id="40" tr="사십 "/>
+        <Res id="50" tr="오십 "/>
+        <Res id="60" tr="육십 "/>
+        <Res id="70" tr="칠십 "/>
+        <Res id="80" tr="팔십 "/>
+        <Res id="90" tr="구십 "/>
+        <Res id="100_beg" tr="백 "/>
+        <Res id="200" tr="이백 "/>
+        <Res id="300" tr="삼백 "/>
+        <Res id="400" tr="사백 "/>
+        <Res id="500" tr="오백 "/>
+        <Res id="600" tr="육백 "/>
+        <Res id="700" tr="칠백 "/>
+        <Res id="800" tr="팔백 "/>
+        <Res id="900" tr="구백 "/>
+        <Res id="1e3" tr="일천 "/>
+        <Res id="2e3" tr="이천 "/>
+        <Res id="3e3" tr="삼천 "/>
+        <Res id="4e3" tr="사천 "/>
+        <Res id="5e3" tr="오천 "/>
+        <Res id="6e3" tr="육천 "/>
+        <Res id="7e3" tr="칠천 "/>
+        <Res id="8e3" tr="팔천 "/>
+        <Res id="9e3" tr="구천 "/>
+        <Res id="e3s" tr="천 "/>
+        <Res id="1e6" tr="일백만 "/>
+        <Res id="2e6" tr="이백만 "/>
+        <Res id="3e6" tr="삼백만 "/>
+        <Res id="4e6" tr="사백만 "/>
+        <Res id="5e6" tr="오백만 "/>
+        <Res id="6e6" tr="육백만 "/>
+        <Res id="7e6" tr="칠백만 "/>
+        <Res id="8e6" tr="팔백만 "/>
+        <Res id="9e6" tr="구백만 "/>
+        <Res id="e6s" tr="백만 "/>
+        <Res id="1e9" tr="일십억 "/>
+        <Res id="2e9" tr="이십억 "/>
+        <Res id="3e9" tr="삼십억 "/>
+        <Res id="4e9" tr="사십억 "/>
+        <Res id="5e9" tr="오십억 "/>
+        <Res id="6e9" tr="육십억 "/>
+        <Res id="7e9" tr="칠십억 "/>
+        <Res id="8e9" tr="팔십억 "/>
+        <Res id="9e9" tr="구십억 "/>
+        <Res id="e9s" tr="십억 "/>
+        <Res id="1e12" tr="일조 "/>
+        <Res id="2e12" tr="이조 "/>
+        <Res id="3e12" tr="삼조 "/>
+        <Res id="4e12" tr="사조 "/>
+        <Res id="5e12" tr="오조 "/>
+        <Res id="6e12" tr="육조 "/>
+        <Res id="7e12" tr="칠조 "/>
+        <Res id="8e12" tr="팔조 "/>
+        <Res id="9e12" tr="구조 "/>
+        <Res id="e12s" tr="조 "/>
+        <Res id="1e15" tr="일경 "/>
+        <Res id="2e15" tr="이경 "/>
+        <Res id="3e15" tr="삼경 "/>
+        <Res id="4e15" tr="사경 "/>
+        <Res id="5e15" tr="오경 "/>
+        <Res id="6e15" tr="육경 "/>
+        <Res id="7e15" tr="칠경 "/>
+        <Res id="8e15" tr="팔경 "/>
+        <Res id="9e15" tr="구경 "/>
+        <Res id="e15s" tr="경 "/>
+        <Res id="and" tr="그리고 "/>
+        <Res id="Page" tr="페이지"/>
+        <Res id="NoDPToExp" tr="내보낼 데이터가 없습니다! 보고서에 기본 테이블이 포함되어 있지 않습니다!"/>
+        <Res id="ExpToXMLDone" tr="XML로 내보내기 성공!"/>
+        <Res id="repErr" tr="보고서 오류"/>
+        <Res id="repToPDF" tr="PDF로 내보내기"/>
+        <Res id="repToXML" tr="XML로 내보내기"/>
+    </Translations>
+</DevRes>

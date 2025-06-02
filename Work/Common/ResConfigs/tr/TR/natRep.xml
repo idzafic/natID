@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevRes>
+    <Translations>
+        <Res id="repView" tr="Raporlar"/>
+        <Res id="repError" tr="Hata"/>
+        <Res id="repNoView" tr="Açık rapor yok! İşlem tamamlanamıyor!"/>
+        <Res id="print" tr="Yazdır"/>
+        <Res id="printTT" tr="Yazdır"/>
+        <Res id="expPDF" tr="PDF'ye"/>
+        <Res id="expPDFTT" tr="PDF'ye aktar"/>
+        <Res id="expXML" tr="XML'ye"/>
+        <Res id="expXMLTT" tr="XML'ye aktar"/>
+        <Res id="zoom11" tr="1:1"/>
+        <Res id="zoom11TT" tr="Yazdırılan sürümle 1:1 oranında yap"/>
+        <Res id="repZoom" tr="Yakınlaştır"/>
+        <Res id="repZoomTT" tr="Yüzde olarak yakınlaştırma değeri"/>
+        <Res id="zoomW" tr="Genişliğe"/>
+        <Res id="zoomWTT" tr="Sayfa genişliğine sığdır"/>
+        <Res id="zoomH" tr="Yüksekliğe"/>
+        <Res id="zoomHTT" tr="Sayfa genişliğine sığdır"/>
+        <Res id="vwSingle" tr="Bir sayfa"/>
+        <Res id="vwSingleTT" tr="Bir sayfayı sütunda göster"/>
+        <Res id="vwTwo" tr="İki sayfa"/>
+        <Res id="vwTwoTT" tr="İki sayfayı sütunda göster"/>
+        <Res id="vwThree" tr="Üç sayfa"/>
+        <Res id="vwThreeTT" tr="Üç sayfayı sütunda göster"/>
+        <Res id="vwFour" tr="Dört sayfa"/>
+        <Res id="vwFourTT" tr="Dört sayfayı sütunda göster"/>
+        <Res id="repPg#" tr="Sayfa/Toplam sayfa sayısı"/>
+        <Res id="repPg#TT" tr="Sayfa numarası / Toplam sayfa sayısı"/>
+        <Res id="goToFirst" tr="İlkine git"/>
+        <Res id="goToFirstTT" tr="İlk sayfayı göster (ona git)"/>
+        <Res id="goToLast" tr="Sonuncusuna git"/>
+        <Res id="goToLastTT" tr="Son sayfayı göster (ona git)"/>
+        <Res id="rep2XML" tr="XML'ye aktar"/>
+        <Res id="0" tr="sıfır "/>
+        <Res id="1" tr="bir "/>
+        <Res id="2" tr="iki "/>
+        <Res id="3" tr="üç "/>
+        <Res id="4" tr="dört "/>
+        <Res id="5" tr="beş "/>
+        <Res id="6" tr="altı "/>
+        <Res id="7" tr="yedi "/>
+        <Res id="8" tr="sekiz "/>
+        <Res id="9" tr="dokuz "/>
+        <Res id="10" tr="on "/>
+        <Res id="11" tr="on bir "/>
+        <Res id="12" tr="on iki "/>
+        <Res id="13" tr="on üç "/>
+        <Res id="14" tr="on dört "/>
+        <Res id="15" tr="on beş "/>
+        <Res id="16" tr="on altı "/>
+        <Res id="17" tr="on yedi "/>
+        <Res id="18" tr="on sekiz "/>
+        <Res id="19" tr="on dokuz "/>
+        <Res id="20" tr="yirmi "/>
+        <Res id="30" tr="otuz "/>
+        <Res id="40" tr="kırk "/>
+        <Res id="50" tr="elli "/>
+        <Res id="60" tr="altmış "/>
+        <Res id="70" tr="yetmiş "/>
+        <Res id="80" tr="seksen "/>
+        <Res id="90" tr="doksan "/>
+        <Res id="100_beg" tr="yüz "/>
+        <Res id="200" tr="iki yüz "/>
+        <Res id="300" tr="üç yüz "/>
+        <Res id="400" tr="dört yüz "/>
+        <Res id="500" tr="beş yüz "/>
+        <Res id="600" tr="altı yüz "/>
+        <Res id="700" tr="yedi yüz "/>
+        <Res id="800" tr="sekiz yüz "/>
+        <Res id="900" tr="dokuz yüz "/>
+        <Res id="1e3" tr="bin "/>
+        <Res id="2e3" tr="iki bin "/>
+        <Res id="3e3" tr="üç bin "/>
+        <Res id="4e3" tr="dört bin "/>
+        <Res id="5e3" tr="beş bin "/>
+        <Res id="6e3" tr="altı bin "/>
+        <Res id="7e3" tr="yedi bin "/>
+        <Res id="8e3" tr="sekiz bin "/>
+        <Res id="9e3" tr="dokuz bin "/>
+        <Res id="e3s" tr="bin "/>
+        <Res id="1e6" tr="bir milyon "/>
+        <Res id="2e6" tr="iki milyon "/>
+        <Res id="3e6" tr="üç milyon "/>
+        <Res id="4e6" tr="dört milyon "/>
+        <Res id="5e6" tr="beş milyon "/>
+        <Res id="6e6" tr="altı milyon "/>
+        <Res id="7e6" tr="yedi milyon "/>
+        <Res id="8e6" tr="sekiz milyon "/>
+        <Res id="9e6" tr="dokuz milyon "/>
+        <Res id="e6s" tr="milyon "/>
+        <Res id="1e9" tr="bir milyar "/>
+        <Res id="2e9" tr="iki milyar "/>
+        <Res id="3e9" tr="üç milyar "/>
+        <Res id="4e9" tr="dört milyar "/>
+        <Res id="5e9" tr="beş milyar "/>
+        <Res id="6e9" tr="altı milyar "/>
+        <Res id="7e9" tr="yedi milyar "/>
+        <Res id="8e9" tr="sekiz milyar "/>
+        <Res id="9e9" tr="dokuz milyar "/>
+        <Res id="e9s" tr="milyar "/>
+        <Res id="1e12" tr="bir trilyon "/>
+        <Res id="2e12" tr="iki trilyon "/>
+        <Res id="3e12" tr="üç trilyon "/>
+        <Res id="4e12" tr="dört trilyon "/>
+        <Res id="5e12" tr="beş trilyon "/>
+        <Res id="6e12" tr="altı trilyon "/>
+        <Res id="7e12" tr="yedi trilyon "/>
+        <Res id="8e12" tr="sekiz trilyon "/>
+        <Res id="9e12" tr="dokuz trilyon "/>
+        <Res id="e12s" tr="trilyon "/>
+        <Res id="1e15" tr="bir katrilyon "/>
+        <Res id="2e15" tr="iki katrilyon "/>
+        <Res id="3e15" tr="üç katrilyon "/>
+        <Res id="4e15" tr="dört katrilyon "/>
+        <Res id="5e15" tr="beş katrilyon "/>
+        <Res id="6e15" tr="altı katrilyon "/>
+        <Res id="7e15" tr="yedi katrilyon "/>
+        <Res id="8e15" tr="sekiz katrilyon "/>
+        <Res id="9e15" tr="dokuz katrilyon "/>
+        <Res id="e15s" tr="katrilyon "/>
+        <Res id="and" tr="ve "/>
+        <Res id="Page" tr="Sayfa"/>
+        <Res id="NoDPToExp" tr="Dışa aktarılacak Veri Yok! Rapor, veritabanından herhangi bir tablo içermiyor!"/>
+        <Res id="ExpToXMLDone" tr="XML'e aktarma başarılı!"/>
+        <Res id="repErr" tr="Rapor Hatası"/>
+        <Res id="repToPDF" tr="Raporu PDF'ye Aktar"/>
+        <Res id="repToXML" tr="Raporu XML'ye Aktar"/>
+    </Translations>
+</DevRes>

@@ -340,14 +340,7 @@ protected:
         _depthViewMatrix = glm::lookAt(_lightDir, glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 
         
-        
-#ifdef DEBUG_GL
-        GLenum error = glGetError();
-        if (error != GL_NO_ERROR)
-        {
-            mu::dbgLog("OpenGL error: %x", error);
-        }
-#endif
+        dbgCheckGLError();
     }
     
     bool prepareNextFrame() override

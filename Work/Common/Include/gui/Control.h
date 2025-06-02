@@ -25,6 +25,11 @@ namespace gui
 
 class Layout;
 class FileDialog;
+class Dialog;
+class View;
+class StackedLayout;
+class GridLayout;
+class SplitterLayout;
 
 class NATGUI_API Control : public Frame
 {
@@ -32,7 +37,11 @@ public:
     enum class Limit : td::BYTE {None=0, UseAsMin, Fixed};
 private:
     friend class Layout;
+    friend class StackedLayout;
+    friend class GridLayout;
+    friend class SplitterLayout;
     friend class ControlHelper;
+    friend class View;
 
     td::UINT4 _visualID = 0;
 //    td::UINT4 _maxWidth = math::maxVal<td::UINT4>(); //not used yet
@@ -53,15 +62,17 @@ protected:
     void sendReMeasureMsg();
     td::BYTE getContextMenuID() const;
     void adjustToPreferableSize(CellInfo& ci);
-    
+    virtual void reMeasure(CellInfo&) = 0;
+    virtual void measure(CellInfo&) = 0;
     //void getMinSize(Size& sz);
+    virtual bool freeze();
+    virtual void unFreeze();
 public:
     
     virtual void getMinSize(Size& minSize) const;
     virtual td::WORD getTotalHMargin() const;
     virtual td::WORD getTotalVMargin() const;
-    virtual void measure(CellInfo&);
-    virtual void reMeasure(CellInfo&);
+    
     virtual void setGeometry(const Geometry& cellFrame, const Cell& cell);
     void measure(const char* pString, Size& sz) const; //return size of the text in ptring using control's font
     void measure(td::BYTE nChars, Size& sz, char ch='H') const; //return size of nChars using control's font
@@ -78,8 +89,11 @@ public:
     virtual td::UINT2 getPreferableWidth(td::UINT2 forHeight, td::UINT2 minWidth) const;
     
     void disableRemeasuring();
-    virtual td::UINT4 getTagID() const;
+    //virtual td::UINT4 getTagID() const;
+    void enable(bool bEnable = true);
     void disable(bool bDisable = true);
+    bool isDisabled() const;
+    virtual bool isEditable() const;
     void setFlat() const;
     bool isText() const;
     bool isLayout() const;
@@ -92,6 +106,17 @@ public:
     void getFontDescription(gui::Font& font) const;
     gui::FileDialog* getAttachedFileDialog(td::UINT4 fileDlgID);
     gui::Window* getAttachedWindow(td::UINT4 wndID);
+    
+    template <typename TID>
+    gui::Dialog* getAttachedDialog(TID wndID)
+    {
+        gui::Window* pWnd = getAttachedWindow((td::UINT4) wndID);
+        if (!pWnd)
+            return nullptr;
+        gui::Dialog* pDlg = reinterpret_cast<gui::Dialog*>(pWnd);
+        return pDlg;
+    }
+    
     void adjustToToolBarSize(gui::Size& sz) const;
     void setVisualID(td::UINT4 visualID);
     td::UINT4 getVisualID() const override;

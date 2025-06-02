@@ -25,7 +25,6 @@ namespace td
 {
 class Variant : public VariantBase
 {
-
     template <typename TVAR>
     friend struct PlusEqVisitor;
 
@@ -229,12 +228,10 @@ protected:
             td::String& str = (td::String&) _strVal;
             if (str.relRef())
             {
-                delete[] _strVal;
+                delete [] _strVal;
             }
-            _strVal = nullptr;
         }
-        //_lu8Val = 0;
-        //int g = 5;
+        _strVal = nullptr;
     }
 
     inline void takeFromString(const td::String& val)
@@ -245,10 +242,15 @@ protected:
         td::String& str = (td::String&) _strVal;
         if (!str.addRef())
         {
-            td::String strTmp;
-            strTmp.clone(val);
-            str.addRef();
+            td::String strTmp = val.clone();
+            td::UINT4  nRefsTmp = strTmp.getNoOfRefs();
+//            strTmp.clone(val);
+//            str.addRef();
             _strVal = strTmp.buffer;
+            td::String& str2 = (td::String&) _strVal;
+            str2.addRef();
+            td::UINT4  nRefsFinal = str2.getNoOfRefs();
+            assert(nRefsFinal == 1);
         }
         setType(td::string8);
     }
@@ -522,11 +524,11 @@ public:
     }
 
     
-    //bool& boolVal()
-    //{
-    //	assert(getType() == td::boolean);
-    //	return _boolVal;
-    //}
+//    bool& boolVal()
+//    {
+//    	assert(getType() == td::boolean);
+//    	return _boolVal;
+//    }
 
     bool boolVal() const
     {
@@ -702,10 +704,28 @@ public:
         return _linePattern;
     }
     
+    DotPattern& dotPattern()
+    {
+        assert(getType() == td::dotPattern);
+        return _dotPattern;
+    }
+    
     const DotPattern& dotPattern() const
     {
         assert(getType() == td::dotPattern);
         return _dotPattern;
+    }
+    
+    Anchor& anchor()
+    {
+        assert(getType() == td::anchor);
+        return _anchor;
+    }
+    
+    const Anchor& anchor() const
+    {
+        assert(getType() == td::anchor);
+        return _anchor;
     }
     
     Time& timeVal()
@@ -1982,6 +2002,8 @@ public:
 protected:
     inline td::BoolCh& getVal(td::BoolCh){ return (td::BoolCh&)_bVal; }
 
+//    inline bool& getVal(bool){ return _boolVal; }
+    
     inline td::BYTE& getVal(td::BYTE){ return byteVal(); }
 
     inline td::INT2& getVal(td::INT2){ return i2Val(); }
@@ -2015,6 +2037,8 @@ protected:
     inline td::ColorID& getVal(td::ColorID){ return colorID(); }
     
     inline td::LinePattern& getVal(td::LinePattern){ return linePattern(); }
+    inline td::DotPattern& getVal(td::DotPattern){ return dotPattern(); }
+    inline td::Anchor& getVal(td::Anchor){ return anchor(); }
                     
     inline td::SmallDecimal0& getVal(td::SmallDecimal0){ return sdec0Val(); }
     inline td::SmallDecimal1& getVal(td::SmallDecimal1){ return sdec1Val(); }
@@ -2067,6 +2091,8 @@ protected:
     inline const td::Color& getVal(td::Color)const{ return colorVal(); }
     inline const td::ColorID& getVal(td::ColorID)const{ return colorID(); }
     inline const td::LinePattern& getVal(td::LinePattern)const{ return linePattern(); }
+    inline const td::DotPattern& getVal(td::DotPattern)const{ return dotPattern(); }
+    inline const td::Anchor& getVal(td::Anchor)const{ return anchor(); }
 
     inline const td::SmallDecimal0& getVal(td::SmallDecimal0)const{ return (td::SmallDecimal0&) _smallDecVal; }
     inline const td::SmallDecimal1& getVal(td::SmallDecimal1)const{ return (td::SmallDecimal1&) _smallDecVal; }
@@ -2138,107 +2164,6 @@ public:
         TVAL& myVal = getVal(val);
         myVal = val;
     }
-
-            
-    //void setValueFromAnyType(const char* pStr)
-    //{
-    //	td::DataType thisType = getType();
-    //	if (td::string8 == thisType)
-    //	{
-    //		strVal() = pStr;
-    //		return;
-    //	}
-    //	setValueFromString(pStr);
-    //}
-    //
-    //void setValueFromAnyType(const td::String& val)
-    //{
-    //	td::DataType thisType = getType();
-    //	if (td::string8 == thisType)
-    //	{
-    //		setValue(val);
-    //		return;
-    //	}
-
-    //	setValueFromString(val.c_str());
-    //}
-    //
-    //void setValueFromAnyType(const td::Variant& val)
-    //{
-    //	td::DataType thisType = getType();
-    //	if (td::string8 == thisType)
-    //	{
-    //		setValue(val);
-    //		return;
-    //	}
-
-    //	_lu8Val = val._lu8Val;
-    //}
-
-    //template <class TDAT>
-    //void setValueFromDateTime(const TDAT& val)
-    //{
-    //	td::DataType thisType = getType();
-    //	td::DataType varType = td::getType(val);
-    //	if (varType == thisType)
-    //	{
-    //		setValue(val);
-    //		return;
-    //	}
-    //	if (thisType == td::string8)
-    //	{
-    //		char tmp[64];
-    //		val.formc_str(tmp);
-    //		const char* pStr = &tmp[0];
-    //		td::String& str = strVal();
-    //		str = pStr;
-    //	}
-    //	else if (thisType == td::ch7)
-    //	{
-    //		char tmp[64];
-    //		val.formc_str(tmp);
-    //		const char* pStr = &tmp[0];
-    //		td::ChFix7& str = chFixVal();
-    //		str = pStr;
-    //	}
-    //	else
-    //		_lu8Val = val.getValue();
-    //}
-    //
-    //void setValueFromAnyType(const td::DateTime& val)
-    //{
-    //	setValueFromDateTime(val);
-    //}
-
-    //void setValueFromAnyType(const td::Date& val)
-    //{
-    //	setValueFromDateTime(val);
-    //}
-
-    //void setValueFromAnyType(const td::Time& val)
-    //{
-    //	setValueFromDateTime(val);
-    //}
-
-    //template <typename TVAL>
-    //void setValueFromAnyType(const TVAL& val)
-    //{
-    //	td::DataType thisType = getType();
-    //	td::DataType varType = td::getType(val);
-    //	if (varType == thisType)
-    //	{
-    //		setValue(val);
-    //		return;
-    //	}
-
-    //	if (td::isNumeric(varType))
-    //	{
-    //		setValueFromNumeric(val);
-    //		return;
-    //	}
-
-    //	_lu8Val = (td::LUINT8) val;
-    //}
 
     const char* getConstStr() const
     {

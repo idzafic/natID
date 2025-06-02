@@ -18,23 +18,24 @@ public:
     {
     }
     
-    virtual Type getType() const
+    Type getType() const override
     {
         return Type::RoundRect;
     }
     
-    void init()
+    void init() override
     {
         if (_rect.width() > 0 && _rect.height() > 0)
             _shape.createRoundedRect(_rect, _radius, _lineWidth, _linePattern);
     }
     
-    virtual void load(arch::ArchiveIn& ar)
+    void load(arch::ArchiveIn& ar) override
     {
         ar >> _radius;
         Rectangle::load(ar);
     }
-    virtual void save(arch::ArchiveOut& ar) const
+    
+    void save(arch::ArchiveOut& ar) const override
     {
         ar << _radius;
         Rectangle::save(ar);
@@ -51,14 +52,14 @@ public:
         }
     }
     
-    virtual void getValues(gui::PropertyValues& propValues) const
+    void getValues(gui::PropertyValues& propValues) const override
     {
         td::Variant r(_radius);
         propValues.setValueByKey((td::UINT4)PropID::Rr, r);
         Rectangle::getValues(propValues);
     }
     
-    virtual void setValues(gui::PropertyValues& propValues)
+    void setValues(gui::PropertyValues& propValues) override
     {
         float oldRadius = _radius;
         td::Variant r = propValues.getValueByKey((td::UINT4)PropID::Rr);
@@ -69,7 +70,7 @@ public:
             _shape.updateRoundRectNodes(_rect, _radius);
     }
     
-    virtual void translate(const gui::Point& delta)
+    void translate(const gui::Point& delta) override
     {
         _rect.translate(delta);
         _shape.translateRoundRectNodes(delta);

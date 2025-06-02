@@ -420,8 +420,14 @@ namespace cnt
 		{
 			assert(_root);
 			return _root->data;
-
 		}
+        
+        T* firstPtr()
+        {
+            if(_root)
+                return &_root->data;
+            return nullptr;
+        }
 
 		//template <typename T_CHAR, td::StringEncoding Encoding>
 		//inline iterator push_back(const td::StringBase<T_CHAR, Encoding, 4, false>& val)

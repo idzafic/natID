@@ -8,23 +8,44 @@
 #include <arch/FileSerializer.h>
 #include <arch/ArchiveIn.h>
 #include <arch/ArchiveOut.h>
+#include "../property/DefaultSettings.h"
 
 //Interface to 2d shapes (Rect, Circle,...)
 class Model
 {
     cnt::PushBackVector<IShape2D*, 1024> _shapes;
+    DefaultSettings* _pDefSettings ;
     gui::Size _modelSize;
+    td::UINT4 _noOfRects = 0;
+    td::UINT4 _noOfRoundedRects = 0;
+    td::UINT4 _noOfCircles = 0;
+    
 protected:
+    
+    void updateNoOfShapesInProps()
+    {
+        _pDefSettings->setNoOfShapes(_noOfRects, IShape2D::Type::Rect, false);
+        _pDefSettings->setNoOfShapes(_noOfRoundedRects, IShape2D::Type::RoundRect, false);
+        _pDefSettings->setNoOfShapes(_noOfCircles, IShape2D::Type::Circle, true); //last one should update the viewer
+    }
+    
     void clean()
     {
         for (auto pShape : _shapes)
         {
             pShape->release();
         }
+        _noOfRects = 0;
+        _noOfRoundedRects = 0;
+        _noOfCircles = 0;
+        updateNoOfShapesInProps();
     }
+    
+    Model() = delete;
 public:
-    Model()
-    : _modelSize(10,10)
+    Model(DefaultSettings* pDefSettings)
+    : _pDefSettings(pDefSettings)
+    , _modelSize(10,10)
     {
     }
     
@@ -49,7 +70,7 @@ public:
         //mu::dbgLog("#Drawn=%d", nDrawn);
     }
     
-    void appendShape(IShape2D* pShape)
+    void appendShape(IShape2D* pShape, bool informPropEditor)
     {
         gui::Rect boundRect;
         pShape->getBoundingRect(boundRect);
@@ -59,8 +80,25 @@ public:
         _modelSize.width = currentModelRect.width();
         _modelSize.height = currentModelRect.height();
 //        mu::dbgLog("Model w=%.1f, h=%.1f", _modelSize.width, _modelSize.height);
+        auto type = pShape->getType();
+        switch (type)
+        {
+            case IShape2D::Type::Rect:
+                ++_noOfRects;
+                break;
+            case IShape2D::Type::RoundRect:
+                ++_noOfRoundedRects;
+                break;
+            case IShape2D::Type::Circle:
+                ++_noOfCircles;
+                break;
+            default:
+                assert(false);
+        }
+        _shapes.push_back(pShape);
         
-        _shapes.push_back(pShape);        
+        if (informPropEditor)
+            updateNoOfShapesInProps();
     }
     
     bool load(const td::String& fileName)
@@ -100,7 +138,7 @@ public:
                         IShape2D* pShape = IShape2D::createRect(gui::Shape::Attribs::LineAndFill, r, td::ColorID::SysText, td::ColorID::SysText, 1.0f, td::LinePattern::Solid);
                         pShape->load(ar);
                         pShape->init();
-                        appendShape(pShape);
+                        appendShape(pShape, false);
                     }
                         break;
                     case IShape2D::Type::RoundRect:
@@ -110,7 +148,7 @@ public:
                         IShape2D* pShape = IShape2D::createRoundedRect(gui::Shape::Attribs::LineAndFill, r, radius, td::ColorID::SysText, td::ColorID::SysText, 1.0f, td::LinePattern::Solid);
                         pShape->load(ar);
                         pShape->init();
-                        appendShape(pShape);
+                        appendShape(pShape, false);
                     }
                         break;
                     case IShape2D::Type::Circle:
@@ -120,7 +158,7 @@ public:
                         IShape2D* pShape = IShape2D::createCircle(gui::Shape::Attribs::LineAndFill, pt, radius, td::ColorID::SysText, td::ColorID::SysText, 1.0f, td::LinePattern::Solid);
                         pShape->load(ar);
                         pShape->init();
-                        appendShape(pShape);
+                        appendShape(pShape, false);
                     }
                         break;
                     default:
@@ -131,9 +169,13 @@ public:
                         
                 }
             }
+            //update prop editor all at once
+            updateNoOfShapesInProps();
         }
         catch(...)
         {
+            //update prop editor all at once
+            updateNoOfShapesInProps();
             return false;
         }
         return true;
@@ -192,9 +234,27 @@ public:
     {
         if (pShape)
         {
+            auto shapeType = pShape->getType();
+            switch (shapeType)
+            {
+                case IShape2D::Type::Rect:
+                    --_noOfRects;
+                    break;
+                case IShape2D::Type::RoundRect:
+                    --_noOfRoundedRects;
+                    break;
+                case IShape2D::Type::Circle:
+                    --_noOfCircles;
+                    break;
+                default:
+                    assert(false);
+            }
+            updateNoOfShapesInProps();
             _shapes.remove(pShape);
             pShape->release();
             pShape = nullptr;
+            
+            
         }
     }
     

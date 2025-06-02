@@ -25,10 +25,10 @@ public:
 
 inline ISignal::Type getSignalType(const td::StringExt* pStr)
 {
-    if (pStr->compareConstStr("LowLimit"))
+    if (pStr->compareConstStr("TooLow"))
         return ISignal::Type::LowLimit;
     
-    if (pStr->compareConstStr("HighLimit"))
+    if (pStr->compareConstStr("TooHigh"))
         return ISignal::Type::HighLimit;
     
     if (pStr->compareConstStr("Rounding"))

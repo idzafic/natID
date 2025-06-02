@@ -17,5 +17,7 @@
 		<Res id="rect" path="Work/Common/Symbols/Shapes/rectangle.xml"/>
 		<Res id="roundRct" path="Work/Common/Symbols/Shapes/roundedRectangle.xml"/>
 		<Res id="circ" path="Work/Common/Symbols/Shapes/circle.xml"/>
+		<Res id="Bez1" path="Work/Common/Symbols/Shapes/Bezier01.xml"/>
+		<Res id="Bez2" path="Work/Common/Symbols/Shapes/Bezier02.xml"/>
 	</Symbols>
 </DevRes>

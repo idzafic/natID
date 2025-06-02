@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<DevRes>
+    <Translations>
+        <Res id="appTitle" tr="贪吃蛇"/>
+        <Res id="start" tr="新游戏"/>
+        <Res id="startTT" tr="开始新游戏"/>
+        <Res id="stop" tr="放弃"/>
+        <Res id="stopTT" tr="放弃并结束游戏"/>
+        <Res id="Update" tr="刷新"/>
+        
+        <Res id="GZBeatHS:" tr="恭喜！您以以下成绩打破了之前的最高分："/>
+        <Res id="Score:" tr="分数："/>
+        <Res id="Highscore: " tr="最高分："/>
+
+        <Res id="closeNOK" tr="错误！动画正在运行！"/>
+        <Res id="cloeErr" tr="停止动画后再关闭应用程序！"/>
+        <Res id="settings" tr="设置"/>
+        <!-- Settings -->
+        <Res id="dlgSettings" tr="设置"/>
+        <Res id="lblLang" tr="当前应用程序语言："/>
+        <Res id="lblLang2" tr="应用程序重启后的语言："/>
+        <Res id="chbTBIcsAndLbls" tr="在工具栏图标下方显示标签"/>
+        <Res id="lblLevel" tr="难度："/>
+        <Res id="RestartRequired" tr="重启应用程序"/>
+        <Res id="RestartRequiredInfo" tr="部分更改的设置需要重启应用程序才能生效"/>
+        <Res id="Restart" tr="重启"/>
+        <Res id="DoNoRestart" tr="不重启"/>
+        <!-- Status Bar -->
+        <Res id="ClStart" tr="点击'新游戏'按钮开始游戏..."/>
+        <Res id="clickArrK" tr="按任意方向键开始移动蛇。"/>
+        <Res id="+apple" tr="太棒了！又吃到一个苹果！"/>
+        <Res id="+pear" tr="太棒了！我喜欢梨子！"/>
+        <Res id="+banana" tr="太好了！香蕉是我的最爱！"/>
+        <Res id="Total:" tr="总计："/>
+        <!-- Other -->
+        <Res id="theApp" tr="应用程序"/>
+        <Res id="game" tr="游戏"/>
+        <Res id="Easy" tr="简单"/>
+        <Res id="Medium" tr="中等"/>
+        <Res id="Hard" tr="困难"/>
+    </Translations>
+</DevRes>

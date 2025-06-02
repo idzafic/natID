@@ -49,13 +49,13 @@ protected:
         td::String lbl;
         NatString natStr;
         //td::UINT2 posInSwitcher;
-        td::UINT2 contextMenuGroup = 0;
+        td::UINT2 contextMenuGroup; //system context menu group
         td::ColorID selLineColor;
         Type type;
-        td::BYTE contextMenuID = 0;
+        td::BYTE contextMenuID;
         td::BYTE nonRemovable = 0;
         td::BYTE modified = 0;
-        td::BYTE contentType = 0;
+//        td::BYTE contentType = 0;
     };
 private:
     TabView* _pTabView;
@@ -90,17 +90,18 @@ protected:
     bool getItemRect(size_t posItem, Rect& r) const;
     
     void setTitle(int pos, const td::String& strTitle);
+    td::String getTitle(int pos) const;
     
     void setModified(int pos, bool bModified);
     bool isModified(int Pos) const;
     
-    void setContentTypeID(int pos, td::BYTE cntType);
-    td::BYTE getContentTypeID(int pos) const;
+//    void setContentTypeID(int pos, td::BYTE cntType);
+//    td::BYTE getContentTypeID(int pos) const;
     
     void populate(Item& item, const td::String& lbl, td::ColorID selLineColor);
     
-    void append(const Image* pImg, const td::String& lbl, td::ColorID selLineColor, td::BYTE cntType);
-    void append(const Symbol* pSymb, const td::String& lbl, td::ColorID selLineColor, td::BYTE cntType);
+    void append(const Image* pImg, const td::String& lbl, td::ColorID selLineColor);
+    void append(const Symbol* pSymb, const td::String& lbl, td::ColorID selLineColor);
     
     void setLineLen(CoordType newLineLen);
     
@@ -120,6 +121,7 @@ protected:
     void setHeaderContextMenu(int pos, td::BYTE contextMenuID, td::UINT2 contextMenuGroup = 0);
     void forwardContextMenuEventsTo(int pos, Frame* pFrame);
     void setNonRemovable(int viewPos, bool nonRemovable);
+    void systemColorModeChanged(bool bDarkMode);
 //    bool onActionItem(gui::ActionItemDescriptor& aiDesc) override;
 public:
     TabHeader(TabView* pTabView, Type type, td::BYTE minWidthInChars, td::BYTE maxWidthInChars, Font::ID selFontID, Font::ID fontID);

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevRes>
+    <Translations>
+        <Res id="@GUI.fdFileType" tr="文件类型："/>
+        <Res id="Ok" tr="确定"/>
+        <Res id="Cancel" tr="取消"/>
+        <Res id="@msgInfo" tr="信息"/>
+        <Res id="@msgWarning" tr="警告"/>
+        <Res id="@msgError" tr="错误"/>
+        <Res id="@AppMenu" tr="应用程序菜单"/>
+        <Res id="@CTX.CloseAllOnLeft" tr="关闭左侧所有"/>
+        <Res id="@CTX.CloseAllOnRigh" tr="关闭右侧所有"/>
+        <Res id="@CTX.CloseAllButThi" tr="关闭除此以外的所有"/>
+        <Res id="@CTX.CloseAll" tr="关闭所有"/>
+        <Res id="@CTX.TEExport2XML" tr="导出内容到XML"/>
+        <Res id="@CTX.TEExport2TXT" tr="导出内容到TXT"/>
+        <Res id="@CTX.TECopy" tr="复制所选行"/>
+        <Res id="@TE.find:" tr="查找："/>
+        <Res id="@TE.replace:" tr="替换："/>
+        <Res id="@TE.GoToLine:" tr="转到行："/>
+        <Res id="@TE.Info:" tr="信息："/>
+        <Res id="@TE.LEfindTT" tr="要搜索的内容"/>
+        <Res id="@TE.BtnfindTT" tr="查找下一个"/>
+        <Res id="@TE.replaceTT" tr="用于替换的内容"/>
+        <Res id="@TE.findAllTT" tr="到达最后一个位置后从头开始搜索"/>
+        <Res id="@TE.ReplaceTT" tr="替换下一个"/>
+        <Res id="@TE.ReplaceAllTT" tr="替换所有（从文档开始到结束）"/>
+        <Res id="@TE.GoToLineTT" tr="转到编辑器中的指定行"/>
+        <Res id="@TE.found" tr="找到："/>
+        <Res id="@TE.NotFound" tr="未找到任何内容"/>
+        <Res id="@TE.replaced" tr="已替换"/>
+        <Res id="@TE.NotReplaced" tr="未替换任何内容"/>
+        <Res id="@TE.replacedAll:" tr="替换所有："/>
+        <Res id="@TE.LineNoTooLarge" tr="行号太大"/>
+        <Res id="@TE.OnLine" tr="找到行号"/>
+        <Res id="@TE.Export2XML" tr="导出内容到XML"/>
+        <Res id="@TE.Export2TXT" tr="导出内容到TXT"/>
+        <Res id="@TE.findReplaceDlg" tr="查找和替换"/>
+    </Translations>
+</DevRes>

@@ -9,6 +9,7 @@
 
 #pragma once
 #include <cnt/List.h>
+#include <cnt/ListSL.h>
 #include <td/String.h>
 
 #include <assert.h>
@@ -19,12 +20,13 @@ namespace mem
 	class TStrAllocBuff
 	{
 	public:
-		td::UINT4 len;
 		char* buff;
+        td::UINT4 len;
+//        td::UINT4 capacity;
 	};
 
 	//template <typename T_CHAR, StringEncoding Encoding, int SPACE_FOR_SIZE>	
-	template <class TUSEDSTRING = td::StringExt, td::UINT4 SINGLEBUFFLEN = 1024 * 4>
+	template <class TUSEDSTRING = td::StringExt, td::UINT4 SINGLEBUFFLEN = 1024 * 64>
 	class StringMemoryManager : public cnt::ListSL< TStrAllocBuff, false >
 	{
 	protected:		
@@ -35,8 +37,8 @@ namespace mem
 		
 		typedef struct _tChunk
 		{
+            struct _tChunk* next;
 			td::UINT4 len;
-			struct _tChunk* next;			
 		}ChunkLink;		
 
 		ChunkLink* _firstAvailableChunk;
@@ -51,19 +53,19 @@ namespace mem
 			//TStrAllocBuff  = new T_CHAR[minLen];
 			//_currentLast = _current + minLen;
 			TStrAllocBuff& chunk(BASE::push());
+            chunk.buff = new char[minLen];
 			chunk.len = minLen;
-			chunk.buff = new char[minLen];
+//            chunk.capacity = minLen;
+			
 			ChunkLink* chunkLink = (ChunkLink*)chunk.buff;
 			chunkLink->len = chunk.len;
 			chunkLink->next = nullptr;
 			if (pPrevLink)
-			{
 				pPrevLink->next = chunkLink;
-			}
+            
 			return chunkLink;
 		}
-		
-
+        
 		inline char* findFirstSuitableChunk(td::UINT4 len)
 		{
 			if (!_firstAvailableChunk)
@@ -152,6 +154,13 @@ namespace mem
 			
 			return retStr;
 		}
+        
+        inline TUSEDSTRING* alloc(const td::String& str)
+        {
+            return allocObject(str.length(), str.c_str());
+        }
+        
+        
 
 		////string se ne moze smjesti u string referencu konzumera, samo u objekat string
 		//inline TUSEDSTRING& allocDataHolder(td::UINT4 nChars, const T_CHAR* pInStr = nullptr)
@@ -237,6 +246,17 @@ namespace mem
 			clean();
 		}
 
+//        void reset()
+//        {
+//            _firstAvailableChunk = nullptr;
+//            TStrAllocBuff* firstBuff = BASE::firstPtr();
+//            if (firstBuff)
+//            {
+//                _firstAvailableChunk = firstBuff->buff;
+//                _firstAvailableChunk->len = firstBuff->capacity;
+//            }
+//        }
+        
 		void clean()
 		{
 			BASE_ITER it(BASE::begin());
@@ -247,6 +267,7 @@ namespace mem
 				++it;
 			}
 			BASE::clean();
+            _firstAvailableChunk = nullptr;
 		}
 	};
 }

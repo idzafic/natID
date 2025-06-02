@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<DevRes>
+    <Translations>
+        <Res id="appTitle" tr="Змейка"/>
+        <Res id="start" tr="Новая игра"/>
+        <Res id="startTT" tr="Начать новую игру"/>
+        <Res id="stop" tr="Сдаться"/>
+        <Res id="stopTT" tr="Сдаться и закончить игру"/>
+        <Res id="Update" tr="Обновить"/>
+        
+        <Res id="GZBeatHS:" tr="Поздравляем! Вы побили предыдущий рекорд с результатом: "/>
+        <Res id="Score:" tr="Счет: "/>
+        <Res id="Highscore: " tr="Рекорд: "/>
+
+        <Res id="closeNOK" tr="Ошибка! Анимация запущена!"/>
+        <Res id="cloeErr" tr="Остановите анимацию перед закрытием приложения!"/>
+        <Res id="settings" tr="Настройки"/>
+        <!-- Settings -->
+        <Res id="dlgSettings" tr="Настройки"/>
+        <Res id="lblLang" tr="Текущий язык приложения:"/>
+        <Res id="lblLang2" tr="Язык приложения после перезапуска:"/>
+        <Res id="chbTBIcsAndLbls" tr="Показывать подписи под иконками на панели инструментов"/>
+        <Res id="lblLevel" tr="Сложность:"/>
+        <Res id="RestartRequired" tr="Перезапустить приложение"/>
+        <Res id="RestartRequiredInfo" tr="Некоторые измененные настройки требуют перезапуска приложения"/>
+        <Res id="Restart" tr="Перезапустить"/>
+        <Res id="DoNoRestart" tr="Не перезапускать"/>
+        <!-- Status Bar -->
+        <Res id="ClStart" tr="Нажмите 'Новая игра' для начала..."/>
+        <Res id="clickArrK" tr="Нажмите любую стрелку для движения змейки."/>
+        <Res id="+apple" tr="Отлично! Еще одно яблоко!"/>
+        <Res id="+pear" tr="Отлично! Я люблю груши!"/>
+        <Res id="+banana" tr="Превосходно! Банан - мой любимый!"/>
+        <Res id="Total:" tr="Всего: "/>
+        <!-- Other -->
+        <Res id="theApp" tr="Приложение"/>
+        <Res id="game" tr="Игра"/>
+        <Res id="Easy" tr="Легко"/>
+        <Res id="Medium" tr="Средне"/>
+        <Res id="Hard" tr="Сложно"/>
+    </Translations>
+</DevRes>

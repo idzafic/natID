@@ -25,10 +25,19 @@ public:
 //    enum class LineBreak : unsigned char {Spase, Word}; //Breaks on spaces for now
 private:
     NatString _natString;
+    
+private:
+    DrawableString(const DrawableString&) = delete;
+    DrawableString& operator=(const DrawableString&) = delete;
 public:
     DrawableString();
     DrawableString(const char*);
     DrawableString(const td::String& str);
+    // Move constructor
+    DrawableString(DrawableString&& ds) noexcept;
+    // Move assignment operator
+    DrawableString& operator=(DrawableString&& ds) noexcept;
+    
     ~DrawableString();
     
     bool isInitialized() const;

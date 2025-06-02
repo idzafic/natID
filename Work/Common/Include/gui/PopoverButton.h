@@ -19,7 +19,6 @@ namespace gui
 {
 
 class PopoverView;
-class PopoverButtonHelper;
 
 class NATGUI_API PopoverButton : public DataCtrl, public IPopoverButton
 {

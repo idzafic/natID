@@ -95,6 +95,8 @@ public:
     
     //Windows only (with GTK)
     void setLeadingSpace(td::BYTE leadingSpace);
+    void systemColorModeChanged(bool bDarkMode);
+    
     td::BYTE getLeadingSpace() const;
 };
 

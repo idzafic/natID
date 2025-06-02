@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<DevRes>
+    <Translations>
+        <Res id="appTitle" tr="Serpiente"/>
+        <Res id="start" tr="Nuevo juego"/>
+        <Res id="startTT" tr="Comenzar un nuevo juego"/>
+        <Res id="stop" tr="Rendirse"/>
+        <Res id="stopTT" tr="Rendirse y terminar el juego"/>
+        <Res id="Update" tr="Actualizar"/>
+        
+        <Res id="GZBeatHS:" tr="¡Felicidades! Has superado el mejor puntaje anterior con: "/>
+        <Res id="Score:" tr="Puntuación: "/>
+        <Res id="Highscore: " tr="Mejor puntuación: "/>
+
+        <Res id="closeNOK" tr="¡Error! ¡La animación está en curso!"/>
+        <Res id="cloeErr" tr="¡Detén la animación antes de cerrar la aplicación!"/>
+        <Res id="settings" tr="Configuración"/>
+        <!-- Settings -->
+        <Res id="dlgSettings" tr="Configuración"/>
+        <Res id="lblLang" tr="Idioma actual de la aplicación:"/>
+        <Res id="lblLang2" tr="Idioma de la aplicación después de reiniciar:"/>
+        <Res id="chbTBIcsAndLbls" tr="Mostrar etiquetas debajo de los iconos en la barra de herramientas"/>
+        <Res id="lblLevel" tr="Dificultad:"/>
+        <Res id="RestartRequired" tr="Reiniciar la aplicación"/>
+        <Res id="RestartRequiredInfo" tr="Algunos cambios requieren reiniciar la aplicación para aplicarse"/>
+        <Res id="Restart" tr="Reiniciar"/>
+        <Res id="DoNoRestart" tr="No reiniciar"/>
+        <!-- Status Bar -->
+        <Res id="ClStart" tr="Haz clic en 'Nuevo juego' para comenzar..."/>
+        <Res id="clickArrK" tr="Presiona cualquier tecla de flecha para mover la serpiente."/>
+        <Res id="+apple" tr="¡Genial! ¡Otra manzana!"/>
+        <Res id="+pear" tr="¡Genial! ¡Me encantan las peras!"/>
+        <Res id="+banana" tr="¡Excelente! ¡El plátano es mi favorito!"/>
+        <Res id="Total:" tr="Total: "/>
+        <!-- Other -->
+        <Res id="theApp" tr="Aplicación"/>
+        <Res id="game" tr="Juego"/>
+        <Res id="Easy" tr="Fácil"/>
+        <Res id="Medium" tr="Medio"/>
+        <Res id="Hard" tr="Difícil"/>
+    </Translations>
+</DevRes>

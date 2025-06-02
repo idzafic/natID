@@ -1,0 +1,31 @@
+Header:
+	startTime = 0.0
+	dTime = 1e-3
+	endTime = 3.0
+	maxIter= 20
+	report = Solved
+end  //end of header
+//Model created by xml -> modl converter
+Model [type=DAE domain=real method=RK2 name="PendulumModelUsingDAE"]:
+Vars [out=true]:		// output all variables for plotting 
+	x=0.6		// Variable name and initial value (optional) 
+	v_x=0		// Variable name and initial value (optional) 
+	y=sqrt(l^2-x^2)		// "0.998749218"  Variable name and initial value (optional) 
+	v_y=0		// Variable name and initial value (optional) 
+	F=m*g*y/l		// "9.6" Variable name and initial value (optional) 
+Params:		// default integration step 
+	l=1		// Parameter name and its value 
+	m=1		// Parameter name and its value 
+	g=9.81		// Parameter name and its value 
+	k=0		// koeficijent otpora zraka 
+	v=0 [out=true]		// brzina 
+ODEs:
+	x'=v_x		// First state variable
+	v_x'=-F*x/(m*l)-k*v_x/m		// Second state variable
+	y'=v_y		// 3rd state variable
+	v_y'=g-F*y/(m*l)-k*v_y/m		// 4th state variable
+NLEs:
+	x^2+y^2=l^2		// First nonlinear equaiton of the model 
+PostProc:
+	v=sqrt(v_x^2+v_y^2)
+end

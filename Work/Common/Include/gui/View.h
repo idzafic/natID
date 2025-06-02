@@ -19,7 +19,6 @@
 namespace gui
 {
 
-class Layout;
 class Control;
 class ViewHelper;
 
@@ -48,10 +47,16 @@ protected:
     virtual void adjustLayout(const Size& newSize); //called on every resize
     void setMargins(td::BYTE left, td::BYTE top, td::BYTE right, td::BYTE bottom);
     std::tuple<bool, bool> isFixedSize() const override;
+    
+    bool freeze() override;
+    void unFreeze() override;
+    Layout* getLayout() override;
+    
     View (int k);
     View(const View&) = delete;
     View(View&&) = delete;
 public:
+    
     View();
     View(td::BYTE marginLeft, td::BYTE marginTop, td::BYTE marginRight, td::BYTE marginBottom);
     ~View();
@@ -61,8 +66,9 @@ public:
     td::WORD getTotalVMargin() const override;
     gui::ObjType getObjType() const override { return ObjType::View;}
     void setAsCentralViewInWindow(Window* pWnd, Frame::FixSizes fixSizes) override;
-    void setLayout(Layout* pLayout);
+    
     const Cell& getCell() const;
+    void setLayout(Layout* pLayout);
     //void setBackgroundColor(td::ColorID);
 };
 

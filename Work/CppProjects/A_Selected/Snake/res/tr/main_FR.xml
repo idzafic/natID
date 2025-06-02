@@ -1,0 +1,41 @@
+<DevRes>
+    <Translations>
+        <Res id="appTitle" tr="Serpent"/>
+        <Res id="start" tr="Nouvelle partie"/>
+        <Res id="startTT" tr="Commencer une nouvelle partie"/>
+        <Res id="stop" tr="Abandonner"/>
+        <Res id="stopTT" tr="Abandonner et terminer le jeu"/>
+        <Res id="Update" tr="Actualiser"/>
+        
+        <Res id="GZBeatHS:" tr="Félicitations ! Vous avez battu le meilleur score avec : "/>
+        <Res id="Score:" tr="Score : "/>
+        <Res id="Highscore: " tr="Meilleur score : "/>
+
+        <Res id="closeNOK" tr="Erreur ! L'animation est en cours !"/>
+        <Res id="cloeErr" tr="Arrêtez l'animation avant de fermer l'application !"/>
+        <Res id="settings" tr="Paramètres"/>
+        <!-- Settings -->
+        <Res id="dlgSettings" tr="Paramètres"/>
+        <Res id="lblLang" tr="Langue actuelle de l'application :"/>
+        <Res id="lblLang2" tr="Langue de l'application après redémarrage :"/>
+        <Res id="chbTBIcsAndLbls" tr="Afficher les étiquettes sous les icônes de la barre d'outils"/>
+        <Res id="lblLevel" tr="Difficulté :"/>
+        <Res id="RestartRequired" tr="Redémarrer l'application"/>
+        <Res id="RestartRequiredInfo" tr="Certains paramètres modifiés nécessitent un redémarrage de l'application"/>
+        <Res id="Restart" tr="Redémarrer"/>
+        <Res id="DoNoRestart" tr="Ne pas redémarrer"/>
+        <!-- Status Bar -->
+        <Res id="ClStart" tr="Cliquez sur 'Nouvelle partie' pour commencer..."/>
+        <Res id="clickArrK" tr="Appuyez sur une touche de direction pour déplacer le serpent."/>
+        <Res id="+apple" tr="Super ! Une autre pomme !"/>
+        <Res id="+pear" tr="Super ! J'adore les poires !"/>
+        <Res id="+banana" tr="Excellent ! La banane est mon fruit préféré !"/>
+        <Res id="Total:" tr="Total : "/>
+        <!-- Other -->
+        <Res id="theApp" tr="Application"/>
+        <Res id="game" tr="Jeu"/>
+        <Res id="Easy" tr="Facile"/>
+        <Res id="Medium" tr="Moyen"/>
+        <Res id="Hard" tr="Difficile"/>
+    </Translations>
+</DevRes>

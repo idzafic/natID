@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevRes>
+    <Translations>
+        <Res id="@Plot_settings" tr="绘图设置"/>
+        <Res id="@Plot_zatvori" tr="关闭"/>
+        <Res id="@Plot_legendCols" tr="绘图图例中的列数："/>
+        <Res id="@Plot_marginLeft" tr="左边距："/>
+        <Res id="@Plot_marginRight" tr="右边距："/>
+        <Res id="@Plot_marginTop" tr="上边距："/>
+        <Res id="@Plot_marginBottom" tr="下边距："/>
+        <Res id="@Plot_xSpace" tr="到 X 轴标签的距离："/>
+        <Res id="@Plot_ySpace" tr="到 Y 轴标签的距离："/>
+        <Res id="@Plot_savedImageRes" tr="保存的图像分辨率："/>
+        <Res id="@Plot_height" tr="图像高度："/>
+        <Res id="@Plot_width" tr="图像宽度"/>
+        <Res id="@Plot_colorDef" tr="为以下项定义的颜色："/>
+        <Res id="@Plot_defLineProps" tr="默认线条属性"/>
+        <Res id="@Plot_allMode" tr="任何主题"/>
+        <Res id="@Plot_darkMode" tr="暗黑模式"/>
+        <Res id="@Plot_whiteMode" tr="亮色模式"/>
+        <Res id="@Plot2JPG" tr="JPG 图像格式"/>
+        <Res id="@Plot2PNG" tr="PNG 图像格式"/>
+        <Res id="@Plot2PDF" tr="PDF 文档格式"/>
+        <Res id="@Plot2EPS" tr="EPS 图像格式"/>
+        <Res id="@Plot2SVG" tr="SVG 图像格式"/>
+        <Res id="@Plot2TXT" tr="TXT（文本）格式"/>
+        <Res id="Fig_AllMode" tr="所有颜色模式"/>
+        <Res id="Fig_DarkMode" tr="深色模式"/>
+        <Res id="Fig_LightMode" tr="浅色模式"/>
+        <Res id="Fig_DefLineProps" tr="线条属性"/>
+        <Res id="@Plot_AxisFS" tr="字体大小："/>
+        <Res id="@Plot_AxisFN" tr="字体名称："/>
+    </Translations>
+</DevRes>

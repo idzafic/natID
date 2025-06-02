@@ -18,6 +18,7 @@
 #include <td/ColorID.h>
 #include <td/LinePattern.h>
 #include <td/DotPattern.h>
+#include <td/Anchor.h>
 
 namespace db
 {
@@ -62,6 +63,7 @@ namespace td
             td::ColorID _colorID;
             td::LinePattern _linePattern;
             td::DotPattern _dotPattern;
+            td::Anchor _anchor;
 			WORD _wordVal;
 			INT2 _i2Val;
 			UINT4 _u4Val;
@@ -204,6 +206,11 @@ namespace td
         {
         }
         
+        VariantBase(const td::Anchor& val)
+            : _anchor(val)
+        {
+        }
+        
         //template<size_t N >
         //VariantBase(const td::SmallChFix<N>& val)
         //    : _lu8Val(val.lu8Val())
@@ -280,6 +287,7 @@ namespace td
             case td::colorID: return vis(_colorID); break;
             case td::linePattern: return vis(_linePattern); break;
             case td::dotPattern: return vis(_dotPattern); break;
+            case td::anchor: return vis(_anchor); break;
 			case td::TD_NONE: return vis(none()); break;
 				//case td::none:	return "NONE-VALUE";
 			default: assert(false);
@@ -322,6 +330,7 @@ namespace td
             case td::colorID: return vis(_colorID); break;
             case td::linePattern: return vis(_linePattern); break;
             case td::dotPattern: return vis(_dotPattern); break;
+            case td::anchor: return vis(_anchor); break;
 			case td::TD_NONE: return vis(none()); break;
 			default: assert(false); 
 			}

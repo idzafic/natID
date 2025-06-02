@@ -163,7 +163,8 @@ private:
         _textures.append({ &_samplerWoodFloor, &_samplerWoodFloorNormal });
         _program.setBuffer(&_gpuBuffer);
         _program.setTextures(&_textures);
-        _program.setTextureUniforms();
+        
+        //dbgCheckGLError();
     }
 protected:
     
@@ -205,13 +206,7 @@ protected:
         gui::gl::Context::enable(gui::gl::Context::Flag::DepthTest);
         gui::gl::Context::enable(gui::gl::Context::Flag::CullFace);
         
-#ifdef DEBUG_GL
-        GLenum error = glGetError();
-        if (error != GL_NO_ERROR)
-        {
-            mu::dbgLog("OpenGL error: %x", error);
-        }
-#endif
+        dbgCheckGLError();
     }
     
     bool prepareNextFrame() override
@@ -229,7 +224,6 @@ protected:
         _normalMat = glm::transpose(glm::inverse(_modelViewMat));
         _mvpMatrix = _perspectiveMatrix * _viewMatrix * modelMatrix;
         return true;
-
     }
     
     void onDraw(const gui::Rect& rect) override
@@ -243,6 +237,7 @@ protected:
         _program.setN(_normalMat);
         _program.setLightPos(_lightPos);
         _program.setV(_viewMatrix);
+        _program.setTextureUniforms();
         _program.execute();
         _program.deActivate();
     }

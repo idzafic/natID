@@ -75,13 +75,16 @@ protected:
     virtual bool onClick(gui::DrawableButtonIntern* pDrawableBtnIntern);
     virtual bool onClick(gui::DrawableButtonWithDelegate* pDrawableBtnWDlg);
     virtual bool onClick(gui::CheckBox* pBtn);
+    virtual bool onDblClick(gui::TableEdit* pTE);
     virtual bool onClick(gui::Dialog* pDlg, td::UINT4 dlgID); //clicked a closing button on Dialog
     virtual bool onClick(gui::FileDialog* pDlg, td::UINT4 dlgID); //clicked Open/Save or cancel status button on a file dialog
     //for Alerts
     virtual bool onAnswer(td::UINT4 questionID, gui::Alert::Answer answer); //clicked Yes/No/Other on Alert dialog
     //for line edits
     virtual bool onBeginEdit(gui::LineEdit* pCtrl);
+    virtual bool onChangedContent(gui::LineEdit* pCtrl);
     virtual bool onActivate(gui::LineEdit* pCtrl); //pressed enter
+    virtual bool onActivateCmd(gui::LineEdit* pCtrl); //pressed Cmd/Ctrl+Enter
     virtual bool onFinishEdit(gui::LineEdit* pCtrl);
     //for selection changes
     virtual bool onChangedSelection(gui::ComboBox* pCmb);
@@ -98,6 +101,7 @@ protected:
     virtual bool onChangedValue(gui::TimeEdit* pTE);
     virtual bool onChangedValue(gui::ColorPicker* pCP);
     virtual bool onChangedValue(gui::LinePatternPicker* pLPP);
+    virtual bool onModified(gui::TextEdit* pTE);
     //Popover on toolbar
     virtual bool onToolbarsPopoverSelectionChange(gui::PopoverView* pPOView, td::UINT2 ctrlID, td::UINT2 selection);
     virtual bool onToolbarsComboBoxSelectionChange(gui::ComboBox* pCmb, td::UINT2 ctrlID, int selection);

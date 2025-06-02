@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevRes>
+    <Translations>
+        <Res id="repView" tr="报表"/>
+        <Res id="repError" tr="错误"/>
+        <Res id="repNoView" tr="没有打开的报表！操作无法完成！"/>
+        <Res id="print" tr="打印"/>
+        <Res id="printTT" tr="打印"/>
+        <Res id="expPDF" tr="转为 PDF"/>
+        <Res id="expPDFTT" tr="导出为 PDF"/>
+        <Res id="expXML" tr="转为 XML"/>
+        <Res id="expXMLTT" tr="导出为 XML"/>
+        <Res id="zoom11" tr="1:1"/>
+        <Res id="zoom11TT" tr="与打印版本形成 1:1 比例"/>
+        <Res id="repZoom" tr="缩放"/>
+        <Res id="repZoomTT" tr="缩放百分比值"/>
+        <Res id="zoomW" tr="适应宽度"/>
+        <Res id="zoomWTT" tr="适应页面宽度"/>
+        <Res id="zoomH" tr="适应高度"/>
+        <Res id="zoomHTT" tr="适应页面宽度"/>
+        <Res id="vwSingle" tr="一页"/>
+        <Res id="vwSingleTT" tr="按列显示一页"/>
+        <Res id="vwTwo" tr="两页"/>
+        <Res id="vwTwoTT" tr="按列显示两页"/>
+        <Res id="vwThree" tr="三页"/>
+        <Res id="vwThreeTT" tr="按列显示三页"/>
+        <Res id="vwFour" tr="四页"/>
+        <Res id="vwFourTT" tr="按列显示四页"/>
+        <Res id="repPg#" tr="页码/总页数"/>
+        <Res id="repPg#TT" tr="页码/总页数"/>
+        <Res id="goToFirst" tr="到首页"/>
+        <Res id="goToFirstTT" tr="显示（跳转到）首页"/>
+        <Res id="goToLast" tr="到末页"/>
+        <Res id="goToLastTT" tr="显示（跳转到）末页"/>
+        <Res id="rep2XML" tr="导出为 XML"/>
+        <Res id="0" tr="零 "/>
+        <Res id="1" tr="一 "/>
+        <Res id="2" tr="二 "/>
+        <Res id="3" tr="三 "/>
+        <Res id="4" tr="四 "/>
+        <Res id="5" tr="五 "/>
+        <Res id="6" tr="六 "/>
+        <Res id="7" tr="七 "/>
+        <Res id="8" tr="八 "/>
+        <Res id="9" tr="九 "/>
+        <Res id="10" tr="十 "/>
+        <Res id="11" tr="十一 "/>
+        <Res id="12" tr="十二 "/>
+        <Res id="13" tr="十三 "/>
+        <Res id="14" tr="十四 "/>
+        <Res id="15" tr="十五 "/>
+        <Res id="16" tr="十六 "/>
+        <Res id="17" tr="十七 "/>
+        <Res id="18" tr="十八 "/>
+        <Res id="19" tr="十九 "/>
+        <Res id="20" tr="二十 "/>
+        <Res id="30" tr="三十 "/>
+        <Res id="40" tr="四十 "/>
+        <Res id="50" tr="五十 "/>
+        <Res id="60" tr="六十 "/>
+        <Res id="70" tr="七十 "/>
+        <Res id="80" tr="八十 "/>
+        <Res id="90" tr="九十 "/>
+        <Res id="100_beg" tr="一百 "/>
+        <Res id="200" tr="两百 "/>
+        <Res id="300" tr="三百 "/>
+        <Res id="400" tr="四百 "/>
+        <Res id="500" tr="五百 "/>
+        <Res id="600" tr="六百 "/>
+        <Res id="700" tr="七百 "/>
+        <Res id="800" tr="八百 "/>
+        <Res id="900" tr="九百 "/>
+        <Res id="1e3" tr="一千 "/>
+        <Res id="2e3" tr="两千 "/>
+        <Res id="3e3" tr="三千 "/>
+        <Res id="4e3" tr="四千 "/>
+        <Res id="5e3" tr="五千 "/>
+        <Res id="6e3" tr="六千 "/>
+        <Res id="7e3" tr="七千 "/>
+        <Res id="8e3" tr="八千 "/>
+        <Res id="9e3" tr="九千 "/>
+        <Res id="e3s" tr="千 "/>
+        <Res id="1e6" tr="一百万 "/>
+        <Res id="2e6" tr="两百万 "/>
+        <Res id="3e6" tr="三百万 "/>
+        <Res id="4e6" tr="四百万 "/>
+        <Res id="5e6" tr="五百万 "/>
+        <Res id="6e6" tr="六百万 "/>
+        <Res id="7e6" tr="七百万 "/>
+        <Res id="8e6" tr="八百万 "/>
+        <Res id="9e6" tr="九百万 "/>
+        <Res id="e6s" tr="百万 "/>
+        <Res id="1e9" tr="十亿 "/>
+        <Res id="2e9" tr="二十亿 "/>
+        <Res id="3e9" tr="三十亿 "/>
+        <Res id="4e9" tr="四十亿 "/>
+        <Res id="5e9" tr="五十亿 "/>
+        <Res id="6e9" tr="六十亿 "/>
+        <Res id="7e9" tr="七十亿 "/>
+        <Res id="8e9" tr="八十亿 "/>
+        <Res id="9e9" tr="九十亿 "/>
+        <Res id="e9s" tr="十亿 "/>
+        <Res id="1e12" tr="一万亿 "/>
+        <Res id="2e12" tr="两万亿 "/>
+        <Res id="3e12" tr="三万亿 "/>
+        <Res id="4e12" tr="四万亿 "/>
+        <Res id="5e12" tr="五万亿 "/>
+        <Res id="6e12" tr="六万亿 "/>
+        <Res id="7e12" tr="七万亿 "/>
+        <Res id="8e12" tr="八万亿 "/>
+        <Res id="9e12" tr="九万亿 "/>
+        <Res id="e12s" tr="万亿 "/>
+        <Res id="1e15" tr="一千兆 "/>
+        <Res id="2e15" tr="两千兆 "/>
+        <Res id="3e15" tr="三千兆 "/>
+        <Res id="4e15" tr="四千兆 "/>
+        <Res id="5e15" tr="五千兆 "/>
+        <Res id="6e15" tr="六千兆 "/>
+        <Res id="7e15" tr="七千兆 "/>
+        <Res id="8e15" tr="八千兆 "/>
+        <Res id="9e15" tr="九千兆 "/>
+        <Res id="e15s" tr="千兆 "/>
+        <Res id="and" tr="和 "/>
+        <Res id="Page" tr="页"/>
+        <Res id="NoDPToExp" tr="没有数据可导出！报表不包含任何来自数据库的表！"/>
+        <Res id="ExpToXMLDone" tr="成功导出为 XML！"/>
+        <Res id="repErr" tr="报表错误"/>
+        <Res id="repToPDF" tr="导出报表为 PDF"/>
+        <Res id="repToXML" tr="导出报表为 XML"/>
+    </Translations>
+</DevRes>

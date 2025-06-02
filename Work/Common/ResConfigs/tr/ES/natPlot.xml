@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevRes>
+    <Translations>
+        <Res id="@Plot_settings" tr="Configuración del gráfico"/>
+        <Res id="@Plot_zatvori" tr="Cerrar"/>
+        <Res id="@Plot_legendCols" tr="Número de columnas en la leyenda del gráfico:"/>
+        <Res id="@Plot_marginLeft" tr="Margen izquierdo:"/>
+        <Res id="@Plot_marginRight" tr="Margen derecho:"/>
+        <Res id="@Plot_marginTop" tr="Margen superior:"/>
+        <Res id="@Plot_marginBottom" tr="Margen inferior:"/>
+        <Res id="@Plot_xSpace" tr="Espacio hasta la etiqueta del eje X:"/>
+        <Res id="@Plot_ySpace" tr="Espacio hasta la etiqueta del eje Y:"/>
+        <Res id="@Plot_savedImageRes" tr="Resolución de la imagen guardada:"/>
+        <Res id="@Plot_height" tr="Altura de la imagen:"/>
+        <Res id="@Plot_width" tr="Ancho de la imagen"/>
+        <Res id="@Plot_colorDef" tr="Colores definidos para:"/>
+        <Res id="@Plot_defLineProps" tr="Propiedades de línea predeterminadas"/>
+        <Res id="@Plot_allMode" tr="Cualquier tema"/>
+        <Res id="@Plot_darkMode" tr="Modo oscuro"/>
+        <Res id="@Plot_whiteMode" tr="Modo claro"/>
+        <Res id="@Plot2JPG" tr="Formato de imagen JPG"/>
+        <Res id="@Plot2PNG" tr="Formato de imagen PNG"/>
+        <Res id="@Plot2PDF" tr="Formato de documento PDF"/>
+        <Res id="@Plot2EPS" tr="Formato de imagen EPS"/>
+        <Res id="@Plot2SVG" tr="Formato de imagen SVG"/>
+        <Res id="@Plot2TXT" tr="Formato TXT (texto)"/>
+        <Res id="Fig_AllMode" tr="Todos los modos de color"/>
+        <Res id="Fig_DarkMode" tr="Modo de color oscuro"/>
+        <Res id="Fig_LightMode" tr="Modo de color claro"/>
+        <Res id="Fig_DefLineProps" tr="Propiedades de línea"/>
+        <Res id="@Plot_AxisFS" tr="Tamaño de fuente:"/>
+        <Res id="@Plot_AxisFN" tr="Nombre de fuente:"/>
+    </Translations>
+</DevRes>

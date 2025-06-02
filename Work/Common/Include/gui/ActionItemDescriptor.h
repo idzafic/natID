@@ -33,6 +33,8 @@ public:
     enum class Source : td::BYTE {MenuOrToolbar=0, Report, Other};
     gui::ActionItem* _pActionItem;
     const gui::ContextData* _pContextData;
+    td::String _menuItemFileName;
+    td::String _menuItemShortName;
     td::BYTE _menuID;
     td::BYTE _firstSubmenuID;
     td::BYTE _lastSubMenuID;
@@ -46,6 +48,8 @@ public:
     ActionItemDescriptor(Source source, const gui::ContextData* pContextData, td::BYTE menuID, td::BYTE firstSubmenuID, td::BYTE lastSubMenuID, td::BYTE actionItemID, gui::ActionItem* pActionItem);
     std::tuple<td::BYTE, td::BYTE, td::BYTE, td::BYTE> getIDs() const;
     gui::ActionItem* getActionItem();
+    const td::String& getMenuItemFileName() const;
+    const td::String& getMenuItemShortName() const;
     Source getSource() const;
     const gui::ContextData* getContextData() const;
 };

@@ -14,10 +14,11 @@
 #pragma once
 #include <gui/Layout.h>
 #include <gui/_aux/SplitterCell.h>
+#include <gui/ISwitch.h>
 
 namespace gui
 {    
-	class NATGUI_API SplitterLayout : public Layout
+	class NATGUI_API SplitterLayout : public Layout, public ISwitch
 	{
         friend class SplitterCell;
     public:
@@ -28,14 +29,13 @@ namespace gui
         SplitterCell _splitterCell;
         Geometry _lastGeometry;
         Cell _cells[3];
-        td::UINT4 _sizeOfAuxiliaryCell;
+        CoordType _sizeOfAuxiliaryCell;
+        CoordType _lastVisibleAuxiliarySize;
         Orientation _orientation;
         AuxiliaryCell _posOfAuxiliaryCell;
         td::BYTE _spaceOfSplitterCell;
-//        td::BYTE _marginX=0;
-//        td::BYTE _marginY=0;
     private:
-        void showMinimizedAuxiliary(const Geometry& viewGeometry);
+        void unhideAuxliaryView(const Geometry& viewGeometry);
     protected:
         gui::CoordType getMaxSizeForAuxiliaryCell() const;
         void getMinSizeForAuxiliaryCell(Size& sz) const;
@@ -44,17 +44,25 @@ namespace gui
         void initialMeasure(CellInfo&) override;
         void measure(CellInfo& cell) override;
         void reMeasure(CellInfo& cell) override;
-        //virtual void updateCell(CellInfo& cell, const CellInfo& ci, int iPos) const;
         
-        virtual void setGeometry(const Geometry& cellFrame, const Cell& cell) override;
+        bool freeze() override;
+        void unFreeze() override;
+        bool onActionItem(gui::ActionItemDescriptor& aiDesc) override;
+        
+        void setGeometry(const Geometry& cellFrame, const Cell& cell) override;
         
         td::BYTE getXMargin() const;
         td::BYTE getYMargin() const;        
-        //virtual Size getMinSize(const Cell& cell);
+
         Orientation getOrientation() const;
        
         void updateGeometry(const Geometry& viewGeometry);
         void onSplitterCellMove();
+        //ISwitch
+        ISwitch::State toggle() override;
+        void setState(ISwitch::State state) override;
+        void setUpdater(ISwitchState* pUpdater) override;
+        SplitterLayout() = delete;
     public:
         SplitterLayout(SplitterLayout::Orientation orientation, SplitterLayout::AuxiliaryCell auxCellPos = SplitterLayout::AuxiliaryCell::Second);
         gui::ObjType getObjType() const override { return ObjType::SplitterLayout;}

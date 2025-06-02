@@ -53,10 +53,10 @@ protected:
         }
     }
     
-    void handleSelectionChange()
+    void handleSelectionChange(const gui::TextEdit::Selection& sel)
     {
-        gui::Range range;
-        _textEdit.getSelection(range);
+        const gui::Range& range = sel.selection;
+//        _textEdit.getSelection(range);
         gui::TextAttribs attribs;
         _textEdit.getTextAttribs(range.location, attribs);
         
@@ -246,9 +246,9 @@ public:
                 _textEdit.removeColor(range);
         });
         
-        _textEdit.onChangedSelection([this]()
+        _textEdit.onChangedSelection([this](const gui::TextEdit::Selection& sel)
         {
-            handleSelectionChange();
+            handleSelectionChange(sel);
         });
     }
     
@@ -300,7 +300,7 @@ public:
 //                td::String strHTML = _textEdit.getHTML(false);
 //                if (strHTML.length() == 0)
 //                    return;
-//                
+//
 //                td::String strFileName = pFileDlg->getFileName();
 //                fo::OutFile f;
 //                if (fo::createTextFile(f, strFileName, true))

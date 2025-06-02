@@ -46,7 +46,7 @@ public:
         
     }
     
-    virtual void draw() const
+    void draw() const override
     {
         if (_attribs == gui::Shape::Attribs::LineAndFill)
             _shape.drawFillAndWire(_fillColor, _lineColor);
@@ -56,7 +56,7 @@ public:
             _shape.drawFill(_fillColor);
     }
     
-    virtual void load(arch::ArchiveIn& ar)
+    void load(arch::ArchiveIn& ar) override
     {
 //        td::BYTE attr = 0 ; //(td::BYTE) _attribs;
 //        td::BYTE lnPattern = 0; //(td::BYTE) _linePattern;
@@ -67,7 +67,7 @@ public:
 //        _linePattern = (td::LinePattern) lnPattern;
     }
     
-    virtual void save(arch::ArchiveOut& ar) const
+    void save(arch::ArchiveOut& ar) const override
     {
 //        td::BYTE attr = (td::BYTE) _attribs;
 //        td::BYTE lnPattern = (td::BYTE) _linePattern;
@@ -76,7 +76,7 @@ public:
         ar << _lineWidth << attr << _fillColor << _lineColor << lnPattern;
     }
     
-    virtual void release()
+    void release() override
     {
         delete this;
     }
@@ -123,7 +123,7 @@ public:
         }
     }
     
-    virtual void getValues(gui::PropertyValues& propValues) const
+    void getValues(gui::PropertyValues& propValues) const override
     {
         td::INT4 iAttr= (td::INT4) _attribs;
         td::Variant attribs(iAttr);
@@ -142,7 +142,8 @@ public:
         propValues.setValueByKey((td::UINT4)PropID::LinePattern, linePattern);
         
     }
-    virtual void setValues(gui::PropertyValues& propValues)
+    
+    void setValues(gui::PropertyValues& propValues) override
     {
         propValues.setUpdateCanvas(true);
         td::Variant attribs = propValues.getValueByKey((td::UINT4)PropID::Attribs);
@@ -170,7 +171,7 @@ public:
             _shape.setLinePattern(_linePattern);
     }
     
-    virtual void setValue(td::UINT4 key, gui::PropertyValues& propValues)
+    void setValue(td::UINT4 key, gui::PropertyValues& propValues) override
     {
         
     }

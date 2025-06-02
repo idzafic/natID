@@ -21,6 +21,7 @@
 namespace gui
 {
 
+//class used to draw custom Popover Views
 class SymbolPopoverButton;
 
 class NATGUI_API SymbolPopoverView : public PopoverView
@@ -58,6 +59,8 @@ protected:
         };
         
         td::BYTE useSymbolStyling = 0;
+        td::BYTE checked = 0;
+        td::BYTE disabled = 0;
         Type type = Type::Symbol;
 
         Item() {}
@@ -111,14 +114,18 @@ protected:
     
     void drawItem(td::UINT2 itemPos, const gui::Rect& r) override;
     void drawToolTipText(td::UINT2 itemPos, const gui::Rect& r) override;
+    
+    //IPopoverUpdater should call these method
+    void setChecked(size_t iPos, bool bChecked) override;
+    void setDisabled(size_t iPos, bool bDisabled) override;
 private:
-    SymbolPopoverView(){}
+    SymbolPopoverView(){};
 public:
     
     SymbolPopoverView(Type type, size_t nItems, td::BYTE nCols, td::BYTE cellWidth=48, td::BYTE cellHeight = 48, td::BYTE numberOfToolTipTextLines = 1);
     SymbolPopoverView(Type type, size_t nItems, PopoverView::SymbolWidth symbolWidth= PopoverView::SymbolWidth::UserDefined); //more suitable with SystemAndText type, nRows = nItems, nCols = 1, symbolHeight = textHeight
     
-    ~SymbolPopoverView();
+//    ~SymbolPopoverView();
     
     //allocate capacity
     void reserve(size_t nItems);

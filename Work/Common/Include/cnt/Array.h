@@ -51,6 +51,12 @@ namespace cnt
 //            return *this;
 //        }
 
+        void setAll(T val)
+        {
+            for (size_t i=0; i<SIZE; ++i)
+                _data[i] = val;
+        }
+        
 		inline void clean()
 		{
 			mem::fastZero(_data, SIZE);

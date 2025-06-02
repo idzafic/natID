@@ -1,0 +1,29 @@
+<?xml version='1.0'?>
+<Regionals id="ja-JP">
+	<Numeric decSeparator="." thSeparator=","/>
+	<Date separator="/" winShort="YYYY/mm/dd" winLong="YYYY年mm月dd日" shortDM="mm/dd" shortY2="YY/mm/dd" shortY4="YYYY/mm/dd"/>
+	<Time separator=":" winShort="hh:mm:ss" winLong="hh時mm分ss秒" shortHMM="hh:mm" shortHMMSS="hh:mm:ss" shortHMMSSu="hh:mm:ss.u"/>
+	<Days>
+		<Day name="日曜日" shortName="日"/>
+		<Day name="月曜日" shortName="月"/>
+		<Day name="火曜日" shortName="火"/>
+		<Day name="水曜日" shortName="水"/>
+		<Day name="木曜日" shortName="木"/>
+		<Day name="金曜日" shortName="金"/>
+		<Day name="土曜日" shortName="土"/>
+	</Days>
+	<Months>
+		<Month name="1月" shortName="1月"/>
+		<Month name="2月" shortName="2月"/>
+		<Month name="3月" shortName="3月"/>
+		<Month name="4月" shortName="4月"/>
+		<Month name="5月" shortName="5月"/>
+		<Month name="6月" shortName="6月"/>
+		<Month name="7月" shortName="7月"/>
+		<Month name="8月" shortName="8月"/>
+		<Month name="9月" shortName="9月"/>
+		<Month name="10月" shortName="10月"/>
+		<Month name="11月" shortName="11月"/>
+		<Month name="12月" shortName="12月"/>
+	</Months>
+</Regionals>

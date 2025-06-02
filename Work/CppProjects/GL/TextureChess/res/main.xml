@@ -1,0 +1,15 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="export" path="Work/Common/Icons/export48.png"/>
+	</Images>
+	<Texts>
+		<!--- all from res folder -->
+		<Res id="shVert" path=":shaders/First.vert"/>
+		<Res id="shFrag" path=":shaders/First.frag"/>
+	</Texts>
+	<Textures>
+		<Res id="chess1" path="Work/Common/Images/Chess1.png" mirrorV = "true"/>
+		<Res id="chess2" path="Work/Common/Images/Chess2.png" mirrorV = "true"/>
+	</Textures>
+</DevRes>

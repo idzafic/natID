@@ -13,4 +13,6 @@ set(WORK_ROOT ${HOME_ROOT}/Work)
 include(${WORK_ROOT}/DevEnv/Common.cmake) 
 #END dio koji ide u sve solutions
 
+include(${WORK_ROOT}/DevEnv/ZipperLib.cmake)
+
 include(testPerlin.cmake)

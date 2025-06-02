@@ -14,7 +14,7 @@
 
 #pragma once
 #include <gui/Types.h>
-
+#include <td/LineParams.h>
 
 namespace gui
 {
@@ -55,8 +55,15 @@ public:
     
 protected:
     NatShape* _path;
+    Shape(const Shape& shape) = delete;
+    Shape& operator=(const Shape&) = delete;
 public:
     Shape();
+    // Move constructor
+    Shape(Shape&& shape) noexcept;
+    // Move assignment operator
+    Shape& operator=(Shape&& ds) noexcept;
+    
     ~Shape();
     bool isInitialized() const;
     void setLineWidth(float lineWidth);
@@ -94,6 +101,11 @@ public:
     static void drawRect(const Rect& r, float alphaChannel, td::ColorID fillColor);
     
     static void drawLine(const Point& p1, const Point& p2, td::ColorID lineColor, float lineWidth, td::LinePattern linePattern=td::LinePattern::Solid);
+    
+    inline static void drawLine(const Point& p1, const Point& p2, const td::LineParams& lineParams, bool bIsDarkMode)
+    {
+        drawLine(p1, p2, lineParams.getColor(bIsDarkMode), lineParams.width, lineParams.pattern);
+    }
     
     static void drawSelectionRect(const Rect& r, double scale = 1);
     

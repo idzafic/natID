@@ -18,26 +18,26 @@ namespace cnt
 	class Dictionary
 	{
 	public:
-        typedef struct _TE
+        using TEntry =  struct _TE
         {
             TKey first;
             TVal second;
-        } TEntry;
+        };
         
-		typedef TEntry* iterator;
+		using iterator = TEntry*;
 
-		typedef const TEntry* const_iterator;
+		using const_iterator = const TEntry*;
 
 	protected:
-		typedef struct _tStackEntry
+		using tStackEntry = struct _tSE
 		{
 			TEntry** ref;
 			int from;
 			int to;
-		} tStackEntry;
-	protected:	
+        };
+	protected:
 		TEntry* _entries = nullptr;
-        td::UINT4 _size = 0;
+        td::UINT4 _capacity = 0;
         td::UINT4 _noEntries = 0;
         td::BYTE _bulk = 0;
         td::BYTE _modified = 0;
@@ -69,8 +69,6 @@ namespace cnt
             {
                 if (mid <= fromPos)
                     return nullptr;
-//                if (mid == 0)
-//                    return nullptr;
                 
                 return findEntry(key,fromPos, mid-1);
             }
@@ -82,18 +80,18 @@ namespace cnt
         
 	public:
 
-        Dictionary(td::UINT4 size)
+        Dictionary(td::UINT4 capacity)
         : _entries(nullptr)
-        , _size(size)
+        , _capacity(0)
         , _noEntries(0)
         {
-            if (size > 0)
-                reserve(size);
+            if (capacity > 0)
+                reserve(capacity);
         };
 
         Dictionary()
         : _entries(nullptr)
-        , _size(0)
+        , _capacity(0)
         , _noEntries(0)
         {
         }
@@ -101,44 +99,41 @@ namespace cnt
         ~Dictionary(void)
         {
             if (_entries)
-                free(_entries);
+                delete [] _entries;
         }
         
         void clean()
         {
             if (_entries)
             {
-                free(_entries);
+                delete [] _entries;
                 _entries = nullptr;
             }
-            _size = 0;
+            _capacity = 0;
             _noEntries = 0;
             _bulk = 0;
             _modified = 0;
             _growStrategy = 0;
         }
 
-        void reserve(td::UINT4 size)
+        void reserve(td::UINT4 capacity)
         {
-            if (size == _size)
+            if (capacity == 0 || capacity == _capacity)
                 return;
-            
+
+            TEntry* newEntries = new TEntry[capacity];
+
             if (_entries)
             {
-                if (_size < size)
-                {
-                    free(_entries);
-                    _entries = (TEntry*)malloc(sizeof(TEntry)*size);
-                    _size = size;
-                    return;
-                }
-                
-                _entries = (TEntry*)realloc(_entries, sizeof(TEntry) * size);
-                _size = size;
+                td::UINT4 copySize = _capacity < capacity ? _capacity : capacity;
+                for (td::UINT4 i = 0; i < copySize; ++i)
+                    newEntries[i] = std::move(_entries[i]);  // Move elements if possible
+
+                delete[] _entries;
             }
 
-            _entries = (TEntry*)malloc(sizeof(TEntry)*size);
-            _size = size;
+            _entries = newEntries;
+            _capacity = capacity;
         }
 
         iterator begin()
@@ -179,16 +174,16 @@ namespace cnt
         void insert(const TKey& newKey, const TVal& val)
         {
 //            assert(_noEntries < _size);
-            if (_noEntries >= _size)
+            if (_noEntries >= _capacity)
             {
                 if (_growStrategy == 0)
-                    reserve(_size*2);
+                    reserve(_capacity*2);
                 else if (_growStrategy == 1)
-                    reserve(_size+1);
+                    reserve(_capacity+1);
                 else if (_growStrategy == 255)
-                    reserve(_size + 64*1024);
+                    reserve(_capacity + 64*1024);
                 else
-                    reserve(_size + _growStrategy);
+                    reserve(_capacity + _growStrategy);
             }
             
             _entries[_noEntries].first = newKey;
@@ -242,7 +237,7 @@ namespace cnt
                 return const_iterator(pEntry);
             
             return end();
-        };
+        }
         
         inline bool find(const TKey& key, TVal& val) const
         {
@@ -268,16 +263,41 @@ namespace cnt
             }
             
             return false;
-        };
+        }
+        
+        inline const TVal* findValPtr(const TKey& key) const
+        {
+            if (_noEntries == 0)
+                return nullptr;
+            
+            //check against first
+            const TKey& currKey = _entries[0].first;
+            if (currKey > key)
+                return nullptr;
+            
+            //check against first
+            const TKey& currKey2 = _entries[_noEntries-1].first;
+            if (currKey2 < key)
+                return nullptr;
+
+            const TEntry* pEntry = findEntry(key, 0, _noEntries-1);
+            
+            if (pEntry)
+            {
+                return &(pEntry->second);
+            }
+            
+            return nullptr;
+        }
         
         td::UINT4 capacity() const
         {
-            return _size;
+            return _capacity;
         }
         
         td::UINT4 size() const
         {
-            return _size;
+            return _noEntries;
         }
         
         td::UINT4 count() const

@@ -19,6 +19,8 @@ constexpr gui::CoordType dCtrl = 60, cX = 380, cY = 220, rB = 24.;
 constexpr bool showBezierConstructingPoints = true;
 constexpr bool doNotShowNonBezierPrimitives = true;
 
+//#define HIDE_NON_BEZIER
+
 class ViewCanvas : public gui::Canvas
 {
 protected:
@@ -75,7 +77,7 @@ protected:
         tr.translate(_translate.x, _translate.y);
         tr.scale(_scaleX, _scaleY);
         tr.appendToContext();
-        
+#ifndef HIDE_NON_BEZIER
         if (doNotShowNonBezierPrimitives)
         {
             _shapeRect.drawFillAndWire(td::ColorID::Blue, td::ColorID::Yellow);
@@ -134,7 +136,7 @@ protected:
             symbolRect.translate(70, 0);
             _symbol.drawInRect(symbolRect, 0, gui::Symbol::getDefaultSymbolAttribs());
         }
-        
+#endif
         _shapeBezier.drawFillAndWire(td::ColorID::Red, td::ColorID::SysText);
         
         gui::Rect smbRect(300,500, 375, 590);
@@ -212,6 +214,7 @@ public:
     , _symbolBez1(":Bez1")
     , _symbolBez2(":Bez2")
     {
+        setClipsToBounds();
         registerForScrollEvents(); //Event::Zoom must be enabled, otherwise no scroll events
         //_symbolBez2.save("/Volumes/RAMDisk/Bez.xml");
         gui::Rect r(50, 50, 200, 150);

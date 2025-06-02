@@ -1,0 +1,9 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<!-- <Res id="poly128" path="Work/Common/Icons/PolyLine_128.png"/> -->
+	</Images>
+	<Symbols>
+		<Res id="bus" path="Work/Common/Symbols/PSA/bus.xml"/>
+	</Symbols>
+</DevRes>

@@ -23,7 +23,16 @@ namespace gui
     public:
         void setAsReadOnly(bool readOnly=true);
         void setText(const char* val);
-        void setText(const td::String& val);
+        void setText(const td::String& val, bool bSendMessage = true);
         td::String getText() const;
+        
+        bool isEmpty() const;
+        
+        bool isEditable() const override;
+        
+        void selectAll();
+        void copy() const;
+        void cut();
+        void paste();
 	};
 }

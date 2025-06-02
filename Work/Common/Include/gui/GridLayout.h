@@ -42,6 +42,10 @@ protected:
     void measure(CellInfo& cell) override;
     void reMeasure(CellInfo& cell) override;
     void setGeometry(const Geometry& geometry, const Cell& cell) override;
+    bool freeze() override;
+    void unFreeze() override;
+    bool onActionItem(gui::ActionItemDescriptor& aiDesc) override;
+    
     GridLayout();
 public:
     GridLayout(td::BYTE nRows, td::BYTE nCols);

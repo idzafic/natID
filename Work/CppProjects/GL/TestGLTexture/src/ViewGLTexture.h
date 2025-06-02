@@ -55,14 +55,7 @@ private:
         assert(_textureScaleLoc >= 0);
         if (_textureScaleLoc < 0)
             return false;
-#ifdef DEBUG_GL
-        GLenum error = glGetError();
-        if (error != GL_NO_ERROR)
-        {
-            mu::dbgLog("ERROR! OpenGL error in setupVBO! Error code = %x", error);
-            return false;
-        }
-#endif
+        dbgCheckGLError();
         return true;
     }
     
@@ -180,14 +173,7 @@ private:
         // Unbind VAO
         glBindVertexArray(0);
 
-#ifdef DEBUG_GL
-        GLenum error = glGetError();
-        if (error != GL_NO_ERROR)
-        {
-            mu::dbgLog("ERROR! OpenGL error in setupVBO! Error code = %x", error);
-            assert(false);
-        }
-#endif
+        dbgCheckGLError();
     }
 protected:
     
@@ -207,18 +193,12 @@ protected:
         setupVBO();
         loadTexture();
         
-#ifdef DEBUG_GL
-        GLenum error = glGetError();
-        if (error != GL_NO_ERROR)
-        {
-            mu::dbgLog("OpenGL error: %x", error);
-        }
-#endif
+        dbgCheckGLError();
     }
     
     void onDraw(const gui::Rect& rect) override
     {
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //clear OPENGL BUFFERS
 
         // Use the shader program
         glUseProgram(_shaderProgram);

@@ -20,9 +20,20 @@
 namespace gui
 {
 
+using TabStop = struct Tabstop {
+    int start;
+    int nSteps;
+    int delta;
+};
+
 class NATGUI_API DrawableAttributedString
 {
 public:
+    using ColorRange = struct ClrRange
+    {
+        td::UINT4 len; //in glyphs
+        td::ColorID color;
+    };
 //    enum class LineBreak : unsigned char {Spase, Word}; //Breaks on spaces for now
 private:
     AttributedString _natString;
@@ -43,6 +54,9 @@ public:
     
     void draw(const gui::Rect& r) const;
     
+    //create using string, tabstrops, and color range
+    void create(const td::String& str, DrawableAttributedString::ColorRange* range, size_t nSegments, td::UINT2 styleID = 0);
+    
 //    void draw(const gui::Rect& r) const;
     //gui::NatString getNatStrPtr();
     const gui::AttributedString getNatStrPtr() const;
@@ -61,6 +75,10 @@ public:
     static void adjustHTMLString(td::String& strHTML);
     
     static void release(AttributedString& natStr);
+    
+//    static void setStyle(td::UINT2 styleID, const td::String fontName, float fontSize, const TabStop* pTabStops = nullptr, size_t nTabStops = 0);
+//    
+//    static void setStyle(td::UINT2 styleID, float fontSize, const td::String& fontName = "", const TabStop* pTabStops = nullptr, size_t nTabStops = 0);
 };
 
 } //namepace gui

@@ -14,6 +14,7 @@
 #pragma once
 #include <td/Types.h>
 #include <mu/muLib.h>
+#include <td/String.h>
 
 namespace td
 {
@@ -21,6 +22,7 @@ enum class LinePattern : unsigned char {Solid=0, Dash, Dot, DashDot, DashEq, NA}
 
 MAINUTILS_API const char* toString(td::LinePattern linePattern);
 MAINUTILS_API td::LinePattern toLinePattern(const char* pStr);
+MAINUTILS_API td::LinePattern toLinePattern(const td::String& str);
 
 inline DataType getType(td::LinePattern) { return td::linePattern; }
 

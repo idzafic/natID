@@ -65,7 +65,11 @@ protected:
     Style _style = Style::Normal;
     td::BYTE _dynamic = 0;
 public:
-    Font();   
+    Font();
+    // Move constructor
+    Font(Font&& fnt) noexcept;
+    // Move assignment operator
+    Font& operator=(Font&& fnt) noexcept;
     ~Font();
     
     bool create(const td::String& fntName, float size, gui::Font::Style style, gui::Font::Unit sizeUnit);

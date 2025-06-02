@@ -30,6 +30,8 @@ public:
     void setCurrentEditor(int pos, IProperty* propConsumer, bool bUpdateData);
     void setCanvas(int pos, Canvas* pCanvas);
     void updateValues();
+    void updateValues(int pos);
+    PropertyEditor* getPropertyEditor(int pos);
 };
 
 } //namespace gui

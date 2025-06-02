@@ -31,8 +31,8 @@ protected:
     void reMeasure(CellInfo& cell) override;
     void setGeometry(const Geometry& cellFrame, const Cell& cell) override;
     const Size& getHeaderSize() const;
-    void append(const Image* pImg, const td::String& lbl, td::ColorID selLineColor, td::BYTE cntType);
-    void append(const Symbol* pSymb, const td::String& lbl, td::ColorID selLineColor, td::BYTE cntType);
+    void append(const Image* pImg, const td::String& lbl, td::ColorID selLineColor);
+    void append(const Symbol* pSymb, const td::String& lbl, td::ColorID selLineColor);
     void sendSelChangeMessage();
     void onGeometryChange(const Geometry& newGeometry) override;
     void onContentSizeChange(const gui::Size& newSize) override;
@@ -40,14 +40,18 @@ protected:
     void removeTab(int pos);
     void removeTabExt(int pos, int newSelection, bool sendMessage, bool bRedraw);
     void showTab(int pos, bool bSetFocus =  true);
+    
     void setTitle(int pos, const td::String& strTitle);
+    td::String getTitle(int pos) const;
+    
     void setModified(int pos, bool bModified);
     bool isModified(int Pos) const;
-    void setContentTypeID(int pos, td::BYTE cntType);
-    td::BYTE getContentTypeID(int pos) const;
+//    void setContentTypeID(int pos, td::BYTE cntType);
+//    td::BYTE getContentTypeID(int pos) const;
     void setHeaderContextMenu(int pos, td::BYTE contextMenuID, td::UINT2 contextMenuGroup = 0);
     void forwardContextMenuEventsTo(int pos, Frame* pConsumer);
     void setNonRemovable(int viewPos, bool nonRemovable);
+    void systemColorModeChanged(bool bDarkMode) override;
 public:
     TabHeaderScroller(TabView* pTabView, TabHeader::Type type, td::BYTE minWidthInChars, td::BYTE maxWidthInChars, Font::ID selFontID, Font::ID fontID);
     ~TabHeaderScroller();

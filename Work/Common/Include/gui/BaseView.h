@@ -15,28 +15,34 @@
 #include "Control.h"
 #include <gui/Alert.h>
 #include <tuple>
+#include <td/Variant.h>
 
 namespace gui
 {
+class Application;
 class Window;
 class Image;
 class Symbol;
 class ToolBarItem;
 class IPopoverButton;
-
+class Layout;
 class BaseViewHelper;
 class ViewScroller;
 
 class NATGUI_API BaseView : public Control
 {
+    friend class Application;
     friend class ToolBarItem;
     friend class BaseViewHelper;
     friend class ViewScroller;
+    friend class Window;
     
 public:
     //enum class PopoverType : unsigned char {None=0, Form, Canvas};
 protected:
-    //Window* _parentWnd;
+    void* _menuActions = nullptr;
+    td::Variant _varSource; //file name or something else
+    td::BYTE _contentType = 0;
     
 protected:
     BaseView();
@@ -50,8 +56,6 @@ protected:
     virtual bool getModelSize(gui::Size& modelSize) const;
     
     void registerForScrollEvents();
-    
-//    virtual bool isGeometryChangeNotificationRequired() const;
     virtual bool estimateDesiredInitialSize(const gui::Size& initialSize, gui::Size& desiredSize) const;
     virtual void onGeometryChange(const Geometry& newGeometry);
     virtual void onContentSizeChange(const gui::Size& newSize);
@@ -60,8 +64,8 @@ protected:
     virtual bool shouldClose(); //tabview will not be closed if this method returns false
     virtual void onClose(); //will be called only once 
     virtual std::tuple<bool, bool> isFixedSize() const;
-
-//    virtual void setMargins(td::BYTE left, td::BYTE top, td::BYTE right, td::BYTE bottom);
+    virtual Layout* getLayout();
+    virtual void systemColorModeChanged(bool bDarkMode);
 public:
     virtual Frame::FixSizes getFixSizesInfo();
     
@@ -70,6 +74,37 @@ public:
     virtual void scale(double newScale);
     virtual void scaleToPoint(double newScale, const gui::Point& toPoint);
     virtual double getScale() const;
+    
+    void setSource(const td::Variant& varFilenameOrOtherIndicator);
+    ///returnns fileName of other indicator used for the view
+    const td::Variant& getSource() const;
+    
+    template <typename TSOURCE>
+    void getSource(TSOURCE& src)
+    {
+        const td::Variant& var = getSource();
+        var.getValue(src);
+    }
+    
+    void setContentTypeID(td::BYTE cntType);
+    td::BYTE getContentTypeID() const;
+    
+    template <typename T>
+    void setContentType(T contentType)
+    {
+        setContentTypeID((td::BYTE) contentType);
+    }
+    
+    template <typename T>
+    void getContentType(T& contentType)
+    {
+        contentType = (T) getContentTypeID();
+    }
+    
+    //event handlers
+    bool onActionItem(gui::ActionItemDescriptor& aiDesc) override;
+    void onActionItem(td::BYTE menuID, td::BYTE actionID, const std::function<void()>& fnToCall); //first and last submenu = 0
+    void onActionItem(td::BYTE menuID, td::BYTE firstSubMenuID, td::BYTE actionID, td::BYTE lastMenuID, const std::function<void()>& fnToCall);
 };
 
 } //namespace gui

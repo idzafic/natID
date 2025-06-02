@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevRes>
+	<Translations>
+		<Res id="@GUI.fdFileType" tr="Dosya türü:"/>
+		<Res id="Ok" tr="Tamam"/>
+		<Res id="Cancel" tr="İptal"/>
+		<Res id="@msgInfo" tr="Bilgi"/>
+		<Res id="@msgWarning" tr="Uyarı"/>
+		<Res id="@msgError" tr="Hata"/>
+		<Res id="@AppMenu" tr="Uygulama menüsü"/>
+		<Res id="@CTX.CloseAllOnLeft" tr="Soldaki her şeyi kapat"/>
+		<Res id="@CTX.CloseAllOnRigh" tr="Sağdaki her şeyi kapat"/>
+		<Res id="@CTX.CloseAllButThi" tr="Bunun dışındaki her şeyi kapat"/>
+		<Res id="@CTX.CloseAll" tr="Hepsini kapat"/>
+		<Res id="@CTX.TEExport2XML" tr="İçeriği XML'e aktar"/>
+		<Res id="@CTX.TEExport2TXT" tr="İçeriği TXT'ye aktar"/>
+		<Res id="@CTX.TECopy" tr="Seçili satırı kopyala"/>
+		<Res id="@TE.find:" tr="Bul:"/>
+		<Res id="@TE.replace:" tr="Değiştir:"/>
+		<Res id="@TE.GoToLine:" tr="Şuraya git:"/>
+		<Res id="@TE.Info:" tr="Bilgi:"/>
+		<Res id="@TE.LEfindTT" tr="Aranacak içerik"/>
+		<Res id="@TE.BtnfindTT" tr="Sonrakini bul"/>
+		<Res id="@TE.replaceTT" tr="Değiştirmede kullanılacak içerik"/>
+		<Res id="@TE.findAllTT" tr="Son pozisyona ulaştıktan sonra baştan ara"/>
+		<Res id="@TE.ReplaceTT" tr="Sonrakini değiştir"/>
+		<Res id="@TE.ReplaceAllTT" tr="Hepsini değiştir (belge başından sonuna kadar)"/>
+		<Res id="@TE.GoToLineTT" tr="Düzenleyicide belirtilen satıra git"/>
+		<Res id="@TE.found" tr="Bulundu:"/>
+		<Res id="@TE.NotFound" tr="Hiçbir şey bulunamadı"/>
+		<Res id="@TE.replaced" tr="Değiştirildi"/>
+		<Res id="@TE.NotReplaced" tr="Hiçbir şey değiştirilmedi"/>
+		<Res id="@TE.replacedAll:" tr="Tümünü değiştir:"/>
+		<Res id="@TE.LineNoTooLarge" tr="Satır numarası çok büyük"/>
+		<Res id="@TE.OnLine" tr="Satır numarası bulundu"/>
+		<Res id="@TE.Export2XML" tr="İçeriği XML'e aktar"/>
+		<Res id="@TE.Export2TXT" tr="İçeriği TXT'ye aktar"/>
+		<Res id="@TE.findReplaceDlg" tr="Bul ve değiştir"/>
+	</Translations>
+</DevRes>

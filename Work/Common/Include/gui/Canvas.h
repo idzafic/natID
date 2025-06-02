@@ -49,6 +49,9 @@ protected:
     void handleModelSizeChanged();
     void setPreferredFrameRateRange(float minFPS, float maxFPS);
     
+    //required on macOS to clip the drawing within the borders of the canvas
+    void setClipsToBounds();
+    
 public:
     Canvas();
     Canvas(const std::initializer_list<InputDevice::Event>& events, const Geometry* g = nullptr);

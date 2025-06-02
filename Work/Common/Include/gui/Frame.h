@@ -32,8 +32,8 @@ public:
     enum class FixSizes : td::BYTE {No=0, FixMin=1, FixHorMax=2, FixMin_andHorMax=3, FixVerMax=4, FixMin_andVerMax=5, FixHorMinAndMax=6, FixAll=7, FixAuto=8};
     enum class Animation : td::BYTE {Yes, No, SystemDefault};
 protected:
-    td::Variant _tagID;
     Frame* _parentFrame = nullptr;
+    td::LUINT8 _tagID;
     cnt::PushBackVector<ContextMenuNat> _contextMenus;
 private:
     gui::Handle getContextMenuNatHandle(td::BYTE menuID) const;
@@ -54,7 +54,7 @@ protected:
 public:
 //    Frame();
     Frame(Frame* parentFrame);
-    ~Frame();
+//    ~Frame();
     
     void setGeometry(const Geometry& g);
     void getGeometry(Geometry& g) const;
@@ -69,8 +69,8 @@ public:
     
     void setPreferedContentSize(const gui::Size& sz);
     
-    void hide(bool bHide);
-    void show(bool bShow);
+    void hide(bool bHide = true);
+    void unHide(bool bUnhide = true);
     virtual bool isHidden() const;
     bool isVisible() const;
     
@@ -79,6 +79,7 @@ public:
     td::String getTitle() const;
     
     void setFocus(bool selectAll = true);
+    void setFocusable(bool bCanTakeFocus);
     
     void setBackgroundColor(td::ColorID colorID);
     
@@ -101,8 +102,14 @@ public:
     const Window* getContainingWindow() const;
     Window* getContainingWindow();
     
-    void setTagID(const td::Variant& tagID);
-    const td::Variant& getTagID() const;
+    void setTagID(const td::LUINT8 tagID);
+    td::LUINT8 getTagID() const;
+    
+    template <typename T>
+    void getTagID(T& tagID)
+    {
+        tagID = T(getTagID());
+    }
     
     void showAlert(const td::String& msgText, const td::String& informativeText) const;
     

@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<DevRes>
+    <Translations>
+        <Res id="appTitle" tr="Yılan"/>
+        <Res id="start" tr="Yeni Oyun"/>
+        <Res id="startTT" tr="Yeni bir oyun başlat"/>
+        <Res id="stop" tr="Pes et"/>
+        <Res id="stopTT" tr="Pes et ve oyunu bitir"/>
+        <Res id="Update" tr="Yenile"/>
+        
+        <Res id="GZBeatHS:" tr="Tebrikler! Önceki en yüksek skoru geçtiniz: "/>
+        <Res id="Score:" tr="Skor: "/>
+        <Res id="Highscore: " tr="En yüksek skor: "/>
+
+        <Res id="closeNOK" tr="Hata! Animasyon devam ediyor!"/>
+        <Res id="cloeErr" tr="Uygulamayı kapatmadan önce animasyonu durdurun!"/>
+        <Res id="settings" tr="Ayarlar"/>
+        <!-- Settings -->
+        <Res id="dlgSettings" tr="Ayarlar"/>
+        <Res id="lblLang" tr="Uygulamanın mevcut dili:"/>
+        <Res id="lblLang2" tr="Uygulama yeniden başlatıldığında kullanılacak dil:"/>
+        <Res id="chbTBIcsAndLbls" tr="Araç çubuğundaki simgelerin altında etiketleri göster"/>
+        <Res id="lblLevel" tr="Zorluk:"/>
+        <Res id="RestartRequired" tr="Uygulamayı yeniden başlat"/>
+        <Res id="RestartRequiredInfo" tr="Bazı değiştirilen ayarların uygulanması için yeniden başlatma gerekir"/>
+        <Res id="Restart" tr="Yeniden başlat"/>
+        <Res id="DoNoRestart" tr="Yeniden başlatma"/>
+        <!-- Status Bar -->
+        <Res id="ClStart" tr="Başlamak için 'Yeni Oyun' butonuna tıklayın..."/>
+        <Res id="clickArrK" tr="Yılanı hareket ettirmek için herhangi bir yön tuşuna basın."/>
+        <Res id="+apple" tr="Harika! Bir elma daha!"/>
+        <Res id="+pear" tr="Harika! Armutları seviyorum!"/>
+        <Res id="+banana" tr="Mükemmel! Muz benim favorim!"/>
+        <Res id="Total:" tr="Toplam: "/>
+        <!-- Other -->
+        <Res id="theApp" tr="Uygulama"/>
+        <Res id="game" tr="Oyun"/>
+        <Res id="Easy" tr="Kolay"/>
+        <Res id="Medium" tr="Orta"/>
+        <Res id="Hard" tr="Zor"/>
+    </Translations>
+</DevRes>
