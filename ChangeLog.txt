@@ -1,3 +1,10 @@
+
+Overview of Changes in 3.4.0, 2025-06-02
+=========================================
+- Fix Table edit 
+- Added new symbolic model
+- Added dTwin setup
+
 Overview of Changes in 3.3.2, 2025-01-13
 =========================================
 - Fix Table edit push_back and delete (for Windows and Linux) 
