@@ -18,7 +18,7 @@ namespace sc
 class ISignal
 {
 public:
-    enum class Type : unsigned char {LowLimit=0, HighLimit, Rounding, None};
+    enum class Type : unsigned char {LowLimit=0, LowMedium, Default, HighMedium, HighLimit, Rounding, None};
 
     virtual void handle(Type type) = 0;
 };
@@ -33,6 +33,15 @@ inline ISignal::Type getSignalType(const td::StringExt* pStr)
     
     if (pStr->compareConstStr("Rounding"))
         return ISignal::Type::Rounding;
+    
+    if (pStr->compareConstStr("MedLow"))
+        return ISignal::Type::LowMedium;
+    
+    if (pStr->compareConstStr("MedHigh"))
+        return ISignal::Type::HighMedium;
+    
+    if (pStr->compareConstStr("Default"))
+        return ISignal::Type::Default;
     
     return ISignal::Type::None;
 }

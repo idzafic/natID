@@ -11,6 +11,7 @@
 //  Created by Izudin Dzafic on 28/07/2020.
 //  Copyright © 2020 IDz. All rights reserved.
 //
+
 #pragma once
 #include "Types.h"
 
@@ -35,6 +36,7 @@ private:
     td::UINT4 _keyCode = 0; //UTF32
     td::UINT4 _modifiers = 0;
     td::UINT2 _nEvents = 0;
+    td::BYTE _extendedMask = 0;
     char _ascii = 0;
     Type _type = Type::NA;
     Virtual _virtual = Virtual::NA;
@@ -44,7 +46,7 @@ private:
     
 public:
     Key();
-    Key(td::UINT4 keyCode, td::UINT4 keyModifiers, td::UINT2 nEvents);
+    Key(td::UINT4 keyCode, td::UINT4 keyModifiers, td::UINT2 nEvents, td::BYTE extendedMask=0);
     Key(Type type, Virtual virtID, char ascii = 0); //for simulations
     
     Key::Type getType() const;

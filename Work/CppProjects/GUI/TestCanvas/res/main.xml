@@ -2,10 +2,16 @@
 <DevRes>
 	<Images>
 		<Res id="TransCost" path="Work/Common/Icons/transportCostXL.png"/>
+		<Res id="watters" path="Work/Common/Images/Faces/Watters.png"/>
 	</Images>
 	<Symbols>
 		<Res id="Xfmr4" path="Work/Common/Symbols/PSA/FourWindingTransformer.xml"/>
 		<Res id="Bez1" path="Work/Common/Symbols/Shapes/Bezier01.xml"/>
 		<Res id="Bez2" path="Work/Common/Symbols/Shapes/Bezier02.xml"/>
 	</Symbols>
+	<Textures>
+		<Res id="watters" path="Work/Common/Images/Faces/FaceWatters.png"/>
+		<Res id="merlin" path="Work/Common/Images/Faces/FaceMerlin.png"/>
+		<Res id="hetfield" path="Work/Common/Images/Faces/FaceHetfield.png"/>
+	</Textures>
 </DevRes>

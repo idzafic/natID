@@ -12,7 +12,7 @@
 //  Copyright © 2020 IDz. All rights reserved.
 //
 #pragma once
-#include "PopoverView.h"
+#include "gui/PopoverCanvas.h"
 #include <gui/Image.h>
 #include <gui/Symbol.h>
 #include <cnt/PushBackVector.h>
@@ -24,7 +24,7 @@ namespace gui
 //class used to draw custom Popover Views
 class SymbolPopoverButton;
 
-class NATGUI_API SymbolPopoverView : public PopoverView
+class NATGUI_API SymbolPopoverView : public PopoverCanvas
 {
     friend class SymbolPopoverButton;
 
@@ -123,7 +123,7 @@ private:
 public:
     
     SymbolPopoverView(Type type, size_t nItems, td::BYTE nCols, td::BYTE cellWidth=48, td::BYTE cellHeight = 48, td::BYTE numberOfToolTipTextLines = 1);
-    SymbolPopoverView(Type type, size_t nItems, PopoverView::SymbolWidth symbolWidth= PopoverView::SymbolWidth::UserDefined); //more suitable with SystemAndText type, nRows = nItems, nCols = 1, symbolHeight = textHeight
+    SymbolPopoverView(Type type, size_t nItems, PopoverCanvas::SymbolWidth symbolWidth= PopoverCanvas::SymbolWidth::UserDefined); //more suitable with SystemAndText type, nRows = nItems, nCols = 1, symbolHeight = textHeight
     
 //    ~SymbolPopoverView();
     

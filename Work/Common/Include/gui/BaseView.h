@@ -19,6 +19,12 @@
 
 namespace gui
 {
+
+namespace Popover
+{
+    enum class Location : td::BYTE {AboveButton=0, BelowButon, LeftToButton, RightToButton};
+}
+
 class Application;
 class Window;
 class Image;
@@ -36,14 +42,13 @@ class NATGUI_API BaseView : public Control
     friend class BaseViewHelper;
     friend class ViewScroller;
     friend class Window;
-    
-public:
-    //enum class PopoverType : unsigned char {None=0, Form, Canvas};
 protected:
     void* _menuActions = nullptr;
     td::Variant _varSource; //file name or something else
     td::BYTE _contentType = 0;
     
+private:
+    virtual gui::Handle getNativeSurfaceHandle();
 protected:
     BaseView();
     BaseView(const BaseView&) = delete;
@@ -66,6 +71,7 @@ protected:
     virtual std::tuple<bool, bool> isFixedSize() const;
     virtual Layout* getLayout();
     virtual void systemColorModeChanged(bool bDarkMode);
+    void adjustContentSize(Window* pWnd, Frame::FixSizes fixSizes);
 public:
     virtual Frame::FixSizes getFixSizesInfo();
     
@@ -74,7 +80,7 @@ public:
     virtual void scale(double newScale);
     virtual void scaleToPoint(double newScale, const gui::Point& toPoint);
     virtual double getScale() const;
-    
+
     void setSource(const td::Variant& varFilenameOrOtherIndicator);
     ///returnns fileName of other indicator used for the view
     const td::Variant& getSource() const;
@@ -100,7 +106,7 @@ public:
     {
         contentType = (T) getContentTypeID();
     }
-    
+
     //event handlers
     bool onActionItem(gui::ActionItemDescriptor& aiDesc) override;
     void onActionItem(td::BYTE menuID, td::BYTE actionID, const std::function<void()>& fnToCall); //first and last submenu = 0

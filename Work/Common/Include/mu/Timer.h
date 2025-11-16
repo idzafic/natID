@@ -70,9 +70,9 @@ protected:
         return std::chrono::high_resolution_clock::now();
 #endif
     }
-    
+public:
     template<ClockID T>
-    inline double getTimeInMilliSec(T iClock = T{0}) const
+    inline double getTimeInMilliSec(T iClock) const
     {
         const td::UINT4 clockIndex = static_cast<td::UINT4>(iClock);
         assert(clockIndex <= SIZE);
@@ -83,6 +83,12 @@ protected:
 #endif
     }
     
+    inline double getTimeInMilliSec() const
+    {
+        return getTimeInMilliSec(td::UINT4(0));
+    }
+    
+protected:
     template <ClockID T, typename... Args>
     inline double getCumTimeInMilliSec(T iClock) const
     {
@@ -118,9 +124,9 @@ protected:
         double totalTime = getTimeInSec(iFirstClock) + getCumTimeInSec(args...);
         return totalTime;
     }
-
+public:
     template<ClockID T>
-    inline double getTimeInSec(T iClock = T{0}) const
+    inline double getTimeInSec(T iClock) const
     {
         const td::UINT4 clockIndex = static_cast<td::UINT4>(iClock);
         assert(clockIndex <= SIZE);
@@ -130,6 +136,13 @@ protected:
         return _times[clockIndex].totalTime / 1000000000.0;
 #endif
     }
+    
+    inline double getTimeInSec() const
+    {
+        return getTimeInSec(td::UINT4(0));
+    }
+    
+protected:
     
     template <class TSTR>
     inline void printTimeInSec(TSTR& s, td::UINT4 iClock, const char* pName, double totalTime, td::UINT4 nCalls) const
@@ -190,19 +203,6 @@ public:
         setName(0, timerName, startMeasuring);
     }
     
-
-//    template <size_t size>
-//    explicit Timer(const char(&timerName)[size], bool startMeasuring = true)
-//    {
-//#ifdef MU_WINDOWS
-//        LARGE_INTEGER tmp;
-//        QueryPerformanceFrequency(&tmp);
-//        liFreq = tmp.QuadPart;
-//#endif
-//        setName(td::UINT4(0), timerName, startMeasuring);
-//    }
-    
-
     template <ClockID T>
     void setName(T iClock, const char* clockName, bool startMeasuring = false)
     {
@@ -213,18 +213,8 @@ public:
             measure(iClock);
     }
     
-//    template <ClockID T, size_t size>
-//    void setName(T iClock, const char(&clockName)[size], bool startMeasuring = false)
-//    {
-//        const td::UINT4 clockIndex = static_cast<td::UINT4>(iClock);
-//        assert(clockIndex <= SIZE);
-//        _times[clockIndex].name = &clockName[0];
-//        if (startMeasuring)
-//            measure(iClock);
-//    }
-
     template <ClockID T>
-    inline void pause(T iClock = T{0})
+    inline void pause(T iClock)
     {
         const td::UINT4 clockIndex = static_cast<td::UINT4>(iClock);
         assert(clockIndex <= SIZE);
@@ -239,6 +229,11 @@ public:
         _times[clockIndex].totalTime += std::chrono::duration_cast<std::chrono::nanoseconds>(countEnd - _times[clockIndex].lastStartTime).count();
 #endif
     }
+    
+    inline void pause()
+    {
+        pause(td::UINT4(0));
+    }
 
     inline void pauseAll()
     {
@@ -247,7 +242,7 @@ public:
     }
 
     template <ClockID T>
-    inline void measure(T iClock = T{0})
+    inline void measure(T iClock)
     {
         const td::UINT4 clockIndex = static_cast<td::UINT4>(iClock);
         assert(clockIndex <= SIZE);
@@ -260,7 +255,7 @@ public:
     }
 
     template <ClockID T>
-    inline void reset(T iClock = T{0})
+    inline void reset(T iClock)
     {
         const td::UINT4 clockIndex = static_cast<td::UINT4>(iClock);
         assert(clockIndex <= SIZE);
@@ -272,6 +267,16 @@ public:
         _times[clockIndex].totalTime = {}; //set to measure
 #endif
         _times[clockIndex].lastStartTime = getCurrentTime();
+    }
+    
+    inline void reset()
+    {
+        reset(td::UINT4{0});
+    }
+    
+    inline void measure()
+    {
+        measure(td::UINT4{0});
     }
 
     inline void resetAll()
@@ -470,7 +475,7 @@ public:
     }
     
     template <ClockID T>
-    inline void getTime(td::MutableString& mStr, T iClock = T{0})
+    inline void getTime(td::MutableString& mStr, T iClock)
     {
         const td::UINT4 clockIndex = static_cast<td::UINT4>(iClock);
         if (mStr.capacity() < 128)
@@ -486,7 +491,7 @@ public:
             mStr.appendFormat("%s: %.3f milliseconds", _times[clockIndex].name, timeInMilliSec);
         }
     }
-    
+
 };
 
 } //namespace mu

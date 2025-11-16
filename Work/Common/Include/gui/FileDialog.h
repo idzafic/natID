@@ -46,7 +46,7 @@ protected:
     FileDialog::CallBack _callBack;
     td::String _fileOrFolderName;
     td::String _defaultExtension;
-    cnt::SafeFullVector<td::String> _filters;
+    cnt::SafeFullVector<td::String> _filters; //pattern or extension
     td::Variant _attachedValue;
     td::UINT4 _wndID;
     EventHandlerType _eventHandlerType;
@@ -370,7 +370,17 @@ public:
         }
         
         pFD = new SaveFileDialog(pFrame, dlgTitle, allowedDocDescriptions, defaultFileName);
-        pFD->_openWithID(wndID, fnToCallOnOK);
+        try
+        {
+            pFD->_openWithID(wndID, fnToCallOnOK);
+        }
+        catch (...)
+        {
+            mu::dbgLog("Error! Cannot create SaveFileDialog");
+            delete pFD;
+            pFD = nullptr;
+        }
+        
         return pFD;
     }
     

@@ -12,6 +12,7 @@
 #include <td/Types.h>
 #include <mu/Machine.h>
 #include <tuple>
+#include <mu/mu.h>
 
 namespace td
 {
@@ -31,7 +32,7 @@ inline bool toBoolean(const TCH* pStr, int nLen)
 template <typename TFLOAT>
 inline TFLOAT toFloat(const char* str)
 {
-    return (TFLOAT) atof(str);
+    return TFLOAT(mu::toDouble(str));
 }
 
 template <typename TINT>
@@ -43,7 +44,13 @@ inline TINT toInt(const char* str)
 template <typename TFLOAT>
 inline void toFloat(const char* str, TFLOAT& val)
 {
-     val = (TFLOAT) atof(str);
+    if (!str)
+    {
+        val = 0;
+        return;
+    }
+    
+    val = TFLOAT(mu::toDouble(str));
 }
 
 template <typename TINT>

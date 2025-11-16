@@ -22,6 +22,29 @@ class Image;
 class ViewScroller;
 class CanvasHelper;
 
+#ifdef MU_WINDOWS
+struct CanvasPriv
+{
+    double scale = 1.0f;
+    td::Point<td::INT4> initialDragPoint;
+    td::LUINT8 animatingToken = 0;
+    td::LUINT8 drawToken = 0;
+    void* zoomManager = nullptr;
+
+    td::UINT2 inputEvents = 0;
+
+    gui::Cursor::Type cursorType = gui::Cursor::Type::Default;
+    //td::BYTE handleCursorOnEnterExitEvents = 0;
+    td::BYTE sendScrollEvents = 0;
+    td::BYTE sendFocusEvents = 0;
+    td::BYTE enableResizeEvent = 0;
+    //td::BYTE canAnimate = 0;
+    td::BYTE isAnimating = 0;
+    td::BYTE closing = 0;
+    td::BYTE dragInProgress = 0;
+};
+#endif
+
 class NATGUI_API Canvas : public DrawableView
 {
     friend class CanvasHelper;
@@ -30,6 +53,13 @@ public:
 
 protected:
     ViewScroller* _pScroller = nullptr;
+private:
+
+#ifdef MU_WINDOWS
+    CanvasPriv _priv;
+#endif
+
+protected:
     td::UINT2 _fixedWidth = 0;
     td::UINT2 _fixedHeight = 0;
     Backend _backend = Backend::Display;

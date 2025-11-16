@@ -84,7 +84,7 @@ public:
     , _gl(2,13)
     , _pUpdateMenuAndTB(pUpdateMenuAndTB)
     {
-        setMargins(0,0,0,0);
+        //setMargins(0,0,0,0);
         _neFrequency.setNumberOfDigitsAfterDecimalPoint(2);
         _neFrequency.setValue(_frequency);
         _neFrequency.setMaxValue(60);

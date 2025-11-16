@@ -266,7 +266,7 @@ protected:
         }
         if (pBtn == &_btn1)
         {
-            _textEdit.setValue("");
+            _textEdit.clean();
             return true;
         }
         
@@ -284,7 +284,8 @@ protected:
             _quant.setValue(val, false);
             td::DateTime dt(2000,1,1, 19, 0, 0, 0);
             //_dateTimeEdit.setValue(dt, true);
-            td::Color color(255, 0, 0);
+            //td::Color color(255, 0, 0);
+            td::ColorID color = td::ColorID::Red;
             _colorPicker.setValue(color, true);
             return true;
         }

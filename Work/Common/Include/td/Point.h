@@ -9,6 +9,7 @@
 
 #pragma once
 #include <td/Types.h>
+#include <type_traits>
 
 namespace td
 {
@@ -88,6 +89,13 @@ public:
         ar << x << y;
     }
     
+    template <typename T2>
+    void operator = (const Point<T2>& pIn)
+    {
+        x = T(pIn.x);
+        y = T(pIn.y);
+    }
+    
     void operator -= (const Point<T>& pIn)
     {
         x -= pIn.x;
@@ -98,6 +106,18 @@ public:
     {
         x += pIn.x;
         y += pIn.y;
+    }
+    
+    void operator *= (const T& scale)
+    {
+        x *= scale;
+        y *= scale;
+    }
+
+    void operator /= (const T& invScale)
+    {
+        x /= invScale;
+        y /= invScale;
     }
     
     void translate(const T& dx, const T& dy)
@@ -111,11 +131,42 @@ public:
         x += dP.x;
         y += dP.y;
     }
+
     void scale(T sx, T sy)
     {
         x *= sx;
         y *= sy;
     }
+
+    void scale(T s)
+    {
+        x *= s;
+        y *= s;
+    }
+    template <typename T2>
+    auto getEuclidianDistanceTo(const Point<T2>& dP) const
+    {
+        using RT = std::common_type_t<T, T2>;
+        RT dx = static_cast<RT>(dP.x) - static_cast<RT>(x);
+        RT dy = static_cast<RT>(dP.y) - static_cast<RT>(y);
+        return std::sqrt(dx * dx + dy * dy);
+    }
+    
+    //dot product is scalar
+    template <typename T2>
+    inline std::common_type_t<T, T2> dot(const Point<T2>& b)
+    {
+        using RT = std::common_type_t<T, T2>;
+        return static_cast<RT>(x) * static_cast<RT>(b.x) + static_cast<RT>(y) * static_cast<RT>(b.y);
+    }
+    
+    template <typename T2>
+    inline std::common_type_t<T, T2> cross(const Point<T2>& b)
+    {
+        using RT = std::common_type_t<T, T2>;
+        return static_cast<RT>(x) * static_cast<RT>(b.y) - static_cast<RT>(y) * static_cast<RT>(b.x);
+    }
+
 };
 
 
@@ -173,21 +224,42 @@ inline T getDistanceFromAB(T x1, T y1, T x2, T y2, T x, T y)
     return A;
 }
 
-template <typename T>
-inline Point<T> operator + (const Point<T> p1, const Point<T>& p2)
+// Addition
+template <typename T1, typename T2>
+inline Point<std::common_type_t<T1, T2>> operator+ (const Point<T1>& p1, const Point<T2>& p2)
 {
-    Point res(p1);
-    res += p2;
-    return res;
+    using RT = std::common_type_t<T1, T2>;
+    return Point<RT>(static_cast<RT>(p1.x) + static_cast<RT>(p2.x),
+                     static_cast<RT>(p1.y) + static_cast<RT>(p2.y));
 }
 
-template <typename T>
-inline Point<T> operator - (const Point<T> p1, const Point<T>& p2)
+// Subtraction
+template <typename T1, typename T2>
+inline Point<std::common_type_t<T1, T2>> operator- (const Point<T1>& p1, const Point<T2>& p2)
 {
-    Point res(p1);
-    res -= p2;
-    return res;
+    using RT = std::common_type_t<T1, T2>;
+    return Point<RT>(static_cast<RT>(p1.x) - static_cast<RT>(p2.x),
+                     static_cast<RT>(p1.y) - static_cast<RT>(p2.y));
 }
+
+// Element-wise multiplication
+template <typename T1, typename T2>
+inline Point<std::common_type_t<T1, T2>> operator* (const Point<T1>& a, const Point<T2>& b)
+{
+    using RT = std::common_type_t<T1, T2>;
+    return Point<RT>{static_cast<RT>(a.x) * static_cast<RT>(b.x),
+                     static_cast<RT>(a.y) * static_cast<RT>(b.y)};
+}
+
+// Element-wise division
+template <typename T1, typename T2>
+inline Point<std::common_type_t<T1, T2>> operator/ (const Point<T1>& a, const Point<T2>& b)
+{
+    using RT = std::common_type_t<T1, T2>;
+    return Point<RT>{static_cast<RT>(a.x) / static_cast<RT>(b.x),
+                     static_cast<RT>(a.y) / static_cast<RT>(b.y)};
+}
+
 
 template <typename T>
 inline T getDistanceFromAB(const Point<T>* p1, const Point<T>* p2, T x, T y)

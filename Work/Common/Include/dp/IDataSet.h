@@ -25,7 +25,7 @@ namespace dp
 {	
 	class IDatabase;
     class IDataSetDelegate;
-    typedef cnt::Wrapper<td::Variant> RowWrapper;
+    using RowWrapper = cnt::Wrapper<td::Variant>;
 
 	class IDataSet
 	{	
@@ -34,7 +34,7 @@ namespace dp
 
 		enum class Execution : td::UINT4 { EX_SINGLE = 0x00000010, EX_MULT = 0x00000020, EX_NO = 0x00000040 };
 
-		typedef cnt::SafeFullVector<td::Variant, false>& Row;
+		using Row = cnt::SafeFullVector<td::Variant, false>&;
 
 		virtual int getColIndex(const td::String& colName) const =0; //returns -1 if falls
 

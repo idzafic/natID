@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Map ratioLat="1" ratioLong="1" scale="0.6" infoLoc="TL"> <!-- approx 1 degree in km for lat and long -->
+  <Towns>
+    <Town id="A" name="A" lat="2" long="1"/>
+    <Town id="B" name="B" lat="0" long="0.5"/>
+    <Town id="C" name="C" lat="1" long="1.5"/>
+    <Town id="D" name="D" lat="0" long="1"/>
+  </Towns>
+
+  <Roads>
+     <Road fromNode="A" toNode="B" name="AB" cost="100"/>
+     <Road fromNode="A" toNode="C" name="AC" cost="1"/>
+     <Road fromNode="B" toNode="C" name="BC" cost="1"/>
+     <Road fromNode="B" toNode="D" name="BD" cost="1"/>
+     <Road fromNode="C" toNode="D" name="CD" cost="100"/>
+  </Roads>
+</Map>

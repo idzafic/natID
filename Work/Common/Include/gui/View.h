@@ -30,10 +30,12 @@ class NATGUI_API View : public BaseView
     
 protected:
     Cell _cell;
-    td::BYTE _marginLeft;
-    td::BYTE _marginTop;
-    td::BYTE _marginRight;
-    td::BYTE _marginBottom;
+    td::BYTE _marginLeft=0;
+    td::BYTE _marginTop=0;
+    td::BYTE _marginRight=0;
+    td::BYTE _marginBottom=0;
+    td::BYTE _initiallyMeasured = 0;
+    //td::BYTE _isClosing = 0;
     
 private:
     void removeAllCtrls();
@@ -41,13 +43,14 @@ private:
     
 protected:
     Frame::FixSizes getFixSizesInfo() override;
+    //bool initialMeasure() override;
     bool reMeasure() override;
     void measure(CellInfo& cell) override;
     void reMeasure(CellInfo& cell) override;
     virtual void adjustLayout(const Size& newSize); //called on every resize
     void setMargins(td::BYTE left, td::BYTE top, td::BYTE right, td::BYTE bottom);
     std::tuple<bool, bool> isFixedSize() const override;
-    
+    bool estimateDesiredInitialSize(const gui::Size& initialSize, gui::Size& desiredSize) const override;
     bool freeze() override;
     void unFreeze() override;
     Layout* getLayout() override;

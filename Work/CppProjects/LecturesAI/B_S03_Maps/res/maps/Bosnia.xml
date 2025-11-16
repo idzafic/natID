@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Map ratioLat="135" ratioLong="106" infoLoc="BL"> <!-- approx 1 degree in km for lat and long -->
+  <Towns>
+    <Town id="SA" name="Sarajevo" lat="43.8564" long="18.4131"/>
+    <Town id="BL" name="Banja Luka" lat="44.7722" long="17.1911"/>
+    <Town id="KVAR" name="Kotor Varoš" lat="44.5772" long="17.3728"/>
+    <Town id="TESL" name="Teslić" lat="44.6061" long="17.8594"/>
+    <Town id="TZ" name="Tuzla" lat="44.5384" long="18.6671"/>
+    <Town id="ZE" name="Zenica" lat="44.2034" long="17.9077"/>
+    <Town id="MO" name="Mostar" lat="43.3438" long="17.8078"/>
+    <Town id="BUNA" name="Buna" lat="43.2450" long="17.8278"/>
+    <Town id="BJ" name="Bijeljina" lat="44.7869" long="19.2164"/>
+    <Town id="RACA" name="Rača" lat="44.9233" long="19.2200"/>
+
+    <Town id="PRIJ" name="Prijedor" lat="44.9795" long="16.7134"/>
+    <Town id="DO" name="Doboj" lat="44.7306" long="18.0878"/>
+    <Town id="CAZN" name="Cazin" lat="44.9669" long="15.9431"/>
+    <Town id="TREB" name="Trebinje" lat="42.7081" long="18.3436"/>
+    <Town id="ZV" name="Zvornik" lat="44.3858" long="19.1025"/>
+    <Town id="KALS" name="Kalesija" lat="44.5372" long="18.7978"/>
+    <Town id="SAPN" name="Sapna" lat="44.5700" long="18.8744"/>
+    <Town id="TEOC" name="Teočak" lat="44.6000" long="18.8944"/>
+    <Town id="OSMC" name="Osmaci" lat="44.4011" long="18.8078"/>
+    <Town id="ZIV" name="Živinice" lat="44.4494" long="18.6497"/>
+    <Town id="BIH" name="Bihać" lat="44.8169" long="15.8708"/>
+    <Town id="GRAC" name="Gračanica" lat="44.7031" long="18.3103"/>
+    <Town id="VISK" name="Visoko" lat="43.9889" long="18.1781"/>
+    <Town id="BREZ" name="Breza" lat="43.9889" long="18.3167"/>
+    <Town id="VKLD" name="Velika Kladuša" lat="45.0844" long="15.8039"/>
+    <Town id="GO" name="Goražde" lat="43.6675" long="18.9756"/>
+    <Town id="LIVN" name="Livno" lat="43.5269" long="17.0078"/>
+    <Town id="TOMG" name="Tomislavgrad" lat="43.5181" long="17.2350"/>
+    <Town id="KAME" name="Kamensko" lat="43.4044" long="17.0506"/>
+    <Town id="GLAM" name="Glamoč" lat="44.0486" long="16.8483"/>
+    <Town id="SANM" name="Sanski Most" lat="44.7656" long="16.6656"/>
+    <Town id="TESN" name="Tešanj" lat="44.6119" long="17.9858"/>
+    <Town id="PRNJ" name="Prnjavor" lat="44.8703" long="17.6628"/>
+    <Town id="MRKG" name="Mrkonjić Grad" lat="44.4169" long="17.0825"/>
+    <Town id="KLJU" name="Ključ" lat="44.5356" long="16.7728"/>
+    <Town id="FOCA" name="Foča" lat="43.5056" long="18.7786"/>
+    <Town id="SCPO" name="Šćepan Polje" lat="43.3450" long="18.8394"/>
+    <Town id="BUG" name="Bugojno" lat="44.0572" long="17.4508"/>
+    <Town id="KSLJ" name="Kiseljak" lat="43.9425" long="18.0792"/>
+    <Town id="POTC" name="Potoci" lat="43.4086" long="17.8786"/>
+    <Town id="GRDS" name="Gradiška" lat="45.1411" long="17.2506"/>
+    <Town id="KONJ" name="Konjic" lat="43.6519" long="17.9608"/>
+    <Town id="JABL" name="Jablanica" lat="43.6478" long="17.7586"/>
+    <Town id="GLAV" name="Glavatičevo" lat="43.6325" long="18.1061"/>
+    <Town id="KALI" name="Kalinovik" lat="43.5700" long="18.1200"/>
+    
+    <Town id="ILDZ" name="Ilidža" lat="43.8272" long="18.3042"/>
+    <Town id="HADZ" name="Hadžići" lat="43.7506" long="18.2239"/>
+    <Town id="CAP" name="Čapljina" lat="43.1169" long="17.7019"/>
+    <Town id="KRUP" name="Bosanska Krupa" lat="44.8825" long="16.1514"/>
+    <Town id="OTOK" name="Bosanska Otoka" lat="44.9525" long="16.1554"/>
+    <Town id="TRAV" name="Travnik" lat="44.1711" long="17.6575"/>
+    <Town id="VOG" name="Vogošća" lat="43.9019" long="18.3481"/>
+    <Town id="JAJC" name="Jajce" lat="44.3422" long="17.2706"/>
+    
+    <Town id="PROZ" name="Prozor" lat="43.8222" long="17.6092"/>
+    <Town id="ODZK" name="Odžak" lat="45.0086" long="18.3247"/>
+    <Town id="ST" name="Stolac" lat="43.0833" long="17.9583"/>
+    <Town id="SBRG" name="Široki Brijeg" lat="43.3833" long="17.5931"/>
+    <Town id="NG" name="Novi Grad" lat="45.0458" long="16.3806"/>
+    <Town id="ROGT" name="Rogatica" lat="43.7989" long="19.0036"/>
+    <Town id="KAKA" name="Kakanj" lat="44.1272" long="18.1181"/>
+    <Town id="VARE" name="Vareš" lat="44.1644" long="18.3281"/>
+    <Town id="PALE" name="Pale" lat="43.8161" long="18.5694"/>
+    <Town id="NEV" name="Nevesinje" lat="43.2583" long="18.1139"/>
+    <Town id="LJUB" name="Ljubuški" lat="43.2000" long="17.5458"/>
+    <Town id="KUPR" name="Kupres" lat="43.8992" long="17.1900"/>
+    <Town id="SUIC" name="Suica" lat="43.6792" long="17.1500"/>
+    <Town id="BPET" name="Bosanski Petrovac" lat="44.5553" long="16.3733"/>
+    <Town id="GRAH" name="Bosansko Grahovo" lat="44.1794" long="16.3636"/>
+    <Town id="ZASE" name="Zaseok" lat="44.2069" long="16.2828"/>
+    <Town id="KLAD" name="Kladanj" lat="44.2269" long="18.6925"/>
+    <Town id="BRAT" name="Bratunac" lat="44.1847" long="19.3364"/>
+    <Town id="VLAS" name="Vlasenica" lat="44.3300" long="18.9900"/>
+    <Town id="BAN" name="Banovići" lat="44.4089" long="18.5261"/>
+    <Town id="CE" name="Čelić" lat="44.7247" long="18.8306"/>
+    <Town id="ORSJ" name="Orašje" lat="45.0356" long="18.3931"/>
+    <Town id="BRCK" name="Brčko" lat="44.9728" long="18.6083"/>
+    <Town id="DERV" name="Derventa" lat="44.9783" long="17.9078"/>
+    <Town id="BROD" name="Bosanski Brod" lat="45.0764" long="17.9153"/>
+    <Town id="BDUB" name="Bosanska Dubica" lat="45.1767" long="16.8094"/>
+    <Town id="GRUD" name="Grude" lat="43.3722" long="17.4144"/>
+    <Town id="NEUM" name="Neum" lat="42.9231" long="17.6158"/>
+    <Town id="RAVN" name="Ravno" lat="42.8397" long="17.9531"/>
+    <Town id="HUT" name="Hutovo" lat="43.0653" long="17.7828"/>
+    <Town id="OLOV" name="Olovo" lat="44.0500" long="18.5600"/>
+    <Town id="SOKO" name="Sokolac" lat="43.8706" long="18.7458"/>
+    <Town id="HANP" name="Han Pijesak" lat="44.0667" long="18.8333"/>
+    <Town id="POTO" name="Potočari" lat="44.2014" long="19.2592"/>
+    <Town id="SRCA" name="Srebrenica" lat="44.1086" long="19.2756"/>
+    <Town id="ZEPA" name="Žepa" lat="44.0328" long="18.9483"/>
+    <Town id="KPOL" name="Konjević Polje" lat="44.2833" long="19.2300"/>
+    
+    
+    <Town id="GACK" name="Gacko" lat="43.1178" long="18.6342"/>
+    <Town id="BILE" name="Bileća" lat="42.8717" long="18.4300"/>
+    
+    <Town id="LUKA" name="Lukavac" lat="44.5419" long="18.5258"/>
+    <Town id="GRAD" name="Gradačac" lat="44.8950" long="18.4025"/>
+    <Town id="SREB" name="Srebrenik" lat="44.6425" long="18.4914"/>
+    <Town id="ZEPC" name="Žepče" lat="44.4261" long="18.0378"/>
+    <Town id="MAGL" name="Maglaj" lat="44.5475" long="18.1000"/>
+    <Town id="ZAVD" name="Zavidovići" lat="44.4458" long="18.1497"/>
+    <Town id="ORMA" name="Ormanica" lat="44.8600" long="18.5000"/>
+    
+    
+  </Towns>
+
+  <Roads>
+    <!-- A1 motorway (type=1): marked only for A1 segments -->
+     <Road fromNode="GRDS" toNode="PRNJ" type="1" name="A1"/>
+     <Road fromNode="PRNJ" toNode="DO" type="0" name="R"/>
+    <Road fromNode="DO" toNode="MAGL" type="1" name="A1"/>
+    <Road fromNode="MAGL" toNode="ZEPC" type="0" name="R"/>
+    <Road fromNode="ZEPC" toNode="ZE" type="0" name="R"/>
+    <Road fromNode="ZE" toNode="KAKA" type="1" name="A1"/>
+    <Road fromNode="VISK" toNode="KAKA" type="1" name="A1"/>
+    <Road fromNode="VISK" toNode="VOG" type="1" name="A1"/>
+    <Road fromNode="VOG" toNode="ILDZ" type="1" name="A1"/>
+    <Road fromNode="ILDZ" toNode="KONJ" type="1" name="A1"/>
+
+    <!-- M17 corridor (main north-south road, type=0) -->
+    <Road fromNode="KONJ" toNode="JABL" type="0" name="M17"/>
+    <Road fromNode="JABL" toNode="POTC" type="0" name="M17"/>
+    <Road fromNode="POTC" toNode="MO" type="0" name="M17"/>
+    <Road fromNode="MO" toNode="BUNA" type="0" name="M17"/>
+    <Road fromNode="BUNA" toNode="CAP" type="0" name="M17"/>
+
+    <!-- M18 corridor and connections -->
+    <Road fromNode="TZ" toNode="KALS" type="0" name="M18"/>
+    <Road fromNode="KALS" toNode="ZV" type="0" name="M18"/>
+    <Road fromNode="TZ" toNode="ZIV" type="0" name="M18"/>
+    <Road fromNode="ZIV" toNode="KLAD" type="0" name="M18"/>
+    <Road fromNode="KLAD" toNode="OLOV" type="0" name="M18"/>
+    <Road fromNode="OLOV" toNode="SA" type="0" name="M18"/>
+    <Road fromNode="SA" toNode="FOCA" type="0" name="M18"/>
+    <Road fromNode="GO" toNode="FOCA" type="0" name="M18"/>
+    <Road fromNode="SCPO" toNode="FOCA" type="0" name="M18"/>
+    
+    <!-- M4 and northwest connections -->
+    <Road fromNode="BL" toNode="GRDS" type="0" name="M4"/>
+    <Road fromNode="GRDS" toNode="DERV" type="0" name="M4"/>
+    <Road fromNode="DERV" toNode="DO" type="0" name="M4"/>
+
+    <!-- Major regional links to ensure connectivity -->
+     <Road fromNode="BROD" toNode="DERV" type="1" name="A1"/>
+    <Road fromNode="BL" toNode="PRIJ" type="0" name="R"/>
+    <Road fromNode="BL" toNode="MRKG" type="0" name="R"/>
+    <Road fromNode="BL" toNode="KVAR" type="0" name="R"/>
+    <Road fromNode="TRAV" toNode="KVAR" type="0" name="R"/>
+    <Road fromNode="KVAR" toNode="TESL" type="0" name="R"/>
+    <Road fromNode="ZE" toNode="TESL" type="0" name="R"/>
+    <Road fromNode="PRNJ" toNode="TESL" type="0" name="R"/>
+    <Road fromNode="DO" toNode="TESL" type="0" name="R"/>
+    <Road fromNode="MRKG" toNode="KLJU" type="0" name="R"/>
+    <Road fromNode="KLJU" toNode="SANM" type="0" name="R"/>
+    <Road fromNode="KLJU" toNode="BPET" type="0" name="R"/>
+    <Road fromNode="BPET" toNode="GRAH" type="0" name="R"/>
+    <Road fromNode="BPET" toNode="BIH" type="0" name="R"/>
+    <Road fromNode="BPET" toNode="KRUP" type="0" name="R"/>
+    <Road fromNode="GRAH" toNode="ZASE" type="0" name="R"/>
+    <Road fromNode="CAZN" toNode="BIH" type="0" name="R"/>
+    <Road fromNode="KRUP" toNode="SANM" type="0" name="R"/>
+    <Road fromNode="SANM" toNode="PRIJ" type="0" name="R"/>
+
+    <Road fromNode="JAJC" toNode="BUG" type="0" name="R"/>
+    <Road fromNode="PROZ" toNode="BUG" type="0" name="R"/>
+    <Road fromNode="JAJC" toNode="MRKG" type="0" name="R"/>
+
+    <Road fromNode="ORMA" toNode="BRCK" type="0" name="R"/>
+    <Road fromNode="TEOC" toNode="BJ" type="0" name="R"/>
+    <Road fromNode="BJ" toNode="ZV" type="0" name="R"/>
+    <Road fromNode="BJ" toNode="RACA" type="0" name="R"/>
+    <Road fromNode="ZV" toNode="KPOL" type="0" name="R"/>
+    <Road fromNode="KPOL" toNode="BRAT" type="0" name="R"/>
+    <Road fromNode="KPOL" toNode="VLAS" type="0" name="R"/>
+    
+    <Road fromNode="PALE" toNode="SA" type="0" name="R"/>
+
+    <Road fromNode="SA" toNode="ILDZ" type="0" name="Urban"/>
+    <Road fromNode="ILDZ" toNode="VOG" type="0" name="Urban"/>
+    <Road fromNode="SA" toNode="VOG" type="0" name="Urban"/>
+
+    <Road fromNode="TRAV" toNode="BUG" type="0" name="R"/>
+    <Road fromNode="TRAV" toNode="ZE" type="0" name="R"/>
+    <Road fromNode="JAJC" toNode="BL" type="0" name="R"/>
+    <Road fromNode="BDUB" toNode="NG" type="0" name="R"/>
+    <Road fromNode="BDUB" toNode="PRIJ" type="0" name="R"/>
+    <Road fromNode="BDUB" toNode="GRDS" type="0" name="R"/>
+    <Road fromNode="NG" toNode="PRIJ" type="0" name="R"/>
+    <Road fromNode="NG" toNode="OTOK" type="0" name="R"/>
+    <Road fromNode="KRUP" toNode="OTOK" type="0" name="R"/>
+
+    <Road fromNode="ZAVD" toNode="BAN" type="0" name="R"/>
+    
+    <Road fromNode="ZEPC" toNode="ZAVD" type="0" name="R"/>
+    <Road fromNode="MAGL" toNode="ZAVD" type="0" name="R"/>
+
+    <Road fromNode="JABL" toNode="PROZ" type="0" name="R"/>
+    <Road fromNode="PROZ" toNode="SBRG" type="0" name="R"/>
+    <Road fromNode="SBRG" toNode="GRUD" type="0" name="R"/>
+    <Road fromNode="GRUD" toNode="LJUB" type="0" name="R"/>
+    <Road fromNode="LJUB" toNode="SBRG" type="0" name="R"/>
+
+    <Road fromNode="MO" toNode="SBRG" type="0" name="R"/>
+    <Road fromNode="BUNA" toNode="ST" type="0" name="R"/>
+    <Road fromNode="CAP" toNode="ST" type="0" name="R"/>
+    <Road fromNode="CAP" toNode="HUT" type="0" name="R"/>
+    <Road fromNode="ST" toNode="HUT" type="0" name="R"/>
+    <Road fromNode="HUT" toNode="NEUM" type="0" name="R"/>
+    <Road fromNode="HUT" toNode="RAVN" type="0" name="R"/>
+    <Road fromNode="RAVN" toNode="TREB" type="0" name="R"/>
+
+    <Road fromNode="ORSJ" toNode="ODZK" type="0" name="R"/>
+    <Road fromNode="ODZK" toNode="DERV" type="0" name="R"/>
+
+    <Road fromNode="PRNJ" toNode="BL" type="0" name="R"/>
+    
+    <Road fromNode="KRUP" toNode="CAZN" type="0" name="R"/>
+    <Road fromNode="OTOK" toNode="CAZN" type="0" name="R"/>
+    <Road fromNode="VKLD" toNode="CAZN" type="0" name="R"/>
+
+    <Road fromNode="MRKG" toNode="GLAM" type="0" name="R"/>
+    <Road fromNode="LIVN" toNode="GLAM" type="0" name="R"/>
+    <Road fromNode="LIVN" toNode="TOMG" type="0" name="R"/>
+    <Road fromNode="KUPR" toNode="BUG" type="0" name="R"/>
+    <Road fromNode="KUPR" toNode="SUIC" type="0" name="R"/>
+    <Road fromNode="TOMG" toNode="SBRG" type="0" name="R"/>
+    <Road fromNode="LIVN" toNode="GRAH" type="0" name="R"/>
+    <Road fromNode="LIVN" toNode="KAME" type="0" name="R"/>
+    <Road fromNode="LIVN" toNode="SUIC" type="0" name="R"/>
+    <Road fromNode="SUIC" toNode="TOMG" type="0" name="R"/>
+
+    <Road fromNode="PALE" toNode="GO" type="0" name="R"/>
+    <Road fromNode="CE" toNode="TZ" type="0" name="R"/>
+
+    <Road fromNode="LUKA" toNode="TZ" type="0" name="R"/>
+    <Road fromNode="ZIV" toNode="BAN" type="0" name="R"/>
+    <Road fromNode="ZIV" toNode="KALS" type="0" name="R"/>
+
+    <Road fromNode="VARE" toNode="KAKA" type="0" name="R"/>
+
+    <Road fromNode="BDUB" toNode="BL" type="0" name="R"/>
+
+    <Road fromNode="BRCK" toNode="BJ" type="0" name="R"/>
+    <Road fromNode="ORSJ" toNode="ORMA" type="0" name="R"/>
+
+    <Road fromNode="KALS" toNode="OSMC" type="0" name="R"/>
+
+    <Road fromNode="OLOV" toNode="SOKO" type="0" name="R"/>
+
+    <Road fromNode="SOKO" toNode="PALE" type="0" name="R"/>
+
+    <Road fromNode="SOKO" toNode="HANP" type="0" name="R"/>
+    <Road fromNode="SOKO" toNode="ROGT" type="0" name="R"/>
+    <Road fromNode="ROGT" toNode="GO" type="0" name="R"/>
+    <Road fromNode="HANP" toNode="VLAS" type="0" name="R"/>
+    <Road fromNode="HANP" toNode="ZEPA" type="0" name="R"/>
+    <Road fromNode="BRAT" toNode="POTO" type="0" name="R"/>
+    <Road fromNode="POTO" toNode="SRCA" type="0" name="R"/>
+    <Road fromNode="KONJ" toNode="GLAV" type="0" name="R"/>
+    <Road fromNode="GLAV" toNode="KALI" type="0" name="R"/>
+    <Road fromNode="KALI" toNode="FOCA" type="0" name="R"/>
+    <Road fromNode="KALI" toNode="NEV" type="0" name="R"/>
+    <Road fromNode="NEV" toNode="GACK" type="0" name="R"/>
+    <Road fromNode="FOCA" toNode="GACK" type="0" name="M20"/>
+    <Road fromNode="KALI" toNode="GACK" type="0" name="R"/>
+    <Road fromNode="GACK" toNode="BILE" type="0" name="M20"/>
+    <Road fromNode="BILE" toNode="TREB" type="0" name="M20"/>
+    <Road fromNode="BILE" toNode="NEV" type="0" name="R"/>
+    <Road fromNode="KALS" toNode="SAPN" type="0" name="R"/>
+    <Road fromNode="SAPN" toNode="TEOC" type="0" name="R"/>
+    <Road fromNode="SAPN" toNode="ZV" type="0" name="R"/>
+    <Road fromNode="LUKA" toNode="SREB" type="0" name="R"/>
+    <Road fromNode="SREB" toNode="ORMA" type="0" name="R"/>
+    <Road fromNode="ORMA" toNode="GRAD" type="0" name="R"/>
+    <Road fromNode="ORMA" toNode="GRAC" type="0" name="R"/>
+    <Road fromNode="GRAC" toNode="SREB" type="0" name="R"/>
+    <Road fromNode="GRAC" toNode="DO" type="0" name="R"/>
+    <Road fromNode="LUKA" toNode="GRAC" type="0" name="R"/>
+    <Road fromNode="ILDZ" toNode="HADZ" type="0" name="R"/>
+    <Road fromNode="HADZ" toNode="KONJ" type="0" name="R"/>
+    <Road fromNode="GRAD" toNode="ODZK" type="0" name="R"/>
+    <Road fromNode="MAGL" toNode="TESN" type="0" name="R"/>
+    <Road fromNode="DO" toNode="TESN" type="0" name="R"/>
+    <Road fromNode="ILDZ" toNode="KSLJ" type="0" name="R"/>
+    <Road fromNode="VISK" toNode="BREZ" type="0" name="R"/>
+  </Roads>
+</Map>

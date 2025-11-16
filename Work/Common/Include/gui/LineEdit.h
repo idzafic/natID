@@ -27,8 +27,7 @@ namespace gui
         std::function<void()> _onActivate; //when user presses Enter
         std::function<void()> _onActivateCmd; //when user presses Cmd/Ctrl+Enter
         std::function<void()> _onFinishEdit; //on lost focus
-    private:
-        void checkMessageLevl(td::BYTE requiredLevel);
+    
     public:
         enum class Messages : unsigned char {DoNotSend=0, Send, SendAll};
     protected:
@@ -52,6 +51,9 @@ namespace gui
         const std::function<void()>& getActivateCmdHandler() const;
         const std::function<void()>& getFinishEditHandler() const;
         
+        //for old-style event handling
+        void activateContentChangeAndFocusEvents();
+
         void onBeginEdit(const std::function<void()>& fnToCall); //first change after obtaining focus
         void onChangedContent(const std::function<void()>& fnToCall);
         void onActivate(const std::function<void()>& fnToCall); //pressed enter

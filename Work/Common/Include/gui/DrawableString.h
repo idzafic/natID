@@ -50,7 +50,17 @@ public:
     void measure(const gui::Font* pFont, gui::Size& resultingSize) const;
     void measure(const gui::Font* pFont, CoordType maxWidth, gui::Size& resultingSize) const;
     
+//    static void getSize(const gui::DrawableString& drawString, gui::Font::ID fontID, gui::Size& resultingSize);
+//    void measure(gui::Font::ID fontID, gui::Size& resultingSize) const;
+//    static void getSize(const gui::DrawableString& drawString, gui::Font::ID fontID, gui::CoordType maxWidth, gui::Size& resultingSize);
+//    void measure(gui::Font::ID fontID, gui::CoordType maxWidth, gui::Size& resultingSize) const;
+    
+    
     static void measureNChars(size_t nChars, gui::Font::ID fontID, gui::Size& resultingSize);
+    
+    //measureString -> measeure (moved from Font)
+    static void measure(const char* pStr, gui::Font::ID fontID, gui::Size& resultingSize);
+    static void measure(const td::String& str, gui::Size& resultingSize, gui::Font::ID fontID = gui::Font::ID::SystemNormal);
     
     void draw(const gui::Rect& r, gui::Font::ID fntID, td::ColorID clrID, td::TextAlignment hAlign = td::TextAlignment::Left, td::VAlignment vAlign = td::VAlignment::Top, td::TextEllipsize ellips = td::TextEllipsize::End) const;
     void draw(const gui::Point& pt, gui::Font::ID fntID, td::ColorID clrID) const;

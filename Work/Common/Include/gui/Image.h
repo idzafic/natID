@@ -39,7 +39,7 @@ public:
         td::UINT2 bitsPerPixel;
         Image::Format format;
     } Data;
-    
+
 private:
     union
     {
@@ -56,6 +56,18 @@ private:
 private:
     void calcHWRatio(const gui::Size& sz);
     void calcHWRatio();
+    void resetHandle();
+    //bool loadFromRes(const td::String& fn);
+protected:
+    gui::Handle getHandle();
+    const gui::Handle getHandle() const;
+    gui::Handle getDisabled();
+    void drawWithoutContextManagement(const gui::Rect& rect, AspectRatio aspectRatio = AspectRatio::Keep, td::HAlignment hAlign = td::HAlignment::Center, td::VAlignment vAlign = td::VAlignment::Center) const;
+
+    //for drawing to Image used by Canvas::drawToImage)
+    void createDrawingContext(gui::Canvas* pCanvas, bool clear = false, td::ColorID clearColor = td::ColorID::Transparent);
+    void releaseDrawingContext();
+
 public:
     Image();
     Image(gui::Handle handle); //for resource
@@ -66,11 +78,11 @@ public:
     Image(const Image* pResImage); //for resource images only
     ~Image();
 //    virtual gui::ObjType getObjType() const override { return ObjType::Image; }
-    gui::Handle getHandle();
-    const gui::Handle getHandle() const;
     
-    void draw(const gui::Rect& rect, AspectRatio aspectRatio = AspectRatio::Keep, td::HAlignment hAlign=td::HAlignment::Center, td::VAlignment vAlign=td::VAlignment::Center) const;
-    void drawWithoutContextManagement(const gui::Rect& rect, AspectRatio aspectRatio = AspectRatio::Keep, td::HAlignment hAlign=td::HAlignment::Center, td::VAlignment vAlign=td::VAlignment::Center) const;
+    //draws in a specific rectangle
+    //if pResultRect != nullptr, it will be used to return bounding rectangle of image placement
+    void draw(const gui::Rect& rect, AspectRatio aspectRatio = AspectRatio::Keep, td::HAlignment hAlign=td::HAlignment::Center, td::VAlignment vAlign=td::VAlignment::Center, gui::Rect* pPlacementRect = nullptr) const;
+    
     void getSize(gui::Size& sz) const;
     
     bool load(const char* fileOrResName);
@@ -79,9 +91,6 @@ public:
     bool isOK() const;
     bool getData(Data& data) const;
     
-    //for drawing to Image
-    void startDrawingContext(gui::Canvas* pCanvas, bool clear = false, td::ColorID clearColor = td::ColorID::Transparent);
-    void releaseDrawingContext();
     float getHWRatio() const;
     bool isFromDisplay() const;
     void setInvertible(bool bInvertable);
@@ -92,7 +101,7 @@ public:
     //get data content (bytes are ordered from top-left->top right up to bottom->right corner)
     void getContent(cnt::SafeFullVector<td::Color>& content) const;
     bool saveToFile(const td::String& fileName, Image::Type type = Image::Type::PNG) const;
-    gui::Handle getDisabled();
+    
 };
 
 } //namespace gui

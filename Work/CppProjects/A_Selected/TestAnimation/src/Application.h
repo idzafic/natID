@@ -13,6 +13,7 @@ protected:
     
     gui::Window* createInitialWindow() override
     {
+        //return new DialogSettings(nullptr, 100);
         return new MainWindow();
     }
     

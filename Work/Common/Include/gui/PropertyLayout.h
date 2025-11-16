@@ -51,6 +51,7 @@ namespace gui
 //        td::BYTE _nResVert;
 //        td::BYTE _nResHor;
     protected:
+        bool initialMeasure() override;
         void initialMeasure(CellInfo&) override;
         void measure(CellInfo& cell) override;
         void reMeasure(CellInfo& cell) override;

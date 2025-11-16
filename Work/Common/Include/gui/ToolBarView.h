@@ -15,7 +15,6 @@
 #include <gui/ToolBarItem.h>
 #include <gui/ToolBarLayout.h>
 #include <gui/View.h>
-#include <gui/ToolBarLayout.h>
 
 namespace gui
 {
@@ -31,10 +30,13 @@ protected:
     ToolBarLayout _layout;
     ToolBar* _pToolBar;
     MenuButton* _pMenuButton = nullptr;
-    int _fullWidth = 0;
+    td::UINT2 _fullWidth = 0;
+    td::BYTE _buttonSize = 24;
+    td::BYTE _labelSize = 0;
+    td::BYTE _fullHeight;
 protected:
     void adjustLayout(const Size& newSize) override; //called on every resize
-    void initialMeasure();
+    bool initialMeasure() override;
     void composeContent();
 public:
     ToolBarView(ToolBar* pToolBar, td::BYTE nCols, int menuID = -1, const td::String& menuButtonTT = "");
@@ -47,6 +49,9 @@ public:
     bool isMeasured() const;
     
     int getFullWidth() const;
+
+    int getCurrentHeight() const;
+
     void setSpaceBetweenCells(td::BYTE spaceBetweeRows, td::BYTE spaceBetweenCols);
     void showLabels(bool bShow);
     void updateLabel(const gui::ToolBarItem* pTBI, const td::String& strTxt);

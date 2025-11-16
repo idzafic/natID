@@ -15,8 +15,13 @@
 #include <mu/ILoggerBase.h>
 #include <cstdarg>
 #include <filesystem>
+#include <locale.h>
+#include <stdlib.h>
 
 #ifdef MU_WINDOWS
+
+typedef _locale_t my_locale_t;
+
 namespace no
 {
 	namespace sock
@@ -24,7 +29,10 @@ namespace no
 		class Init;
 	}
 }
+#else
+typedef locale_t my_locale_t;
 #endif
+
 
 namespace mem
 {
@@ -40,6 +48,13 @@ class IAppSettings;
 
 template <class TSTR>
 class TxtOutFile;
+
+//locale
+MAINUTILS_API extern my_locale_t __c_locale;
+MAINUTILS_API double toDouble(const char* pStr);
+MAINUTILS_API void initCLocale(void);
+MAINUTILS_API void freeCLocale(void);
+
     
 MAINUTILS_API Regionals* getMainThreadRegionals();
 

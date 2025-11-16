@@ -41,6 +41,7 @@ namespace gui
         void getMinSizeForAuxiliaryCell(Size& sz) const;
         
         size_t getNoOfVisibleCells() const;
+        bool initialMeasure() override;
         void initialMeasure(CellInfo&) override;
         void measure(CellInfo& cell) override;
         void reMeasure(CellInfo& cell) override;

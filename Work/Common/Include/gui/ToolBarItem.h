@@ -31,8 +31,9 @@ class Symbol;
 class DataCtrl;
 //class BaseView;
 class ToolBar;
-class PopoverView;
+class PopoverCanvas;
 class PopoverButton;
+class PopupView;
 class ToolBarItemHelper;
 class View;
 
@@ -45,7 +46,7 @@ class NATGUI_API ToolBarItem : public ActionItem, public IPopoverButton
     template <typename T, bool EXTERN_ALLOCATOR>
     friend class cnt::SafeFullVector;
 public:
-    enum class Type : unsigned char {Image, Symbol, Control, PopoverView, View, Space};
+    enum class Type : unsigned char {Image, Symbol, Control, PopoverCanvas, View, PopupView, Space};
 protected:
     ToolBar* _pToolBar = nullptr;
     td::String _strID;
@@ -58,8 +59,9 @@ protected:
         Image* _image = nullptr;
         Symbol* _symbol;
         DataCtrl* _control;
-        PopoverView* _popoverView;
+        PopoverCanvas* _popoverCanvas;
         View* _view;
+        PopupView* _popupView;
     };
     
     td::UINT4 _gid = 0;
@@ -70,20 +72,17 @@ protected:
     void setPopoverCurrentSelection(td::UINT2 pos, bool closePopover) override;
     void sendPopoverMessage() override;
     //virtual void drawPopoverSymbolText(gui::CoordType x, gui::CoordType y, td::UINT2 itemPos) const;
+    //const gui::Handle getPOBHandle() const override;
     void closePopover() override;
     
     void enablePopover(bool bEnable) override;
 
     void setHandle(gui::Handle handle);
-public:
-    ToolBarItem();
-    gui::ObjType getObjType() const override { return ObjType::ToolBarItem;}
     
     gui::Handle getHandle();
     const gui::Handle getHandle() const;
-    td::UINT4 getActionID() const;
     
-    ///simple action item (with image or symbol)
+    //simple action item (with image or symbol)
     void init(const char* itemID, const td::String& lbl, Image* image, const td::String& toolTip, td::BYTE menuID, td::BYTE firstSubMenuID, td::BYTE lastSubMenuID, td::BYTE actionID);
     void init(const char* itemID, const td::String& lbl, Symbol* symbol, const td::String& toolTip, td::BYTE menuID, td::BYTE firstSubMenuID, td::BYTE lastSubMenuID, td::BYTE actionID);
     //init using control (DataCtrl, like ComboBox)
@@ -92,7 +91,15 @@ public:
     void init(const char* itemID, const td::String& lbl, const td::String& toolTip, gui::View* pView);
     
     //init using popover view
-    void init(const char* itemID, gui::PopoverView* pPopoverView, td::UINT4 ctrlID, const td::String& lbl, const td::String& toolTip);
+    void init(const char* itemID, gui::PopoverCanvas* pPopoverCanvas, td::UINT4 ctrlID, const td::String& lbl, const td::String& toolTip);
+    
+    //init using popup view
+    void init(const char* itemID, gui::PopupView* pPopupView, td::UINT4 ctrlID, const td::String& lbl, const td::String& toolTip);
+    
+public:
+    ToolBarItem();
+    gui::ObjType getObjType() const override { return ObjType::ToolBarItem;}
+    td::UINT4 getActionID() const;
     
     ToolBar* getToolBar();
     const ToolBar* getToolBar() const;
@@ -110,9 +117,14 @@ public:
     
     //Popover& getPopover();
     DataCtrl* getControl();
-    PopoverView* getPopoverView();
-    const PopoverView* getPopoverView() const;
+    
+    PopoverCanvas* getPopoverCanvas();
+    const PopoverCanvas* getPopoverCanvas() const;
     View* getView();
+    const View* getView() const;
+    PopupView* getPopupView();
+    const PopupView* getPopupView() const;
+    
     Type getType() const;
     
     void initAsSpace();

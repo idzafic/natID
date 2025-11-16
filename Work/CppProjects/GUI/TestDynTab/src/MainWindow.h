@@ -14,6 +14,7 @@
 #include "ViewWithTabs.h"
 #include "NavigatorView.h"
 #include "DynTabView.h"
+#include "BackView2.h"
 
 
 class MainWindow : public gui::Window
@@ -107,6 +108,7 @@ protected:
                             {
                             case 0:
                             {
+                                //BackView2* pView =  new BackView2;
                                 ViewComplex* pView = new ViewComplex;
 
                                 int iPos = _dynTabView.addView(pView, tr("view1"), _images[_viewPos]);

@@ -1,0 +1,21 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="start" path="Work/Common/Icons/arrow_right.png"/>
+		<Res id="stop" path="Work/Common/Icons/x.png"/>
+		<Res id="settings" path = "Work/Common/Icons/SettingsBlue48.png"/>
+		<Res id="source" path="Work/Common/Icons/Flags/startFlag48.png" desktop="Light"/>
+		<Res id="goal" path="Work/Common/Icons/Flags/endFlag48b.png" desktop="Dark"/>
+	</Images>
+	
+	<Sounds>
+		<Res id="flight" path="Work/Common/Sounds/JetFlight.wav"/>
+		<Res id="cheering" path="Work/Common/Sounds/Cheering.wav"/>
+	</Sounds>
+
+	<FileNames>
+		<Res id="map" path=":maps/Bosnia.xml"/>
+		<Res id="4Node" path=":maps/4Node.xml"/>
+		<Res id="12Node" path=":maps/12Node.xml"/>
+	</FileNames>
+</DevRes>

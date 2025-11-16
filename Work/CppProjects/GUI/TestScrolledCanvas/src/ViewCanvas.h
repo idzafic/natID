@@ -8,6 +8,8 @@
 #include <math/math.h>
 #include <gui/Image.h>
 #include <gui/Symbol.h>
+#include <gui/DrawableString.h>
+#include <gui/Context.h>
 
 class ViewCanvas : public gui::Canvas
 {
@@ -23,11 +25,13 @@ protected:
     gui::Shape _shapeLines;
     gui::Image _img;
     gui::Symbol _symbol;
+    gui::DrawableString _drawableString;
 public:
     ViewCanvas()
     : gui::Canvas({gui::InputDevice::Event::PrimaryClicks, gui::InputDevice::Event::SecondaryClicks, gui::InputDevice::Event::Zoom})
     , _img(":TransCost")
     , _symbol(":Xfmr4")
+    , _drawableString("This is text rendered by DrawableString! The text is a bit longer (for demonstration purposes)")
     {
         gui::Rect r(50, 50, 200, 150);
         float lw = 5;
@@ -230,6 +234,51 @@ public:
             p2.translate(dP);
             gui::Shape::drawLine(p1, p2, td::ColorID::Orange, lw, td::LinePattern::Dot);
         }
+
+        gui::Rect rectForDrawableStr(500, 420, 600, 470);
+        gui::Shape shRectTxt;
+        shRectTxt.createRect(rectForDrawableStr, 1, td::LinePattern::Dot);
+
+        shRectTxt.drawWire(td::ColorID::Yellow);
+        _drawableString.draw(rectForDrawableStr, gui::Font::ID::SystemNormal, td::ColorID::Orange, td::TextAlignment::Left);
+
+        //draw rotated string
+        {
+            gui::Context ctx;
+            gui::Transformation tr;
+            
+            tr.translate(rectForDrawableStr.left, rectForDrawableStr.top);
+            tr.rotateDeg(-90);
+            //tr.translate(0, -100);
+
+            //tr.appendToContext();
+            tr.setToContext();
+            gui::Rect rect2(0, 0, 200, 200);
+            _drawableString.draw(rect2, gui::Font::ID::SystemNormal, td::ColorID::Orange);
+        }
+
+        gui::Point ptTransl(120, 0);
+        rectForDrawableStr.translate(ptTransl);
+        //        gui::Shape shRectTxt2;
+        //        shRectTxt2.createRect(rectForDrawableStr, 1, td::LinePattern::Dot);
+        shRectTxt.translateRectNodes(ptTransl);
+        shRectTxt.drawWire(td::ColorID::Yellow);
+        _drawableString.draw(rectForDrawableStr, gui::Font::ID::SystemNormal, td::ColorID::Blue, td::TextAlignment::Center);
+
+        rectForDrawableStr.translate(ptTransl);
+        //        gui::Shape shRectTxt3;
+        //        shRectTxt3.createRect(rectForDrawableStr, 1, td::LinePattern::Dot);
+        shRectTxt.translateRectNodes(ptTransl);
+        shRectTxt.drawWire(td::ColorID::Yellow);
+        _drawableString.draw(rectForDrawableStr, gui::Font::ID::SystemNormal, td::ColorID::Magenta, td::TextAlignment::Right);
+
+        rectForDrawableStr.translate(ptTransl);
+        //        gui::Shape shRectTxt3;
+        //        shRectTxt3.createRect(rectForDrawableStr, 1, td::LinePattern::Dot);
+        shRectTxt.translateRectNodes(ptTransl);
+        shRectTxt.drawWire(td::ColorID::Yellow);
+        _drawableString.draw(rectForDrawableStr, gui::Font::ID::SystemNormal, td::ColorID::Green, td::TextAlignment::Justified);
+        
     }
     
     

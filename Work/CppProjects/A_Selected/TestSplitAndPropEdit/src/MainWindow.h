@@ -62,7 +62,7 @@ protected:
         pEditor->setFocus();
     }
     
-    bool onToolbarsPopoverSelectionChange(gui::PopoverView* pPOView, td::UINT2 ctrlID, td::UINT2 selection) override
+    bool onToolbarsPopoverSelectionChange(gui::PopoverCanvas* pPOView, td::UINT2 ctrlID, td::UINT2 selection) override
     {
         IShape2D::currentTool = (IShape2D::Tool) selection;
         EditorView* pEditor = _view.getEditor();
@@ -75,7 +75,7 @@ protected:
         auto [menuID, firstSubMenuID, lastSubMenuID, actionID] = aiDesc.getIDs();
         auto pAI = aiDesc.getActionItem();
         
-        if (menuID == 10 & actionID == 10)
+        if (menuID == 10 && actionID == 10)
         {
             td::UINT4 settingsID = 728289; //bilo koji unikatan broj
             auto pDlg = getAttachedWindow(settingsID);

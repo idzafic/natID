@@ -12,14 +12,15 @@
 //  Copyright © 2020 IDz. All rights reserved.
 //
 #pragma once
-#include "BaseView.h"
-#include "Types.h"
-#include "InputDevice.h"
-#include "PrintInfo.h"
-#include "Cursor.h"
+#include <gui/BaseView.h>
+#include <gui/Types.h>
+#include <gui/InputDevice.h>
+#include <gui/PrintInfo.h>
+#include <gui/Cursor.h>
 
 namespace gui
 {
+
 class DrawableViewHelper;
 class NATGUI_API DrawableView : public BaseView
 {

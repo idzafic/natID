@@ -16,12 +16,12 @@
 namespace gui
 {
 
-class PopoverView;
+class PopoverCanvas;
 
 class IPopoverUpdater
 {
 public:
-    virtual void updatePopoverView(PopoverView* pPopoverView) = 0;
+    virtual void updatePopoverView(PopoverCanvas* pPopoverView) = 0;
 };
 
 }  //namespace gui

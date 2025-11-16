@@ -25,6 +25,7 @@
 #include <math/math.h>
 #include <td/Conv.h>
 #include <td/Color.h>
+#include <mu/mu.h>
 
 namespace td
 {
@@ -184,7 +185,7 @@ public:
 				return 0;
 		}
 		formatBuffer[iUsedCh] = 0;
-		return atof(formatBuffer);
+        mu::toDouble(formatBuffer);
 	}
 
 	template <class TLI>
@@ -1367,6 +1368,10 @@ public:
 					it = timeFormatWinLong.begin();
 					itEnd = timeFormatWinLong.end();
 					break;
+				default:
+					assert(false);
+					it = timeFormatOwnShortHMM.begin();
+					itEnd = timeFormatOwnShortHMM.end();
 			}
 
 			bool bPM = false;
@@ -1824,8 +1829,8 @@ public:
 			int toRet = 0;
 			int nBufLen = _maxLen;
 			
-			cnt::PushBackVector<tDatePartFmt>::const_iterator it;
-			cnt::PushBackVector<tDatePartFmt>::const_iterator itEnd;
+			cnt::PushBackVector<tDatePartFmt>::const_iterator it = dateFormatOwnShortY4.begin();
+			cnt::PushBackVector<tDatePartFmt>::const_iterator itEnd = dateFormatOwnShortY4.end();
 			switch (df)
 			{				
 				case td::Date::Format::ShortY4:
@@ -1848,6 +1853,8 @@ public:
 					it = dateFormatOwnShortDM.begin();
 					itEnd = dateFormatOwnShortDM.end();
 					break;
+				default:
+					assert(false);
 			}
 
 			while (it != itEnd)
@@ -2321,31 +2328,31 @@ public:
         template <size_t NCHBUFF>
         std::tuple<size_t, bool> extractNumbers(const char* pData, size_t nDataLen, td::DataType dt, char (&buff)[NCHBUFF], bool sci= false)
         {
-            char decPoint = getDecPoint();
+            char chDecPoint = getDecPoint();
             char thSep = getThousandSeparator();
-            return td::extractNumbers(pData, nDataLen, dt, buff, decPoint, thSep, sci);
+            return td::extractNumbers(pData, nDataLen, dt, buff, chDecPoint, thSep, sci);
         }
         
         inline bool extractNumbers(const char* pData, size_t nDataLen, td::DataType dt, char* buff, size_t buffLen, bool sci= false)
         {
-            char decPoint = getDecPoint();
+            char chDecPoint = getDecPoint();
             char thSep = getThousandSeparator();
-            return td::extractNumbers(pData, nDataLen, dt, buff, buffLen, decPoint, thSep, sci);
+            return td::extractNumbers(pData, nDataLen, dt, buff, buffLen, chDecPoint, thSep, sci);
         }
         
          template <size_t NBUFLEN>
         inline size_t toAnsiCNumber(const char* pStrIn, size_t nLenIn, char (&buff) [NBUFLEN])
         {
-            char decPoint = getDecPoint();
+            char chDecPoint = getDecPoint();
             char thSep = getThousandSeparator();
-            return td::toAnsiCNumber(pStrIn, nLenIn, buff, decPoint, thSep);
+            return td::toAnsiCNumber(pStrIn, nLenIn, buff, chDecPoint, thSep);
         }
         
         inline size_t toAnsiCNumber(const char* pStrIn, size_t nLenIn, char* buff, size_t buffLen)
         {
-            char decPoint = getDecPoint();
+            char chDecPoint = getDecPoint();
             char thSep = getThousandSeparator();
-            return td::toAnsiCNumber(pStrIn, nLenIn, buff, buffLen, decPoint, thSep);
+            return td::toAnsiCNumber(pStrIn, nLenIn, buff, buffLen, chDecPoint, thSep);
         }
 	};	
 };

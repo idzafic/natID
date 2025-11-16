@@ -38,6 +38,7 @@ private:
     void updateSpan(GridCell& cell, td::BYTE iRow, td::BYTE iCol, td::BYTE rowSpan, td::BYTE colSpan,  const char* redistribution);
 protected:
     void initialize(td::BYTE iRow, td::BYTE iCol, Control& ctrl, td::BYTE rowSpan, td::BYTE colSpan,  td::HAlignment hAlign, td::VAlignment vAlign);
+    bool initialMeasure() override;
     void initialMeasure(CellInfo&) override;
     void measure(CellInfo& cell) override;
     void reMeasure(CellInfo& cell) override;

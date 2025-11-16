@@ -32,9 +32,9 @@ protected:
     
 protected:
   
-//    void measure(CellInfo& cell);
-//
-//    void reMeasure(CellInfo& cell);
+    void measure(CellInfo& cell) override;
+
+    void reMeasure(CellInfo& cell) override;
     
     PropertyEditorTitle();
 public:

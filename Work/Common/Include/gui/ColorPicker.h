@@ -32,7 +32,7 @@ public:
     ColorPicker();
     ColorPicker(const td::String& toolTip);
     //~ColorPicker();
-    virtual gui::ObjType getObjType() const override{ return ObjType::ColorPicker;}
+    //virtual gui::ObjType getObjType() const override{ return ObjType::ColorPicker;}
     bool setValue(const td::Variant& val, bool sendMessage=true) override;
     bool getValue(td::Variant& val, bool checkType = false) const override;
     td::ColorID getValue() const;
@@ -40,5 +40,6 @@ public:
 
     const std::function<void()>& getChangedValueHandler() const;
     void onChangedValue(const std::function<void()>& fnToCall);
+    void onChangedSelection(const std::function<void()>& fnToCall) = delete;
 };
 }

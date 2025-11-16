@@ -22,11 +22,12 @@ class NATGUI_API DrawableButtonIntern : public DrawableButton
 public:
     enum class Type : unsigned char {Apply, Restore};
 private:
-    //std::function<void(gui::DrawableButtonIntern*)> _onClick;
     Type _type;
 //    td::BYTE _checked = 0; //To do
 protected:
-//    void getMinSize(gui::Size& sz) const override;
+    void measure(CellInfo&) override;
+    void reMeasure(CellInfo&) override;
+
     void onDraw(const gui::Rect& rect) override;
     DrawableButtonIntern();
     td::UINT2 getPreferableWidth(td::UINT2 forHeight, td::UINT2 minWidth) const override;
@@ -37,13 +38,9 @@ public:
 //    bool isChecked() const;
     
     DrawableButtonIntern(DrawableButtonIntern::Type type);
-//    DrawableButtonIntern(gui::IDrawDelegate* pDrawDelegatem, td::UINT4 tagID);
     ~DrawableButtonIntern();
     Type getType() const;
     gui::ObjType getObjType() const override { return ObjType::DrawableButtonIntern;}
-    
-    //const std::function<void(gui::DrawableButtonIntern*)>& getClickHandler() const;
-    //void onClick(std::function<void(gui::DrawableButtonIntern*)> fnToCall);
 };
 
 }//namespace gui

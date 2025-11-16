@@ -426,8 +426,8 @@ namespace mu
 					if (ch == ';')
 					{
 						tmp[iPos] = 0;
-						UTF16 ch16 = (UTF16) atoi(tmp);
-						UTF16 u16[2];
+						mu::UTF16 ch16 = (mu::UTF16) atoi(tmp);
+						mu::UTF16 u16[2];
 						u16[0] = ch16;
 						u16[1] = 0;
 						TCHAR pStr[5];						

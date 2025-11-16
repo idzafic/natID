@@ -39,10 +39,13 @@ class NATGUI_API Window : public Frame
     friend class Dialog;
 protected:
 public:
-    enum class FrameSize : td::BYTE {Minimized=0, UseSpecified, AdjustToContent, Maximized, FullScreen};
+    enum class FrameSize : td::BYTE { Minimized = 0, UseSpecified, AdjustToContent, Maximized, FullScreen };
 private:
     void addToParent(Window* pParent);
 protected:
+#ifdef MU_DEBUG
+    td::String _name;
+#endif
     Window* _parent = nullptr;
     ToolBar* _pToolBar = nullptr;
     BaseView* _pCentralView = nullptr;
@@ -62,8 +65,9 @@ protected:
     td::BYTE _attachToParent : 1;
     td::BYTE _frozen : 1;
     td::BYTE _focusEvents : 1;
-//    td::BYTE _bulkActionItemInsert : 1;
-    
+    td::BYTE _hasHeaderBar : 1;
+    //    td::BYTE _bulkActionItemInsert : 1;
+
 private:
     Window() = delete;
     Window(const Window&) = delete;
@@ -79,6 +83,12 @@ private:
     void destroy() override;
     void composeContent();
 protected:
+    inline void setDbgName(const char* name)
+    {
+#ifdef MU_DEBUG
+        _name = name;
+#endif
+    }
     void setToolBar(ToolBar& pToolBar);
     void setCentralView(gui::BaseView* pView, Frame::FixSizes fixSizes = Frame::FixSizes::FixAuto);
     void setStatusBar(gui::StatusBar& sb);
@@ -91,7 +101,7 @@ protected:
     virtual void onFocusLost(); //will be called when window is not in focus anymore
     
     virtual bool shouldClose(); //window will not be closed if this method returns false
-    void invokeOnCloseEnvent();
+    //void invokeOnCloseEnvent();
     virtual void onClose(); //will be called only once
     virtual void systemColorModeChanged(bool bDarkMode);
     
@@ -152,6 +162,7 @@ public:
     Frame::FixSizes getFixSizes() const;
     const ToolBar* getToolBar() const;
     ToolBar* getToolBar();
+    bool hasHeaderBar() const;
     BaseView* getCentralView();
     const BaseView* getCentralView() const;
     const StatusBar* getStatusBar() const;
@@ -174,7 +185,8 @@ public:
     
     bool isClosing() const;
     bool isMain() const; //returns true if this window is the main window
-    
+    bool isMaximized() const;
+
     float getLogicalToPhysicalPixelScale() const;
 };
 

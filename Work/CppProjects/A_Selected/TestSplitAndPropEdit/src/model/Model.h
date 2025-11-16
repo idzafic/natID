@@ -29,7 +29,7 @@ protected:
         _pDefSettings->setNoOfShapes(_noOfCircles, IShape2D::Type::Circle, true); //last one should update the viewer
     }
     
-    void clean()
+    void clean(bool closing = false)
     {
         for (auto pShape : _shapes)
         {
@@ -38,7 +38,8 @@ protected:
         _noOfRects = 0;
         _noOfRoundedRects = 0;
         _noOfCircles = 0;
-        updateNoOfShapesInProps();
+        if (!closing)
+            updateNoOfShapesInProps();
     }
     
     Model() = delete;
@@ -51,7 +52,7 @@ public:
     
     ~Model()
     {
-        clean();
+        clean(true);
     }
     
     void draw(const gui::Rect& rDraw) const

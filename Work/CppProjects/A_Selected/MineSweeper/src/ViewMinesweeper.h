@@ -7,7 +7,7 @@
 #include <gui/Transformation.h>
 #include <math/Constants.h>
 #include <math/math.h>
-#include <gui/PopoverView.h>
+#include <gui/PopoverCanvas.h>
 #include <vector>
 #include <time.h>
 #include "DialogSettings.h"
@@ -34,12 +34,11 @@ protected:
     td::INT4 _grid[MaxGridSize][MaxGridSize];
     td::INT4 _sgrid[MaxGridSize][MaxGridSize];
     
-    td::INT4 _brojacz;
-    td::INT4 _brojac;
+    td::INT4 _noOfRemFlags;
+    td::INT4 _noOfRemBombs;
     
     const gui::CoordType _w = 32;
     
-    gui::Size _size;
     gui::Rect _tileRect;
     const td::UINT4 _cSettingsDlgID = 17; //any unique id among dialogs
     Difficulty _difficulty = Difficulty::Medium;
@@ -71,7 +70,7 @@ protected:
         return false;
     }
     
-    bool onToolbarsPopoverSelectionChange(gui::PopoverView* pPOView, td::UINT2 ctrlID, td::UINT2 selection) override
+    bool onToolbarsPopoverSelectionChange(gui::PopoverCanvas* pPOView, td::UINT2 ctrlID, td::UINT2 selection) override
     {
         //no need to check ctrlID, since there is only 1 combo box in toolbar
         switch (selection)
@@ -286,25 +285,25 @@ protected:
         if (_sgrid[x][y] == 11)
         {
             _sgrid[x][y] = 10;
-            _brojacz++;
+            _noOfRemFlags++;
             _pStatusBar->setMessage(tr("FlagRemoved"));
-            _pStatusBar->setNoOfFlags(_bombs - _brojacz);
+            _pStatusBar->setNoOfFlags(_bombs - _noOfRemFlags);
             if (_grid[x][y] == 9)
-                _brojac++;
+                _noOfRemBombs++;
             markerPlaced = true;
         }
         else if (_sgrid[x][y] == 10) 
         {
             _sgrid[x][y] = 11;
-            _brojacz--;
-            _pStatusBar->setNoOfFlags(_bombs - _brojacz);
+            _noOfRemFlags--;
+            _pStatusBar->setNoOfFlags(_bombs - _noOfRemFlags);
             _pStatusBar->setMessage(tr("FlagAdded"));
             if (_grid[x][y] == 9)
-                _brojac--;
+                _noOfRemBombs--;
             markerPlaced = true;
         }
         
-        if (_brojac == 0)
+        if (_noOfRemBombs == 0)
         {
             _index = 2;
             gameOver();
@@ -382,7 +381,7 @@ protected:
         
         if (showAlert)
         {
-            if (_brojac != 0)
+            if (_noOfRemBombs != 0)
             {
                 td::String strDead(tr("Dead"));
                 _pStatusBar->setMessage(strDead);
@@ -429,8 +428,8 @@ public:
     void newGame(td::INT4 a, td::INT4 b)
     {
 
-        _brojac = _bombs;
-        _brojacz = _bombs;
+        _noOfRemBombs = _bombs;
+        _noOfRemFlags = _bombs;
         srand((unsigned int) time(0));
 
         td::INT4 cnt = 0;

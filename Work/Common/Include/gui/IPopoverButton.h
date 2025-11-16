@@ -12,6 +12,8 @@
 //  Copyright © 2020 IDz. All rights reserved.
 //
 #pragma once
+#include <td/Types.h>
+#include <gui/Types.h>
 
 namespace gui
 {

@@ -8,28 +8,29 @@
 // ################################################################################################################
 
 #pragma once
-//#include <iostream>
 #include <random>
+#include <chrono>
 
 namespace rnd
 {
 	template <typename T>
 	class MinMax
 	{
-	private:
-		//T _minVal;
-		//T _maxVal;		
+	private:		
 		std::random_device _rd;
 		std::mt19937_64 _gen;
 		std::uniform_int_distribution<T> _dis;
 	public:
-		MinMax(T minValue, T maxValue/*, int rndSeed = 0*/)
-			//: _minVal(minValue)
-			//, _maxVal(maxValue)					
+		MinMax(T minValue, T maxValue)				
 			: _gen(_rd())
 			, _dis(minValue, maxValue)
 		{	
-			//rndSeed;
+		}
+
+		void reSeed()
+		{
+             std::mt19937_64 generator((unsigned int) std::chrono::high_resolution_clock::now().time_since_epoch().count());
+            _gen = generator;
 		}
 
 		T next()

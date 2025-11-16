@@ -55,9 +55,9 @@ constexpr const char* const TokenNames[] = { "Label", "Var", "Param", "EmbParam"
 
 constexpr const char* const RealFunctionNames[] = {"abs","acos","asin","atg","cos","exp","sqrt","ln","log","sin","tg", "sqr", "atg2", "min", "max", "smin", "smax", "avg", "var", "dev", "diff", "sign",
     "sinh", "cosh", "tgh", "asnh", "acsh", "atgh",
-    "int", "lim", "rnd", "disn", "disc"};
+    "int", "lim", "rnd", "disn", "disc", "round"};
 
-enum class RealFunction : td::BYTE {Abs, ACos, ASin, ATg, Cos, Exp, Sqrt, Lm, Log, Sin, Tg, Sqr, ATg2, Min, Max, SMin, SMax, Avg, Var, Dev, Diff, Sign, Sinh, Cosh, Tgh, ASinh, ACosh, Atgh, Int, Lim, Rnd, Disn, Disc, Last};
+enum class RealFunction : td::BYTE {Abs, ACos, ASin, ATg, Cos, Exp, Sqrt, Lm, Log, Sin, Tg, Sqr, ATg2, Min, Max, SMin, SMax, Avg, Var, Dev, Diff, Sign, Sinh, Cosh, Tgh, ASinh, ACosh, Atgh, Int, Lim, Rnd, Disn, Disc, Round, Last};
 
 constexpr const char* const ComplexFunctionNames[] = {"conj", "cabs", "rtop", "ptor", "real", "imag"}; //additional complex functions
 
@@ -105,13 +105,13 @@ using AttribDesc = struct _AttDesc
 };
 
 enum class ReservedID : td::BYTE {Main, Repeat, LaplaceOperator, Group, //naming = 0
-    If, Else, End, //Common begins with If
+    If, Else, Switch, Case, Default, End, //Common begins with If
     LinePlot, BarPlot, PiePlot, HLine, VLine, HBand, VBand, Cond, XAxis, YAxis, Last}; //naming = 1 (starts with LinePlot)
 
 
 inline bool isScopeIncreaser(ReservedID reservedID)
 {
-    return ( (reservedID == ReservedID::If) || (reservedID == ReservedID::Group) ||
+    return ( (reservedID == ReservedID::If) || (reservedID == ReservedID::Group) || (reservedID == ReservedID::Switch) ||
             (reservedID == ReservedID::LinePlot) || (reservedID == ReservedID::BarPlot) || (reservedID == ReservedID::PiePlot));
 }
 
@@ -141,7 +141,7 @@ using ReservedLblDesc = struct _RLBLDS
 
 //see ReservedID above
 constexpr ReservedLblDesc ReservedNames[] = { {"@main", {0, 0}}, {"repeat", {0, 0}}, {"s", {0, 0}}, {"group", {0, 0}},
-    {"if", {1, 0}}, {"else", {0, 0}}, {"end", {0, 1}}, //Common parw starts with if
+    {"if", {1, 0}}, {"else", {0, 0}}, {"switch", {1, 0}}, {"case", {0, 0}}, {"default", {0, 0}}, {"end", {0, 1}}, //Common parw starts with if
     {"linePlot", {1, 0}}, {"barPlot", {1, 0}}, {"piePlot", {1, 0}}, {"hLine@", {0, 0}}, {"vLine@", {0, 0}},
     {"hBand@", {0, 0}}, {"vBand@", {0, 0}},
     {"@cond", {0, 0}}, {"@x", {0, 0}}, {"@y", {0, 0}}};
@@ -190,7 +190,7 @@ using Range = td::Range<td::UINT4>;
 
 enum class ModelType : unsigned char {NL=0, WLS, ODE, DAE, NA};
 
-enum class ExpressionType : td::BYTE {Error=0, Normal, If, Else, End, Grouper, Repeater};
+enum class ExpressionType : td::BYTE {Error=0, Normal, If, Else, Switch, Case, End, Grouper, Repeater};
 
 enum class ModelLevel : td::BYTE {MainModel=0, SubModel};
 
@@ -358,6 +358,13 @@ inline bool isAssignment(sc::Token tok)
 inline bool isAnyOpenBracket(sc::Token tok)
 {
     return (tok == sc::Token::OpenParenthesis) || (tok == sc::Token::OpenBracket) || (tok == sc::Token::OpenCurlyBrace);
+}
+
+inline bool isBase(sc::Group groupID)
+{
+    if (groupID >= sc::Group::NLEs && groupID <= sc::Group::TFs)
+        return true;
+    return false;
 }
 
 } //namspace sc

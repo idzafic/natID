@@ -66,7 +66,24 @@ protected:
     
     void onDraw(const gui::Rect& rDraw) override
     {
-//        mu::dbgLog("x=%.1f y=%.1f w=%.1f h=%.1f", rDraw.left, rDraw.top, rDraw.width(), rDraw.height());
+        //mu::dbgLog("onDraw x=%.1f y=%.1f w=%.1f h=%.1f", rDraw.left, rDraw.top, rDraw.width(), rDraw.height());
+        //
+        //gui::Transformation::saveContext();
+        //{
+        //    auto r = rDraw;
+        //    gui::Size sz;
+        //    getSize(sz);
+        //    r.left = 0;
+        //    r.top = 0;
+        //    r.setSize(sz);
+        //    r.inflate(-3);
+        //    gui::Transformation transf;
+        //    transf.scale(1.0);
+        //    transf.setToContext();
+        //    gui::Shape::drawRect(r, td::ColorID::DarkGreen, td::ColorID::Yellow, 1.0f);
+        //}
+        //gui::Transformation::restoreContext();
+        
         _model.draw(rDraw);
         if (_pSelectedShape)
         {
@@ -119,7 +136,7 @@ protected:
         
         _lastMouseClickPoint = modelPoint;
         _lastEvent = LastEvent::MouseClick;
-//        mu::dbgLog("EditorView onMouseDown!");
+        mu::dbgLog("EditorView onMouseDown!");
         switch (IShape2D::currentTool)
         {
             case IShape2D::Tool::Selector:
@@ -353,14 +370,10 @@ public:
         if (IShape2D::currentTool == IShape2D::Tool::Selector)
         {
             setCursor(gui::Cursor::Type::Default);
-//            gui::Cursor cursor = gui::Cursor(gui::Cursor::Type::Default);
-//            cursor.push();
         }
         else
         {
             setCursor(gui::Cursor::Type::Adder);
-//            gui::Cursor cursor = gui::Cursor(gui::Cursor::Type::Adder);
-//            cursor.push();
         }
     }
     

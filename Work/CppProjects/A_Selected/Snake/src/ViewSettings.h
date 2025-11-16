@@ -25,7 +25,7 @@ protected:
     gui::CheckBox _chbToolbarIconsAndLabels;
     gui::Label _lblLevel;
     gui::ComboBox _cmbLevel;
-    gui::GridLayout _gl;
+    gui::GridLayout _mainLayout;
     gui::ToolBar* _pMainTB = nullptr;
     int _initialLangSelection;
 public:
@@ -34,7 +34,7 @@ public:
     , _lblLangNew(tr("lblLang2"))
     , _chbToolbarIconsAndLabels(tr("chbTBIcsAndLbls"))
     , _lblLevel(tr("lblLevel"))
-    , _gl(4,2)
+    , _mainLayout(4,2)
     {
         auto appProperties = getAppProperties();
         assert (appProperties);
@@ -80,12 +80,12 @@ public:
         _cmbLangs.selectIndex(newLangIndex);
         _initialLangSelection = newLangIndex;
         // populate grid
-        gui::GridComposer gc(_gl);
+        gui::GridComposer gc(_mainLayout);
         gc.appendRow(_lblLangNow) << _leLang;
         gc.appendRow(_lblLangNew) << _cmbLangs;
         gc.appendRow(_chbToolbarIconsAndLabels, 0);
         gc.appendRow(_lblLevel) << _cmbLevel;
-        setLayout(&_gl);
+        setLayout(&_mainLayout);
         
         //handler for checkbox that controls labels (this one requires immediate action 
         //to show/hide labels so that user can see the effects immediatelly

@@ -18,29 +18,30 @@
 namespace gui
 {
 
-class PopoverView;
+class PopoverCanvas;
 
 class NATGUI_API PopoverButton : public DataCtrl, public IPopoverButton
 {
 private:
     std::function<void()> _onChangedSelection;
 protected:
-    PopoverView* _popoverView = nullptr;
+    PopoverCanvas* _popoverCanvas = nullptr;
     //td::UINT2 _currentSelection = 0;
 protected:
     void measure(CellInfo&) override;
     void reMeasure(CellInfo&) override;
     void setPopoverCurrentSelection(td::UINT2 pos, bool closePopover) override;
     void sendPopoverMessage() override;
-    
+    //const gui::Handle getPOBHandle() const override;
     void closePopover() override;
     
+
     PopoverButton(td::DataType dt);
 public:
-    PopoverButton(PopoverView* popoverView);
+    PopoverButton(PopoverCanvas* popoverView);
     ~PopoverButton();
     gui::ObjType getObjType() const override { return ObjType::PopoverButton;}
-    PopoverView* getPopoverView();
+    PopoverCanvas* getPopoverCanvas();
     td::UINT2 getCurrentSelection() const;
     void enablePopover(bool bEnable) override;
     const std::function<void()>& getChangedSelectionHandler() const;

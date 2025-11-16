@@ -61,6 +61,8 @@ public:
     
     void getDisplayInfo(gui::Display::Info& di) const; 
     
+    void setHeight(gui::CoordType h);
+    void setWidth(gui::CoordType w);
     void setSize(const Size& desiredSize);
     void getSize(Size& sz) const;
     
@@ -74,6 +76,8 @@ public:
     virtual bool isHidden() const;
     bool isVisible() const;
     
+    bool isDrawable() const;
+
     virtual void setTitle(const td::String& title);
     virtual void setTitle(const char* title);
     td::String getTitle() const;
@@ -126,6 +130,8 @@ public:
     
     
     void openContextMenu(td::BYTE menuID, const gui::InputDevice& inpDev, gui::IMessageConsumer* pConsumer = nullptr, const gui::ContextData* pContextData = nullptr, td::UINT2 groupID = 0);
+    
+    bool isNative() const;
     
     //messages
     void showInfo(const td::String& txtHeader, const td::String& txtMsg) const;

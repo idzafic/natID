@@ -1,0 +1,19 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="reset" path="Work/Common/Icons/arrow_cycle.png"/>
+		<Res id="start" path="Work/Common/Icons/arrow_right.png"/>
+		<Res id="stop" path="Work/Common/Icons/x.png"/>
+		<Res id="settings" path = "Work/Common/Icons/SettingsBlue48.png"/>
+		<Res id="board" path = "Work/Common/Images/Chess/ChessBoard1024.jpg"/>
+		<Res id="blackKing" path = "Work/Common/Images/Chess/DarkKing.png"/>
+		<Res id="whiteKing" path = "Work/Common/Images/Chess/WhiteKing.png"/>
+		<Res id="whitePawn" path = "Work/Common/Images/Chess/WhitePawn.png"/>	 <!-- it has alpha channel -> must be in png-->
+		<Res id="whiteQueen" path = "Work/Common/Images/Chess/QueenWhite.png"/>. <!-- it has alpha channel -> must be in png-->
+	</Images>
+	
+	<Sounds>
+		<Res id="move" path="Work/Common/Sounds/ChessCapture.wav"/>
+		<Res id="success" path="Work/Common/Sounds/MissionSuccess.wav"/>
+	</Sounds>
+</DevRes>

@@ -2319,4 +2319,21 @@ inline bool collectFileNames(const fs::path& location, const td::String& strPatt
     }
 }
 
+inline void adjustFileName(const char* fileName)
+{
+#ifdef MU_WINDOWS
+    if (!fileName)
+        return;
+    char* fn = const_cast<char*>(fileName);
+    while (char ch = *fn)
+    {
+        if (ch == 0)
+            return;
+        if (ch == '/')
+            *fn = '\\';
+        ++fn;
+    }
+#endif
+}
+
 } //namespace fo

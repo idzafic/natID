@@ -30,18 +30,6 @@ namespace gui
 namespace plot
 {
 
-
-#ifdef MU_WINDOWS
-const char* const cg_DefFontName = "Times New Roman";
-#else
-#ifdef MU_LINUX
-const char* const cg_DefFontName = "Liberation Serif";
-#else
-//MACOS
-const char* const cg_DefFontName = "Times New Roman";
-#endif
-#endif
-
     class View;
 
 class NATPLOT_API Renderer
@@ -67,7 +55,7 @@ private:
     enum class Limits : td::BYTE {xMin = 0, xMax, yMin, yMax};
 //    gui::CoordType* _Limits = nullptr;
     gui::CoordType _limits[4] = {math::maxVal<double>(),math::minVal<double>(),math::maxVal<double>(),math::minVal<double>()};
-
+    
     Legend _legend;
 
     gui::Font* _font = nullptr;
@@ -93,15 +81,15 @@ private:
         float marginTop = 20;
         float marginRight = 20;
         float marginBottom = 5;
-        float marginLeft = 40;
+        float marginLeft = 5;
     }_margins, _marginsZero;
 
     gui::DrawableString _xAxisName;
     gui::DrawableString _yAxisName;
     double _numberHeight;
     
-    float _yAxisNameSeperation = 40; //150;
-    float _xAxisNameSeperation = 40; //86;
+    float _yAxisNameSeperation = 60; //150;
+    float _xAxisNameSeperation = 60; //86;
     
     bool _drawMargins;
     bool _drawNumbersOutside = true;
@@ -143,7 +131,7 @@ private:
     
 protected:
     void setBounds(const gui::Rect& bounds);
-    
+    void checkLimits();
 public:
     using Pattern = Plot::Pattern;
     virtual void drawAgain(){}

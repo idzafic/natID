@@ -17,25 +17,37 @@ template <bool RestartTimer = false>
 class Timer
 {
     std::chrono::high_resolution_clock::time_point _start;
+    std::chrono::high_resolution_clock::time_point _end;
+    bool _running = false;
 public:
     Timer()
     : _start(std::chrono::high_resolution_clock::now())
+    , _end(_start)
     {}
     
     void start()
     {
         _start = std::chrono::high_resolution_clock::now();
+        _end = _start;
+        _running = true;
+    }
+    
+    void stop()
+    {
+        _end = std::chrono::high_resolution_clock::now();
+        _running = false;
     }
     
     double getDurationInSeconds()
     {
         // Get the current time point again
-        std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
+        if (_running)
+            _end = std::chrono::high_resolution_clock::now();
 
         // Calculate the time difference
-        std::chrono::duration<double> duration = end - _start;
+        std::chrono::duration<double> duration = _end - _start;
         if (RestartTimer)
-            _start = end;
+            _start = _end;
 
         // Get the time difference in seconds as a double
         double secondsPassed = duration.count();
@@ -46,13 +58,14 @@ public:
     double getDurationInMilliseconds()
     {
         // Get the current time point again
-        std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
+        if (_running)
+            _end = std::chrono::high_resolution_clock::now();
 
         // Calculate the time difference in nanoseconds
 //        auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - _start);
-        auto duration = end - _start;
+        auto duration = _end - _start;
         if (RestartTimer)
-            _start = end;
+            _start = _end;
 
         // Convert the duration to milliseconds as a double value
         double milliseconds = std::chrono::duration<double, std::milli>(duration).count();
@@ -63,13 +76,14 @@ public:
     double getDurationInMicroSeconds()
     {
         // Get the current time point again
-        std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
+        if (_running)
+            _end = std::chrono::high_resolution_clock::now();
 
         // Calculate the time difference in nanoseconds
-        auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - _start);
+        auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(_end - _start);
         
         if (RestartTimer)
-            _start = end;
+            _start = _end;
 
         // Convert the duration to milliseconds as a double value
         double microseconds = std::chrono::duration<double, std::micro>(duration).count();

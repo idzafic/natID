@@ -1,0 +1,39 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+        <Res id="appTitle" tr="Šah"/>
+		<Res id="start" tr="Pokreni"/>
+		<Res id="startTT" tr="Pokreni animaciju"/>
+		<Res id="stop" tr="Zaustavi"/>
+		<Res id="stopTT" tr="Zaustavi animaciju"/>
+        <Res id="Update" tr="Refrešuj"/>
+        <Res id="lblAlgorithm" tr="Aloritam:"/>
+        <Res id="lblSpeed" tr="Brzina:"/>
+        <Res id="lblStart" tr="Start:"/>
+        <Res id="lblGoal" tr="Cilj:"/>
+        <Res id="lblVisColor" tr="Boja posjećenih:"/>
+        <Res id="pathColor" tr="Boja puta:"/>
+        <Res id="closeNOK" tr="Greška! Animacija je u toku!"/>
+        <Res id="cloeErr" tr="Zaustavite animaciju pa onda zatvorite aplikaciju!"/>
+        <Res id="settings" tr="Podešenja"/>
+        <Res id="settingsTT" tr="Podešenja (trenutno samo jezik)"/>
+        <!-- Settings -->
+        <Res id="dlgSettings" tr="Podešenja"/>
+        <Res id="lblLang" tr="Trenutni jezik aplikacija:"/>
+        <Res id="lblLang2" tr="Jezik aplikacije nakon njenog restarta:"/>
+        <Res id="chbTBIcsAndLbls" tr="Prikaži labele ispod ikona na alatnoj traci"/>
+		<Res id="RestartRequired" tr="Restartovati aplikaciju"/>
+		<Res id="RestartRequiredInfo" tr="Neke od promijenjenih postavki zahtijevaju ponovno pokretanje aplikacije kako bi bile primijenjene"/>
+		<Res id="Restart" tr="Restartovati"/>
+		<Res id="DoNoRestart" tr="Nemoj restartovati"/>
+        <Res id="chbDarkQueen" tr="Koristiti tamnu (crnu) figuru kraljice"/>
+        <Res id="lblSpeed" tr="Brzina animacije:"/>
+        <Res id="lblQueenColor" tr="Boja figure (kraljice):"/>
+        <Res id="Black" tr="Crna"/>
+        <Res id="White" tr="Bijela"/>
+        <Res id="CellOposite" tr="Inverzno od boje polja"/>
+        <Res id="chbRandomSol" tr="Generiši proizvoljno rješenje"/>
+        <Res id="chbPlaySound" tr="Puštati zvuk u toku pretrage"/>
+
+    </Translations>
+</DevRes>

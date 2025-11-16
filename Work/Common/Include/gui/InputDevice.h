@@ -12,8 +12,8 @@
 //  Copyright © 2020 IDz. All rights reserved.
 //
 #pragma once
-#include "Types.h"
-#include "Key.h"
+#include <gui/Types.h>
+#include <gui/Key.h>
 
 namespace gui
 {

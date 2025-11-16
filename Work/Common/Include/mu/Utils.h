@@ -20,6 +20,7 @@
 #include <td/Variant.h>
 #include <td/BoolCh.h>
 #include "./Hash.h"
+#include <mu/mu.h>
 
 //
 //namespace td
@@ -256,27 +257,14 @@ public:
         return _buf;
     }
 
-    static float toFloat(const char* val)
+    static float toFloat(const char* strToFloat)
     {
-        if (val == 0)
-            return 0;
-
-        char* old_locale = setlocale(LC_NUMERIC, NULL);  // Save current locale
-        setlocale(LC_NUMERIC, "C");  // Set locale to "C"
-        float toRet = (float)atof(val);
-        setlocale(LC_NUMERIC, old_locale);  // Restore original locale
-        return toRet;
+        return float(mu::toDouble(strToFloat));
     }
 
-    static double toDouble(const char* val)
+    static double toDouble(const char* strToDbl)
     {
-        if (val == 0)
-            return 0;
-        char* old_locale = setlocale(LC_NUMERIC, NULL);  // Save current locale
-        setlocale(LC_NUMERIC, "C");  // Set locale to "C"
-        double toRet = atof(val);
-        setlocale(LC_NUMERIC, old_locale);  // Restore original locale
-        return toRet;
+        return mu::toDouble(strToDbl);
     }
 
     static td::INT4 toINT4(const char* val)

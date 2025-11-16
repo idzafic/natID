@@ -24,7 +24,7 @@
 namespace gui
 {
 
-enum class ObjType : unsigned char {AppWindow=0, Window, Dialog, FileDialog, OpenFileDialog, SaveFileDialog, MenuBar, MenuItem, ToolBar, ToolBarView, ToolBarItem, ToolBarButton, StatusBar, ToolBarPopoverItem, Image, View, ViewScroller, ViewSwitcher, StandardTabView, TabView, Navigator, Canvas, GLView, GLXView, Label, LineEdit, PasswordEdit, NumericEdit, DateEdit, TimeEdit, TextEdit, CodeView, ComboBox, DBComboBox, CheckBox, Slider, ProgressIndicator, TableEdit, ColorPicker, LinePatternPicker, DotPatternPicker, PopoverView, ColorPopoverView, PopoverButton, ContextMenuNat, ImageView, Button, PushButton, DrawableButton, DrawableButtonIntern, DrawableButtonWithDelegate,
+enum class ObjType : unsigned char {AppWindow=0, Window, Dialog, FileDialog, OpenFileDialog, SaveFileDialog, MenuBar, MenuItem, ToolBar, ToolBarView, ToolBarItem, ToolBarButton, StatusBar, ToolBarPopoverItem, Image, View, ViewScroller, ViewSwitcher, StandardTabView, TabView, Navigator, Canvas, GLView, GLXView, Label, LineEdit, PasswordEdit, NumericEdit, DateEdit, TimeEdit, TextEdit, CodeView, ComboBox, DBComboBox, CheckBox, Slider, ProgressIndicator, TableEdit, PopoverCanvas, PopoverButton, ContextMenuNat, ImageView, Button, PushButton, DrawableButton, DrawableButtonIntern, DrawableButtonWithDelegate,
     MenuButton, HorizontalLayout, VerticalLayout, GridLayout, PropertyLayout, SplitterLayout, SplitterCell, Transformation, Timer, NA};
 
 //enum class Artwork : unsigned char {EPS=0, PDF, SVG};
@@ -38,8 +38,6 @@ inline bool isAltPressed(td::UINT4 modifiers) {return (modifiers & (td::UINT4)Ke
 inline bool isCmdPressed(td::UINT4 modifiers) {return (modifiers & (td::UINT4)KeyModifier::Cmd);}
 inline bool isFnPressed(td::UINT4 modifiers) {return (modifiers & (td::UINT4)KeyModifier::Fn);}
 
-//enum class LinePattern : unsigned char {Solid=0, Dash, Dot, DashDot, DashEq, NA};
-
 enum class FileType : unsigned char {File=0, Folder, FileOrFolder};
 enum class Orientation : unsigned char {Horizontal=0 , Vertical};
 //typedef void* NatShape;
@@ -51,7 +49,7 @@ typedef void* Handle;
 typedef double CoordType;
 typedef void* NatString;
 typedef void* AttributedString;
-#elif MU_WINDOWS
+#elif defined(MU_WINDOWS)
 typedef void* Handle;
 typedef double CoordType;
 typedef void* NatString;
@@ -63,12 +61,12 @@ typedef td::String* NatString;
 typedef td::String* AttributedString;
 #endif
 
-typedef td::PointAndSize<gui::CoordType> Geometry;
-typedef td::Size<gui::CoordType> Size;
-typedef td::Point<gui::CoordType> Point;
-typedef td::RectNormalized<gui::CoordType> Rect;
-typedef td::Circle<gui::CoordType> Circle;
-typedef td::Range<td::UINT4> Range;
+using Geometry = td::PointAndSize<gui::CoordType>;
+using Size = td::Size<gui::CoordType>;
+using Point = td::Point<gui::CoordType>;
+using Rect = td::RectNormalized<gui::CoordType>;
+using Circle =  td::Circle<gui::CoordType>;
+using Range = td::Range<td::UINT4>;
 
 class AttributedStringBlock
 {
@@ -106,7 +104,7 @@ public:
     
     td::BYTE getLineWithInt() const
     {
-        return lineWidth;
+        return td::BYTE(lineWidth);
     }
     
     float getLineWithFloat() const

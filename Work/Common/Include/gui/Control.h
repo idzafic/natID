@@ -62,6 +62,7 @@ protected:
     void sendReMeasureMsg();
     td::BYTE getContextMenuID() const;
     void adjustToPreferableSize(CellInfo& ci);
+    virtual bool initialMeasure(); //for layouts to measure all cells
     virtual void reMeasure(CellInfo&) = 0;
     virtual void measure(CellInfo&) = 0;
     //void getMinSize(Size& sz);
@@ -74,15 +75,16 @@ public:
     virtual td::WORD getTotalVMargin() const;
     
     virtual void setGeometry(const Geometry& cellFrame, const Cell& cell);
+    
     void measure(const char* pString, Size& sz) const; //return size of the text in ptring using control's font
     void measure(td::BYTE nChars, Size& sz, char ch='H') const; //return size of nChars using control's font
     void measureToFitContent(Size& sizeToFit) const;
     
     //can set limits on width and height of control
-    void setSizeLimits(td::UINT2 width, Limit widthHandling, td::UINT2 height = 0, Limit heightHandling = Limit::None);
+    void setSizeLimits(td::UINT2 width, Control::Limit widthHandling, td::UINT2 height = 0, Control::Limit heightHandling = Limit::None);
     //set limits on width of control
-    void setSizeLimit(const char* strWidthPattern, Limit widthHandling);
-    void setSizeLimitForNChars(td::BYTE nChars, Limit widthHandling, char ch='H');
+    void setSizeLimit(const char* strWidthPattern, Control::Limit widthHandling);
+    void setSizeLimitForNChars(td::BYTE nChars, Control::Limit widthHandling, char ch='H');
     std::tuple<td::UINT2, Control::Limit> getWidthLimit() const;
     std::tuple<td::UINT2, Control::Limit> getHeightLimit() const;
     

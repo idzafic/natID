@@ -32,7 +32,7 @@ protected:
     gui::Sound _flightSound;
     gui::Size _size;
     gui::SymbolDrawingAttribs _drawingAttribs[2];
-    gui::Font _fontInfo;
+    gui::Font _font;
     gui::DrawableString _strInfo;
     td::Timer<false> _timer; //measures time between start and current frame
     double _angle = cInitialAngle;
@@ -51,8 +51,8 @@ protected:
         //call base class
          if (gui::Canvas::onKeyPressed(key))
             return true;
-        
-        if (key.getType() == gui::Key::Type::ASCII)
+        auto keyType = key.getType();
+        if (keyType == gui::Key::Type::ASCII)
         {
             char ch = key.getChar();
             if (ch == 'b' || ch == 'B')
@@ -140,7 +140,7 @@ protected:
         gui::Rect rectForTextInfo(0, _size.height-_infoHeight-verticalExtra, _size.width, _size.height);
         float alpha = 0.3f;
         gui::Shape::drawRect(rectForTextInfo, alpha, td::ColorID::Blue);
-        _strInfo.draw(rectForTextInfo, &_fontInfo, td::ColorID::Yellow, td::TextAlignment::Center, td::VAlignment::Center, td::TextEllipsize::End);
+        _strInfo.draw(rectForTextInfo, &_font, td::ColorID::Yellow, td::TextAlignment::Center, td::VAlignment::Center, td::TextEllipsize::End);
         
         if (_nCharsFPS > 0)
         {
@@ -180,9 +180,9 @@ public:
         _drawingAttribs[1].overideFillColor = 1;
         _drawingAttribs[1].fillColor = td::ColorID::Yellow;
         
-        _fontInfo.create("Arial", 14.0f, gui::Font::Style::BoldItalic, gui::Font::Unit::Point);
+        _font.create("Arial", 14.0f, gui::Font::Style::BoldItalic, gui::Font::Unit::LogicalPixel);
         gui::Size szInfo;
-        _strInfo.measure(&_fontInfo, szInfo);
+        _strInfo.measure(&_font, szInfo);
         _infoHeight = szInfo.height;
     }
     

@@ -18,12 +18,12 @@ protected:
     gui::LineEdit _leLang;
     gui::Label _lblLangNew;
     gui::ComboBox _cmbLangs;
-    gui::GridLayout _gl;
+    gui::GridLayout _mainLayout;
 public:
     ViewSettings()
     : _lblLangNow(tr("lblLang"))
     , _lblLangNew(tr("lblLang2"))
-    , _gl(2,2)
+    , _mainLayout(2,2)
     {
         gui::Application* pApp = getApplication();
         auto appProperties = pApp->getProperties();
@@ -51,10 +51,10 @@ public:
         
         _cmbLangs.selectIndex(newLangIndex);
         // populate grid
-        gui::GridComposer gc(_gl);
+        gui::GridComposer gc(_mainLayout);
         gc.appendRow(_lblLangNow) << _leLang;
         gc.appendRow(_lblLangNew) << _cmbLangs;
-        setLayout(&_gl);
+        setLayout(&_mainLayout);
     }
     
     td::String getTranslationExt()

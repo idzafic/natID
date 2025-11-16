@@ -1,0 +1,15 @@
+#Zipper library
+
+if (WIN32)
+    set(ZLIB "${MY_LIB}/zlib.lib")
+    set(ZIPPER_LIB_DEBUG "${MY_LIB}/zipperD.lib")
+    set(ZIPPER_LIB_RELEASE "${MY_LIB}/zipper.lib")
+elseif(APPLE)
+    set(ZLIB "${MY_LIB}/zlib.a")
+    set(ZIPPER_LIB_DEBUG "${MY_LIB}/zipperD.dylib")
+    set(ZIPPER_LIB_RELEASE "${MY_LIB}/zipper.dylib")
+else()
+    set(ZLIB "${MY_LIB}/zlib.a")
+    set(ZIPPER_LIB_DEBUG "${MY_LIB}/zipperD.so")
+    set(ZIPPER_LIB_RELEASE "${MY_LIB}/zipper.so")
+endif()

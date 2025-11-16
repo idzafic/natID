@@ -24,7 +24,7 @@ public:
 protected:
     SymbolPopoverView _symbolPopoverView;
 public:
-    SymbolPopoverButton(PopoverView::Type type, td::UINT2 nItems = 64);
+    SymbolPopoverButton(PopoverCanvas::Type type, td::UINT2 nItems = 64);
 //    ~SymbolPopoverButton();
 };
 

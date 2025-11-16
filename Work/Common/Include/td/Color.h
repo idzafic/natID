@@ -70,27 +70,47 @@ namespace td
 			return _color;
 		}
 
-		td::UINT4 red() const
+		inline td::UINT4 red() const
 		{
 			return td::GetRColor(_color);
 		}
 
-		td::UINT4 green() const
+		inline td::UINT4 green() const
 		{
 			return td::GetGColor(_color);
 		}
 
-		td::UINT4 blue() const
+		inline td::UINT4 blue() const
 		{
 			return td::GetBColor(_color);
 		}
 
-		td::UINT4 alpha() const
+		inline td::UINT4 alpha() const
 		{
 			return td::GetAColor(_color);
 		}
+
+		inline td::BYTE R() const
+		{
+			return td::BYTE(td::GetRColor(_color));
+		}
+
+		inline td::BYTE G() const
+		{
+			return td::BYTE(td::GetGColor(_color));
+		}
+
+		inline td::BYTE B() const
+		{
+			return td::BYTE(td::GetBColor(_color));
+		}
+
+		inline td::BYTE A() const
+		{
+			return td::BYTE(td::GetAColor(_color));
+		}
         
-        void setAlpha(td::UINT4 alpha)
+        inline void setAlpha(td::UINT4 alpha)
         {
             _color = td::GLRGBA(red(), green(), blue(), alpha);
         }

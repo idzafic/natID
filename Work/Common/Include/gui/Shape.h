@@ -34,6 +34,7 @@ public:
         NatShape* _path = nullptr;
         float _lineWidth = 1;
         td::LinePattern _linePattern = td::LinePattern::Solid;
+        td::BYTE _open = 1;
         Bezier() = delete;
     public:
         
@@ -51,6 +52,7 @@ public:
         Bezier& lineTo(const Point& p, bool closePath = false);
         Bezier& quadraticTo(const Point& p, const Point& ctrlPoint, bool closePath = false);
         Bezier& cubicTo(const Point& p, const Point& ctrlPoint1, const Point& ctrlPoint2, bool closePath=false);
+        void end();
     };
     
 protected:
@@ -100,7 +102,7 @@ public:
     
     static void drawRect(const Rect& r, float alphaChannel, td::ColorID fillColor);
     
-    static void drawLine(const Point& p1, const Point& p2, td::ColorID lineColor, float lineWidth, td::LinePattern linePattern=td::LinePattern::Solid);
+    static void drawLine(const Point& p1, const Point& p2, td::ColorID lineColor, float lineWidth, td::LinePattern linePattern=td::LinePattern::Solid, float alphaChannel = 1.0f);
     
     inline static void drawLine(const Point& p1, const Point& p2, const td::LineParams& lineParams, bool bIsDarkMode)
     {
@@ -114,8 +116,8 @@ public:
     void updateRoundRectNodes(const gui::Rect& r, CoordType radius);
     void updateCircleNodes(const gui::Circle& circle);
     void updateOvalNodes(const gui::Rect& r);
-    void updateArcNodes(const gui::Circle& circle, float fromAngle, float toAngle);
-    void updatePieNodes(const gui::Circle& circle, float fromAngle, float toAngle);
+    void updateArcNodes(const gui::Circle& circle, float fromAngle, float toAngle, bool clockwise = false);
+    void updatePieNodes(const gui::Circle& circle, float fromAngle, float toAngle, bool clockwise = false);
     
     void translateNodes(const gui::Point& delta);
     void translateRectNodes(const gui::Point& delta);

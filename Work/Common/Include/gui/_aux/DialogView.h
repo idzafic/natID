@@ -31,10 +31,10 @@ protected:
     gui::Dialog* _pDialog;
 private:
     bool onClick(gui::Button* pButton) override;
-    bool estimateDesiredInitialSize(const gui::Size& initialSize, gui::Size& desiredSize) const override;
+    //bool estimateDesiredInitialSize(const gui::Size& initialSize, gui::Size& desiredSize) const override;
 public:
     DialogView(gui::Dialog* pDlg);
-    ~DialogView();
+    //~DialogView();
 };
 
 } //namespace gui

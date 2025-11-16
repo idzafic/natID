@@ -37,7 +37,7 @@ public:
         td::Time::Format timeFormat;
         td::FormatFloat floatingNoFmt;
     };
-    td::BYTE posInDS = 0;
+    td::UINT4 posInDS = 0;
     td::HAlignment hAlign = td::HAlignment::Left;
     ThSep showThSep = ThSep::AppDefault;
     Column()

@@ -38,7 +38,7 @@ protected:
 public:
     ~DrawableButton();
     gui::ObjType getObjType() const override { return ObjType::DrawableButton;}
-    virtual PopoverView* getPopoverView();
+    virtual PopoverCanvas* getPopoverCanvas();
     virtual gui::IPopoverButton* getPopoverButton();
     virtual td::UINT2 getPopoverCurrentSelection();
 

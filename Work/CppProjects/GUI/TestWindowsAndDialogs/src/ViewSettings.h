@@ -21,7 +21,7 @@ protected:
     gui::LineEdit _leLang;
     gui::Label _lblLangNew;
     gui::ComboBox _cmbLangs;
-    gui::GridLayout _gl;
+    gui::GridLayout _mainLayout;
 
     gui::CheckBox _toolbarVisible;
 
@@ -39,7 +39,7 @@ public:
         , _toolbarVisible(tr("TBVisible"))
         , _lblToolbarIconSize(tr("TBIconSize"))
         , _toolbarShowLbls(tr("TBShowLbl"))
-        , _gl(5,2)
+        , _mainLayout(5,2)
     {
         gui::Application* pApp = getApplication();
         auto settings = pApp->getProperties();
@@ -79,13 +79,13 @@ public:
 
         
         // populate grid
-        gui::GridComposer gc(_gl);
+        gui::GridComposer gc(_mainLayout);
         gc.appendRow(_lblLangNow) << _leLang;
         gc.appendRow(_lblLangNew) << _cmbLangs;
         gc.appendRow(_toolbarVisible);
         gc.appendRow(_lblToolbarIconSize) << _toolbarIconSize;
         gc.appendRow(_toolbarShowLbls);
-        setLayout(&_gl);
+        setLayout(&_mainLayout);
     }
     
     td::String getTranslationExt() const

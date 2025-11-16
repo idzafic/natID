@@ -196,15 +196,15 @@ namespace td
 
 			td::BaseDate bd;
 			
-			bd.year = Date::getYear();
-			bd.month = Date::getMonth();
-			bd.day = Date::getDay();
+			bd.year = td::UINT2(Date::getYear());
+			bd.month = td::BYTE(Date::getMonth());
+			bd.day = td::BYTE(Date::getDay());
 
 			td::BaseTime bt;
-			bt.hour = Time::getHour();
-			bt.min = Time::getMinute();
-			bt.sec = Time::getSecond();
-			bt.usec = Time::getFraction() * 100;
+			bt.hour = td::BYTE(Time::getHour());
+			bt.min = td::BYTE(Time::getMinute());
+			bt.sec = td::BYTE(Time::getSecond());
+			bt.usec = td::UINT2(Time::getFraction()) * 100;
 
 			mu::convertTime(bd, bt, true);
 
@@ -220,15 +220,15 @@ namespace td
 
 			td::BaseDate bd;
 
-			bd.year = Date::getYear();
-			bd.month = Date::getMonth();
-			bd.day = Date::getDay();
+			bd.year = td::UINT2(Date::getYear());
+			bd.month = td::BYTE(Date::getMonth());
+			bd.day = td::BYTE(Date::getDay());
 
 			td::BaseTime bt;
-			bt.hour = Time::getHour();
-			bt.min = Time::getMinute();
-			bt.sec = Time::getSecond();
-			bt.usec = Time::getFraction() * 100;
+			bt.hour = td::BYTE(Time::getHour());
+			bt.min = td::BYTE(Time::getMinute());
+			bt.sec = td::BYTE(Time::getSecond());
+			bt.usec = td::UINT2(Time::getFraction()) * 100;
 
 			mu::convertTime(bd, bt, false);
 

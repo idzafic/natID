@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+<DevRes>
+    <Translations>
+        <Res id="appTitle" tr="Chess"/>
+        <Res id="start" tr="Start"/>
+        <Res id="startTT" tr="Start the animation"/>
+        <Res id="stop" tr="Stop"/>
+        <Res id="stopTT" tr="Stop the animation"/>
+        <Res id="Update" tr="Update"/>
+        <Res id="lblAlgorithm" tr="Algorihm:"/>
+        <Res id="lblSpeed" tr="Speed:"/>
+        <Res id="lblStart" tr="Start:"/>
+        <Res id="lblGoal" tr="Goal:"/>
+        
+        <Res id="lblVisColor" tr="Visited color:"/>
+        <Res id="pathColor" tr="Path color:"/>
+        <Res id="closeNOK" tr="Error! Animation is running!"/>
+        <Res id="cloeErr" tr="Stop Animation and then close the app!"/>
+        <Res id="settings" tr="Settings"/>
+        <Res id="settingsTT" tr="Settings (adjust language)"/>
+        <!-- Settings -->
+        <Res id="dlgSettings" tr="Settings"/>
+        <Res id="lblLang" tr="Current application language:"/>
+        <Res id="lblLang2" tr="Application language after application's restart:"/>
+        <Res id="chbTBIcsAndLbls" tr="Show labels below icons on main toolbar"/>
+		<Res id="RestartRequired" tr="Restart the application"/>
+		<Res id="RestartRequiredInfo" tr="Some of the changed settings require restarting the application to take effect"/>
+		<Res id="Restart" tr="Restart"/>
+		<Res id="DoNoRestart" tr="Don't restart"/>
+        <Res id="lblQueenColor" tr="Queen color selection strategy:"/>
+        <Res id="Black" tr="Black"/>
+        <Res id="White" tr="White"/>
+        <Res id="CellOposite" tr="Opposite of cell color"/>
+        <Res id="lblSpeed" tr="Animation speed:"/>
+        <Res id="chbRandomSol" tr="Generate random solution"/>
+        <Res id="chbPlaySound" tr="Play sound while searching"/>
+     </Translations>
+</DevRes>

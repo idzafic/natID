@@ -18,7 +18,7 @@
 
 namespace td
 {
-enum class LinePattern : unsigned char {Solid=0, Dash, Dot, DashDot, DashEq, NA};
+enum class LinePattern : unsigned char {Solid=0, Dash, Dot, DashDot, DashDotDot, NA};
 
 MAINUTILS_API const char* toString(td::LinePattern linePattern);
 MAINUTILS_API td::LinePattern toLinePattern(const char* pStr);

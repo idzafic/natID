@@ -12,14 +12,14 @@
 //  Copyright © 2020 IDz. All rights reserved.
 //
 #pragma once
-#include <gui/PopoverView.h>
+#include <gui/PopoverCanvas.h>
 
 namespace gui
 {
 
 class ColorPicker;
 
-class NATGUI_API ColorPopoverView : public PopoverView
+class NATGUI_API ColorPopoverView : public PopoverCanvas
 {
     
 private:
@@ -34,7 +34,7 @@ private:
     void drawCurrentItemOnPOButton(const Size& sz) override;
     void drawCurrentItemOnPOButton(const Rect& r) override;
 protected:
-    gui::ObjType getObjType() const override { return ObjType::ColorPopoverView;}
+    //gui::ObjType getObjType() const override { return ObjType::ColorPopoverView;}
     const td::String& getPopoverLabel(td::UINT2 itemPos) const override;
     const td::String& getPopoverToolTip(td::UINT2 itemPos) const override;
     

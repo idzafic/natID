@@ -47,13 +47,18 @@ protected:
     cnt::SafeFullVector<Buttons> _buttonPositions;
     ToolBarView* _pToolBarView;
     td::BYTE _menuIncluded = 0;
+    td::BYTE _labelsVisible = 1;
 protected:
     void measure(CellInfo& cell) override;
-    void reMeasure(CellInfo& cell) override;
+    //void reMeasure(CellInfo& cell) override;
     void setGeometry(const Geometry& cellFrame, const Cell& cell) override;
+    //bool initialMeasure() override;
     void initialMeasure(CellInfo& cell) override;
     int getMinWidth();
     td::WORD getColWidth(td::BYTE colPos) const;
+    td::BYTE getLabelHeight() const;
+    bool areLabelsVisible() const;
+    void updateLabelWidth(td::BYTE colPos, td::UINT2 newWidth);
 //    Grid& getGrid();
     ToolBarLayout();
 public:
@@ -70,6 +75,7 @@ public:
     void updateToolTip(const ToolBarItem* pTBI, const td::String& strToolTip);
     void setMenuIncluded();
     bool isMenuIncluded() const;
+    
 };
 
 } //namespace gui

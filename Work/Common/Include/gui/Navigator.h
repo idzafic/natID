@@ -40,7 +40,7 @@ public:
     void setItem(td::UINT2 itemPos, Image* pImg, const td::String& str);
     void setItem(td::UINT2 itemPos, Symbol* pSymb, const td::String& str, float rotateDeg=0);
     td::UINT2 getCurrentSelection() const;
-    void setCurrentSelection(td::UINT2 selection);
+    void setCurrentSelection(td::UINT2 selection, bool bSendMsg = false);
 
     const std::function<void(gui::Navigator*)>& getChangedSelectionHandler() const;
     void onChangedSelection(std::function<void(gui::Navigator*)> fnToCall);

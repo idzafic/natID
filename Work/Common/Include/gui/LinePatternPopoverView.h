@@ -12,7 +12,7 @@
 //  Copyright © 2020 IDz. All rights reserved.
 //
 #pragma once
-#include <gui/PopoverView.h>
+#include <gui/PopoverCanvas.h>
 //#include <gui/Image.h>
 //#include <gui/Symbol.h>
 #include <cnt/Array.h>
@@ -22,7 +22,7 @@
 namespace gui
 {
 
-class NATGUI_API LinePatternPopoverView : public PopoverView
+class NATGUI_API LinePatternPopoverView : public PopoverCanvas
 {
 protected:
     cnt::Array<td::String, (size_t) td::LinePattern::NA> _labels;

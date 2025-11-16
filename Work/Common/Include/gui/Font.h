@@ -19,6 +19,17 @@
 namespace gui
 {
 
+#ifdef MU_WINDOWS
+const char* const cg_DefFontName = "Times New Roman";
+#else
+#ifdef MU_LINUX
+const char* const cg_DefFontName = "Liberation Serif";
+#else
+//MACOS
+const char* const cg_DefFontName = "Times New Roman";
+#endif
+#endif
+
 class DrawableString;
 class FontHelper;
 
@@ -101,12 +112,9 @@ public:
     void measureString(const char* pStr, size_t strLen, gui::Size& resultingSize) const;
     void measureString(const td::String& str, gui::Size& resultingSize) const;
     
-    static void getSize(const gui::DrawableString& drawString, gui::Font::ID fontID, gui::Size& resultingSize);
-    static void getSize(const gui::DrawableString& drawString, gui::Font::ID fontID, gui::CoordType maxWidth, gui::Size& resultingSize);
     static void getAverageSize(size_t nChars, gui::Font::ID fontID, gui::Size& resultingSize);
     static float getHeight(gui::Font::ID fontID);
     static void measureNChars(size_t nChars, gui::Font::ID fontID, gui::Size& resultingSize);
-    static void measureString(const char* pStr, gui::Font::ID fontID, gui::Size& resultingSize);
     
     static const char* toString(gui::Font::Style style);
     static const char* toString(gui::Font::Markup markup);

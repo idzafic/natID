@@ -51,6 +51,13 @@ namespace td
 			height = p.height;
 		}
         
+		template <typename T2>
+		void operator = (const Size<T2>& p)
+		{
+			width = T(p.width);
+			height = T(p.height);
+		}
+
         void operator += (const Size& p)
         {
             width += p.width;

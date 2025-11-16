@@ -16,6 +16,11 @@
 #pragma once
 #include <compiler/Definitions.h>
 
+#ifdef _MSC_VER
+#define SIZE_T_FMT "%Iu"
+#else
+#define SIZE_T_FMT "%zu"
+#endif
 //#include <ctype> 
 #include <cassert>
 #include <cstring>
@@ -737,6 +742,18 @@ enum class TextWrap : unsigned char {No=0, Word, Any};
 enum class TextEllipsize : unsigned char {None=0, Start, Middle, End};
 
 enum class ThousandSep : unsigned char {SystemDefault, Show, DoNotShow};
+
+inline TextAlignment getTextAlignment(HAlignment hAling)
+{
+    switch (hAling)
+    {
+    case HAlignment::Left: return TextAlignment::Left;
+    case HAlignment::Right: return TextAlignment::Right;
+    case HAlignment::Center: return TextAlignment::Center;
+    default: return TextAlignment::Left;
+    }
+    return TextAlignment::Left;
+}
 
 inline bool isInteger(td::DataType type)
 {

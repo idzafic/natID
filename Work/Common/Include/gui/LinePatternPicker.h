@@ -28,7 +28,7 @@ public:
     LinePatternPicker();
     LinePatternPicker(const td::String& toolTip);
     ~LinePatternPicker();
-    gui::ObjType getObjType() const override { return ObjType::LinePatternPicker;}
+    //gui::ObjType getObjType() const override { return ObjType::LinePatternPicker;}
     bool setValue(const td::Variant& val, bool sendMessage=true) override;
     bool getValue(td::Variant& val, bool checkType = false) const override;
     td::LinePattern getValue() const;

@@ -1836,26 +1836,13 @@ namespace td
 
 		inline float toFloat() const
 		{
-			char* old_locale = setlocale(LC_NUMERIC, NULL);  // Save current locale
-			setlocale(LC_NUMERIC, "C");  // Set locale to "C"
-
-			float toRet = (float)atof(c_str());
-
-			setlocale(LC_NUMERIC, old_locale);  // Restore original locale
-
+			float toRet = (float)mu::toDouble(c_str()); 
 			return toRet;
 		}
 
 		inline double toDouble() const
 		{
-			char* old_locale = setlocale(LC_NUMERIC, NULL);  // Save current locale
-			setlocale(LC_NUMERIC, "C");  // Set locale to "C"
-
-			double toRet = (double)atof(c_str());
-
-            if (old_locale)
-                setlocale(LC_NUMERIC, old_locale);  // Restore original locale
-
+			double toRet = mu::toDouble(c_str()); 
 			return toRet;
 		}	
 
@@ -2060,13 +2047,9 @@ namespace td
 
 		inline float toSingle() const
 		{
-			return (float) atof(c_str());
+			float toRet = (float)mu::toDouble(c_str()); 
+			return toRet;
 		}
-
-		//inline double toDouble() const
-		//{
-		//	return atof(c_str());
-		//}
 
 		inline td::INT4 toINT4() const
 		{
@@ -2946,6 +2929,12 @@ namespace td
 				return length() / 4;
 			return length();
 		}
+
+		inline bool isEmpty() const
+		{
+			return (length() == 0);
+		}
+
     protected:
         inline td::UINT4 glyphLengthLocal(td::UTF8, td::UINT4 len) const
         {

@@ -47,7 +47,10 @@ protected:
     td::WORD addItem(const td::String& lbl, Image* image, const td::String& toolTip, td::BYTE menuID, td::BYTE firstSubMenuID, td::BYTE lastSubMenuID, td::BYTE actionID);
     td::WORD addItem(const td::String& lbl, Symbol* symbol, const td::String& toolTip, td::BYTE menuID, td::BYTE firstSubMenuID, td::BYTE lastSubMenuID, td::BYTE actionID);
 //    void initItem(td::WORD itemPos, gui::PopoverView* pPopoverView, td::UINT2 ctrlID);
-    td::WORD addItem(gui::PopoverView* pPopoverView, td::UINT2 ctrlID, const td::String& lbl = "", const td::String& toolTip = "");
+    td::WORD addItem(gui::PopoverCanvas* pPopoverCanvas, td::UINT2 ctrlID, const td::String& lbl = "", const td::String& toolTip = "");
+    
+    td::WORD addItem(gui::PopupView* pPopupView, td::UINT2 ctrlID, const td::String& lbl, const td::String& toolTip = "");
+    
     td::WORD addItem(const td::String& lbl, const td::String& toolTip, gui::DataCtrl* pCtrl, td::UINT2 ctrlID);
     
     td::WORD addItem(const td::String& lbl, const td::String& toolTip, gui::View* pView);
@@ -76,8 +79,8 @@ public:
     ToolBarItem* getItem(td::BYTE menuID, td::BYTE firstSubMenuID, td::BYTE lastSubMenuID, td::BYTE actionID);
     ToolBarItem* getItem(td::UINT4 gid);
     gui::DataCtrl* getDataCtrl(td::UINT4 ctrlID);
-    gui::PopoverView* getPopoverView(td::UINT2 popoverID);
-    const gui::PopoverView* getPopoverView(td::UINT2 popoverID) const;
+    gui::PopoverCanvas* getPopoverCanvas(td::UINT2 popoverID);
+    const gui::PopoverCanvas* getPopoverCanvas(td::UINT2 popoverID) const;
     void enableCtrl(td::UINT4 ctrlID, bool bEnable);
     void enablePopover(td::UINT2 popoverID, bool bEnable);
     
@@ -89,7 +92,7 @@ public:
     void hide(bool bHide);
     void showLabels(bool bShowLabels);
     bool areLabelsVisible() const;
-    
+    //void enableItem(td::WORD itemPos, bool bEnable); //enable/disable toolbar item
     void setPropertyType(mu::IAppProperties::ToolBarType propType);
     mu::IAppProperties::ToolBarType getPropertyType() const;
     

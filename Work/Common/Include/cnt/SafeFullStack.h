@@ -18,7 +18,8 @@ namespace cnt
 	protected:
 		T* _container;
 		T* _top;
-		size_t _size;
+		td::UINT4 _capacity;
+		td::UINT4 _size;
 
 	public:
 		typedef T* iterator;
@@ -27,6 +28,7 @@ namespace cnt
 		SafeFullStack()
 			: _container(nullptr)
 			, _top(nullptr)
+			, _capacity(0)
 			, _size(0)
 		{
 		}
@@ -34,7 +36,8 @@ namespace cnt
 		SafeFullStack(int initialSize)
 			: _container(new T[initialSize])
 			, _top(_container)
-			, _size(initialSize)
+			, _capacity(initialSize)
+			, _size(0)
 		{
 		}
 
@@ -46,7 +49,7 @@ namespace cnt
 
 		T& top() const
 		{
-			assert(_size > 0);
+			assert(_capacity > 0);
 			return *(_top - 1);
 		};
         
@@ -61,14 +64,14 @@ namespace cnt
 		{
 			assert(n>0);
 			//_container.reserve(n);
-			if (_size != n)
+			if (_capacity != n)
 			{
 				if (_container)
 				{
 					delete [] _container;
 				}
 				_container = new T[n];
-				_size = n;
+				_capacity = td::UINT4(n);
 			}
 			_top = _container;
 		}
@@ -95,12 +98,13 @@ namespace cnt
 
 		void push (const T& val)
 		{
-			assert(_size > 0);
+			assert(_capacity > 0);
+			
 
-			if (_top == end())
+			if (_top == _container + _capacity)
 			{
 				//resize container
-                size_t oldSize = _size;
+                size_t oldSize = _capacity;
 
                 size_t newSize = oldSize * 2;
 
@@ -119,24 +123,25 @@ namespace cnt
 
 				_top = &_container[oldSize];
 
-				_size = newSize;
+				_capacity = td::UINT4(newSize);
 			}
+			assert(_top);
 
 			*_top = val;
-
+			++_size;
 			++_top;
 
 		};
         
         void push()
         {
-            assert(_size > 0);
+            assert(_capacity > 0);
+			
 
-            if (_top == end())
+			if (_top == _container + _capacity)
             {
                 //resize container
-                size_t oldSize = _size;
-
+                size_t oldSize = _capacity;
                 size_t newSize = oldSize * 2;
 
                 T* tmp = new T[newSize];
@@ -155,22 +160,25 @@ namespace cnt
 
                 _top = &_container[oldSize];
 
-                _size = newSize;
+				_capacity = newSize;
             }
-
+			assert(_top);
+			++_size;
             ++_top;
         }
 
 		void pop()
 		{
+			assert(_capacity > 0);
 			assert(_size > 0);
-			if (_top != _container)
-				_top--;
+			assert(_top != _container);
+			_top--;
+			--_size;
 		};
 
 		bool empty() const
 		{
-			return (_top == _container());
+			return (_top == _container);
 		};
 
 		bool notEmpty() const
@@ -183,9 +191,19 @@ namespace cnt
 			_top = _container;
 		}
 
-        size_t size() const
+        size_t capacity() const
+		{
+			return _capacity;
+		}
+
+		size_t size() const
 		{
 			return _size;
+		}
+
+		void reset()
+		{
+			_top = _container;
 		}
 	};
 

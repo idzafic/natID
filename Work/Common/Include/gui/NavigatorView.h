@@ -60,7 +60,7 @@ class NATGUI_API NavigatorView : protected Canvas
     td::BYTE _vertical = 1;
     td::BYTE _alignment = 0;
     
-    NavigatorView();
+    NavigatorView() = delete;
     void getTxtRect(td::UINT2 itemPos, Rect& r) const;
     void getImgRect(td::UINT2 itemPos, Rect& r) const;
     void getBoundingRect(td::UINT2 itemPos, Rect& r) const;
@@ -72,9 +72,12 @@ class NATGUI_API NavigatorView : protected Canvas
     td::BYTE getAlignment() const;
     void setAlignment(td::BYTE alignment);
 protected:
+    void selectItem(td::UINT2 itemPos);
+
     void onResize(const gui::Size& newSize) override;
     void onDraw(const gui::Rect& rDraw) override;
     void onPrimaryButtonPressed(const gui::InputDevice& inputDevice) override;
+    bool onKeyPressed(const gui::Key& key) override;
 public:
     NavigatorView(Navigator* pNavigator, td::UINT2 nItems, gui::Orientation orientation, td::UINT2 imageHeight, float widthMultiplier);
     ~NavigatorView();

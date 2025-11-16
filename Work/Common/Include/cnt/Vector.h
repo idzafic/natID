@@ -37,7 +37,7 @@ public:
     }
 
     ExternalAllocator(const ExternalAllocator& other)
-    : _memoryManager(other.memoryManager) {}
+    : _memoryManager(other._memoryManager) {}
     
     ExternalAllocator& operator=(const ExternalAllocator& other) {
         _memoryManager = other._memoryManager;

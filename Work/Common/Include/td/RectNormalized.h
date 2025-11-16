@@ -123,7 +123,15 @@ public:
         bottom *= sy;
     }
 
-    inline void unija(const Point<T>& p)
+    void scale(T s)
+    {
+        left *= s;
+        right *= s;
+        top *= s;
+        bottom *= s;
+    }
+
+    inline void encompass(const Point<T>& p) //encompass -> unija
     {
         if (p.x < left)
         {
@@ -153,6 +161,15 @@ public:
     {
         center.x = (left + right)/2;
         center.y = (top + bottom) /2;
+    }
+    
+    inline T getLengthOfSmallerSide() const
+    {
+        auto w = width();
+        auto h = height();
+        if (w < h)
+            return w;
+        return h;
     }
     
     inline Point<T> center() const

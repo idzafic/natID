@@ -27,7 +27,7 @@ protected:
 public:
     DotPatternPicker();
     DotPatternPicker(const td::String& toolTip);
-    gui::ObjType getObjType() const override { return ObjType::DotPatternPicker;}
+    //gui::ObjType getObjType() const override { return ObjType::DotPatternPicker;}
     bool setValue(const td::Variant& val, bool sendMessage=true) override;
     bool getValue(td::Variant& val, bool checkType = false) const override;
     td::DotPattern getValue() const;

@@ -17,4 +17,6 @@ int main(int argc, const char * argv[])
     td::String trLang = appProperties->getValue("translation", "BA");
     app.init(trLang);
     return app.run();
+
+    
 }

@@ -22,7 +22,7 @@ protected:
     gui::Label _lblLangNew;
     gui::ComboBox _cmbLangs;
     gui::CheckBox _chbToolbarIconsAndLabels;
-    gui::GridLayout _gl;
+    gui::GridLayout _mainLayout;
     gui::ToolBar* _pMainTB = nullptr;
     int _initialLangSelection;
 public:
@@ -30,7 +30,7 @@ public:
     : _lblLangNow(tr("lblLang"))
     , _lblLangNew(tr("lblLang2"))
     , _chbToolbarIconsAndLabels(tr("chbTBIcsAndLbls"))
-    , _gl(3,2)
+    , _mainLayout(3,2)
     {
         gui::Application* pApp = getApplication();
         auto appProperties = pApp->getProperties();
@@ -68,11 +68,11 @@ public:
         _cmbLangs.selectIndex(newLangIndex);
         _initialLangSelection = newLangIndex;
         // populate grid
-        gui::GridComposer gc(_gl);
+        gui::GridComposer gc(_mainLayout);
         gc.appendRow(_lblLangNow) << _leLang;
         gc.appendRow(_lblLangNew) << _cmbLangs;
         gc.appendRow(_chbToolbarIconsAndLabels, 0);
-        setLayout(&_gl);
+        setLayout(&_mainLayout);
         
         _chbToolbarIconsAndLabels.onClick([this]()
         {

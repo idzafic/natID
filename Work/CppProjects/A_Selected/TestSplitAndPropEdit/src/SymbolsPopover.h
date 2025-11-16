@@ -15,7 +15,7 @@ class SymbolsPopover : public gui::SymbolPopoverView
     gui::Symbol _circ;
 public:
     SymbolsPopover()
-    : SymbolPopoverView(gui::PopoverView::Type::SymbolOnly, 4, 4)
+    : SymbolPopoverView(gui::PopoverCanvas::Type::SymbolOnly, 4, 4)
     , _pointer(":pointer")
     , _rect(":rect")
     , _roundedRect(":roundRct")

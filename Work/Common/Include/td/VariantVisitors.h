@@ -11,6 +11,7 @@
 #include <td/Types.h>
 #include <td/VariantBase.h>
 #include <td/String.h>
+#include <mu/mu.h>
 
 
 namespace td
@@ -327,8 +328,8 @@ namespace td
 			char *pStop = 0;
 			val = CSTR_TO_LUINT8(pStr, &pStop, 10);
 		}
-		void operator()(float& val) const { val = (float) atof(pStr); }
-		void operator()(double& val) const { val = atof(pStr); }
+		void operator()(float& val) const { val = (float) mu::toDouble(pStr); }
+		void operator()(double& val) const { val = mu::toDouble(pStr); }
 		void operator() (td::String& val) const { val = pStr; }
 		void operator() (td::ChFix7& val) const { val = pStr; }
         void operator() (td::ColorID& val) const { val = td::toColorID(pStr); }
@@ -582,12 +583,12 @@ namespace td
 
 		inline void stringNumber(const td::String& str, double& val) const
 		{
-			val = atof(str.c_str());
+			val = mu::toDouble(str.c_str());
 		}
 
 		inline void stringNumber(const td::String& str, float& val) const
 		{
-			val = atof(str.c_str());
+			val = float(mu::toDouble(str.c_str()));
 		}
 
 		template <typename TINTVAL>

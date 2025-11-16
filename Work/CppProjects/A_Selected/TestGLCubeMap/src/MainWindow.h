@@ -33,7 +33,6 @@ public:
     }
     
 protected:
-    
     bool onActionItem(gui::ActionItemDescriptor& aiDesc) override
     {
         auto [menuID, firstSM, lastSM1, actionID] = aiDesc.getIDs();

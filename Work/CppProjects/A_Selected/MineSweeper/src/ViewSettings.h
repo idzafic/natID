@@ -30,7 +30,7 @@ protected:
     gui::CheckBox _chbUseCombo;
     gui::StatusBar* _pStatusBar = nullptr;
 
-    gui::GridLayout _gl;
+    gui::GridLayout _mainLayout;
     gui::ToolBar* _pMainTB = nullptr;
     gui::Size _sweeperSize;
     int _initialLangSelection = 0;
@@ -45,7 +45,7 @@ public:
     , _chbUseCombo(tr("chbUseCombo"))
     , _pStatusBar(const_cast<gui::StatusBar*>(pSB))
     , _sweeperSize(sweeperSize)
-    , _gl(6,2)
+    , _mainLayout(6,2)
     {
         _chbUseCombo.setChecked(bAnimateTransition);
         
@@ -108,14 +108,14 @@ public:
 //        appProperties->getValue("showStatusBar", true);
         _chbShowStatusBar.setChecked(showStatusBar);
         // populate grid
-        gui::GridComposer gc(_gl);
+        gui::GridComposer gc(_mainLayout);
         gc.appendRow(_lblLangNow) << _leLang;
         gc.appendRow(_lblLangNew) << _cmbLangs;
         gc.appendRow(_lblTheme) << _cmbTheme;
         gc.appendRow(_chbToolbarIconsAndLabels, 0);
         gc.appendRow(_chbUseCombo, 0);
         gc.appendRow(_chbShowStatusBar, 0);
-        setLayout(&_gl);
+        setLayout(&_mainLayout);
         
         //handler for checkbox that controls labels (this one requires immediate action 
         //to show/hide labels so that user can see the effects immediatelly

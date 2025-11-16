@@ -35,9 +35,20 @@ public:
     template <typename T>
     void setValue(const char* key, const T& value)
     {
-        td::Variant varVal(value);
-        td::String strKey(key);
-        setKeyValue(strKey, varVal);
+        if constexpr (std::is_enum_v<T>)
+        {
+            unsigned int enumVal = static_cast<unsigned int>(value);
+            td::Variant varVal(enumVal);
+            td::String strKey(key);
+            setKeyValue(strKey, varVal);
+        }
+        else
+        {
+            td::Variant varVal(value);
+            td::String strKey(key);
+            setKeyValue(strKey, varVal);
+        }
+        
     }
     template <typename T>
     void setValue(const td::String& key, const T& value)
@@ -67,12 +78,26 @@ public:
     template <typename T>
     const T getValue(const char* key, const T& defaultValue) const
     {
-        td::Variant varDefaultValue(defaultValue);
-        td::String strKey(key);
-        const td::Variant& retVarVal = getKeyValue(strKey, varDefaultValue);
-        T retVal;
-        retVarVal.getValue(retVal);
-        return retVal;
+        if constexpr (std::is_enum_v<T>)
+        {
+            td::Variant varDefaultValue(static_cast<unsigned int>(defaultValue));
+            td::String strKey(key);
+            const td::Variant& retVarVal = getKeyValue(strKey, varDefaultValue);
+
+            unsigned int val;
+            retVarVal.getValue(val);
+            return static_cast<T>(val);
+        }
+        else
+        {
+            td::Variant varDefaultValue(defaultValue);
+            td::String strKey(key);
+            const td::Variant& retVarVal = getKeyValue(strKey, varDefaultValue);
+            T retVal;
+            retVarVal.getValue(retVal);
+            return retVal;
+        }
+        
     }
     
     template <typename T>

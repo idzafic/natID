@@ -21,7 +21,7 @@ void populateCustomerData(dp::IDatabase* pDB, rpt::ReportData::iterator& it, td:
     }
             
 	it << rpt::ContainerType::CNT_DocHeader << rpt::ContainerType::CNT_Group << "Customer" << pDP;
-
+    auto nRows = pDP->getNumberOfRows();
 	dp::IDataSet::Row row(pDP->getRow(0));
 	row[0] = customerID; //CustomerID
 	row[1] = "4062592827172"; //GID (13 digits)

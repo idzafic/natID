@@ -61,9 +61,12 @@ public:
     virtual gui::ObjType getObjType() const { return ObjType::NA;}
     //virtual gui::CtrlType getCtrlType() const { return CtrlType::NA;}
     bool isControl() const;
+    bool isView() const;
+    
     //call function from another thread and execute it in main (GUI) thread
     static void asyncCall(AsyncFn* pFn, bool bDeleteFnPtrAfterCall = false);
     static void asyncCall1(AsyncFn1 pFn, void* userData);
+    
     ///translation
     td::String tr(const char* strKey) const;
     const char* trCStr(const char* strKey) const;

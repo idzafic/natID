@@ -27,22 +27,22 @@ protected:
     
     bool onChangedSelection(gui::StandardTabView* pTab, int newPos) override
     {
-        if (pTab == this)
-        {
-            
-//            int iSel = _cmb.getSelectedIndex();
-//            td::String selStr = _cmb.getSelectedText();
-//            td::String str;
-//            str.format("ComboBox cs:%d->%s\n", iSel, selStr.c_str());
-            td::String msgText("TabView:Handling onChangedSelection");
-            td::String informativeText("Add here handling tabView selection change");
-            showAlert(msgText, informativeText);
-            //_textEdit.appendString(str);
-            return true;
-        }
+//        if (pTab == this)
+//        {
+//            
+////            int iSel = _cmb.getSelectedIndex();
+////            td::String selStr = _cmb.getSelectedText();
+////            td::String str;
+////            str.format("ComboBox cs:%d->%s\n", iSel, selStr.c_str());
+//            td::String msgText("TabView:Handling onChangedSelection");
+//            td::String informativeText("Add here handling tabView selection change");
+//            showAlert(msgText, informativeText);
+//            //_textEdit.appendString(str);
+//            return true;
+//        }
         
         
-        return false;
+        return true;
     }
     
     

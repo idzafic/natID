@@ -33,6 +33,7 @@
 #include <gui/DrawableButtonWithDelegate.h>
 #include <gui/DrawableString.h>
 #include <gui/DrawableView.h>
+#include <gui/DrawableProgressIndicator.h>
 #include <gui/FileDialog.h>
 #include <gui/Font.h>
 #include <gui/GridComposer.h>
@@ -59,7 +60,8 @@
 #include <gui/PaperInfo.h>
 #include <gui/PasswordEdit.h>
 #include <gui/PopoverButton.h>
-#include <gui/PopoverView.h>
+#include <gui/PopoverCanvas.h>
+#include <gui/PopupView.h>
 #include <gui/PrintInfo.h>
 #include <gui/ProgressIndicator.h>
 #include <gui/Properties.h>
@@ -83,6 +85,7 @@
 #include <gui/Texture.h>
 #include <gui/TimeEdit.h>
 #include <gui/Timer.h>
+#include <gui/Thread.h>
 #include <gui/ToolBar.h>
 #include <gui/ToolBarItem.h>
 #include <gui/Transformation.h>

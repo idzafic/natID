@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Map ratioLat="1" ratioLong="1" scale="0.2" infoLoc="BR"> <!-- approx 1 degree in km for lat and long -->
+  <Towns>
+    <Town id="A" name="A" lat="5" long="0"/>
+    <Town id="B" name="B" lat="5" long="1"/>
+    <Town id="C" name="C" lat="4" long="0"/>
+    <Town id="D" name="D" lat="4" long="1"/>
+    <Town id="E" name="E" lat="4" long="2"/>
+    <Town id="F" name="F" lat="4" long="3"/>
+    <Town id="G" name="G" lat="4" long="4"/>
+    <Town id="H" name="H" lat="3" long="2"/>
+    <Town id="I" name="I" lat="2" long="1"/>
+    <Town id="J" name="J" lat="2" long="3"/>
+    <Town id="K" name="K" lat="1" long="1"/>
+    <Town id="L" name="L" lat="0" long="1"/>
+  </Towns>
+
+  <Roads>
+     <Road fromNode="A" toNode="B" name="AB" cost="10"/>
+     <Road fromNode="B" toNode="C" name="BC" cost="10"/>
+     <Road fromNode="B" toNode="D" name="BD" cost="11"/>
+     <Road fromNode="B" toNode="E" name="BE" cost="12"/>
+     <Road fromNode="B" toNode="F" name="BF" cost="13"/>
+     <Road fromNode="F" toNode="G" name="FG" cost="2"/>
+     <Road fromNode="F" toNode="J" name="FJ" cost="0.5"/>
+     <Road fromNode="C" toNode="L" name="CL" cost="10"/>
+     <Road fromNode="C" toNode="I" name="CI" cost="10"/>
+     <Road fromNode="D" toNode="I" name="DI" cost="4"/>
+     <Road fromNode="E" toNode="H" name="EH" cost="1"/>
+     <Road fromNode="H" toNode="I" name="HI" cost="1"/>
+     <Road fromNode="I" toNode="K" name="IK" cost="2"/>
+     <Road fromNode="I" toNode="J" name="IJ" cost="1"/>
+     <Road fromNode="J" toNode="L" name="JL" cost="6"/>
+     <Road fromNode="K" toNode="L" name="KL" cost="3"/>
+  </Roads>
+</Map>

@@ -105,7 +105,7 @@ public:
         return ((source >= Source::MS_MouseBtnLeft) && (source <= Source::MS_MouseWheel));
     }
 
-    Message(NatObject* pMsgField = nullptr, struct Desc msgType = Desc(Type::MT_FocusOut, Source::MS_Other))
+    Message(NatObject* pMsgField = nullptr, Desc msgType = Desc(Type::MT_FocusOut, Source::MS_Other))
         : pSource(pMsgField)
         , desc(msgType)
 //        , acceptStatus(0)

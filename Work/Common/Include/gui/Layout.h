@@ -19,14 +19,17 @@ namespace gui
 
 class View;
 class BaseView;
+class ViewHelper;
 
 class NATGUI_API Layout : public Control
 {
     friend class View;
     friend class BaseView;
+    friend class ViewHelper;
 protected:
     Layout();
     void addCtrlToView(Control* pCtrl, View* pView) const;
+    
     virtual void initialMeasure(CellInfo&);
 public:
     virtual void populateView(View* pView, const Cell& cell, const Size& szMargins);

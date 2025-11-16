@@ -81,6 +81,7 @@ protected:
     void drawCloseTabSymbol() const;
     void updateGeometryOfItems(int fromItem);
     void calcHoveringItem(const gui::Point& viewPoint);
+    void onResize(const gui::Size& newSize) override;
     
     void removeTab(int pos); //from inside
     void removeTabExt(int pos, int newSelection, bool sendMessage, bool bRedraw); //from outside
@@ -107,21 +108,21 @@ protected:
     
     //virtual void onResize(const gui::Rect& newBounds);
     
-    virtual void onDraw(const gui::Rect& rect);
+    void onDraw(const gui::Rect& rect) override;
     
-    virtual void onPrimaryButtonPressed(const gui::InputDevice& inputDevice);
-    virtual void onSecondaryButtonPressed(const gui::InputDevice& inputDevice);
+    void onPrimaryButtonPressed(const gui::InputDevice& inputDevice) override;
+    void onSecondaryButtonPressed(const gui::InputDevice& inputDevice) override;
     //virtual void onMouseDrag(const gui::Point& viewPoint, td::UINT4 keyModifiers);
     
-    virtual void onCursorEntered(const gui::InputDevice& inputDevice);
-    virtual void onCursorMoved(const gui::InputDevice& inputDevice);
-    virtual void onCursorExited(const gui::InputDevice& inputDevice);
+    void onCursorEntered(const gui::InputDevice& inputDevice) override;
+    void onCursorMoved(const gui::InputDevice& inputDevice) override;
+    void onCursorExited(const gui::InputDevice& inputDevice) override;
     
-    virtual bool getModelSize(gui::Size& modelSize) const;
+    bool getModelSize(gui::Size& modelSize) const override;
     void setHeaderContextMenu(int pos, td::BYTE contextMenuID, td::UINT2 contextMenuGroup = 0);
     void forwardContextMenuEventsTo(int pos, Frame* pFrame);
     void setNonRemovable(int viewPos, bool nonRemovable);
-    void systemColorModeChanged(bool bDarkMode);
+    void systemColorModeChanged(bool bDarkMode) override;
 //    bool onActionItem(gui::ActionItemDescriptor& aiDesc) override;
 public:
     TabHeader(TabView* pTabView, Type type, td::BYTE minWidthInChars, td::BYTE maxWidthInChars, Font::ID selFontID, Font::ID fontID);

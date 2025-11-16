@@ -38,7 +38,7 @@ class TableEdit;
 class Navigator;
 class TabView;
 class PopoverButton;
-class PopoverView;
+class PopoverCanvas;
 class LinePatternPicker;
 class DrawableButton;
 class DrawableButtonIntern;
@@ -103,7 +103,7 @@ protected:
     virtual bool onChangedValue(gui::LinePatternPicker* pLPP);
     virtual bool onModified(gui::TextEdit* pTE);
     //Popover on toolbar
-    virtual bool onToolbarsPopoverSelectionChange(gui::PopoverView* pPOView, td::UINT2 ctrlID, td::UINT2 selection);
+    virtual bool onToolbarsPopoverSelectionChange(gui::PopoverCanvas* pPOView, td::UINT2 ctrlID, td::UINT2 selection);
     virtual bool onToolbarsComboBoxSelectionChange(gui::ComboBox* pCmb, td::UINT2 ctrlID, int selection);
     virtual bool onToolbarsComboBoxSelectionChange(gui::DBComboBox* pCmb, td::UINT2 ctrlID, int selection);
     //Timers

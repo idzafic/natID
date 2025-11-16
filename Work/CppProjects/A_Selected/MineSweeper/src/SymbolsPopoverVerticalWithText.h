@@ -13,7 +13,7 @@ class SymbolsPopoverVerticalWithText : public gui::SymbolPopoverView
     gui::Image _hard;
 public:
     SymbolsPopoverVerticalWithText()
-    : SymbolPopoverView(gui::PopoverView::Type::SymbolAndText, 4, PopoverView::SymbolWidth::AdjustToMaxWHRatio)
+    : SymbolPopoverView(gui::PopoverCanvas::Type::SymbolAndText, 4, gui::PopoverCanvas::SymbolWidth::AdjustToMaxWHRatio)
     , _easy(":Easy")
     , _medium(":Medium")
     , _hard(":Hard")

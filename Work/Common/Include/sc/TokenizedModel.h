@@ -20,6 +20,7 @@
 
 #include <tuple>
 #include <td/ColorID.h>
+#include <mu/Utils.h>
 
 namespace sc
 {
@@ -139,7 +140,7 @@ public:
             const char* pStr = valIn.c_str();
             if (!pStr)
                 return false;
-            valOut = std::atof(pStr);
+            valOut = mu::toDouble(pStr);
             return true;
         }
         
@@ -153,7 +154,7 @@ public:
             const char* pStr = valIn->c_str();
             if (!pStr)
                 return false;
-            valOut = std::atof(pStr);
+            valOut = mu::toDouble(pStr); 
             return true;
         }
         
@@ -422,6 +423,9 @@ public:
     }
     
     td::UINT4 countChildren(const iterator& it, td::UINT2 namingPosition, sc::Group groupID, sc::ExpressionType et) const;
+    td::UINT4 countSwitchCases(const iterator& it, td::UINT2 namingPosition, sc::Group groupID, bool& defaultFound) const;
+    //static int findtCaseConditionSeparator(const sc::ExpressionTokens& modelTokens, const iterator& it);
+    
 //    td::UINT4 countChildren(td::UINT2 namingPosition, sc::Group groupID, sc::ModelLevel modelLevel) const;
     sc::ExpressionType getExpressionType(const iterator& it, td::UINT2 namingPosition) const;
 //    bool copyParentParentsToSubModel() const;

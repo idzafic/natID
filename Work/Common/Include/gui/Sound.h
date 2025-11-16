@@ -40,15 +40,17 @@ class NATGUI_API Sound : public NatObject
 {
 public:
     enum class Type : unsigned char {Beep=0, SelectionChanged};
+    enum class State : unsigned char {NotPlaying, Playing, ContinuousPlay, Paused};
 private:
     friend class SoundHelper;
     friend class Resources;
 
     SoundBuffer _buffer;
+    State _state = State::NotPlaying;
 
-    Sound();
+    Sound() = delete;
     Sound(const Sound& sound);
-public:    
+public:
     Sound(const char* fileOrResName);
     Sound(const td::String& fileOrResName);
     ~Sound();
@@ -60,6 +62,7 @@ public:
     static void setPlaySoundOnSelectionChange(bool bPlay);
     static bool shouldPlaySoundOnSelectionChange();
     static void play(Sound::Type soundType);
+    Sound::State getState() const;
 };
 
 } //namespace gui

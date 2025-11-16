@@ -18,21 +18,21 @@ protected:
     gui::LineEdit _leServerAddress;
     gui::Label _lblServerPort;
     gui::NumericEdit _neServerPort;
-    gui::GridLayout _gl;
+    gui::GridLayout _mainLayout;
 public:
     ViewSettings(const td::String& serverAddr, td::UINT2 serverPort)
     : _lblServerAddress("Address:")
     , _lblServerPort("Port:")
     , _neServerPort(td::word, gui::LineEdit::Messages::DoNotSend, false)
-    , _gl(2, 2)
+    , _mainLayout(2, 2)
     {
         _leServerAddress.setText(serverAddr);
         _neServerPort.setValue(serverPort);
         _neServerPort.setHAlignment(td::HAlignment::Left);
-        gui::GridComposer gc(_gl);
+        gui::GridComposer gc(_mainLayout);
         gc.appendRow(_lblServerAddress) << _leServerAddress;
         gc.appendRow(_lblServerPort) << _neServerPort;
-        setLayout(&_gl);
+        setLayout(&_mainLayout);
     }
 
     td::String getServerAddress() const

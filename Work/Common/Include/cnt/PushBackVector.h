@@ -213,7 +213,8 @@ public:
 
     T& operator [] (size_t pos)
     {
-        assert(pos < size());
+        auto sz = size();
+        assert(pos < sz);
         return _data[pos];
     }
     
@@ -238,6 +239,22 @@ public:
     }
 
     T& last()
+    {
+        assert(size() > 0);
+        assert(_capacity > 0);
+        assert(_top);
+        return *(_top - 1);
+    }
+    
+    const T& back() const
+    {
+        assert(size() > 0);
+        assert(_capacity > 0);
+        assert(_top);
+        return *(_top - 1);
+    }
+
+    T& back()
     {
         assert(size() > 0);
         assert(_capacity > 0);
