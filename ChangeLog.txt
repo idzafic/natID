@@ -3,6 +3,7 @@ Overview of Changes in 3.5.0, 2025-11-16
 =========================================
 - Several fixes on linux
 - Added PopoupView
+- Added syst/Keybooard.h (console keyboard events)
 - AI examples (CppProjects/LecturesAI)
 
 Overview of Changes in 3.4.0, 2025-06-02
