@@ -354,7 +354,7 @@ public:
         {
             fo::fs::path home;
             mu::getHomePath(home);
-            fo::fs::path mnistTestImages = home / "other_bin/TestData/AI/NNData/TrainIDX3";
+            fo::fs::path mnistTestImages = home / "other_bin/TestData/AI/MNIST/TrainIDX3";
             td::String fn = mnistTestImages.string();
             td::Size<td::INT4> imgSize;
             td::BYTE bytesPerPixel = 0;
