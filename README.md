@@ -31,6 +31,20 @@ On macOS, it leverages native Cocoa libraries. On Linux and Windows, it uses GTK
     - macOS: Xcode
     - Linux: Qt Creator or Visual Studio Code
 
+## Video Installation Instructions
+
+Windows (Visual Studio) Initial Setup, Update, and error detection via ba.natID floder with logs: https://youtu.be/ftJBRGf_Bu4
+
+Linux setup and update for Visual Studio Code: https://youtu.be/umfNY0fspdg
+
+MacOS (arm and x64) setup and update for XCode: https://youtu.be/l2a3m7a6jrk
+  
+
+2. Set Up in the HOME Folder
+  - Place the repository in your HOME folder.
+  - The framework uses two subfolders: Work and other_bin, which must also be located in your HOME folder.
+  - On Windows, ensure the HOME environment variable is defined.
+
 ## Demo Projects
 
 Demo projects are located in Work/CppProjects.
