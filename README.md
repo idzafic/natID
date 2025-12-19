@@ -10,6 +10,8 @@ Currently, natID supports the following operating systems:
 
 On macOS, it leverages native Cocoa libraries. On Linux and Windows, it uses GTK4. Future plans include providing native support on Windows through the Windows App SDK.
 
+[natID Documentation (PDF)](Docs/natID_EN.pdf)
+
 ## Installation
 
 1. Download the Repository
@@ -38,12 +40,12 @@ Windows (Visual Studio) Initial Setup, Update, and error detection via ba.natID 
 Linux setup and update for Visual Studio Code: https://youtu.be/umfNY0fspdg
 
 MacOS (arm and x64) setup and update for XCode: https://youtu.be/l2a3m7a6jrk
-  
 
-2. Set Up in the HOME Folder
-  - Place the repository in your HOME folder.
-  - The framework uses two subfolders: Work and other_bin, which must also be located in your HOME folder.
-  - On Windows, ensure the HOME environment variable is defined.
+## First steps after setup (Video Intro)
+
+Video introduction (folder structure): https://youtu.be/rBrvuQVi8iw
+
+Create first project: https://youtu.be/PX7Fc8PeXHU
 
 ## Demo Projects
 
