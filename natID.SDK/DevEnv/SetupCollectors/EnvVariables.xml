@@ -1,0 +1,20 @@
+<?xml version='1.0'?>
+<EnvVariables>
+	<Common>
+		<Var name="MyBin" value="$natIDSDKPath/bin"/>
+	</Common>
+	<macOS>
+		<Var name="MyDLib" value="$MyBin/lib"/>
+		<Var name="RAMDisk" value="/Volumes/RAMDisk"/>
+	</macOS>
+	<Windows>
+		<Var name="RAMDisk" value="R:"/>
+		<Var name="MyDLib" value="$MyBin"/>
+		<Var name="NSIS" value="$MyBin/NSIS"/>
+	</Windows>
+	<Linux>
+		<Var name="RAMDisk" value="/media/RAMDisk"/>
+		<Var name="MyDLib" value="$MyBin/lib"/>
+		<Var name="DepGTKv4" value="libc6 (>=2.34), libgcc-s1 (>=3.0), libstdc++6 (>=13.1), libgtk-4-1 (>=4.14.2), libgtk-4-1 (<=4.88.9), libadwaita-1-0 (>=1.2), libopenal1, libasound2t64 (>=1.2)"/>
+	</Linux>
+</EnvVariables>

@@ -1,0 +1,18 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="imgOpen" path="Common/Icons/openSave/open64.png"/>
+		<Res id="imgSave" path="Common/Icons/openSave/save64.png"/>
+		<Res id="TransCost" path = "Common/Icons/transportCostXL.png"/>
+		<Res id="UNSA" path = "Common/Icons/UNSA/UNSA_Logo.png"/>
+	</Images>
+	<Symbols>
+		<Res id="roundRct" path="Common/Symbols/Shapes/roundedRectangle.xml"/>
+        <Res id="TestPie" path="Common/Symbols/PSA/TestPie.xml"/>
+        <Res id="TestOval" path="Common/Symbols/PSA/TestOval.xml"/>
+	</Symbols>
+	<FileNames>
+		<Res id="Test.db" path="bin/TestData/natGUITest/Test.db"/>
+	</FileNames>
+	
+</DevRes>

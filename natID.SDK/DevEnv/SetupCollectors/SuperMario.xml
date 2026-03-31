@@ -1,0 +1,24 @@
+<?xml version='1.0'?>
+<SetupCollector xmlns:win="windows" xmlns:mac="macOS" xmlns:lin="linux" executableName="superMario">
+	<Folders dev="~natID.Examples/StudentProjects/PZI/2025/SuperMario" executable="$RAMDisk/Out/SuperMario/Release" out="$RAMDisk/Setup/SuperMario"/>
+	<Packages debug="false">
+		<Package name="natGUIALL"/>
+		<Package name="GTK4" exclude="macOS,linux"/>
+	</Packages>
+	<ResData>
+		<!-- schams subfolder will be created in resources of setup (dep) -->
+		<Res type="folder" dev="$MyBin/GTK/release/share/glib-2.0/schemas" dep="schemas" exclude="macOS,linux"/>
+	</ResData>
+	<MutableResource/>
+	<Setup licenseFileName="~natID.SDK/DevEnv/License.txt"
+			categories="Games"
+			win:programGroup="IDz"
+			win:width="440"
+			win:headerBackColor="#FF4444"
+			win:headerTxtColor= "#FFFFFF"
+			win:licenseTxtColor="#846060"
+			win:useMakeCabinet="true"
+			win:minBuildNumber="17763"
+			lin:depends="$DepGTKv4" 
+			lin:icon="~natID.GitHub/StudentProjects/LinuxIcons/SuperMario"/>
+</SetupCollector>

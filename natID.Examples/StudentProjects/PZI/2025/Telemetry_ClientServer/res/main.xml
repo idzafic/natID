@@ -1,0 +1,11 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="line" path=":icons/LineGraph.png"/>
+		<Res id="table" path=":icons/Table.png"/>
+		<Res id="collum" path=":icons/Collum.png"/>
+		<Res id="noc" path=":icons/NoConnection.png"/>
+		<Res id="c" path=":icons/Connection.png"/>
+		<Res id="gettingc" path = ":icons/Connecting.png"/>
+	</Images>
+</DevRes>

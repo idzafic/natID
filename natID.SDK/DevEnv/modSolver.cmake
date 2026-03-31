@@ -1,0 +1,16 @@
+#modSolver -> interface for python interop and HTML dTwin Server
+
+if (WIN32)
+    set(MODSOLVER_LIB_DEBUG "${NATID_SDK_LIB}/modSolverD.lib")
+    set(MODSOLVER_LIB_RELEASE "${NATID_SDK_LIB}/modSolver.lib")
+	if( CMAKE_SIZEOF_VOID_P EQUAL 4 )
+		set(MODSOLVER_LIB_DEBUG "${NATID_SDK_LIB}/modSolver32D.lib")
+		set(MODSOLVER_LIB_RELEASE "${NATID_SDK_LIB}/modSolver32.lib")
+	endif()
+elseif (APPLE)
+    set(MODSOLVER_LIB_DEBUG "${NATID_SDK_LIB}/modSolverD.dylib")
+    set(MODSOLVER_LIB_RELEASE "${NATID_SDK_LIB}/modSolver.dylib")
+else ()
+    set(MODSOLVER_LIB_DEBUG "${NATID_SDK_LIB}/modSolverD.so")
+    set(MODSOLVER_LIB_RELEASE "${NATID_SDK_LIB}/modSolver.so")
+endif()

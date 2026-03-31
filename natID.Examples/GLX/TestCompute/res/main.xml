@@ -1,0 +1,11 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="export" path="Common/Icons/export48.png"/>
+	</Images>
+	<FileNames>
+		<Res id="compute_shader" path=":../src/shaders/testComputeGLX"/>
+ 		<Res id="font1" path="bin/TestData/natGL/Fonts/Times New Roman32.text"/>
+	</FileNames>
+
+</DevRes>

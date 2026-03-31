@@ -1,0 +1,85 @@
+Header:
+	maxIter = 60 	//Solution start time for time domain (ODE and DAE) problems
+	report = Solved 	//Only successfully solved cases
+	maxReps = -1 	//Used to limit repetitions (-1: no limit)
+	outToTxt = false 	//true: create output txt file for results, fale: output file was not created
+	txtFile = "" 	//only valid if outToTxt was set to true
+	dTime = 0.001	//Integration time step for time domain (ODE and DAE) problems
+end
+//This model demonstrates frequency regulation on a power network with one generator, two busbars, and one load
+
+Model [type=DAE name="Generator with a single node" domain=real method=RK4 eps=1e-5]:
+
+Vars [out=true]:
+	δ_g = 0. 		//initial value for generator's angle
+	ω_g = 1. 		//p.u. value 
+	regI				//integral part of PI regulator
+	δ_l				//voltage angle at load node
+	v_l					//voltage magnitude at load node
+	P_ge				//active electric power of generator
+	P_gm				//input mechanic power at generator's rotor
+
+Params: 	// default integration step 
+	V_gref = 1
+	v_g = V_gref
+	g_line = 100
+	b_line = -10
+	G11 = g_line
+	B11 = b_line
+	G22 = G11
+	B22 = B11
+	G12 = -g_line
+	B12 = -b_line
+	Q_l = -0.3
+	P_l = -1
+	Pgm_min = 0
+	Pgm_max = 11.5
+	ω_ref = 1
+	H = 20
+	D = 0.1
+	Kp = 200
+	Ki = 60
+	f=50 [out=true]
+
+// Calculate initial PF (solve initial problem the main DAE model)
+SubModel [domain=real eps=1e-6 copyPars=12 name="PF Subproblem for DAE" type=NL]: // PF subproblem 
+	Vars:
+		δ_l = 0
+		v_l = V_gref
+	Params:
+		δ_g = 0
+		P_ge = 0
+	NLEs:
+		v_l^2*G22 + v_l*v_g*(G12*cos(δ_l-δ_g) + B12*sin(δ_l-δ_g))=P_l
+		-v_l^2*B22 + v_l*v_g*(G12*sin(δ_l-δ_g) - B12*cos(δ_l-δ_g))=Q_l
+	PostProc:
+		 // Calcualate initial power that generator generates at steady state 
+		P_ge = v_g^2*G11 + v_l*v_g*(G12*cos(δ_g-δ_l) + B12*sin(δ_g-δ_l))
+		 // transfer initial values to parent problem 
+		@main.P_ge	= P_ge
+		@main.P_gm	= P_ge
+		@main.regI	= P_ge
+		@main.δ_l	= δ_l
+		@main.v_l	= v_l
+end		//end of SubModel
+
+ // Main problem (DAE)
+ODEs:
+	δ_g' = ω_g	
+	ω_g' = (P_gm-P_ge) / (H*ω_g)
+	regI = Ki*int(ω_ref-ω_g)  //try with ∫
+NLEs:
+	v_l^2*G22 + v_l*v_g*(G12*cos(δ_l-δ_g) + B12*sin(δ_l-δ_g))=P_l
+	-v_l^2*B22 + v_l*v_g*(G12*sin(δ_l-δ_g) - B12*cos(δ_l-δ_g))=Q_l
+	P_ge=v_g^2*G11 + v_l*v_g*(G12*cos(δ_g-δ_l) + B12*sin(δ_g-δ_l))
+	P_gm=lim(Kp*(ω_ref-ω_g) + regI, Pgm_min, Pgm_max)
+PostProc:
+	f = 50 * ω_g
+	 // limit angles between π an -π 
+	if δ_g > π:
+		δ_g -= 2*π
+	end
+	if δ_l > π:
+		δ_l -= 2*π
+	end
+end			//end of Model

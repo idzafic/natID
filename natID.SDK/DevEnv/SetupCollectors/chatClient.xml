@@ -1,0 +1,26 @@
+<?xml version='1.0'?>
+<SetupCollector xmlns:win="windows" xmlns:mac="macOS" xmlns:lin="linux" executableName="chatClient">
+	<Folders dev="~natID.Examples/A_Selected/ChatClient" executable="$RAMDisk/Out/ChatClient/Release" out="$RAMDisk/Setup/chatClient"/>
+	<Packages debug="false">
+		<Package name="natGUIALL"/>
+		<Package name="netOp"/>
+		<Package name="GTK4" exclude="macOS,linux"/>
+	</Packages>
+	<ResData>
+		<!-- schams subfolder will be created in resources of setup (dep) -->
+		<Res type="folder" dev="$MyBin/GTK/release/share/glib-2.0/schemas" dep="schemas" exclude="macOS,linux"/>
+	</ResData>
+	<MutableResource/>
+	<Setup licenseFileName="~natID.SDK/DevEnv/License.txt"
+			categories="Education;Utility"
+			win:programGroup="IDz"
+			win:width="440"
+			win:headerBackColor="#6AAFC8"
+			win:headerTxtColor= "#2A2A2E"
+			win:licenseTxtColor="#846060"
+			win:useMakeCabinet="true"
+			win:minBuildNumber="17763"
+			win:banner="$HOME/natID.SDK/Common/Images/natIDVBanner.bmp" 
+			lin:depends="$DepGTKv4" 
+			lin:icon="$HOME/natID.SDK/Common/LinIcons/ChatClient"/>
+</SetupCollector>

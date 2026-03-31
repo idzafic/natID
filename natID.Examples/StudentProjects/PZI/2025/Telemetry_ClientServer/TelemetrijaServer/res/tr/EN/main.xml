@@ -1,0 +1,12 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+		<Res id="closeNOK" tr="Cannot close"/>
+		<Res id="closeErr" tr="You need first to stop the server and then close the app."/>
+		<Res id="start" tr="Start"/>
+		<Res id="stop" tr="Stop"/>
+		<Res id="settings" tr="Settings"/>
+		<Res id="info" tr="TestDataSender: usrnm = Sender passwrd = test
+Ploter: usrnm = Reciever passwrd = test"/>
+	</Translations>
+</DevRes>

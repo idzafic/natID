@@ -1,0 +1,22 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="TransCost" path = "Common/Icons/transportCostXL.png"/>
+		<Res id="normalRep" path="Common/Icons/report64_2.png"/>
+		<Res id="fallRep" path="Common/Icons/Waterfall64.png"/>
+		<Res id="incSize" path="Common/Icons/sizeIncrease128.png"/>
+		<Res id="decSize" path="Common/Icons/sizeDecrease128.png"/>
+		<Res id="img3" path="Common/Icons/Blackberry8707g_48.png"/>
+		<Res id="ctxRep" path="Common/Icons/ctxRep.png"/>
+		<Res id="UNSA" path = "Common/Icons/UNSA/UNSA_Logo.png"/>
+		<Res id="settings" path = "Common/Icons/SettingsBlue48.png"/>
+	</Images>
+	<Symbols>
+		<Res id="Xfmr4" path="Common/Symbols/PSA/FourWindingTransformer.xml"/>
+		<Res id="TestPie" path="Common/Symbols/PSA/TestPie.xml"/>
+		<Res id="TestOval" path="Common/Symbols/PSA/TestOval.xml"/>
+	</Symbols>
+	<FileNames>
+		<Res id="TestRep.db" path="bin/TestData/natGUITest/TestRep.db"/>
+	</FileNames>
+</DevRes>

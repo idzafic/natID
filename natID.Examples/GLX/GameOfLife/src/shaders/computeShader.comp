@@ -1,0 +1,87 @@
+#version 450
+#extension GL_ARB_compute_shader : enable
+
+
+layout(local_size_x = 32, local_size_y = 32, local_size_z = 1) in;
+
+
+layout(set = 0, binding = 3, std430) buffer GameBoardData { 
+    uint width; 
+    uint height; 
+    uint data[]; 
+} boardRead;
+
+
+layout(set = 0, binding = 4, std430) buffer GameBoardData2 { 
+    uint width; 
+    uint height; 
+    uint data[]; 
+} boardWrite;
+
+
+uint countNeighbors(uint x, uint y)
+{
+    uint count = 0;
+    
+    // Check all 8 neighboring cells
+    for(int dx = -1; dx <= 1; dx++)
+    {
+        for(int dy = -1; dy <= 1; dy++)
+        {
+            // Skip the center cell
+            if(dx == 0 && dy == 0) continue;
+            
+            int nx = int(x) + dx;
+            int ny = int(y) + dy;
+            
+            // Check bounds
+            if(nx >= 0 && nx < int(boardRead.width) && ny >= 0 && ny < int(boardRead.height))
+            {
+                uint neighborIdx = uint(ny) * boardRead.width + uint(nx);
+                if(boardRead.data[neighborIdx] != 0)
+                {
+                    count++;
+                }
+            }
+        }
+    }
+    
+    return count;
+}
+
+void mainComp()
+{
+    uint x = gl_GlobalInvocationID.x;
+    uint y = gl_GlobalInvocationID.y;
+    
+    // Check if within bounds
+    if(x < boardRead.width && y < boardRead.height)
+    {
+        uint idx = y * boardRead.width + x;
+        uint neighbors = countNeighbors(x, y);
+        uint currentCell = boardRead.data[idx];
+        
+        // Apply Conway's Game of Life rules
+        // A live cell with 2-3 neighbors survives
+        // A dead cell with exactly 3 neighbors becomes alive
+        uint nextState = 0;
+        if(currentCell != 0)
+        {
+            // Cell is alive
+            if(neighbors == 2 || neighbors == 3)
+            {
+                nextState = 1;
+            }
+        }
+        else
+        {
+            // Cell is dead
+            if(neighbors == 3)
+            {
+                nextState = 1;
+            }
+        }
+        
+        boardWrite.data[idx] = nextState;
+    }
+}

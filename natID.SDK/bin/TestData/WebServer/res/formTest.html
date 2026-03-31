@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Web Server Test (form)</title>
+  <script type="text/javascript">
+	  
+  	var xhttp = new XMLHttpRequest();
+	
+  	xhttp.onreadystatechange = function() {
+  	    if (xhttp.readyState == 4 && xhttp.status == 200) {
+  	       // Typical action to be performed when the document is ready:
+		   //readyState==4 - completed
+		   //status==200 - OK
+		   document.getElementById("Result").value = xhttp.responseText;
+  	    }
+  	};
+	
+	xhttp.onerror = function() {
+	  alert("Request failed");
+	};
+	
+   function doCalculate(f) 
+   {
+	xhttp.timeout = 1000;
+	var str1 = "calculate?r8valA=";
+	var str1Val = document.getElementById("valA").value;
+	var str2 = "&r8valB=";
+	var str2Val = document.getElementById("valB").value;
+	var res = str1.concat(str1Val.toString(), str2, str2Val.toString());
+	
+	//alert(res);
+	//let myForm = document.getElementById('frm');
+	//var formData = new FormData(myForm);
+	//var str2 = formData.toString();
+	
+	//alert(str2);
+	xhttp.open("GET", res, true);
+	xhttp.send();
+	return false;
+   }
+  </script>
+  
+</head>
+<body>
+
+<h1 style="font-family:verdana;">Computation using HTTP Server</h1>
+
+<form id="frm" onsubmit="event.preventDefault(); doCalculate(this)">
+  <label for="valA">Value a:</label>
+  <input type="number" id="valA" name="valA" value="2.0" step="0.01"><br>
+  <label for="valB">Value b:</label>
+  <input type="number" id="valB" name="valB" value="1.5" step="0.01"><br><br>
+  <button type="submit">Calculate</button><br><br>
+  <label for="Result">Result (a*b):</label>
+  <input type="number" id="Result" name="Result" value="0.0" step="0.0001"><br>
+  <!-- ><label for="rStatus">Status:</label>
+  <input type="text" id="rStatus" name="rStatus"> -->
+</form>
+<br>
+<p style="font-family:times;"> Go to <a href="index.html">index page using this link.</a> </p>
+
+</body>
+</html>

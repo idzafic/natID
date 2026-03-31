@@ -1,0 +1,10 @@
+#Res=9
+/index.html,cl9 = bin/TestData/WebServer/res/index.html
+/nextPage.html,cl9 = bin/TestData/WebServer/res/nextPage.html
+/formTest.html,cl9 = bin/TestData/WebServer/res/formTest.html
+/favicon.ico = Common/Icons/ServerIcon64.png
+/server.png = Common/Icons/serverKey128.png
+/numbers.png = Common/Icons/ByNumbers128.png
+/WebSocketTest.html,cl9 = bin/TestData/WebServer/res/WebSocketTest.html
+/WebSocketChat.html,cl9 = bin/TestData/WebServer/res/WebSocketChat.html
+/natID_WebSock.js,cl9 = bin/TestData/WebServer/res/natID_WebSock.js

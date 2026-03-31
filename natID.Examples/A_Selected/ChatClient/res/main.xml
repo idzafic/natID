@@ -1,0 +1,10 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="start" path="Common/Icons/connect64.png"/>
+		<Res id="inProcess" path="Common/Icons/Connecting64.png"/>
+		<Res id="stop" path="Common/Icons/disconnect64.png"/>
+		<Res id="settings" path = "Common/Icons/SettingsBlue48.png"/>
+	</Images>
+	<Symbols/>
+</DevRes>

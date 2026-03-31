@@ -1,0 +1,71 @@
+Header:
+	maxIter = 50 	//Solution start time for time domain (ODE and DAE) problems
+	report = AllDetails 	//Solved and unsolved cases with iterations and debug information
+	maxReps = -1 	//Used to limit repetitions (-1: no limit)
+	outToTxt = false 	//true: create output txt file for results, fale: output file was not created
+	txtFile = "" 	//only valid if outToTxt was set to true
+end
+//Model created by xml -> modl converter
+Model [type=NL name="PF"]:
+Vars [out=true]:
+	δ_2=δ_1		// Variable name and its initial value (optional)
+	v_2=v_1
+	δ_3=δ_1
+	v_3=v_1
+	Q2_inj=0		//IBR Q - initial value set to zero
+Params:
+	v_1=1 [out=true]	//slack voltage
+	δ_1=0		// slack angle
+	aY=32.8797974610715
+	aY11=aY
+	aY21=aY
+	aY22=65.7595949221429
+	aY23=aY
+	aY32=aY
+	aY33=aY
+	θ_diag=-1.40564764938027 
+	θ_offDiag=1.73594500420952 
+	θ_11=θ_diag
+	θ_21=θ_offDiag
+	θ_22=θ_diag
+	θ_23=θ_offDiag
+	θ_32=θ_offDiag
+	θ_33=θ_diag
+	P2_inj=0.2		//IBR P
+	V2_sp=1.01
+	P3_inj=-1.2
+	Q3_inj=-0.45			//inductive load
+	
+	IBR_section=0 [type=int out=true]  //for debug: it shows slope pos:-2->left donst part, -1->left slope, 0->deadband, 1->right slope, 2->right const part
+	S_ibr_rating = 1.5
+	cLim = 0.44	//default multiplicator for max and min reactive power injection
+	V_2_sp = 1.02		//IBR set point
+	V_dead_max = V_2_sp+0.02; V_dead_min = V_2_sp-0.02
+	V_reg_max = V_2_sp+0.08; V_reg_min = V_2_sp-0.08
+	
+	k1 = -cLim*S_ibr_rating/(V_dead_min-V_reg_min)
+	k2 = -cLim*S_ibr_rating/(V_reg_max-V_dead_max)
+NLEs:
+	// node 2 (IBR node with default VAr regulation)
+	v_2^2*aY22*cos(θ_22) + v_2*(aY21*v_1*cos(δ_2-θ_21-δ_1) + aY23*v_3*cos(δ_2-θ_23-δ_3)) = P2_inj
+	-v_2^2*aY22*sin(θ_22) + v_2*(aY21*v_1*sin(δ_2-θ_21-δ_1) + aY23*v_3*sin(δ_2-θ_23-δ_3)) = Q2_inj
+	switch:
+		case v_2 < V_reg_min -> Q2_inj=cLim*S_ibr_rating
+		case v_2 < V_dead_min -> Q2_inj=cLim*S_ibr_rating+k1*(v_2-V_reg_min)
+		case v_2 > V_reg_max -> Q2_inj=-cLim*S_ibr_rating
+		case v_2 > V_dead_max -> Q2_inj=k2*(v_2-V_dead_max)
+		default -> Q2_inj = 0
+	end
+	
+	// node 3 - PQ load
+	v_3^2*aY33*cos(θ_33) + v_3*(aY32*v_2*cos(δ_3-θ_32-δ_2)) = P3_inj
+	-v_3^2*aY33*sin(θ_33) + v_3*(aY32*v_2*sin(δ_3-θ_32-δ_2)) = Q3_inj
+IterPostP:		//This part is optional (just for debug purposes)
+	switch:
+		case v_2 < V_reg_min -> IBR_section = -2
+		case v_2 < V_dead_min -> IBR_section = -1
+		case v_2 > V_reg_max -> IBR_section = 2
+		case v_2 > V_dead_max -> IBR_section = 1
+		default -> IBR_section = 0
+	end
+end

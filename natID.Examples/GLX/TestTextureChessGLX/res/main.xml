@@ -1,0 +1,13 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="export" path="Common/Icons/export48.png"/>
+	</Images>
+	<FileNames>
+		<Res id="shaders" path=":shaders"/>
+	</FileNames>
+	<Textures>
+		<Res id="chess1" path="Common/Images/Chess1.png" mirrorV = "true"/>
+		<Res id="chess2" path="Common/Images/Chess2.png" mirrorV = "true"/>
+	</Textures>
+</DevRes>

@@ -1,0 +1,23 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="TransCost" path = "Common/Icons/transportCostXL.png"/>
+		<Res id="zoomIn" path = "Common/Icons/zoomIn64.png"/>
+		<Res id="zoomOut" path = "Common/Icons/zoomOut64.png"/>
+		<Res id="fullScreen" path = "Common/Icons/fullScreen64.png"/>
+		<Res id="grid" path = "Common/Icons/grid128.png"/>
+		<Res id="canvas" path = "Common/Icons/canvas128.png"/>
+		<Res id="connOK" path = "Common/Icons/connOK.png"/>
+		<Res id="sestar" path = "Common/Icons/Sestar64.png"/>
+		<Res id="settings" path = "Common/Icons/SettingsBlue48.png"/>
+		<Res id="bh_flag" path = "Common/Icons/bh_flag.png"/>
+	</Images>
+	<Symbols>
+		<Res id="Xfmr4" path="Common/Symbols/PSA/FourWindingTransformer.xml"/>
+		<Res id="rect" path="Common/Symbols/Shapes/rectangle.xml"/>
+		<Res id="roundRct" path="Common/Symbols/Shapes/roundedRectangle.xml"/>
+		<Res id="circ" path="Common/Symbols/Shapes/circle.xml"/>
+		<Res id="Bez1" path="Common/Symbols/Shapes/Bezier01.xml"/>
+		<Res id="Bez2" path="Common/Symbols/Shapes/Bezier02.xml"/>
+	</Symbols>
+</DevRes>

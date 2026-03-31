@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns:win="windows" xmlns:mac="macOS" xmlns:lin="linux">
+	<lin:Group type="dynLib" path="$MyBin/GTK/release/lib">
+		<File name="adwaita-1-0"/>
+		<File name="cairo-2"/>
+		<File name="cairo-gobject-2"/>
+		<File name="cairo-script-interpreter-2"/>
+		<File name="epoxy-0"/>
+		<File name="ffi-7"/>
+		<File name="fontconfig-1"/>
+		<File name="freetype-6"/>
+		<File name="fribidi-0"/>
+		<File name="gdk_pixbuf-2.0-0"/>
+		<File name="gio-2.0-0"/>
+		<File name="glib-2.0-0"/>
+		<File name="gmodule-2.0-0"/>
+		<File name="gobject-2.0-0"/>
+		<File name="graphene-1.0-0"/>
+		<File name="gthread-2.0-0"/>
+		<File name="gtk-4-1"/>
+		<File name="harfbuzz-gobject"/>
+		<File name="harfbuzz-subset"/>
+		<File name="harfbuzz"/>
+		<File name="intl-8"/>
+		<File name="jpeg-8.2.2"/>
+		<File name="pango-1.0-0"/>
+		<File name="pangocairo-1.0-0"/>
+		<File name="pangowin32-1.0-0"/>
+		<File name="pixman-1-0"/>
+		<File name="pkgconf-4"/>
+		<File name="png16-16"/>
+		<File name="sass"/>
+		<File name="tiff4"/>
+		<File name="xml2-2"/>
+		<File name="z"/>
+	</lin:Group>
+	<Group type="dynLib" path="$MyBin/GTK/release/bin">
+		<File name="adwaita-1-0"/>
+		<File name="cairo-2"/>
+		<File name="cairo-gobject-2"/>
+		<File name="cairo-script-interpreter-2"/>
+		<File name="epoxy-0"/>
+		<File name="ffi-7"/>
+		<File name="freetype-6"/>
+		<File name="fribidi-0"/>
+		<File name="gdk_pixbuf-2.0-0"/>
+		<File name="gio-2.0-0"/>
+		<File name="glib-2.0-0"/>
+		<File name="gmodule-2.0-0"/>
+		<File name="gobject-2.0-0"/>
+		<File name="graphene-1.0-0"/>
+		<File name="gthread-2.0-0"/>
+		<File name="gtk-4-1"/>
+		<File name="harfbuzz-gobject"/>
+		<File name="harfbuzz-subset"/>
+		<File name="harfbuzz"/>
+		<File name="intl-8"/>
+		<File name="jpeg-8.2.2"/>
+		<File name="pango-1.0-0"/>
+		<File name="pangocairo-1.0-0"/>
+		<File name="pangowin32-1.0-0"/>
+		<File name="pixman-1-0"/>
+		<File name="pkgconf-4"/>
+		<File name="png16-16"/>
+		<File name="sass"/>
+		<File name="tiff4"/>
+		<File name="z"/>
+	</Group>
+</Package>

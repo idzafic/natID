@@ -1,0 +1,14 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="invoiceRep" path = "Common/Icons/transportCost.png"/>
+		<Res id="cardRep" path="Common/Icons/Report.png"/>
+	</Images>
+	<Symbols>
+		<Res id="Xfmr4" path="Common/Symbols/PSA/FourWindingTransformer.xml"/>
+	</Symbols>
+	<FileNames>
+		<Res id="allReps.db" path="bin/TestData/natGUITest/TestAllReps.db"/>
+	</FileNames>
+	
+</DevRes>

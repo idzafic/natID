@@ -1,0 +1,76 @@
+Header:
+	maxIter=50
+	maxReps=1000
+	report=AllDetails //Solved - only final solved solution, All - shows solved and nonSolved with iterations, AllWithDetails - All + debug information 
+end  //end of header
+
+//Model created by xml -> modl converter
+Model [type=WLS reInit=true eps=1e-5 maxIter=50 domain=cmplx name="SE EC With PF SubModel (SE with Transfer Cap)"]:
+Vars [out=true]:		// conj="true" is by default 
+	v1=v1_sl
+	v2=v1_sl
+	v3=v1_sl
+Params:
+	v1_sl=1.01*e^(1i*pi/4)			//slack node
+	z12=0.005+0.03i
+	z23=0.005+0.03i
+	y21=1/z12
+	y23=1/z23
+	y22=y21+y23
+	y33=y23
+	S3_inj=-1-0.3i [out=true]
+	v1_meas [type=real out=true]
+	v2_meas [type=real out=true]
+	v3_meas [type=real out=true]
+	w_inj=10  [type=real]	
+	w_v=1 [type=real]
+	S3_meas [out=true]
+	S3_est [out=true]
+	
+SubModel [type=NL alwaysOn=true eps=1e-4 maxIter=200 domain=cmplx copyPars=8 alwaysOn=false name="Prepare inputs for the main probelm with RND"]:		
+	Vars [conj=true out=true]:
+		v2=v1_sl
+		v3=v1_sl
+	Params:
+		v1=v1_sl
+		
+	Distribs:
+		g1 [type=Gauss mean=0 dev=0.02]
+		g2 [type=Gauss mean=0 dev=0.03]
+	NLEs:
+		// node 2 (PV node)
+		y22*v2-y21*v1-y23*v3=0
+		conj(y22*v2-y21*v1-y23*v3)=0
+			
+		// node 3 
+		v3*conj(y33*v3-y23*v2) = S3_inj
+		conj(v3)*(y33*v3-y23*v2) = conj(S3_inj)
+	PostProc:
+		// transfer initial values to parent problem
+		@main.v1_meas.real = abs(v1) + real(rnd(g1))		//transfer to the real-valued main variable initial value with noise
+		@main.v2_meas.real = abs(v2) + real(rnd(g1))		//transfer to the real-valued main variable initial value with noise
+		@main.v3_meas.real = abs(v3) + real(rnd(g1))		//transfer to the real-valued main variable initial value with noise
+		@main.S3_meas = v3*conj(y33*v3-y23*v2) + rnd(g2)	//transfer to the complex valued main variable initial value with noise
+end			//end of submodel
+
+WLSEs:
+	// node 1 slack(node) Fix angle 
+	[w=w_v]	v1 = v1_sl
+	[w=w_v]	conj(v1) = conj(v1_sl)
+	// node 3 
+	[w=w_inj]	v3*conj(y33*v3-y23*v2) = S3_meas
+	[w=w_inj]	conj(v3)*(y33*v3-y23*v2) = conj(S3_meas)
+	// voltages 
+	[w=w_v]	v2*conj(v2) = v2_meas^2
+	[w=w_v]	v3*conj(v3) = v3_meas^2
+ECs:
+	// node 2 (ZI: sum of currents = 0) 
+	y22*v2-y21*v1-y23*v3=0
+	conj(y22*v2-y21*v1-y23*v3)=0
+PostProc:
+	S3_est=v3*conj(y33*v3-y23*v2)
+
+Repeats:			//repeat until fails to solve
+	S3_inj -= 0.02+0.01i		//increase load at node 3
+	repeat
+end

@@ -1,0 +1,28 @@
+Header:
+	startTime = 0.0
+	dTime = 1e-3
+	endTime = 20.0
+	maxIter= 20
+	report = Solved
+end  //end of header
+//Model created by xml -> modl converter
+Model [type=DAE domain=real method=RK4 name="Dorf Example 7.60 page 481"]:
+Vars:
+	err [out=true]
+	yc
+	ym
+	ul
+	y [out=true]
+Params:
+	u=1 [out=true]
+	Kp=500
+	Kd=191.3
+	Td=0		// disturbance 
+TFs:
+	yc/err=Kp+Kd*s		// PD controller 
+	ym/yc=5000/(s+1000)		// Motor coil 
+	y/ul=1/(s^2+20*s)		// Load 
+NLEs:
+	err=u-y		// negative feedback 
+	ul=ym-Td		// Input to load (output from motor minus disturbance)
+end

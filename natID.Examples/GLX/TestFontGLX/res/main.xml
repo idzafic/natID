@@ -1,0 +1,14 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="export" path="Common/Icons/export48.png"/>
+	</Images>
+    <FileNames>
+        <Res id="font1" path="bin/TestData/natGL/Fonts/Times New Roman32.text"/>
+    </FileNames>
+    
+    <FileNames>
+        <Res id="font2" path="bin/TestData/natGL/Fonts/Times New Roman32bi.text"/>
+    </FileNames>
+
+</DevRes>

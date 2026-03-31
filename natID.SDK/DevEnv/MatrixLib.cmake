@@ -1,0 +1,16 @@
+#ISparseSolver lib
+
+if (WIN32)
+    set(MATRIX_LIB_DEBUG "${NATID_SDK_LIB}/MatrixD.lib")
+    set(MATRIX_LIB_RELEASE "${NATID_SDK_LIB}/Matrix.lib")
+	if( CMAKE_SIZEOF_VOID_P EQUAL 4 )
+		set(MATRIX_LIB_DEBUG "${NATID_SDK_LIB}/Matrix32D.lib")
+		set(MATRIX_LIB_RELEASE "${NATID_SDK_LIB}/Matrix32.lib")
+	endif()
+elseif (APPLE)
+    set(MATRIX_LIB_DEBUG "${NATID_SDK_LIB}/MatrixD.dylib")
+    set(MATRIX_LIB_RELEASE "${NATID_SDK_LIB}/Matrix.dylib")
+else ()
+    set(MATRIX_LIB_DEBUG "${NATID_SDK_LIB}/MatrixD.so")
+    set(MATRIX_LIB_RELEASE "${NATID_SDK_LIB}/Matrix.so")
+endif()

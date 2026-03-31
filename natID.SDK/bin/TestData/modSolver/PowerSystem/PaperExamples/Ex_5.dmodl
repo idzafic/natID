@@ -1,0 +1,78 @@
+Header:
+	maxIter = 200 	//Solution start time for time domain (ODE and DAE) problems
+	report = Solved 	//Only successfully solved cases
+end
+Model [type=NL reInit=true domain=cmplx name="PF With PV Regulating Generator And Its Limits"]:
+Vars [conj=true out=true]:
+	v2=v1; v3=v1
+Params:
+	
+	v1=1.01*e^(1i*2*pi/3)	//slack node
+	z12=0.005+0.03i; z23=0.005+0.03i
+	y21=1/z12; y23=1/z23; y22=y21+y23; y33=y23
+
+	S1 = 0 [out=true]
+	S2_inj=0.2+0i [out=true]
+
+	S3_inj=0 		[out=true]		//start from zero
+	V2_sp=1.01; Q2_inj_min=-1; Q2_inj_max=1.6		// Set to 1.6 to have voltage regulation 
+	cGen2Reg=true	[out=true]	// initially generator on node 2 is in voltage regulation mode 
+
+//Start of the Repeat loop
+
+ReInit:			//just re-init params, vars are done by the system (used only when reInit=true and Repeats is used)
+	cGen2Reg=true
+	S2_inj=0.2+0i
+	S1 = 0
+	
+// Start of the outer loop 
+
+// Start of the inner Loop 
+NLEs:
+	// node 2 (PV node)
+	// Sinj2 + conj(Sinj2) = 2*P2_inj 
+	v2*conj(y22*v2-y21*v1-y23*v3) + conj(v2)*(y22*v2-y21*v1-y23*v3)=2*real(S2_inj)
+	if cGen2Reg:
+		v2*conj(v2)=V2_sp^2		// if node is PV 
+	else:
+		v2*conj(y22*v2-y21*v1-y23*v3) - conj(v2)*(y22*v2-y21*v1-y23*v3)=2i*imag(S2_inj)		// Sinj2-conj(Sinj2)=2i*Q2_inj 
+	end
+	// node 3 
+	v3*conj(y33*v3-y23*v2) = S3_inj
+	conj(v3)*(y33*v3-y23*v2) = conj(S3_inj)
+	
+//IterPostP - Iteration Post Processing Part (will be called in inner loop for each iteration)
+IterPostP [alwaysOn=true]: 
+	if cGen2Reg:
+		S2_inj.imag = imag(v2*conj(y22*v2-y21*v1-y23*v3))
+	end
+	S1 = v1*conj(y21*v1-y21*v2)
+	
+// End of the inner Loop 
+
+Limits:
+	//Limits on Gen at node 2
+	group [name="Gen2"]:
+		// PV generator on node 2 
+		if cGen2Reg:
+			// check against the min limit 
+			if imag(S2_inj) <= Q2_inj_min [signal=TooLow]:
+				cGen2Reg = false			// disable voltage regulation on gen 2 
+				S2_inj.imag = Q2_inj_min		// set generator to PQ with given minQ 
+			else:
+				// check against the max limit 
+				if imag(S2_inj) >= Q2_inj_max [signal=TooHigh]:
+					cGen2Reg = false			// disable voltage regulation on gen 2 
+					S2_inj.imag = Q2_inj_max		// set generator to PQ with maxQ 
+				end
+			end
+		end
+	end
+// End of the outer loop 
+
+Repeats:			//repeat until fails to solve
+	S3_inj -= 0.02+0.01i		//increase load at node 3
+	repeat
+	
+//End of the Repeat loop
+end		//Model end

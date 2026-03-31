@@ -1,0 +1,19 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="export" path="Common/Icons/export48.png"/>
+	</Images>
+	<Textures>
+		<Res id="numbers" path="Common/Images/diceNumbers_Atlas.jpg" mirrorV = "true"/>
+		<Res id="dots" path="Common/Images/dice_Atlas.jpg" mirrorV = "true"/>
+		
+		<Res id="woodFloor" path="Common/Images/wood_floor_color.jpg" mirrorV = "true"/>
+		<Res id="woodFloorNRM" path="Common/Images/wood_floor_normal.jpg" mirrorV = "true"/>
+		<Res id="woodFloorDISP" path="Common/Images/wood_floor_disp.jpg" mirrorV = "true"/>
+		<Res id="woodFloorSPEC" path="Common/Images/wood_floor_spec.jpg" mirrorV = "true"/>
+
+	</Textures>
+	<FileNames>
+		<Res id="shaders" path=":shaders/"/>
+	</FileNames>
+</DevRes>

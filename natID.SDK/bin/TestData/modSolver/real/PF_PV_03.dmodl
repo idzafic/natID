@@ -1,0 +1,65 @@
+Header:
+	maxIter=50
+	report=AllDetails //Solved - only final solved solution, All - shows solved and nonSolved with iterations, AllWithDetails - All + debug information 
+end  //end of header
+//Model created by xml -> modl converter
+Model [type=NL name="PF"]:
+Vars [out=true]:
+	phi_2=0		// Variable name and its initial value (optional)
+	v_2=1
+	phi_3=0
+	v_3=1
+Params:
+	v_1=1 [out=true]
+	phi_1=0		// Parameter name and its value
+	aY=32.8797974610715
+	aY11=aY
+	aY21=aY
+	aY22=65.7595949221429
+	aY23=aY
+	aY32=aY
+	aY33=aY
+	thetaDiag=-1.40564764938027 
+	thetaOffDiag=1.73594500420952 
+	theta11=thetaDiag
+	theta21=thetaOffDiag
+	theta22=thetaDiag
+	theta23=thetaOffDiag
+	theta32=thetaOffDiag [out=true]
+	theta33=thetaDiag
+	cGen2Reg=true		// initially generator on node 2 is in regulation mode 
+	P2_inj=0.1
+	Q2_inj=0.111 [out=true]
+	Q2_inj_min=-10
+	Q2_inj_max=10
+	V2_sp=1.01
+	P3_inj=-1
+	Q3_inj=-0.3
+NLEs:
+	// node 2 (PV node)
+	v_2^2*aY22*cos(theta22) + v_2*(aY21*v_1*cos(phi_2-theta21-phi_1) + aY23*v_3*cos(phi_2-theta23-phi_3))=P2_inj
+	if cGen2Reg:
+		v_2=V2_sp		// if node is PV 
+	else:
+		-v_2^2*aY22*sin(theta22) + v_2*(aY21*v_1*sin(phi_2-theta21-phi_1) + aY23*v_3*sin(phi_2-theta23-phi_3))=Q2_inj
+	end
+	// node 3 
+	v_3^2*aY33*cos(theta33) + v_3*(aY32*v_2*cos(phi_3-theta32-phi_2)) = P3_inj
+	-v_3^2*aY33*sin(theta33) + v_3*(aY32*v_2*sin(phi_3-theta32-phi_2)) = Q3_inj
+Limits:
+	group [name="Gen2" enabled=true]:
+		// PV generator on node 2 
+		if cGen2Reg:
+			Q2_inj=-v_2^2*aY22*sin(theta22) + v_2*(aY21*v_1*sin(phi_2-theta21-phi_1) + aY23*v_3*sin(phi_2-theta23-phi_3))
+			if Q2_inj <= Q2_inj_min [signal=TooLow]:
+				cGen2Reg=false		// disable voltage regulation on gen 2 
+				Q2_inj=Q2_inj_min		// set generator to PQ with given minQ 
+			else:
+				if Q2_inj >= Q2_inj_max [signal=TooHigh]:
+					cGen2Reg=false		// disable voltage regulation on gen 2 
+					Q2_inj=Q2_inj_max		// set generator to PQ with maxQ 
+				end
+			end
+		end
+	end
+end

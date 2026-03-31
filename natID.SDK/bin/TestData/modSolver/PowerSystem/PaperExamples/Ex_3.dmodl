@@ -1,0 +1,50 @@
+Header:
+	maxIter=50
+	report=AllDetails //Solved - only final solved solution, All - shows solved and nonSolved with iterations, AllWithDetails - All + debug information 
+end  //end of header
+Model [type=NL domain=cmplx name="PF With Regulating Generator And Its Limits"]:
+Vars [conj=true out=true]:
+	v2=v1; v3=v1
+Params:
+	v1=1.01*e^(1i*2*pi/3)	//slack node
+	z12=0.005+0.03i; z23=0.005+0.03i
+	y21=1/z12; y23=1/z23; y22=y21+y23; y33=y23
+	S3_inj=-2-1i
+
+        P2_inj=0.2; Q2_inj=0
+	V2_sp=1.01; Q2_inj_min=-1; Q2_inj_max=1.6		// Set to 1.6 to have voltage regulation 
+	cGen2Reg=true [type=bool out=true]	// initially generator on node 2 is in regulation mode 
+// Start of outer loop 
+// Start of inner Loop 
+NLEs:
+	// node 2 (PV node)
+	// Sinj2 + conj(Sinj2) = 2*P2_inj 
+	v2*conj(y22*v2-y21*v1-y23*v3) + conj(v2)*(y22*v2-y21*v1-y23*v3)=2*P2_inj
+	if cGen2Reg:
+		v2*conj(v2)=V2_sp^2		// if node is PV 
+	else:
+		v2*conj(y22*v2-y21*v1-y23*v3)-conj(v2)*(y22*v2-y21*v1-y23*v3)=2i*Q2_inj		// Sinj2-conj(Sinj2)=2i*Q2_inj 
+	end
+	// node 3 
+	v3*conj(y33*v3-y23*v2) = S3_inj; conj(v3)*(y33*v3-y23*v2) = conj(S3_inj)
+// End of inner Loop 
+Limits:
+	group [name="Gen2"]:
+		// PV generator on node 2 
+		if cGen2Reg:
+			Q2_inj = imag(v2*conj(y22*v2-y21*v1-y23*v3))
+			if Q2_inj <= Q2_inj_min [signal=TooLow]:
+				cGen2Reg = false		// disable voltage regulation on gen 2 
+				Q2_inj = Q2_inj_min		// set generator to PQ with given minQ 
+			else:
+				if Q2_inj >= Q2_inj_max [signal=TooHigh]:
+					cGen2Reg = false		// disable voltage regulation on gen 2 
+					Q2_inj = Q2_inj_max		// set generator to PQ with maxQ 
+				end
+			end
+		end
+	end
+// End of outer loop 
+PostProc:
+	Q2_inj = imag(v2*conj(y22*v2-y21*v1-y23*v3))
+end

@@ -1,0 +1,26 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="start" path="Common/Icons/arrow_right.png"/>
+		<Res id="stop" path="Common/Icons/x.png"/>
+		<Res id="apple" path="Common/Icons/apple.png"/>
+		<Res id="pear" path="Common/Icons/pear.png"/>
+		<Res id="banana" path="Common/Icons/banana.png"/>
+		<Res id="gameover" path="Common/Icons/GameOver.png"/>
+		<Res id="ok" path="Common/Icons/ok.png"/>
+		<Res id="nok" path="Common/Icons/nok.png"/>
+		<Res id="settings" path = "Common/Icons/SettingsBlue48.png"/>
+	</Images>
+	
+    <Symbols>   
+		<Res id="snake" path="Common/Symbols/Shapes/SnakeHead.xml"/>
+		<Res id="snakeOM" path="Common/Symbols/Shapes/SnakeHeadOM.xml"/>
+		<Res id="snakeBody" path="Common/Symbols/Shapes/SnakeBody.xml"/>
+    </Symbols>
+	
+	<Sounds>
+		<Res id="background" path="Common/Sounds/LeavesRustling.wav"/>
+		<Res id="eatFood" path="Common/Sounds/AppleEating.wav"/>
+		<Res id="gameOver" path="Common/Sounds/GameOver.wav"/>
+	</Sounds>
+</DevRes>

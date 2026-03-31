@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="export" path="Common/Icons/export48.png"/>
+	</Images>
+	<Texts>
+		<!--- all from res folder -->
+		<Res id="mainV" path=":shaders/Main.vert"/>
+		<Res id="mainF" path=":shaders/Main.frag"/>
+		<Res id="shadowV" path=":shaders/Shadow.vert"/>
+		<Res id="shadowF" path=":shaders/Shadow.frag"/>		
+		<Res id="depthMapV" path=":shaders/DepthMap.vert"/>
+		<Res id="depthMapF" path=":shaders/DepthMap.frag"/>		
+		<Res id="mainNoTexV" path=":shaders/MainNoTex.vert"/>
+		<Res id="mainNoTexF" path=":shaders/MainNoTex.frag"/>
+		<Res id="simpleV" path=":shaders/SimpleColor.vert"/>
+        <Res id="simpleF" path=":shaders/SimpleColor.frag"/>
+		<Res id="DepthPassV" path=":shaders/DepthPass.vert"/>
+		<Res id="DepthPassF" path=":shaders/DepthPass.frag"/>
+		<Res id="MainPass1V" path=":shaders/MainPassV1.vert"/>
+		<Res id="MainPass1F" path=":shaders/MainPassV1.frag"/>
+	</Texts>
+	<Textures>
+		<Res id="robotColor" path=":Common/Images/robot_color.png" mirrorV = "true"/>
+        <Res id="robotMetalRough" path=":Common/Images/robot_metal_rough.png" mirrorV = "true"/>
+
+	</Textures>
+	<FileNames>
+		<!-- Desna strana -->
+        <Res id="Desna_nadkoljenica" path=":Common/Models/Desna_nadkoljenica.obj"/>
+        <Res id="Desna_nadlaktica" path=":Common/Models/Desna_nadlaktica.obj"/>
+        <Res id="Desna_podkoljenica" path=":Common/Models/Desna_podkoljenica.obj"/>
+        <Res id="Desna_podlaktica" path=":Common/Models/Desna_podlaktica.obj"/>
+        <Res id="Desni_kuk" path=":Common/Models/Desni_kuk.obj"/>
+        <Res id="Desni_lakat" path=":Common/Models/Desni_lakat.obj"/>
+        <Res id="Desno_koljeno" path=":Common/Models/Desno_koljeno.obj"/>
+        <Res id="Desno_rame" path=":Common/Models/Desno_rame.obj"/>
+
+        <!-- Glava i Tijelo -->
+        <Res id="Glava" path=":Common/Models/Glava.obj"/>
+        <Res id="Tijelo" path=":Common/Models/Tijelo.obj"/>
+
+        <!-- Lijeva strana -->
+        <Res id="Lijeva_nadkoljenca" path=":Common/Models/Lijeva_nadkoljenica.obj"/>
+        <Res id="Lijeva_nadlaktica" path=":Common/Models/Lijeva_nadlaktica.obj"/>
+        <Res id="Lijeva_podkoljenica" path=":Common/Models/Lijeva_podkoljenica.obj"/>
+        <Res id="Lijeva_podlaktica" path=":Common/Models/Lijeva_podlaktica.obj"/>
+        <Res id="Lijevi_kuk" path=":Common/Models/Lijevi_kuk.obj"/>
+        <Res id="Lijevi_lakat" path=":Common/Models/Lijevi_lakat.obj"/>
+        <Res id="Lijevo_koljeno" path=":Common/Models/Lijevo_koljeno.obj"/>
+        <Res id="Lijevo_rame" path=":Common/Models/Lijevo_rame.obj"/>
+	</FileNames>
+</DevRes>

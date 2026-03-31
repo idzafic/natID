@@ -1,0 +1,37 @@
+// Simple Compute Shader Demo
+// Processes an array of values: reads input, applies a simple transformation, writes to output
+
+#version 450
+#extension GL_ARB_compute_shader : enable
+
+// Threadgroup size: 32 threads per group (32 x 1 x 1)
+// This number is static and the same for all potential compute shaders
+layout(local_size_x = 32, local_size_y = 1, local_size_z = 1) in;
+
+// Input buffer: array of floats (read-only)
+layout(std430, binding = 0) readonly buffer InputBuffer {
+    float data[];
+} inputBuffer;
+
+// Output buffer: array of floats (read-write)
+layout(std430, binding = 1) buffer OutputBuffer {
+    float data[];
+} outputBuffer;
+
+// Parameter buffer
+layout(std140, binding = 2) uniform ComputeParams {
+    float multiplier;  // Simple scaling factor
+    float padding1;
+    float padding2;
+    float padding3;
+} params;
+
+void mainComp()
+{
+    // Each thread processes one element
+    uint idx = gl_GlobalInvocationID.x;
+    
+    
+    // Simple operation: multiply input by the multiplier parameter
+    outputBuffer.data[idx] = inputBuffer.data[idx] * params.multiplier;
+}

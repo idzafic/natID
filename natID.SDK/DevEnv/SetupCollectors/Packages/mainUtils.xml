@@ -1,0 +1,11 @@
+<?xml version='1.0'?>
+<Package>
+	<Group type="dynLib" path="$MyDLib" subFolder=""> 
+		<!-- type could be: 
+		 	dynLib: for dlls, dylibs and so file (extension will be added directly 
+		 	executable: for executables (extension will be added automatically)
+			other: for all other files (extension will not be changed)
+		 -->
+		<File name="mainUtils" debugName="mainUtilsD"/>
+	</Group>
+</Package>

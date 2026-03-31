@@ -1,0 +1,24 @@
+<?xml version='1.0'?>
+<DevRes regionals="Common/Regionals"
+		displayName="Chat Client"
+		maintainer="Izudin Džafić" 
+		email="idzafic@etf.unsa.ba"
+		homePage="https://github.com/idzafic/natID"
+		majorVersion="1" 
+		minorVersion="0"
+		versionDate="2026-03-25"
+		comment="Simple demonstration of natID capabilities.
+For more details visit https://github.com/idzafic/natID">
+	<Langs>
+		<Lang id="EN" name="English"/>
+		<Lang id="BA" name="Bosanski"/>
+	</Langs>
+	<ArtWork>
+		<Config path="Common/ResConfigs/natGUI.xml"/>
+		<Config path=":main.xml"/>
+	</ArtWork>
+	<Translation>
+		<Config path="Common/ResConfigs/tr/%s/natGUI.xml"/>
+		<Config path=":tr/%s/main.xml"/>
+	</Translation>
+</DevRes>

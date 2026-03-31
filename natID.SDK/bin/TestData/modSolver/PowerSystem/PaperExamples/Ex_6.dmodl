@@ -1,0 +1,32 @@
+Header:
+	maxIter=200
+	maxReps=1000
+	report=AllWithDetails //Solved - only final solved solution, All - shows solved and nonSolved with iterations, AllWithDetails - All + debug information 
+end  //end of header
+Model [type=WLS domain=cmplx name="SE_EC"]:
+Vars [out=true]:		// conj="true" is by default 
+	v1=v1_ph_meas; v2=v1_ph_meas; v3=v1_ph_meas
+Params:
+	phiSlack=pi/4	[type=real]	// angle of slack 
+	v1_meas=1	[type=real] // real magnitude measurement on node 1 
+	v1_ph_meas=v1_meas*e^(phiSlack*1i)
+	w_inj=10  [type=real]; w_v=1 [type=real]
+	z12=0.005+0.03i; z23=0.005+0.03i;
+	y21=1/z12; y23=1/z23; y22=y21+y23; y33=y23
+	S3_meas=-1-0.3i
+	v2_meas=0.984267; v3_meas=0.969386
+WLSEs:
+	// node 1 slack(node) Fix angle 
+	// <Eq w="w_phiSlack" fx="v1-conj(v1)-2i*v1_meas*sin(phiSlack)"/> 
+	[w=w_v]	v1 = v1_ph_meas
+	[w=w_v]	conj(v1) = conj(v1_ph_meas)
+	// node 3 
+	[w=w_inj]	v3*conj(y33*v3-y23*v2) = S3_meas
+	[w=w_inj]	conj(v3)*(y33*v3-y23*v2) = conj(S3_meas)
+	// voltage magnitudes
+	[w=w_v]	v2*conj(v2) = v2_meas^2
+	[w=w_v]	v3*conj(v3) = v3_meas^2
+ECs:
+	// node 2 (ZI: sum of currents = 0) 
+	y22*v2-y21*v1-y23*v3=0; conj(y22*v2-y21*v1-y23*v3)=0
+end

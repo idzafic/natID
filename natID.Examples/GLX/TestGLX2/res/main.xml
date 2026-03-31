@@ -1,0 +1,6 @@
+<?xml version='1.0'?>
+<DevRes>
+	<FileNames>
+		<Res id="shaders" path=":shaders"/>
+	</FileNames>
+</DevRes>

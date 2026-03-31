@@ -1,0 +1,24 @@
+<?xml version='1.0'?>
+<SetupCollector xmlns:win="windows" xmlns:mac="macOS" xmlns:lin="linux" executableName="Chess">
+	<Folders dev="~natID.Examples/LecturesAI/E_MMAB02_Chess_GUI" executable="$RAMDisk/Out/Chess/Release" out="$RAMDisk/Setup/Chess"/>
+	<Packages debug="false">
+		<Package name="natGUIALL"/>
+		<Package name="GTK4" exclude="macOS,linux"/>
+	</Packages>
+	<ResData>
+		<!-- schams subfolder will be created in resources of setup (dep) -->
+		<Res type="folder" dev="$MyBin/GTK/release/share/glib-2.0/schemas" dep="schemas" exclude="macOS,linux"/>
+	</ResData>
+	<MutableResource/>
+	<Setup licenseFileName="~natID.SDK/DevEnv/License.txt"
+			categories="Education;Utility"
+			win:programGroup="IDz"
+			win:width="440"
+			win:headerBackColor="#30D5C8"
+			win:headerTxtColor= "#1A1A2E"
+			win:licenseTxtColor="#846060"
+			win:useMakeCabinet="true"
+			win:minBuildNumber="17763"
+			lin:depends="$DepGTKv4" 
+			lin:icon="$HOME/natID.SDK/Common/LinIcons/8Queens"/>
+</SetupCollector>

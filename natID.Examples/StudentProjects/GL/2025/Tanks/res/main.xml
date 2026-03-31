@@ -1,0 +1,83 @@
+<?xml version='1.0'?>
+<DevRes>
+
+	<Texts>
+		<!--- all from res folder -->
+		<Res id="mainV" path=":shaders/Main.vert"/>
+		<Res id="mainF" path=":shaders/Main.frag"/>
+		<Res id="shadowV" path=":shaders/Shadow.vert"/>
+		<Res id="shadowF" path=":shaders/Shadow.frag"/>		
+		<Res id="depthMapV" path=":shaders/DepthMap.vert"/>
+		<Res id="depthMapF" path=":shaders/DepthMap.frag"/>		
+		<Res id="mainNoTexV" path=":shaders/MainNoTex.vert"/>
+		<Res id="mainNoTexF" path=":shaders/MainNoTex.frag"/>
+		
+		<Res id="DepthPassV" path=":shaders/DepthPass.vert"/>
+		<Res id="DepthPassF" path=":shaders/DepthPass.frag"/>
+		<Res id="MainPass1V" path=":shaders/MainPassV1.vert"/>
+		<Res id="MainPass1F" path=":shaders/MainPassV1.frag"/>
+	</Texts>
+	<Textures>
+		<Res id="cityTex" path=":Images/GradPolyTex.png" mirrorV="true"/>
+		<Res id="tankTex" path=":Images/TankBody.png" mirrorV="true"/>
+		<Res id="wheelsTex" path=":Images/Wheels.png" mirrorV="true"/>
+		<Res id="turretTex" path=":Images/TankTurret.png" mirrorV="true"/>
+		<Res id="barrelTex" path=":Images/TankBarrel.png" mirrorV="true"/>
+		<Res id="tracksTex" path=":Images/TankTracks.png" mirrorV="true"/>
+		<Res id="shellTex" path=":Images/TankShell.png" mirrorV="true"/>
+		<Res id="remainsTex" path=":Images/Remains.png" mirrorV="true"/>
+	</Textures>
+	<FileNames>
+		<Res id="cityObj" path=":Models/LowPoly.obj"/>
+		<Res id="tankObj" path=":Models/Body.obj"/>
+		<Res id="wheelsObj" path=":Models/Wheels.obj"/>
+		<Res id="wheels2Obj" path=":Models/Wheels2.obj"/>
+		<Res id="turretObj" path=":Models/Turret.obj"/>
+		<Res id="barrelObj" path=":Models/Barrel.obj"/>
+		<Res id="shellObj" path=":Models/Shell.obj"/>
+		<Res id="tracksObj" path=":Models/Tracks.obj"/>
+		<Res id="remainsObj" path=":Models/Remains.obj"/>
+		<Res id="track1DObj" path=":Models/track1D.obj"/>
+		<Res id="track2DObj" path=":Models/track2D.obj"/>
+		<Res id="track3DObj" path=":Models/track3D.obj"/>
+		<Res id="track4DObj" path=":Models/track4D.obj"/>
+		<Res id="track5DObj" path=":Models/track5D.obj"/>
+		<Res id="track6DObj" path=":Models/track6D.obj"/>
+		<Res id="track7DObj" path=":Models/track7D.obj"/>
+		<Res id="track8DObj" path=":Models/track8D.obj"/>
+		<Res id="track9DObj" path=":Models/track9D.obj"/>
+		<Res id="track10DObj" path=":Models/track10D.obj"/>
+		
+		<Res id="track1LObj" path=":Models/track1L.obj"/>
+		<Res id="track2LObj" path=":Models/track2L.obj"/>
+		<Res id="track3LObj" path=":Models/track3L.obj"/>
+		<Res id="track4LObj" path=":Models/track4L.obj"/>
+		<Res id="track5LObj" path=":Models/track5L.obj"/>
+		<Res id="track6LObj" path=":Models/track6L.obj"/>
+		<Res id="track7LObj" path=":Models/track7L.obj"/>
+		<Res id="track8LObj" path=":Models/track8L.obj"/>
+		<Res id="track9LObj" path=":Models/track9L.obj"/>
+		<Res id="track10LObj" path=":Models/track10L.obj"/>
+		
+
+		<!-- Cube Map 3 -->
+		<Res id="cm3Left" path=":Images/CubeMaps/nx.jpg"/>
+		<Res id="cm3Front" path=":Images/CubeMaps/pz.jpg"/>
+		<Res id="cm3Right" path=":Images/CubeMaps/px.jpg"/>
+		<Res id="cm3Back" path=":Images/CubeMaps/nz.jpg"/>
+		<Res id="cm3Top" path=":Images/CubeMaps/py.jpg"/>
+		<Res id="cm3Bottom" path=":Images/CubeMaps/ny.jpg"/>
+
+		<!-- Fonts -->
+		<Res id="arcade" path="bin/TestData/natGL/Fonts/Arcade32.text"/> <!-- ascii only -->
+		<Res id="arcadeClasic" path="bin/TestData/natGL/Fonts/ArcadeClassic32.text"/> <!-- ascii only -->
+		<Res id="korataki" path="bin/TestData/natGL/Fonts/Korataki32.text"/>
+		<Res id="vinq" path="bin/TestData/natGL/Fonts/Vinque32.text"/>
+		
+	</FileNames>
+	<Sounds>
+		<Res id="tankEngine" path=":Sounds/zvukTenka.wav"/>
+		<Res id="tankFire" path=":Sounds/fireTenka.wav"/>
+		<Res id="tankThrottle" path=":Sounds/zvukThrottle.wav"/>
+	</Sounds>
+</DevRes>

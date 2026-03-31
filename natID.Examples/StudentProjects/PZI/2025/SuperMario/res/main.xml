@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<DevRes>
+    <Images>
+		<Res id="TransCost" path="Common/Icons/transportCostXL.png"/>
+        <Res id="watters" path="Common/Images/Faces/Watters.png"/>           
+        <Res id="coin1" path=":images/coin1.png"/>
+        <Res id="coin2" path=":images/coin2.png"/>
+        <Res id="coin3" path=":images/coin3.png"/>
+		
+        <Res id="mario_idle_right" path=":images/mario_idle_right.png"/>
+        <Res id="mario_walk1_right" path=":images/mario_walk1_right.png"/>
+        <Res id="mario_walk2_right" path=":images/mario_walk2_right.png"/>
+        <Res id="mario_jump_right" path=":images/mario_jump_right.png"/>
+        
+        <Res id="mario_idle_left" path=":images/mario_idle_left.png"/>
+        <Res id="mario_walk1_left" path=":images/mario_walk1_left.png"/>
+        <Res id="mario_walk2_left" path=":images/mario_walk2_left.png"/>
+        <Res id="mario_jump_left" path=":images/mario_jump_left.png"/>
+        
+        <Res id="goomba_idle" path=":images/goomba_idle.png"/>
+        <Res id="goomba_walk1" path=":images/goomba_walk1.png"/>
+        <Res id="goomba_walk2" path=":images/goomba_walk2.png"/>
+        <Res id="goomba_dead" path=":images/goomba_dead.png"/>
+        
+        <Res id="mushroom" path=":images/mushroom.png"/>
+        <Res id="flower1" path=":images/flower1.png"/>
+        <Res id="flower2" path=":images/flower2.png"/>
+    </Images>
+    <Sounds>
+        <Res id="background" path=":sounds/GroundTheme.wav"/>
+        <Res id="jump" path=":sounds/Jump.wav"/>
+        <Res id="grow" path=":sounds/grow.wav"/>
+        <Res id="crash" path=":sounds/Crash.wav"/>
+        <Res id="checkPoint" path=":sounds/checkPoint.wav"/>
+        <Res id="coin" path=":sounds/coin.wav"/>
+    </Sounds>
+</DevRes>

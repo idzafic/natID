@@ -1,0 +1,7 @@
+<?xml version='1.0'?>
+<DevRes>
+	<FileNames>
+		<Res id="_NATID_shaders" path="Common/Shaders/Font/testFontGLX.spv"/>
+		<Res id="_NATID_cubemap" path="Common/Shaders/Cubemap/testSkybox.spv"/>
+	</FileNames>
+</DevRes>

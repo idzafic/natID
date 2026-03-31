@@ -1,0 +1,14 @@
+<?xml version='1.0'?>
+<DevRes regionals="Common/Regionals">
+	<Langs>
+		<Lang id="EN" name="English"/>
+		<Lang id="BA" name="Bosanski"/>
+	</Langs>
+	<ArtWork>
+		<Config path="Common/ResConfigs/natGUI.xml"/>
+		<Config path=":main.xml"/>
+	</ArtWork>
+	<Translation>
+
+	</Translation>
+</DevRes>

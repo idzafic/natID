@@ -1,0 +1,15 @@
+#Zipper library
+
+if (WIN32)
+    set(ZLIB "${NATID_SDK_LIB}/zlib.lib")
+    set(ZIPPER_LIB_DEBUG "${NATID_SDK_LIB}/zipperD.lib")
+    set(ZIPPER_LIB_RELEASE "${NATID_SDK_LIB}/zipper.lib")
+elseif(APPLE)
+    set(ZLIB "${NATID_SDK_LIB}/zlib.a")
+    set(ZIPPER_LIB_DEBUG "${NATID_SDK_LIB}/zipperD.dylib")
+    set(ZIPPER_LIB_RELEASE "${NATID_SDK_LIB}/zipper.dylib")
+else()
+    set(ZLIB "${NATID_SDK_LIB}/zlib.a")
+    set(ZIPPER_LIB_DEBUG "${NATID_SDK_LIB}/zipperD.so")
+    set(ZIPPER_LIB_RELEASE "${NATID_SDK_LIB}/zipper.so")
+endif()

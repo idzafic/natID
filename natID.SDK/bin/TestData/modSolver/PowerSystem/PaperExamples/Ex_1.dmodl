@@ -1,0 +1,21 @@
+Header:
+	maxIter=50
+	report=AllDetails //Solved - only final solved solution, All - shows solved and nonSolved with iterations, AllDetails - All + debug information 
+end  //end of header
+Model [type=NL domain=real eps=1e-6 name="PF for 3 nodes (second node is Zero Injection)"]:
+Vars [out=true]:
+	δ_2=δ_1; v_2=v_1; δ_3=δ_1; v_3=v_1 //variable name and its initial value (optional)
+Params:
+	δ_1=0; v_1=1	//slack angle and voltage (param)
+	aY=32.8797974610715; θ_diag=-1.40564764938027; θ_offDiag=1.73594500420952
+	aY11=aY; aY21=aY; aY22=65.7595949221429; aY23=aY; aY32=aY; aY33=aY 
+	θ_11=θ_diag; θ_21=θ_offDiag; θ_22=θ_diag; θ_23=θ_offDiag; θ_32=θ_offDiag; θ_33=θ_diag
+	P3_inj=-1; Q3_inj=-0.3
+NLEs:
+	// node 2 (ZI). Instead of sum(powers) = 0 --> sum of currents = 0
+	aY21*v_1*cos(θ_21+δ_1) + v_2*aY22*cos(θ_22+δ_2) + aY23*v_3*cos(θ_23+δ_3)=0
+	aY21*v_1*sin(θ_21+δ_1) + v_2*aY22*sin(θ_22+δ_2) + aY23*v_3*sin(θ_23+δ_3)=0
+	// node 3: PQ, sum of powers = 0
+	v_3^2*aY33*cos(θ_33) + v_3*(aY32*v_2*cos(δ_3-θ_32-δ_2)) = P3_inj
+	-v_3^2*aY33*sin(θ_33) + v_3*(aY32*v_2*sin(δ_3-θ_32-δ_2)) = Q3_inj
+end

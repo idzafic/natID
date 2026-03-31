@@ -1,0 +1,21 @@
+Header:
+	maxIter=50
+	maxReps=1000
+	report=AllDetails //Solved - only final solved solution, All - shows solved and nonSolved with iterations, AllWithDetails - All + debug information 
+end  //end of header
+Model [type=NL domain=cmplx eps=1e-6 name="PF for 3 nodes (second node is Zero Injection)"]:
+Vars [conj=true out=true]:
+	v2=v1; v3=v1
+Params:
+	v1=1+0i
+	z12=0.005+0.03i; z23=0.005+0.03i; 
+	y21=1/z12; y23=1/z23; y22=y21+y23; y33=y23
+	S3_inj=-1-0.3i
+NLEs:
+	// node 2 (Sum of currents)
+	y22*v2-y21*v1-y23*v3=0			//sum of currents = 0
+	conj(y22*v2-y21*v1-y23*v3)=0	//sum of conj(currents) = 0
+	// node 3 
+	v3*conj(y33*v3-y23*v2) = S3_inj
+	conj(v3)*(y33*v3-y23*v2) = conj(S3_inj)
+end

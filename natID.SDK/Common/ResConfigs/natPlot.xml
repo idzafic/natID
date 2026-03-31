@@ -1,0 +1,11 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="@PlotReset" path="Common/Icons/Graph/origSize.png" desktop="Dark"/>
+		<Res id="@PlotGrid" path="Common/Icons/Graph/grid.png" desktop="Dark"/>
+		<Res id="@PlotLegend" path="Common/Icons/Graph/legend.png" desktop="Dark"/>
+		<Res id="@PlotSave" path="Common/Icons/Graph/save.png" desktop="Dark"/>
+		<Res id="@PlotSettings" path="Common/Icons/Graph/settings.png" desktop="Dark"/>
+	</Images>
+	<Symbols/>
+</DevRes>

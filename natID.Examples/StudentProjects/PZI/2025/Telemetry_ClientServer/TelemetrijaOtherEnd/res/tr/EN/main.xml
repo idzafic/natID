@@ -1,0 +1,13 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+		<Res id="settings" tr="Settings"/>
+		<Res id="settingsTT" tr="Adjust address and port number of remote web server"/>
+		<Res id="connect" tr="Connect"/>
+		<Res id="connectTT" tr="Connect to the web server"/>
+		<Res id="inProcess" tr="In process"/>
+		<Res id="inProcessTT" tr="Trying to establish the connection"/>
+		<Res id="disconnect" tr="Disconnect"/>
+		<Res id="disconnectTT" tr="Disconnect from the web server"/>
+	</Translations>
+</DevRes>

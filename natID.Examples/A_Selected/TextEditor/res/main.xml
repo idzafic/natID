@@ -1,0 +1,13 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="imgOpen" path="Common/Icons/openSave/open64.png"/>
+		<Res id="imgSave" path="Common/Icons/openSave/save64.png"/>
+	</Images>
+	<Symbols>
+		<Res id="roundRct" path="Common/Symbols/Shapes/roundedRectangle.xml"/>
+	</Symbols>
+	<Texts>
+		<Res id="textEditIntro" path=":files/textEditIntro.html"/>
+	</Texts>
+</DevRes>

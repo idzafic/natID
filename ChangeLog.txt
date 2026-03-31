@@ -1,4 +1,17 @@
 
+Overview of Changes in 4.0.0, 2026-03-31
+=========================================
+- Several fixes on linux, macOS, Windows
+- Added SetupCollector (natID installer for linux, macOS, and Windows
+- Shell executor
+- Default about dlg
+- better dlg positioning on windows
+- new folder structure
+- no need for HOME path env variable
+- no need for other_bin
+- initial version of GLX (metal like api for linux, macOS, and Windows): Metal on macOS, Vulkan on other systems
+- ...
+
 Overview of Changes in 3.5.0, 2025-11-16
 =========================================
 - Several fixes on linux

@@ -1,0 +1,7 @@
+<?xml version='1.0'?>
+<DevRes regionals="Common/Regionals">
+	<ArtWork>
+		<Config path="Common/ResConfigs/natGUI.xml"/>
+		<Config path=":main.xml"/>
+	</ArtWork>
+</DevRes>

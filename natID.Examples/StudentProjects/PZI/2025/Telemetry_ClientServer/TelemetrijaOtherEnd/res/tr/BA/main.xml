@@ -1,0 +1,15 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+		<Res id="settings" tr="Podešenja"/>
+		<Res id="settingsTT" tr="Podešenja adrese i porta servera"/>
+		<Res id="connect" tr="Spoji se"/>
+		<Res id="connectTT" tr="Konektuj se na web server"/>
+		<Res id="inProcess" tr="U toku"/>
+		<Res id="inProcessTT" tr="Konektiranje je u toku"/>
+		<Res id="disconnect" tr="Prekini"/>
+		<Res id="disconnectTT" tr="Diskonektuj se sa web server"/>
+		
+	</Translations>
+</DevRes>
+

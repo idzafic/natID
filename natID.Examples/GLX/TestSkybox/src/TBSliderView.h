@@ -1,0 +1,69 @@
+
+#pragma once
+#include <gui/Slider.h>
+#include <gui/CheckBox.h>
+#include <gui/View.h>
+#include <gui/HorizontalLayout.h>
+
+class TBSlider : public gui::Slider
+{
+protected:
+    
+    void getMinSize(gui::Size& minSize) const override
+    {
+        minSize.height = 22;
+        minSize.width = 150;
+    }
+    
+public:
+    TBSlider()
+    {
+        setRange(0.001, 0.05);
+        setValue(0.01);
+    }
+};
+
+class TBCheckBox : public gui::CheckBox
+{
+protected:
+    
+    void getMinSize(gui::Size& minSize) const override
+    {
+        minSize.height = 24;
+        minSize.width = 150;
+    }
+    
+public:
+    TBCheckBox()
+    : gui::CheckBox("Dice with dots")
+    {
+    }
+};
+
+class TBSliderView : public gui::View
+{
+protected:
+    TBSlider _sliderSpeed;
+    TBCheckBox _cb;
+    gui::HorizontalLayout _hl;
+protected:
+public:
+    TBSliderView()
+    : _hl(2)
+    {
+        setMargins(0, 0, 0, 0);
+        _hl.setMargins(0,0);
+        _hl << _sliderSpeed << _cb;
+        setLayout(&_hl);
+    }
+    
+    TBSlider* getSlider()
+    {
+        return &_sliderSpeed;
+    }
+    
+    TBCheckBox* getCheckBox()
+    {
+        return &_cb;
+    }
+};

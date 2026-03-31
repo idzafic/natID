@@ -1,0 +1,30 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Images>
+		<Res id="TransCost" path="Common/Icons/transportCostXL.png"/>
+		<Res id="watters" path="Common/Images/Faces/Watters.png"/>
+	</Images>
+	<Symbols>
+		<Res id="Xfmr4" path="Common/Symbols/PSA/FourWindingTransformer.xml"/>
+		<Res id="Bez1" path="Common/Symbols/Shapes/Bezier01.xml"/>
+		<Res id="Bez2" path="Common/Symbols/Shapes/Bezier02.xml"/>
+	</Symbols>
+	<Sounds></Sounds> <!-- We do not need sounds here -->
+	<Textures>
+		<Res id="watters" path="Common/Images/Faces/FaceWatters.png"/>
+		<Res id="merlin" path="Common/Images/Faces/FaceMerlin.png"/>
+		<Res id="hetfield" path="Common/Images/Faces/FaceHetfield.png"/>
+	</Textures>
+	<Texts>	<!-- Just to demonstrate text usage (text file is in res/texts folder-->
+		<Res id="txtSample" path=":texts/SampleText.txt"/>
+	</Texts>
+	<FileNames>
+		<Res id="mnist" path="bin/TestData/AI/MNIST/TrainIDX3"/>
+	</FileNames>
+
+	<!-- 
+	Note: for custom applications yout paths can start with ~ which depicts your home folder
+	 For example: 
+	 <Res id="myRestOutOfnatIDSKD" path="~/MyImages/AnImageOutsideNatID_SDK.png"/> 
+	 -->
+</DevRes>
