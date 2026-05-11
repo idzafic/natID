@@ -1,0 +1,9 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+		<Res id="open" tr="Open"/>
+		<Res id="openTT" tr="Show the selected plugin"/>
+		<Res id="appTitle" tr="Plugin tester"/>
+		<Res id="mOpen" tr="Open and show the plugin!"/>
+	</Translations>
+</DevRes>

@@ -1,0 +1,34 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+
+
+		        <!-- Settings -->
+        <Res id="dlgSettings" tr="Podešenja"/>
+        <Res id="lblLang" tr="Trenutni jezik aplikacija:"/>
+        <Res id="lblLang2" tr="Jezik aplikacije nakon njenog restarta:"/>
+        <Res id="chbTBIcsAndLbls" tr="Prikaži labele ispod ikona na alatnoj traci"/>
+		<Res id="RestartRequired" tr="Restartovati aplikaciju"/>
+		<Res id="RestartRequiredInfo" tr="Neke od promijenjenih postavki zahtijevaju ponovno pokretanje aplikacije kako bi bile primijenjene"/>
+		<Res id="Restart" tr="Restartovati"/>
+		<Res id="DoNoRestart" tr="Nemoj restartovati"/>
+
+
+            <Res id="Normal" tr="Normalno"/>
+            <Res id="Bold" tr="Podebljano"/>
+            <Res id="Italic" tr="Kurziv"/>
+            <Res id="BoldItalic" tr="Podebljano kurziv"/>
+            <Res id="Underline" tr="Podvučeno"/>
+            <Res id="ResetUnderline" tr="Ponovno podvlačenje"/>
+            <Res id="Subscript" tr="Indeks"/>
+            <Res id="Superscript" tr="Eksponent"/>
+            <Res id="ResetSupSuperscript" tr="Ponovno eksponent"/>
+            <Res id="ResetColor" tr="Ponovno boja"/>
+            <Res id="IncreaseFont" tr="Povećaj font"/>
+            <Res id="DecreaseFont" tr="Smanji font"/>
+
+
+		
+	</Translations>
+</DevRes>
+

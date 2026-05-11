@@ -1,0 +1,10 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Translations>
+		<Res id="open" tr="Otvori"/>
+		<Res id="openTT" tr="Prikaži selektirani plugin"/>
+		<Res id="appTitle" tr="Plugin tester"/>
+		<Res id="mOpen" tr="Aktivirana je opcija za učitavanje plugina!"/>
+	</Translations>
+</DevRes>
+

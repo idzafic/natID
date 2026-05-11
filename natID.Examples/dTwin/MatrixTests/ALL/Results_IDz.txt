@@ -1,0 +1,54 @@
+FastSolverIDz
+Trying small real unsymmetric matrix...
+x(0)=1
+x(1)=2
+x(2)=3
+x(3)=4
+x(4)=5
+Small unsymmetric real matrix OK!
+Trying small complex unsymmetric matrix...
+x(0)=(1,1.25);
+x(1)=(2,0);
+x(2)=(3,0);
+x(3)=(4,0);
+Complex unsymmetric matrix OK
+Trying small real symmetric matrix...
+x(0)=-0.316803
+x(1)=-0.495569
+x(2)=-0.212961
+x(3)=0.0567046
+x(4)=0.860706
+x(5)=0.314098
+x(6)=0.400341
+x(7)=1.49886
+Small real symmetric matrix OK!
+Testing real matrix: 1138_bus.mtx
+Cannot open file: 1138_bus.mtx
+Unexpected format
+Testing real matrix: 685_bus.mtx
+Cannot open file: 685_bus.mtx
+Unexpected format
+Testing real matrix: 494_bus.mtx
+Cannot open file: 494_bus.mtx
+Unexpected format
+Testing real matrix: 662_bus.mtx
+Cannot open file: 662_bus.mtx
+Unexpected format
+Testing real matrix: qh1484.mtx
+Cannot open file: qh1484.mtx
+Unexpected format
+Testing real matrix: qh882.mtx
+Cannot open file: qh882.mtx
+Unexpected format
+Testing real matrix: bcsstk26.mtx
+Cannot open file: bcsstk26.mtx
+Unexpected format
+Testing real matrix: gemat11.mtx
+Cannot open file: gemat11.mtx
+Unexpected format
+Testing real matrix: gemat12.mtx
+Cannot open file: gemat12.mtx
+Unexpected format
+Testing complex matrix: young4c.mtx
+Cannot open file: young4c.mtx
+Expected 'complex' in young4c.mtx
