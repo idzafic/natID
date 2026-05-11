@@ -1,3 +1,11 @@
+Overview of Changes in 4.1.0, 2026-05-11
+=========================================
+- Several fixes on linux, macOS, Windows
+- Added gui::thread::asyncExecInMainThread
+    - used in progress indicators
+- Added plugin support (see natID.Examples/dTwin/Plugin)
+- Added examples for dense and sparse matrix manipulation (see natID.Examples/dTwin/MatrixTests)
+- ...
 
 Overview of Changes in 4.0.0, 2026-03-31
 =========================================
