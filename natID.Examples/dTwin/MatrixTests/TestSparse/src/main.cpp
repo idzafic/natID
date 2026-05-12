@@ -390,7 +390,8 @@ void testRealMatrix(const fo::fs::path& inPath, const char* strMatrixName,  spar
     td::String matrixFileName;
     matrixFileName.format("%s.mtx", strMatrixName);
     auto matrixIn = inPath / matrixFileName.c_str();
-    const char* matrixName = matrixIn.c_str();
+    td::String strMatrixInName = matrixIn.string();
+    const char* matrixName = strMatrixInName.c_str();
 
     auto outPath = getResultPath(natIDSDKPath);
     td::String strOut;
@@ -644,7 +645,8 @@ void testComplexMatrix(const fo::fs::path& inPath, const char* strMatrixName,  s
     td::String matrixFileName;
     matrixFileName.format("%s.mtx", strMatrixName);
     auto matrixIn = inPath / matrixFileName.c_str();
-    const char* matrixName = matrixIn.c_str();
+    td::String strMatrixInName = matrixIn.string();
+    const char* matrixName = strMatrixInName.c_str();
 
     auto outPath = getResultPath(natIDSDKPath);
 

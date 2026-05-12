@@ -23,5 +23,4 @@ target_compile_definitions(${TESTDENSE_NAME} PUBLIC SER_RESULTS MU_USETIMER)
 target_link_libraries(${TESTDENSE_NAME} debug ${MU_LIB_DEBUG} optimized ${MU_LIB_RELEASE}
                     debug ${MATRIX_LIB_DEBUG} optimized ${MATRIX_LIB_RELEASE})
 
-setIDEPropertiesForExecutableWithAVX2(${TESTDENSE_NAME})
-#copyPBTargetReleaseExeToMyBin(${TESTDENSE_NAME})
+setIDEPropertiesForExecutable(${TESTDENSE_NAME})

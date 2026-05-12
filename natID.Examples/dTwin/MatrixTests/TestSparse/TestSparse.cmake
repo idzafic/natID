@@ -20,4 +20,3 @@ target_link_libraries(${TESTSPARSE_NAME} debug ${MU_LIB_DEBUG} optimized ${MU_LI
                                     debug ${MATRIX_LIB_DEBUG} optimized ${MATRIX_LIB_RELEASE})
 
 setIDEPropertiesForExecutable(${TESTSPARSE_NAME})
-#copyPBTargetReleaseExeToMyBin(${TESTSPARSE_NAME})
