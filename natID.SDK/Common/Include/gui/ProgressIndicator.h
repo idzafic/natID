@@ -28,9 +28,10 @@ namespace gui
         ProgressIndicator(const td::String& toolTip, DataCtrl::Orientation orientation = DataCtrl::Orientation::Horizontal, bool bShowValues = false);
         ~ProgressIndicator();
         gui::ObjType getObjType() const override { return ObjType::ProgressIndicator;}
+        //val must be double in range [0,1]
         bool setValue(const td::Variant& val, bool sendMessage=true) override;
         bool getValue(td::Variant& val, bool checkType = false) const override;
-        void setValue(double val);
+        void setValue(double val); //val must be double in range [0,1]
         double getValue() const;
 	};
 }

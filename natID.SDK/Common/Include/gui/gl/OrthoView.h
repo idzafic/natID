@@ -59,7 +59,6 @@ protected:
     void onCursorExited(const gui::InputDevice& inputDevice) override;
     void createContext(bool invertYAxis = false);
     void setModelRefPoint(const gui::Point& refPt);
-//    bool triangulate(const cnt::PushBackVector<gui::gl::Point> vertices, cnt::PushBackVector<td::INT4>& indices) const;
 };
 
 } //namespace gl

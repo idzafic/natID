@@ -14,87 +14,46 @@
 namespace gui
 {
 
+class ViewportCanvasHelper;
+
 class NATGUI_API ViewportCanvas : public Canvas
 {
-public:
-
-    struct ViewState
-    {
-        double originX = 0.0;
-        double originY = 0.0;
-        double zoom = 1.0;
-    };
-
+    friend class ViewportCanvasHelper;
+    
 protected:
-
-    ViewState _view;
-
-    bool _panInProgress = false;
-    gui::Point _lastMousePos;
-
-    double _minZoom = 0.01;
-    double _maxZoom = 1000.0;
-
+    gui::Size _size;
+    gui::Point _modelRefPt;
+    double _minZoom = 0.001;
+    double _maxZoom = 1000.;
+    td::BYTE _invertY = 0;
+    td::BYTE _dragging = 0;
 public:
-
     ViewportCanvas();
-    virtual ~ViewportCanvas();
-
-    //
-    // coordinate conversion
-    //
-
-    gui::Point modelToView(const gui::Point& pt) const;
-    gui::Point viewToModel(const gui::Point& pt) const;
-
-    //
-    // viewport
-    //
-
-    void setOrigin(double x, double y);
-    void getOrigin(double& x, double& y) const;
-
-    void pan(double dxPixels, double dyPixels);
-
+    ~ViewportCanvas();
+    
+    virtual void onZoomChanged();
+    virtual void onOriginChanged();
+    
     void setZoom(double zoom);
     double getZoom() const;
-
-    void zoomAtPoint(double factor,
-                     const gui::Point& viewPoint);
-
-    void zoomToFit(const gui::Rect& modelBounds,
-                   double margin = 10.0);
-
-    void centerAt(const gui::Point& modelPoint);
-
-    //
-    // visible area
-    //
-
-    void getVisibleModelRect(gui::Rect& r) const;
-
-protected:
-
-    //
-    // drawing
-    //
-
-    virtual void drawModel() = 0;
-
-    void onDraw(const gui::Rect& invalidRect) override;
-
-    //
-    // mouse interaction
-    //
-
-//    bool onMousePressed(const gui::MouseEvent& e) override;
-//    bool onMouseReleased(const gui::MouseEvent& e) override;
-//    bool onMouseMoved(const gui::MouseEvent& e) override;
-//    bool onMouseWheel(const gui::MouseEvent& e) override;
-
-protected:
-
-    void clampZoom();
+    void setZoomLimits(double minZoom, double maxZoom);
+    
+    const gui::Point& getOrigin() const; //in model coordinates
+    void setOrigin(const gui::Point& tl);   //in model coordinates
+    
+    Canvas::Placement getPlacement() const override final;
+    gui::Point getModelPoint(const gui::Point& framePoint) const;
+    void onResize(const gui::Size& newSize) override;
+    bool onKeyPressed(const Key& key) override;
+    //bool onKeyReleased(const Key& key) override;
+    bool onZoom(const gui::InputDevice& inputDevice) override;
+    bool onScroll(const gui::InputDevice& inputDevice) override;
+    void onPrimaryButtonPressed(const gui::InputDevice& inputDevice) override;
+    void onPrimaryButtonReleased(const gui::InputDevice& inputDevice) override;
+    void onPrimaryButtonDblClick(const gui::InputDevice& inputDevice) override;
+    void onCursorDragged(const gui::InputDevice& inputDevice) override;
+    void onCursorExited(const gui::InputDevice& inputDevice) override;
+    void setModelRefPoint(const gui::Point& refPt);
 };
 
 }

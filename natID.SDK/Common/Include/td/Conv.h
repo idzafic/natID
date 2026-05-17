@@ -12,10 +12,76 @@
 #include <td/Types.h>
 #include <mu/Machine.h>
 #include <tuple>
+#include <charconv>
+#include <system_error>
+#include <cstdlib>
+#include <cstring>
+#include <type_traits>
 #include <mu/mu.h>
 
 namespace td
 {
+
+// Check if we can use from_chars (c++ 17)
+#if defined(__cpp_lib_to_chars) && __cpp_lib_to_chars >= 201611L
+    #ifndef __APPLE__
+        #define TD_USE_STD_FROM_CHARS 1
+    #else
+        // On macOS, check if deployment target is macOS 13+
+        #ifdef __MAC_OS_X_VERSION_MIN_REQUIRED
+            #if __MAC_OS_X_VERSION_MIN_REQUIRED >= 130000
+                #define TD_USE_STD_FROM_CHARS 1
+            #endif
+        #else
+            // If no deployment target specified, assume older macOS
+            #define TD_USE_STD_FROM_CHARS 0
+        #endif
+    #endif
+#else
+    #define TD_USE_STD_FROM_CHARS 0
+#endif
+
+template<typename T>
+T toNumber(const char* str, int strLen=-1)
+{
+    static_assert(std::is_arithmetic<T>::value, "T must be arithmetic type");
+    
+    if (!str)
+        return T{0};
+    
+    if (strLen < 0)
+        strLen = (int) strlen(str);
+    
+    if (strLen == 0)
+        return T{0};
+    
+    T result = T{0};
+    
+#if TD_USE_STD_FROM_CHARS
+    auto [ptr, ec] = std::from_chars(str, str + strLen, result);
+    if (ec != std::errc())
+        result = 0;  // or throw
+    return result;
+#else
+    // Fallback implementation (used on all platforms if from_chars unavailable)
+    if constexpr (std::is_same<T, bool>::value) {
+        result = (str[0] == '1' || str[0] == 't' || str[0] == 'T' ||
+                  str[0] == 'y' || str[0] == 'Y');
+    }
+    else if constexpr (std::is_integral<T>::value) {
+        if constexpr (std::is_unsigned<T>::value) {
+            result = static_cast<T>(std::strtoull(str, nullptr, 10));
+        } else {
+            result = static_cast<T>(std::strtoll(str, nullptr, 10));
+        }
+    }
+    else if constexpr (std::is_floating_point<T>::value) {
+        result = static_cast<T>(std::strtod(str, nullptr));
+    }
+    
+    return result;
+#endif
+}
 
 template <typename TCH>
 inline bool toBoolean(const TCH* pStr, int nLen)

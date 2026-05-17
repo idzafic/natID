@@ -22,6 +22,7 @@ public:
     static size_t getID();
     static int execute(const char* pathToExecutable, char* const* argv);
     static int execute(const td::String& pathToExecutable, const cnt::SafeFullVector<td::String>& argv, bool bWait = true);
+    static int restartCurrent(int argc, const char* argv[]);
 };
 
 } //namespace syst

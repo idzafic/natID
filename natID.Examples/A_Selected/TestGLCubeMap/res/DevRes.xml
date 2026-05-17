@@ -1,5 +1,14 @@
 <?xml version='1.0'?>
-<DevRes version="2024.07.16" regionals="Common/Regionals">
+<DevRes regionals="Common/Regionals"
+		displayName="TestGL Cube Map"
+		maintainer="Izudin Džafić" 
+		email="idzafic@etf.unsa.ba"
+		homePage="https://github.com/idzafic/dTwin"
+		majorVersion="1" 
+		minorVersion="0"
+		versionDate="2026-03-25"
+		comment="Demonstrates 3D operations (cube map, camera,...)
+It also shows font rendering using textures.">
 	<Langs>
 		<Lang id="EN" name="English"/>
 		<Lang id="BA" name="Bosanski"/>

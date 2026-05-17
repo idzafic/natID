@@ -87,10 +87,16 @@ private:
     gui::DrawableString _xAxisName;
     gui::DrawableString _yAxisName;
     double _numberHeight;
-    
+  
+    gui::Point _legendAnchorOffset;
+
+    //td::BYTE nLegendColumns = 1;
+    //bool showLegend = false;
+
     float _yAxisNameSeperation = 60; //150;
     float _xAxisNameSeperation = 60; //86;
-    
+
+    td::Anchor _legendAnchor = td::Anchor::Fixed;
     bool _drawMargins;
     bool _drawNumbersOutside = true;
     bool _initalDraw = false;
@@ -132,6 +138,7 @@ private:
 protected:
     void setBounds(const gui::Rect& bounds);
     void checkLimits();
+    void updateLegendLocation();
 public:
     using Pattern = Plot::Pattern;
     virtual void drawAgain(){}
@@ -163,6 +170,8 @@ public:
     
     void addFunction2(const gui::CoordType* x, const gui::CoordType* y, size_t length,  const td::String& name, const td::LineParams& lineParams);
     
+    void addFunction2(gui::Point* pts, gui::Point* ptsOrig, size_t length, const td::String& name, const td::LineParams& lineParams);
+    
     void addFunction3(const gui::Point* points, size_t length, const td::String& name, const td::LineParams& lineParams);
     
     void addFunction(gui::CoordType* x, gui::CoordType* y, size_t length, td::ColorID color, float lineWidth = 2, Pattern pattern = Pattern(), td::String name = "line");
@@ -184,7 +193,10 @@ public:
     void changePattern(Pattern pattern, size_t function);
     void changeColor(td::ColorID color, size_t function);
     void setLegendLocation(const gui::Point& location);
+	void adjustDeltaToAnchor(gui::Point& delta);
+	void incrementLegendLocation(gui::Point& delta);
     void setLegendCols(size_t cols);
+    void setLegendCols(const gui::Point& offset, size_t cols, td::Anchor anchor, bool bShowLegend);
     size_t getLegendCols() const;
 //    void removeColorFromAutopicker(td::ColorID color);
     
@@ -194,6 +206,10 @@ public:
     void draw(td::ColorID backColor);
     
     void getProps(gui::plot::Plot::Props& props) const;
+
+    const gui::Point& getLegendAnchorOffset() const;
+
+    td::Anchor getLegendAnchor() const;
 //    void setProps(const gui::Plot::Props& props);
 };
 

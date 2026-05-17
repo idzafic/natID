@@ -140,8 +140,8 @@ namespace cnt
 			if (_top == _container + _capacity)
             {
                 //resize container
-                size_t oldSize = _capacity;
-                size_t newSize = oldSize * 2;
+                td::UINT4 oldSize = _capacity;
+                td::UINT4 newSize = oldSize * 2;
 
                 T* tmp = new T[newSize];
 
@@ -225,7 +225,7 @@ namespace cnt
 				return -1;
 
 			if ((pData >= _container) && (pData < _container + _size))
-				return pData - _container;
+				return int(pData - _container);
 
 			return -1;
 		}

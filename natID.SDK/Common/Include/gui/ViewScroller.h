@@ -14,6 +14,7 @@
 #pragma once
 #include "BaseView.h"
 #include "Types.h"
+#include "IScrollConsumer.h"
 
 namespace gui
 {
@@ -27,6 +28,8 @@ public:
     enum class Type : unsigned char {NoScroll = 0, ScrollerAlwaysVisible, ScrollAndAutoHide, ScrollExternal};
 protected:
     BaseView* _pContentView = nullptr;
+    IScrollConsumer* _pScrollConsumer = nullptr;
+    
     ViewScroller::Type _horizontal;
     ViewScroller::Type _vertical;
 protected:
@@ -36,7 +39,7 @@ protected:
 
     void onGeometryChange(const Geometry& newGeometry) override;
     
-    virtual void onContentScrolled();
+    virtual void onContentScrolled(const gui::Point& newOrigin);
     
     ViewScroller() = delete;
     ViewScroller(const ViewScroller&) = delete;
@@ -68,9 +71,10 @@ public:
     
     double getScale() const override;
     
+    //void reserveScrollConsumers(size_t nScrollConsumers);
+    void setScrollConsumer(IScrollConsumer* pConsumers);
+    
     void handleModelSizeChanged();
-    
-    
 };
 
 } //namespace gui

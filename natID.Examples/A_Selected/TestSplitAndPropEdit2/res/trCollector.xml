@@ -1,0 +1,6 @@
+<?xml version='1.0'?>
+<TrCollector xmlTrFileName="./tr/main_%s.xml" defLang="EN">
+	<Folders extensions="*.h;*.cpp" trFunctionNames="tr;trCStr">
+		<Folder location="../src" subfolder="true"/>
+	</Folders>
+</TrCollector>

@@ -44,9 +44,11 @@ private:
 //        double _width, _height;
 //        ImageSaveStyle _mode;
 //    } _imageSaveSettings;
-    
+    //td::Point<double> _legendAnchorOffset;
+    //td::Anchor _legendAnchor = td::Anchor::Fixed;
     InternAction _internAction = InternAction::None;
     td::ColorID _backgroundColor;
+    static gui::Point prevPosition;
 private:
 //    void setColorsAndPatternStack();
     void resetGraph() override;

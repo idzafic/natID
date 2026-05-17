@@ -18,7 +18,7 @@ struct tagVARIANT;
 
 #define TDVAR_TYPE_MASK   0x000000FF
 #define TDVAR_DBTYPE_MASK 0x0000FF00
-#define TDVAR_ISNULL	  0x00010000
+#define TDVAR_ISNULL      0x00010000
 #define TDVAR_TOKENTYPE   0xFF000000
 
 namespace td
@@ -50,7 +50,7 @@ public:
     inline DataType getDBType() const
     {
         //if (getType() == td::boolean)
-        //	return td::chFix;
+        //    return td::chFix;
         return (td::DataType) ((_flags >> 8) & TDVAR_TYPE_MASK);
     }
 
@@ -78,7 +78,7 @@ public:
     inline td::UINT4 getDBLen() const
     {
         //if (getType() == td::boolean)
-        //	return 1;
+        //    return 1;
 
         td::LUINT8 len = _flags >> 32;
         td::UINT4 lenToRet = (td::UINT4)len;
@@ -165,7 +165,7 @@ protected:
 
     //inline void setInitialType(td::DataType type)
     //{
-    //	_flags = type;
+    //    _flags = type;
     //}
 
     inline void setSmallChFixDBTYpe(td::DataType dtp)
@@ -185,8 +185,8 @@ protected:
     {
         //if (dtp == td::ch7)
         //{
-        //	_flags = dtp;
-        //	setDBLen(7);
+        //    _flags = dtp;
+        //    setDBLen(7);
         //}
         //else
         if ((dtp == td::ch) || ((dtp == td::nch) || (dtp == td::chFix) || (dtp == td::nchFix)))
@@ -205,8 +205,8 @@ protected:
         _flags &= ~TDVAR_TYPE_MASK;
         //if (dtp == td::ch7)
         //{
-        //	_flags |= (td::LUINT8)dtp;
-        //	setDBLen(7);
+        //    _flags |= (td::LUINT8)dtp;
+        //    setDBLen(7);
         //}
         //else
         if ((dtp == td::ch) || ((dtp == td::nch) || (dtp == td::chFix) || (dtp == td::nchFix)))
@@ -225,7 +225,7 @@ protected:
     {
         if (getType() == td::string8)
         {
-            td::String& str = (td::String&) _strVal;
+            td::String& str = reinterpret_cast<td::String&>(_strVal);
             if (str.relRef())
             {
                 delete [] _strVal;
@@ -237,9 +237,9 @@ protected:
     inline void takeFromString(const td::String& val)
     {
         clean();
-        _strVal = (char*) val.buffer;
+        _strVal = reinterpret_cast<char*>(val.buffer);
 
-        td::String& str = (td::String&) _strVal;
+        td::String& str = reinterpret_cast<td::String&>(_strVal);
         if (!str.addRef())
         {
             td::String strTmp = val.clone();
@@ -247,7 +247,7 @@ protected:
 //            strTmp.clone(val);
 //            str.addRef();
             _strVal = strTmp.buffer;
-            td::String& str2 = (td::String&) _strVal;
+            td::String& str2 = reinterpret_cast<td::String&>(_strVal);
             str2.addRef();
             td::UINT4  nRefsFinal = str2.getNoOfRefs();
             assert(nRefsFinal == 1);
@@ -297,7 +297,7 @@ public:
         {
             if (varType == td::string8)
             {
-                td::String& str = (td::String&) _strVal;
+                td::String& str = reinterpret_cast<td::String&>(_strVal);
                 str.addRef();
             }
         }
@@ -526,8 +526,8 @@ public:
     
 //    bool& boolVal()
 //    {
-//    	assert(getType() == td::boolean);
-//    	return _boolVal;
+//        assert(getType() == td::boolean);
+//        return _boolVal;
 //    }
 
     bool boolVal() const
@@ -659,25 +659,25 @@ public:
     Date& dateVal()
     {
         assert(getType() == td::date);
-        return (Date&)(_dateVal);
+        return reinterpret_cast<Date&>((_dateVal));
     }
 
     const Date& dateVal() const
     {
         assert(getType() == td::date);
-        return (Date&)(_dateVal);
+        return reinterpret_cast<const Date&>((_dateVal));
     }
     
     Color& colorVal()
     {
         assert(getType() == td::color);
-        return (Color&)(_colorVal);
+        return reinterpret_cast<Color&>((_colorVal));
     }
 
     const Color& colorVal() const
     {
         assert(getType() == td::color);
-        return (Color&)(_colorVal);
+        return reinterpret_cast<const Color&>((_colorVal));
     }
     
     ColorID& colorID()
@@ -731,25 +731,25 @@ public:
     Time& timeVal()
     {
         assert(getType() == td::time);
-        return (Time&)(_timeVal);
+        return reinterpret_cast<Time&>((_timeVal));
     }
 
     const Time& timeVal() const
     {
         assert(getType() == td::time);
-        return (Time&)(_timeVal);
+        return reinterpret_cast<const Time&>((_timeVal));
     }
 
     DateTime& dtVal()
     {
         assert(getType() == td::dateTime);
-        return (DateTime&) _dtVal;
+        return reinterpret_cast<DateTime&>(_dtVal);
     }
 
     const DateTime& dtVal() const
     {
         assert(getType() == td::dateTime);
-        return (DateTime&) _dtVal;
+        return reinterpret_cast<const DateTime&>(_dtVal);
     }
 
     template< typename THOLDER, int NDEC >
@@ -763,133 +763,133 @@ public:
     Decimal0& dec0Val()
     {
         assert(getType() == td::decimal0);
-        return (Decimal0 &) _decVal;
+        return reinterpret_cast<Decimal0 &>(_decVal);
     }
 
     const Decimal0& dec0Val() const
     {
         assert(getType() == td::decimal0);
-        return (Decimal0 &) _decVal;
+        return reinterpret_cast<const Decimal0 &>(_decVal);
     }
 
     Decimal1& dec1Val()
     {
         assert(getType() == td::decimal1);
-        return (Decimal1 &) _decVal;
+        return reinterpret_cast<Decimal1 &>(_decVal);
     }
 
     const Decimal1& dec1Val() const
     {
         assert(getType() == td::decimal1);
-        return (Decimal1 &) _decVal;
+        return reinterpret_cast<const Decimal1 &>(_decVal);
     }
 
     Decimal2& dec2Val()
     {
         assert(getType() == td::decimal2);
-        return (Decimal2&) _decVal;
+        return reinterpret_cast<Decimal2&>(_decVal);
     }
 
     const Decimal2& dec2Val() const
     {
         assert(getType() == td::decimal2);
-        return (Decimal2&) _decVal;
+        return reinterpret_cast<const Decimal2&>(_decVal);
     }
 
     Decimal3& dec3Val()
     {
         assert(getType() == td::decimal3);
-        return (Decimal3&) _decVal;
+        return reinterpret_cast<Decimal3&>(_decVal);
     }
 
     const Decimal3& dec3Val() const
     {
         assert(getType() == td::decimal3);
-        return (Decimal3&) _decVal;
+        return reinterpret_cast<const Decimal3&>(_decVal);
     }
 
     Decimal4& dec4Val()
     {
         assert(getType() == td::decimal4);
-        return (Decimal4&) _decVal;
+        return reinterpret_cast<Decimal4&>(_decVal);
     }
 
     const Decimal4& dec4Val() const
     {
         assert(getType() == td::decimal4);
-        return (Decimal4&) _decVal;
+        return reinterpret_cast<const Decimal4&>(_decVal);
     }
 
     SmallDecimal0& sdec0Val()
     {
         assert(getType() == td::smallDecimal0);
-        return (SmallDecimal0&) _i4Val;
+        return reinterpret_cast<SmallDecimal0&>(_i4Val);
     }
 
     const SmallDecimal0& sdec0Val() const
     {
         assert(getType() == td::smallDecimal0);
-        return (SmallDecimal0&) _i4Val;
+        return reinterpret_cast<const SmallDecimal0&>(_i4Val);
     }
 
     SmallDecimal1& sdec1Val()
     {
         assert(getType() == td::smallDecimal1);
-        return (SmallDecimal1&) _i4Val;
+        return reinterpret_cast<SmallDecimal1&>(_i4Val);
     }
 
     const SmallDecimal1& sdec1Val() const
     {
         assert(getType() == td::smallDecimal1);
-        return (SmallDecimal1&) _i4Val;
+        return reinterpret_cast<const SmallDecimal1&>(_i4Val);
     }
 
     SmallDecimal2& sdec2Val()
     {
         assert(getType() == td::smallDecimal2);
-        return (SmallDecimal2&) _i4Val;
+        return reinterpret_cast<SmallDecimal2&>(_i4Val);
     }
 
     const SmallDecimal2& sdec2Val() const
     {
         assert(getType() == td::smallDecimal2);
-        return (SmallDecimal2&) _i4Val;
+        return reinterpret_cast<const SmallDecimal2&>(_i4Val);
     }
 
     SmallDecimal3& sdec3Val()
     {
         assert(getType() == td::smallDecimal3);
-        return (SmallDecimal3&) _i4Val;
+        return reinterpret_cast<SmallDecimal3&>(_i4Val);
     }
 
     const SmallDecimal3& sdec3Val() const
     {
         assert(getType() == td::smallDecimal3);
-        return (SmallDecimal3&) _i4Val;
+        return reinterpret_cast<const SmallDecimal3&>(_i4Val);
     }
 
     SmallDecimal4& sdec4Val()
     {
         assert(getType() == td::smallDecimal4);
-        return (SmallDecimal4&) _i4Val;
+        return reinterpret_cast<SmallDecimal4&>(_i4Val);
     }
 
     const SmallDecimal4& sdec4Val() const
     {
         assert(getType() == td::smallDecimal4);
-        return (SmallDecimal4&) _i4Val;
+        return reinterpret_cast<const SmallDecimal4&>(_i4Val);
     }
 
     ChFix7& chFixVal()
     {
         assert(getType() == td::ch7);
-        return (ChFix7&)_chVal;
+        return reinterpret_cast<ChFix7&>(_chVal);
     }
 
     const ChFix7& chFixVal() const
     {
         assert(getType() == td::ch7);
-        return (ChFix7&)_chVal;
+        return reinterpret_cast<const ChFix7&>(_chVal);
     }
 
     //END DEC VALUE
@@ -900,13 +900,13 @@ public:
     td::String& strVal()
     {
         assert(getType() == td::string8);
-        return (td::String&) _strVal;
+        return reinterpret_cast<td::String&>(_strVal);
     }
 
     const td::String& strVal() const
     {
         assert(getType() == td::string8);
-        return (td::String&) _strVal;
+        return reinterpret_cast<const td::String&>(_strVal);
     }
 
     void*& voidPtr()
@@ -1049,7 +1049,7 @@ public:
     Variant& operator = (const td::DateTime& val)
     {
         clean();
-        _dtVal = (td::LINT8&) val;
+        _dtVal = reinterpret_cast<const td::LINT8&>(val);
         setType(td::getType(val));
         return *this;
     }
@@ -1111,38 +1111,38 @@ public:
 
     //Variant& operator = (const Variant& var)
     //{
-    //	clean();
+    //    clean();
 
-    //	td::DataType thisType(getType());
-    //	td::DataType varType(var.getType());
+    //    td::DataType thisType(getType());
+    //    td::DataType varType(var.getType());
 
-    //	//_isNull = var._isNull;
-    //	if (varType == td::string8)
-    //	{
-    //		if (thisType != td::string8)
-    //			_flags = 0L;
-    //		takeFromString(const_cast<td::String&>(var.strVal()));
-    //	}
-    //	else
-    //	{
-    //		_lu8Val = var._lu8Val;
-    //	}
+    //    //_isNull = var._isNull;
+    //    if (varType == td::string8)
+    //    {
+    //        if (thisType != td::string8)
+    //            _flags = 0L;
+    //        takeFromString(const_cast<td::String&>(var.strVal()));
+    //    }
+    //    else
+    //    {
+    //        _lu8Val = var._lu8Val;
+    //    }
 
-    //	//this prevents changing type due to implicit conversion to variant (_flags == 0) and
-    //	if ( thisType != varType)
-    //		_flags = var._flags;
-    //	else
-    //	{
-    //		td::DataType thisDBType = getDBType();
-    //		//td::DataType varDBType = var.getDBType();
-    //		if (thisDBType == td::TD_NONE)
-    //		{
-    //			_flags = var._flags;
-    //		}
-    //	}
+    //    //this prevents changing type due to implicit conversion to variant (_flags == 0) and
+    //    if ( thisType != varType)
+    //        _flags = var._flags;
+    //    else
+    //    {
+    //        td::DataType thisDBType = getDBType();
+    //        //td::DataType varDBType = var.getDBType();
+    //        if (thisDBType == td::TD_NONE)
+    //        {
+    //            _flags = var._flags;
+    //        }
+    //    }
     //
 
-    //	return *this;
+    //    return *this;
     //}
 
     Variant& operator = (const Variant& var)
@@ -1829,9 +1829,9 @@ public:
             setDBTypeAndLen(td::chFix, 7);
         }
         //if ((dtp == td::ch) || ((dtp == td::nch) || (dtp == td::chFix) || (dtp == td::nchFix)))
-        //	_flags = td::string8;
+        //    _flags = td::string8;
         //else
-        //	_flags = dtp;
+        //    _flags = dtp;
         if (toZero)
             _lu8Val = 0;
     }
@@ -1840,7 +1840,7 @@ public:
     {
         if (getType() == td::string8)
         {
-            td::String& str = (td::String&) _strVal;
+            td::String& str = reinterpret_cast<td::String&>(_strVal);
             if (str.relRef())
             {
                 delete[] _strVal;
@@ -2000,7 +2000,7 @@ public:
         return *this;
     }
 protected:
-    inline td::BoolCh& getVal(td::BoolCh){ return (td::BoolCh&)_bVal; }
+    inline td::BoolCh& getVal(td::BoolCh){ return reinterpret_cast<td::BoolCh&>(_bVal); }
 
 //    inline bool& getVal(bool){ return _boolVal; }
     
@@ -2054,7 +2054,7 @@ protected:
 
 
     //const
-    inline const td::BoolCh& getVal(td::BoolCh)const { return (td::BoolCh&)_bVal; }
+    inline const td::BoolCh& getVal(td::BoolCh)const { return reinterpret_cast<const td::BoolCh&>(_bVal); }
     
     inline td::INT4 getVal(bool)const { return boolVal(); }
 
@@ -2078,7 +2078,7 @@ protected:
 
     inline const td::String& getVal(const td::String&) const { return strVal(); }
 
-    //inline const td::String& getVal(td::String&) const { return strVal(); }
+    //inline const td::String& getValreinterpret_cast<td::String&>(const) { return strVal(); }
 
     inline const td::Date& getVal(td::Date)const{ return dateVal(); }
 
@@ -2094,17 +2094,17 @@ protected:
     inline const td::DotPattern& getVal(td::DotPattern)const{ return dotPattern(); }
     inline const td::Anchor& getVal(td::Anchor)const{ return anchor(); }
 
-    inline const td::SmallDecimal0& getVal(td::SmallDecimal0)const{ return (td::SmallDecimal0&) _smallDecVal; }
-    inline const td::SmallDecimal1& getVal(td::SmallDecimal1)const{ return (td::SmallDecimal1&) _smallDecVal; }
-    inline const td::SmallDecimal2& getVal(td::SmallDecimal2)const{ return (td::SmallDecimal2&) _smallDecVal; }
-    inline const td::SmallDecimal3& getVal(td::SmallDecimal3)const{ return (td::SmallDecimal3&) _smallDecVal; }
-    inline const td::SmallDecimal4& getVal(td::SmallDecimal4)const{ return (td::SmallDecimal4&) _smallDecVal; }
+    inline const td::SmallDecimal0& getVal(td::SmallDecimal0)const{ return reinterpret_cast<const td::SmallDecimal0&>(_smallDecVal); }
+    inline const td::SmallDecimal1& getVal(td::SmallDecimal1)const{ return reinterpret_cast<const td::SmallDecimal1&>(_smallDecVal); }
+    inline const td::SmallDecimal2& getVal(td::SmallDecimal2)const{ return reinterpret_cast<const td::SmallDecimal2&>(_smallDecVal); }
+    inline const td::SmallDecimal3& getVal(td::SmallDecimal3)const{ return reinterpret_cast<const td::SmallDecimal3&>(_smallDecVal); }
+    inline const td::SmallDecimal4& getVal(td::SmallDecimal4)const{ return reinterpret_cast<const td::SmallDecimal4&>(_smallDecVal); }
 
-    inline const td::Decimal0& getVal(td::Decimal0)const{ return (td::Decimal0&) _decVal; }
-    inline const td::Decimal1& getVal(td::Decimal1)const{ return (td::Decimal1&) _decVal; }
-    inline const td::Decimal2& getVal(td::Decimal2)const{ return (td::Decimal2&) _decVal; }
-    inline const td::Decimal3& getVal(td::Decimal3)const{ return (td::Decimal3&) _decVal; }
-    inline const td::Decimal4& getVal(td::Decimal4)const{ return (td::Decimal4&) _decVal; }
+    inline const td::Decimal0& getVal(td::Decimal0)const{ return reinterpret_cast<const td::Decimal0&>(_decVal); }
+    inline const td::Decimal1& getVal(td::Decimal1)const{ return reinterpret_cast<const td::Decimal1&>(_decVal); }
+    inline const td::Decimal2& getVal(td::Decimal2)const{ return reinterpret_cast<const td::Decimal2&>(_decVal); }
+    inline const td::Decimal3& getVal(td::Decimal3)const{ return reinterpret_cast<const td::Decimal3&>(_decVal); }
+    inline const td::Decimal4& getVal(td::Decimal4)const{ return reinterpret_cast<const td::Decimal4&>(_decVal); }
 
 public:
 
@@ -2220,7 +2220,7 @@ public:
         td::BYTE bw = (td::BYTE) dt;
         s << bw;
         toStream(s);
-        //s << _flags;	//flags will be kept unchanged during serialization, only value will be stored,
+        //s << _flags;    //flags will be kept unchanged during serialization, only value will be stored,
     }
 
     //check if type is equal to requared and then load value

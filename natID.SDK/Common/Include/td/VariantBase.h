@@ -77,7 +77,7 @@ namespace td
 			INT4 _timeVal;
 			LINT8 _dtVal;
 			LINT8 _decVal;
-			INT4 _smallDecVal; //za SmallDec			
+			INT4 _smallDecVal; //for SmallDec			
 
 			char* _strVal;	//pointer do dataHolder of td::String
 			bool* _ptrBool;
@@ -110,8 +110,9 @@ namespace td
 	protected:
 		inline td::String& strValBase()
 		{
-			return (td::String&) _strVal;
+			return reinterpret_cast<td::String&>(_strVal);
 		}
+
 	public:
 		VariantBase()
 			: _lu8Val(0)
@@ -246,7 +247,7 @@ namespace td
 		{
 			if (dataType == td::string8)
 			{
-				td::String& str = (td::String&) _strVal;
+				td::String& str = reinterpret_cast<td::String&>(_strVal);
 				str.clean();
 			}
 			else
@@ -258,38 +259,37 @@ namespace td
 		{
 			switch (type)
 			{
-			case td::boolean: return vis((td::BoolCh&) _bVal); break;
-			case td::byte:	return vis(_byteVal); break;
-			case td::word:	return vis(_wordVal); break;
-			case td::int2:	return vis(_i2Val); break;
-			case td::uint4:	return vis(_u4Val); break;
-			case td::int4:	return vis(_i4Val); break;
-			case td::lint8: return vis(_li8Val); break;
-			case td::luint8: return vis(_lu8Val); break;
-			case td::real4:	return vis(_r4Val); break;
-			case td::real8:	return vis(_r8Val); break;
-			case td::string8: return vis((td::String&) _strVal); break;
-			case td::ch7: return vis((td::ChFix7&) _chVal); break;
-			case td::date:	return vis((td::Date&)_dateVal); break;
-			case td::time:	return vis((td::Time&)_timeVal); break;
-			case td::dateTime: return vis((td::DateTime&)_dtVal); break;
-			case td::decimal0: return vis((td::Decimal0&)_decVal); break;
-			case td::decimal1: return vis((td::Decimal1&)_decVal); break;
-			case td::decimal2: return vis((td::Decimal2&)_decVal); break;
-			case td::decimal3: return vis((td::Decimal3&)_decVal); break;
-			case td::decimal4: return vis((td::Decimal4&)_decVal); break;
-			case td::smallDecimal0:	return vis((td::SmallDecimal0&)_smallDecVal); break;
-			case td::smallDecimal1:	return vis((td::SmallDecimal1&)_smallDecVal); break;
-			case td::smallDecimal2:	return vis((td::SmallDecimal2&)_smallDecVal); break;
-			case td::smallDecimal3:	return vis((td::SmallDecimal3&)_smallDecVal); break;
-			case td::smallDecimal4:	return vis((td::SmallDecimal4&)_smallDecVal); break;
-            case td::color: return vis((td::Color&)_colorVal); break;
-            case td::colorID: return vis(_colorID); break;
-            case td::linePattern: return vis(_linePattern); break;
-            case td::dotPattern: return vis(_dotPattern); break;
-            case td::anchor: return vis(_anchor); break;
-			case td::TD_NONE: return vis(none()); break;
-				//case td::none:	return "NONE-VALUE";
+			case td::boolean:      return vis(reinterpret_cast<td::BoolCh&>(_bVal));          break;
+			case td::byte:         return vis(_byteVal);                                       break;
+			case td::word:         return vis(_wordVal);                                       break;
+			case td::int2:         return vis(_i2Val);                                         break;
+			case td::uint4:        return vis(_u4Val);                                         break;
+			case td::int4:         return vis(_i4Val);                                         break;
+			case td::lint8:        return vis(_li8Val);                                        break;
+			case td::luint8:       return vis(_lu8Val);                                        break;
+			case td::real4:        return vis(_r4Val);                                         break;
+			case td::real8:        return vis(_r8Val);                                         break;
+			case td::string8:      return vis(reinterpret_cast<td::String&>(_strVal));         break;
+			case td::ch7:          return vis(reinterpret_cast<td::ChFix7&>(_chVal));          break;
+			case td::date:         return vis(reinterpret_cast<td::Date&>(_dateVal));          break;
+			case td::time:         return vis(reinterpret_cast<td::Time&>(_timeVal));          break;
+			case td::dateTime:     return vis(reinterpret_cast<td::DateTime&>(_dtVal));        break;
+			case td::decimal0:     return vis(reinterpret_cast<td::Decimal0&>(_decVal));       break;
+			case td::decimal1:     return vis(reinterpret_cast<td::Decimal1&>(_decVal));       break;
+			case td::decimal2:     return vis(reinterpret_cast<td::Decimal2&>(_decVal));       break;
+			case td::decimal3:     return vis(reinterpret_cast<td::Decimal3&>(_decVal));       break;
+			case td::decimal4:     return vis(reinterpret_cast<td::Decimal4&>(_decVal));       break;
+			case td::smallDecimal0: return vis(reinterpret_cast<td::SmallDecimal0&>(_smallDecVal)); break;
+			case td::smallDecimal1: return vis(reinterpret_cast<td::SmallDecimal1&>(_smallDecVal)); break;
+			case td::smallDecimal2: return vis(reinterpret_cast<td::SmallDecimal2&>(_smallDecVal)); break;
+			case td::smallDecimal3: return vis(reinterpret_cast<td::SmallDecimal3&>(_smallDecVal)); break;
+			case td::smallDecimal4: return vis(reinterpret_cast<td::SmallDecimal4&>(_smallDecVal)); break;
+			case td::color:        return vis(reinterpret_cast<td::Color&>(_colorVal));        break;
+			case td::colorID:      return vis(_colorID);                                       break;
+			case td::linePattern:  return vis(_linePattern);                                   break;
+			case td::dotPattern:   return vis(_dotPattern);                                    break;
+			case td::anchor:       return vis(_anchor);                                        break;
+			case td::TD_NONE:      return vis(none());                                         break;
 			default: assert(false);
 			}
 			return vis(none());
@@ -300,38 +300,37 @@ namespace td
 		{
 			switch (type)
 			{
-			case td::boolean: return vis((td::BoolCh&) _bVal); break;
-			case td::byte:	return vis(_byteVal); break;
-			case td::word:	return vis(_wordVal); break;
-			case td::int2:	return vis(_i2Val); break;
-			case td::uint4:	return vis(_u4Val); break;
-			case td::int4:	return vis(_i4Val); break;
-			case td::lint8: return vis(_li8Val); break;
-			case td::luint8: return vis(_lu8Val); break;
-			case td::real4:	return vis(_r4Val); break;
-			case td::real8:
-                    return vis(_r8Val); break;
-			case td::string8: return vis((td::String&) _strVal); break;
-			case td::ch7: return vis((td::ChFix7&) _chVal); break;
-			case td::date:	return vis((td::Date&)_dateVal); break;
-			case td::time:	return vis((td::Time&)_timeVal); break;
-			case td::dateTime: return vis((td::DateTime&)_dtVal); break;
-			case td::decimal0: return vis((td::Decimal0&)_decVal); break;
-			case td::decimal1: return vis((td::Decimal1&)_decVal); break;
-			case td::decimal2: return vis((td::Decimal2&)_decVal); break;
-			case td::decimal3: return vis((td::Decimal3&)_decVal); break;
-			case td::decimal4: return vis((td::Decimal4&)_decVal); break;
-			case td::smallDecimal0:	return vis((td::SmallDecimal0&)_smallDecVal); break;
-			case td::smallDecimal1:	return vis((td::SmallDecimal1&)_smallDecVal); break;
-			case td::smallDecimal2:	return vis((td::SmallDecimal2&)_smallDecVal); break;
-			case td::smallDecimal3:	return vis((td::SmallDecimal3&)_smallDecVal); break;
-			case td::smallDecimal4:	return vis((td::SmallDecimal4&)_smallDecVal); break;
-            case td::color: return vis((td::Color&)_colorVal); break;
-            case td::colorID: return vis(_colorID); break;
-            case td::linePattern: return vis(_linePattern); break;
-            case td::dotPattern: return vis(_dotPattern); break;
-            case td::anchor: return vis(_anchor); break;
-			case td::TD_NONE: return vis(none()); break;
+			case td::boolean:      return vis(reinterpret_cast<const td::BoolCh&>(_bVal));          break;
+			case td::byte:         return vis(_byteVal);                                             break;
+			case td::word:         return vis(_wordVal);                                             break;
+			case td::int2:         return vis(_i2Val);                                               break;
+			case td::uint4:        return vis(_u4Val);                                               break;
+			case td::int4:         return vis(_i4Val);                                               break;
+			case td::lint8:        return vis(_li8Val);                                              break;
+			case td::luint8:       return vis(_lu8Val);                                              break;
+			case td::real4:        return vis(_r4Val);                                               break;
+			case td::real8:        return vis(_r8Val);                                               break;
+			case td::string8:      return vis(reinterpret_cast<const td::String&>(_strVal));         break;
+			case td::ch7:          return vis(reinterpret_cast<const td::ChFix7&>(_chVal));          break;
+			case td::date:         return vis(reinterpret_cast<const td::Date&>(_dateVal));          break;
+			case td::time:         return vis(reinterpret_cast<const td::Time&>(_timeVal));          break;
+			case td::dateTime:     return vis(reinterpret_cast<const td::DateTime&>(_dtVal));        break;
+			case td::decimal0:     return vis(reinterpret_cast<const td::Decimal0&>(_decVal));       break;
+			case td::decimal1:     return vis(reinterpret_cast<const td::Decimal1&>(_decVal));       break;
+			case td::decimal2:     return vis(reinterpret_cast<const td::Decimal2&>(_decVal));       break;
+			case td::decimal3:     return vis(reinterpret_cast<const td::Decimal3&>(_decVal));       break;
+			case td::decimal4:     return vis(reinterpret_cast<const td::Decimal4&>(_decVal));       break;
+			case td::smallDecimal0: return vis(reinterpret_cast<const td::SmallDecimal0&>(_smallDecVal)); break;
+			case td::smallDecimal1: return vis(reinterpret_cast<const td::SmallDecimal1&>(_smallDecVal)); break;
+			case td::smallDecimal2: return vis(reinterpret_cast<const td::SmallDecimal2&>(_smallDecVal)); break;
+			case td::smallDecimal3: return vis(reinterpret_cast<const td::SmallDecimal3&>(_smallDecVal)); break;
+			case td::smallDecimal4: return vis(reinterpret_cast<const td::SmallDecimal4&>(_smallDecVal)); break;
+			case td::color:        return vis(reinterpret_cast<const td::Color&>(_colorVal));        break;
+			case td::colorID:      return vis(_colorID);                                             break;
+			case td::linePattern:  return vis(_linePattern);                                         break;
+			case td::dotPattern:   return vis(_dotPattern);                                          break;
+			case td::anchor:       return vis(_anchor);                                              break;
+			case td::TD_NONE:      return vis(none());                                               break;
 			default: assert(false); 
 			}
 			return vis(none());

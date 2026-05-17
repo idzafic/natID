@@ -66,7 +66,7 @@ protected:
     
     void onDraw(const gui::Rect& rDraw) override
     {
-        //mu::dbgLog("onDraw x=%.1f y=%.1f w=%.1f h=%.1f", rDraw.left, rDraw.top, rDraw.width(), rDraw.height());
+        mu::dbgLog("onDraw x=%.1f y=%.1f w=%.1f h=%.1f", rDraw.left, rDraw.top, rDraw.width(), rDraw.height());
         //
         //gui::Transformation::saveContext();
         //{
@@ -216,8 +216,7 @@ protected:
             return;
         
         td::BYTE ctxMenuID = 100;
-        Frame::openContextMenu(ctxMenuID, inputDevice);
-        return;
+        Frame::openContextMenu(ctxMenuID, inputDevice.getFramePoint());
     }
     
     void onCursorDragged(const gui::InputDevice& inputDevice) override //onMouseDragged(const gui::Point& modelPoint, td::UINT4 keyModifiers)

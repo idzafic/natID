@@ -177,17 +177,24 @@ namespace arch
 			f.write(tmp, ARCH_HEADER_SIZE);
 		}
 
-		inline void put(const char* data, td::UINT4 nBytes)
-		{
-			_serializer.write(data, nBytes);
-			_transferedBytes += nBytes;
-			if (_countPayload && (_transferedBytes > ARCH_HEADER_SIZE))
-			{
-				_totalUsedBytes += nBytes;
-				if (_calcCRC)
-					_crc32.consume((td::BYTE*) data, nBytes);
-			}				
-		}
+        inline void put(const char* data, size_t nBytes)
+        {
+            _serializer.write(data, td::UINT4(nBytes));
+            _transferedBytes += nBytes;
+            if (_countPayload && (_transferedBytes > ARCH_HEADER_SIZE))
+            {
+                _totalUsedBytes += nBytes;
+                if (_calcCRC)
+                    _crc32.consume((td::BYTE*) data, nBytes);
+            }
+        }
+        
+        template <size_t N>
+        inline void put(const char(&data)[N])
+        {
+            put(&data[0], N-1);
+        }
+        
 
 #pragma region Save Data
 		//ArchiveOut& operator << (const td::Variant& var)

@@ -766,7 +766,6 @@ namespace td
 		//		}
 		//	}
 		//}
-
 #ifdef WINDOWS_UNICODE
 		static inline int getStrLength(const UTF32* pStr)
 		{
@@ -1929,6 +1928,13 @@ namespace td
             int nLen = SNPRINTF(tmp, 24, _TRUNCATE, FMT_LUINT8, val);
 			fromKnownString(tmp, nLen);
 		}
+        
+        template <typename TNUM>
+        TNUM toNumber() const
+        {
+            static_assert(typeid(T_CHAR) == typeid(td::UTF8), "Method td::String::toNumber workds only on UTF8 encoding!");
+            return td::toNumber(c_str(), (int) length());
+        }
 
         inline StringBase& operator = (const std::filesystem::path& path)
         {
@@ -2534,6 +2540,23 @@ namespace td
 		}
         
         template <size_t nLen>
+        inline bool compareConstStrCI(const char(&str)[nLen]) const
+        {
+            assert(Encoding == EncodingUTF8);
+            if (length() != nLen - 1)
+                return false;
+        
+            auto pStr = c_str();
+            for (size_t i=0; i<nLen-1; ++i)
+            {
+                if (td::toLower(pStr[i]) != td::toLower(str[i]))
+                    return false;
+            }
+
+            return true;
+        }
+        
+        template <size_t nLen>
         inline bool compareConstStr(const char(&str)[nLen], size_t afterPos) const
         {
             assert(Encoding == EncodingUTF8);
@@ -2555,10 +2578,41 @@ namespace td
 
 			return wcscmp(c_str(), pStr);
 		}
+        
+        template <class TSTR>
+        inline bool compareCI(const TSTR& str) const
+        {
+            int nLenMy = length();
+            int nLenIn = str.length();
+            int nLen;
+            if (nLenMy < nLenIn)
+            {
+                nLen = nLenMy;
+                
+                if (nLen == 0)
+                    return false;
+            }
+            else if (nLenMy > nLenIn)
+            {
+                nLen = nLenIn;
+                if (nLen == 0)
+                    return false;
+            }
+            else
+            {
+                nLen = nLenMy;
+                if (nLen == 0)
+                    return true;
+            }
+            
+            return compareCI(str.c_str(), nLenIn);
+        }
 
 		template <class TSTR>
-		inline int compare(const TSTR& str) const
+		inline int cCompare(const TSTR& str) const //treba biti cCompare
 		{
+            //static_assert(false, "This method should be renamed to cCompare");
+            
 			int nLenMy = length();
 			int nLenOut = str.length();
 			int nLen;
@@ -2638,7 +2692,7 @@ namespace td
 		template <class TSTR>
 		inline bool operator > (const TSTR& str) const
 		{
-			int comp = compare(str);
+			int comp = cCompare(str);
 			if (comp > 0)
 				return true;
 			return false;
@@ -2647,7 +2701,7 @@ namespace td
 		template <class TSTR>
 		inline bool operator < (const TSTR& str) const
 		{
-			int comp = compare(str);
+			int comp = cCompare(str);
 			if (comp < 0)
 				return true;
 			return false;
@@ -2656,7 +2710,7 @@ namespace td
 		template <class TSTR>
 		inline bool operator >= (const TSTR& str) const
 		{
-			int comp = compare(str);
+			int comp = cCompare(str);
 			if (comp >= 0)
 				return true;
 			return false;
@@ -2665,7 +2719,7 @@ namespace td
 		template <class TSTR>
 		inline bool operator <= (const TSTR& str) const
 		{
-			int comp = compare(str);
+			int comp = cCompare(str);
 			if (comp <= 0)
 				return true;
 			return false;
@@ -3221,27 +3275,35 @@ namespace td
 					cnt.push_back(str);
 				return;
 			}
-			int iPos = -1;
+            
+            int iPos = 0;
 			for (int i = 0; i < nSplits+1; ++i)
-			{				
-				int iPos2 = findOneOf(separators, iPos + 1);
+			{
+                iPos = getFirstNonWhiteSpacePosition(iPos);
+                if (iPos < 0)
+                    return;
+                
+				int iPos2 = findOneOf(separators, iPos);
 
 				StringBase<T_CHAR, Encoding, SPACE_FOR_SIZE, false> str;
-				if (iPos2 > iPos+1)
-					str = subStr(iPos+1, iPos2 - 1);
+				if (iPos2 > iPos)
+					str = subStr(iPos, iPos2 - 1);
 				else if (iPos2 < 0)
 				{
-					str = subStr(iPos + 1, -1);
+					str = subStr(iPos, -1);
 				}					
 
 				if (trimSplits)
-					cnt.push_back(str.trim());
+                {
+                    auto strTok = str.trim();
+                    cnt.push_back(strTok);
+                }
 				else
 					cnt.push_back(str);
 
 				if (iPos2 < 0)
 					return;
-				iPos = iPos2;
+				iPos = iPos2+1;
 			}
 			//StringBase<T_CHAR, Encoding, SPACE_FOR_SIZE, false> str(subStr(iPos, -1));
 			//if (trimSplits)
@@ -3452,6 +3514,30 @@ namespace td
 				return false;
 			return true;
 		}
+        
+        inline bool compareCI(const T_CHAR* pStr, int lenPStr = -1) const
+        {
+            td::UINT4 nLen2;
+            if (lenPStr >= 0)
+                nLen2 = lenPStr;
+            else
+                nLen2 = (td::UINT4) strlen(pStr);
+            
+            if (length() != nLen2)
+                return false;
+
+            const T_CHAR* pCh1 = c_str();
+            const T_CHAR* pCh2 = pStr;
+            while ((*pCh2) && (td::toLower(*pCh1) == td::toLower(*pCh2)))
+            {
+                ++pCh1;
+                ++pCh2;
+                --nLen2;
+            }
+            if (0 != nLen2)
+                return false;
+            return true;
+        }
 
 		inline bool endsWith(const T_CHAR* pStr, size_t len) const
 		{

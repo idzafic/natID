@@ -24,7 +24,7 @@ class ContextData;
 class Message
 {
 public:
-    enum class Type : unsigned char {MT_NA=0, MT_FocusIn, MT_FocusOut, MT_Enter, MT_CmdEnter, MT_ComboSelectionChanged, MT_TableEditSelectionChanged, MT_TableDblClick,
+    enum class Type : unsigned char {MT_NA=0, MT_FocusIn, MT_FocusOut, MT_Enter, MT_CmdEnter, MT_ComboSelectionChanged, MT_TableEditSelectionChanged, MT_TableDblClick, MT_DataViewSelectionChanged, MT_DataViewDblClick,
         MT_BtnClick, MT_CheckBtnClick, MT_DrawableBtnClick, MT_DlgBtnClick, MT_FileDlgClick, MT_AlertClick, MT_MenuActivate,
         MT_ToolbarActivate, MT_ToolbarPopoverChange, MT_PopoverButtonSelChange, MT_ToolbarComboSelectionChanged,
         MT_NavigatorSelectionChanged, MT_StandardTabViewSelectionChanged, MT_TextEditSelectionChaged, MT_CodeViewSelectionChaged,

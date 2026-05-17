@@ -205,7 +205,7 @@ namespace mem
 
 			char* pBuff = findFirstSuitableChunk(nBuffLen);
 
-			TUSEDSTRING& retStr = (TUSEDSTRING&)(pBuff);
+			TUSEDSTRING& retStr = reinterpret_cast<TUSEDSTRING&>(pBuff);
 			//retStr.initDataHolderOnAllocator(pBuff, byteDataLen, pInStr);
 			retStr.initDataHolderOnAllocator(byteDataLen, pInStr);
 			
@@ -233,7 +233,7 @@ namespace mem
 
             char* pBuff = findFirstSuitableChunk(nBuffLen);
 
-            TUSEDSTRING& retStr = (TUSEDSTRING&)(pBuff);
+            TUSEDSTRING& retStr = reinterpret_cast<TUSEDSTRING&>(pBuff);
             //retStr.initDataHolderOnAllocator(pBuff, byteDataLen, pInStr);
             retStr.initDataHolderOnAllocator(byteDataLen, pInStr, chLead);
             

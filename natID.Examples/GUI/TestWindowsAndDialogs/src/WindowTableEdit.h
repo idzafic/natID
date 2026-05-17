@@ -19,10 +19,5 @@ public:
         setTitle(tr("Table Edit Window"));
         setToolBar(_toolBar);
         setCentralView(&_viewTableEdit);
-//        composeContent();
-    }
-    
-    ~WindowTableEdit()
-    {
     }
 };

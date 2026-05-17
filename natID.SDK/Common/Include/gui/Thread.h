@@ -23,13 +23,17 @@ namespace thread {
 
 using MainThreadFunction = std::function<void()>;
 using MainThreadFunction1 = std::function<void(td::Variant)>;
+using MainThreadFunction2 = std::function<void(td::Variant&)>;
 
 using MainThreadSharedFunction = std::shared_ptr<MainThreadFunction>;
 using MainThreadSharedFunction1 = std::shared_ptr<MainThreadFunction1>;
+using MainThreadSharedFunction2 = std::shared_ptr<MainThreadFunction2>;
 
 // low-level calls
 NATGUI_API void asyncExecInMainThread(const MainThreadSharedFunction& fn);
 NATGUI_API void asyncExecInMainThread(const MainThreadSharedFunction1& fn, td::Variant param);
+NATGUI_API void syncExecInMainThread(const MainThreadSharedFunction& fn);
+NATGUI_API void syncExecInMainThread(const MainThreadSharedFunction2& fn, td::Variant& param); //in this case, param can be input/output
 
 
 // Templates for convenience
@@ -49,6 +53,25 @@ void asyncExecInMainThread(Fn&& fn, const td::Variant& param)
 {
     auto sharedFn = std::make_shared<MainThreadFunction1>(std::forward<Fn>(fn));
     asyncExecInMainThread(sharedFn, param);
+}
+
+//and for synchronous execution
+template <typename Fn>
+requires (!std::is_same_v<std::decay_t<Fn>, MainThreadSharedFunction> &&
+          !std::is_same_v<std::decay_t<Fn>, MainThreadSharedFunction2>)
+void syncExecInMainThread(Fn&& fn)
+{
+    auto sharedFn = std::make_shared<MainThreadFunction>(std::forward<Fn>(fn));
+    syncExecInMainThread(sharedFn);
+}
+
+template <typename Fn>
+requires (!std::is_same_v<std::decay_t<Fn>, MainThreadSharedFunction> &&
+          !std::is_same_v<std::decay_t<Fn>, MainThreadSharedFunction2>)
+void syncExecInMainThread(Fn&& fn, td::Variant& param)
+{
+    auto sharedFn = std::make_shared<MainThreadFunction2>(std::forward<Fn>(fn));
+    syncExecInMainThread(sharedFn, param);
 }
 
 } // namespace thread

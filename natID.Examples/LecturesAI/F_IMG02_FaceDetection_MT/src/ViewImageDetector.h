@@ -283,7 +283,7 @@ public:
         _maxRndImages = appProperties->getValue("maxRndImages", _maxRndImages);
         enableResizeEvent(true); //required to obtain events whenever this view resizes (see onResize method in this class)
         reset();
-        setClipsToBounds();
+//        setClipsToBounds();
         registerForScrollEvents(); //Event::Zoom must be enabled, otherwise no scroll events
     }
     

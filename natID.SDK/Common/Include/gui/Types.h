@@ -41,8 +41,15 @@ inline bool isFnPressed(td::UINT4 modifiers) {return (modifiers & (td::UINT4)Key
 enum class FileType : unsigned char {File=0, Folder, FileOrFolder};
 enum class Orientation : unsigned char {Horizontal=0 , Vertical};
 //typedef void* NatShape;
+enum class BoolStyle : td::BYTE {Text=0, CheckCrossGreenRed, CircleGreenRed};
 
+enum class ClipMode : td::BYTE {None=0, Left=1, Right=2, Top=4, Bottom=8, All=15};
 
+inline bool operator& (ClipMode a, ClipMode b) {
+    return static_cast<bool>(
+        static_cast<td::BYTE>(a) & static_cast<td::BYTE>(b)
+    );
+}
 
 #ifdef MU_MACOS
 typedef void* Handle;

@@ -26,7 +26,7 @@ public:
     const cnt::SafeFullVector<td::String>* pEnumStrings = nullptr;
     td::String header;
     td::String toolTip;
-    td::INT2 width = 100;
+    td::INT2 width = 130;
     union
     {
         td::Date::Format dateFormat;

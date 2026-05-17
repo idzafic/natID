@@ -12,7 +12,7 @@
 #include <td/VariantBase.h>
 #include <td/String.h>
 #include <mu/mu.h>
-
+#include <td/Conv.h>
 
 namespace td
 {	
@@ -39,15 +39,15 @@ namespace td
 		void operator()(double& val) const { val = vb._r8Val; }
 		void operator()(td::String& val) const 
 		{ 
-			const td::String& strIn = (td::String&) (vb._strVal);
+			const td::String& strIn = reinterpret_cast<const td::String&>(vb._strVal);
 			val = strIn;
 			//int g = 5;
 		}
-		void operator()(td::Date& val) const { val = (const td::Date&) (vb._dateVal); }
-		void operator()(td::Time& val) const { val = (const td::Time&) (vb._timeVal); }
+		void operator()(td::Date& val) const { val = reinterpret_cast<const td::Date&>(vb._dateVal); }
+		void operator()(td::Time& val) const { val = reinterpret_cast<const td::Time&>(vb._timeVal); }
 		void operator()(td::DateTime& val) const 
 		{ 
-			val = (const td::DateTime&) vb._dtVal; 
+			val = reinterpret_cast<const td::DateTime&>(vb._dtVal); 
 		}
 		template< int NDEC >
 		void operator()(td::Decimal<td::LINT8, NDEC>& val) const
@@ -73,13 +73,13 @@ namespace td
 		const VAR& vb;
 		EqualityVisitor(const VAR& vIn) : vb(vIn){}
 		bool operator()(none) const { return false; }
-		bool operator()(td::BoolCh& val) const { return val == vb.boolVal(); }
+		bool operator()(const td::BoolCh& val) const { return val == vb.boolVal(); }
 		bool operator()(td::BYTE val) const { return val == vb.byteVal(); }
 		bool operator()(td::INT2 val) const { return val == vb.i2Val(); }
 		bool operator()(td::WORD val) const { return val == vb.wordVal(); }
 		bool operator()(td::INT4 val) const { return val == vb.i4Val(); }
 		bool operator()(td::UINT4 val) const { return val == vb.u4Val(); }
-        bool operator()(td::Color& val) const { return val == vb.colorVal(); }
+        bool operator()(const td::Color& val) const { return val == vb.colorVal(); }
         bool operator()(td::ColorID val) const { return val == vb.colorID(); }
         bool operator()(td::LinePattern val) const { return val == vb.linePattern(); }
 		bool operator()(td::DotPattern val) const { return val == vb.dotPattern(); }
@@ -111,13 +111,13 @@ namespace td
 		const VAR& vb;
 		LessThanVisitor(const VAR& vIn) : vb(vIn){}
 		bool operator()(none) const { return false; }
-		bool operator()(td::BoolCh&  val) const { return val < vb.boolVal(); }
+		bool operator()(const td::BoolCh&  val) const { return val < vb.boolVal(); }
 		bool operator()(td::BYTE val) const { return val < vb.byteVal(); }
 		bool operator()(td::INT2 val) const { return val <vb.i2Val(); }
 		bool operator()(td::WORD val) const { return val < vb.wordVal(); }
 		bool operator()(td::INT4 val) const { return val < vb.i4Val(); }
 		bool operator()(td::UINT4 val) const { return val < vb.u4Val(); }
-        bool operator()(td::Color& val) const { return val < vb.colorVal(); }
+        bool operator()(const td::Color& val) const { return val < vb.colorVal(); }
         bool operator()(td::ColorID val) const { return val < vb.colorID(); }
         bool operator()(td::LinePattern val) const { return val < vb.linePattern(); }
 		bool operator()(td::DotPattern val) const { return val < vb.dotPattern(); }
@@ -149,13 +149,13 @@ namespace td
 		const VAR& vb;
 		LessEqualThanVisitor(const VAR& vIn) : vb(vIn) {}
 		bool operator()(none) const { return false; }
-		bool operator()(td::BoolCh&  val) const { return val <= vb.boolVal(); }
+		bool operator()(const td::BoolCh&  val) const { return val <= vb.boolVal(); }
 		bool operator()(td::BYTE val) const { return val <= vb.byteVal(); }
 		bool operator()(td::INT2 val) const { return val <= vb.i2Val(); }
 		bool operator()(td::WORD val) const { return val <= vb.wordVal(); }
 		bool operator()(td::INT4 val) const { return val <= vb.i4Val(); }
 		bool operator()(td::UINT4 val) const { return val <= vb.u4Val(); }
-        bool operator()(td::Color& val) const { return val <= vb.colorVal(); }
+        bool operator()(const td::Color& val) const { return val <= vb.colorVal(); }
         bool operator()(td::ColorID val) const { return val <= vb.colorID(); }
         bool operator()(td::LinePattern val) const { return val <= vb.linePattern(); }
 		bool operator()(td::DotPattern val) const { return val <= vb.dotPattern(); }
@@ -188,13 +188,13 @@ namespace td
 		const VAR& vb;
 		GreatherThanVisitor(const VAR& vIn) : vb(vIn){}
 		bool operator()(none) const { return false; }
-		bool operator()(td::BoolCh& val) const { return val > vb.boolVal(); }
+		bool operator()(const td::BoolCh& val) const { return val > vb.boolVal(); }
 		bool operator()(td::BYTE val) const { return val > vb.byteVal(); }
 		bool operator()(td::INT2 val) const { return val > vb.i2Val(); }
 		bool operator()(td::WORD val) const { return val > vb.wordVal(); }
 		bool operator()(td::INT4 val) const { return val > vb.i4Val(); }
 		bool operator()(td::UINT4 val) const { return val > vb.u4Val(); }
-        bool operator()(td::Color& val) const { return val > vb.colorVal(); }
+        bool operator()(const td::Color& val) const { return val > vb.colorVal(); }
         bool operator()(td::ColorID val) const { return val > vb.colorID(); }
         bool operator()(td::LinePattern val) const { return val > vb.linePattern(); }
 		bool operator()(td::DotPattern val) const { return val > vb.dotPattern(); }
@@ -226,13 +226,13 @@ namespace td
 		const VAR& vb;
 		GreatherEqualThanVisitor(const VAR& vIn) : vb(vIn) {}
 		bool operator()(none) const { return false; }
-		bool operator()(td::BoolCh& val) const { return val >= vb.boolVal(); }
+		bool operator()(const td::BoolCh& val) const { return val >= vb.boolVal(); }
 		bool operator()(td::BYTE val) const { return val >= vb.byteVal(); }
 		bool operator()(td::INT2 val) const { return val >= vb.i2Val(); }
 		bool operator()(td::WORD val) const { return val >= vb.wordVal(); }
 		bool operator()(td::INT4 val) const { return val >= vb.i4Val(); }
 		bool operator()(td::UINT4 val) const { return val >= vb.u4Val(); }
-        bool operator()(td::Color& val) const { return val >= vb.colorVal(); }
+        bool operator()(const td::Color& val) const { return val >= vb.colorVal(); }
         bool operator()(td::ColorID val) const { return val >= vb.colorID();}
         bool operator()(td::LinePattern val) const { return val >= vb.linePattern();}
 		bool operator()(td::DotPattern val) const { return val >= vb.dotPattern();}
@@ -470,7 +470,7 @@ namespace td
         {}
         
 		const char* operator()(none) const { return "TD_NONE"; }
-		const char* operator()(td::BoolCh& val) const { return td::c_str(val()); }
+		const char* operator()(const td::BoolCh& val) const { return td::c_str(val()); }
 		const char* operator()(td::BYTE val) const
 		{
 			pReg->formatUInt(val, showThousendSep != 0);
@@ -643,9 +643,10 @@ namespace td
 			return (TNUM)val.getAsFloat();
 		}
 
-		TNUM operator()(td::ChFix7&) const
+		TNUM operator()(const td::ChFix7& val) const
 		{
-			return (TNUM)0;
+            TNUM result = td::toNumber<TNUM>(val.c_str());
+			return result;
 		}
 
 		template <typename TVAL>
@@ -757,13 +758,13 @@ namespace td
 			return val.toString();
 		}
 
-		td::String operator()(td::ChFix7& val) const
+		td::String operator()(const td::ChFix7& val) const
 		{
 			td::String str(val.c_str());
 			return str;
 		}
         
-        td::String operator()(td::Color& val) const
+        td::String operator()(const td::Color& val) const
         {
             return val.toString();
         }
@@ -997,4 +998,3 @@ namespace td
 	};
 	
 }
-

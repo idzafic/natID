@@ -358,7 +358,7 @@ public:
         _texture.replace({280, 300}, _watters);
         _texture.addNoise({140, 140, 140, 0});
         _texture.adjustBrightness(-0.33f);
-        setClipsToBounds();     //use this not to go beyound Frame bounds on macOS
+//        setClipsToBounds();     //use this not to go beyound Frame bounds on macOS
         registerForScrollEvents(); //Event::Zoom must be enabled, otherwise no scroll events
         
         //MNIST Image test

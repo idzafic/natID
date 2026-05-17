@@ -193,29 +193,24 @@ namespace td
             setColor(red, green, blue, alpha);
         }
         
-        inline bool operator < (const td::Color& clr)
+        inline bool operator < (const td::Color& clr) const
         {
             return _color < clr._color;
         }
         
-        inline bool operator <= (const td::Color& clr)
+        inline bool operator <= (const td::Color& clr) const
         {
             return _color <= clr._color;
         }
         
-        inline bool operator > (const td::Color& clr)
+        inline bool operator > (const td::Color& clr) const
         {
             return _color > clr._color;
         }
         
-        inline bool operator >= (const td::Color& clr)
+        inline bool operator >= (const td::Color& clr) const
         {
             return _color >= clr._color;
-        }
-        
-        inline bool operator == (const td::Color& clr)
-        {
-            return _color == clr._color;
         }
         
         td::StringBase<UTF8, td::EncodingUTF8, 4, false> toString() const;

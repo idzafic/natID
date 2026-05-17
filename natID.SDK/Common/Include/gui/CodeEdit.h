@@ -100,8 +100,12 @@ protected:
     cnt::Array<Selection,2> _selections;
     cnt::Array<sc::Range,2> _locationOfVars;
     cnt::Array<sc::Range,2> _locationOfParams;
+    cnt::Array<sc::Range,2> _locationOfConsts;
     cnt::Array<sc::Range,2> _locationOfDistribs;
     cnt::Array<sc::Range,2> _locationOfStats;
+    cnt::Array<sc::Range,2> _locationOfDataSets;
+    cnt::Array<sc::Range,2> _locationOfSamplers;
+    
     cnt::Array<sc::Range,2> _locationOfModels;
     cnt::Array<td::INT4,2> _indexOfDeltaT; //dummy
     cnt::Array<td::INT4,2> _indexOfTime;   //dummy

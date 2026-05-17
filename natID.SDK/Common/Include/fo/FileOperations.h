@@ -1553,41 +1553,19 @@ inline td::LUINT8 getFileSize(std::ostream& f)
 }
 
 template <class TCONTAINER>
-void getFileNamesInFolder(TCONTAINER& outFileNames, const td::String& folderName, const char* pExtension = 0)
-{
-    fs::path dir_path(folderName.c_str());
-    fs::directory_iterator end_it;
-
-    // loop through each file in the directory
-    for(fs::directory_iterator it(dir_path); it != end_it; ++it)
-    {
-        // if it's not a directory and its extension is as given [2]
-        if(fs::is_directory(it->status()))
-            continue;
-
-        if (pExtension != 0)
-        {
-            auto strExt = it->path().extension();
-            if (strExt == pExtension)
-            {
-                // store filename for later use
-                //std::string strTmp = it->path().string();
-                td::String str(it->path().string().c_str());
-                outFileNames.push_back(str);
-            }
-        }
-        else
-        {
-            outFileNames.push_back( it->path().string().c_str() );
-        }
-    }
-}
-
-template <class TCONTAINER>
 void getFileNamesInFolder(TCONTAINER& outFileNames, const fo::fs::path& folderPath, const char* pExtension = 0)
 {
+    if (!folderExists(folderPath))
+        return;
+    
 //    fs::path dir_path(folderName.c_str());
     fs::directory_iterator end_it;
+    
+    if (pExtension)
+    {
+        if (*pExtension == '*')
+            ++pExtension;
+    }
 
     // loop through each file in the directory
     for(fs::directory_iterator it(folderPath); it != end_it; ++it)
@@ -1598,25 +1576,28 @@ void getFileNamesInFolder(TCONTAINER& outFileNames, const fo::fs::path& folderPa
 
         if (pExtension != 0)
         {
-#ifdef USE_BOOST_FILE_SYSTEM
-            if (fs::extension(it->path()) == pExtension)
-#else
-            if (it->path().extension() == pExtension)
-#endif
+            auto strExtension = it->path().extension();
+            if (strExtension == pExtension)
             {
                 // store filename for later use
                 //std::string strTmp = it->path().string();
-                td::String str(it->path().string().c_str());
+                td::String str(it->path().c_str());
                 outFileNames.push_back(str);
             }
         }
         else
         {
-            outFileNames.push_back( it->path().string().c_str() );
+            outFileNames.push_back( it->path().c_str() );
         }
     }
 }
 
+template <class TCONTAINER>
+void getFileNamesInFolder(TCONTAINER& outFileNames, const td::String& folderName, const char* pExtension = 0)
+{
+    fs::path folderPath(folderName.c_str());
+    getFileNamesInFolder(outFileNames, folderPath, pExtension);
+}
 
 inline td::String convertDOSWildCardToRegex(const td::String& dosWildcard)
 {
@@ -2411,6 +2392,54 @@ inline std::uintmax_t getFolderSize(const std::filesystem::path& root)
     }
 
     return totalSize;
+}
+
+inline fs::path getFolderPath(const char* fullPath)
+{
+    fs::path p(fullPath);
+    fs::path parent = p.parent_path();
+    return parent;
+}
+
+inline fs::path getFolderPath(const td::String& fullPath)
+{
+    return getFolderPath(fullPath.c_str());
+}
+
+inline fs::path getFolderPath(const fs::path& fullPath)
+{
+    fs::path parent = fullPath.parent_path();
+    return parent;
+}
+
+inline td::String getFilename(const char* fullFath)
+{
+    fs::path p(fullFath);
+    return p.filename().c_str();
+}
+
+inline td::String getFilename(const td::String& fullFath)
+{
+    fs::path p(fullFath.c_str());
+    return p.filename().c_str();
+}
+
+inline td::String getFilename(const fs::path& fullFath)
+{
+    return fullFath.filename().c_str();
+}
+
+constexpr const char* getSharedLibDefaultExtension()
+{
+#ifdef MU_WINDOWS
+    return ".dll";
+#else
+#ifdef MU_MACOS
+    return ".dylib";
+#else
+    return ".so";
+#endif
+#endif
 }
 
 } //namespace fo

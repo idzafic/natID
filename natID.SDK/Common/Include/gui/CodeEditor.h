@@ -48,6 +48,7 @@ public:
     CodeEdit* getCodeEdit();
     const CodeEdit* getCodeEdit() const;
     void systemColorModeChanged(bool bDarkMode) override;
+    const gui::ILineNumbers* getLineNumbers() const;
 };
 
 }

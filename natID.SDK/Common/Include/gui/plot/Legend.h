@@ -36,7 +36,8 @@ class NATPLOT_API Legend
     
     std::vector<double> _lengths;
     gui::Font* _font;
-    
+    //const gui::Point& offset;
+
     td::UINT2 _nColumns = 1;
     td::UINT2 _nBands = 0;
     td::UINT2 _nAritraryLines = 0;
@@ -47,8 +48,8 @@ class NATPLOT_API Legend
     
 public:
     
-    void changeLocation(const gui::Point &location);
-    Legend(td::ColorID textColor, gui::Font *font, const gui::Point &location);
+    //void changeLocation(const gui::Point &location);
+    Legend(td::ColorID textColor, gui::Font *font);
     
     int getNoOfEntriesPerColumn();
     

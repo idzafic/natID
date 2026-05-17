@@ -21,6 +21,7 @@
 #include "ILog.h"
 #include <sc/Token.h>
 #include "SolutionOptions.h"
+#include <mu/IProgressor.h>
 
 namespace sc
 {
@@ -98,8 +99,10 @@ public:
     virtual int getParamValue(int indexVar, TSolType& value) = 0;
     virtual int getParamValue(const char* parName, TSolType& value) = 0;
     
+    virtual void setInitProgressor(mu::IProgressor* pProgressor, td::BYTE progPosition) = 0;
+    
     virtual bool init(const sc::Naming* pNaming, const sc::TokenizedModel* pTokenizedModelif, bool bMainModel = true) = 0;
-    virtual int init(const td::String& fileNameOrXmlContent, SourceType source = SourceType::XMLFile) =0;
+    //virtual int init(const td::String& fileNameOrXmlContent, SourceType source = SourceType::XMLFile) =0;
     
     //single solution (for steady state models)
     virtual sc::Solution solve() = 0;

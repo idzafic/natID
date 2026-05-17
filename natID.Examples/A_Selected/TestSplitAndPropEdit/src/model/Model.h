@@ -57,18 +57,22 @@ public:
     
     void draw(const gui::Rect& rDraw) const
     {
+        assert(rDraw.isNormalized());
+        
         gui::Rect boundingRect;
         size_t nDrawn = 0;
         for (auto pShape : _shapes)
         {
             pShape->getBoundingRect(boundingRect);
+            assert(boundingRect.isNormalized());
+            
             if (boundingRect.intersects(rDraw))
             {
                 pShape->draw();
                 ++nDrawn;
             }
         }
-        //mu::dbgLog("#Drawn=%d", nDrawn);
+        mu::dbgLog("Rect=(x=%.1f y=%.1f w=%.1f h=%.1f)", rDraw.left, rDraw.top, rDraw.width(), rDraw.height());
     }
     
     void appendShape(IShape2D* pShape, bool informPropEditor)

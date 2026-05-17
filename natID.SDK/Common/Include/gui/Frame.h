@@ -43,7 +43,7 @@ private:
 protected:
     virtual void onSetFocus();
     virtual void onLostFocus();
-    void reDraw();
+    
     void reDraw(const gui::Rect& rToRedraw);
     void showYesNoQuestionAsyncWithConsumer(td::UINT4 questionID, IMessageConsumer* pConsumer, const td::String& msgText, const td::String& informativeText, const td::String& strYes, const td::String& strNo) const;
     
@@ -54,6 +54,8 @@ public:
 //    Frame();
     Frame(Frame* parentFrame);
 //    ~Frame();
+    
+    void reDraw();
     
     void setGeometry(const Geometry& g);
     void getGeometry(Geometry& g) const;
@@ -128,7 +130,7 @@ public:
     void showYesNoQuestionAsync(const td::String& msgText, const td::String& informativeText, const td::String& strYes, const td::String& strNo, Alert::CallBack callBackLambda) const;
     
     
-    void openContextMenu(td::BYTE menuID, const gui::InputDevice& inpDev, gui::IMessageConsumer* pConsumer = nullptr, const gui::ContextData* pContextData = nullptr, td::UINT2 groupID = 0);
+    void openContextMenu(td::BYTE menuID, const gui::Point& framePoint, gui::IMessageConsumer* pConsumer = nullptr, const gui::ContextData* pContextData = nullptr, td::UINT2 groupID = 0);
     
     bool isNative() const;
     

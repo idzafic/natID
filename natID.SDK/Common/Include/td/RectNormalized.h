@@ -35,6 +35,11 @@ public:
         return bottom - top;
     }
 
+    inline bool isNormalized() const
+    {
+        return ( (right >= left) && (bottom >= top));
+    }
+    
     inline bool contains(const RectNormalized<T>& r) const
     {
         return (left <= r.left && right >= r.right && top <= r.top && bottom >= r.bottom);
@@ -43,11 +48,6 @@ public:
     inline bool intersects (const RectNormalized<T>& r) const
     {
         return !(left > r.right || right < r.left || top > r.bottom || bottom < r.top);
-        //if (!toRet)
-        //{
-        //	toRet = r.contains();
-        //}
-        //return toRet;
     }
 
     inline bool notIntersects (const RectNormalized<T>& r) const
@@ -269,10 +269,6 @@ public:
         bottom = top + size.height;
     }
     
-    bool isNormalized() const
-    {
-        return ((left <= right) && (top <= bottom));
-    }
     
     void operator -= (const td::Point<T>& delta)
     {

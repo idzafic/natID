@@ -29,6 +29,8 @@ class NATGUI_API DialogView : public View
     friend class Dialog;
 protected:
     gui::Dialog* _pDialog;
+protected:
+    //void onInitialAppearance() override final;
 private:
     bool onClick(gui::Button* pButton) override;
     //bool estimateDesiredInitialSize(const gui::Size& initialSize, gui::Size& desiredSize) const override;

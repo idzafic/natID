@@ -61,7 +61,7 @@ protected:
 public:
     void setAsCentralViewInWindow(Window* pWnd, Frame::FixSizes fixSizes) override;
 //    void setCursor(Cursor::Type ct, bool showImmediately = false) const;
-    
+    void registerForFocusEvents() const;
     void showCursor(bool bShow); //Show/hide cursor
     void moveCursorToCenter() const; //moves cursor to center of this view
     bool getCursorPosition(gui::Point& pt) const; //returns true if view is in focus, pt contains point relative to view    

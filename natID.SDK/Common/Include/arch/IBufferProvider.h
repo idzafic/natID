@@ -20,6 +20,7 @@ namespace arch
 		virtual void completed(const char* buff, td::UINT4 headerSize, td::UINT4 payloadSize, bool bError) = 0;
 		virtual void reset() = 0;		
 		virtual void setReadMode(bool bRead = true) = 0;
+        virtual void release() = 0;
 		virtual cnt::ListSL< char* >& getBuffers() = 0;
 	};
 };

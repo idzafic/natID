@@ -20,30 +20,40 @@ namespace gui
 {
 
 class TextEdit;
+class DataViewBody;
 
-class NATGUI_API LineNumbers : public Canvas, ILineNumbers
+class NATGUI_API LineNumbers : public Canvas, public ILineNumbers
 {
+    enum class Type : td::BYTE {TextEdit=0, DataView};
+public:
+    enum class Style : td::BYTE {NotVisible, ZeroBased, OneBased};
 protected:
-    TextEdit* _pTE = nullptr;
+    union
+    {
+        TextEdit* _pTE = nullptr;
+        DataViewBody* _pDBV;
+    };
     CoordType _dy = 0;
     CoordType _lineHeight = 0;
     CoordType _y = 0;
     td::UINT4 _totalLines = 0;
-    td::UINT4 _firstVisibleLine = 1;
+    td::UINT4 _firstVisibleLine;
     td::UINT4 _currentLine = 0;
     td::UINT4 _startingPos = 0;
     td::BYTE _nDigits = 3;
+
+    Type _type = Type::TextEdit;
+    Style _style = Style::OneBased;
+
 protected:
     void measure(CellInfo&) override;
     void reMeasure(CellInfo&) override;
     
     //ILineNumbers
-    void setCurrentLine(td::UINT4 lineNo) override;
+    
     td::UINT4 getCurrentLine() const override;
     //void setTotalLines(gui::CoordType lineHeight, td::UINT4 totalLines) override;
-    void setTotalLines(td::UINT4 totalNoOfLines, bool forceRedraw = false) override;
-    td::UINT4 getTotalLines() const override;
-    void setScrollPos(CoordType dy) override;
+    
     void fontChanged() override;
     CoordType getOffsetOnRightSide() const override;
     td::ColorID getColor() const override;
@@ -53,7 +63,13 @@ protected:
     LineNumbers() = delete;
 public:
     explicit LineNumbers(TextEdit* pTE);
+    explicit LineNumbers(DataViewBody* pDV);
+    void setTotalLines(td::UINT4 totalNoOfLines, bool forceRedraw = false) override;
+    td::UINT4 getTotalLines() const override;
     const TextEdit* getTextEdit() const;
+    void setCurrentLine(td::UINT4 lineNo) override;
+    void setScrollPos(CoordType dy) override;
+    void setStyle(Style style);
 };
 
 }

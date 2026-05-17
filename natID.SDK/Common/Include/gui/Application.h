@@ -75,7 +75,9 @@ protected:
     void setInitialFrameSize(gui::Window::FrameSize initialFrameSize);
     void setContextMenus(ContextMenus* pContextMenus);
     
-    virtual bool onResourcesLoaded();   //will be called after all app resources are loaded
+    /// onResourcesLoaded will be called after all app resources are loaded
+    ///override method should call base implementation
+    virtual bool onResourcesLoaded();
     virtual bool onInitialActivation();
     virtual void onActivated();
     virtual void onDeactivated();
@@ -100,8 +102,6 @@ public:
     Window* getReportWindow();
 
     const MenuBar* getMenuBar() const;
-
-    const fo::fs::path& getResPath() const;
     
     ///if fileToCheck doesn't exist, the data will be installed (this is valid only in deployment)
     bool checkAndInstallUserData(const char* fileToCheck) const;

@@ -59,7 +59,6 @@ protected:
     virtual void setScroller(ViewScroller* pScroller);
     virtual bool getModelSize(gui::Size& modelSize) const;
     
-    void registerForScrollEvents();
     virtual bool estimateDesiredInitialSize(const gui::Size& initialSize, gui::Size& desiredSize) const;
     virtual void onGeometryChange(const Geometry& newGeometry);
     virtual void onContentSizeChange(const gui::Size& newSize);
@@ -71,6 +70,7 @@ protected:
     virtual Layout* getLayout();
     virtual void systemColorModeChanged(bool bDarkMode);
     void adjustContentSize(Window* pWnd, Frame::FixSizes fixSizes);
+    virtual void onInitialAppearance(); //will be called only once on central views and main dialog view
 public:
     virtual Frame::FixSizes getFixSizesInfo();
     
@@ -106,6 +106,7 @@ public:
         contentType = (T) getContentTypeID();
     }
 
+    void registerForScrollEvents();
     //event handlers
     bool onActionItem(gui::ActionItemDescriptor& aiDesc) override;
     void onActionItem(td::BYTE menuID, td::BYTE actionID, const std::function<void()>& fnToCall); //first and last submenu = 0

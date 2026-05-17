@@ -1092,6 +1092,27 @@ public:
 		template <typename T>
         inline int convertFloat(char* pBuff, T val, int nDec, int BUFFLEN, td::FormatFloat fmt= td::FormatFloat::Decimal, const char* trailingTxt = nullptr)
 		{
+            if (val != 0)
+            {
+                if (nDec < 0)
+                {
+                    T eps = std::pow(T(10), nDec);
+                    nDec = -nDec;
+                    if (math::abs(val) < eps)
+                    {
+                        nDec = nDec / 2;
+                        if (nDec == 0)
+                            nDec = 1;
+                        if (trailingTxt)
+                            return SNPRINTF(pBuff, BUFFLEN - 1, _TRUNCATE, "%.*e%s", nDec, val, trailingTxt);
+                        else
+                            return SNPRINTF(pBuff, BUFFLEN - 1, _TRUNCATE, "%.*e", nDec, val);
+                    }
+                }
+            }
+            if (nDec < 0)
+                nDec = -nDec;
+            
 			float minNumber = minFltFormat;
 			float maxNumber = maxFltFormat;
 
@@ -1218,6 +1239,8 @@ public:
 			}
             
             pBuff[nLen] = 0;
+            if (nDec < 0)
+                nDec = -nDec;
 
             int nDecPos = nLen - nDec - 1;
             if (fmt == td::FormatFloat::Scientific)

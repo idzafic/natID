@@ -81,6 +81,10 @@ public:
     //key part
     td::UINT4 getKeyboardModifiers() const;
     bool isAnyModifierPressed() const;
+    bool isAltPressed() const;
+    bool isCtrlPressed() const;
+    bool isCmdPressed() const;
+    bool isCmdOnMacOrCtrlOnOtherPressed() const;
     const Key& getKey() const;
     bool isPointerCaptured() const;
 };

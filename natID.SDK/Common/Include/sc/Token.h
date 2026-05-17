@@ -22,7 +22,9 @@ namespace sc
 const size_t cMaxFunctionOrReservedKeyLength = td::StrKey::Length;
 
 //NOTE: If you edit Token, you need also to edit TokenNames below
-enum class Token : td::BYTE {Label=0, Variable, Parameter, EmbParam,//variables, params, can be any length
+//NOTE: Also you need to adjust mapping from sc:Token to SLIB_NAMESPACE::Token (Token.h in symbDblSolver/inc/Token.h)
+//      and in RPNParser.cpp: constexpr const Token::Type sTT[] -> line 1275
+enum class Token : td::BYTE {Label=0, Variable, Parameter, Const, EmbParam,//variables, params, consts, can be any length (Const will be converted to 
     Function, Group, AttribName, AttribEnumValue, Structure, Reserved, //defined by user, constraint on length: MaxFunctionOrReservedKeyLength
     ConstString, ConstInt, SpecialConst, ConstFloat, ConstImag, ConstNumericComplex, ConstColor, ConstLinePattern, ConstDotPattern, ConstAny, ConstTrue, ConstFalse, ConstLogic, //constants
     OpenParenthesis, CloseParenthesis, OpenBracket, CloseBracket, OpenCurlyBrace, CloseCurlyBrace,  //brackets
@@ -34,10 +36,10 @@ enum class Token : td::BYTE {Label=0, Variable, Parameter, EmbParam,//variables,
     LogicalNot, LogicalOr, LogicalAnd, LogicalXOR,      //logical operations
     LessThan, LessThanOrEqual, GreatherThan, GreatherThanOrEqual, IsEqual, IsDifferent,     //comparison operators
     Comma, Period, Colon, Semicolon,  //end of operators
-    Distribution, Stat,
+    Distribution, Stat, DataSet, Sampler,
     Comment, CCommentBegin, CCommentEnd, EndOfLine, Error};
 
-constexpr const char* const TokenNames[] = { "Label", "Var", "Param", "EmbParam",
+constexpr const char* const TokenNames[] = { "Label", "Var", "Param", "Const", "EmbParam",
     "Fn", "Group", "AttName", "AttEnValue", "Structure", "Reserved",
     "CStr", "CInt", "CSpecial", "CReal", "CImag", "CCmplx", "CClr", "CLinePattern", "CDotPattern", "CConstAny", "true", "false", "ConstLogic", //constants
     "(", ")", "[", "]", "{", "}",  //brackets
@@ -49,7 +51,7 @@ constexpr const char* const TokenNames[] = { "Label", "Var", "Param", "EmbParam"
     "!", "||", "&&", "##",      //logical operations
     "<", "<=", ">", ">=", "==", "!=",     //comparison operators
     ",", ".", ":", ";",  //end of operators
-    "Dist", "Stat",
+    "Dist", "Stat", "DataSet", "Sampler",
     "//", "/*", "*/", "NL", "ERR"};
 
 static_assert( static_cast<size_t>(Token::Error)+1 == std::size(TokenNames),
@@ -58,9 +60,9 @@ static_assert( static_cast<size_t>(Token::Error)+1 == std::size(TokenNames),
 
 constexpr const char* const RealFunctionNames[] = {"abs","acos","asin","atg","cos","exp","sqrt","ln","log","sin","tg", "sqr", "atg2", "min", "max", "smin", "smax", "avg", "var", "dev", "diff", "sign",
     "sinh", "cosh", "tgh", "asnh", "acsh", "atgh",
-    "int", "lim", "rnd", "disn", "disc", "round"};
+    "int", "lim", "rnd", "disn", "disc", "round", "sample"};
 
-enum class RealFunction : td::BYTE {Abs=0, ACos, ASin, ATg, Cos, Exp, Sqrt, Lm, Log, Sin, Tg, Sqr, ATg2, Min, Max, SMin, SMax, Avg, Var, Dev, Diff, Sign, Sinh, Cosh, Tgh, ASinh, ACosh, Atgh, Int, Lim, Rnd, Disn, Disc, Round, Last};
+enum class RealFunction : td::BYTE {Abs=0, ACos, ASin, ATg, Cos, Exp, Sqrt, Lm, Log, Sin, Tg, Sqr, ATg2, Min, Max, SMin, SMax, Avg, Var, Dev, Diff, Sign, Sinh, Cosh, Tgh, ASinh, ACosh, Atgh, Int, Lim, Rnd, Disn, Disc, Round, Sample, Last};
 
 static_assert( static_cast<size_t>(RealFunction::Last) == std::size(RealFunctionNames),
     "RealFunctionNames must match RealFunction enum"
@@ -68,21 +70,26 @@ static_assert( static_cast<size_t>(RealFunction::Last) == std::size(RealFunction
 
 constexpr const char* const ComplexFunctionNames[] = {"conj", "cabs", "rtop", "ptor", "real", "imag"}; //additional complex functions
 
-enum class Group : td::BYTE {Model=0, SubModel, Vars, Params, Distribs, Stats, ReInit, PreProc, NLEs, WLSEs, ECs,
+enum class Group : td::BYTE {Model=0, SubModel, Vars, Params, Consts, DataSets, Samplers, Distribs, Stats, ReInit, PreProc, NLEs, WLSEs, ECs,
     ODEs, PDEs, TFs, IterPostP, BasePostP, PostProc, Limits, Repeats, Plots, Last};
 
-constexpr const char* const GroupNames[] = {"Model", "SubModel", "Vars", "Params", "Distribs", "Stats", "ReInit", "PreProc", "NLEs", "WLSEs", "ECs", "ODEs", "PDEs", "TFs", "IterPostP", "BasePostP", "PostProc", "Limits", "Repeats", "Plots"};
+constexpr const char* const GroupNames[] = {"Model", "SubModel", "Vars", "Params", "Consts", "DataSets", "Samplers", "Distribs", "Stats", "ReInit", "PreProc", "NLEs", "WLSEs", "ECs", "ODEs", "PDEs", "TFs", "IterPostP", "BasePostP", "PostProc", "Limits", "Repeats", "Plots"};
 
 static_assert( static_cast<size_t>(Group::Last) == std::size(GroupNames),
     "GroupNames must match Group enum"
 );
 
 //all attribIDs are in this enum
-enum class AttribID : td::BYTE {Domain=0, Type, Method, Eps, DeltaT, Out, Weight, Conj, Enabled, Signal, CopyParamsFromParent, Min, Max, Mean, Dev, Integer, K, P, N, Alpha, Beta, Lambda, ReInit, AlwaysOn, InitMain, Simplify, Pivot, MaxIter,//namingPos == 0
+enum class AttribID : td::BYTE {Domain=0, Type, Method, Eps, DeltaT, Conn, Data, DS, Param, OutVals, Out, Weight, Conj, Enabled, Signal, CopyParamsFromParent, Min, Max, Mean, Dev, Integer, K, P, N, Alpha, Beta, Lambda, ReInit, AlwaysOn, InitMain, Simplify, Pivot, MaxIter,//namingPos == 0
     Width, Name,  //common
     MinX, MaxX, MinY, MaxY, LineColorL, LineColorD, BackColor, Legend, Step, Pattern, XLabel, YLabel,//namingPos == 1
-    Last};
+    Anchor, NCols, AnchorX, AnchorY, Last};
 
+//conn=":data/acc5.txt" data="SELECT time, xAcc as ax, yAcc as ay"]
+//    
+//Samplers:
+//    accell [ds=dsAccell param="time" outVals=
+            
 inline bool isColor(AttribID attID)
 {
     return (attID >= AttribID::LineColorL && attID <= AttribID::BackColor);
@@ -95,7 +102,7 @@ using TokenLabel = struct _tokLab
 };
 
 constexpr TokenLabel AtttribNames[] = {{"domain", Token::AttribEnumValue}, {"type",Token::AttribEnumValue},
-    {"method",Token::AttribEnumValue}, {"eps",Token::ConstFloat}, {"dT",Token::ConstFloat}, {"out",Token::ConstLogic},
+    {"method",Token::AttribEnumValue}, {"eps",Token::ConstFloat}, {"dT",Token::ConstFloat}, {"conn",Token::ConstString}, {"data",Token::ConstString}, {"ds",Token::ConstString}, {"param",Token::ConstString}, {"outVals",Token::ConstString}, {"out",Token::ConstLogic},
     {"w",Token::ConstFloat}, {"conj",Token::ConstLogic}, {"enabled",Token::ConstLogic}, {"signal",Token::AttribEnumValue},
     {"copyPars",Token::ConstInt},{"min",Token::ConstFloat},{"max",Token::ConstFloat},{"mean",Token::ConstFloat},
     {"dev",Token::ConstFloat}, {"integer",Token::ConstLogic}, {"k",Token::ConstFloat},
@@ -107,7 +114,9 @@ constexpr TokenLabel AtttribNames[] = {{"domain", Token::AttribEnumValue}, {"typ
     {"colorL",Token::ConstColor}, {"colorD",Token::ConstColor}, {"backColor",Token::AttribEnumValue},
     {"legend",Token::ConstLogic},
     {"step",Token::ConstFloat}, {"pattern",Token::ConstLinePattern},
-    {"xLabel",Token::ConstString}, {"yLabel",Token::ConstString}};
+    {"xLabel",Token::ConstString}, {"yLabel",Token::ConstString},
+    {"anchor",Token::AttribEnumValue}, {"nCols",Token::ConstInt},
+    {"anchorX",Token::ConstString}, {"anchorY",Token::ConstString}};
 
 static_assert( static_cast<size_t>(AttribID::Last) == std::size(AtttribNames),
     "AtttribNames must match AttribID enum"
@@ -126,8 +135,14 @@ enum class ReservedID : td::BYTE {Main, Repeat, LaplaceOperator, Group, //naming
 
 inline bool isScopeIncreaser(ReservedID reservedID)
 {
-    return ( (reservedID == ReservedID::If) || (reservedID == ReservedID::Group) || (reservedID == ReservedID::Switch) ||
+    return ( (reservedID == ReservedID::Group) ||
+            (reservedID == ReservedID::If) || (reservedID == ReservedID::Switch) ||
             (reservedID == ReservedID::LinePlot) || (reservedID == ReservedID::BarPlot) || (reservedID == ReservedID::PiePlot));
+}
+
+inline bool isScopeDecreaser(ReservedID reservedID)
+{
+    return ((reservedID == ReservedID::Else) || (reservedID == ReservedID::Group) );
 }
 
 using ReservedDesc = struct _RDS
@@ -193,9 +208,9 @@ inline const char* const getReserveName(sc::ReservedID reservedID)
 enum class Type : td::BYTE {ModelWithGroups=0, NoModelWithGroups, NoModelNoGroups};
 enum class Domain : td::BYTE {Real = 0, Complex};
 enum class UserLabels : td::BYTE {None=0, Extern, Intern};
-enum class UserLabel : td::BYTE {Variable=0, Param, Distrib, Stat, Last}; //this object
+enum class UserLabel : td::BYTE {Variable=0, Param, Const, Distrib, Stat, DataSet, Sampler, Last}; //this object
 enum class FunctionSet : td::BYTE {Real=0, Complex, NA}; //function groups
-enum class ColorGroup : td::BYTE {Variable=0, Param, NumericConstant, LogicalConstant, StringConstant, ColorConstant, Function, Group, Operator, AttribName, AttribValue, Comment, UnknownLabel, DoubleDefinition, NotInModel, Reserved, Other}; //color groups
+enum class ColorGroup : td::BYTE {Variable=0, Param, Const, DataSet, NumericConstant, LogicalConstant, StringConstant, ColorConstant, Function, Group, Operator, AttribName, AttribValue, Comment, UnknownLabel, DoubleDefinition, NotInModel, Reserved, Other}; //color groups
 
 enum class SupplementaryGroup : td::BYTE {ReInit=0, PreProc, IterPostProc, BasePostProc, PostProc, LimitGroup, Repeat, Last};
 
@@ -203,13 +218,13 @@ enum class SupplementaryGroup : td::BYTE {ReInit=0, PreProc, IterPostProc, BaseP
 
 //enum class Group : td::BYTE {Other=0, Model, Vars, Params, WLS};
 
-enum class Location : td::BYTE {BeforeModel=0, OnModel, Model, ModelVars, ModelDistribs, ModelStats, ModelParams, ModelBody, SubModel, SubModelVars, SubModelDistribs, SubModelStats, SubModelParams, SubModelBody, NotInModel};
+enum class Location : td::BYTE {BeforeModel=0, OnModel, Model, ModelVars, ModelParams, ModelConsts, ModelDistribs, ModelStats, ModelDataSets, ModelSamplers, ModelBody, SubModel, SubModelVars, SubModelParams, SubModelConsts, SubModelDistribs, SubModelStats, SubModelDataSets, SubModelSamplers, SubModelBody, NotInModel};
 
 using Range = td::Range<td::UINT4>;
 
 enum class ModelType : unsigned char {NL=0, WLS, ODE, DAE, NA};
 
-enum class ExpressionType : td::BYTE {Error=0, Normal, If, Else, Switch, Case, End, Grouper, Repeater};
+enum class ExpressionType : td::BYTE {Error=0, Normal, Sampler, If, Else, Switch, Case, End, Grouper, Repeater};
 
 enum class ModelLevel : td::BYTE {MainModel=0, SubModel};
 

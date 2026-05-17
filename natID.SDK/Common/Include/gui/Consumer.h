@@ -50,6 +50,7 @@ class Dialog;
 class FileDialog;
 class ContextMenu;
 class TextEdit;
+class DataView;
 
 class NATGUI_API Consumer : public NatObject, protected gui::IMessageConsumer
 {
@@ -79,6 +80,7 @@ protected:
     virtual bool onClick(gui::DrawableButtonWithDelegate* pDrawableBtnWDlg);
     virtual bool onClick(gui::CheckBox* pBtn);
     virtual bool onDblClick(gui::TableEdit* pTE);
+    virtual bool onDblClick(gui::DataView* pDV);
     virtual bool onClick(gui::Dialog* pDlg, td::UINT4 dlgID); //clicked a closing button on Dialog
     virtual bool onClick(gui::FileDialog* pDlg, td::UINT4 dlgID); //clicked Open/Save or cancel status button on a file dialog
     //for Alerts
@@ -93,6 +95,7 @@ protected:
     virtual bool onChangedSelection(gui::ComboBox* pCmb);
     virtual bool onChangedSelection(gui::DBComboBox* pCmb);
     virtual bool onChangedSelection(gui::TableEdit* pTE);
+    virtual bool onChangedSelection(gui::DataView* pDV);
     virtual bool onChangedSelection(gui::Navigator* pNavigator);
     virtual bool onChangedSelection(gui::TabView* pNavigator);
     virtual bool onChangedSelection(gui::PopoverButton* pBtn);

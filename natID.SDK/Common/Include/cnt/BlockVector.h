@@ -29,12 +29,6 @@ namespace cnt
 		td::UINT4 _size;	//number of elements inside
         td::UINT4 _capacity;
         td::UINT4 _lastUsedBlockPos;
-		
-				
-		//inline void fastTakeDataFrom(const SafeFullVector&  vect)
-		//{
-		//	td::fastMemCopy(begin(), vect.begin(), vect.size());			
-		//}
 
 		inline DataChunk getBlock(td::UINT4 blockPos)
 		{
@@ -313,6 +307,15 @@ namespace cnt
 			it._pIter = _blocks.begin();
 			return it;
 		}
+        
+        const_iterator cbegin() const
+        {
+            const_iterator it;
+            it._pos = 0;
+            it._size = _size;
+            it._pIter = _blocks.begin();
+            return it;
+        }
 
 		const_iterator end() const
 		{

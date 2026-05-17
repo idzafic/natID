@@ -19,6 +19,7 @@
 #include <initializer_list>
 #include <cnt/SafeFullVector.h>
 #include <gui/InputDevice.h>
+#include <gui/IDataSetPresenter.h>
 
 namespace gui
 {
@@ -28,7 +29,6 @@ class TableEditHelper;
 class NATGUI_API TableEdit : public Control
 {
 public:
-    enum class BoolStyle : td::BYTE {Text=0, CheckCrossGreenRed, CircleGreenRed};
     
     using SelChCallBack = std::function<void(td::INT4)>;
     using ActivateCallBack = std::function<void(td::INT4)>;
@@ -82,6 +82,7 @@ public:
     //virtual bool getValue(int iCol, td::Variant& val, bool checkType = false) const;
     
     virtual void clean(bool sendMessage = false);
+    void cleanAndDetachDataSet();
     void init(dp::IDataSet* pData);
     bool init(dp::IDataSet* pData, const std::initializer_list<int>& colPos);
     void init(dp::IDataSet* pData, size_t nFirstCols);
@@ -129,12 +130,8 @@ public:
     BoolStyle getBoolStale() const;
     
     void setContextMenu(td::BYTE contextMenuID, td::UINT2 contextMenuGroup = 0);
-};
-
-class IDataSetPresenter
-{
-public:
-    virtual void show(dp::IDataSet* pDS) = 0;
+    
+    
 };
 
 } //namespace gui

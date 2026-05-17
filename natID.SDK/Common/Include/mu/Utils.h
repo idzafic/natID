@@ -121,12 +121,12 @@ public:
 
     const char* c_str(std::complex<float> val)
     {
-        char* old_locale = setlocale(LC_NUMERIC, NULL);  // Save current locale
+        char* oldLocale = setlocale(LC_NUMERIC, NULL);  // Save current locale
         setlocale(LC_NUMERIC, "C");  // Set locale to "C"
 
         if (SNPRINTF(_buf, MU_BUFFLEN, _TRUNCATE, "(%g,%g)", val.real(), val.imag()) < 0)
             _buf[MU_BUFFLEN] = 0;
-        setlocale(LC_NUMERIC, old_locale);  // Restore original locale
+        setlocale(LC_NUMERIC, oldLocale);  // Restore original locale
         return _buf;
     }
     const char* c_str(std::complex<double> val)

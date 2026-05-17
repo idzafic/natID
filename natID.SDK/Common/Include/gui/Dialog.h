@@ -19,6 +19,7 @@
 
 namespace gui
 {
+
 class WindowHelper;
 class NATGUI_API Dialog : public Window
 {
@@ -56,15 +57,25 @@ public:
         {
         }
     };
+
+    //used with Pangel to provide additional checks if button closes the dialog in the Panel's view
+    class CloseChecker
+    {
+    public:
+        virtual bool shouldTriggerClose(Dialog::Button::ID, gui::Button*) = 0;
+    };
     
     static const std::initializer_list<Dialog::ButtonDesc> OkCancel;
 protected:
+    CloseChecker* _pCloseChecker = nullptr;
     DialogView _mainView;
     VerticalLayout _vl;
     HorizontalLayout _hlButtons;
     cnt::SafeFullVector<Dialog::Button> _buttons;
+    
     std::function<void(gui::Dialog::Button::ID, gui::Dialog*)> _fnToCallForAllButtons;
     std::function<void(gui::Dialog*)> _fnToCallForSingleButtons;
+    
     Dialog::Button::ID _clickedButtonID = Dialog::Button::ID::NA;
     EventHandlerType _eventHandlerType = EventHandlerType::Consumer;
     Dialog::Button::ID _buttonIDToHandle = Dialog::Button::ID::OK;
@@ -79,13 +90,13 @@ private:
     bool handleClick(gui::Button* pButton);
     
     size_t appendButton(Dialog::Button::ID btnID, const std::initializer_list<Dialog::ButtonDesc>& buttons);
-    void initButtons(const std::initializer_list<Dialog::ButtonDesc>& buttons);
+    void initButtons(const std::initializer_list<Dialog::ButtonDesc>& buttons, td::HAlignment hAlign = td::HAlignment::Right);
     void composeContent();
     void _setVisualID(td::UINT4 wndID);
 protected:
     //users should override this one
     virtual bool onClick(Dialog::Button::ID btnID, gui::Button* pButton);
-    
+    void onInitialAppearance() override;
     void closeModal(Dialog::Button::ID closingBtnID);
     void focusButton(Dialog::Button::ID btnID);
 private:
@@ -95,6 +106,7 @@ private:
     Dialog& operator = (const Dialog&) = delete;
 public:
     Dialog(Frame* pParentFrame, const std::initializer_list<Dialog::ButtonDesc>& buttons, const gui::Size& sz, td::UINT4 dlgID = 0);
+    Dialog(Frame* pParentFrame, const std::initializer_list<Dialog::ButtonDesc>& buttons, td::HAlignment buttonAlignment, const gui::Size& sz, td::UINT4 dlgID = 0);
     // virtual ~Dialog();
     
     const gui::DialogView& getCentralViewWithButtons() const;
@@ -197,6 +209,11 @@ public:
         if (keepOnParent)
             pDlg->keepOnTopOfParent();
         pDlg->open();
+    }
+    
+    void setButtonCloseChecker(CloseChecker* pCloseChecker)
+    {
+        _pCloseChecker = pCloseChecker;
     }
 };
 

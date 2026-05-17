@@ -437,7 +437,19 @@ public:
 
             _capacity = newSize;
         }
-        return *(_top++);
+		T& toRet = *_top;
+        ++_top;
+        return toRet;
+    }
+    
+    
+    void copyFrom(const PushBackVector<T>& v)
+    {
+        release();
+        auto nElems = v.size();
+        reserve(nElems);
+        for (const auto& e: v)
+            push_back(e);
     }
     
 //    inline T& push_back() requires (!td::conc::DefaultConstructor<T>)

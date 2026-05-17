@@ -22,6 +22,7 @@
 #include <tuple>
 #include <td/ColorID.h>
 #include <mu/Utils.h>
+#include <mu/IProgressor.h>
 
 namespace sc
 {
@@ -59,10 +60,11 @@ class SYMBOLICOMP_API TokenizedModel
 public:
     using CntGroupInfo = cnt::Array<CountersAndPointers, size_t(Group::Last)>;
 protected:
-    cnt::SafeFullVector<td::Variant>& _headerAttribs;
+    cnt::SafeFullVector<td::Variant>* _pHeaderAttribs;
+    mu::IProgressor* _pProgressor = nullptr;
     
     TranslateFunction _translate;
-    sc::Naming& _naming;
+    sc::Naming* _pNaming;
     sc::ExpressionTokens _modelTokens;
     sc::AttribTokens _attribTokens;
     sc::LinesInfo _mainModelLinesInfo;
@@ -74,14 +76,21 @@ protected:
     cnt::Array<cnt::PushBackVector<td::Variant>,2> _modelAttribs; //model and submodel attribs
     cnt::Array<sc::Range,2> _locationOfVars;
     cnt::Array<sc::Range,2> _locationOfParams;
+    cnt::Array<sc::Range,2> _locationOfConsts;
     cnt::Array<sc::Range,2> _locationOfDistribs;
     cnt::Array<sc::Range,2> _locationOfStats;
+    
+    cnt::Array<sc::Range,2> _locationOfDataSets;
+    cnt::Array<sc::Range,2> _locationOfSamplers;
+    
     cnt::Array<sc::Range,2> _locationOfModels;
     cnt::Array<td::INT4,2> _indexOfDeltaT;
     cnt::Array<td::INT4,2> _indexOfTime;
     cnt::Array<td::UINT4,2> _numberOfLimits;
     cnt::Array<ModelInfo,2> _modelInfo;
-    sc::ILog* _pLog;
+    sc::ILog* _pLog = nullptr;
+    td::String _fileName;
+    size_t _nProgressSteps = 0;
     td::UINT4 _nInitialVars = 0;
     td::UINT4 _nInitialParams = 0;
     td::UINT4 _nOutVars = 0;
@@ -92,8 +101,7 @@ protected:
     td::UINT4 _noOfHeaderLines = 0;
     td::UINT2 _namingPosition = 0;
     td::BYTE _complexDomain = 0;
-    
-    TokenizedModel() = delete;
+    td::BYTE _progressLocation = 0;
 protected:
     bool countExpressions(CntGroupInfo& gi, const sc::LinesInfo& li, sc::ModelLevel modelLevel);
     void addLogEntry(const sc::ILog::Entry& le, sc::ILog::Type type = sc::ILog::Type::Error);
@@ -103,7 +111,8 @@ protected:
     bool loadVarsAndParams(void* modelLoader, td::MutableString& mStr, td::INT4& nSuppLines);
 public:
     explicit TokenizedModel(sc::ILog* pLog, cnt::SafeFullVector<td::Variant>& headerAttribs, TranslateFunction translate, sc::Naming& naming, td::UINT2 namingPosition);
-    
+    TokenizedModel();
+    void init(sc::ILog* pLog, cnt::SafeFullVector<td::Variant>& headerAttribs, TranslateFunction translate, sc::Naming& naming, td::UINT2 namingPosition);
     //load methods
     bool loadFromEditor(mu::ILineLoader* pLL, bool cleanNaming, sc::Domain domain);
     bool loadFromFile(const td::String& fileName);
@@ -123,7 +132,7 @@ public:
     bool hasRepetitions() const;
     td::INT4 getIndexOfTimeParam(sc::ModelLevel modelLevel) const;
     td::INT4 getIndexOfDeltaTimeParam(sc::ModelLevel modelLevel) const;
-    
+    void setProgressor(mu::IProgressor* progressor, size_t nSteps, td::BYTE progressLocation);
     class const_iterator;
 
     class iterator
@@ -203,7 +212,7 @@ public:
         
         bool operator == (const iterator& it) const
         {
-            if (_pLinesInfo != it._pLinesInfo);
+            if (_pLinesInfo != it._pLinesInfo)
                 return false;
             return (_pos == it._pos && _lastPos == it._lastPos);
         }
@@ -358,7 +367,7 @@ public:
 //            }
 //            return false;
         }
-        
+
         template <typename T>
         bool getAttribValue(sc::AttribID attID, T& val) const
         {
@@ -459,6 +468,16 @@ public:
     const td::UINT4 getNumberOfLimits(sc::ModelLevel modelLevel) const
     {
         return _numberOfLimits[(td::BYTE) modelLevel];
+    }
+    
+    void setFileName(const td::String& fileName)
+    {
+        _fileName = fileName;
+    }
+    
+    const td::String& getFileName() const
+    {
+        return _fileName;
     }
 //    static std::span<const char* const> getModelAttribNames();
     

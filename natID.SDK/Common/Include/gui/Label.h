@@ -38,6 +38,7 @@ public:
     void setTitle(const char* title) override;
     void setResizable(td::BYTE minChars=3, td::TextEllipsize ellips = td::TextEllipsize::End);
     void setSelectable();
+    void setAlignment(td::HAlignment hAlign); // make sense only if it resizible
     void operator = (const td::String& lblText);
     void operator = (const char* pLblText);
 };

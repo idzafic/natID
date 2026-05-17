@@ -175,7 +175,9 @@ inline wchar_t* wmemcpy_s( wchar_t* dest, [[maybe_unused]] size_t buffLen, const
 #ifdef MU_64BIT
     #ifndef __MINGW32__
         #ifndef MU_MACOS
-            #define USE_SIMD
+            #if !defined(__arm__) && !defined(__aarch64__)
+                #define USE_SIMD
+            #endif
         #endif
     #endif
 #endif

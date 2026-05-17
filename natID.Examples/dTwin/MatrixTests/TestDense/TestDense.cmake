@@ -24,3 +24,4 @@ target_link_libraries(${TESTDENSE_NAME} debug ${MU_LIB_DEBUG} optimized ${MU_LIB
                     debug ${MATRIX_LIB_DEBUG} optimized ${MATRIX_LIB_RELEASE})
 
 setIDEPropertiesForExecutable(${TESTDENSE_NAME})
+

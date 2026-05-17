@@ -129,7 +129,7 @@ protected:
     
     void onInit() override
     {
-        mu::ILogger* pLog = mu::pApp()->getLogger();
+        mu::ILogger* pLog = mu::IApplication::getApplication()->getLogger();
         if (pLog)
             pLog->showInfo("ViewGLAnimation::onInit", "Pos0");
         

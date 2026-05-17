@@ -22,7 +22,7 @@ public:
 //        _toolBar.setIconSize(gui::ToolBar::IconSize::SystemDefault);
 //    
 //        setToolBar(_toolBar);
-        mu::ILogger* pLog = mu::pApp()->getLogger();
+        mu::ILogger* pLog = mu::IApplication::getApplication()->getLogger();
         setCentralView(&_viewCubeMap);
     }
     

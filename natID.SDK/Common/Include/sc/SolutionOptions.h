@@ -21,7 +21,7 @@ using SolutionOptions = struct so
     double dT = 1e-3;
 };
 
-enum class SourceType : unsigned char {XMLFile = 0, XMLMemory, ModlFile};
+//enum class SourceType : unsigned char {XMLFile = 0, XMLMemory, ModlFile};
 
 enum class Solution : unsigned char {OK=0, BaseOK, Iterating, LimitFix, NewPass, EmptyMatrix, FactorizationError, SolutionError, Oscillation, NoImprovement, MaximumIteration, SubmodelFailed};
 constexpr const char* SolutionNames[] = {"OK", "BaseOK", "IterBase", "LimitFix", "NewPass", "EmptyMatrix", "FactorizationError", "SolutionError", "Oscillation", "NoImprovement", "MaxIters",  "SubmodelFailed"};

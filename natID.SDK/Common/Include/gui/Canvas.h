@@ -33,12 +33,10 @@ struct CanvasPriv
 
     td::UINT2 inputEvents = 0;
 
-    gui::Cursor::Type cursorType = gui::Cursor::Type::Default;
-    //td::BYTE handleCursorOnEnterExitEvents = 0;
+    gui::Cursor::Type cursorType = gui::Cursor::Type::Default;;
     td::BYTE sendScrollEvents = 0;
     td::BYTE sendFocusEvents = 0;
     td::BYTE enableResizeEvent = 0;
-    //td::BYTE canAnimate = 0;
     td::BYTE isAnimating = 0;
     td::BYTE closing = 0;
     td::BYTE dragInProgress = 0;
@@ -48,9 +46,10 @@ struct CanvasPriv
 class NATGUI_API Canvas : public DrawableView
 {
     friend class CanvasHelper;
+ 
 public:
     enum class Backend : unsigned char {Display=0, Bitmap, EPS, PDF, SVG, Printer};
-
+    enum class Placement {SingleNonScalable=0, SingleScalable, InScroller};
 protected:
     ViewScroller* _pScroller = nullptr;
 private:
@@ -60,6 +59,7 @@ private:
 #endif
 
 protected:
+    
     td::UINT2 _fixedWidth = 0;
     td::UINT2 _fixedHeight = 0;
     Backend _backend = Backend::Display;
@@ -80,7 +80,7 @@ protected:
     void setPreferredFrameRateRange(float minFPS, float maxFPS);
     
     //required on macOS to clip the drawing within the borders of the canvas
-    void setClipsToBounds();
+    void setClipsToBounds(ClipMode clipMode = ClipMode::All);
     
     Canvas(const Canvas&) = delete;
     Canvas& operator =(const Canvas&) = delete;
@@ -90,6 +90,8 @@ public:
     ~Canvas();
     gui::ObjType getObjType() const override { return ObjType::Canvas;}
 
+    virtual Placement getPlacement() const;
+    
     void getVisiblePartInModelCoordinates(gui::Rect& r) const;
     
     void getSize(Size& sz) const;

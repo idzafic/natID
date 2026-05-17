@@ -149,51 +149,6 @@ protected:
                     {
                     });
                 }
-                
-                //return true;
-
-                //or as panel
-//                gui::showPanel<ViewSettings>(&_toolBar, this);
-
-                //another way to do it
-                //gui::showPanel<ViewSettings>(this, [this](gui::Dialog* pDlg)
-                //    {
-                //        //update settings, user clicked ok
-                //        if (pDlg->getClickedButtonID() == gui::Dialog::Button::ID::OK)
-                //        {
-
-                //            gui::PanelDefault<ViewSettings, gui::Dialog>* pDlg2 = dynamic_cast<gui::PanelDefault<ViewSettings, gui::Dialog>*>(pDlg);
-
-                //            auto& view2 =  *(dynamic_cast<const ViewSettings*>(pDlg->getCentralView()));
-                //            //auto pDlg2 = dynamic_cast<gui::PanelDefault<ViewSettings, gui::Dialog>*>(pDlg);
-                //            auto& view = pDlg2->view();
-
-                //            auto settings = getApplication()->getProperties();
-                //            //update translation if needed
-                //            td::String strTr = view.getTranslationExt();
-                //            if (strTr.length() > 0)
-                //            {
-                //                //write translation info back to properties
-                //                settings->setValue("translation", strTr);
-                //            }
-
-                //            //show or hide toolbar
-                //            bool isTBVisible = view.isTBVisible();
-                //            _toolBar.show(isTBVisible);
-                //            settings->setValue("TBVisible", isTBVisible);
-
-
-                //            //adjust toolbar icon size if needed
-                //            gui::ToolBar::IconSize iconSize = view.getTBIconSize();
-                //            _toolBar.setIconSize(iconSize);
-                //            settings->setValue("TBIconSz", static_cast<std::underlying_type_t<gui::ToolBar::IconSize>>(iconSize));
-
-                //            //show or hide toolbar labels
-                //            bool TBLbls = view.getTBShowLabels();
-                //            _toolBar.showLabels(TBLbls);
-                //            settings->setValue("TBLbls", TBLbls);
-                //        }
-                //    });
 
                 return true;
             }

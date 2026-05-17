@@ -143,7 +143,11 @@ public:
     std::tuple<int, const char**> getMainArgs() const;
     td::String expandResFileName(const fo::fs::path& relativePath, const td::String& resFileName) const;
     td::String expandResFileName(const fo::fs::path& relativePath, const char* resFileName) const;
+    
+    const fo::fs::path& getResPath() const;
+    
+    static IApplication* getApplication();
 };
 
-MAINUTILS_API mu::IApplication* pApp();
+//MAINUTILS_API mu::IApplication* pApp();
 }
