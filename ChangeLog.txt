@@ -1,10 +1,11 @@
 Overview of Changes in 4.2.0, 2026-05-17
 =========================================
-- Fixed warnings on linux
-- Added gui/ViewportCanvas class
-- fixed app restart on all systems
-- upgraded from gtk 4.18.5 to gtk 4.22.2
-- fixed gui::Canvas clip on macOS
+- Fixed compilation warnings on linux
+- Added gui/ViewportCanvas class 
+     - with example project: TestSplitAndPropEdit2
+- Fixed app restart on all systems
+- Upgraded from gtk 4.18.5 to gtk 4.22.2
+- Fixed gui::Canvas clip on macOS
 - ...
 
 Overview of Changes in 4.1.0, 2026-05-11
