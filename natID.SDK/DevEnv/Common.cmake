@@ -306,6 +306,100 @@ function(setIDEPropertiesForGUIExecutable targetID devResPath)
 
 endfunction()
 
+function(setIDEPropertiesForLib targetID)
+
+    # Common properties for all platforms
+    if(APPLE)
+        set_target_properties(${targetID} PROPERTIES
+            MACOSX_RPATH                TRUE
+            BUILD_WITH_INSTALL_RPATH    TRUE
+            INSTALL_RPATH               "@loader_path"
+            INSTALL_RPATH_USE_LINK_PATH FALSE
+            SKIP_BUILD_RPATH            FALSE
+            XCODE_GENERATE_SCHEME       TRUE
+            XCODE_SCHEME_WORKING_DIRECTORY "${SOURCE_ROOT}"
+            XCODE_SCHEME_ENVIRONMENT    "DYLD_LIBRARY_PATH=${NATID_SDK_LIB}"
+			CXX_VISIBILITY_PRESET       hidden
+        	PREFIX                      ""
+        	OUTPUT_NAME                 "${targetID}$<$<CONFIG:Debug>:D>"
+        )
+
+		# ────────────────────────────────────────────────
+        # Only sign SHARED (dynamic) libraries
+        # ────────────────────────────────────────────────
+		
+		get_real_target_type(_type ${targetID})
+
+        if(_type STREQUAL "SHARED_LIBRARY" OR _type STREQUAL "MODULE_LIBRARY")
+			# ────────────────────────────────────────────────
+			# Decide whether we should attempt code signing
+			# ────────────────────────────────────────────────
+			set(SIGN_SCRIPT "${NATID_SDK_BIN}/signAppXcode.command")
+			if(EXISTS "${SIGN_SCRIPT}" AND NOT IS_DIRECTORY "${SIGN_SCRIPT}")
+				message(STATUS "Signing script found: ${SIGN_SCRIPT} → code signing ENABLED for ${targetID}")
+
+				# Ad-hoc signing for macOS after build
+				add_custom_command(TARGET ${targetID} POST_BUILD
+					COMMAND codesign --force --sign - "$<TARGET_FILE:${targetID}>"
+					COMMENT "Ad-hoc signing ${targetID}.dylib"
+				)
+
+				set_target_properties(${targetID} PROPERTIES				
+					XCODE_ATTRIBUTE_CODE_SIGN_STYLE Manual
+					XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "-"
+					XCODE_ATTRIBUTE_DEVELOPMENT_TEAM ""
+					XCODE_ATTRIBUTE_PROVISIONING_PROFILE_SPECIFIER ""
+					XCODE_ATTRIBUTE_PROVISIONING_PROFILE ""
+					XCODE_ATTRIBUTE_CODE_SIGNING_ALLOWED YES
+					XCODE_ATTRIBUTE_CODE_SIGNING_REQUIRED NO
+					XCODE_ATTRIBUTE_ENABLE_HARDENED_RUNTIME NO
+
+					#XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY    "${MY_SIGNATURE}"
+					#XCODE_ATTRIBUTE_CODE_SIGNING_REQUIRED "YES"
+				)
+				# Optional: also run the script explicitly after build
+				# add_custom_command(TARGET ${targetID} POST_BUILD
+				# 	COMMAND ${CMAKE_COMMAND} -E echo "Running custom signing script..."
+				# 	COMMAND "${SIGN_SCRIPT}" "$<TARGET_FILE:${targetID}>"
+				# 	COMMAND ${CMAKE_COMMAND} -E echo "Signing finished."
+				# 	COMMENT "Custom code signing: ${targetID}"
+				# 	VERBATIM
+				# )
+			else()
+				message(STATUS "Signing script not found or not a file: ${SIGN_SCRIPT} → signing DISABLED for ${targetID}")
+			endif()
+		else()
+			message(STATUS "Detected static library ${targetID} → NO NEED for signing!")
+		endif()
+
+        # Only if you still need it (Objective-C code)
+        target_compile_options(${targetID} PRIVATE "-fobjc-arc")
+
+    elseif(WIN32)
+        # Windows — no changes needed here
+        set_target_properties(${targetID} PROPERTIES
+        	CXX_VISIBILITY_PRESET       hidden
+        	PREFIX                      ""
+        	OUTPUT_NAME                 "${targetID}$<$<CONFIG:Debug>:D>" 
+		)
+    else()
+        # Linux
+        set_target_properties(${targetID} PROPERTIES
+            BUILD_WITH_INSTALL_RPATH    TRUE
+            INSTALL_RPATH               "$ORIGIN"
+            INSTALL_RPATH_USE_LINK_PATH FALSE
+            SKIP_BUILD_RPATH            FALSE
+            POSITION_INDEPENDENT_CODE   ON
+			CXX_VISIBILITY_PRESET hidden
+			PREFIX ""
+			COMPILE_FLAGS "-fPIC"
+			LINK_FLAGS "-Wl,--no-undefined"
+        )
+		target_link_directories(${targetID} PRIVATE ${NATID_SDK_LIB})
+        target_link_options(${targetID} PRIVATE "-Wl,--no-undefined")
+    endif()
+
+endfunction()
 
 function(executePostConfigProgram executablePath args)
 
