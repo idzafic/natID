@@ -50,6 +50,10 @@ include(../Radar2/Radar2.cmake)
 
 include(../TestGLTess2/testGLTess2.cmake)
 
+include(../SolarSystem/SolarSystem.cmake)
+
+include(../SolarSystem2/SolarSystem2.cmake)
+
 include(${NATID_SDK_ROOT}/DevEnv/ZipperLib.cmake)
 
 include(../TestPerlin/testPerlin.cmake)

@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Texts>
+		<!--- all from res folder -->
+		<Res id="simpleVS" path=":shaders/simple.vert"/>
+		<Res id="simpleFS" path=":shaders/simple.frag"/>
+		<Res id="skyboxVS" path=":shaders/skybox.vert"/>
+		<Res id="skyboxFS" path=":shaders/skybox.frag"/>
+	</Texts>
+	<FileNames>
+		<!-- Fonts -->
+		<Res id="lucida" path="bin/TestData/natGL/Fonts/Lucida32.text"/>
+		
+		<!-- planets -->
+		<Res id="earth2k" path="Common/Images/Planets/planets/earth2k.jpg"/>
+		<Res id="2k_sun" path="Common/Images/Planets/planets/2k_sun.jpg"/>
+		<Res id="2k_moon" path="Common/Images/Planets/planets/2k_moon.jpg"/>
+		<Res id="2k_mercury" path="Common/Images/Planets/planets/2k_mercury.jpg"/>
+		<Res id="2k_venus" path="Common/Images/Planets/planets/2k_venus.jpg"/>
+		<Res id="2k_mars" path="Common/Images/Planets/planets/2k_mars.jpg"/>
+		<Res id="2k_jupiter" path="Common/Images/Planets/planets/2k_jupiter.jpg"/>
+		<Res id="2k_saturn" path="Common/Images/Planets/planets/2k_saturn.jpg"/>
+		<Res id="2k_uranus" path="Common/Images/Planets/planets/2k_uranus.jpg"/>
+		<Res id="2k_neptune" path="Common/Images/Planets/planets/2k_neptune.jpg"/>
+		<Res id="saturn_ring" path="Common/Images/Planets/planets/r.jpg"/>
+		<Res id="2k_earth_clouds" path="Common/Images/Planets/planets/2k_earth_clouds.jpg"/>
+
+		<!-- Skybox starfield -->
+		<Res id="starfield_rt" path="Common/Images/Planets/skybox/starfield/starfield_rt.tga"/>
+		<Res id="starfield_lf" path="Common/Images/Planets/skybox/starfield/starfield_lf.tga"/>
+		<Res id="starfield_up" path="Common/Images/Planets/skybox/starfield/starfield_up.tga"/>
+		<Res id="starfield_dn" path="Common/Images/Planets/skybox/starfield/starfield_dn.tga"/>
+		<Res id="starfield_ft" path="Common/Images/Planets/skybox/starfield/starfield_ft.tga"/>
+		<Res id="starfield_bk" path="Common/Images/Planets/skybox/starfield/starfield_bk.tga"/>
+
+		<!-- Skybox blue -->
+		<Res id="bkg1_right" path="Common/Images/Planets/skybox/blue/bkg1_right.png"/>
+		<Res id="bkg1_left" path="Common/Images/Planets/skybox/blue/bkg1_left.png"/>
+		<Res id="bkg1_top" path="Common/Images/Planets/skybox/blue/bkg1_top.png"/>
+		<Res id="bkg1_bot" path="Common/Images/Planets/skybox/blue/bkg1_bot.png"/>
+		<Res id="bkg1_front" path="Common/Images/Planets/skybox/blue/bkg1_front.png"/>
+		<Res id="bkg1_back" path="Common/Images/Planets/skybox/blue/bkg1_back.png"/>
+	</FileNames>
+</DevRes>

@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<DevRes>
+	<Texts>
+		<!-- Shaders (: prefix = relative to this res/ folder) -->
+		<Res id="bodyVS" path=":shaders/body.vert"/>
+		<Res id="bodyFS" path=":shaders/body.frag"/>
+		<Res id="ringVS" path=":shaders/ring.vert"/>
+		<Res id="ringFS" path=":shaders/ring.frag"/>
+	</Texts>
+	<FileNames>
+		<!-- Planet textures -->
+		<Res id="texSun"     path="Common/Images/Planets/planets/2k_sun.jpg"/>
+		<Res id="texMercury" path="Common/Images/Planets/planets/2k_mercury.jpg"/>
+		<Res id="texVenus"   path="Common/Images/Planets/planets/2k_venus.jpg"/>
+		<Res id="texEarth"   path="Common/Images/Planets/planets/earth2k.jpg"/>
+		<Res id="texMoon"    path="Common/Images/Planets/planets/2k_moon.jpg"/>
+		<Res id="texMars"    path="Common/Images/Planets/planets/2k_mars.jpg"/>
+		<Res id="texJupiter" path="Common/Images/Planets/planets/2k_jupiter.jpg"/>
+		<Res id="texSaturn"  path="Common/Images/Planets/planets/2k_saturn.jpg"/>
+		<Res id="texUranus"  path="Common/Images/Planets/planets/2k_uranus.jpg"/>
+		<Res id="texNeptune" path="Common/Images/Planets/planets/2k_neptune.jpg"/>
+
+		<!-- Starfield skybox (order: Left, Front, Right, Back, Top, Bottom) -->
+		<Res id="sfLeft"   path="Common/Images/Planets/skybox/starfield/starfield_lf.tga"/>
+		<Res id="sfFront"  path="Common/Images/Planets/skybox/starfield/starfield_ft.tga"/>
+		<Res id="sfRight"  path="Common/Images/Planets/skybox/starfield/starfield_rt.tga"/>
+		<Res id="sfBack"   path="Common/Images/Planets/skybox/starfield/starfield_bk.tga"/>
+		<Res id="sfTop"    path="Common/Images/Planets/skybox/starfield/starfield_up.tga"/>
+		<Res id="sfBottom" path="Common/Images/Planets/skybox/starfield/starfield_dn.tga"/>
+
+		<!-- Blue skybox (order: Left, Front, Right, Back, Top, Bottom) -->
+		<Res id="blLeft"   path="Common/Images/Planets/skybox/blue/bkg1_left.png"/>
+		<Res id="blFront"  path="Common/Images/Planets/skybox/blue/bkg1_front.png"/>
+		<Res id="blRight"  path="Common/Images/Planets/skybox/blue/bkg1_right.png"/>
+		<Res id="blBack"   path="Common/Images/Planets/skybox/blue/bkg1_back.png"/>
+		<Res id="blTop"    path="Common/Images/Planets/skybox/blue/bkg1_top.png"/>
+		<Res id="blBottom" path="Common/Images/Planets/skybox/blue/bkg1_bot.png"/>
+
+		<!-- HUD font (SDK-relative path, no : prefix) -->
+		<Res id="lucida" path="bin/TestData/natGL/Fonts/Lucida32.text"/>
+	</FileNames>
+</DevRes>
