@@ -10,7 +10,6 @@
 class ViewGLX : public glx::View
 {
 protected:
-    Renderer* _pRenderer = nullptr;  // Keep reference to our renderer
     gui::Texture _frameTexture; //for frame export
     
     glx::IRenderer* createRenderer() override
@@ -19,12 +18,23 @@ protected:
         return _pRenderer;
     }
     
+    //Helper methods (IRenderer -> My Renderer)
+    inline Renderer* getRenderer()
+    {
+        return static_cast<Renderer*>(_pRenderer);
+    }
+    
+    inline const Renderer* getRenderer() const
+    {
+        return static_cast<const Renderer*>(_pRenderer);
+    }
+    
     // Input handling methods similar to TestGL
     bool onKeyPressed(const gui::Key& key) override
     {
         if (_pRenderer)
         {
-            _pRenderer->handleKeyPressed(key);
+            getRenderer()->handleKeyPressed(key);
             reDraw(); // Trigger redraw after input
             return true;
         }
@@ -36,7 +46,7 @@ protected:
         if (_pRenderer)
         {
             auto pt = inputDevice.getFramePoint();
-            _pRenderer->handleLeftButtonPressed(pt);
+            getRenderer()->handleLeftButtonPressed(pt);
             reDraw(); // Trigger redraw after input
         }
     }
@@ -46,7 +56,7 @@ protected:
         if (_pRenderer)
         {
             auto pt = inputDevice.getFramePoint();
-            _pRenderer->handleRightButtonPressed(pt);
+            getRenderer()->handleRightButtonPressed(pt);
             reDraw(); // Trigger redraw after input
         }
     }
@@ -62,7 +72,7 @@ public:
         if (_pRenderer)
         {
             // Update the texture scale in renderer and redraw
-            _pRenderer->setTextureScale(val);
+            getRenderer()->setTextureScale(val);
             reDraw();
         }
     }
@@ -71,7 +81,7 @@ public:
     {
         if (_pRenderer)
         {
-            _pRenderer->switchTexture();
+            getRenderer()->switchTexture();
             reDraw();
         }
     }
@@ -110,7 +120,7 @@ public:
                     }
                     
                     // Get the current drawable and save it
-                    glx::CommandQueue cmdQueue = _pRenderer->getCommandQueue();
+                    glx::CommandQueue cmdQueue = getRenderer()->getCommandQueue();
                     bool success = saveDrawable(path.c_str(), cmdQueue, format);
                     
                     if (success)

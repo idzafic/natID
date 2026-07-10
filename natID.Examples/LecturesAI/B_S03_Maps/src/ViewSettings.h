@@ -63,6 +63,8 @@ public:
             ++i;
         }
         
+        _cmbLangs.sizeToFit(); //adjust its size to fit the content
+
         bool showLabels = appProperties->getTBLabelVisibility(mu::IAppProperties::ToolBarType::Main, true);
         _chbToolbarIconsAndLabels.setChecked(showLabels);
         

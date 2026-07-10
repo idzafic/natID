@@ -7,9 +7,20 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file Format.h
+    @brief Defines the Format enumeration for sparse matrix serialization output formats. */
 #pragma once
 namespace sparse
 {
-    enum class Format : unsigned int  { Cpp = 1, SciLab = 2, Matlab = 4, LaTeX = 8, Mtx = 16, Fortran = 32} ;
-	
+    /// @brief Bit-flag enumeration of supported sparse matrix serialization output formats.
+    enum class Format : unsigned int
+    {
+        Cpp = 1, ///< C++ source code format
+        SciLab = 2, ///< Scilab matrix format
+        Matlab = 4, ///< MATLAB/Octave matrix format
+        LaTeX = 8, ///< LaTeX bmatrix format
+        Mtx = 16, ///< Matrix Market exchange format (.mtx)
+        Fortran = 32 ///< Fortran array format
+    };
+
 }

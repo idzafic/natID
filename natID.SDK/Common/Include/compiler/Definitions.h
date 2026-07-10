@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file Definitions.h
+    @brief Detects the target operating system, compiler, and CPU architecture and defines corresponding preprocessor macros. */
 //
 //  Created by Izudin Dzafic on 25/10/2020.
 //  Copyright © 2020-2021 IDz. All rights reserved.

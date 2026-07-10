@@ -7,10 +7,12 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file Markers.h
+    @brief Exports a shared zero-buffer constant used as a marker sentinel in the mu library. */
 #pragma once
 #include <td/Types.h>
 
 namespace mu
 {
-	extern MAINUTILS_API const td::UTF8 __zeroBuffer[8];
+	extern MAINUTILS_API const td::UTF8 __zeroBuffer[8]; ///< Shared zero-initialized buffer used as a sentinel marker.
 };

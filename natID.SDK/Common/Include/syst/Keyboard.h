@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file Keyboard.h
+    @brief Provides cross-platform non-blocking keyboard input polling. */
 #pragma once
 
 #include <chrono>
@@ -23,13 +25,16 @@
 namespace syst
 {
 
-class Keyboard 
+/// @brief Cross-platform utility class for non-blocking keyboard input detection.
+class Keyboard
 {
-    int _sleepMs = 0;
+    int _sleepMs = 0; ///< Poll interval in milliseconds used by wait().
 #ifndef MU_WINDOWS
-    unsigned char _ch = 0;
+    unsigned char _ch = 0; ///< Last character read on POSIX platforms.
 #endif
 public:
+    /// @brief Constructs a Keyboard with a specified polling interval.
+    /// @param pollIntervalInMilliseconds Duration in milliseconds to sleep between polls.
     explicit Keyboard(int pollIntervalInMilliseconds = 50)
         : _sleepMs(pollIntervalInMilliseconds)
     {
@@ -38,7 +43,8 @@ public:
 #endif
     }
 
-    ~Keyboard() 
+    /// @brief Destructor; restores original terminal settings on POSIX platforms.
+    ~Keyboard()
     {
 #ifndef MU_WINDOWS
         configureTerminal(false);
@@ -46,7 +52,9 @@ public:
     }
 
     // Returns true if a key was pressed
-    bool keyPressed() 
+    /// @brief Checks whether a key has been pressed without blocking.
+    /// @return true if a key is available; false otherwise.
+    bool keyPressed()
     {
 #ifdef MU_WINDOWS
         return _kbhit();
@@ -60,7 +68,9 @@ public:
     }
 
     // Reads and returns a key if pressed
-    char readKey() 
+    /// @brief Reads the most recently pressed key character.
+    /// @return The character code of the pressed key, or 0 if none is available.
+    char readKey()
     {
 #ifdef MU_WINDOWS
         return _getch();
@@ -74,19 +84,22 @@ public:
     }
 
     // Sleep for the configured duration
-    void wait() const 
+    /// @brief Sleeps for the poll interval specified at construction.
+    void wait() const
     {
         std::this_thread::sleep_for(std::chrono::milliseconds(_sleepMs));
     }
 
 private:
 #ifndef MU_WINDOWS
-    void configureTerminal(bool enable) 
+    /// @brief Configures or restores the terminal for raw, non-blocking input.
+    /// @param enable true to enable raw non-blocking mode; false to restore saved settings.
+    void configureTerminal(bool enable)
     {
         static struct termios oldt;
         static bool configured = false;
 
-        if (enable && !configured) 
+        if (enable && !configured)
         {
             struct termios newt;
             tcgetattr(STDIN_FILENO, &oldt);
@@ -98,8 +111,8 @@ private:
             fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
 
             configured = true;
-        } 
-        else if (!enable && configured) 
+        }
+        else if (!enable && configured)
         {
             tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
             configured = false;

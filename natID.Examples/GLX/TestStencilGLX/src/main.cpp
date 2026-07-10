@@ -4,7 +4,7 @@
 #include <gui/WinMain.h>
 
 
-#define ENABLE_CONSOLE
+#define ENABLE_CONSOLE2
 
 #if defined(MU_WINDOWS) && defined(ENABLE_CONSOLE)
 #include <windows.h>

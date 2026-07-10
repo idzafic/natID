@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file MinMaxFix.h
+    @brief Undefines the min and max macros injected by Windows headers when compiling with MSVC. */
 //
 //  Created by Izudin Dzafic on 25/10/2020.
 //  Copyright © 2020-2021 IDz. All rights reserved.

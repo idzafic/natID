@@ -52,6 +52,7 @@ class Renderer : public glx::IRenderer
     gui::Size _viewportSize;
     float _textureScale = 1.0f;
     td::UINT1 _usedTexture = 0;
+    glx::PixelFormat _compatiblePixelFormat;
     
     struct TextureVertex {
         float position[2];
@@ -89,7 +90,7 @@ protected:
 
         glx::RenderPipeline::ColorAttachments clrAttachments = desc.colorAttachments();
         glx::RenderPipeline::ColorAttachment clrAtt = clrAttachments[0];
-        clrAtt.setPixelFormat(glx::PixelFormat::RGBA8Unorm);
+        clrAtt.setPixelFormat(_compatiblePixelFormat);
 
         _RP = _device.newRenderPipelineState(desc, error);
         if (!_RP.isOk())
@@ -306,6 +307,8 @@ public:
     Renderer(glx::View* pView)
         : _device(pView->device())
     {
+        _compatiblePixelFormat = glx::getCompatiblePixelFormat(glx::PixelFormat::RGBA8Unorm);
+        
         _commandQueue = _device.newCommandQueue();
         //_viewportSize = gui::Size(800, 600);
         pView->getSize(_viewportSize);
@@ -317,7 +320,7 @@ public:
         
         updateMVPMatrix();
 
-        pView->setPixelFormat(glx::PixelFormat::RGBA8Unorm);
+        pView->setPixelFormat(_compatiblePixelFormat);
         
         mu::DebugConsoleLog::info() << "Texture Chess GLX Demo Initialized";
         #if ENABLE_ANISOTROPIC_FILTERING

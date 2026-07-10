@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file muLib.h
+    @brief Defines the MAINUTILS_API and MAINUTILS_EXTERN export/import macros for the mu library. */
 #pragma once
 #include <compiler/Definitions.h>
 
@@ -19,7 +21,7 @@
 	#else
 		#ifdef MAINUTILS_EXPORTS
 			#define MAINUTILS_API __declspec(dllexport)
-			#define MAINUTILS_EXTERN 
+			#define MAINUTILS_EXTERN
 		#else
 			#define MAINUTILS_API __declspec(dllimport)
 			#define MAINUTILS_EXTERN extern

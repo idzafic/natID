@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file natID.h
+    @brief Convenience header that includes all natGUI public headers in a single include. */
 //
 //  Created by Izudin Dzafic on 28/07/2020.
 //  Copyright © 2020 IDz. All rights reserved.
@@ -97,4 +99,3 @@
 #include <gui/ViewSwitcher.h>
 #include <gui/Window.h>
 #include <gui/WndID.h>
-

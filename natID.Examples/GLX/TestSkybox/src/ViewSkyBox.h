@@ -7,23 +7,42 @@
 #include <mu/DebugConsoleLog.h>
 
 
-class ViewGLX : public glx::View
+class ViewSkyBox : public glx::View
 {
 protected:
-    Renderer* _pRenderer = nullptr;  // Keep reference to our renderer
-    
     glx::IRenderer* createRenderer() override
     {
         _pRenderer = new Renderer(this);
         return _pRenderer;
     }
     
-
+    //Helper methods (IRenderer -> My Renderer)
+    inline Renderer* getRenderer()
+    {
+        return static_cast<Renderer*>(_pRenderer);
+    }
+    
+    inline const Renderer* getRenderer() const
+    {
+        return static_cast<const Renderer*>(_pRenderer);
+    }
+    
+    //Helper methods that wrap IRenderer to my Renderer
+    inline Renderer* getMyRenderer()
+    {
+        return static_cast<Renderer*>(_pRenderer);
+    }
+    
+    inline const Renderer* getMyRenderer() const
+    {
+        return static_cast<const Renderer*>(_pRenderer);
+    }
+    
     bool onKeyPressed(const gui::Key& key) override
     {
         if (_pRenderer)
         {
-            _pRenderer->handleKeyPressed(key);
+            getMyRenderer()->handleKeyPressed(key);
             return true;
         }
         return false;
@@ -33,7 +52,7 @@ protected:
     {
         if (_pRenderer)
         {
-            _pRenderer->handleKeyReleased(key);
+            getMyRenderer()->handleKeyReleased(key);
             return true;
         }
         return false;
@@ -44,7 +63,7 @@ protected:
         if (_pRenderer)
         {
             auto pt = inputDevice.getFramePoint();
-            _pRenderer->handleLeftClick(pt);
+            getMyRenderer()->handleLeftClick(pt);
         }
     }
     
@@ -53,7 +72,7 @@ protected:
         if (_pRenderer)
         {
             auto pt = inputDevice.getFramePoint();
-            _pRenderer->handleRightClick(pt);
+            getMyRenderer()->handleRightClick(pt);
         }
     }
 
@@ -64,7 +83,7 @@ protected:
             if (inputDevice.isPointerCaptured())
             {
                 const gui::Point& delta = inputDevice.getScrollDelta();
-                _pRenderer->handleCapturedDeltaMove(delta);
+                getMyRenderer()->handleCapturedDeltaMove(delta);
             }
 //            else
 //            {
@@ -76,7 +95,7 @@ protected:
 	}
 
 public:
-    ViewGLX()
+    ViewSkyBox()
         : glx::View({ gui::InputDevice::Event::Keyboard, gui::InputDevice::Event::CursorEnterLeave, gui::InputDevice::Event::PrimaryClicks, gui::InputDevice::Event::SecondaryClicks, gui::InputDevice::Event::CursorMove, gui::InputDevice::Event::CursorDrag, gui::InputDevice::Event::Zoom })
     {
         setContinousRenderMode(true);
@@ -88,7 +107,7 @@ public:
     {
         if (_pRenderer)
         {
-            _pRenderer->updateSpeed(val);
+            getMyRenderer()->updateSpeed(val);
         }
     }
     
@@ -96,7 +115,7 @@ public:
     {
         if (_pRenderer)
         {
-            _pRenderer->switchTexture();
+            getMyRenderer()->switchTexture();
         }
     }
     
@@ -134,7 +153,7 @@ public:
                     }
                     
                     // Get the current drawable and save it
-                    glx::CommandQueue cmdQueue = _pRenderer->getCommandQueue();
+                    glx::CommandQueue cmdQueue = getMyRenderer()->getCommandQueue();
                     bool success = saveDrawable(path.c_str(), cmdQueue, format);
                     
                     if (success)

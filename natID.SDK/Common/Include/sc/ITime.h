@@ -7,6 +7,9 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file ITime.h
+ *  @brief Interface for configuring the time-stepping method used by dynamic solvers.
+ */
 #pragma once
 
 #include <td/Types.h>
@@ -19,10 +22,16 @@
 namespace sc
 {
 
+/// @brief Abstract interface for setting integration time parameters on a dynamic solver.
 class ITime
 {
 public:
+    /// @brief Select the numerical integration method (e.g. Euler, Runge-Kutta).
+    /// @param m The integration method to apply.
     virtual void setTimeMethod(math::IntMethod m) = 0;
+    /// @brief Set the start time and step size for the integrator.
+    /// @param t0 Start time.
+    /// @param dT Integration step size.
     virtual void setTimes(double t0, double dT) = 0;
 };
 

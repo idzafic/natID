@@ -7,10 +7,9 @@
 #include <mu/DebugConsoleLog.h>
 
 
-class ViewGLX : public glx::View
+class ViewOrtho : public glx::View
 {
 protected:
-    Renderer* _pRenderer = nullptr;  // Keep reference to our renderer
     
     glx::IRenderer* createRenderer() override
     {
@@ -18,12 +17,23 @@ protected:
         return _pRenderer;
     }
     
+    //Helper methods (IRenderer -> My Renderer)
+    inline Renderer* getRenderer()
+    {
+        return static_cast<Renderer*>(_pRenderer);
+    }
+    
+    inline const Renderer* getRenderer() const
+    {
+        return static_cast<const Renderer*>(_pRenderer);
+    }
 
     bool onKeyPressed(const gui::Key& key) override
     {
         if (_pRenderer)
         {
-            _pRenderer->handleKeyPressed(key);
+            getRenderer()->handleKeyPressed(key);
+            reDraw();
             return true;
         }
         return false;
@@ -35,7 +45,8 @@ protected:
         {
             auto scrollDelta = inputDevice.getScrollDelta();
             bool shiftPressed = inputDevice.getKey().isShiftPressed();
-            _pRenderer->handleScroll(scrollDelta, shiftPressed);
+            getRenderer()->handleScroll(scrollDelta, shiftPressed);
+            reDraw();
             return true;
         }
         return false;
@@ -50,7 +61,8 @@ protected:
         {
             auto scale = inputDevice.getScale();
             auto pt = inputDevice.getFramePoint();
-            _pRenderer->handleZoom((scale - 1)*0.4 + 1, pt);
+            getRenderer()->handleZoom((scale - 1)*0.4 + 1, pt);
+            reDraw();
             return true;
         }
         return false;
@@ -62,7 +74,8 @@ protected:
         {
             auto pt = inputDevice.getFramePoint();
             bool shiftPressed = inputDevice.getKey().isShiftPressed();
-            _pRenderer->handleMouseDragged(pt, shiftPressed);
+            getRenderer()->handleMouseDragged(pt, shiftPressed);
+            reDraw();
         }
     }
 
@@ -71,15 +84,15 @@ protected:
         if (_pRenderer)
         {
             auto pt = inputDevice.getFramePoint();
-            _pRenderer->handleMousePressed(pt);
+            getRenderer()->handleMousePressed(pt);
         }
     }
 
 public:
-    ViewGLX()
+    ViewOrtho()
         : glx::View({ gui::InputDevice::Event::Keyboard, gui::InputDevice::Event::CursorEnterLeave, gui::InputDevice::Event::PrimaryClicks, gui::InputDevice::Event::SecondaryClicks, gui::InputDevice::Event::CursorMove, gui::InputDevice::Event::CursorDrag, gui::InputDevice::Event::Zoom })
     {
-        setContinousRenderMode(true);
+        //setContinousRenderMode(false);
         registerForScrollEvents();
     }
     
@@ -118,7 +131,7 @@ public:
                     }
                     
                     // Get the current drawable and save it
-                    glx::CommandQueue cmdQueue = _pRenderer->getCommandQueue();
+                    glx::CommandQueue cmdQueue = getRenderer()->getCommandQueue();
                     bool success = saveDrawable(path.c_str(), cmdQueue, format);
                     
                     if (success)

@@ -8,13 +8,13 @@
 
 using GraphType = std::uint32_t;
 
-using Transition = struct
+using Transition = struct Transition
 {
     GraphType toNodeID;   //destination node ID (1-based)
     GraphType overBranchID;    //destination branch ID (1-based)
 };
 
-using Edge = struct
+using Edge = struct Edge
 {
     GraphType fromNodeID;   //terminal 1 (1-based)
     GraphType toNodeID;     //termainal 2 (1-based)

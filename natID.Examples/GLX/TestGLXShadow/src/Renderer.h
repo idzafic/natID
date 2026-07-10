@@ -1,6 +1,8 @@
+#pragma once
+
 #define GLM_FORCE_RADIANS 
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE 
-#pragma once
+
 #include <glx/IRenderer.h>
 #include <glx/Device.h>
 #include <glx/CommandQueue.h>
@@ -79,6 +81,8 @@ class Renderer : public glx::IRenderer
     glm::vec3 _lightDir;
     glm::vec3 _sunColor;
     glm::vec3 _cameraPosition;
+
+    glx::PixelFormat _compatiblePixelFormat;
     
     float _angleX = 0.0f;
     float _angleY = 0.0f;
@@ -194,7 +198,8 @@ protected:
 
         glx::RenderPipeline::ColorAttachments clrAttachments = desc.colorAttachments();
         glx::RenderPipeline::ColorAttachment clrAtt = clrAttachments[0];
-        clrAtt.setPixelFormat(glx::PixelFormat::BGRA8Unorm);
+        //clrAtt.setPixelFormat(glx::PixelFormat::BGRA8Unorm);
+        clrAtt.setPixelFormat(_compatiblePixelFormat);
         
         clrAtt.setWriteMask(glx::ColorWriteMask::All);
 
@@ -831,7 +836,7 @@ public:
     {
         _commandQueue = _device.newCommandQueue();
         
-
+        _compatiblePixelFormat = glx::getCompatiblePixelFormat(glx::PixelFormat::RGBA8Unorm);
 
         pView->getSize(_viewportSize);
         
@@ -856,7 +861,7 @@ public:
         loadTextures();
         updateTransforms();
 
-        pView->setPixelFormat(glx::PixelFormat::BGRA8Unorm);
+        pView->setPixelFormat(_compatiblePixelFormat);
         
         
         mu::DebugConsoleLog::ok() << "Shadow mapping renderer initialized";

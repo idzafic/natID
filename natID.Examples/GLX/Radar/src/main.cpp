@@ -4,15 +4,14 @@
 #include <gui/WinMain.h>
 #include "ViewGLX.h"
 
+#define ENABLE_CONSOLE2
+
 #if defined(MU_WINDOWS) && defined(ENABLE_CONSOLE)
 #include <windows.h>
 #include <io.h>
 #include <fcntl.h>
 #include <iostream>
 #endif
-
-
-#define ENABLE_CONSOLE
 
 int main(int argc, const char * argv[])
 {

@@ -7,6 +7,9 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file LocaleInfo.h
+ *  @brief Locale information class that reads and stores localized date, time, numeric, and currency formatting data.
+ */
 #pragma once
 #include <sstream>
 #include <iostream>
@@ -27,39 +30,41 @@
 
 namespace mu
 {
+	/// @brief Reads OS or Boost locale information and provides localized names for months, days, separators, and currency symbols.
 	class LocaleInfo
 	{
 
 	protected:
-		//time_t _Now;		
-		td::UINT4 _lcid;
-		cnt::Array< td::String, 7> _vecShortDayNames;
-		cnt::Array< td::String, 7> _vecLongDayNames;
-		cnt::Array< td::String, 12> _vecShortMonthNames;
-		cnt::Array <td::String, 12> _vecLongMonthNames;
-		td::String _localeString;
-		td::String _localeRealName;
-		td::String _thousandSeparator;
-		td::String _decimalPoint;
-		td::String _localMonetarySymbol;
-		td::String _internationalMonetarySymbol;
+		//time_t _Now;
+		td::UINT4 _lcid;                                          ///< Windows locale identifier.
+		cnt::Array< td::String, 7> _vecShortDayNames;             ///< Abbreviated day names (Sun–Sat).
+		cnt::Array< td::String, 7> _vecLongDayNames;              ///< Full day names (Sunday–Saturday).
+		cnt::Array< td::String, 12> _vecShortMonthNames;          ///< Abbreviated month names (Jan–Dec).
+		cnt::Array <td::String, 12> _vecLongMonthNames;           ///< Full month names (January–December).
+		td::String _localeString;                                  ///< Locale identifier string (e.g., "en_US").
+		td::String _localeRealName;                                ///< Human-readable locale name.
+		td::String _thousandSeparator;                             ///< Thousands grouping separator character.
+		td::String _decimalPoint;                                  ///< Decimal point character.
+		td::String _localMonetarySymbol;                           ///< Local currency symbol (e.g., "$").
+		td::String _internationalMonetarySymbol;                   ///< ISO currency code (e.g., "USD").
 
-		td::String _trueName;
-		td::String _falseName;
-		
-		td::String _timeShortFmt;
-		td::String _timeLongFmt;
-		td::String _am;
-		td::String _pm;
-		td::String _bc;
-		td::String _timeSep;
+		td::String _trueName;   ///< Locale-specific string for boolean true.
+		td::String _falseName;  ///< Locale-specific string for boolean false.
 
-		td::String _dateShortFmt;
-		td::String _dateLongFmt;
-		td::String _dateSep;
-		qtu::HAlignment _stringDefHAlign;
+		td::String _timeShortFmt;  ///< Short time format string.
+		td::String _timeLongFmt;   ///< Long time format string.
+		td::String _am;            ///< AM designator string.
+		td::String _pm;            ///< PM designator string.
+		td::String _bc;            ///< BC era designator string.
+		td::String _timeSep;       ///< Time component separator character.
+
+		td::String _dateShortFmt;  ///< Short date format string.
+		td::String _dateLongFmt;   ///< Long date format string.
+		td::String _dateSep;       ///< Date component separator character.
+		qtu::HAlignment _stringDefHAlign; ///< Default horizontal alignment for string columns.
 	public:
-		LocaleInfo()	
+		/// @brief Default constructor; initialises all fields to empty/default values.
+		LocaleInfo()
 			: _lcid(0)
 			, _stringDefHAlign(qtu::Left)
 			, _bc("BC")
@@ -71,20 +76,25 @@ namespace mu
 
 		}
 
-		//: _Now(0 + 24*3600*3), // first day is Sunday 
-		LocaleInfo(const char* localeString, const char* realName = "")			
+		//: _Now(0 + 24*3600*3), // first day is Sunday
+		/// @brief Constructs a LocaleInfo for the given locale string and optional real name.
+		/// @param localeString Locale identifier (e.g., "en_US"); may be nullptr for the default locale.
+		/// @param realName Human-readable locale description; defaults to empty string.
+		LocaleInfo(const char* localeString, const char* realName = "")
 			:_lcid(0)
 			,_localeString(localeString ? localeString : "")
 			, _localeRealName(realName)
 			, _stringDefHAlign(qtu::Left)
 			, _bc("BC")
-		{			
+		{
 			_vecShortDayNames.clean();
 			_vecLongDayNames.clean();
 			_vecShortMonthNames.clean();
 			_vecLongMonthNames.clean();
 		}
 
+		/// @brief Reads all locale information (calendar names, currency, separators, booleans).
+		/// @return Always returns true.
 		bool readLocaleInfo()
 		{
 			// TODO use return values.
@@ -96,6 +106,9 @@ namespace mu
 			return true;
 		}
 
+		/// @brief Returns the full day name for the given zero-based index (0=Sunday).
+		/// @param idx Zero-based day index (0–6).
+		/// @return Null-terminated long day name, or empty string for an out-of-range index.
 		const char* getLongDayName(size_t idx) const
 		{
 			if (idx < 7)
@@ -105,6 +118,9 @@ namespace mu
 			return "";
 		}
 
+		/// @brief Returns the abbreviated day name for the given zero-based index (0=Sunday).
+		/// @param idx Zero-based day index (0–6).
+		/// @return Null-terminated short day name, or empty string for an out-of-range index.
 		const char* getShortDayName(size_t idx) const
 		{
 			if (idx < 7)
@@ -114,6 +130,9 @@ namespace mu
 			return "";
 		}
 
+		/// @brief Returns the full month name for the given zero-based index (0=January).
+		/// @param idx Zero-based month index (0–11).
+		/// @return Null-terminated long month name, or empty string for an out-of-range index.
 		const char* getLongMonthName(size_t idx) const
 		{
 			if (idx < 12)
@@ -123,6 +142,9 @@ namespace mu
 			return "";
 		}
 
+		/// @brief Returns the abbreviated month name for the given zero-based index (0=January).
+		/// @param idx Zero-based month index (0–11).
+		/// @return Null-terminated short month name, or empty string for an out-of-range index.
 		const char* getShortMonthName(size_t idx) const
 		{
 			if (idx < 12)
@@ -132,6 +154,8 @@ namespace mu
 			return "";
 		}
 
+		/// @brief Returns the thousands grouping separator as a single character.
+		/// @return The thousands separator character, or space if not set.
 		const char getThousandSeparator() const
 		{
 			if (_thousandSeparator.length() > 0)
@@ -139,6 +163,8 @@ namespace mu
 			return ' ';
 		}
 
+		/// @brief Returns the decimal point character for this locale.
+		/// @return The decimal point character, or space if not set.
 		const char getDecimalPoint() const
 		{
 			if (_decimalPoint.length() > 0)
@@ -146,78 +172,109 @@ namespace mu
 			return ' ';
 		}
 
+		/// @brief Returns the local currency symbol (e.g., "$").
+		/// @return Null-terminated local monetary symbol string.
 		const char* getLocalMonetarySymbol() const
 		{
 			return _localMonetarySymbol.c_str();
 		}
 
+		/// @brief Returns the international currency code (e.g., "USD").
+		/// @return Null-terminated international monetary symbol string.
 		const char* getInternationalMonetarySymbol() const
 		{
 			return _internationalMonetarySymbol.c_str();
 		}
 
 
+		/// @brief Returns the locale-specific string representing boolean true.
+		/// @return Null-terminated true-value name.
 		const char* getTrueName() const
 		{
 			return _trueName.c_str();
 		}
 
+		/// @brief Returns the locale-specific string representing boolean false.
+		/// @return Null-terminated false-value name.
 		const char* getFalseName() const
 		{
 			return _falseName.c_str();
 		}
 
+		/// @brief Returns the AM designator string for this locale.
+		/// @return Null-terminated AM string.
 		const char* getAM() const
 		{
 			return _am.c_str();
 		}
 
+		/// @brief Returns the PM designator string for this locale.
+		/// @return Null-terminated PM string.
 		const char* getPM() const
 		{
 			return _pm.c_str();
 		}
 
+		/// @brief Returns the BC era designator string for this locale.
+		/// @return Null-terminated BC string.
 		const char* getBC() const
 		{
 			return _bc.c_str();
 		}
 
+		/// @brief Returns the short date format pattern string.
+		/// @return Null-terminated short date format.
 		const char* getDateShortFmt() const
 		{
 			return _dateShortFmt.c_str();
 		}
 
+		/// @brief Returns the long date format pattern string.
+		/// @return Null-terminated long date format.
 		const char* getDateLongFmt() const
 		{
 			return _dateLongFmt.c_str();
 		}
 
+		/// @brief Returns the short time format pattern string.
+		/// @return Null-terminated short time format.
 		const char* getTimeShortFmt() const
 		{
 			return _timeShortFmt.c_str();
 		}
 
+		/// @brief Returns the long time format pattern string.
+		/// @return Null-terminated long time format.
 		const char* getTimeLongFmt() const
 		{
 			return _timeLongFmt.c_str();
 		}
 
+		/// @brief Returns the date component separator character as a string.
+		/// @return Null-terminated date separator string.
 		const char* getDateSep() const
 		{
 			return _dateSep.c_str();
 		}
 
+		/// @brief Returns the time component separator character as a string.
+		/// @return Null-terminated time separator string.
 		const char* getTimeSep() const
 		{
 			return _timeSep.c_str();
 		}
 
+		/// @brief Returns the locale identifier string (e.g., "en_US").
+		/// @return Null-terminated locale name string.
 		const char* getLocaleName() const
 		{
 			return _localeString.c_str();
 		}
-		
 
+
+		/// @brief Equality comparison based on the locale ID.
+		/// @param li The other LocaleInfo to compare with.
+		/// @return True if both objects have the same locale ID.
 		bool operator == (const LocaleInfo& li)
 		{
 			if (_lcid != li._lcid)
@@ -226,9 +283,19 @@ namespace mu
 		}
 
 		//OLD IMPLEMENENTATION USING C++ std::locale
+		/// @brief Stores locale data into the database using the old C++ std::locale implementation.
+		/// @tparam TDB Database access type providing createStatement().
+		/// @param pDB Pointer to the database connection.
+		/// @param timeSep Time component separator string.
+		/// @param dateSep Date component separator string.
+		/// @param timeShortFmt Short time format string.
+		/// @param timeLongFmt Long time format string.
+		/// @param dateShortFmt Short date format string.
+		/// @param dateLongFmt Long date format string.
+		/// @return True on success; false if any database operation fails.
 		template <class TDB>
 		bool storeToDB(TDB* pDB, const char* timeSep, const char* dateSep, const char* timeShortFmt, const char* timeLongFmt, const char* dateShortFmt, const char* dateLongFmt)
-		{			
+		{
 
 			td::UINT4 langID = mu::Utils::calcHashNo(_localeString.c_str());
 
@@ -252,12 +319,12 @@ namespace mu
 				db::Ref<td::String> rFN(16);
 
 				db::Ref<td::String> rDateSep(1, td::chFix);
-				db::Ref<td::String> rTimeSep(1, td::chFix);				
+				db::Ref<td::String> rTimeSep(1, td::chFix);
 				db::Ref<td::String> rDateSF(16, td::ch);
 				db::Ref<td::String> rDateLF(32, td::ch);
 				db::Ref<td::String> rTimeSF(16, td::ch);
 				db::Ref<td::String> rTimeLF(32, td::ch);
-				
+
 
 				db::Params parLang(pStLang->allocParams());
 
@@ -318,7 +385,7 @@ namespace mu
 						return false;
 				}
 			}
-			
+
 
 			//Insert Lang months entries
 			{
@@ -332,7 +399,7 @@ namespace mu
 					<< refSN
 					<< refLN;
 				for (int iMonth = 0; iMonth < 12; ++iMonth)
-				{					
+				{
 					refSN = _vecShortMonthNames[iMonth];
 					refLN = _vecLongMonthNames[iMonth];
 					monthID = iMonth + 1;
@@ -343,10 +410,15 @@ namespace mu
 			return true;
 		}
 
+		/// @brief Loads locale data from the database using the given language ID.
+		/// @tparam TDB Database access type providing createStatement().
+		/// @param pDB Pointer to the database connection.
+		/// @param langID Hash-based numeric identifier for the locale to load.
+		/// @return True if all data was loaded successfully; false on any failure.
 		template <class TDB>
 		bool loadFromDB(TDB* pDB, td::UINT4 langID)
-		{		
-			//load lang data		
+		{
+			//load lang data
 			{
 				db::IStatementPtr pStLang(pDB->createStatement(db::IStatement::DBS_SELECT, "SELECT * FROM Lang Where ID=?"));
 				db::Params parLang(pStLang->allocParams());
@@ -383,7 +455,7 @@ namespace mu
 
 				_stringDefHAlign = (qtu::HAlignment) stringDefHAlign;
 			}
-			
+
 			//load day data
 			{
 				db::IStatementPtr pStLangDays(pDB->createStatement(db::IStatement::DBS_SELECT, "SELECT * FROM LangDays WHERE LangID=? ORDER BY DayID"));
@@ -412,8 +484,8 @@ namespace mu
 					{
 						refSN = _vecShortDayNames[iDay];
 						refLN = _vecLongDayNames[iDay];
-					}					
-				}				
+					}
+				}
 
 				if (iDay != 7)
 					return false;
@@ -432,14 +504,14 @@ namespace mu
 				//td::String longName;
 
 				cols << "MonthID" << monthID << "ShortName" << refSN << "LongName" << refLN;
-				
+
 				if (!pStLangMonths->execute())
 				{
 					return false;
 				}
 				int iMonth = 0;
 				while (pStLangMonths->moveNext())
-				{					
+				{
 					if (iMonth != --monthID)
 						return false;
 
@@ -457,6 +529,10 @@ namespace mu
 			return true;
 		}
 
+		/// @brief Loads locale data from the database, computing the language ID from the locale string.
+		/// @tparam TDB Database access type providing createStatement().
+		/// @param pDB Pointer to the database connection.
+		/// @return True if all data was loaded successfully; false on any failure.
 		template <class TDB>
 		bool loadFromDB(TDB* pDB)
 		{
@@ -464,8 +540,12 @@ namespace mu
 
 			return loadFromDB(pDB, langID);
 		}
-		
+
 		//new implementation using Windows Locale
+		/// @brief Stores locale data into the database using the Windows Locale implementation.
+		/// @tparam TDB Database access type providing createStatement().
+		/// @param pDB Pointer to the database connection.
+		/// @return True on success; false if any database operation fails.
 		template <class TDB>
 		bool storeToDB(TDB* pDB)
 		{
@@ -592,11 +672,14 @@ namespace mu
 			return true;
 		}
 
+		/// @brief Prints a human-readable summary of all locale fields to the provided output stream.
+		/// @tparam OFS Output stream type supporting the << operator.
+		/// @param ofs Destination output stream.
 		template <class OFS>
 		void printLocaleInfo(OFS& ofs)
 		{
 			//boost::locale::generator gen;
-			//std::locale loc = gen(_localeString.c_str()); 
+			//std::locale loc = gen(_localeString.c_str());
 			//boost::gregorian::date_facet* ptrFacet1 = new boost::gregorian::date_facet("%x");
 			//std::cout.imbue(std::locale(loc, ptrFacet1));
 
@@ -604,12 +687,12 @@ namespace mu
 			//ofs.imbue(std::locale(loc, ptrFacet1));
 
 
-			ofs << "LocaleString: " << _localeString << 
+			ofs << "LocaleString: " << _localeString <<
 				 "\nReal Name   : " << _localeRealName << "\n\n";
 
 			for(size_t idx=0; idx < 7; ++idx)
 			{
-				ofs << "Day: " << idx << " LongDayName: " << getLongDayName(idx) 
+				ofs << "Day: " << idx << " LongDayName: " << getLongDayName(idx)
 					<< " ShortDayName: " << getShortDayName(idx) << std::endl;
 			}
 
@@ -617,10 +700,10 @@ namespace mu
 
 			for(size_t idx=0; idx < 12; ++idx)
 			{
-				ofs << "Month: " << idx << " LongMonthName: " << getLongMonthName(idx) 
-					<< " ShortMonthName: " << getShortMonthName(idx) << std::endl;	
+				ofs << "Month: " << idx << " LongMonthName: " << getLongMonthName(idx)
+					<< " ShortMonthName: " << getShortMonthName(idx) << std::endl;
 			}
-			
+
 			ofs << "\nLocalMonetarySymbol: " << getLocalMonetarySymbol();
 			ofs << "\nInterMonetarySymbol: " << _internationalMonetarySymbol;
 			ofs << "\nThousandSeparator  : " << getThousandSeparator();
@@ -641,6 +724,8 @@ namespace mu
 
 	private:
 
+		/// @brief Appends ".UTF8" to the locale string if it contains an underscore, producing a Boost-compatible locale name.
+		/// @param localeName Output string to receive the UTF-8 qualified locale name.
 		void getLocaleNameUTF8(td::String& localeName)
 		{
 			localeName = _localeString;
@@ -650,6 +735,7 @@ namespace mu
 			}
 		}
 #ifdef USE_BOOST_LOCALEINFO
+		/// @brief Populates day and month name arrays using Boost.Locale date/time facets.
 		void createCalenderNames()
 		{
 			td::String localeName;
@@ -698,11 +784,13 @@ namespace mu
 			}
 		}
 
+		/// @brief Reads the local currency symbol using Boost.Locale moneypunct.
+		/// @return True on success; false if the locale cannot be constructed.
 		bool readCurrencySymbol()
 		{
 			td::String localeName;
 			getLocaleNameUTF8(localeName);
-			try 
+			try
 			{
 				boost::locale::generator gen;
 				std::locale loc = gen(localeName.c_str());
@@ -728,20 +816,21 @@ namespace mu
 				//ofs << "neg_format: " << mp.neg_format() << std::endl;
 
 			}
-			catch (std::runtime_error& e) 
+			catch (std::runtime_error& e)
 			{
 				// a runtime_error will be thrown if the locale cannot be constructed
 				std::cerr << " Caught runtime_error: " << e.what() << '\n';
 				return false;
 			}
-			catch (...) 
+			catch (...)
 			{
-				std::cerr << "Caught an unknown exception"; 
+				std::cerr << "Caught an unknown exception";
 				return false;
 			}
 			return true;
 		}
 
+		/// @brief Reads the thousands separator character using Boost.Locale numpunct.
 		void readThousandSeparator()
 		{
 			td::String localeName;
@@ -758,6 +847,7 @@ namespace mu
 			_thousandSeparator = stream1.str();
 		}
 
+		/// @brief Reads the decimal point character using Boost.Locale numpunct.
 		void readDecimalPoint()
 		{
 			td::String localeName;
@@ -774,6 +864,7 @@ namespace mu
 			_decimalPoint = stream1.str();
 		}
 
+		/// @brief Reads the locale-specific boolean value names using Boost.Locale numpunct.
 		void readBooleanValueNames()
 		{
 			td::String localeName;
@@ -802,12 +893,15 @@ namespace mu
 			}
 		}
 #else
+/// @brief Stub: populates calendar names without Boost (not yet implemented).
 void createCalenderNames()
 {
 	//need to be implemented without boost
 	assert(false);
 }
 
+/// @brief Stub: reads currency symbol without Boost (not yet implemented).
+/// @return Always returns true (stub).
 bool readCurrencySymbol()
 {
 	//need to be implemented without boost
@@ -815,18 +909,21 @@ bool readCurrencySymbol()
 	return true;
 }
 
+/// @brief Stub: reads the thousands separator without Boost (not yet implemented).
 void readThousandSeparator()
 {
 	//need to be implemented without boost
 	assert(false);
 }
 
+/// @brief Stub: reads the decimal point without Boost (not yet implemented).
 void readDecimalPoint()
 {
 	//need to be implemented without boost
 	assert(false);
 }
 
+/// @brief Stub: reads boolean value names without Boost (not yet implemented).
 void readBooleanValueNames()
 {
 	//need to be implemented without boost
@@ -837,7 +934,7 @@ void readBooleanValueNames()
 
 	};
 }
-  
+
 
 
 //// working example for currency reading on Linux ...

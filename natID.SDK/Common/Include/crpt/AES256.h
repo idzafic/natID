@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file AES256.h
+    @brief AES-256 ECB encryption and decryption implementation with raw and hex output modes. */
 #pragma once
 #include <td/Types.h>
 #include <td/String.h>
@@ -23,18 +25,26 @@ namespace crpt
 
 #define AES256_FD(x)  (((x) >> 1) ^ (((x) & 1) ? 0x8d : 0))
 
+/// @brief Implements AES-256 block cipher encryption and decryption in ECB mode.
 	class AES256
 	{
-		td::BYTE _ctxKey[32];
-		td::BYTE _ctxEncKey[32];
-		td::BYTE _ctxDecKey[32];
-		char _trailedZeros = -1;
+		td::BYTE _ctxKey[32];     ///< Working copy of the round key used during encryption/decryption rounds
+		td::BYTE _ctxEncKey[32];  ///< Expanded encryption key schedule
+		td::BYTE _ctxDecKey[32];  ///< Expanded decryption key schedule
+		char _trailedZeros = -1;  ///< Number of zero-padding bytes appended to the last plaintext block; -1 means unknown
 
 		//bool _addTrailZero = true; //encrypted content len will be multiplier of 16
 
 	public:
-		typedef enum _tOut { Raw =0, Hex} EncryptedType;
+		/// @brief Selects the encoding format for the encrypted output.
+		typedef enum _tOut {
+			Raw = 0, ///< Output is raw binary bytes
+			Hex      ///< Output is lowercase hexadecimal ASCII
+		} EncryptedType;
 	protected:
+		/// @brief Computes the GF(2^8) anti-logarithm base 3 of x.
+		/// @param x Input byte value.
+		/// @return Anti-logarithm of x in GF(2^8).
 		inline td::BYTE gf_alog(td::BYTE x) const // calculate anti-logarithm gen 3
 		{
 			td::BYTE y = 1, i;
@@ -42,8 +52,11 @@ namespace crpt
 			for (i = 0; i < x; i++) y ^= rj_xtime(y);
 
 			return y;
-		} // gf_alog 
-		  
+		} // gf_alog
+
+		/// @brief Computes the GF(2^8) logarithm base 3 of x.
+		/// @param x Input byte value.
+		/// @return Logarithm of x in GF(2^8), or 0 for x == 0.
 		inline td::BYTE gf_log(td::BYTE x) const // calculate logarithm gen 3
 		{
 			td::BYTE y, i = 0;
@@ -52,21 +65,27 @@ namespace crpt
 				for (i = 1, y = 1; i > 0; i++)
 				{
 					y ^= rj_xtime(y);
-					if (y == x) 
+					if (y == x)
 						break;
 				}
 
 			return i;
-		} // gf_log 
+		} // gf_log
 
 
-		  // -------------------------------------------------------------------------- 
+		  // --------------------------------------------------------------------------
+		/// @brief Computes the multiplicative inverse of x in GF(2^8).
+		/// @param x Input byte value.
+		/// @return Multiplicative inverse of x, or 0 for x == 0.
 		inline td::BYTE gf_mulinv(td::BYTE x) const  // calculate multiplicative inverse
 		{
 			return (x) ? gf_alog(255 - gf_log(x)) : 0;
-		} // gf_mulinv 
+		} // gf_mulinv
 
-		  // -------------------------------------------------------------------------- 
+		  // --------------------------------------------------------------------------
+		/// @brief Applies the AES S-box substitution to a single byte.
+		/// @param x Input byte.
+		/// @return Substituted byte after S-box transformation.
 		inline td::BYTE rj_sbox(td::BYTE x) const
 		{
 			td::BYTE y, sb;
@@ -78,9 +97,12 @@ namespace crpt
 			y = (td::BYTE)(y << 1) | (y >> 7), sb ^= y;
 
 			return (sb ^ 0x63);
-		} // rj_sbox 
+		} // rj_sbox
 
-		  // -------------------------------------------------------------------------- 
+		  // --------------------------------------------------------------------------
+		/// @brief Applies the inverse AES S-box substitution to a single byte.
+		/// @param x Input byte.
+		/// @return Substituted byte after inverse S-box transformation.
 		inline td::BYTE rj_sbox_inv(td::BYTE x) const
 		{
 			td::BYTE y, sb;
@@ -93,74 +115,94 @@ namespace crpt
 			sb ^= y;
 
 			return gf_mulinv(sb);
-		} // rj_sbox_inv 
+		} // rj_sbox_inv
 
+		/// @brief Multiplies x by 2 in GF(2^8) (xtime operation).
+		/// @param x Input byte.
+		/// @return x multiplied by 2 modulo the AES reduction polynomial.
 		inline td::BYTE rj_xtime(td::BYTE x) const
 		{
 			td::BYTE y = (td::BYTE)(x << 1);
 			return (x & 0x80) ? (y ^ 0x1b) : y;
-		} //rj_xtime 
+		} //rj_xtime
 
-		  //-------------------------------------------------------------------------- 
+		  //--------------------------------------------------------------------------
+		/// @brief Applies S-box substitution to all 16 bytes of a state block.
+		/// @param buf Pointer to a 16-byte AES state block; modified in place.
 		inline void aes_subBytes(td::BYTE *buf) const
 		{
 			td::BYTE i = 16;
 
-			while (i--) 
+			while (i--)
 				buf[i] = rj_sbox(buf[i]);
-		} //aes_subBytes 
+		} //aes_subBytes
 
-		  //-------------------------------------------------------------------------- 
+		  //--------------------------------------------------------------------------
+		/// @brief Applies inverse S-box substitution to all 16 bytes of a state block.
+		/// @param buf Pointer to a 16-byte AES state block; modified in place.
 		inline void aes_subBytes_inv(td::BYTE *buf) const
 		{
 			td::BYTE i = 16;
 
 			while (i--) buf[i] = rj_sbox_inv(buf[i]);
-		} //aes_subBytes_inv 
+		} //aes_subBytes_inv
 
-		  //-------------------------------------------------------------------------- 
+		  //--------------------------------------------------------------------------
+		/// @brief XORs each byte of the state block with the corresponding byte of the round key.
+		/// @param buf Pointer to a 16-byte AES state block; modified in place.
+		/// @param key Pointer to the 16-byte round key.
 		inline void aes_addRoundKey(td::BYTE *buf, td::BYTE *key) const
 		{
 			td::BYTE i = 16;
 
-			while (i--) 
+			while (i--)
 				buf[i] ^= key[i];
-		} //aes_addRoundKey 
+		} //aes_addRoundKey
 
-		  //-------------------------------------------------------------------------- 
+		  //--------------------------------------------------------------------------
+		/// @brief XORs the state block with the round key and simultaneously copies the key into a working buffer.
+		/// @param buf Pointer to a 16-byte AES state block; modified in place.
+		/// @param key Pointer to the 32-byte source round key.
+		/// @param cpk Pointer to a 32-byte destination buffer that receives a copy of key.
 		inline void aes_addRoundKey_cpy(td::BYTE *buf, td::BYTE *key, td::BYTE *cpk) const
 		{
 			td::BYTE i = 16;
 
 			while (i--)  buf[i] ^= (cpk[i] = key[i]), cpk[16 + i] = key[16 + i];
-		} //aes_addRoundKey_cpy 
+		} //aes_addRoundKey_cpy
 
 
-		  //-------------------------------------------------------------------------- 
+		  //--------------------------------------------------------------------------
+		/// @brief Performs the AES ShiftRows operation on a 16-byte state block.
+		/// @param buf Pointer to a 16-byte AES state block; modified in place.
 		inline void aes_shiftRows(td::BYTE *buf) const
 		{
-			td::BYTE i, j; //to make it potentially parallelable :) 
+			td::BYTE i, j; //to make it potentially parallelable :)
 
 			i = buf[1], buf[1] = buf[5], buf[5] = buf[9], buf[9] = buf[13], buf[13] = i;
 			i = buf[10], buf[10] = buf[2], buf[2] = i;
 			j = buf[3], buf[3] = buf[15], buf[15] = buf[11], buf[11] = buf[7], buf[7] = j;
 			j = buf[14], buf[14] = buf[6], buf[6] = j;
 
-		} //aes_shiftRows 
+		} //aes_shiftRows
 
-		  //-------------------------------------------------------------------------- 
+		  //--------------------------------------------------------------------------
+		/// @brief Performs the inverse AES ShiftRows operation on a 16-byte state block.
+		/// @param buf Pointer to a 16-byte AES state block; modified in place.
 		inline void aes_shiftRows_inv(td::BYTE* buf) const
 		{
-			td::BYTE i, j; //same as above :) 
+			td::BYTE i, j; //same as above :)
 
 			i = buf[1], buf[1] = buf[13], buf[13] = buf[9], buf[9] = buf[5], buf[5] = i;
 			i = buf[2], buf[2] = buf[10], buf[10] = i;
 			j = buf[3], buf[3] = buf[7], buf[7] = buf[11], buf[11] = buf[15], buf[15] = j;
 			j = buf[6], buf[6] = buf[14], buf[14] = j;
 
-		} //aes_shiftRows_inv 
+		} //aes_shiftRows_inv
 
-		  //-------------------------------------------------------------------------- 
+		  //--------------------------------------------------------------------------
+		/// @brief Performs the AES MixColumns operation on a 16-byte state block.
+		/// @param buf Pointer to a 16-byte AES state block; modified in place.
 		inline void aes_mixColumns(td::BYTE* buf) const
 		{
 			td::BYTE i, a, b, c, d, e;
@@ -177,9 +219,11 @@ namespace crpt
 				buf[i + 2] ^= e ^ rj_xtime(c ^ d);
 				buf[i + 3] ^= e ^ rj_xtime(d ^ a);
 			}
-		} //aes_mixColumns 
+		} //aes_mixColumns
 
-		  //-------------------------------------------------------------------------- 
+		  //--------------------------------------------------------------------------
+		/// @brief Performs the inverse AES MixColumns operation on a 16-byte state block.
+		/// @param buf Pointer to a 16-byte AES state block; modified in place.
 		inline void aes_mixColumns_inv(td::BYTE *buf) const
 		{
 			td::BYTE i, a, b, c, d, e, x, y, z;
@@ -199,9 +243,12 @@ namespace crpt
 				buf[i + 2] ^= x ^ rj_xtime(c ^ d);
 				buf[i + 3] ^= y ^ rj_xtime(d ^ a);
 			}
-		} //aes_mixColumns_inv 
+		} //aes_mixColumns_inv
 
-		  //-------------------------------------------------------------------------- 
+		  //--------------------------------------------------------------------------
+		/// @brief Derives the next encryption round key from the current key schedule in place.
+		/// @param k Pointer to the 32-byte key schedule buffer; updated in place.
+		/// @param rc Pointer to the round constant byte; updated in place.
 		inline void aes_expandEncKey(td::BYTE *k, td::BYTE *rc) const
 		{
 			td::BYTE i;
@@ -222,9 +269,12 @@ namespace crpt
 			for (i = 20; i < 32; i += 4) k[i] ^= k[i - 4], k[i + 1] ^= k[i - 3],
 				k[i + 2] ^= k[i - 2], k[i + 3] ^= k[i - 1];
 
-		} //aes_expandEncKey 
+		} //aes_expandEncKey
 
-		  //-------------------------------------------------------------------------- 
+		  //--------------------------------------------------------------------------
+		/// @brief Derives the previous decryption round key from the current key schedule in place.
+		/// @param k Pointer to the 32-byte key schedule buffer; updated in place.
+		/// @param rc Pointer to the round constant byte; updated in place.
 		inline void aes_expandDecKey(td::BYTE *k, td::BYTE *rc) const
 		{
 			td::BYTE i;
@@ -245,10 +295,12 @@ namespace crpt
 			k[1] ^= rj_sbox(k[30]);
 			k[2] ^= rj_sbox(k[31]);
 			k[3] ^= rj_sbox(k[28]);
-		} //aes_expandDecKey 
+		} //aes_expandDecKey
 
 
-		  //-------------------------------------------------------------------------- 
+		  //--------------------------------------------------------------------------
+		/// @brief Initialises the AES-256 context and expands the provided key into the encryption and decryption key schedules.
+		/// @param k Pointer to a 32-byte raw key.
 		inline void aes256_init(td::BYTE *k)
 		{
 			td::BYTE rcon = 1;
@@ -256,18 +308,21 @@ namespace crpt
 
 			for (i = 0; i < sizeof(_ctxKey); i++) _ctxEncKey[i] = _ctxDecKey[i] = k[i];
 			for (i = 8; --i;) aes_expandEncKey(_ctxDecKey, &rcon);
-		} //aes256_init 
+		} //aes256_init
 
-		  //-------------------------------------------------------------------------- 
+		  //--------------------------------------------------------------------------
+		/// @brief Securely clears all key material from the AES-256 context.
 		inline void aes256_done()
 		{
 			td::BYTE i;
 
 			for (i = 0; i < sizeof(_ctxKey); i++)
 				_ctxKey[i] = _ctxEncKey[i] = _ctxDecKey[i] = 0;
-		} //aes256_done 
+		} //aes256_done
 
-		  //-------------------------------------------------------------------------- 
+		  //--------------------------------------------------------------------------
+		/// @brief Encrypts a single 16-byte block in place using the current key schedule (ECB mode).
+		/// @param buf Pointer to a 16-byte plaintext block; overwritten with ciphertext in place.
 		inline void aes256_encrypt_ecb(td::BYTE *buf)
 		{
 			td::BYTE i, rcon;
@@ -285,9 +340,11 @@ namespace crpt
 			aes_shiftRows(buf);
 			aes_expandEncKey(_ctxKey, &rcon);
 			aes_addRoundKey(buf, _ctxKey);
-		} //aes256_encrypt 
+		} //aes256_encrypt
 
-		  //-------------------------------------------------------------------------- 
+		  //--------------------------------------------------------------------------
+		/// @brief Decrypts a single 16-byte block in place using the current key schedule (ECB mode).
+		/// @param buf Pointer to a 16-byte ciphertext block; overwritten with plaintext in place.
 		inline void aes256_decrypt_ecb(td::BYTE *buf)
 		{
 			td::BYTE i, rcon;
@@ -309,10 +366,17 @@ namespace crpt
 				aes_subBytes_inv(buf);
 			}
 			aes_addRoundKey(buf, _ctxKey);
-		} //aes256_decrypt 
+		} //aes256_decrypt
 
 	public:
 
+		/// @brief Encrypts arbitrary-length binary data using AES-256 ECB with the given 32-byte key.
+		/// @param key 32-character string used as the AES-256 encryption key.
+		/// @param inData Pointer to the plaintext data to encrypt.
+		/// @param inLen Number of bytes of plaintext.
+		/// @param outEncryptedData String that receives the encrypted output (raw binary or hex depending on encType).
+		/// @param encType Output encoding format: Raw produces binary bytes, Hex produces ASCII hex.
+		/// @return true if encryption succeeded, false if the input is empty or the key length is not 32.
 		bool encrypt(const td::String& key, const td::BYTE* inData, size_t inLen, td::String& outEncryptedData, EncryptedType encType = Raw)
 		{
 			if (inLen == 0)
@@ -326,14 +390,14 @@ namespace crpt
 
 			size_t nFullBuffers = inLen / 16;
 			size_t nRem = inLen % 16;
-			{	
+			{
 				size_t toReserve = nFullBuffers;
 				if (nRem != 0)
 					++toReserve;
 				if (encType == Raw)
 					outEncryptedData.reserve(toReserve * 16);
 				else
-					outEncryptedData.reserve(toReserve * 32);				
+					outEncryptedData.reserve(toReserve * 32);
 			}
 
 			//uint8_t key[32];
@@ -388,6 +452,12 @@ namespace crpt
 			return true;
 		}
 
+		/// @brief Encrypts a td::String using AES-256 ECB with the given 32-byte key.
+		/// @param key 32-character string used as the AES-256 encryption key.
+		/// @param inData The plaintext string to encrypt.
+		/// @param outEncryptedData String that receives the encrypted output.
+		/// @param encType Output encoding format: Raw produces binary bytes, Hex produces ASCII hex.
+		/// @return true if encryption succeeded, false if the input is empty or the key length is not 32.
 		bool encrypt(const td::String& key, const td::String& inData, td::String& outEncryptedData, EncryptedType encType = Raw)
 		{
 			return encrypt(key, (const td::BYTE*) inData.c_str(), inData.length(), outEncryptedData, encType);
@@ -395,7 +465,7 @@ namespace crpt
 			//size_t inLen = inData.length();
 
 			//if (inLen == 0)
-			//	return false;			
+			//	return false;
 
 			//if (key.length() != 32)
 			//	return false;
@@ -434,8 +504,8 @@ namespace crpt
 			//		crpt::toHex(buf, hexOut);
 			//		memcpy(pOut, hexOut, 32);
 			//	}
-			//	
-			//	
+			//
+			//
 			//	pIn += 16;
 			//	if (encType == Raw)
 			//		pOut += 16;
@@ -464,6 +534,13 @@ namespace crpt
 			//return true;
 		}
 
+		/// @brief Decrypts arbitrary-length ciphertext using AES-256 ECB with the given 32-byte key.
+		/// @param key 32-character string used as the AES-256 decryption key.
+		/// @param inData Pointer to the ciphertext data to decrypt.
+		/// @param inLen Number of bytes of ciphertext (must be a multiple of 16 for Raw, or 32 for Hex).
+		/// @param outDecryptedData String that receives the decrypted plaintext.
+		/// @param encType Encoding format of the input ciphertext: Raw for binary, Hex for ASCII hex.
+		/// @return true if decryption succeeded, false on invalid length, empty input, or wrong key length.
 		bool decrypt(const td::String& key, const td::BYTE* inData, size_t inLen, td::String& outDecryptedData, EncryptedType encType = Raw)
 		{
 			if (inLen == 0)
@@ -545,16 +622,26 @@ namespace crpt
 			return true;
 		}
 
+		/// @brief Decrypts a td::String of ciphertext using AES-256 ECB with the given 32-byte key.
+		/// @param key 32-character string used as the AES-256 decryption key.
+		/// @param inData The ciphertext string to decrypt.
+		/// @param outDecryptedData String that receives the decrypted plaintext.
+		/// @param encType Encoding format of the input ciphertext: Raw for binary, Hex for ASCII hex.
+		/// @return true if decryption succeeded, false on invalid data or key.
 		bool decrypt(const td::String& key, const td::String& inData, td::String& outDecryptedData, EncryptedType encType = Raw)
 		{
-			return decrypt(key, (const td::BYTE*) inData.c_str(), inData.length(), outDecryptedData, encType);			
+			return decrypt(key, (const td::BYTE*) inData.c_str(), inData.length(), outDecryptedData, encType);
 		}
 
+		/// @brief Sets the number of zero-padding bytes that were appended during encryption.
+		/// @param nTrailedZeros Number of trailing zero bytes (0-15), or -1 to indicate unknown (auto-detect on decrypt).
 		void setTrailZeros(char nTrailedZeros)
 		{
 			_trailedZeros = nTrailedZeros;
 		}
 
+		/// @brief Returns the number of trailing zero-padding bytes recorded from the last operation.
+		/// @return Number of trailing zero bytes, or -1 if unknown.
 		char getTrailZeros() const
 		{
 			return _trailedZeros;

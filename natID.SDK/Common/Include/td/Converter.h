@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file Converter.h
+    @brief Utilities to update typed values from strings and to display typed values to a stream. */
 #pragma once
 
 #include <td/Types.h>
@@ -17,6 +19,12 @@
 namespace td
 {
 
+/// @brief Updates a typed value at a raw pointer from a string representation.
+/// @param pValue Pointer to the memory location of the target value.
+/// @param dataType The DataType of the target value.
+/// @param strValue Pointer to the source string.
+/// @param lenValue Length of the source string.
+/// @param enumSerializer Optional pointer to an enum serializer for enumerator types.
 inline void UpdatePtr(void* pValue, DataType dataType, const char* strValue, int lenValue, const mu::EnumSerializer* enumSerializer= 0)
 {
     switch (dataType)
@@ -98,6 +106,11 @@ inline void UpdatePtr(void* pValue, DataType dataType, const char* strValue, int
     }
 }
 
+/// @brief Outputs a typed value to a stream object using the DataType to select the correct cast.
+/// @param ss The output stream to write to.
+/// @param pValue Pointer to the raw byte data holding the value.
+/// @param dataType The DataType describing the stored value.
+/// @param enumSerializer Optional pointer to an enum serializer for enumerator types.
 template<class TSTREAM>
 inline void ShowValue(TSTREAM& ss, td::BYTE* pValue, DataType dataType, const mu::EnumSerializer* enumSerializer= 0)
 {

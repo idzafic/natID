@@ -7,6 +7,9 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file InitialParams.h
+ * @brief Initial application parameters passed at startup.
+ */
 //
 //  Created by Izudin Dzafic on 28/07/2020.
 //  Copyright © 2020 IDz. All rights reserved.
@@ -18,9 +21,10 @@
 
 namespace gui
 {
+/// @brief Holds initial parameters for application startup configuration.
 typedef struct _InitialParams
 {
-    gui::Window::FrameSize initialFrameSize;
+    gui::Window::FrameSize initialFrameSize; ///< Initial frame size of the main window.
 }InitialParams;
 
 } //namespace gui

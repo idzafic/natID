@@ -66,18 +66,20 @@ protected:
     {
         IShape2D::currentTool = (IShape2D::Tool) selection;
         EditorView* pEditor = _view.getEditor();
+        pPOView->setFocus();
         pEditor->updateCursor();
+
         return true;
     }
     
     bool onActionItem(gui::ActionItemDescriptor& aiDesc) override
     {
         auto [menuID, firstSubMenuID, lastSubMenuID, actionID] = aiDesc.getIDs();
-        auto pAI = aiDesc.getActionItem();
+        //auto pAI = aiDesc.getActionItem();
         
         if (menuID == 10 && actionID == 10)
         {
-            td::UINT4 settingsID = 728289; //bilo koji unikatan broj
+            td::UINT4 settingsID = 728289; //any unique number for a dialog
             auto pDlg = getAttachedWindow(settingsID);
             if (pDlg)
                 pDlg->setFocus();
@@ -103,7 +105,7 @@ protected:
             {
                 case 10:
                 {
-                    //PRIMJER Otvaranja fajla/modela
+                    //Example: load model
 //                    pAI->disable();
                     td::String dlgTitle(tr("openF"));
                     gui::OpenFileDialog::show(this, dlgTitle,  { {tr("VGF"),"*.getf"}, {tr("BGF"), "*.bin"}}, actionID, [this](gui::FileDialog* pFileDlg)

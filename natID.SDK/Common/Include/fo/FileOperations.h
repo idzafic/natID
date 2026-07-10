@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file FileOperations.h
+    @brief Cross-platform file and folder utility functions for the fo (file operations) namespace. */
 #pragma once
 #include <mu/muLib.h>
 
@@ -61,30 +63,65 @@ include <boost/regex.hpp>
 namespace fo
 {
 
-enum class CopyOption : td::BYTE { None = 0, SkipExisting, OverwriteExisting, CopySimLinks, CreateSimLinks };
+/// @brief Controls how an existing destination file is handled during a copy operation.
+enum class CopyOption : td::BYTE {
+    None = 0,          ///< No special handling; fail if the destination already exists
+    SkipExisting,      ///< Leave the destination unchanged if it already exists
+    OverwriteExisting, ///< Replace the destination file if it already exists
+    CopySimLinks,      ///< Copy symbolic links as symbolic links
+    CreateSimLinks     ///< Create a symbolic link at the destination instead of copying data
+};
 
 //for using with getLine (fo::getLine(f, buffer))
 
-typedef td::BufferString<td::UTF8, 256, 256>  LineSmall;
-typedef td::BufferString<td::UTF8, 1024 * 4, 1024 * 4>  LineNormal;
-typedef td::BufferString<td::UTF8, 1024 * 64, 1024 * 64>  LineLarge;
+typedef td::BufferString<td::UTF8, 256, 256>  LineSmall;   ///< Small line buffer (256-byte capacity) for reading text lines
+typedef td::BufferString<td::UTF8, 1024 * 4, 1024 * 4>  LineNormal; ///< Normal line buffer (4 KiB capacity) for reading text lines
+typedef td::BufferString<td::UTF8, 1024 * 64, 1024 * 64>  LineLarge; ///< Large line buffer (64 KiB capacity) for reading text lines
 
-typedef std::ifstream InFile;
-typedef std::ofstream OutFile;
+typedef std::ifstream InFile;  ///< Alias for a standard input file stream
+typedef std::ofstream OutFile; ///< Alias for a standard output file stream
 
 
-typedef enum {FE_FILEISNOTVALID=0, FE_FILEDOESNOTEXIST, FE_FILEEXIST} FileExist;
+/// @brief Indicates the result of a file-existence check.
+typedef enum {
+    FE_FILEISNOTVALID=0, ///< The path is invalid or inaccessible
+    FE_FILEDOESNOTEXIST, ///< The path does not exist on the filesystem
+    FE_FILEEXIST         ///< The path exists and refers to a regular file
+} FileExist;
 
-typedef enum _FT{ FT_File, FT_Folder, FT_Other } FileType;
+/// @brief Classifies a filesystem entry by its kind.
+typedef enum _FT{
+    FT_File,   ///< Regular file
+    FT_Folder, ///< Directory
+    FT_Other   ///< Any other filesystem entry (device, symlink, etc.)
+} FileType;
 
-typedef enum { FT_GLOBAL_PATH = 0, FT_APPFOLDER, FT_HOMEFOLDER, FT_HOMELOCALDATAFOLDER, FT_TMPFOLDER, FT_DP_FOLDER, FT_REP_FOLDER, FT_TR_FOLDER, FT_RES_FOLDER, FT_GUI_FOLDER, FT_HELP_FOLDER } FolderType;
+/// @brief Enumerates well-known application folder categories.
+typedef enum {
+    FT_GLOBAL_PATH = 0,    ///< Absolute global path (no category)
+    FT_APPFOLDER,          ///< Application installation folder
+    FT_HOMEFOLDER,         ///< Current user's home folder
+    FT_HOMELOCALDATAFOLDER,///< User's local application data folder
+    FT_TMPFOLDER,          ///< System temporary folder
+    FT_DP_FOLDER,          ///< Data processing folder
+    FT_REP_FOLDER,         ///< Reports folder
+    FT_TR_FOLDER,          ///< Translations folder
+    FT_RES_FOLDER,         ///< Resources folder
+    FT_GUI_FOLDER,         ///< GUI assets folder
+    FT_HELP_FOLDER         ///< Help content folder
+} FolderType;
 
+/// @brief Describes a single filesystem entry with its path and type classification.
 typedef struct _FileDesc
 {
-    fo::fs::path name;
-    FileType type;
+    fo::fs::path name; ///< Filesystem path of the entry
+    FileType type;     ///< Classification of the entry (file, folder, or other)
 }FileDesc;
 
+/// @brief Populates a singly-linked list with all entries found directly inside a directory.
+/// @param folderPath Path of the directory to enumerate.
+/// @param outList List that receives a FileDesc entry for each item found.
+/// @return Number of entries that could not be accessed due to errors.
 inline int createFolderContentList(const fs::path& folderPath, cnt::ListSL<FileDesc>& outList)
 {
     int noErrors = 0;
@@ -123,6 +160,9 @@ inline int createFolderContentList(const fs::path& folderPath, cnt::ListSL<FileD
     return noErrors;
 }
 
+/// @brief Constructs a canonical absolute path for a file located in the current working directory.
+/// @param fileName Null-terminated relative file name.
+/// @param strCurrPath String that receives the resulting absolute path.
 inline void getFileNameInCurrentFolder(const char* fileName, td::String& strCurrPath)
 {
     fs::path currPath(fs::current_path() / fileName);
@@ -131,6 +171,8 @@ inline void getFileNameInCurrentFolder(const char* fileName, td::String& strCurr
 }
 
 
+/// @brief Retrieves the current working directory as a platform-preferred path string.
+/// @param strCurrPath String that receives the current working directory path.
 inline void getCurrentPath(td::String& strCurrPath)
 {
     fs::path currPath(fs::current_path());
@@ -139,6 +181,9 @@ inline void getCurrentPath(td::String& strCurrPath)
 }
 
 #ifdef MU_WINDOWS
+/// @brief Prepends the Windows long-path prefix (\\?\) when the path exceeds 240 characters.
+/// @param inFilePath Input file path as a UTF-8 string.
+/// @param outLongFilePath Output string that receives the (possibly prefixed) UTF-16 path.
 inline void buildLongWinFileName(const td::String& inFilePath, td::StringUTF16& outLongFilePath)
 {
     //fs::path filePath(inFilePath.c_str());
@@ -157,6 +202,9 @@ inline void buildLongWinFileName(const td::String& inFilePath, td::StringUTF16& 
     }
 }
 
+/// @brief Prepends the Windows long-path prefix (\\?\) when the UTF-16 path exceeds 240 code units.
+/// @param inFilePath Input file path as a UTF-16 string.
+/// @param outLongFilePath Output string that receives the (possibly prefixed) UTF-16 path.
 inline void buildLongWinFileName(const td::StringUTF16& inFilePath, td::StringUTF16& outLongFilePath)
 {
     //fs::path path(inFilePath.c_str());
@@ -176,6 +224,11 @@ inline void buildLongWinFileName(const td::StringUTF16& inFilePath, td::StringUT
 #endif
 
 
+/// @brief Creates and opens a new binary file, truncating any existing file at that path.
+/// @tparam T File stream type (e.g. std::ofstream).
+/// @param f File stream object to open.
+/// @param fileName Filesystem path of the file to create.
+/// @return true if the file was created and opened successfully.
 template<typename T>
 bool createBinaryFile(T& f, const fs::path& fileName)
 {
@@ -218,6 +271,12 @@ bool createBinaryFile(T& f, const fs::path& fileName)
 //		return f.is_open();
 //	}
 
+/// @brief Creates and opens a new text file, truncating any existing file at that path.
+/// @tparam T File stream type (e.g. std::ofstream).
+/// @param f File stream object to open.
+/// @param fileName Path of the file to create, as a td::String.
+/// @param writeUTFBOM If true, writes a UTF-8 BOM (0xEF 0xBB 0xBF) at the start of the file.
+/// @return true if the file was created and opened successfully.
 template<typename T>
 bool createTextFile(T& f, const td::String& fileName, bool writeUTFBOM = false)
 {
@@ -246,6 +305,11 @@ bool createTextFile(T& f, const td::String& fileName, bool writeUTFBOM = false)
     return isOpen;
 }
 
+/// @brief Creates and opens a new binary file from a td::String path, truncating any existing file.
+/// @tparam T File stream type (e.g. std::ofstream).
+/// @param f File stream object to open.
+/// @param fileName Path of the file to create, as a td::String.
+/// @return true if the file was created and opened successfully.
 template<typename T>
 bool createBinaryFile(T& f, const td::String& fileName)
 {
@@ -267,6 +331,11 @@ bool createBinaryFile(T& f, const td::String& fileName)
     return f.is_open();
 }
 
+/// @brief Creates and opens a new binary file from a C-string path, truncating any existing file.
+/// @tparam T File stream type (e.g. std::ofstream).
+/// @param f File stream object to open.
+/// @param fName Null-terminated path of the file to create.
+/// @return true if the file was created and opened successfully.
 template<typename T>
 bool createBinaryFile(T& f, const char* fName)
 {
@@ -292,6 +361,12 @@ bool createBinaryFile(T& f, const char* fName)
 //MAINUTILS_API bool createSharedReadFile(std::ofstream& f, const td::String& fileName);
 //MAINUTILS_API void unlockSharedReadFile(std::ofstream& f);
 
+/// @brief Opens a file for writing and obtains its OS-level file descriptor for shared-read access.
+/// @tparam T File stream type.
+/// @param f File stream object to open.
+/// @param fileName Path of the file to open.
+/// @param fid Integer that receives the OS-level file descriptor on success.
+/// @return true if the file was opened successfully.
 template <typename T>
 bool createSharedReadFile(T& f, const td::String& fileName, int& fid)
 {
@@ -299,7 +374,7 @@ bool createSharedReadFile(T& f, const td::String& fileName, int& fid)
         return false;
     fid = f.filedesc();
     return true;
-    
+
 //#ifdef MU_WINDOWS
 //		HANDLE hf = _get_osfhandle(f.fd());
 //		int status = LockFile(hf, 0, 0, 0, 0);
@@ -324,8 +399,13 @@ bool createSharedReadFile(T& f, const td::String& fileName, int& fid)
 //		f.attach(fid);
 //		return f.is_open();
 }
-        
 
+
+/// @brief Opens an existing binary file for reading.
+/// @tparam T File stream type (e.g. std::ifstream).
+/// @param f File stream object to open.
+/// @param fileName Path of the existing binary file, as a td::String.
+/// @return true if the file was opened successfully.
 template<typename T>
 bool openExistingBinaryFile(T& f, const td::String& fileName)
 {
@@ -346,6 +426,11 @@ bool openExistingBinaryFile(T& f, const td::String& fileName)
     return f.is_open();
 }
 
+/// @brief Opens an existing binary file for reading from a C-string path.
+/// @tparam T File stream type (e.g. std::ifstream).
+/// @param f File stream object to open.
+/// @param fileName Null-terminated path of the existing binary file.
+/// @return true if the file was opened successfully.
 template<typename T>
 bool openExistingBinaryFile(T& f, const char* fileName)
 {
@@ -366,6 +451,11 @@ f.open(fileName, FO_BINARY_OPEN_EXISTING);
 return f.is_open();
 }
 
+/// @brief Opens a file using the default open mode from a filesystem path.
+/// @tparam T File stream type.
+/// @param f File stream object to open.
+/// @param fileName Filesystem path of the file.
+/// @return true if the file was opened successfully.
 template <typename T>
 bool openFile(T& f, const fs::path& fileName)
 {
@@ -387,6 +477,12 @@ bool openFile(T& f, const fs::path& fileName)
     return f.is_open();
 }
 
+/// @brief Opens a file with an explicit open mode from a filesystem path.
+/// @tparam T File stream type.
+/// @param f File stream object to open.
+/// @param fileName Filesystem path of the file.
+/// @param mode Combination of std::ios_base::openmode flags.
+/// @return true if the file was opened successfully.
 template<typename T>
 bool openFile(T& f, const fs::path& fileName, std::ios_base::openmode mode)
 {
@@ -409,6 +505,11 @@ bool openFile(T& f, const fs::path& fileName, std::ios_base::openmode mode)
 }
 
 
+/// @brief Opens a file using the default open mode from a UTF-8 C-string path.
+/// @tparam T File stream type.
+/// @param f File stream object to open.
+/// @param fileName Null-terminated UTF-8 path of the file.
+/// @return true if the file was opened successfully.
 template <typename T>
 bool openFile(T& f, const td::UTF8* fileName)
 {
@@ -438,6 +539,12 @@ bool openFile(T& f, const td::UTF8* fileName)
     return f.is_open();
 }
 
+/// @brief Opens a file with an explicit open mode from a UTF-8 C-string path.
+/// @tparam T File stream type.
+/// @param f File stream object to open.
+/// @param fileName Null-terminated UTF-8 path of the file.
+/// @param mode Combination of std::ios_base::openmode flags.
+/// @return true if the file was opened successfully.
 template <typename T>
 bool openFile(T& f, const td::UTF8* fileName, std::ios_base::openmode mode)
 {
@@ -467,6 +574,11 @@ bool openFile(T& f, const td::UTF8* fileName, std::ios_base::openmode mode)
     return f.is_open();
 }
 
+/// @brief Opens a file using the default open mode from a td::String path.
+/// @tparam T File stream type.
+/// @param f File stream object to open.
+/// @param fileName Path of the file as a td::String.
+/// @return true if the file was opened successfully.
 template <typename T>
 bool openFile(T& f, const td::String& fileName)
 {
@@ -495,6 +607,12 @@ bool openFile(T& f, const td::String& fileName)
     return f.is_open();
 }
 
+/// @brief Opens a file with an explicit open mode from a td::String path.
+/// @tparam T File stream type.
+/// @param f File stream object to open.
+/// @param fileName Path of the file as a td::String.
+/// @param mode Combination of std::ios_base::openmode flags.
+/// @return true if the file was opened successfully.
 template <typename T>
 bool openFile(T& f, const td::String& fileName, std::ios_base::openmode mode)
 {
@@ -523,6 +641,11 @@ bool openFile(T& f, const td::String& fileName, std::ios_base::openmode mode)
     return f.is_open();
 }
 
+/// @brief Opens a file using the default open mode from a UTF-16 C-string path.
+/// @tparam T File stream type.
+/// @param f File stream object to open.
+/// @param fileName Null-terminated UTF-16 path of the file.
+/// @return true if the file was opened successfully.
 template <typename T>
 bool openFile(T& f, const td::UTF16* fileName)
 {
@@ -552,6 +675,12 @@ bool openFile(T& f, const td::UTF16* fileName)
     return f.is_open();
 }
 
+/// @brief Opens a file with an explicit open mode from a UTF-16 C-string path.
+/// @tparam T File stream type.
+/// @param f File stream object to open.
+/// @param fileName Null-terminated UTF-16 path of the file.
+/// @param mode Combination of std::ios_base::openmode flags.
+/// @return true if the file was opened successfully.
 template <typename T>
 bool openFile(T& f, const td::UTF16* fileName, std::ios_base::openmode mode)
 {
@@ -582,6 +711,11 @@ bool openFile(T& f, const td::UTF16* fileName, std::ios_base::openmode mode)
     return f.is_open();
 }
 
+/// @brief Opens a file using the default open mode from a UTF-32 C-string path.
+/// @tparam T File stream type.
+/// @param f File stream object to open.
+/// @param fileName Null-terminated UTF-32 path of the file.
+/// @return true if the file was opened successfully.
 template <typename T>
 bool openFile(T& f, const td::UTF32* fileName)
 {
@@ -611,6 +745,12 @@ bool openFile(T& f, const td::UTF32* fileName)
     return f.is_open();
 }
 
+/// @brief Opens a file with an explicit open mode from a UTF-32 C-string path.
+/// @tparam T File stream type.
+/// @param f File stream object to open.
+/// @param fileName Null-terminated UTF-32 path of the file.
+/// @param mode Combination of std::ios_base::openmode flags.
+/// @return true if the file was opened successfully.
 template <typename T>
 bool openFile(T& f, const td::UTF32* fileName, std::ios_base::openmode mode)
 {
@@ -641,7 +781,7 @@ bool openFile(T& f, const td::UTF32* fileName, std::ios_base::openmode mode)
 }
 
 
-//inline bool openFileNoBlockDelete(std::ofstream& f, const std::filesystem::path& path) 
+//inline bool openFileNoBlockDelete(std::ofstream& f, const std::filesystem::path& path)
 //{
 //#ifdef MU_WINDOWS
 //    // Windows-specific code using CreateFile
@@ -656,7 +796,7 @@ bool openFile(T& f, const td::UTF32* fileName, std::ios_base::openmode mode)
 //        NULL                     // Template file handle
 //    );
 //
-//    if (hFile == INVALID_HANDLE_VALUE) 
+//    if (hFile == INVALID_HANDLE_VALUE)
 //    {
 //        std::cerr << "Failed to open file on Windows." << std::endl;
 //        return false;  // Return an empty ofstream
@@ -707,6 +847,10 @@ bool openFile(T& f, const td::UTF32* fileName, std::ios_base::openmode mode)
 //}
 
 
+/// @brief Writes a null-terminated UTF-8 string to the given output stream.
+/// @tparam T Output stream type.
+/// @param f The output stream to write to.
+/// @param txt Pointer to the null-terminated UTF-8 string; does nothing if null.
 template <typename T>
 void writeString(T& f, const td::UTF8* txt)
 {
@@ -715,6 +859,10 @@ void writeString(T& f, const td::UTF8* txt)
         //f.write(txt, strlen(txt));
 }
 
+/// @brief Converts a UTF-16 string to UTF-8 and writes it to the output stream.
+/// @tparam T Output stream type.
+/// @param f The output stream to write to.
+/// @param txt Pointer to the null-terminated UTF-16 string; does nothing if null.
 template <typename T>
 void writeString(T& f, const td::UTF16* txt)
 {
@@ -727,6 +875,10 @@ void writeString(T& f, const td::UTF16* txt)
     }
 }
 
+/// @brief Converts a UTF-32 string to UTF-8 and writes it to the output stream.
+/// @tparam T Output stream type.
+/// @param f The output stream to write to.
+/// @param txt Pointer to the null-terminated UTF-32 string; does nothing if null.
 template <typename T>
 void writeString(T& f, const td::UTF32* txt)
 {
@@ -739,6 +891,11 @@ void writeString(T& f, const td::UTF32* txt)
     }
 }
 
+/// @brief Writes a td::String to the output stream, optionally excluding the null terminator byte.
+/// @tparam T Output stream type.
+/// @param f The output stream to write to.
+/// @param txt The string to write.
+/// @param isBinary If true, all bytes including any trailing null are written; if false, the last byte is skipped.
 template <typename T>
 void writeString(T& f, const td::String& txt, bool isBinary = true)
 {
@@ -752,6 +909,10 @@ void writeString(T& f, const td::String& txt, bool isBinary = true)
     }
 }
 
+/// @brief Converts a UTF-16 string to UTF-8 and writes it to the output stream.
+/// @tparam T Output stream type.
+/// @param f The output stream to write to.
+/// @param txt The UTF-16 string to convert and write.
 template <typename T>
 void writeString(T& f, const td::StringUTF16& txt)
 {
@@ -761,6 +922,10 @@ void writeString(T& f, const td::StringUTF16& txt)
         f.write(str.c_str(), nLen);
 }
 
+/// @brief Converts a UTF-32 string to UTF-8 and writes it to the output stream.
+/// @tparam T Output stream type.
+/// @param f The output stream to write to.
+/// @param txt The UTF-32 string to convert and write.
 template <typename T>
 void writeString(T& f, const td::StringUTF32& txt)
 {
@@ -770,6 +935,10 @@ void writeString(T& f, const td::StringUTF32& txt)
         f.write(str.c_str(), nLen);
 }
 
+/// @brief Writes a MidStringUTF8 substring to the output stream.
+/// @tparam T Output stream type.
+/// @param f The output stream to write to.
+/// @param txt The UTF-8 substring to write.
 template <typename T>
 void writeString(T& f, const td::MidStringUTF8& txt)
 {
@@ -778,6 +947,10 @@ void writeString(T& f, const td::MidStringUTF8& txt)
         f.write(txt.c_str(), nLen);
 }
 
+/// @brief Converts a MidStringUTF16 substring to UTF-8 and writes it to the output stream.
+/// @tparam T Output stream type.
+/// @param f The output stream to write to.
+/// @param txt The UTF-16 substring to convert and write.
 template <typename T>
 void writeString(T& f, const td::MidStringUTF16& txt)
 {
@@ -787,6 +960,10 @@ void writeString(T& f, const td::MidStringUTF16& txt)
         f.write(str.c_str(), nLen);
 }
 
+/// @brief Converts a MidStringUTF32 substring to UTF-8 and writes it to the output stream.
+/// @tparam T Output stream type.
+/// @param f The output stream to write to.
+/// @param txt The UTF-32 substring to convert and write.
 template <typename T>
 void writeString(T& f, const td::MidStringUTF32& txt)
 {
@@ -795,6 +972,12 @@ void writeString(T& f, const td::MidStringUTF32& txt)
     if (nLen > 0)
         f.write(str.c_str(), nLen);
 }
+
+/// @brief Serialises the contents of a string builder to the output stream.
+/// @tparam TFILE Output stream type.
+/// @tparam TBUILDER String builder type that exposes a serialize(stream) method.
+/// @param f The output stream to write to.
+/// @param builder The string builder whose content is serialised.
 template <class TFILE, class TBUILDER>
 void writeBuilder(TFILE& f, TBUILDER& builder)
 {
@@ -809,6 +992,11 @@ void writeBuilder(TFILE& f, TBUILDER& builder)
 }
 
 
+/// @brief Serialises the contents of a binary string builder to the output stream.
+/// @tparam TFILE Output stream type.
+/// @tparam TBUILDER Binary builder type that exposes a serialize(stream) method.
+/// @param f The output stream to write to.
+/// @param builder The binary builder whose content is serialised.
 template <class TFILE, class TBUILDER>
 void writeBinaryBuilder(TFILE& f, TBUILDER& builder)
 {
@@ -825,6 +1013,13 @@ void writeBinaryBuilder(TFILE& f, TBUILDER& builder)
     //	f.write(builder.getDataPtr(itLast), builder.getLastLen());
 }
 
+/// @brief Writes each segment of a string builder to the output stream, separated by chSep.
+/// @tparam TFILE Output stream type.
+/// @tparam TBUILDER String builder type whose iterator yields writable string segments.
+/// @param f The output stream to write to.
+/// @param builder The string builder to iterate over.
+/// @param chSep Null-terminated separator inserted between segments; ignored before the first segment.
+/// @param putEndLine If true, appends std::endl after the last segment.
 template <class TFILE, class TBUILDER>
 void writeBuilder(TFILE& f, TBUILDER& builder, const char* chSep, bool putEndLine = true)
 {
@@ -877,6 +1072,10 @@ void writeBuilder(TFILE& f, TBUILDER& builder, const char* chSep, bool putEndLin
 //		f << std::endl;
 //}
 
+/// @brief Returns the current read position in the stream, recovering gracefully if tellg() returns -1.
+/// @tparam T Input stream type.
+/// @param f The input stream to query.
+/// @return Current read position in bytes, or 0 if the position cannot be determined.
 template <typename T>
 std::streamoff tellReadPos(T& f)
 {
@@ -894,6 +1093,10 @@ std::streamoff tellReadPos(T& f)
     return toRet;
 }
 
+/// @brief Returns the current write position in the stream, returning 0 if tellp() reports an error.
+/// @tparam T Output stream type.
+/// @param f The output stream to query.
+/// @return Current write position in bytes, or 0 on error.
 template <typename T>
 std::streamoff tellWritePos(T& f)
 {
@@ -903,12 +1106,20 @@ std::streamoff tellWritePos(T& f)
     return toRet;
 }
 
+/// @brief Seeks the read cursor of an input stream to the given absolute byte position.
+/// @tparam T Input stream type.
+/// @param f The input stream to seek.
+/// @param pos Absolute byte position to seek to.
 template <typename T>
 void seekReadPos(T& f, size_t pos)
 {
     f.seekg(pos);
 }
 
+/// @brief Seeks the write cursor of an output stream to the given absolute byte position.
+/// @tparam T Output stream type.
+/// @param f The output stream to seek.
+/// @param pos Absolute byte position to seek to.
 template <typename T>
 void seekWritePos(T& f, size_t pos)
 {
@@ -916,16 +1127,25 @@ void seekWritePos(T& f, size_t pos)
 }
 
 
+/// @brief Seeks an input stream to the given absolute byte position.
+/// @param f The input stream to seek.
+/// @param pos Absolute byte position.
 inline void seek(std::istream& f, size_t pos)
 {
     f.seekg(pos);
 }
 
+/// @brief Seeks an output stream to the given absolute byte position.
+/// @param f The output stream to seek.
+/// @param pos Absolute byte position.
 inline void seek(std::ostream& f, size_t pos)
 {
     f.seekp(pos);
 }
 
+/// @brief Returns the current read position of an input stream, handling negative tellg() results.
+/// @param f The input stream to query.
+/// @return Current read position in bytes, or 0 if the position cannot be determined.
 inline std::streamoff tell(std::istream& f)
 {
     std::streamoff toRet = f.tellg();
@@ -942,6 +1162,9 @@ inline std::streamoff tell(std::istream& f)
     return toRet;
 }
 
+/// @brief Returns the current write position of an output stream, returning 0 on error.
+/// @param f The output stream to query.
+/// @return Current write position in bytes, or 0 on error.
 inline std::streamoff tell(std::ostream& f)
 {
     std::streamoff toRet = f.tellp();
@@ -965,6 +1188,12 @@ inline std::streamoff tell(std::ostream& f)
 //	return 0;
 //}
 
+/// @brief Reads up to buffSize bytes from the stream into buffer.
+/// @tparam T Input stream type.
+/// @param f The input stream to read from.
+/// @param buffer Pointer to the destination buffer.
+/// @param buffSize Maximum number of bytes to read.
+/// @return Number of bytes actually read, 0 at end of file, or -1 on error.
 template <typename T>
 std::streamsize read(T& f, char* buffer, unsigned int buffSize)
 {
@@ -985,6 +1214,12 @@ std::streamsize read(T& f, char* buffer, unsigned int buffSize)
         //return 0;
 }
 
+/// @brief Writes buffSize bytes from buffer to the output stream.
+/// @tparam OSTREAM Output stream type.
+/// @param f The output stream to write to.
+/// @param buffer Pointer to the source data.
+/// @param buffSize Number of bytes to write.
+/// @return buffSize if the write succeeded, or -1 on error.
 template <class OSTREAM>
 std::streamsize write(OSTREAM& f, const char* buffer, std::streamsize buffSize)
 {
@@ -995,6 +1230,12 @@ std::streamsize write(OSTREAM& f, const char* buffer, std::streamsize buffSize)
     return -1;
 }
 
+/// @brief Writes all buffSize bytes from buffer to the output stream.
+/// @tparam T Output stream type.
+/// @param f The output stream to write to.
+/// @param buffer Pointer to the source data.
+/// @param buffSize Number of bytes to write.
+/// @return true if all bytes were written successfully, false on error.
 template <typename T>
 bool writeAll(T& f, const char* buffer, size_t buffSize)
 {
@@ -1005,165 +1246,158 @@ bool writeAll(T& f, const char* buffer, size_t buffSize)
     return false;
 }
 
+/// @brief Reads one line of text from the stream into a BufferString, handling CR, LF, and CR+LF line endings.
+/// @tparam T_STREAM Input stream type.
+/// @tparam T_CHAR Character type of the BufferString.
+/// @tparam NINITLEN Initial capacity of the BufferString.
+/// @tparam INCREMENT Growth increment of the BufferString.
+/// @param f The input stream to read from.
+/// @param s BufferString that receives the line content (without the line ending).
+/// @return true if a line was read (possibly empty), false at end of file or on overflow.
 template <class T_STREAM, class T_CHAR, int NINITLEN, int INCREMENT>
 bool getLine(T_STREAM& f, td::BufferString<T_CHAR, NINITLEN, INCREMENT>& s)
 {
-    typename std::ios_base::iostate _State = std::ios_base::goodbit;
-    bool _Changed = false;
+    s.erase();
 
-    if (f.good() && !f.eof())
+    if (!f.good())
+        return false;
+
+    typedef typename T_STREAM::int_type   int_type;
+    typedef typename T_STREAM::traits_type traits_type;
+
+    const int_type EOF_VAL  = traits_type::eof();
+    const int_type LF_VAL   = traits_type::to_int_type(static_cast<T_CHAR>(TD_TO_NEWLINE));  // \n
+    const int_type CR_VAL   = traits_type::to_int_type(static_cast<T_CHAR>(TD_TO_LINEBEG));  // \r
+
+    bool hasContent = false;
+
+    for (;;)
     {
-        // state okay, extract characters
-        s.erase();
-        T_CHAR END_LINE = TD_TO_NEWLINE;
-        T_CHAR BEG_LINE = TD_TO_LINEBEG;
-        T_CHAR END_OF_FILE = TD_EOF;
-        T_CHAR ch = f.rdbuf()->sgetc();
+        int_type raw = f.rdbuf()->sbumpc();  // read and advance in one step
 
-        for (; ; ch = f.rdbuf()->snextc())
+        if (traits_type::eq_int_type(raw, EOF_VAL))
         {
-            if (ch == END_OF_FILE)
-            {
-                // end of file, quit
-                //check if it is really eof (some encodings placing FF chars)
-                ch = f.rdbuf()->snextc();
-                if (ch == TD_EOF)
-                {
-                    _State |= std::ios_base::eofbit;
-                    if (s.length() == 0)
-                    {
-                        f.setstate(_State);
-                        return false;
-                    }
-                    break;
-                }
-                s += ch;
-                _Changed = true;
-            }
-            //else if (ch == BEG_LINE || ch == END_LINE)
-            //{
-            //	// got a delimiter, discard it, adn return
-            //	_Changed = true;
-            //	f.rdbuf()->sbumpc();
-            //	break;
-            //}
-            else if (ch == BEG_LINE)
-            {
-                // got a delimiter, discard it
-                _Changed = true;
-                //f.rdbuf()->sbumpc();
-            }
-            else if (ch == END_LINE)
-            {
-                // got a delimiter, discard it and return
-                _Changed = true;
-                f.rdbuf()->sbumpc();
-                break;
-            }
-            else if (s.max_size() <= s.size())
-            {
-                // string too large, quit
-                _State |= std::ios_base::failbit;
-                break;
-            }
-            else
-            {	// got a character, add it to string
-                s += ch;
-                _Changed = true;
-            }
+            f.setstate(std::ios_base::eofbit);
+            return hasContent;  // true if we accumulated something, false if truly empty
         }
+
+        if (traits_type::eq_int_type(raw, LF_VAL))
+        {
+            // End of line — return whatever we have (even empty lines)
+            return true;
+        }
+
+        if (traits_type::eq_int_type(raw, CR_VAL))
+        {
+            // Peek ahead: consume LF if it follows (handles \r\n)
+            int_type next = f.rdbuf()->sgetc();
+            if (!traits_type::eq_int_type(next, EOF_VAL) &&
+                 traits_type::eq_int_type(next, LF_VAL))
+            {
+                f.rdbuf()->sbumpc();  // consume the LF
+            }
+            return true;
+        }
+
+        if (s.size() >= s.max_size())
+        {
+            f.setstate(std::ios_base::failbit);
+            return false;
+        }
+
+        s += traits_type::to_char_type(raw);
+        hasContent = true;
     }
-    else
-        return false; //eof of bad file indicator
-
-    if (!_Changed)
-        _State |= std::ios_base::failbit;
-
-    f.setstate(_State);
-
-    return true;
 }
 
 //fromPosition is input/output argument
+/// @brief Reads one line from the stream into a MutableString, tracking the byte position within the stream.
+/// @tparam ISTREAM Input stream type.
+/// @param f The input stream to read from.
+/// @param str MutableString that receives the line content (without the line ending).
+/// @param pos Input/output parameter tracking the cumulative byte position in the stream.
+/// @return true if a line was read (possibly empty), false at end of file.
 template <class ISTREAM>
 inline bool getLine(ISTREAM& f, td::MutableString& str, td::UINT4& pos)
 {
-    typename std::ios_base::iostate _State = std::ios_base::goodbit;
-    bool _Changed = false;
+    if (!f.good())
+        return false;
 
-    if (f.good() && !f.eof())
+    if (str.capacity() == 0)
+        str.reserve(4096);
+    str.reset();
+
+    typedef typename ISTREAM::int_type    int_type;
+    typedef typename ISTREAM::traits_type traits_type;
+
+    const int_type EOF_VAL = traits_type::eof();
+    const int_type LF_VAL  = traits_type::to_int_type(static_cast<char>(TD_TO_NEWLINE));
+    const int_type CR_VAL  = traits_type::to_int_type(static_cast<char>(TD_TO_LINEBEG));
+
+    bool hasContent = false;
+
+    for (;;)
     {
-        // state okay, extract characters
-        if (str.capacity() == 0)
-            str.reserve(4096);
-        str.reset();
-        
-        char END_LINE = TD_TO_NEWLINE;
-        char BEG_LINE = TD_TO_LINEBEG;
-        char END_OF_FILE = TD_EOF;
-        char ch = f.rdbuf()->sgetc();
+        int_type raw = f.rdbuf()->sbumpc();  // read and advance in one step
 
-        for (; ; ch = f.rdbuf()->snextc())
+        if (traits_type::eq_int_type(raw, EOF_VAL))
         {
-            if (ch == END_OF_FILE)
+            f.setstate(std::ios_base::eofbit);
+            return hasContent;
+        }
+
+        ++pos;
+
+        if (traits_type::eq_int_type(raw, LF_VAL))
+        {
+            // end of line — return whatever we have (even empty lines)
+            return true;
+        }
+
+        if (traits_type::eq_int_type(raw, CR_VAL))
+        {
+            // peek ahead: consume LF if it follows (handles \r\n)
+            int_type next = f.rdbuf()->sgetc();
+            if (!traits_type::eq_int_type(next, EOF_VAL) &&
+                 traits_type::eq_int_type(next, LF_VAL))
             {
-                // end of file, quit
-                //check if it is really eof (some encodings placing FF chars)
-                ch = f.rdbuf()->snextc();
-                if (ch == TD_EOF)
-                {
-                    _State |= std::ios_base::eofbit;
-                    if (str.length() == 0)
-                    {
-                        f.setstate(_State);
-                        return false;
-                    }
-                    break;
-                }
-                str.append(ch);
-                ++pos;
-                _Changed = true;
-            }
-            else if (ch == BEG_LINE)
-            {
-                // got a delimiter, discard it
-                _Changed = true;
-                ++pos;
-            }
-            else if (ch == END_LINE)
-            {
-                // got a delimiter, discard it and return
-                _Changed = true;
                 f.rdbuf()->sbumpc();
                 ++pos;
-                break;
             }
-            else
-            {    // got a character, add it to string
-                str.append(ch);
-                ++pos;
-                _Changed = true;
-            }
+            return true;
         }
+
+        str.append(traits_type::to_char_type(raw));
+        hasContent = true;
     }
-    else
-        return false; //eof of bad file indicator
-
-    if (!_Changed)
-        _State |= std::ios_base::failbit;
-
-    f.setstate(_State);
-
-    return true;
 }
+
+/// @brief Seeks an input stream to the given absolute position, optionally clearing error flags first.
+/// @tparam ISTREAM Input stream type.
+/// @tparam TPOS Integral type of the position value.
+/// @param f The input stream to seek.
+/// @param pos Absolute byte position to seek to.
+/// @param clearState If true, clears all stream error flags before seeking.
 template <class ISTREAM, typename TPOS>
 inline void goToPos(ISTREAM& f, TPOS pos, bool clearState)
 {
     if (clearState)
         f.clear();
+
+#ifdef MU_LINUX
+    // seekg is unreliable on some Linux systems for certain stream types
+    // (e.g. streams over virtual filesystems, pipes, or proc files).
+    // ignore() skips bytes sequentially which always works.
+    if (pos > 0)
+        f.ignore(pos);
+#else
     f.seekg(pos, std::ios::beg);
+#endif
 }
 
+/// @brief Checks whether a file exists and is a regular file (td::String overload).
+/// @param fileName Path of the file to check.
+/// @return true if the path exists and is a regular file.
 [[nodiscard]]
 inline bool fileExists(const td::String& fileName)
 {
@@ -1185,6 +1419,9 @@ inline bool fileExists(const td::String& fileName)
 #endif
 }
 
+/// @brief Checks whether a file exists and is a regular file (C-string overload).
+/// @param fileName Null-terminated path of the file to check.
+/// @return true if the path exists and is a regular file.
 [[nodiscard]]
 inline bool fileExists(const char* fileName)
 {
@@ -1207,6 +1444,9 @@ inline bool fileExists(const char* fileName)
 #endif
 }
 
+/// @brief Checks whether a file exists and is a regular file (fs::path overload).
+/// @param filePath Filesystem path of the file to check.
+/// @return true if the path exists and is a regular file.
 [[nodiscard]]
 inline bool fileExists(const fo::fs::path& filePath)
 {
@@ -1215,6 +1455,9 @@ inline bool fileExists(const fo::fs::path& filePath)
     return false;
 }
 
+/// @brief Checks whether a directory exists (td::String overload).
+/// @param folderName Path of the directory to check.
+/// @return true if the path exists and is a directory.
 [[nodiscard]]
 inline bool folderExists(const td::String& folderName)
 {
@@ -1236,15 +1479,18 @@ inline bool folderExists(const td::String& folderName)
             return true;
         return false;
     }
-    
+
     catch (...)
     {
     }
-    
+
     return false;
 #endif
 }
 
+/// @brief Checks whether a directory exists (C-string overload).
+/// @param folderNameCStr Null-terminated path of the directory to check.
+/// @return true if the path exists and is a directory.
 [[nodiscard]]
 inline bool folderExists(const char* folderNameCStr)
 {
@@ -1266,15 +1512,18 @@ inline bool folderExists(const char* folderNameCStr)
             return true;
         return false;
     }
-    
+
     catch (...)
     {
     }
-    
+
     return false;
 #endif
 }
 
+/// @brief Checks whether a directory exists (fs::path overload).
+/// @param folderPath Filesystem path of the directory to check.
+/// @return true if the path exists and is a directory.
 [[nodiscard]]
 inline bool folderExists(const fo::fs::path& folderPath)
 {
@@ -1283,6 +1532,9 @@ inline bool folderExists(const fo::fs::path& folderPath)
     return false;
 }
 
+/// @brief Deletes a file by its td::String path.
+/// @param fileName Path of the file to delete.
+/// @return true if the file was successfully deleted, false on error.
 inline bool deleteFile(const td::String& fileName)
 {
     try
@@ -1305,6 +1557,9 @@ inline bool deleteFile(const td::String& fileName)
     return false;
 }
 
+/// @brief Deletes a file identified by an fs::path.
+/// @param fileNamePath Filesystem path of the file to delete.
+/// @return true if the file was successfully deleted, false on error.
 inline bool deleteFile(const fs::path& fileNamePath)
 {
     td::String str;
@@ -1312,6 +1567,9 @@ inline bool deleteFile(const fs::path& fileNamePath)
     return deleteFile(str);
 }
 
+/// @brief Creates a single directory at the given td::String path if it does not already exist.
+/// @param folderName Path of the directory to create.
+/// @return true if the directory was created or already existed, false on error.
 inline bool createFolder(const td::String& folderName)
 {
     if (!folderExists(folderName))
@@ -1337,6 +1595,9 @@ inline bool createFolder(const td::String& folderName)
     return true;
 }
 
+/// @brief Creates a single directory at the given C-string path if it does not already exist.
+/// @param folderNameCStr Null-terminated path of the directory to create.
+/// @return true if the directory was created or already existed, false on error.
 inline bool createFolder(const char* folderNameCStr)
 {
     if (!folderExists(folderNameCStr))
@@ -1363,6 +1624,9 @@ inline bool createFolder(const char* folderNameCStr)
     return true;
 }
 
+/// @brief Creates a single directory at the given fs::path if it does not already exist.
+/// @param path Filesystem path of the directory to create.
+/// @return true if the directory was created or already existed, false on error.
 inline bool createFolder(const fs::path& path)
 {
     td::String str;
@@ -1370,6 +1634,10 @@ inline bool createFolder(const fs::path& path)
     return createFolder(str);
 }
 
+/// @brief Creates a nested directory path relative to an existing root directory.
+/// @param pathRoot The existing root directory under which the new path is created.
+/// @param foldersToCreate Null-terminated relative sub-path to create.
+/// @return true if the directories were created successfully, false if pathRoot does not exist.
 inline bool createFolders(const fo::fs::path& pathRoot, const char* foldersToCreate)
 {
     if (!fo::fs::exists(pathRoot))
@@ -1378,6 +1646,9 @@ inline bool createFolders(const fo::fs::path& pathRoot, const char* foldersToCre
     return fo::fs::create_directories(toCreate);
 }
 
+/// @brief Creates all directories in the given path, including any missing intermediate directories.
+/// @param folders Filesystem path of the full directory tree to create.
+/// @return true if the directories exist or were created successfully.
 inline bool createFolders(const fo::fs::path& folders)
 {
     if (fo::fs::exists(folders))
@@ -1385,6 +1656,10 @@ inline bool createFolders(const fo::fs::path& folders)
     return fo::fs::create_directories(folders);
 }
 
+/// @brief Deletes a directory and optionally all of its contents recursively.
+/// @param folderPath Filesystem path of the directory to delete.
+/// @param deleteContent If true, deletes all files and sub-directories before removing the directory itself.
+/// @return true if the directory was successfully deleted, false on error.
 inline bool deleteFolder(const fs::path folderPath, bool deleteContent = true)
 {
     try
@@ -1427,14 +1702,25 @@ inline bool deleteFolder(const fs::path folderPath, bool deleteContent = true)
     return false;
 }
 
+/// @brief Deletes a directory and optionally all of its contents (td::String overload).
+/// @param folderName Path of the directory to delete.
+/// @param deleteContent If true, deletes all files and sub-directories before removing the directory itself.
+/// @return true if the directory was successfully deleted, false on error.
 inline bool deleteFolder(const td::String& folderName, bool deleteContent=true)
 {
     fs::path folderPath(folderName.c_str());
     return deleteFolder(folderPath, deleteContent);
 }
 
+/// @brief Deletes all files in a folder whose names start with a given prefix.
+/// @param folderPath Path of the folder to clean.
+/// @param fileNamesThatStartWith Null-terminated prefix; only files whose names start with this string are deleted.
 MAINUTILS_API void deleteFilesInFolder(const std::filesystem::path& folderPath, const char* fileNamesThatStartWith);
 
+/// @brief Joins a folder name and a file name into a single platform-preferred absolute path.
+/// @param folderName Null-terminated folder path.
+/// @param fileName Null-terminated file name.
+/// @param outFileName String that receives the combined path.
 inline void buildFileName(const char* folderName, const char* fileName, td::String& outFileName)
 {
     fs::path path1(folderName);
@@ -1443,6 +1729,10 @@ inline void buildFileName(const char* folderName, const char* fileName, td::Stri
     outFileName = path.string();
 }
 
+/// @brief Joins a td::String folder path and a td::String file name into a combined path.
+/// @param folderName The folder path.
+/// @param fileName The file name to append.
+/// @param outFileName String that receives the combined path.
 inline void buildFileName(const td::String& folderName, const td::String& fileName, td::String& outFileName)
 {
     fs::path path1(folderName.c_str());
@@ -1450,6 +1740,10 @@ inline void buildFileName(const td::String& folderName, const td::String& fileNa
     outFileName = path.string();
 }
 
+/// @brief Generates a unique temporary file name and writes it into a caller-supplied buffer.
+/// @param buff Pointer to the character buffer that receives the temporary file name.
+/// @param buffLen Size of the buffer in bytes.
+/// @return Pointer to buff on success, or nullptr if the name could not be generated or the buffer is too small.
 inline const char* getTmpFileName(char* buff, size_t buffLen)
 {
 #ifdef MU_WINDOWS
@@ -1473,6 +1767,8 @@ inline const char* getTmpFileName(char* buff, size_t buffLen)
     return buff;
 }
 
+/// @brief Generates a unique temporary file name and stores it in a td::String.
+/// @param outFileName String that receives the generated temporary file name.
 inline void getTmpFileName(td::String& outFileName)
 {
     char tmp[1024];
@@ -1480,12 +1776,18 @@ inline void getTmpFileName(td::String& outFileName)
 }
 
 
+/// @brief Extracts the directory component from a full file path.
+/// @param fullPathName The full file path to parse.
+/// @param outDirectory String that receives the directory portion of the path.
 inline void getDirectoryFromFullPath(const td::String& fullPathName, td::String& outDirectory)
 {
     fs::path filePath(fullPathName.c_str());
     outDirectory =filePath.parent_path().string();
 }
 
+/// @brief Extracts the file base name (stem) from a full file path, without the extension.
+/// @param fullPathName The full file path to parse.
+/// @param outBaseName String that receives the file name without its directory or extension.
 inline void getBaseNameFromFullPath(const td::String& fullPathName, td::String& outBaseName)
 {
     fs::path filePath(fullPathName.c_str());
@@ -1496,6 +1798,9 @@ inline void getBaseNameFromFullPath(const td::String& fullPathName, td::String& 
 #endif
 }
 
+/// @brief Extracts the file name (including extension) from a full file path.
+/// @param fullPathName The full file path to parse.
+/// @param outFileName String that receives the file name including its extension.
 inline void getFileNameFromFullPath(const td::String& fullPathName, td::String& outFileName)
 {
     fs::path filePath(fullPathName.c_str());
@@ -1503,6 +1808,13 @@ inline void getFileNameFromFullPath(const td::String& fullPathName, td::String& 
 }
 
 
+/// @brief Reads the entire contents of a binary file into a BufferString in chunks.
+/// @tparam TBYTES Character type of the buffer.
+/// @tparam INITSIZE Initial capacity of the BufferString.
+/// @tparam INCSIZE Growth increment of the BufferString.
+/// @param fileName Path of the binary file to read.
+/// @param buffer BufferString that receives the file content.
+/// @return true if the file was read successfully, false if it could not be opened.
 template <typename TBYTES, int INITSIZE, int INCSIZE>
 bool readBytesFromFile(const td::String& fileName, td::BufferString<TBYTES, INITSIZE, INCSIZE>& buffer)
 {
@@ -1513,7 +1825,7 @@ bool readBytesFromFile(const td::String& fileName, td::BufferString<TBYTES, INIT
     std::ifstream f;
     if (!openExistingBinaryFile(f, fileName))
         return false;
-    
+
     int bytesRead = (int) read(f, (char*) fileBuf, 1024);
     while (bytesRead > 0)
     {
@@ -1525,6 +1837,9 @@ bool readBytesFromFile(const td::String& fileName, td::BufferString<TBYTES, INIT
     return true;
 }
 
+/// @brief Returns the size of a file given its C-string path.
+/// @param fileName Null-terminated path of the file.
+/// @return File size in bytes, or 0 if the file does not exist.
 inline td::LUINT8 getFileSize(const char* fileName)
 {
     fs::path filePath(fileName);
@@ -1533,6 +1848,9 @@ inline td::LUINT8 getFileSize(const char* fileName)
     return 0;
 }
 
+/// @brief Returns the size of the file associated with an input stream.
+/// @param f The input stream to measure; the seek cursor is reset to the beginning on return.
+/// @return Total size of the file in bytes.
 inline td::LUINT8 getFileSize(std::istream& f)
 {
     f.seekg(0, std::ios_base::end);//seek to end
@@ -1543,6 +1861,9 @@ inline td::LUINT8 getFileSize(std::istream& f)
     return toRet;
 }
 
+/// @brief Returns the size of the file associated with an output stream.
+/// @param f The output stream to measure; the seek cursor is reset to the beginning on return.
+/// @return Total size of the file in bytes.
 inline td::LUINT8 getFileSize(std::ostream& f)
 {
     f.seekp(0, std::ios_base::end);//seek to end
@@ -1552,15 +1873,20 @@ inline td::LUINT8 getFileSize(std::ostream& f)
     return toRet;
 }
 
+/// @brief Collects all file paths in a folder whose extension matches the given string.
+/// @tparam TCONTAINER Container type that supports push_back with fs::path elements.
+/// @param outFileNames Container that receives matching file paths.
+/// @param folderPath Path of the folder to search.
+/// @param pExtension Optional file extension filter (e.g. ".txt"); pass null to collect all files.
 template <class TCONTAINER>
 void getFileNamesInFolder(TCONTAINER& outFileNames, const fo::fs::path& folderPath, const char* pExtension = 0)
 {
     if (!folderExists(folderPath))
         return;
-    
+
 //    fs::path dir_path(folderName.c_str());
     fs::directory_iterator end_it;
-    
+
     if (pExtension)
     {
         if (*pExtension == '*')
@@ -1592,6 +1918,11 @@ void getFileNamesInFolder(TCONTAINER& outFileNames, const fo::fs::path& folderPa
     }
 }
 
+/// @brief Collects all file paths in a folder (td::String overload) whose extension matches the given string.
+/// @tparam TCONTAINER Container type that supports push_back with td::String elements.
+/// @param outFileNames Container that receives matching file paths.
+/// @param folderName Path of the folder to search, as a td::String.
+/// @param pExtension Optional file extension filter; pass null to collect all files.
 template <class TCONTAINER>
 void getFileNamesInFolder(TCONTAINER& outFileNames, const td::String& folderName, const char* pExtension = 0)
 {
@@ -1599,11 +1930,14 @@ void getFileNamesInFolder(TCONTAINER& outFileNames, const td::String& folderName
     getFileNamesInFolder(outFileNames, folderPath, pExtension);
 }
 
+/// @brief Converts a DOS wildcard pattern (e.g. "*.txt") to an equivalent regular expression string.
+/// @param dosWildcard The DOS wildcard pattern to convert.
+/// @return A td::String containing the equivalent regex pattern.
 inline td::String convertDOSWildCardToRegex(const td::String& dosWildcard)
 {
     cnt::StringBuilderSmall strBuilder;
 
-    for (char ch : dosWildcard) 
+    for (char ch : dosWildcard)
     {
         switch (ch) {
             case '*':
@@ -1638,7 +1972,7 @@ inline td::String convertDOSWildCardToRegex(const td::String& dosWildcard)
 
 //inline void convertWildCardToRegex(const td::String& strWildCard, td::String& regexString)
 //{
-//    
+//
 //    sdfd
 //    td::String regexString2 = strWildCard.replace("*", "\\*");
 //    td::String regexString3 = regexString2.replace("?", "\\?");
@@ -1647,6 +1981,12 @@ inline td::String convertDOSWildCardToRegex(const td::String& dosWildcard)
 //    regexString = regexString4.replace("\\?", ".*");
 //}
 
+/// @brief Collects all file paths whose 4-character extension matches strExtension from a folder.
+/// @tparam TCONTAINER Container type that supports push_back with fs::path elements.
+/// @param vOut Container that receives matching file paths.
+/// @param folderPath Path of the folder to search.
+/// @param strExtension Null-terminated 4-character extension to match (e.g. ".txt").
+/// @param resetContent If true, resets vOut before adding results.
 template <class TCONTAINER>
 void getFilePathsInFolder(TCONTAINER& vOut, const fs::path& folderPath, const char* strExtension, bool resetContent = true)
 {
@@ -1675,7 +2015,7 @@ void getFilePathsInFolder(TCONTAINER& vOut, const fs::path& folderPath, const ch
         int nLen = strFileExt.length();
         if (nLen != 4)
             continue;
-        
+
         if (strFileExt.cCompareNoCase(strExtension) == 0)
         {
             vOut.push_back(i->path());
@@ -1683,6 +2023,12 @@ void getFilePathsInFolder(TCONTAINER& vOut, const fs::path& folderPath, const ch
     }
 }
 
+/// @brief Collects file names in a folder that match a DOS wildcard pattern.
+/// @tparam TCONTAINER Container type that supports push_back with td::String elements.
+/// @param outFileNames Container that receives matching file names (basename only, not full path).
+/// @param folderName Path of the folder to search.
+/// @param pWC Null-terminated DOS wildcard pattern (e.g. "*.log").
+/// @return true if the search completed without error, false if an exception occurred.
 template <class TCONTAINER>
 bool getFileNamesInFolderWildCard(TCONTAINER& outFileNames, const td::String& folderName, const char* pWC)
 {
@@ -1695,7 +2041,7 @@ bool getFileNamesInFolderWildCard(TCONTAINER& outFileNames, const td::String& fo
     std::regex my_filter(regexStr.c_str());
 #endif
 
-    try 
+    try
     {
         fs::directory_iterator end_itr; // Default ctor yields past-the-end
         for( fs::directory_iterator i( target_path ); i != end_itr; ++i )
@@ -1721,7 +2067,7 @@ bool getFileNamesInFolderWildCard(TCONTAINER& outFileNames, const td::String& fo
             td::String fn(str1);
             outFileNames.push_back(fn);
         }
-    } 
+    }
     catch (...)
     {
         return false;
@@ -1729,6 +2075,11 @@ bool getFileNamesInFolderWildCard(TCONTAINER& outFileNames, const td::String& fo
     return true;
 }
 
+/// @brief Reads an entire binary file into a td::String in a single operation.
+/// @tparam TSTR String type for the file name (td::String or compatible).
+/// @param fileName Path of the binary file to load.
+/// @param content String that receives the complete file content.
+/// @return true if the file was read successfully, false if it could not be opened.
 template<typename TSTR>
 inline bool loadBinaryFileAtOnce(const TSTR& fileName, td::String& content)
 {
@@ -1746,10 +2097,15 @@ inline bool loadBinaryFileAtOnce(const TSTR& fileName, td::String& content)
         pData[fileSize] = '\0';
         return true;
     }
-        
+
     return false;
 }
 
+/// @brief Reads an entire binary file into a string builder by appending 4 KiB chunks.
+/// @tparam TSTRBUILDER String builder type that exposes appendString(buf, len).
+/// @param fileName Path of the binary file to load.
+/// @param builder String builder that receives the file content.
+/// @return true if the file was read successfully, false if it could not be opened.
 template <class TSTRBUILDER>
 inline bool loadFile(const td::String& fileName, TSTRBUILDER& builder)
 {
@@ -1768,6 +2124,10 @@ inline bool loadFile(const td::String& fileName, TSTRBUILDER& builder)
 }
 
 
+/// @brief Reads the entire content of a binary file into a td::String.
+/// @param fileName Path of the binary file to load.
+/// @param content String that receives the complete file content.
+/// @return true if the file was read successfully, false if it could not be opened.
 inline bool loadFileContent(const td::String& fileName, td::String& content)
 {
     std::ifstream f;
@@ -1784,6 +2144,9 @@ inline bool loadFileContent(const td::String& fileName, td::String& content)
     return true;
 }
 
+/// @brief Reads the entire content of a binary file and returns it as a td::String.
+/// @param fileName Path of the binary file to load.
+/// @return td::String containing the file content, or an empty string on failure.
 inline td::String loadFileContent(const td::String& fileName)
 {
     td::String content;
@@ -1791,6 +2154,10 @@ inline td::String loadFileContent(const td::String& fileName)
     return content;
 }
 
+/// @brief Reads the entire content of a binary file into a td::MutableString.
+/// @param fileName Path of the binary file to load.
+/// @param content MutableString that receives the complete file content.
+/// @return true if the file was read successfully, false if it could not be opened.
 inline bool loadFileContent(const td::String& fileName, td::MutableString& content)
 {
     std::ifstream f;
@@ -1804,6 +2171,10 @@ inline bool loadFileContent(const td::String& fileName, td::MutableString& conte
 }
 
 
+/// @brief Reads the entire content of a binary file into a td::String (alias for loadFileContent).
+/// @param fileName Path of the binary file to load.
+/// @param content String that receives the complete file content.
+/// @return true if the file was read successfully, false if it could not be opened.
 inline bool loadBinaryFile(const td::String& fileName, td::String& content)
 {
     std::ifstream f;
@@ -1820,6 +2191,10 @@ inline bool loadBinaryFile(const td::String& fileName, td::String& content)
     return true;
 }
 
+/// @brief Reads the entire content of a binary file identified by an fs::path into a td::String.
+/// @param filePath Filesystem path of the binary file to load.
+/// @param content String that receives the complete file content.
+/// @return true if the file was read successfully, false if it could not be opened.
 inline bool loadBinaryFile(const fo::fs::path& filePath, td::String& content)
 {
     std::ifstream f;
@@ -1837,17 +2212,25 @@ inline bool loadBinaryFile(const fo::fs::path& filePath, td::String& content)
 
 
 
+/// @brief Reads the entire content of a binary file identified by a C-string path into a td::String.
+/// @param fileName Null-terminated path of the binary file to load.
+/// @param content String that receives the complete file content.
+/// @return true if the file was read successfully, false if it could not be opened.
 inline bool loadBinaryFile(const char* fileName, td::String& content)
 {
     td::String strFileName(fileName);
     return loadBinaryFile(strFileName, content);
 }
 
+/// @brief Reads the entire content of a binary file (std::string path) into a std::vector<char>.
+/// @param filename Path of the binary file to load.
+/// @param content Vector that receives the complete file content.
+/// @return true if the file was read successfully, false if it could not be opened.
 inline bool loadBinaryFile(const std::string& filename, std::vector<char>& content)
 {
     std::ifstream file(filename, std::ios::ate | std::ios::binary);
 
-    if (!file.is_open()) 
+    if (!file.is_open())
     {
         return false;
     }
@@ -1863,6 +2246,10 @@ inline bool loadBinaryFile(const std::string& filename, std::vector<char>& conte
     return true;
 }
 
+/// @brief Reads all data from an input stream into a td::String using an internal string builder.
+/// @tparam ISTREAM Input stream type.
+/// @param f The input stream to read from.
+/// @param content String that receives the complete stream content.
 template <class ISTREAM>
 inline void loadFromStream(ISTREAM& f, td::String& content)
 {
@@ -1876,6 +2263,9 @@ inline void loadFromStream(ISTREAM& f, td::String& content)
 
 
 
+/// @brief Creates a text file using the OS-level file API, allowing shared read access during writing.
+/// @param fileName Path of the file to create.
+/// @return OS-level file descriptor on success, or a negative value on error.
 inline int createTxtFileUsingOS(const td::String& fileName)
 {
 #ifdef MU_WINDOWS
@@ -1890,6 +2280,9 @@ inline int createTxtFileUsingOS(const td::String& fileName)
     return fd;
 }
 
+/// @brief Flushes all pending writes for an OS-level file descriptor to disk.
+/// @param fd The OS-level file descriptor to sync.
+/// @return 0 on success, or a non-zero error code on failure.
 inline int syncOSFile(int fd)
 {
     if (fd < 0)
@@ -1902,6 +2295,11 @@ inline int syncOSFile(int fd)
 #endif
 }
 
+/// @brief Writes len bytes from buffer to the OS-level file descriptor.
+/// @param fd The OS-level file descriptor to write to.
+/// @param buffer Pointer to the data to write.
+/// @param len Number of bytes to write.
+/// @return Number of bytes written, or 0 if fd is invalid.
 inline ssize_t writeToOSFile(int fd, const char* buffer, size_t len)
 {
     if (fd < 0)
@@ -1912,9 +2310,14 @@ inline ssize_t writeToOSFile(int fd, const char* buffer, size_t len)
 #else
     return ::write(fd, buffer, len);
 #endif
-    
+
 }
 
+/// @brief Writes a compile-time fixed-length C-string literal to the OS-level file descriptor.
+/// @tparam size Size of the character array (including null terminator).
+/// @param fd The OS-level file descriptor to write to.
+/// @param ctStrIn Reference to the character array to write; the null terminator is not written.
+/// @return Number of bytes written, or 0 if fd is invalid or size is zero.
 template <size_t size>
 inline ssize_t writeToOSFile(int fd, const char(&ctStrIn)[size])
 {
@@ -1931,6 +2334,11 @@ inline ssize_t writeToOSFile(int fd, const char(&ctStrIn)[size])
 #endif
 }
 
+/// @brief Writes the contents of a string object to the OS-level file descriptor.
+/// @tparam TSTR String type that exposes length() and c_str().
+/// @param fd The OS-level file descriptor to write to.
+/// @param str The string whose content is written.
+/// @return Number of bytes written, or 0 if fd is invalid or the string is empty.
 template <typename TSTR>
 inline ssize_t writeToOSFile(int fd, const TSTR& str)
 {
@@ -1948,6 +2356,9 @@ inline ssize_t writeToOSFile(int fd, const TSTR& str)
 #endif
 }
 
+/// @brief Closes an OS-level file descriptor.
+/// @param fd The OS-level file descriptor to close.
+/// @return 0 on success, or 0 if fd was already invalid.
 inline int closeOSFile(int fd)
 {
     if (fd < 0)
@@ -1957,9 +2368,11 @@ inline int closeOSFile(int fd)
 #else
     return ::close(fd);
 #endif
-    
+
 }
 
+/// @brief Resolves a relative path beginning with "./" or "../" against the current working directory.
+/// @param strPotentialRelativePath Input/output path string; replaced with the resolved absolute path if relative.
 inline void resolveRelativePath(td::String& strPotentialRelativePath)
 {
     if (strPotentialRelativePath.length() < 2)
@@ -1988,6 +2401,9 @@ inline void resolveRelativePath(td::String& strPotentialRelativePath)
     }
 }
 
+/// @brief Resolves a relative path beginning with "./" or "../" against a given root directory.
+/// @param rootPath The root directory used as the base for relative resolution.
+/// @param strPotentialRelativePath Input/output path string; replaced with the resolved absolute path if relative.
 inline void resolveRelativePath(const fs::path& rootPath, td::String& strPotentialRelativePath)
 {
     if (strPotentialRelativePath.length() < 2)
@@ -2016,6 +2432,12 @@ inline void resolveRelativePath(const fs::path& rootPath, td::String& strPotenti
     }
 }
 
+/// @brief Copies a file from srcFile to destFileOrFolder using the specified copy option.
+/// @tparam TSTR String type that exposes c_str().
+/// @param srcFile Path of the source file.
+/// @param destFileOrFolder Path of the destination file or folder.
+/// @param co The CopyOption controlling how an existing destination is handled.
+/// @return true if the copy succeeded, false on error.
 template <class TSTR>
 bool copyFile(const TSTR& srcFile, const TSTR& destFileOrFolder, fo::CopyOption co)
 {
@@ -2031,10 +2453,15 @@ bool copyFile(const TSTR& srcFile, const TSTR& destFileOrFolder, fo::CopyOption 
     }
     assert(false);
     return false;
-    
+
 }
 
 //copy content of inFolder (including subdirs) to outFolder
+/// @brief Recursively copies the entire content of inFolder (including subdirectories) into outFolder.
+/// @param inFolder Source directory path.
+/// @param outFolder Destination directory path; created if it does not exist.
+/// @param copyOption Filesystem copy option applied to each file (default: overwrite_existing).
+/// @return true if the copy completed successfully, false on error.
 inline bool copyFolder(const td::String& inFolder, const td::String& outFolder, fo::fs::copy_options copyOption = fo::fs::copy_options::overwrite_existing)
 {
     try
@@ -2048,7 +2475,7 @@ inline bool copyFolder(const td::String& inFolder, const td::String& outFolder, 
         if (!fo::fs::exists(output))
             if (!fo::fs::create_directories(output))
                 return false;
-     
+
 
         for (const auto& dir : fo::fs::recursive_directory_iterator(input))
         {
@@ -2073,28 +2500,33 @@ inline bool copyFolder(const td::String& inFolder, const td::String& outFolder, 
     {
         return false;
     }
-    
+
     return false;
 }
 
+/// @brief Recursively copies the entire content of inFolder (including subdirectories) into outFolder (fs::path overload).
+/// @param inFolder Source directory path.
+/// @param outFolder Destination directory path; created if it does not exist.
+/// @param copyOption Filesystem copy option applied to each file (default: overwrite_existing).
+/// @return true if the copy completed successfully, false on error.
 inline bool copyFolder(const fo::fs::path& inFolder, const fo::fs::path& outFolder, fo::fs::copy_options copyOption = fo::fs::copy_options::overwrite_existing)
 {
     try
     {
         if (!fo::fs::exists(inFolder))
             return false;
-        
+
         if (!fo::fs::exists(outFolder))
             if (!fo::fs::create_directories(outFolder))
                 return false;
-        
-        
+
+
         for (const auto& dir : fo::fs::recursive_directory_iterator(inFolder))
         {
             fo::fs::path destPath = outFolder / dir.path().lexically_relative(inFolder);
-            
+
             auto dirPath = dir.path();
-            
+
             if (fo::fs::is_regular_file(dirPath))
             {
                 if (!fo::fs::copy_file(dirPath, destPath, copyOption))
@@ -2106,7 +2538,7 @@ inline bool copyFolder(const fo::fs::path& inFolder, const fo::fs::path& outFold
                     if (!fo::fs::create_directories(destPath))
                         return false;
             }
-            
+
         }
         return true;
     }
@@ -2114,10 +2546,16 @@ inline bool copyFolder(const fo::fs::path& inFolder, const fo::fs::path& outFold
     {
         return false;
     }
-    
+
     return false;
 }
 
+/// @brief Recursively copies inFolder into outFolder, skipping any entries whose names appear in excludeNames.
+/// @param inFolder Source directory path.
+/// @param outFolder Destination directory path; created if it does not exist.
+/// @param excludeNames List of file or directory names (not full paths) to exclude from the copy.
+/// @param copyOption Filesystem copy option applied to each copied file (default: overwrite_existing).
+/// @return true if the copy completed without error, false on any failure.
 inline bool copyFolderExclude(
     const fo::fs::path& inFolder,
     const fo::fs::path& outFolder,
@@ -2172,6 +2610,10 @@ inline bool copyFolderExclude(
     }
 }
 
+/// @brief Extracts the file name without its extension from a full file path.
+/// @tparam TSTRING String type that exposes c_str().
+/// @param fullFileName The full file path including extension.
+/// @return A td::String containing only the file name stem (no directory, no extension).
 template <class TSTRING>
 td::String getFileNameWithoutExtension(const TSTRING& fullFileName)
 {
@@ -2182,6 +2624,12 @@ td::String getFileNameWithoutExtension(const TSTRING& fullFileName)
     return filenameWithoutExtension;
 }
 
+/// @brief Returns a copy of inputPath with its file extension replaced by newExtension.
+/// @tparam CheckIfOrigFilesExists If true, returns an empty path when the original file does not exist.
+/// @tparam CheckIfNewFileExists If true, returns an empty path when the new path does not exist.
+/// @param inputPath The original filesystem path.
+/// @param newExtension Null-terminated new extension (e.g. ".bak").
+/// @return The new path, or an empty path if an existence check fails.
 template <bool CheckIfOrigFilesExists, bool CheckIfNewFileExists = CheckIfOrigFilesExists>
 inline fs::path replaceFileExtension(const fs::path& inputPath, const char* newExtension)
 {
@@ -2204,6 +2652,12 @@ inline fs::path replaceFileExtension(const fs::path& inputPath, const char* newE
     return newPath;
 }
 
+/// @brief Returns a copy of inputFileName (td::String) with its extension replaced by newExtension.
+/// @tparam CheckIfOrigFilesExists If true, returns an empty string when the original file does not exist.
+/// @tparam CheckIfNewFileExists If true, returns an empty string when the new path does not exist.
+/// @param inputFileName The original file path string.
+/// @param newExtension Null-terminated new extension (e.g. ".bak").
+/// @return The new path as a td::String, or an empty string if an existence check fails.
 template <bool CheckIfOrigFilesExists, bool CheckIfNewFileExists = CheckIfOrigFilesExists>
 inline td::String replaceFileExtension(const td::String& inputFileName, const char* newExtension)
 {
@@ -2227,12 +2681,24 @@ inline td::String replaceFileExtension(const td::String& inputFileName, const ch
     return filePath.string();
 }
 
+/// @brief Returns a copy of inputPath with its extension replaced by newExtension (td::String extension overload).
+/// @tparam CheckIfOrigFilesExists If true, returns an empty path when the original file does not exist.
+/// @tparam CheckIfNewFileExists If true, returns an empty path when the new path does not exist.
+/// @param inputPath The original filesystem path.
+/// @param newExtension The new extension as a td::String.
+/// @return The new path, or an empty path if an existence check fails.
 template <bool CheckIfOrigFilesExists, bool CheckIfNewFileExists = CheckIfOrigFilesExists>
 inline fs::path replaceFileExtension(const fs::path& inputPath, const td::String& newExtension)
 {
     return replaceFileExtension<CheckIfOrigFilesExists, CheckIfNewFileExists>(inputPath, newExtension.c_str());
 }
 
+/// @brief Returns a copy of inputFileName with its extension replaced (both td::String overloads).
+/// @tparam CheckIfOrigFilesExists If true, returns an empty string when the original file does not exist.
+/// @tparam CheckIfNewFileExists If true, returns an empty string when the new path does not exist.
+/// @param inputFileName The original file path string.
+/// @param newExtension The new extension as a td::String.
+/// @return The new path as a td::String, or an empty string if an existence check fails.
 template <bool CheckIfOrigFilesExists, bool CheckIfNewFileExists = CheckIfOrigFilesExists>
 inline td::String replaceFileExtension(const td::String& inputFileName, const td::String& newExtension)
 {
@@ -2240,6 +2706,11 @@ inline td::String replaceFileExtension(const td::String& inputFileName, const td
 }
 
 
+/// @brief Creates a copy of filePath with the extension changed to newExtension, optionally in a different folder.
+/// @param filePath Path of the source file.
+/// @param newExtension Null-terminated new extension to apply (e.g. ".bak").
+/// @param newFolder Destination folder; if empty, uses the same folder as filePath.
+/// @return true if the copy was created successfully, false if the source is missing or a copy error occurred.
 inline bool makeCopyWithExtensionChange(const fs::path& filePath, const char* newExtension, const fs::path newFolder = {})
 {
     try
@@ -2270,7 +2741,7 @@ inline bool makeCopyWithExtensionChange(const fs::path& filePath, const char* ne
 
         return true;
     }
-    
+
     catch (const std::exception&)
     {
         return false;
@@ -2278,6 +2749,11 @@ inline bool makeCopyWithExtensionChange(const fs::path& filePath, const char* ne
 }
 
 
+/// @brief Tests whether a file path matches any pattern in the provided list of extension patterns.
+/// @tparam TSTRCONT Container of td::String elements holding patterns of the form "*.ext".
+/// @param filePath The file path whose name is tested.
+/// @param patterns Container of wildcard patterns (currently only "*.ext" suffix patterns are supported).
+/// @return true if the file name matches at least one pattern in the list.
 template <typename TSTRCONT>
 inline bool matchesPattern(const fs::path& filePath, const TSTRCONT& patterns)
 {
@@ -2298,6 +2774,13 @@ inline bool matchesPattern(const fs::path& filePath, const TSTRCONT& patterns)
     return false;
 }
 
+/// @brief Collects file paths in a directory that match a semicolon-separated list of extension patterns.
+/// @tparam TCONT Container type that supports push_back with fs::path elements.
+/// @param location Directory to search.
+/// @param strPattern Semicolon-separated list of patterns (e.g. "*.cpp;*.h").
+/// @param fileNames Container that receives all matching file paths.
+/// @param goToSubFolders If true, the search recurses into sub-directories.
+/// @return true if the search completed without error, false if location is invalid or an exception occurred.
 template <typename TCONT>
 inline bool collectFileNames(const fs::path& location, const td::String& strPattern, TCONT& fileNames, bool goToSubFolders)
 {
@@ -2310,7 +2793,7 @@ inline bool collectFileNames(const fs::path& location, const td::String& strPatt
         patterns.reserve(nSeparators+1);
         strPattern.split(';', patterns);
     }
-    
+
     try
     {
         if (!fs::exists(location) || !fs::is_directory(location))
@@ -2353,6 +2836,8 @@ inline bool collectFileNames(const fs::path& location, const td::String& strPatt
     }
 }
 
+/// @brief Replaces all forward slashes in a file name with backslashes (Windows-only no-op on other platforms).
+/// @param fileName Pointer to the null-terminated file name string to adjust in place.
 inline void adjustFileName(const char* fileName)
 {
 #ifdef MU_WINDOWS
@@ -2371,6 +2856,9 @@ inline void adjustFileName(const char* fileName)
 }
 
 
+/// @brief Computes the total size in bytes of all regular files under a directory tree.
+/// @param root Root directory path to traverse.
+/// @return Total byte count of all regular files found, or 0 if root does not exist.
 inline std::uintmax_t getFolderSize(const std::filesystem::path& root)
 {
     namespace fs = std::filesystem;
@@ -2394,6 +2882,9 @@ inline std::uintmax_t getFolderSize(const std::filesystem::path& root)
     return totalSize;
 }
 
+/// @brief Returns the parent directory path of a full file path (C-string overload).
+/// @param fullPath Null-terminated full file path.
+/// @return fs::path representing the parent directory.
 inline fs::path getFolderPath(const char* fullPath)
 {
     fs::path p(fullPath);
@@ -2401,34 +2892,51 @@ inline fs::path getFolderPath(const char* fullPath)
     return parent;
 }
 
+/// @brief Returns the parent directory path of a full file path (td::String overload).
+/// @param fullPath The full file path as a td::String.
+/// @return fs::path representing the parent directory.
 inline fs::path getFolderPath(const td::String& fullPath)
 {
     return getFolderPath(fullPath.c_str());
 }
 
+/// @brief Returns the parent directory path of a full file path (fs::path overload).
+/// @param fullPath The full file path as an fs::path.
+/// @return fs::path representing the parent directory.
 inline fs::path getFolderPath(const fs::path& fullPath)
 {
     fs::path parent = fullPath.parent_path();
     return parent;
 }
 
+/// @brief Extracts just the file name (including extension) from a full path (C-string overload).
+/// @param fullFath Null-terminated full file path.
+/// @return A td::String containing only the file name component.
 inline td::String getFilename(const char* fullFath)
 {
     fs::path p(fullFath);
     return p.filename().c_str();
 }
 
+/// @brief Extracts just the file name (including extension) from a full path (td::String overload).
+/// @param fullFath The full file path as a td::String.
+/// @return A td::String containing only the file name component.
 inline td::String getFilename(const td::String& fullFath)
 {
     fs::path p(fullFath.c_str());
     return p.filename().c_str();
 }
 
+/// @brief Extracts just the file name (including extension) from a full path (fs::path overload).
+/// @param fullFath The full file path as an fs::path.
+/// @return A td::String containing only the file name component.
 inline td::String getFilename(const fs::path& fullFath)
 {
     return fullFath.filename().c_str();
 }
 
+/// @brief Returns the default shared-library file extension for the current platform.
+/// @return ".dll" on Windows, ".dylib" on macOS, or ".so" on other platforms.
 constexpr const char* getSharedLibDefaultExtension()
 {
 #ifdef MU_WINDOWS

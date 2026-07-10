@@ -7,7 +7,9 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
-// DebugConsole.h
+/** @file DebugConsole.h
+    @brief Cross-platform debug console manager that opens a console window,
+           tees standard output to a log file, and provides coloured log helpers. */
 #pragma once
 #include <mu/mu.h>
 #include <iostream>
@@ -38,19 +40,20 @@ namespace mu
 {
 
 
- // @class DualStreamBuffer
- // @brief Stream buffer that outputs to multiple destinations
-
+/// @brief Stream buffer that outputs to both the original standard output and a log file simultaneously.
 class DualStreamBuffer : public std::streambuf
 {
 private:
-    std::streambuf* _originalBuffer;
-    std::ofstream _logFile;
-    std::string _logPath;
-    std::mutex _mutex;
-    bool _skipOriginalBuffer;
-    
+    std::streambuf* _originalBuffer; ///< Saved pointer to the original std::cout rdbuf.
+    std::ofstream _logFile;          ///< Output file stream for the log file.
+    std::string _logPath;            ///< Filesystem path of the log file.
+    std::mutex _mutex;               ///< Mutex serialising concurrent writes.
+    bool _skipOriginalBuffer;        ///< When true, output is sent only to the log file and not to the original buffer.
+
 public:
+    /// @brief Constructs the buffer, opens the log file, and saves the original stdout buffer.
+    /// @param logPath            Path of the log file to create or append to.
+    /// @param skipOriginalBuffer When true, bytes are not forwarded to the original stdout buffer.
     DualStreamBuffer(const std::string& logPath, bool skipOriginalBuffer = false)
         : _logPath(logPath), _skipOriginalBuffer(skipOriginalBuffer)
     {
@@ -63,13 +66,15 @@ public:
         _originalBuffer = std::cout.rdbuf();
     }
     
+    /// @brief Destructor. Flushes and closes the log file.
     ~DualStreamBuffer()
     {
         std::lock_guard<std::mutex> lock(_mutex);
         if (_logFile.is_open())
             _logFile.close();
     }
-    
+
+    /// @brief Redirects std::cout, std::cerr and std::clog to this buffer.
     void attach()
     {
         // Set this as the new buffer for all standard streams
@@ -77,7 +82,8 @@ public:
         std::cerr.rdbuf(this);
         std::clog.rdbuf(this);
     }
-    
+
+    /// @brief Restores std::cout, std::cerr and std::clog to the original buffer.
     void detach()
     {
         // Restore original buffers
@@ -85,9 +91,11 @@ public:
         std::cerr.rdbuf(_originalBuffer);
         std::clog.rdbuf(_originalBuffer);
     }
-    
+
 protected:
-    // Handle character output
+    /// @brief Called by the stream when the put-area is full; writes one character to both sinks.
+    /// @param c The character to write (may be EOF to flush).
+    /// @return The character written, or EOF on failure.
     int overflow(int c) override
     {
         std::lock_guard<std::mutex> lock(_mutex);
@@ -105,7 +113,8 @@ protected:
         return c;
     }
     
-    // Handle buffer sync
+    /// @brief Flushes both the original buffer and the log file.
+    /// @return 0 on success, -1 on failure.
     int sync() override
     {
         std::lock_guard<std::mutex> lock(_mutex);
@@ -119,7 +128,10 @@ protected:
         return 0;
     }
     
-    // Handle string output
+    /// @brief Writes a block of characters to both the original buffer and the log file.
+    /// @param s Pointer to the character data.
+    /// @param n Number of characters to write.
+    /// @return Number of characters written.
     std::streamsize xsputn(const char* s, std::streamsize n) override
     {
         std::lock_guard<std::mutex> lock(_mutex);
@@ -139,29 +151,27 @@ protected:
 };
 
 
-// @class DebugConsole
-// @brief Cross-platform console manager for GUI applications
- 
+/// @brief Cross-platform debug console manager that opens a console window and redirects standard output to a log file.
 class DebugConsole
 {
-    bool _initialized = false;
-    bool _usingRAMDisk = false;
-    bool _enableConsoleWindow = true;
-    bool _runningFromIDE = false;
-    std::string _appName;
-    std::string _title;
-    std::string _logPath;
-    std::unique_ptr<DualStreamBuffer> _streamBuffer;
-    
+    bool _initialized = false;          ///< True once the console was successfully set up.
+    bool _usingRAMDisk = false;         ///< True when the log file was placed on a RAM disk.
+    bool _enableConsoleWindow = true;   ///< Whether to open a dedicated console window.
+    bool _runningFromIDE = false;       ///< True when the process is detected to run inside an IDE.
+    std::string _appName;               ///< Application name used for the window title and log file name.
+    std::string _title;                 ///< Full console window title string.
+    std::string _logPath;               ///< Resolved filesystem path of the log file.
+    std::unique_ptr<DualStreamBuffer> _streamBuffer; ///< Dual-sink stream buffer that tees output to the log file.
+
 #ifdef MU_WINDOWS
-    HWND _consoleWindow = nullptr;
-    FILE* _stdoutFile = nullptr;
-    FILE* _stderrFile = nullptr;
-    FILE* _stdinFile = nullptr;
+    HWND _consoleWindow = nullptr; ///< Handle to the allocated console window (Windows only).
+    FILE* _stdoutFile = nullptr;   ///< Reopened stdout FILE* (Windows only).
+    FILE* _stderrFile = nullptr;   ///< Reopened stderr FILE* (Windows only).
+    FILE* _stdinFile  = nullptr;   ///< Reopened stdin FILE* (Windows only).
 #else
-    int _originalStdout = -1;
-    int _originalStderr = -1;
-    pid_t _terminalPid = -1;
+    int    _originalStdout = -1;  ///< Saved file descriptor for stdout (POSIX only).
+    int    _originalStderr = -1;  ///< Saved file descriptor for stderr (POSIX only).
+    pid_t  _terminalPid    = -1;  ///< PID of the spawned terminal process (POSIX only).
 #endif
     
 private:
@@ -201,10 +211,9 @@ private:
 #endif
 public:
     
-    // @brief Constructor - creates console if MU_DEBUG is defined
-    // @param appName Application name for console title/log file
-    // @param enableConsoleWindow true to open a separate console window
-     
+    /// @brief Constructs and (when MU_DEBUG is defined) initialises the debug console.
+    /// @param appName             Application name used for the window title and log-file base name.
+    /// @param enableConsoleWindow When true a dedicated console window is opened; false uses logging only.
     explicit DebugConsole(const std::string& appName = "App", bool enableConsoleWindow = true)
     {
 #ifdef MU_DEBUG
@@ -242,6 +251,7 @@ public:
 #endif
     }
     
+    /// @brief Destructor. Prints a farewell message, detaches the stream buffer, and releases the console.
     ~DebugConsole()
     {
 #ifdef MU_DEBUG
@@ -270,24 +280,20 @@ public:
     DebugConsole(const DebugConsole&) = delete;
     DebugConsole& operator=(const DebugConsole&) = delete;
     
-    //
-    // @brief Check if console was successfully initialized
-    //
+    /// @brief Returns true when the console was successfully initialised.
+    /// @return True if initialisation succeeded.
     bool isInitialized() const { return _initialized; }
-    
-    //
-    // @brief Get log file path
-    //
+
+    /// @brief Returns the filesystem path of the log file.
+    /// @return Constant reference to the log-file path string.
     const std::string& getLogPath() const { return _logPath; }
-    
-    //
-    // @brief Check if using RAMDisk
-    //
+
+    /// @brief Returns true when the log file resides on a RAM disk.
+    /// @return True if a RAM disk location was found and used.
     bool isUsingRAMDisk() const { return _usingRAMDisk; }
-    
-    //
-    // @brief Platform-specific console show/hide
-    //
+
+    /// @brief Shows or hides the console window (Windows only; no-op on other platforms).
+    /// @param show True to show the window, false to hide it.
     void showConsole(bool show) {
 #ifdef MU_DEBUG
 #ifdef MU_WINDOWS
@@ -299,9 +305,7 @@ public:
 #endif
     }
     
-    //
-    // @brief Clear console screen
-    //
+    /// @brief Clears the console screen (MU_DEBUG builds only).
     void clearConsole()
     {
 #ifdef MU_DEBUG
@@ -313,9 +317,10 @@ public:
 #endif
     }
     
-    //
-    // @brief Write colored output (ANSI codes)
-    //
+    /// @brief Writes a message to std::cout with an optional ANSI colour code.
+    /// @tparam T        Type of the message value (must be streamable).
+    /// @param msg       The message to print.
+    /// @param colorCode ANSI colour escape code string (e.g. "31" for red), or nullptr for default colour.
     template<typename T>
     void writeColored(const T& msg, const char* colorCode = nullptr) // Default txt color
     {
@@ -328,18 +333,29 @@ public:
 #endif
     }
     
-    //
-    // @brief Convenience methods for colored output
-    //
+    /// @brief Writes an informational message in cyan.
+    /// @tparam T Type of the message value.
+    /// @param msg The message to print.
     template<typename T> void writeInfo(const T& msg) { writeColored(msg, "36"); } // Cyan
+    /// @brief Writes a success message in green.
+    /// @tparam T Type of the message value.
+    /// @param msg The message to print.
     template<typename T> void writeSuccess(const T& msg) { writeColored(msg, "32"); } // Green
+    /// @brief Writes a warning message in yellow.
+    /// @tparam T Type of the message value.
+    /// @param msg The message to print.
     template<typename T> void writeWarning(const T& msg) { writeColored(msg, "33"); } // Yellow
+    /// @brief Writes an error message in red.
+    /// @tparam T Type of the message value.
+    /// @param msg The message to print.
     template<typename T> void writeError(const T& msg) { writeColored(msg, "31"); } // Red
     
 private:
     
     // ==================== Log Path Determination ====================
-    
+
+    /// @brief Determines the best available log-file path, preferring RAM-disk locations.
+    /// @return Absolute or relative path string for the log file.
     std::string determineLogPath()
     {
         std::string fileName = sanitizeFileName(_appName) + ".log";
@@ -400,6 +416,9 @@ private:
 #endif
     }
     
+    /// @brief Tests whether the given directory path is writable by creating and deleting a temporary file.
+    /// @param path Directory path to test (must end with a path separator).
+    /// @return True if the directory exists and a file could be created in it.
     bool testWriteAccess(const std::string& path)
     {
         // Check if directory exists and is writable
@@ -446,6 +465,9 @@ private:
 #endif
     }
     
+    /// @brief Converts an arbitrary application name into a filesystem-safe filename stem.
+    /// @param name Input name string (may contain spaces, dots, or other special characters).
+    /// @return A sanitised string containing only alphanumerics, underscores, and hyphens.
     std::string sanitizeFileName(const std::string& name)
     {
         std::string sanitized;
@@ -461,7 +483,9 @@ private:
     }
     
     // ==================== Platform-Specific Console Initialization ====================
-    
+
+    /// @brief Dispatches to the platform-specific console initialisation routine.
+    /// @return True if initialisation succeeded (or MU_DEBUG is not defined).
     bool initializeConsole()
     {
 #ifdef MU_DEBUG
@@ -477,6 +501,8 @@ private:
 #endif
     }
     
+    /// @brief Allocates a Windows console, sets UTF-8 encoding, and redirects standard I/O.
+    /// @return True on success, false if the console could not be created or redirected.
     bool initializeWindowsConsole()
     {
 #ifdef MU_WINDOWS
@@ -563,6 +589,8 @@ private:
         return false;
     }
     
+    /// @brief Opens a macOS Terminal window that tails the log file and detects IDE execution.
+    /// @return True on success or when running in a real terminal, false if the log file could not be created.
     bool initializeMacConsole()
     {
 #ifdef MU_MACOS
@@ -631,6 +659,8 @@ private:
         return false;
     }
     
+    /// @brief Opens a Linux terminal emulator that tails the log file and detects IDE execution.
+    /// @return True on success, false if no terminal could be found or the log file could not be created.
     bool initializeLinuxConsole()
     {
 #ifndef MU_WINDOWS
@@ -752,6 +782,7 @@ private:
     }
     
     // ==================== Cleanup ====================
+    /// @brief Releases platform-specific console resources and restores the original I/O streams.
     void cleanupConsole()
     {
 #ifdef MU_DEBUG
@@ -794,45 +825,56 @@ private:
     }
 };
 
-//
-// @class GlobalConsoleManager
-// @brief Singleton manager for global console access
-//
+/// @brief Singleton manager providing global access to a shared DebugConsole instance and convenience logging methods.
 class GlobalConsoleManager
 {
 public:
+    /// @brief Creates (on first call) or returns the shared DebugConsole instance.
+    /// @param appName       Application name forwarded to DebugConsole on first call.
+    /// @param enableConsole Whether to open a console window on first call.
+    /// @return Reference to the singleton DebugConsole.
     static DebugConsole& initialize(const std::string& appName = "App", bool enableConsole = true)
     {
         static DebugConsole instance(appName, enableConsole);
         return instance;
     }
     
+    /// @brief Returns the singleton DebugConsole, initialising it with default parameters if needed.
+    /// @return Reference to the singleton DebugConsole.
     static DebugConsole& getInstance()
     {
         return initialize();
     }
-    
+
+    /// @brief Prints a plain informational log message prefixed with "[LOG]".
+    /// @param message The message text to log.
     static void log(const std::string& message)
     {
 #ifdef MU_DEBUG
         std::cout << "[LOG] " << message << std::endl;
 #endif
     }
-    
+
+    /// @brief Prints an error message in red, prefixed with "[ERROR]".
+    /// @param message The error message text to log.
     static void logError(const std::string& message)
     {
 #ifdef MU_DEBUG
         getInstance().writeError("[ERROR] " + message + "\n");
 #endif
     }
-    
+
+    /// @brief Prints a warning message in yellow, prefixed with "[WARNING]".
+    /// @param message The warning message text to log.
     static void logWarning(const std::string& message)
     {
 #ifdef MU_DEBUG
         getInstance().writeWarning("[WARNING] " + message + "\n");
 #endif
     }
-    
+
+    /// @brief Prints a success message in green, prefixed with "[OK]".
+    /// @param message The success message text to log.
     static void logSuccess(const std::string& message)
     {
 #ifdef MU_DEBUG

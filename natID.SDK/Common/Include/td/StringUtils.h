@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file StringUtils.h
+    @brief Provides free-function string and character utilities for searching, trimming, and encoding. */
 #pragma once
 #include <td/Types.h>
 #include <tuple>
@@ -14,6 +16,10 @@
 namespace td
 {
 
+/// @brief Advances a pointer past leading white-space characters.
+/// @tparam CH Character type.
+/// @param pBuff Pointer to the start of the character sequence.
+/// @return Pointer to the first non-white-space character, or nullptr if the string is all white-space.
 template <typename CH>
 inline const CH* findFirstNonWhiteSpace(const CH* pBuff)
 {
@@ -31,6 +37,10 @@ inline const CH* findFirstNonWhiteSpace(const CH* pBuff)
     return nullptr;
 }
 
+/// @brief Returns a pointer to the first white-space character in a string.
+/// @tparam CH Character type.
+/// @param pBuff Pointer to the start of the character sequence.
+/// @return Pointer to the first white-space character, or nullptr if none is found.
 template <typename CH>
 inline const CH* findFirstWhiteSpace(const CH* pBuff)
 {
@@ -45,6 +55,12 @@ inline const CH* findFirstWhiteSpace(const CH* pBuff)
     return nullptr;
 }
 
+/// @brief Searches for the first occurrence of a character starting at a given position.
+/// @tparam CH Character type.
+/// @param pBuff Pointer to the beginning of the character sequence.
+/// @param chToFind The character to search for.
+/// @param fromPosition Zero-based position at which to begin searching.
+/// @return Pointer to the first occurrence of chToFind, or nullptr if not found.
 template <typename CH>
 inline const CH* findChar(const CH* pBuff, CH chToFind, size_t fromPosition)
 {
@@ -54,13 +70,18 @@ inline const CH* findChar(const CH* pBuff, CH chToFind, size_t fromPosition)
     {
         if (ch == chToFind)
             return pBuff;
-        
+
         ++pBuff;
         ch = *pBuff;
     }
     return nullptr;
 }
 
+/// @brief Searches for the first occurrence of a character from the beginning of a sequence.
+/// @tparam CH Character type.
+/// @param pBuff Pointer to the start of the character sequence.
+/// @param chToFind The character to search for.
+/// @return Pointer to the first occurrence of chToFind, or nullptr if not found.
 template <typename CH>
 inline const CH* findChar(const CH* pBuff, CH chToFind)
 {
@@ -69,13 +90,17 @@ inline const CH* findChar(const CH* pBuff, CH chToFind)
     {
         if (ch == chToFind)
             return pBuff;
-        
+
         ++pBuff;
         ch = *pBuff;
     }
     return nullptr;
 }
 
+/// @brief Advances a pointer past leading horizontal white-space characters (space and tab).
+/// @tparam CH Character type.
+/// @param pStr Pointer to the start of the character sequence.
+/// @return Pointer to the first non-horizontal-space character, or the null terminator if none.
 template <typename CH>
 inline const CH* skipHorizontalWhiteSpaces(const CH* pStr)
 {
@@ -84,13 +109,18 @@ inline const CH* skipHorizontalWhiteSpaces(const CH* pStr)
     {
         if (!td::isHorizontalSpace(ch))
             return pStr;
-        
+
         ++pStr;
         ch = *pStr;
     }
     return pStr;
 }
 
+/// @brief Searches for the first occurrence of a character or any white-space character.
+/// @tparam CH Character type.
+/// @param pBuff Pointer to the start of the character sequence.
+/// @param chToFind The target character.
+/// @return Pointer to the first occurrence of chToFind or a white-space character, or nullptr if neither is found.
 template <typename CH>
 inline const CH* findCharOrWhiteSpace(const CH* pBuff, CH chToFind)
 {
@@ -101,16 +131,22 @@ inline const CH* findCharOrWhiteSpace(const CH* pBuff, CH chToFind)
         {
             return pBuff;
         }
-        
+
         if (td::isWhiteSpace(ch))
             return pBuff;
-        
+
         ++pBuff;
         ch = *pBuff;
     }
     return nullptr;
 }
 
+/// @brief Scans for a target character while tracking the last non-white-space position seen.
+/// @tparam CH Character type.
+/// @param pBuff Pointer to the start of the character sequence.
+/// @param chToFind The target character.
+/// @param pLastNonWhiteSpace Output pointer set to the last non-white-space character before chToFind.
+/// @return Pointer to the first occurrence of chToFind, or nullptr if not found.
 template <typename CH>
 inline const CH* findLastNonWhiteSpace(const CH* pBuff, CH chToFind, const CH*& pLastNonWhiteSpace)
 {
@@ -122,16 +158,21 @@ inline const CH* findLastNonWhiteSpace(const CH* pBuff, CH chToFind, const CH*& 
         {
             return pBuff;
         }
-        
+
         if (!td::isWhiteSpace(ch))
             pLastNonWhiteSpace = pBuff;
-        
+
         ++pBuff;
         ch = *pBuff;
     }
     return nullptr;
 }
 
+/// @brief Counts the occurrences of a specific character in a null-terminated string.
+/// @tparam CH Character type.
+/// @param pStr Pointer to the null-terminated string.
+/// @param chToCount The character to count.
+/// @return The number of times chToCount appears in the string.
 template <typename CH>
 inline size_t getCount(const CH* pStr, CH chToCount)
 {
@@ -150,6 +191,9 @@ inline size_t getCount(const CH* pStr, CH chToCount)
 }
 
 
+/// @brief Returns the length of a null-terminated UTF-32 string.
+/// @param pStr Pointer to the UTF-32 string.
+/// @return Number of code points before the null terminator.
 inline size_t strLen(const td::UTF32* pStr)
 {
     size_t len = 0;
@@ -162,6 +206,11 @@ inline size_t strLen(const td::UTF32* pStr)
 }
 
 // Function to find the first occurrence of a pattern in a string
+/// @brief Searches for the first occurrence of a sub-pattern in a string.
+/// @tparam CH Character type.
+/// @param str Pointer to the haystack string.
+/// @param pattern Pointer to the pattern (needle) string.
+/// @return Zero-based index of the first match, or -1 if the pattern is not found.
 template <typename CH>
 inline int findPattern(const CH* str, const CH* pattern)
 {
@@ -170,7 +219,7 @@ inline int findPattern(const CH* str, const CH* pattern)
     size_t pattern_len = strlen(pattern);
 
     // Edge case: if the pattern is longer than the string, return -1
-    if (pattern_len > str_len) 
+    if (pattern_len > str_len)
     {
         return -1;
     }
@@ -179,7 +228,7 @@ inline int findPattern(const CH* str, const CH* pattern)
     for (size_t i = 0; i <= str_len - pattern_len; i++)
     {
         // Check if the substring from i to i + pattern_len matches the pattern
-        if (strncmp(&str[i], pattern, pattern_len) == 0) 
+        if (strncmp(&str[i], pattern, pattern_len) == 0)
         {
             return (int)i; // Return the position where the pattern starts
         }
@@ -189,6 +238,11 @@ inline int findPattern(const CH* str, const CH* pattern)
     return -1;
 }
 
+/// @brief Tests whether a string begins with a given pattern.
+/// @tparam CH Character type.
+/// @param str Pointer to the string to test.
+/// @param pattern Pointer to the pattern to match at the start.
+/// @return true if str starts with pattern; false otherwise.
 template <typename CH>
 inline bool beginsWith(const CH* str, const CH* pattern)
 {
@@ -197,7 +251,7 @@ inline bool beginsWith(const CH* str, const CH* pattern)
     size_t pattern_len = strlen(pattern);
 
     // Edge case: if the pattern is longer than the string, return -1
-    if (pattern_len > str_len) 
+    if (pattern_len > str_len)
     {
         return false;
     }
@@ -213,6 +267,9 @@ inline bool beginsWith(const CH* str, const CH* pattern)
 }
 
 
+/// @brief Tests whether a byte is a UTF-8 continuation byte (top bits are 10).
+/// @param byte The byte to test.
+/// @return true if the byte is a UTF-8 continuation byte.
 inline bool isUTF8ContinuationByte(unsigned char byte)
 {
     return ((byte & 0xC0) == 0x80); // Top 2 bits are 10
@@ -220,94 +277,11 @@ inline bool isUTF8ContinuationByte(unsigned char byte)
 
 ///returns len in bytes, and glyphLen
 //inline std::tuple<td::UINT4, td::UINT4> getLenUTF8(const char* pStr)
-//{
-//    if (!pStr)
-//        return {0,0};
-//    const unsigned char* pUTF8 = (const unsigned char*) pStr;
-//    td::UINT4 len =0;
-//    td::UINT4 glyphLen = 0;
-//    
-//    while (*pUTF8 != 0)
-//    {
-//        unsigned char ch = *pUTF8;
-//        
-//        if (ch < 0x7F)
-//        {
-//            ++len;
-//            ++glyphLen;
-//            ++pUTF8;
-//            continue;
-//        }
-//        if ((ch & 0xE0) == 0xC0)    //2-byte UTF8 character
-//        {
-//            ++pUTF8;
-//            ch = *pUTF8;
-//            if (!isUTF8ContinuationByte(ch))
-//            {
-//                assert(false); //not utf8
-//                return {0,0};
-//            }
-//            len += 2;
-//            ++glyphLen;
-//            ++pUTF8;
-//        }
-//        else if ((ch & 0xF0) == 0xE0)    // 3-byte character
-//        {
-//            ++pUTF8;
-//            ch = *pUTF8;
-//            if (!isUTF8ContinuationByte(ch))
-//            {
-//                assert(false); //not utf8
-//                return {0,0};
-//            }
-//            ++pUTF8;
-//            ch = *pUTF8;
-//            if (!isUTF8ContinuationByte(ch))
-//            {
-//                assert(false); //not utf8
-//                return {0,0};
-//            }
-//            len += 3;
-//            ++glyphLen;
-//            ++pUTF8;
-//        }
-//        else if ((ch & 0xF8) == 0xF0)    // 4-byte character
-//        {
-//            ++pUTF8;
-//            ch = *pUTF8;
-//            if (!isUTF8ContinuationByte(ch))
-//            {
-//                assert(false); //not utf8
-//                return {0,0};
-//            }
-//            ++pUTF8;
-//            ch = *pUTF8;
-//            if (!isUTF8ContinuationByte(ch))
-//            {
-//                assert(false); //not utf8
-//                return {0,0};
-//            }
-//            ++pUTF8;
-//            ch = *pUTF8;
-//            if (!isUTF8ContinuationByte(ch))
-//            {
-//                assert(false); //not utf8
-//                return {0,0};
-//            }
-//            len += 4;
-//            ++glyphLen;
-//            ++pUTF8;
-//        }
-//        else
-//        {
-//            assert(false); //not utf8
-//            return {0,0};
-//        }
-//    }
-//    return {len, glyphLen};
-//}
+//...
 
-/// Returns length in bytes and glyph length (number of visible characters)
+/// @brief Returns the byte length and glyph (visible character) count of a UTF-8 string.
+/// @param pStr Pointer to the UTF-8 encoded null-terminated string.
+/// @return A tuple of (byte length, glyph count); both are 0 on invalid input.
 inline std::tuple<unsigned int, unsigned int> getLenUTF8(const char* pStr)
 {
     if (!pStr)
@@ -371,6 +345,10 @@ inline std::tuple<unsigned int, unsigned int> getLenUTF8(const char* pStr)
     return {len, glyphLen};
 }
 
+/// @brief Encodes a single Unicode code point into a UTF-8 byte sequence.
+/// @param ch The Unicode code point to encode.
+/// @param utf Output buffer of at least 4 bytes that receives the UTF-8 bytes.
+/// @return Number of bytes written (1–4), or 0 for an invalid code point.
 inline int toUTF8(td::UTF32 ch, td::UTF8 utf[4]) {
     if (ch < 0x80) {  // 1-byte UTF-8
         utf[0] = (unsigned char) ch;

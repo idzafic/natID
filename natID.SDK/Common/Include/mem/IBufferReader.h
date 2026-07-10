@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file IBufferReader.h
+    @brief Abstract interface for sequential chunk-based buffer reading. */
 //
 //  Buffer.h
 //
@@ -20,9 +22,13 @@
 
 namespace mem
 {
+/// @brief Abstract base class for objects that expose buffer data as a sequence of raw memory chunks.
 class IBufferReader
 {
 public:
+    /// @brief Returns the next available chunk of data.
+    /// @return Tuple of (pointer to the chunk data, number of valid bytes in the chunk).
+    ///         Returns (nullptr, 0) when no more data is available.
     virtual std::tuple<char*, td::UINT4> getDataChunk() = 0;
 };
 

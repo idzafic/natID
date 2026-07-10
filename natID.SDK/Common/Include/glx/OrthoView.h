@@ -7,6 +7,7 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file OrthoView.h @brief Base class for a glx::View rendered with an orthographic (2-D) projection. */
 //
 //  Created by Izudin Dzafic on 28/07/2020.
 //  Copyright © 2020 IDz. All rights reserved.
@@ -19,11 +20,15 @@
 namespace glx
 {
 
+/// @brief A View subclass that sets up an orthographic projection suitable for 2-D rendering.
+///        Subclasses implement their drawing logic through the IRenderer interface while
+///        inheriting automatic projection-matrix management from this base.
 class NATGL_API OrthoView : public glx::View
 {
     OrthoView(const OrthoView&) = delete;
     OrthoView& operator =(const OrthoView&) = delete;
 protected:
+    /// @brief Constructs an OrthoView with default settings and an identity projection.
     OrthoView();
 //    void setZoom(double zoom);
 //    double getZoom() const;

@@ -3,6 +3,8 @@
 #include <td/StringConverter.h>
 #include <gui/WinMain.h>
 
+#define ENABLE_CONSOLE2
+
 #if defined(MU_WINDOWS) && defined(ENABLE_CONSOLE)
 #include <windows.h>
 #include <io.h>
@@ -11,8 +13,6 @@
 #endif
 
 #include <mu/DebugConsoleLog.h>
-
-#define ENABLE_CONSOLE
 
 int main(int argc, const char * argv[])
 {

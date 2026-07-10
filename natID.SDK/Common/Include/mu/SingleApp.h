@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file SingleApp.h
+    @brief Provides a single-instance application guard using Boost interprocess shared memory. */
 #pragma once
 #include <boost/interprocess/shared_memory_object.hpp>
 #include <boost/interprocess/mapped_region.hpp>
@@ -29,48 +31,53 @@
 
 namespace mu
 {
-	//using namespace boost::interprocess;	
+	//using namespace boost::interprocess;
+	/// @brief Enforces single-instance execution of an application using Boost interprocess shared memory.
 	class SingleApp
 	{
+		/// @brief Shared memory data block exchanged between application instances.
 		struct shmData
 		{
 
+			/// @brief Initializes the shared memory data with default values.
 			shmData()
 				: close(false)
 				, msg_in(false)
 			{}
 
 			//Mutex to protect access to the queue
-			boost::interprocess::interprocess_mutex      mutex;
+			boost::interprocess::interprocess_mutex      mutex; ///< Mutex protecting access to shared data.
 			//boost::mutex mutex;
 
 			//Condition to wait when the queue is empty
-			boost::interprocess::interprocess_condition  cond_resp;
+			boost::interprocess::interprocess_condition  cond_resp; ///< Condition variable signalled by the running instance in response.
 			//boost::condition  cond_resp;
 
 			//Condition to wait when the queue is full
-			boost::interprocess::interprocess_condition  cond_call;
+			boost::interprocess::interprocess_condition  cond_call; ///< Condition variable signalled by the new instance to call the running one.
 			//boost::condition  cond_call;
 
 			//Items to fill
 			//char   items[LineSize];
-			td::DateTime dt;
+			td::DateTime dt; ///< Timestamp used to coordinate the handshake between instances.
 
 			//Is there any message
-			bool close;
+			bool close; ///< Flag indicating the running instance should close.
 
-			bool msg_in;
+			bool msg_in; ///< Flag indicating a message is pending in shared memory.
 		};
 
-		const char* _name;
-		shmData* _data;
-		boost::thread* _shmThread;
-		int _status;
-		bool _shmCreatedByThisInstance;
-		bool _notified;
+		const char* _name;                   ///< Name of the shared memory object.
+		shmData* _data;                      ///< Pointer to the mapped shared memory data.
+		boost::thread* _shmThread;           ///< Background thread managing the shared memory lifecycle.
+		int _status;                         ///< Status code: -1=unknown, 0=not running, 1=already running.
+		bool _shmCreatedByThisInstance;      ///< True if this instance created the shared memory object.
+		bool _notified;                      ///< True after a notify_one call completes successfully.
 
 	protected:
 
+		/// @brief Attempts to create the named shared memory object.
+		/// @return true if the shared memory already existed; false if it was freshly created.
 		bool createShm()
 		{
 			try
@@ -86,11 +93,15 @@ namespace mu
 			}
 			return false;
 		}
+
+		/// @brief Checks whether the other application instance has responded to a message.
+		/// @return true if the message has been consumed (msg_in is false).
 		bool appResponded()
 		{
 			return !_data->msg_in;
 		}
 
+		/// @brief Notifies the running instance by signalling the call condition variable.
 		void notify()
 		{
 			_notified = false;
@@ -98,6 +109,7 @@ namespace mu
 			_notified = true;
 		}
 
+		/// @brief Background thread entry point that handles shared memory creation, detection, and coordination.
 		void thIsRunning()
 		{
 			bool shmExisted = createShm();
@@ -158,7 +170,7 @@ namespace mu
 
 				//Get the address of the mapped region
 				void * addr = region.get_address();
-				
+
 				//Construct the shared structure in memory
 				if (!shmExisted)
 					_data = new (addr)shmData;
@@ -272,18 +284,19 @@ namespace mu
 							_data->msg_in = false;
 							_data->cond_resp.notify_one();
 						}
-						
+
 					}
 				}
 			}
 			catch (boost::interprocess::interprocess_exception &ex)
 			{
 				TRACE_SINGLE_APP_F(ex.what());
-				ex;				
-			}			
+				ex;
+			}
 		}
 
 	public:
+		/// @brief Default constructor; initializes all members to safe defaults.
 		SingleApp()
 			: _name(nullptr)
 			, _data(nullptr)
@@ -292,11 +305,15 @@ namespace mu
 			, _notified(false)
 		{}
 
+		/// @brief Destructor; closes and cleans up the shared memory guard.
 		~SingleApp()
 		{
-			close();					
+			close();
 		}
 
+		/// @brief Checks whether another instance of the application is already running.
+		/// @param shmName The unique shared memory name that identifies this application.
+		/// @return true if another instance is already running; false if this is the first instance.
 		bool isRunning(const char* shmName)
 		{
 			_name = shmName;
@@ -325,6 +342,7 @@ namespace mu
 			return (_status == 1);
 		}
 	protected:
+		/// @brief Signals the background thread to shut down and releases shared memory resources.
 		void close()
 		{
 			if (_shmThread == nullptr)
@@ -334,10 +352,10 @@ namespace mu
 				boost::interprocess::scoped_lock<boost::interprocess::interprocess_mutex> lock(_data->mutex);
 				_data->close = true;
 				_data->msg_in = true;
-				_data->cond_call.notify_one();				
+				_data->cond_call.notify_one();
 			}
 			_shmThread->join();
-			
+
 			if (_shmCreatedByThisInstance)
 			{
 				TRACE_SINGLE_APP_F2("Deleting shm: ", _name);

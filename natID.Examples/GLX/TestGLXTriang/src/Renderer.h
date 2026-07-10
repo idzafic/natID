@@ -1,6 +1,7 @@
+#pragma once
 #define GLM_FORCE_RADIANS 
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE 
-#pragma once
+
 #define NUM_INSTANCES 1
 
 #include <glx/IRenderer.h>
@@ -67,14 +68,6 @@ class Renderer : public glx::IRenderer
 
     gui::Size _viewportSize;
 
-    // Pan and zoom
-    glm::vec2 _panOffset = glm::vec2(0.0f, 0.0f);
-    float _zoom = 1.0f;
-    static constexpr float _zoomMin = 0.1f;
-    static constexpr float _zoomMax = 50.0f;
-    static constexpr float _scrollSpeed = 0.3f;
-    static constexpr float _zoomKeyFactor = 1.1f;
-
     // Drag tracking
     glm::vec2 _lastDragPos = glm::vec2(0.0f, 0.0f);
 
@@ -83,6 +76,15 @@ class Renderer : public glx::IRenderer
 
     // Track which objects are letter E outline (drawn as line loop)
     InstancedObject* _letterEOutline = nullptr;
+
+    // Pan and zoom
+    glm::vec2 _panOffset = glm::vec2(0.0f, 0.0f);
+    float _zoom = 1.0f;
+    glx::PixelFormat _compatiblePixelFormat;
+    static constexpr float _zoomMin = 0.1f;
+    static constexpr float _zoomMax = 50.0f;
+    static constexpr float _scrollSpeed = 0.3f;
+    static constexpr float _zoomKeyFactor = 1.1f;
 
 protected:
 
@@ -115,7 +117,7 @@ protected:
 
         glx::RenderPipeline::ColorAttachments clrAttachments = desc.colorAttachments();
         glx::RenderPipeline::ColorAttachment clrAtt = clrAttachments[0];
-        clrAtt.setPixelFormat(glx::PixelFormat::RGBA8Unorm);
+        clrAtt.setPixelFormat(_compatiblePixelFormat);
 
         _RP = _device.newRenderPipelineState(desc, error);
         if (!_RP.isOk())
@@ -455,7 +457,7 @@ protected:
             uint16_t nVertsAdded = (uint16_t)(vboPoints.size() - startVertE);
             addIndexedObject(vboPoints, eboIndices, startVertE, nVertsAdded, startIdxE, nIndicesE, glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
 
-            // Letter E outline (white) — use original letterE vertices as a line loop
+            // Letter E outline (white) ï¿½ use original letterE vertices as a line loop
             // We create this as a line strip with the vertices forming the outline
             std::vector<ObjectVertex> outlineVerts;
             for (td::UINT4 i = 0; i < nVertsE; ++i)
@@ -504,6 +506,7 @@ public:
     Renderer(glx::View* pView)
         : _device(pView->device())
     {
+        _compatiblePixelFormat = glx::getCompatiblePixelFormat(glx::PixelFormat::RGBA8Unorm);
         _pView = pView;
         _commandQueue = _device.newCommandQueue();
         pView->getSize(_viewportSize);
@@ -514,7 +517,7 @@ public:
         buildObjects();
         updateProjection();
 
-        pView->setPixelFormat(glx::PixelFormat::RGBA8Unorm);
+        pView->setPixelFormat(_compatiblePixelFormat);
 
         mu::DebugConsoleLog::info() << "Ortho polygon renderer initialized";
     }

@@ -10,7 +10,6 @@
 class ViewGLX : public glx::View
 {
 protected:
-    Renderer* _pRenderer = nullptr;  // Keep reference to our renderer
     
     glx::IRenderer* createRenderer() override
     {
@@ -18,7 +17,16 @@ protected:
         return _pRenderer;
     }
     
-
+    //Helper methods that wrap IRenderer to my Renderer
+    inline Renderer* getRenderer()
+    {
+        return static_cast<Renderer*>(_pRenderer);
+    }
+    
+    inline const Renderer* getRenderer() const
+    {
+        return static_cast<const Renderer*>(_pRenderer);
+    }
 public:
     ViewGLX()
         : glx::View({ gui::InputDevice::Event::Keyboard, gui::InputDevice::Event::CursorEnterLeave, gui::InputDevice::Event::PrimaryClicks, gui::InputDevice::Event::SecondaryClicks, gui::InputDevice::Event::CursorMove, gui::InputDevice::Event::CursorDrag, gui::InputDevice::Event::Zoom })
@@ -32,8 +40,8 @@ public:
     {
         if (_pRenderer)
         {
-            _pRenderer->switchColorShadingMode();
-            reDraw();
+            getRenderer()->switchColorShadingMode();
+            // reDraw();
         }
     }
 
@@ -72,7 +80,7 @@ public:
                     
                     // Get the current drawable and save it
                     glx::Drawable drawable = currentDrawable();
-                    glx::CommandQueue cmdQueue = _pRenderer->getCommandQueue();
+                    glx::CommandQueue cmdQueue = getRenderer()->getCommandQueue();
                     bool success = saveDrawable(path.c_str(), cmdQueue, format);
                     
                     if (success)

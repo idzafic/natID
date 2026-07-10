@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file CRC32.h
+    @brief Provides a CRC-32 checksum computation class using a precomputed lookup table. */
 #pragma once
 #include <td/Types.h>
 #include <crpt/Hex.h>
@@ -15,11 +17,13 @@
 
 namespace crpt
 {
+	/// @brief Computes a CRC-32 checksum over incremental data chunks using a precomputed table.
 	class CRC32
 	{
-		td::UINT4 _crcTable[256];
-		td::UINT4 _crc32 = 0xFFFFFFFF;
+		td::UINT4 _crcTable[256]; ///< Precomputed CRC-32 lookup table.
+		td::UINT4 _crc32 = 0xFFFFFFFF; ///< Current CRC-32 accumulator value.
 
+		/// @brief Precomputes the 256-entry CRC-32 lookup table using the standard polynomial.
 		void calcCRCTable()
 		{
 			td::UINT4 POLYNOMIAL = 0xEDB88320;
@@ -39,15 +43,21 @@ namespace crpt
 			} while (0 != ++b);
 		}
 	public:
+		/// @brief Constructor; precomputes the CRC-32 lookup table and initializes the accumulator.
 		CRC32()
 		{
 			calcCRCTable();
 		}
+
+		/// @brief Resets the CRC-32 accumulator to its initial value (0xFFFFFFFF).
 		void init()
 		{
 			_crc32 = 0xFFFFFFFF;
 		}
 
+		/// @brief Feeds a byte buffer into the CRC-32 computation.
+		/// @param buf Pointer to the input byte buffer.
+		/// @param size Number of bytes to process.
 		void consume(const td::BYTE *buf, size_t size)
 		{
 			//static td::UINT4 crc32Tab[] = {
@@ -95,32 +105,38 @@ namespace crpt
 			//	0x54de5729, 0x23d967bf, 0xb3667a2e, 0xc4614ab8, 0x5d681b02, 0x2a6f2b94,
 			//	0xb40bbe37, 0xc30c8ea1, 0x5a05df1b, 0x2d02ef8d
 			//};
-			const td::BYTE* p = buf;			
+			const td::BYTE* p = buf;
 			while (size--)
 				_crc32 = _crcTable[(_crc32 ^ *p++) & 0xFF] ^ (_crc32 >> 8);
 		}
 
+		/// @brief Feeds the content of a string into the CRC-32 computation.
+		/// @param str Input string whose bytes are to be processed.
 		void consume(const td::String& str)
 		{
 			consume((const td::BYTE*) str.c_str(), str.length());
 		}
 
+		/// @brief Returns the final CRC-32 value after XOR-finalisation.
+		/// @return Finalized 32-bit CRC value.
 		td::UINT4 value() const
 		{
 			td::UINT4 toRet = _crc32 ^ 0xFFFFFFFF;
 			return toRet;
 		}
 
+		/// @brief Returns the CRC-32 value as an uppercase hexadecimal string.
+		/// @return Hex-encoded string representation of the CRC-32 value in big-endian byte order.
 		td::String toString() const
-		{			
-			td::UINT4 currValue = value();			
+		{
+			td::UINT4 currValue = value();
 			if (mu::Machine::getEndianInteger() == mu::Machine::Endian::Little)
-			{			
-				mu::Machine::swapEndian(currValue);			
+			{
+				mu::Machine::swapEndian(currValue);
 			}
 			td::String str;
-			crpt::toHex((td::BYTE*) &currValue, 4, str);			
-			return str;			
+			crpt::toHex((td::BYTE*) &currValue, 4, str);
+			return str;
 		}
 	};
 }

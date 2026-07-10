@@ -1,11 +1,10 @@
-#pragma once
 #include "Extrusion.h"
 #include "cnt/PushBackVector.h"
-
+#include <algorithm>
 
 void Extrusion::AddIndices(std::vector<uint32_t>& indices, int start)
 {
-	int poc = indices.size();
+	int poc = (int) indices.size();
 	for (int i = 0; i < 2 * pointCnt; i++) {
 		//if (i == 2 * pointCnt - 1) continue;
 		if (i == 2 * pointCnt - 1) {
@@ -84,19 +83,22 @@ void Extrusion::setyTexture(const std::vector<glm::vec3>& path, int size)
 	for (int i = 0; i < size; i++) {
 		if (i == 0) tempsum = glm::distance(glm::vec3(0, 0, 0), path[i]);
 		else tempsum = glm::distance(path[i], path[(i - 1)]);
-		if (addMidpoint) {
-			for (int j = 0; j < _steps[i]; j++) {
+		if (addMidpoint)
+        {
+			for (int j = 0; j < _steps[i]; j++)
+            {
 				sum += 1.0 * tempsum / (_steps[i]);
 				yTexture.push_back(sum);
-
 			}
 		}
-		else {
+		else
+        {
 			sum += tempsum;
 			yTexture.push_back(sum);
 		}
 	}
-	for (int i = 0; i < yTexture.size(); i++) {
+	for (int i = 0; i < yTexture.size(); i++)
+    {
 		yTexture[i] /= 1.0 * sum;
 		yTexture[i] *= sum / sumx * repeat;
 		yTexture[i] = yTexture[i] - floor(yTexture[i]); //eventualno izbaciti

@@ -9,7 +9,7 @@
 class ViewGLX : public glx::View
 {
 protected:
-    Renderer* _pRenderer = nullptr;  // Keep reference to our renderer
+//    Renderer* _pRenderer = nullptr;  // Keep reference to our renderer
     
     glx::IRenderer* createRenderer() override
     {
@@ -17,6 +17,16 @@ protected:
         return _pRenderer;
     }
     
+    //Helper methods (IRenderer -> My Renderer)
+    inline Renderer* getRenderer()
+    {
+        return static_cast<Renderer*>(_pRenderer);
+    }
+    
+    inline const Renderer* getRenderer() const
+    {
+        return static_cast<const Renderer*>(_pRenderer);
+    }
 
 public:
     ViewGLX()
@@ -58,7 +68,7 @@ public:
                     
                     // Get the current drawable and save it
                     glx::Drawable drawable = currentDrawable();
-                    glx::CommandQueue cmdQueue = _pRenderer->getCommandQueue();
+                    glx::CommandQueue cmdQueue = getRenderer()->getCommandQueue();
                     bool success = saveDrawable(path, cmdQueue, format);
                     
                     if (success)

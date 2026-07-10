@@ -7,17 +7,19 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file natPlotLib.h
+    @brief Platform-specific export/import macros for the natPlot shared library. */
 #pragma once
 #ifdef NATPLOT_EXPORTS
     #ifdef MU_WINDOWS
-        #define NATPLOT_API __declspec(dllexport)
+        #define NATPLOT_API __declspec(dllexport) ///< Exports symbols when building the natPlot DLL on Windows.
     #else
-        #define NATPLOT_API __attribute__((visibility("default")))
+        #define NATPLOT_API __attribute__((visibility("default"))) ///< Exports symbols when building the natPlot shared library on non-Windows platforms.
     #endif
 #else
     #ifdef MU_WINDOWS
-        #define NATPLOT_API __declspec(dllimport)
+        #define NATPLOT_API __declspec(dllimport) ///< Imports symbols when consuming the natPlot DLL on Windows.
     #else
-        #define NATPLOT_API
+        #define NATPLOT_API ///< Empty definition when consuming the natPlot library on non-Windows platforms.
     #endif
 #endif

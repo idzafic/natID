@@ -8,13 +8,13 @@
 class ViewGLX : public glx::View
 {
 protected:
-    Renderer* _pRenderer = nullptr;  // Keep reference to our renderer
     
     glx::IRenderer* createRenderer() override
     {
         _pRenderer = new Renderer(this);
         return _pRenderer;
     }
+
 
 public:
 ViewGLX()
@@ -23,7 +23,16 @@ ViewGLX()
     setContinousRenderMode(true);
 }
     
-Renderer* getRadarRenderer() const { return _pRenderer; }
+    //Helper methods (IRenderer -> My Renderer)
+    inline Renderer* getRenderer()
+    {
+        return static_cast<Renderer*>(_pRenderer);
+    }
+    
+    inline const Renderer* getRenderer() const
+    {
+        return static_cast<const Renderer*>(_pRenderer);
+    }
 
     // Handle mouse input events to control radar targets
     void onPrimaryButtonPressed(const gui::InputDevice& inputDevice) override
@@ -31,8 +40,9 @@ Renderer* getRadarRenderer() const { return _pRenderer; }
         if (_pRenderer) {
             gui::Point clickPos = inputDevice.getFramePoint();
             // Convert from bottom-left origin to top-left origin
-            clickPos.y = _pRenderer->getViewportSize().height - clickPos.y;
-            _pRenderer->setLeftClick(clickPos);
+            auto pMyRenderer = getRenderer();
+            clickPos.y = pMyRenderer->getViewportSize().height - clickPos.y;
+            pMyRenderer->setLeftClick(clickPos);
             mu::DebugConsoleLog::debug() << "Left click at: " << clickPos.x << ", " << clickPos.y;
         }
     }
@@ -42,8 +52,9 @@ Renderer* getRadarRenderer() const { return _pRenderer; }
         if (_pRenderer) {
             gui::Point clickPos = inputDevice.getFramePoint();
             // Convert from bottom-left origin to top-left origin
-            clickPos.y = _pRenderer->getViewportSize().height - clickPos.y;
-            _pRenderer->setRightClick(clickPos);
+            auto pMyRenderer = getRenderer();
+            clickPos.y = pMyRenderer->getViewportSize().height - clickPos.y;
+            pMyRenderer->setRightClick(clickPos);
             mu::DebugConsoleLog::debug() << "Right click at: " << clickPos.x << ", " << clickPos.y;
         }
     }

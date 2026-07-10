@@ -51,6 +51,7 @@ class Renderer : public glx::IRenderer
     float _angleY = 0.0f;
     float _dAngle = 0.001f;
     bool _useDotsTexture = false;
+    glx::PixelFormat _compatiblePixelFormat;
     
     struct CubeVertex {
         float position[3];
@@ -93,7 +94,7 @@ protected:
 
         glx::RenderPipeline::ColorAttachments clrAttachments = desc.colorAttachments();
         glx::RenderPipeline::ColorAttachment clrAtt = clrAttachments[0];
-        clrAtt.setPixelFormat(glx::PixelFormat::RGBA8Unorm);
+        clrAtt.setPixelFormat(_compatiblePixelFormat);
 
         _RP = _device.newRenderPipelineState(desc, error);
         if (!_RP.isOk())
@@ -486,6 +487,8 @@ public:
     Renderer(glx::View* pView)
         : _device(pView->device())
     {
+        _compatiblePixelFormat = glx::getCompatiblePixelFormat(glx::PixelFormat::RGBA8Unorm);
+        
         _commandQueue = _device.newCommandQueue();
         pView->getSize(_viewportSize);
 
@@ -496,7 +499,9 @@ public:
         loadTextures();
         updateUniforms();
 
-        pView->setPixelFormat(glx::PixelFormat::RGBA8Unorm);
+        //pView->setPixelFormat(glx::PixelFormat::RGBA8Unorm); // <- not supported on Vulkan on macOS
+        pView->setPixelFormat(_compatiblePixelFormat);
+        
         pView->setDepthStencilPixelFormat(glx::PixelFormat::Depth32Float);
         pView->setClearDepth(1.0);
         mu::DebugConsoleLog::debug() << "z";

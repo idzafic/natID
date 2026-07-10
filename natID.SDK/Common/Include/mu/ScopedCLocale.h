@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file ScopedCLocale.h
+    @brief RAII wrapper that temporarily switches the C locale and restores it on scope exit. */
 #pragma once
 
 #include <locale.h>
@@ -33,13 +35,17 @@ namespace mu
     After destruction, the previous locale is restored.
 */
 
+/// @brief RAII guard that changes a C locale category on construction and restores the original on destruction.
 class ScopedCLocale
 {
 private:
-    int _category;
-    td::String _previousLocale;
+    int _category;          ///< The locale category to switch (e.g. LC_NUMERIC).
+    td::String _previousLocale; ///< The locale string that was active before the switch.
 
 public:
+    /// @brief Saves the current locale for the given category and switches to a new one.
+    /// @param category The locale category to change (default: LC_NUMERIC).
+    /// @param newLocale The name of the locale to activate (default: "C").
     ScopedCLocale(int category = LC_NUMERIC, const char* newLocale = "C")
         : _category(category)
     {
@@ -52,6 +58,7 @@ public:
             setlocale(_category, newLocale);
     }
 
+    /// @brief Restores the previously saved locale on destruction.
     ~ScopedCLocale()
     {
         if (!_previousLocale.isEmpty())

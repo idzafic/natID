@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file MatrixLib.h
+    @brief Defines platform-specific export/import macros for the Matrix shared library. */
 #pragma once
 #include <td/Types.h>
 #include <compiler/Definitions.h>
@@ -28,4 +30,3 @@
         #define MATRIX_EXTERN extern
     #endif
 #endif
-

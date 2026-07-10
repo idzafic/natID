@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file AutoElement.h
+    @brief Defines report element ID constants and helper functions for resolving auto-element names. */
 #pragma once
 
 #define RPT_COL_POS_NOTOK  (-1)
@@ -27,7 +29,7 @@
 #define RPT_TXT_DOCUMENT_TYPE  (-1000)
 // #DocID
 #define RPT_TXT_DOCUMENT_ID  (-1001)
-// #DocDT"			
+// #DocDT"
 #define RPT_DT_DOCUMENT_DATETIME (-1002)
 // #DocPayDays
 #define RPT_INT_DOCUMENT_PAYMENT_DAYS (-1003)
@@ -39,7 +41,7 @@
 #define RPT_INT_DOCUMENT_STATE (-1006)  //0-initial, 1-review, 2-final
 // #DocFromDT
 #define RPT_DT_DOCUMENT_FROM_DATETIME (-1007)
-// #DocToDT"	
+// #DocToDT"
 #define RPT_DT_DOCUMENT_TO_DATETIME (-1008)
 // #DocMoneyUnit
 #define RPT_TXT_DOCUMENT_MONEY_UNIT (-1009)
@@ -130,31 +132,50 @@
 
 namespace rpt
 {
+/// @brief Checks whether the given ID belongs to the generic auto-element range.
+/// @param id The element ID to test.
+/// @return True if the ID is a generic auto-element ID, false otherwise.
 inline bool isGenericID(int id)
 {
     return ((id <= RPT_INT_AUTO_NUMBER) && (id > RPT_GENERIC_LAST));
 }
 
+/// @brief Checks whether the given ID belongs to the document ID range.
+/// @param id The element ID to test.
+/// @return True if the ID is a document-level auto element ID, false otherwise.
 inline bool isDocumentID(int id)
 {
     return ((id <= RPT_TXT_DOCUMENT_TYPE) && (id > RPT_DOCUMENT_LAST));
 }
 
+/// @brief Checks whether the given ID belongs to the company ID range.
+/// @param id The element ID to test.
+/// @return True if the ID is a company-level auto element ID, false otherwise.
 inline bool isCompanyID(int id)
 {
     return ((id <= RPT_TXT_COMPANY1) && (id > RPT_COMPANY_LAST));
 }
 
+/// @brief Checks whether the given ID belongs to the object ID range.
+/// @param id The element ID to test.
+/// @return True if the ID is an object-level auto element ID, false otherwise.
 inline bool isObjectID(int id)
 {
     return ((id <= RPT_TXT_OBJ_TYPE) && (id > RPT_OBJ_LAST));
 }
 
+/// @brief Checks whether the given ID belongs to the signature ID range.
+/// @param id The element ID to test.
+/// @return True if the ID is a signature auto element ID, false otherwise.
 inline bool isSignatureID(int id)
 {
     return ((id <= RPT_TXT_SINATURE1) && (id > RPT_SIGNATURE_LAST));
 }
 
+/// @brief Resolves a document text auto-element ID from a string starting with '#'.
+/// @tparam TSTR String type that supports getAt(), length(), and compareConstStr().
+/// @param str The string to resolve (e.g. "#DocType").
+/// @return The corresponding document element ID constant, or -1 if not matched.
 template <typename TSTR>
 inline int getAutoDocTxtID(const TSTR& str)
 {
@@ -163,7 +184,7 @@ inline int getAutoDocTxtID(const TSTR& str)
     char ch = str.getAt(0);
     if (ch != '#')
         return -1;
-    
+
     if (str.compareConstStr("DocType", 1))
         return RPT_TXT_DOCUMENT_TYPE;
     else if (str.compareConstStr("DocID", 1))
@@ -205,6 +226,10 @@ inline int getAutoDocTxtID(const TSTR& str)
     return -1;
 }
 
+/// @brief Resolves an object text auto-element ID from a string starting with '#'.
+/// @tparam TSTR String type that supports getAt(), length(), and compareConstStr().
+/// @param str The string to resolve (e.g. "#ObjName").
+/// @return The corresponding object element ID constant, or -1 if not matched.
 template <typename TSTR>
 inline int getAutoObjTxtID(const TSTR& str)
 {
@@ -213,7 +238,7 @@ inline int getAutoObjTxtID(const TSTR& str)
     char ch = str.getAt(0);
     if (ch != '#')
         return -1;
-    
+
     if (str.compareConstStr("ObjType", 1))
         return RPT_TXT_OBJ_TYPE;
     else if (str.compareConstStr("ObjID", 1))
@@ -229,6 +254,10 @@ inline int getAutoObjTxtID(const TSTR& str)
     return -1;
 }
 
+/// @brief Resolves a company text auto-element ID from a string starting with '#'.
+/// @tparam TSTR String type that supports getAt(), length(), and compareConstStr().
+/// @param str The string to resolve (e.g. "#Company1").
+/// @return The corresponding company element ID constant, or -1 if not matched.
 template <typename TSTR>
 inline int getAutoCompanyTxtID(const TSTR& str)
 {
@@ -237,7 +266,7 @@ inline int getAutoCompanyTxtID(const TSTR& str)
     char ch = str.getAt(0);
     if (ch != '#')
         return -1;
-    
+
     if (str.compareConstStr("Company1", 1))
         return RPT_TXT_COMPANY1;
     else if (str.compareConstStr("Company2", 1))
@@ -261,6 +290,10 @@ inline int getAutoCompanyTxtID(const TSTR& str)
     return -1;
 }
 
+/// @brief Resolves a signature text auto-element ID from a string starting with '#'.
+/// @tparam TSTR String type that supports getAt(), length(), and compareConstStr().
+/// @param str The string to resolve (e.g. "#Sign1"); must be exactly 6 characters.
+/// @return The corresponding signature element ID constant, or -1 if not matched.
 template <typename TSTR>
 inline int getSignatureTxtID(const TSTR& str)
 {
@@ -271,7 +304,7 @@ inline int getSignatureTxtID(const TSTR& str)
     char ch = str.getAt(0);
     if (ch != '#')
         return -1;
-    
+
     if (str.compareConstStr("Sign1", 1))
         return RPT_TXT_SINATURE1;
     else if (str.compareConstStr("Sign2", 1))

@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file HorizontalSwitcher.h
+    @brief Template view that provides a row of toggle buttons to switch between views. */
 //
 //  Created by Izudin Dzafic on 28/07/2020.
 //  Copyright © 2020 IDz. All rights reserved.
@@ -22,20 +24,25 @@
 namespace gui
 {
 
+/// @brief Template view that shows NITEMS flat toggle buttons arranged horizontally.
+///        Each button switches the associated ViewSwitcher to the corresponding view.
+/// @tparam NITEMS Number of buttons/views to manage.
 template <size_t NITEMS>
 class HorizontalSwitcher : public View
 {
 protected:
-    ViewSwitcher* _pViewSwitcher = nullptr;
-    ISwitch* _pTurnOn = nullptr; //optional switcher to turn on hidden views
-    HorizontalLayout _layout;
-    Button _buttons[NITEMS];
-    td::UINT2 _selected = 0;
+    ViewSwitcher* _pViewSwitcher = nullptr; ///< Pointer to the associated ViewSwitcher being controlled.
+    ISwitch* _pTurnOn = nullptr; //optional switcher to turn on hidden views ///< Optional switch to restore hidden views when a button is clicked.
+    HorizontalLayout _layout; ///< Horizontal layout containing the toggle buttons.
+    Button _buttons[NITEMS]; ///< Array of toggle buttons, one per view.
+    td::UINT2 _selected = 0; ///< Index of the currently selected button/view.
 
     HorizontalSwitcher() = delete;
     HorizontalSwitcher(const HorizontalSwitcher&) = delete;
     HorizontalSwitcher& operator =(const HorizontalSwitcher&) = delete;
 public:
+    /// @brief Constructs the switcher with labels for each button.
+    /// @param buttonLabels Initializer list of strings, one label per button. Must match NITEMS.
     HorizontalSwitcher(const std::initializer_list<td::String>& buttonLabels)
     : _layout(NITEMS)
     {
@@ -51,7 +58,7 @@ public:
             button.setToMinSize();
             if (i == 0)
                 button.setChecked(true);
-            
+
             _layout << button;
             button.onClick([this, i]
             {
@@ -75,7 +82,9 @@ public:
         assert(i == NITEMS);
         setLayout(&_layout);
     }
-    
+
+    /// @brief Sets tooltip strings for each button.
+    /// @param toolTips Initializer list of tooltip strings. Must match NITEMS.
     void setToolTips(const std::initializer_list<td::String>& toolTips)
     {
         assert(NITEMS == toolTips.size());
@@ -88,11 +97,16 @@ public:
         }
     }
 
+    /// @brief Associates a ViewSwitcher that this control will switch between.
+    /// @param pViewSwitcher Pointer to the ViewSwitcher to control.
     void setViewSwitcher(ViewSwitcher* pViewSwitcher)
     {
         _pViewSwitcher = pViewSwitcher;
     }
 
+    /// @brief Programmatically selects a view by index, updating button states.
+    /// @param viewPos Zero-based index of the view to show.
+    /// @param setFocus Whether to set focus on the shown view.
     void show(size_t viewPos, bool setFocus = true)
     {
         if (_pViewSwitcher)
@@ -103,11 +117,13 @@ public:
                 _selected = viewPos;
                 _buttons[_selected].setChecked(true);
             }
-            
+
             _pViewSwitcher->showView(viewPos, setFocus);
         }
     }
-    
+
+    /// @brief Sets an optional ISwitch to turn on when any button is clicked.
+    /// @param pTurnOn Pointer to an ISwitch that will be set to On state on button click.
     void setViewRestorer(ISwitch* pTurnOn)
     {
         _pTurnOn = pTurnOn;

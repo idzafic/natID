@@ -37,7 +37,8 @@ class Renderer : public glx::IRenderer
     glx::Function _computeFunction;
     glx::ComputePipelineState _computePipeline;
     bool _computeInitialized = false;
-
+    glx::PixelFormat _compatiblePixelFormat;
+    
     // Compute shader parameters
     struct ComputeParams {
         float multiplier = 2.0f;
@@ -57,7 +58,7 @@ protected:
         td::String fontPath = gui::getResFileName(":font1");
         const size_t maxChars = 256;
         
-        _fontInitialized = _font.init(_commandQueue, glx::PixelFormat::RGBA8Unorm, fontPath.c_str(), 32.0, maxChars);
+        _fontInitialized = _font.init(_commandQueue, _compatiblePixelFormat, fontPath.c_str(), 32.0, maxChars);
         if (!_fontInitialized)
         {
             mu::DebugConsoleLog::error() << "Failed to initialize font";
@@ -210,12 +211,12 @@ protected:
             mu::DebugConsoleLog::debug() << "    " << buffer;
             _font.addText(buffer, 50.0, 114.0, td::Color(255, 255, 255, 255));
             
-            snprintf(buffer, sizeof(buffer), "[%zu]: %.1f -> %.1f (expected: %.1f)", 
+            snprintf(buffer, sizeof(buffer), "[%u]: %.1f -> %.1f (expected: %.1f)", 
                 BUFFER_SIZE/2, inputData[BUFFER_SIZE/2], outputData[BUFFER_SIZE/2], inputData[BUFFER_SIZE/2] * _computeParams.multiplier);
             mu::DebugConsoleLog::debug() << "    " << buffer;
             _font.addText(buffer, 50.0, 146.0, td::Color(255, 255, 255, 255));
             
-            snprintf(buffer, sizeof(buffer), "[%zu]: %.1f -> %.1f (expected: %.1f)", 
+            snprintf(buffer, sizeof(buffer), "[%u]: %.1f -> %.1f (expected: %.1f)", 
                 BUFFER_SIZE-1, inputData[BUFFER_SIZE-1], outputData[BUFFER_SIZE-1], inputData[BUFFER_SIZE-1] * _computeParams.multiplier);
             mu::DebugConsoleLog::debug() << "    " << buffer;
             _font.addText(buffer, 50.0, 178.0, td::Color(255, 255, 255, 255));
@@ -226,13 +227,15 @@ public:
     Renderer(glx::View* pView)
         : _device(pView->device())
     {
+        _compatiblePixelFormat = glx::getCompatiblePixelFormat(glx::PixelFormat::RGBA8Unorm);
+        
         _commandQueue = _device.newCommandQueue();
         _viewportSize = gui::Size(800, 600);
 
         setupFont();
         setupComputeShader();
 
-        pView->setPixelFormat(glx::PixelFormat::RGBA8Unorm);
+        pView->setPixelFormat(_compatiblePixelFormat);
         
         mu::DebugConsoleLog::ok() << "Compute shader renderer initialized";
         mu::DebugConsoleLog::debug() << "  Viewport: " << _viewportSize.width << "x" << _viewportSize.height;

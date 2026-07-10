@@ -302,12 +302,10 @@ function(setIDEPropertiesForGUIExecutable targetID devResPath)
 		endif()
 
 	endif()
-		
-
 endfunction()
 
+# Only sign SHARED (dynamic) libraries
 function(setIDEPropertiesForLib targetID)
-
     # Common properties for all platforms
     if(APPLE)
         set_target_properties(${targetID} PROPERTIES
@@ -323,17 +321,10 @@ function(setIDEPropertiesForLib targetID)
         	PREFIX                      ""
         	OUTPUT_NAME                 "${targetID}$<$<CONFIG:Debug>:D>"
         )
-
-		# ────────────────────────────────────────────────
-        # Only sign SHARED (dynamic) libraries
-        # ────────────────────────────────────────────────
-		
 		get_real_target_type(_type ${targetID})
 
         if(_type STREQUAL "SHARED_LIBRARY" OR _type STREQUAL "MODULE_LIBRARY")
-			# ────────────────────────────────────────────────
 			# Decide whether we should attempt code signing
-			# ────────────────────────────────────────────────
 			set(SIGN_SCRIPT "${NATID_SDK_BIN}/signAppXcode.command")
 			if(EXISTS "${SIGN_SCRIPT}" AND NOT IS_DIRECTORY "${SIGN_SCRIPT}")
 				message(STATUS "Signing script found: ${SIGN_SCRIPT} → code signing ENABLED for ${targetID}")
@@ -353,23 +344,12 @@ function(setIDEPropertiesForLib targetID)
 					XCODE_ATTRIBUTE_CODE_SIGNING_ALLOWED YES
 					XCODE_ATTRIBUTE_CODE_SIGNING_REQUIRED NO
 					XCODE_ATTRIBUTE_ENABLE_HARDENED_RUNTIME NO
-
-					#XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY    "${MY_SIGNATURE}"
-					#XCODE_ATTRIBUTE_CODE_SIGNING_REQUIRED "YES"
 				)
-				# Optional: also run the script explicitly after build
-				# add_custom_command(TARGET ${targetID} POST_BUILD
-				# 	COMMAND ${CMAKE_COMMAND} -E echo "Running custom signing script..."
-				# 	COMMAND "${SIGN_SCRIPT}" "$<TARGET_FILE:${targetID}>"
-				# 	COMMAND ${CMAKE_COMMAND} -E echo "Signing finished."
-				# 	COMMENT "Custom code signing: ${targetID}"
-				# 	VERBATIM
-				# )
 			else()
 				message(STATUS "Signing script not found or not a file: ${SIGN_SCRIPT} → signing DISABLED for ${targetID}")
 			endif()
 		else()
-			message(STATUS "Detected static library ${targetID} → NO NEED for signing!")
+			message(STATUS "Detected static library ${targetID} -> NO NEED for signing!")
 		endif()
 
         # Only if you still need it (Objective-C code)
@@ -398,11 +378,9 @@ function(setIDEPropertiesForLib targetID)
 		target_link_directories(${targetID} PRIVATE ${NATID_SDK_LIB})
         target_link_options(${targetID} PRIVATE "-Wl,--no-undefined")
     endif()
-
 endfunction()
 
 function(executePostConfigProgram executablePath args)
-
 	if(WIN32)
 		string(REGEX MATCH ".exe$" match_found "${executablePath}")
 		if(NOT match_found)

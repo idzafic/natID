@@ -15,8 +15,6 @@ set(NATID_SDK_ROOT ${HOME_ROOT}/natID.SDK)
 include(${NATID_SDK_ROOT}/DevEnv/Common.cmake) 
 #END common part for all solutions
 
-
-
 include(${NATID_SDK_ROOT}/DevEnv/natGUI.cmake)
 include(${NATID_SDK_ROOT}/DevEnv/DataProvider.cmake)
 

@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file WndID.h
+    @brief Identity structures for locating windows and file dialogs by pointer and/or numeric ID. */
 //
 //  Created by Izudin Dzafic on 28/07/2020.
 //  Copyright © 2020 IDz. All rights reserved.
@@ -20,11 +22,15 @@ namespace gui
 class Window;
 class FileDialog;
 
+/// @brief Identifies a Window by either its pointer, its numeric ID, or both.
 struct WndID
 {
-    Window* pWnd;
-    td::UINT4 wndID;
-    
+    Window* pWnd;      ///< Pointer to the window; may be nullptr when matching by ID only.
+    td::UINT4 wndID;   ///< Numeric window identifier; 0 when matching by pointer only.
+
+    /// @brief Equality operator that matches by pointer, by ID, or by both depending on which fields are set.
+    /// @param w2 The WndID to compare against.
+    /// @return True if this WndID is considered equal to w2 under the applicable matching rule.
     bool operator == (const struct WndID& w2) const
     {
         if (w2.wndID == 0)
@@ -35,16 +41,20 @@ struct WndID
         {
             return (w2.wndID == wndID);
         }
-        
+
         return ((w2.wndID == wndID) && (w2.pWnd == pWnd));
     }
 };
 
+/// @brief Identifies a FileDialog by either its pointer, its numeric ID, or both.
 struct FileDlgID
 {
-    FileDialog* pFD;
-    td::UINT4 wndID;
-    
+    FileDialog* pFD;   ///< Pointer to the file dialog; may be nullptr when matching by ID only.
+    td::UINT4 wndID;   ///< Numeric dialog identifier; 0 when matching by pointer only.
+
+    /// @brief Equality operator that matches by pointer, by ID, or by both depending on which fields are set.
+    /// @param w2 The FileDlgID to compare against.
+    /// @return True if this FileDlgID is considered equal to w2 under the applicable matching rule.
     bool operator == (const struct FileDlgID& w2) const
     {
         if (w2.wndID == 0)
@@ -55,7 +65,7 @@ struct FileDlgID
         {
             return (w2.wndID == wndID);
         }
-        
+
         return ((w2.wndID == wndID) && (w2.pFD == pFD));
     }
 };

@@ -213,6 +213,9 @@ class Renderer : public glx::IRenderer
     glm::mat4 _viewMatrix;
     glm::mat4 _cameraProjectionMatrix;
     
+    // Keyboard state tracking
+    std::unordered_map<char, bool> _keyStates;
+    
     float _accAngle = 0.0f;
     float _dAngle = 0.01f;
     td::BYTE _usedTexture = 0;
@@ -234,8 +237,8 @@ class Renderer : public glx::IRenderer
     int _lastMouseY = 0;
     bool _firstMouseMove = true;
     
-    // Keyboard state tracking
-    std::unordered_map<char, bool> _keyStates;
+    
+    glx::PixelFormat _compatiblePixelFormat;
     
     // Helper function to get opposite key for conflict resolution
     char getOppositeKey(char key)
@@ -274,7 +277,7 @@ void loadFonts()
         
     // FPS Font - larger for visibility
     td::String fpsFontPath = gui::getResFileName(":font1");
-    _fpsFontInitialized = _fpsFont.init(_commandQueue, glx::PixelFormat::RGBA8Unorm, fpsFontPath.c_str(), 39.0, maxChars);
+    _fpsFontInitialized = _fpsFont.init(_commandQueue, _compatiblePixelFormat, fpsFontPath.c_str(), 39.0, maxChars);
     if (!_fpsFontInitialized)
     {
         mu::DebugConsoleLog::warning() << "Failed to initialize FPS font";
@@ -286,7 +289,7 @@ void loadFonts()
         
     // Static Text Font - smaller for details
     td::String staticFontPath = gui::getResFileName(":font2");
-    _staticTextFontInitialized = _staticTextFont.init(_commandQueue, glx::PixelFormat::RGBA8Unorm, staticFontPath.c_str(), 35.0, maxChars);
+    _staticTextFontInitialized = _staticTextFont.init(_commandQueue, _compatiblePixelFormat, staticFontPath.c_str(), 35.0, maxChars);
     if (!_staticTextFontInitialized)
     {
         mu::DebugConsoleLog::warning() << "Failed to initialize static text font";
@@ -298,7 +301,7 @@ void loadFonts()
     
     // Fancy Font - for special text
     td::String fancyFontPath = gui::getResFileName(":fontFancy");
-    _fancyFontInitialized = _fancyFont.init(_commandQueue, glx::PixelFormat::RGBA8Unorm, fancyFontPath.c_str(), 35.0, maxChars);
+    _fancyFontInitialized = _fancyFont.init(_commandQueue, _compatiblePixelFormat, fancyFontPath.c_str(), 35.0, maxChars);
     if (!_fancyFontInitialized)
     {
         mu::DebugConsoleLog::warning() << "Failed to initialize fancy font";
@@ -358,7 +361,7 @@ void buildShaders()
 
         glx::RenderPipeline::ColorAttachments clrAttachments = desc.colorAttachments();
         glx::RenderPipeline::ColorAttachment clrAtt = clrAttachments[0];
-        clrAtt.setPixelFormat(glx::PixelFormat::RGBA8Unorm);
+        clrAtt.setPixelFormat(_compatiblePixelFormat);
 
         _RP = _device.newRenderPipelineState(desc, error);
         if (!_RP.isOk())
@@ -718,7 +721,7 @@ void buildShaders()
         }
         
         // Initialize the rendering pipeline for the cubemap
-        _skyboxCubemap->initPipeline(glx::PixelFormat::RGBA8Unorm, glx::PixelFormat::Depth32Float);
+        _skyboxCubemap->initPipeline(_compatiblePixelFormat, glx::PixelFormat::Depth32Float);
         
         mu::DebugConsoleLog::info() << "CubeMap texture and pipeline initialized";
     }
@@ -835,6 +838,7 @@ public:
 Renderer(glx::View* pView)
     : _device(pView->device())
 {
+    _compatiblePixelFormat = glx::getCompatiblePixelFormat(glx::PixelFormat::RGBA8Unorm);
     _pView = pView;
     _commandQueue = _device.newCommandQueue();
     pView->getSize(_viewportSize);
@@ -858,7 +862,7 @@ Renderer(glx::View* pView)
     updateCamera();
 
     // Configure View to manage depth texture
-        pView->setPixelFormat(glx::PixelFormat::RGBA8Unorm);
+        pView->setPixelFormat(_compatiblePixelFormat);
         pView->setDepthStencilPixelFormat(glx::PixelFormat::Depth32Float);
         pView->setClearDepth(1.0);
         

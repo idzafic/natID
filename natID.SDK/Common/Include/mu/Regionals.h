@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file Regionals.h
+    @brief Locale-aware formatter for dates, times, numbers, and floating-point values. */
 #pragma once
 #include <mu/muLib.h>
 #include <sstream>
@@ -36,87 +38,102 @@ namespace mu
 {
 	class Regionals;
 
+/// @brief Formats a td::Variant value into the Regionals format buffer.
+/// @param pReg       Pointer to the Regionals instance that owns the format buffer.
+/// @param val        Variant value to format.
+/// @param nDec       Number of decimal places for floating-point values.
+/// @param showThSep  If true, thousand separators are inserted in numeric output.
+/// @param fmt        Floating-point format style (Decimal or Scientific).
+/// @param trailingTxt Optional text appended after the formatted value.
+/// @return Number of characters written, or a negative value on error.
 MAINUTILS_API int formatVariant(Regionals* pReg, const td::Variant& val, int nDec, bool showThSep, td::FormatFloat fmt = td::FormatFloat::Decimal, const char* trailingTxt = nullptr);
 
-	const char _h = 'h';
-	const char _H = 'H';
-	const char _s = 's';
-	const char _S = 'S';
+	const char _h = 'h'; ///< Format character representing a 12-hour clock hour.
+	const char _H = 'H'; ///< Format character representing a 24-hour clock hour.
+	const char _s = 's'; ///< Format character representing seconds (lowercase).
+	const char _S = 'S'; ///< Format character representing seconds (uppercase alias).
 
-	const char _t = 't';
-	const char _u = 'u';
+	const char _t = 't'; ///< Format character representing AM/PM designator.
+	const char _u = 'u'; ///< Format character representing milliseconds.
 
-	const char _d = 'd';
-	const char _D = 'D';
+	const char _d = 'd'; ///< Format character representing day (lowercase).
+	const char _D = 'D'; ///< Format character representing day (uppercase alias).
 
-	const char _m = 'm';
-	const char _M = 'M';
+	const char _m = 'm'; ///< Format character representing month or minute (lowercase).
+	const char _M = 'M'; ///< Format character representing month or minute (uppercase alias).
 
-	const char _y = 'y';
-	const char _Y = 'Y';
-	const char _quot = '\'';
+	const char _y = 'y'; ///< Format character representing year (lowercase).
+	const char _Y = 'Y'; ///< Format character representing year (uppercase alias).
+	const char _quot = '\''; ///< Quote character used to delimit literal text in format strings.
 
-	const int BUFF_OFFSET = 32;
+	const int BUFF_OFFSET = 32; ///< Byte offset in formatBuffer reserved for scratch work during formatting.
 
+	/// @brief Provides locale-aware formatting of dates, times, integers, floats, and decimals.
 	class Regionals
 	{
 	protected:
+		/// @brief Identifies the semantic role of a date part within a format pattern.
 		typedef enum {Year= 0, YearShort = 1, Month = 2, MonthName = 3, MonthShortName = 4, Day = 5, DayName = 6, DayShortName = 7, DateSeparator = 8} tDatePart;
+		/// @brief Identifies the semantic role of a time part within a format pattern.
 		typedef enum {Hour12= 0, Hour24 = 1, Minute = 2, Second = 3, Milisecond = 4, AMPM = 5, TimeSeparator = 6} tTimePart;
-	
-	protected:
-        td::PascalString<1>    locName;
-		int _maxLen;
-		td::UINT4 _locID;
-        float maxDblFormat;
-        float minDblFormat;
-        float maxFltFormat;
-        float minFltFormat;
-        int _fmtBuffLen;
-        char decPoint;
-        char thousandSeparator;
-        char dateInputSeparator;
-        char dateInputFormat[3];
 
+	protected:
+        td::PascalString<1>    locName;          ///< Name of the locale (e.g. "en-US").
+		int _maxLen;                             ///< Maximum usable length of formatBuffer.
+		td::UINT4 _locID;                        ///< Hash-based numeric identifier for the locale name.
+        float maxDblFormat;                      ///< Upper threshold above which doubles are shown as stars.
+        float minDblFormat;                      ///< Lower threshold below which doubles are treated as zero.
+        float maxFltFormat;                      ///< Upper threshold above which floats are shown as stars.
+        float minFltFormat;                      ///< Lower threshold below which floats are treated as zero.
+        int _fmtBuffLen;                         ///< Effective length of the format buffer excluding the offset.
+        char decPoint;                           ///< Decimal separator character (e.g. '.' or ',').
+        char thousandSeparator;                  ///< Thousand-grouping separator character (e.g. ',' or '.').
+        char dateInputSeparator;                 ///< Separator character used in input date strings.
+        char dateInputFormat[3];                 ///< Three-character code describing the input date component order (e.g. "dmy").
+
+		/// @brief Descriptor for one part of a date format pattern.
 		typedef struct _tDateFmt
 		{
-			tDatePart part;
-			td::PascalString<0> format;
+			tDatePart part;                ///< Which date component this entry represents.
+			td::PascalString<0> format;    ///< Printf-style format string used to render this part.
 		} tDatePartFmt;
 
+		/// @brief Descriptor for one part of a time format pattern.
 		typedef struct _tTimeFmt
 		{
-			tTimePart part;
-			td::PascalString<0> format;
+			tTimePart part;                ///< Which time component this entry represents.
+			td::PascalString<0> format;    ///< Printf-style format string used to render this part.
 		} tTimePartFmt;
-		
-		
+
+
 	public:
-		char* formatBuffer;
-	protected:		
-		td::PascalString<1>	bc;
-		td::PascalString<1>	am;
-		td::PascalString<1>	pm;
+		char* formatBuffer; ///< Heap-allocated output buffer used by all format methods.
+	protected:
+		td::PascalString<1>	bc; ///< String displayed after a date to indicate Before Christ (e.g. "BC").
+		td::PascalString<1>	am; ///< String used for the AM period designator.
+		td::PascalString<1>	pm; ///< String used for the PM period designator.
 
-		cnt::PushBackVector<tDatePartFmt>	dateFormatWinLong;
-		cnt::PushBackVector<tDatePartFmt>	dateFormatWinShort;
-		cnt::PushBackVector<tDatePartFmt>	dateFormatOwnShortY4;
-		cnt::PushBackVector<tDatePartFmt>	dateFormatOwnShortY2;
-		cnt::PushBackVector<tDatePartFmt>	dateFormatOwnShortDM;
+		cnt::PushBackVector<tDatePartFmt>	dateFormatWinLong;       ///< Parsed Windows long date format parts.
+		cnt::PushBackVector<tDatePartFmt>	dateFormatWinShort;      ///< Parsed Windows short date format parts.
+		cnt::PushBackVector<tDatePartFmt>	dateFormatOwnShortY4;    ///< Own short date format parts with 4-digit year.
+		cnt::PushBackVector<tDatePartFmt>	dateFormatOwnShortY2;    ///< Own short date format parts with 2-digit year.
+		cnt::PushBackVector<tDatePartFmt>	dateFormatOwnShortDM;    ///< Own short date format parts showing day and month only.
 
-		cnt::PushBackVector<tTimePartFmt>	timeFormatWinLong;
-		cnt::PushBackVector<tTimePartFmt>	timeFormatWinShort;
-		cnt::PushBackVector<tTimePartFmt>	timeFormatOwnShortHMMSSu;
-		cnt::PushBackVector<tTimePartFmt>	timeFormatOwnShortHMMSS;
-		cnt::PushBackVector<tTimePartFmt>	timeFormatOwnShortHMM;
+		cnt::PushBackVector<tTimePartFmt>	timeFormatWinLong;           ///< Parsed Windows long time format parts.
+		cnt::PushBackVector<tTimePartFmt>	timeFormatWinShort;          ///< Parsed Windows short time format parts.
+		cnt::PushBackVector<tTimePartFmt>	timeFormatOwnShortHMMSSu;    ///< Own time format parts: H:MM:SS.uuu.
+		cnt::PushBackVector<tTimePartFmt>	timeFormatOwnShortHMMSS;     ///< Own time format parts: H:MM:SS.
+		cnt::PushBackVector<tTimePartFmt>	timeFormatOwnShortHMM;       ///< Own time format parts: H:MM.
 
-		cnt::Array< td::PascalString<1>, 12>	monthNames;
-		cnt::Array< td::PascalString<1>, 12>	monthShortNames;
+		cnt::Array< td::PascalString<1>, 12>	monthNames;       ///< Full month names indexed 0–11.
+		cnt::Array< td::PascalString<1>, 12>	monthShortNames;  ///< Abbreviated month names indexed 0–11.
 
-		cnt::Array< td::PascalString<1>, 7>		dayNames;
-		cnt::Array< td::PascalString<1>, 7>		dayShortNames;
-public:
+		cnt::Array< td::PascalString<1>, 7>		dayNames;         ///< Full weekday names indexed 0–6.
+		cnt::Array< td::PascalString<1>, 7>		dayShortNames;    ///< Abbreviated weekday names indexed 0–6.
+	public:
 
+	/// @brief Constructs a Regionals instance with the C locale and a custom format buffer size.
+	/// @param buffLen Total size in bytes of the internal format buffer; must be greater than 60.
 	Regionals(int buffLen)
 		: locName("C")
         , _maxLen(buffLen - BUFF_OFFSET-1)
@@ -151,18 +168,25 @@ public:
 		timeFormatOwnShortHMM.reserve(8);
 	}
 
+	/// @brief Returns the decimal separator character for this locale.
+	/// @return The decimal point character.
 	char getDecPoint() const
 	{
 		return decPoint;
 	}
 
+	/// @brief Returns the thousand separator character for this locale.
+	/// @return The thousand separator character.
 	char getThousandSeparator() const
 	{
 		return thousandSeparator;
 	}
 
+	/// @brief Converts a locale-formatted numeric string to a double, replacing the locale decimal point and stripping thousand separators.
+	/// @param pVal Null-terminated string containing the locale-formatted number, or nullptr.
+	/// @return Parsed double value, or 0 on failure.
 	double toDouble(const char* pVal)
-	{		
+	{
 		if (!pVal)
 			return 0;
 
@@ -172,13 +196,13 @@ public:
 		while (ch != 0)
 		{
 			if (ch == decPoint)
-			{				
+			{
 				formatBuffer[iUsedCh++] = '.';
 			}
 			else if (ch != thousandSeparator)
 			{
 				formatBuffer[iUsedCh++] = ch;
-			}							
+			}
 			ch = pVal[++i];
 
 			if (iUsedCh >= 32)
@@ -188,6 +212,10 @@ public:
         return mu::toDouble(formatBuffer);
 	}
 
+	/// @brief Updates all locale format tables from a locale information object.
+	/// @tparam TLI Locale info type exposing getAM(), getPM(), getBC(), getDecimalPoint(),
+	///             getThousandSeparator(), date/time format strings, and month/day name accessors.
+	/// @param li  Locale info object providing the new settings.
 	template <class TLI>
 	void update(const TLI& li)
 	{
@@ -221,13 +249,25 @@ public:
 		}
 	}
 
+	/// @brief Updates locale settings from individual parameters and rebuilds all format tables.
+	/// @param nameOfLocale     Null-terminated locale name string.
+	/// @param dec              Decimal separator character.
+	/// @param thousand         Thousand separator character.
+	/// @param pDateShortFormat Short date format pattern string, or nullptr to skip.
+	/// @param pDateLongFormat  Long date format pattern string, or nullptr to skip.
+	/// @param dateSeparator    Date component separator string used in own date formats.
+	/// @param pTimeShortFormat Short time format pattern string, or nullptr to skip.
+	/// @param pTimeLongFormat  Long time format pattern string, or nullptr to skip.
+	/// @param timeSeparator    Time component separator string used in own time formats.
+	/// @param dateInSeparator  Character separating components in user-input date strings.
+	/// @param inputDateFormat  Three-character string specifying input date order (e.g. "dmy").
 	void update(const char* nameOfLocale, char dec, char thousand, const char* pDateShortFormat = 0, const char* pDateLongFormat = 0, const char* dateSeparator = ".", const char* pTimeShortFormat = 0, const char* pTimeLongFormat = 0, const char* timeSeparator = ":", char dateInSeparator = '.', const char* inputDateFormat = "dmy")
 	{
         dateInputSeparator = dateInSeparator;
         dateInputFormat[0] = inputDateFormat[0];
         dateInputFormat[1] = inputDateFormat[1];
         dateInputFormat[2] = inputDateFormat[2];
-        
+
 		locName = nameOfLocale;
 		_locID = mu::calcHashNo(nameOfLocale);
 		decPoint = dec;
@@ -240,7 +280,7 @@ public:
 			prepareDateFormat(td::Date::Format::WinShort, pDateShortFormat);
 
 		if (pDateShortFormat)
-		{				
+		{
 			prepareOwnDateFormats(td::Date::Format::ShortY2, dateSeparator);
 			prepareOwnDateFormats(td::Date::Format::ShortY4, dateSeparator);
 			prepareOwnDateFormats(td::Date::Format::ShortDM, dateSeparator);
@@ -253,18 +293,33 @@ public:
 			prepareTimeFormat(td::Time::Format::WinShort, pTimeShortFormat);
 
 		if (pTimeShortFormat)
-		{				
+		{
 			prepareOwnTimeFormats(td::Time::Format::ShortHMM, timeSeparator);
 			prepareOwnTimeFormats(td::Time::Format::ShortHMMSS, timeSeparator);
 			prepareOwnTimeFormats(td::Time::Format::ShortHMMSSu, timeSeparator);
 		}
 	}
 
+	/// @brief Returns the name of the current locale.
+	/// @return Null-terminated locale name string.
 	const char* getLocName() const
 	{
 		return locName.c_str();
 	}
-	
+
+	/// @brief Constructs a fully initialised Regionals instance for the specified locale.
+	/// @param nameOfLocale     Null-terminated locale name string.
+	/// @param buffLen          Total size in bytes of the internal format buffer; must be greater than 60.
+	/// @param dec              Decimal separator character.
+	/// @param thousand         Thousand separator character.
+	/// @param pDateShortFormat Short date format pattern string, or nullptr to skip.
+	/// @param pDateLongFormat  Long date format pattern string, or nullptr to skip.
+	/// @param dateSeparator    Date component separator string used in own date formats.
+	/// @param pTimeShortFormat Short time format pattern string, or nullptr to skip.
+	/// @param pTimeLongFormat  Long time format pattern string, or nullptr to skip.
+	/// @param timeSeparator    Time component separator string used in own time formats.
+	/// @param dateInSeparator  Character separating components in user-input date strings.
+	/// @param inputDateFormat  Three-character string specifying input date order (e.g. "dmy").
 	Regionals(const char* nameOfLocale, int buffLen, char dec, char thousand, const char* pDateShortFormat = 0, const char* pDateLongFormat = 0, const char* dateSeparator = ".", const char* pTimeShortFormat = 0, const char* pTimeLongFormat = 0, const char* timeSeparator = ":", char dateInSeparator = '.', const char* inputDateFormat = "dmy")
 		: _maxLen(buffLen - BUFF_OFFSET-1)
 			, locName(nameOfLocale)
@@ -281,7 +336,7 @@ public:
             dateInputFormat[0] = inputDateFormat[0];
             dateInputFormat[1] = inputDateFormat[1];
             dateInputFormat[2] = inputDateFormat[2];
-            
+
 			assert (buffLen > 60);
 
 			_locID = mu::calcHashNo(nameOfLocale);
@@ -309,7 +364,7 @@ public:
 				prepareDateFormat(td::Date::Format::WinShort, pDateShortFormat);
 
 			if (pDateShortFormat)
-			{				
+			{
 				prepareOwnDateFormats(td::Date::Format::ShortY2, dateSeparator);
 				prepareOwnDateFormats(td::Date::Format::ShortY4, dateSeparator);
 				prepareOwnDateFormats(td::Date::Format::ShortDM, dateSeparator);
@@ -320,28 +375,35 @@ public:
 
 			if (pTimeLongFormat)
 				prepareTimeFormat(td::Time::Format::WinLong, pTimeLongFormat);
-				
+
 
 			if (pTimeShortFormat)
-			{				
+			{
 				prepareOwnTimeFormats(td::Time::Format::ShortHMM, timeSeparator);
 				prepareOwnTimeFormats(td::Time::Format::ShortHMMSS, timeSeparator);
 				prepareOwnTimeFormats(td::Time::Format::ShortHMMSSu, timeSeparator);
 			}
 		}
 
+		/// @brief Destructor; releases the format buffer.
 		~Regionals()
 		{
 			delete [] formatBuffer;
 		}
 
+		/// @brief Returns the numeric identifier of the current locale.
+		/// @return 32-bit hash-based locale ID.
 		inline td::UINT4 getID() const
 		{
 			return _locID;
 		}
 
-	protected:		
+	protected:
 
+		/// @brief Builds the own time format part list for the given format type using the parsed Windows short format.
+		/// @param formatType  Target own time format (ShortHMM, ShortHMMSS, or ShortHMMSSu).
+		/// @param separator   Time component separator string.
+		/// @param msSeparator Separator string placed before the milliseconds component (defaults to ".").
 		void prepareOwnTimeFormats(td::Time::Format formatType, const char* separator, const char* msSeparator = ".")
 		{
 			int nMaxParts = 2;
@@ -356,7 +418,7 @@ public:
 				requiredFlag = 2 + 1;
 				break;
 			case td::Time::Format::ShortHMMSS:
-				pList = &timeFormatOwnShortHMMSS;		
+				pList = &timeFormatOwnShortHMMSS;
 				nMaxParts = 3;	//na kraju ne dolazi separator
 				requiredFlag = 4 + 2 + 1;
 				break;
@@ -387,7 +449,7 @@ public:
 							break;
 
 						flag |= 1;
-						++iPos;						
+						++iPos;
 						tTimePartFmt fmt;
 						fmt.part = Hour24;
 						fmt.format = it->format;
@@ -410,7 +472,7 @@ public:
 							break;
 
 						flag |= 2;
-						++iPos;	
+						++iPos;
 						tTimePartFmt fmt;
 						fmt.part = Minute;
 						fmt.format = "%02d";
@@ -421,7 +483,7 @@ public:
 							fmt.part = TimeSeparator;
 							pList->push_back(fmt);
 						}
-					}					
+					}
 					break;
 				case Second:
 					{
@@ -432,7 +494,7 @@ public:
 							break;
 
 						flag |= 4;
-						++iPos;	
+						++iPos;
 						tTimePartFmt fmt;
 						fmt.part = Second;
 						fmt.format = "%02d";
@@ -443,7 +505,7 @@ public:
 							fmt.part = TimeSeparator;
 							pList->push_back(fmt);
 						}
-					}					
+					}
 					break;
 				default:
 					break;
@@ -452,7 +514,7 @@ public:
 			}
 
 			if (requiredFlag & 8)
-			{	
+			{
 				tTimePartFmt fmt;
 				fmt.format = msSeparator;
 				fmt.part = TimeSeparator;
@@ -464,6 +526,9 @@ public:
 			}
 		}
 
+		/// @brief Builds the own date format part list for the given format type using the parsed Windows short format.
+		/// @param formatType Target own date format (ShortY4, ShortY2, or ShortDM).
+		/// @param separator  Date component separator string.
 		void prepareOwnDateFormats(td::Date::Format formatType, const char* separator)
 		{
 			bool yearShort = false;
@@ -476,7 +541,7 @@ public:
 				pList = &dateFormatOwnShortY4;
 				break;
 			case td::Date::Format::ShortY2:
-				pList = &dateFormatOwnShortY2;		
+				pList = &dateFormatOwnShortY2;
 				yearShort = true;
 				break;
 			case td::Date::Format::ShortDM:
@@ -516,7 +581,7 @@ public:
 						{
 							fmt.format = "%d";
 							fmt.part = Year;
-						}						
+						}
 						pList->push_back(fmt);
 
 						if (iPos < nMaxParts)
@@ -525,7 +590,7 @@ public:
 							fmt.part = DateSeparator;
 							pList->push_back(fmt);
 						}
-					}					
+					}
 					break;
 				case Month:
 				case MonthName:
@@ -582,14 +647,19 @@ public:
 			}
 		}
 
+		/// @brief Appends a single parsed time format entry to the appropriate format list.
+		/// @param formatType Target format list (WinLong or WinShort).
+		/// @param ss         String stream accumulating literal separator text.
+		/// @param lastChar   Format character identifying the time component type.
+		/// @param nEntries   Number of consecutive occurrences of lastChar seen.
 		void processTimeFormatEntries(td::Time::Format formatType, std::ostringstream& ss, char lastChar, int nEntries)
-		{		
+		{
 			if (lastChar == 0)
-				return;			
+				return;
 
 			tTimePartFmt fmt;
 
-			if ( lastChar == _h ) 
+			if ( lastChar == _h )
 			{
 				if (nEntries == 1)
 				{
@@ -602,7 +672,7 @@ public:
 					fmt.format = "%02d";
 				}
 			}
-			else if ( lastChar == _H ) 
+			else if ( lastChar == _H )
 			{
 				if (nEntries == 1)
 				{
@@ -655,9 +725,9 @@ public:
 				}
 			}
 			else if (lastChar == _t)
-			{				
+			{
 				fmt.part = AMPM;
-				fmt.format = STRFMT;				
+				fmt.format = STRFMT;
 			}
 			else
 			{
@@ -668,19 +738,24 @@ public:
 			}
 
 			if (formatType == td::Time::Format::WinLong)
-			{				
+			{
 				timeFormatWinLong.push_back(fmt);
 			}
 			else if (formatType == td::Time::Format::WinShort)
 			{
 				timeFormatWinShort.push_back(fmt);
-			}			
+			}
 		}
 
+		/// @brief Appends a single parsed date format entry to the appropriate format list.
+		/// @param formatType Target format list (WinLong or WinShort).
+		/// @param ss         String stream accumulating literal separator text.
+		/// @param lastChar   Format character identifying the date component type.
+		/// @param nEntries   Number of consecutive occurrences of lastChar seen.
 		void processDateFormatEntries(td::Date::Format formatType, std::ostringstream& ss, char lastChar, int nEntries)
-		{		
+		{
 			if (lastChar == 0)
-				return;			
+				return;
 
 			tDatePartFmt fmt;
 
@@ -752,15 +827,18 @@ public:
 			}
 
 			if (formatType == td::Date::Format::WinLong)
-			{				
+			{
 				dateFormatWinLong.push_back(fmt);
 			}
 			else if (formatType == td::Date::Format::WinShort)
 			{
 				dateFormatWinShort.push_back(fmt);
-			}			
+			}
 		}
 
+		/// @brief Parses a platform time format string and populates the corresponding format part list.
+		/// @param formatType Target format list (WinLong or WinShort).
+		/// @param format     Null-terminated time format pattern to parse.
 		void prepareTimeFormat(td::Time::Format formatType, const char* format)
 		{
 			assert(format);
@@ -768,7 +846,7 @@ public:
 			if (format == 0)
 				return;
 
-			const char* pCh = format;		
+			const char* pCh = format;
 
 			std::ostringstream ss;
 
@@ -780,10 +858,10 @@ public:
 			bool hour12FormatDetected = false;
 
 			while (*pCh != 0)
-			{				
+			{
 				switch(*pCh)
 				{
-				case _h:					
+				case _h:
 					{
 						if (lastChar != _h)
 						{
@@ -798,10 +876,10 @@ public:
 
 							hour12FormatDetected = true;
 
-							processTimeFormatEntries(formatType, ss, lastChar, nEntries);							
+							processTimeFormatEntries(formatType, ss, lastChar, nEntries);
 							//hour pattern detected
 							lastChar = _h;
-							nEntries = 1;							
+							nEntries = 1;
 						}
 						else
 						{
@@ -823,10 +901,10 @@ public:
 								break;
 							}
 
-							processTimeFormatEntries(formatType, ss, lastChar, nEntries);							
+							processTimeFormatEntries(formatType, ss, lastChar, nEntries);
 							//hour pattern detected
 							lastChar = _H;
-							nEntries = 1;							
+							nEntries = 1;
 						}
 						else
 						{
@@ -840,10 +918,10 @@ public:
 					{
 						if (lastChar != _m)
 						{
-							processTimeFormatEntries(formatType, ss, lastChar, nEntries);							
+							processTimeFormatEntries(formatType, ss, lastChar, nEntries);
 							//minute pattern detected
 							lastChar = _m;
-							nEntries = 1;							
+							nEntries = 1;
 						}
 						else
 						{
@@ -852,14 +930,14 @@ public:
 					}
 					break;
 				case _s:
-				case _S:	
+				case _S:
 					{
 						if (lastChar != _s)
 						{
-							processTimeFormatEntries(formatType, ss, lastChar, nEntries);							
+							processTimeFormatEntries(formatType, ss, lastChar, nEntries);
 							//second pattern detected
 							lastChar = _s;
-							nEntries = 1;							
+							nEntries = 1;
 						}
 						else
 						{
@@ -867,14 +945,14 @@ public:
 						}
 					}
 					break;
-				case _u:	
+				case _u:
 					{
 						if (lastChar != _u)
 						{
-							processTimeFormatEntries(formatType, ss, lastChar, nEntries);							
+							processTimeFormatEntries(formatType, ss, lastChar, nEntries);
 							//milisecond pattern detected
 							lastChar = _u;
-							nEntries = 1;							
+							nEntries = 1;
 						}
 						else
 						{
@@ -882,7 +960,7 @@ public:
 						}
 					}
 					break;
-				case _t:	
+				case _t:
 					{
 						if (!hour12FormatDetected)
 						{
@@ -896,7 +974,7 @@ public:
 							processTimeFormatEntries(formatType, ss, lastChar, nEntries);
 							//AMPM pattern detected
 							lastChar = _t;
-							nEntries = 1;							
+							nEntries = 1;
 						}
 						else
 						{
@@ -911,7 +989,7 @@ public:
 							processTimeFormatEntries(formatType, ss, lastChar, nEntries);
 
 						lastChar = (char)*pCh;
-						ss << lastChar;	
+						ss << lastChar;
 					}
 				}
 				++pCh;
@@ -920,6 +998,9 @@ public:
 			processTimeFormatEntries(formatType, ss, lastChar, nEntries);
 		}
 
+		/// @brief Parses a platform date format string and populates the corresponding format part list.
+		/// @param formatType Target format list (WinLong or WinShort).
+		/// @param format     Null-terminated date format pattern to parse.
 		void prepareDateFormat(td::Date::Format formatType, const char* format)
 		{
 			assert(format);
@@ -927,29 +1008,29 @@ public:
 			if (format == 0)
 				return;
 
-			const char* pCh = format;		
+			const char* pCh = format;
 
 			std::ostringstream ss;
 
 			char lastChar = 0;
 			int nEntries = 0;
 
-			
+
 			//bool inQuote = false;
 
 			while (*pCh != 0)
-			{				
+			{
 				switch(*pCh)
 				{
 				case _d:
-				case _D:	
+				case _D:
 					{
 						if (lastChar != _d)
 						{
-							processDateFormatEntries(formatType, ss, lastChar, nEntries);							
+							processDateFormatEntries(formatType, ss, lastChar, nEntries);
 							//day pattern detected
 							lastChar = _d;
-							nEntries = 1;							
+							nEntries = 1;
 						}
 						else
 						{
@@ -958,14 +1039,14 @@ public:
 					}
 					break;
 				case _m:
-				case _M:	
+				case _M:
 					{
 						if (lastChar != _m)
 						{
-							processDateFormatEntries(formatType, ss, lastChar, nEntries);							
+							processDateFormatEntries(formatType, ss, lastChar, nEntries);
 							//month pattern detected
 							lastChar = _m;
-							nEntries = 1;							
+							nEntries = 1;
 						}
 						else
 						{
@@ -974,14 +1055,14 @@ public:
 					}
 					break;
 				case _y:
-				case _Y:	
+				case _Y:
 					{
 						if (lastChar != _y)
 						{
-							processDateFormatEntries(formatType, ss, lastChar, nEntries);							
+							processDateFormatEntries(formatType, ss, lastChar, nEntries);
 							//year pattern detected
 							lastChar = _y;
-							nEntries = 1;							
+							nEntries = 1;
 						}
 						else
 						{
@@ -992,7 +1073,7 @@ public:
 				case _quot:
 				{
 					processDateFormatEntries(formatType, ss, lastChar, nEntries);
-					++pCh;					
+					++pCh;
 					while (*pCh != 0 && *pCh != '\'')
 					{
 						ss << *pCh;
@@ -1010,7 +1091,7 @@ public:
 							processDateFormatEntries(formatType, ss, lastChar, nEntries);
 
 						lastChar = (char)*pCh;
-						ss << lastChar;	
+						ss << lastChar;
 					}
 				}
 				if (*pCh != 0)
@@ -1020,6 +1101,11 @@ public:
 			processDateFormatEntries(formatType, ss, lastChar, nEntries);
 		}
 
+		/// @brief Replaces the decimal point character in pSource with the locale decimal point, then copies to pDest.
+		/// @param pSource      Source buffer containing the formatted number with a standard decimal point.
+		/// @param pDest        Destination buffer receiving the locale-formatted string.
+		/// @param nLen         Length of the string in pSource.
+		/// @param nDecPosition Number of digits after the decimal point; 0 means no replacement.
 		inline void replaceDecPoint(char* pSource, char* pDest, int nLen, int nDecPosition)
 		{
 			if (nDecPosition > 0)
@@ -1056,6 +1142,9 @@ public:
 		//	}
 		//}
 
+		/// @brief Allocates or reallocates a char buffer pointed to by *pDest with nLen+1 bytes.
+		/// @param pDest Pointer to the char pointer to reallocate.
+		/// @param nLen  Number of characters the new buffer must hold (excluding the null terminator).
 		void reserve(char** pDest, int nLen)
 		{
 			if (*pDest)
@@ -1065,11 +1154,15 @@ public:
 			*pDest = new char[nLen + 1];
 		}
 
+		/// @brief Writes a star-pattern string into pBuff representing an overflow indicator.
+		/// @param pBuff Output buffer receiving the star pattern.
+		/// @param nDec  Number of decimal places; determines the total pattern length.
+		/// @return Number of characters written.
 		inline int showStars(char* pBuff, int nDec)
 		{
 			if (nDec > 0)
 			{
-				int nLen = nDec + 2;					
+				int nLen = nDec + 2;
 				//reserve(nDec + 2);
 				for (int i=0; i<nLen; i++)
 				{
@@ -1089,6 +1182,15 @@ public:
 			}
 		}
 
+		/// @brief Formats a floating-point value into pBuff using printf semantics, applying range limits.
+		/// @tparam T      Float or double.
+		/// @param pBuff   Output character buffer.
+		/// @param val     Value to format.
+		/// @param nDec    Number of decimal places (negative triggers scientific notation for small values).
+		/// @param BUFFLEN Size of pBuff in bytes.
+		/// @param fmt     Floating-point display format (Decimal or Scientific).
+		/// @param trailingTxt Optional text to append after the number.
+		/// @return Number of characters written, or a negative value on error.
 		template <typename T>
         inline int convertFloat(char* pBuff, T val, int nDec, int BUFFLEN, td::FormatFloat fmt= td::FormatFloat::Decimal, const char* trailingTxt = nullptr)
 		{
@@ -1112,7 +1214,7 @@ public:
             }
             if (nDec < 0)
                 nDec = -nDec;
-            
+
 			float minNumber = minFltFormat;
 			float maxNumber = maxFltFormat;
 
@@ -1127,7 +1229,7 @@ public:
 			if ( maxNumber < absVal)
 			{
 				if (BUFFLEN >= nDec + 2)
-					return showStars(pBuff, nDec);						
+					return showStars(pBuff, nDec);
 				else
 					return -1;
 			}
@@ -1148,7 +1250,7 @@ public:
 
                     return SNPRINTF(pBuff, BUFFLEN - 1, _TRUNCATE, "%.*f%s", nDec, val, trailingTxt);
                 }
-                
+
                 if (nDec < 0)
                 {
                     return SNPRINTF(pBuff, BUFFLEN - 1, _TRUNCATE, "%f", val);
@@ -1156,11 +1258,11 @@ public:
 
                 return SNPRINTF(pBuff, BUFFLEN - 1, _TRUNCATE, "%.*f", nDec, val);
             }
-            
+
             if (trailingTxt)
             {
                 return SNPRINTF(pBuff, BUFFLEN - 1, _TRUNCATE, "%.*e%s", nDec, val, trailingTxt);
-                
+
 //                if (nDec < 0)
 //                {
 //                    return SNPRINTF(pBuff, BUFFLEN - 1, _TRUNCATE, "%g%s", val, trailingTxt);
@@ -1168,7 +1270,7 @@ public:
 //
 //                return SNPRINTF(pBuff, BUFFLEN - 1, _TRUNCATE, "%.*g%s", nDec, val, trailingTxt);
             }
-            
+
 //            if (nDec < 0)
 //            {
 //                return SNPRINTF(pBuff, BUFFLEN - 1, _TRUNCATE, "%g", val);
@@ -1178,6 +1280,12 @@ public:
 //            return SNPRINTF(pBuff, BUFFLEN - 1, _TRUNCATE, "%.*g", nDec, val);
 		}
 
+		/// @brief Inserts thousand separators into pIn and writes the result to pOut.
+		/// @param pIn      Source buffer containing a formatted integer or decimal string.
+		/// @param pOut     Destination buffer receiving the string with separators.
+		/// @param nTh      Number of thousand-separator groups to insert.
+		/// @param nToSkip  Number of leading characters to copy before inserting the first separator.
+		/// @param negative If true, the value is negative and the leading minus sign is handled accordingly.
 		inline void replaceThSeps(char* pIn, char* pOut, int nTh, int nToSkip, bool negative)
 		{
 			int i = 0;
@@ -1219,10 +1327,21 @@ public:
 					++pIn;
 					++i;
 				}
-			}			
+			}
 			STRCPY(pOut, _fmtBuffLen, pIn);
-		}	
+		}
 
+		/// @brief Formats a floating-point value into pDest, applying the locale decimal point and optional thousand separators.
+		/// @tparam T              Float or double.
+		/// @param pDest           Destination buffer for the final formatted string.
+		/// @param pBuff           Scratch buffer of at least BUFFLEN bytes used for intermediate formatting.
+		/// @param val             Value to format.
+		/// @param nDec            Number of decimal places.
+		/// @param BUFFLEN         Size of pBuff in bytes.
+		/// @param replaceThousand If true, thousand separators are inserted.
+		/// @param fmt             Floating-point display format (Decimal or Scientific).
+		/// @param trailingTxt     Optional text to append after the number.
+		/// @return Number of characters written to pDest, or a negative value on error.
 		template <typename T>
         inline int formatFloat(char* pDest, char* pBuff, T val, int nDec, int BUFFLEN, bool replaceThousand, td::FormatFloat fmt = td::FormatFloat::Decimal, const char* trailingTxt = nullptr)
 		{
@@ -1237,7 +1356,7 @@ public:
 				assert(0);
 				return nLen;
 			}
-            
+
             pBuff[nLen] = 0;
             if (nDec < 0)
                 nDec = -nDec;
@@ -1249,7 +1368,7 @@ public:
                     return nLen;
                 nDecPos = 1;
             }
-            
+
             if (trailingTxt)
             {
                 int lenTrail = (int) strlen(trailingTxt);
@@ -1262,7 +1381,7 @@ public:
                 if (nDec > 0 && nDecPos >= 0)
                     pBuff[nDecPos] = decPoint;
             }
-			
+
 
 			if (replaceThousand && (fmt == td::FormatFloat::Decimal))
 			{
@@ -1281,8 +1400,8 @@ public:
 				{
 					nToSkip += nCio % 3;
 					int nTh = (nCio - 1) / 3;
-					nLen += nTh;												
-					replaceThSeps(pBuff, pDest, nTh, nToSkip, negative);						
+					nLen += nTh;
+					replaceThSeps(pBuff, pDest, nTh, nToSkip, negative);
 				}
 				else
 				{
@@ -1297,6 +1416,16 @@ public:
 			return nLen;
 		}
 
+		/// @brief Formats an integer value into pDest, optionally inserting thousand separators.
+		/// @tparam T              Integer type.
+		/// @param pDest           Destination buffer for the final formatted string.
+		/// @param pBuff           Scratch buffer of at least BUFFLEN bytes.
+		/// @param val             Integer value to format.
+		/// @param pWFormat        Printf-style format string for the value (e.g. "%d").
+		/// @param BUFFLEN         Size of pBuff in bytes.
+		/// @param replaceThousand If true, thousand separators are inserted.
+		/// @param trailingTxt     Optional text to append after the number.
+		/// @return Number of characters written to pDest, or a negative value on error.
 		template <typename T>
 		inline int formatInt(char* pDest, char* pBuff, T val, const char* pWFormat, int BUFFLEN, bool replaceThousand, const char* trailingTxt = nullptr)
 		{
@@ -1329,15 +1458,15 @@ public:
 
                 nLen = SNPRINTF(pBuff, BUFFLEN - 1, _TRUNCATE, pWFormat, val);
             }
-			
+
 
 			if (nLen < 0)
-			{	
+			{
 				assert(0);
 				return nLen;
 			}
 
-			int nCio = nLen;					
+			int nCio = nLen;
 
 			int nToSkip = 0;
 			bool negative = false;
@@ -1352,8 +1481,8 @@ public:
 			{
 				nToSkip += nCio % 3;
 				int nTh = (nCio - 1) / 3;
-				nLen += nTh;												
-				replaceThSeps(pBuff, pDest, nTh, nToSkip, negative);						
+				nLen += nTh;
+				replaceThSeps(pBuff, pDest, nTh, nToSkip, negative);
 			}
 			else
 			{
@@ -1362,6 +1491,12 @@ public:
 			return nLen;
 		}
 
+		/// @brief Formats a td::Time value into pBuff according to the specified format.
+		/// @param tf       Time format to apply.
+		/// @param t        Time value to format.
+		/// @param pBuff    Output character buffer.
+		/// @param nBufLen  Size of pBuff in bytes.
+		/// @return Number of characters written, or a negative value on error.
 		inline int format(td::Time::Format tf, const td::Time& t, char* pBuff, int nBufLen)
 		{
 			int toRet = 0;
@@ -1370,7 +1505,7 @@ public:
 			cnt::PushBackVector<tTimePartFmt>::const_iterator it;
 			cnt::PushBackVector<tTimePartFmt>::const_iterator itEnd;
 			switch (tf)
-			{				
+			{
 				case td::Time::Format::ShortHMM:
 					it = timeFormatOwnShortHMM.begin();
 					itEnd = timeFormatOwnShortHMM.end();
@@ -1399,7 +1534,7 @@ public:
 
 			bool bPM = false;
 			while (it != itEnd)
-			{				
+			{
 				int nPart1 = 0;
 				switch( it->part)
 				{
@@ -1447,9 +1582,9 @@ public:
 							}
 							else
 								nPart1 = -1;
-						}					
+						}
 					}
-					break;				
+					break;
 				case mu::Regionals::TimeSeparator:
 					{
 						nPart1 = it->format.length();
@@ -1473,21 +1608,27 @@ public:
 				++it;
 			}
 
-			return toRet;				
+			return toRet;
 		}
-		
+
 	public:
 
+		/// @brief Sets the Before Christ designator string.
+		/// @param strBC Null-terminated string to use (e.g. "BC").
 		void setBCString(const char* strBC)
 		{
 			bc = strBC;
 		}
 
+		/// @brief Returns the maximum usable length of the format buffer.
+		/// @return Maximum number of characters that can be written to formatBuffer.
 		int getBuffLen() const
 		{
 			return _maxLen;
 		}
 
+		/// @brief Sets all 12 full month name strings.
+		/// @param names Array of 12 PascalString<1> month names indexed January=0 through December=11.
 		void setMonthNames (const td::PascalString<1> names[12])
 		{
 			for (int i=0; i<12; i++)
@@ -1496,6 +1637,8 @@ public:
 			}
 		}
 
+		/// @brief Sets all 7 full day name strings.
+		/// @param names Array of 7 PascalString<1> day names indexed Sunday=0 through Saturday=6.
 		void setDayNames (const td::PascalString<1> names[7])
 		{
 			for (int i=0; i<7; i++)
@@ -1504,36 +1647,66 @@ public:
 			}
 		}
 
+		/// @brief Sets the full name of a single month.
+		/// @param i    Zero-based month index (0=January, 11=December).
+		/// @param name Null-terminated month name string.
 		void setMonthName(int i, const char* name)
 		{
 			assert( (i >= 0) && (i < 12) );
 			monthNames[i] = name;
 		}
 
+		/// @brief Sets the abbreviated name of a single month.
+		/// @param i         Zero-based month index (0=January, 11=December).
+		/// @param shortName Null-terminated abbreviated month name string.
 		void setMonthShortName(int i, const char* shortName)
 		{
 			assert( (i >= 0) && (i < 12) );
 			monthShortNames[i] = shortName;
 		}
 
+		/// @brief Sets the full name of a single weekday.
+		/// @param i    Zero-based day index (0=Sunday, 6=Saturday).
+		/// @param name Null-terminated day name string.
 		void setDayName(int i, const char* name)
 		{
 			assert( (i >= 0) && (i < 7) );
 			dayNames[i] = name;
 		}
 
+		/// @brief Sets the abbreviated name of a single weekday.
+		/// @param i         Zero-based day index (0=Sunday, 6=Saturday).
+		/// @param shortName Null-terminated abbreviated day name string.
 		void setDayShortName(int i, const char* shortName)
 		{
 			assert( (i >= 0) && (i < 7) );
 			dayShortNames[i] = shortName;
 		}
 
+		/// @brief Formats a floating-point value into the internal format buffer.
+		/// @tparam T             Float or double.
+		/// @param val            Value to format.
+		/// @param nDec           Number of decimal places.
+		/// @param setThSeparator If true, thousand separators are inserted.
+		/// @param fmt            Floating-point display format.
+		/// @param trailingTxt    Optional text to append after the number.
+		/// @return Number of characters written.
 		template <typename T>
         int formatFloat(T val, int nDec, bool setThSeparator = true, td::FormatFloat fmt = td::FormatFloat::Decimal, const char* trailingTxt = nullptr)
 		{
 			return formatFloat(formatBuffer, formatBuffer + BUFF_OFFSET, val, nDec, _maxLen - BUFF_OFFSET, setThSeparator, fmt, trailingTxt);
 		}
 
+		/// @brief Formats a label followed by a floating-point value into the internal format buffer.
+		/// @tparam T             Float or double.
+		/// @param label          Null-terminated prefix label copied before the number.
+		/// @param labelLen       Length of label in characters.
+		/// @param val            Value to format.
+		/// @param nDec           Number of decimal places.
+		/// @param setThSeparator If true, thousand separators are inserted.
+		/// @param fmt            Floating-point display format.
+		/// @param trailingTxt    Optional text to append after the number.
+		/// @return Total number of characters written including the label.
 		template <typename T>
 		int formatFloat(const char* label, int labelLen, T val, int nDec, bool setThSeparator = true, td::FormatFloat fmt = td::FormatFloat::Decimal, const char* trailingTxt = nullptr)
 		{
@@ -1541,6 +1714,16 @@ public:
 			return formatFloat(formatBuffer + labelLen, formatBuffer + BUFF_OFFSET + labelLen, val, nDec, _maxLen - BUFF_OFFSET - labelLen, setThSeparator, fmt, trailingTxt) + labelLen;
 		}
 
+		/// @brief Formats a floating-point value followed by a label into the internal format buffer.
+		/// @tparam T             Float or double.
+		/// @param val            Value to format.
+		/// @param nDec           Number of decimal places.
+		/// @param postLabel      Null-terminated suffix label appended after the number.
+		/// @param postLabelLen   Length of postLabel in characters.
+		/// @param setThSeparator If true, thousand separators are inserted.
+		/// @param fmt            Floating-point display format.
+		/// @param trailingTxt    Optional text to append after the number but before postLabel.
+		/// @return Total number of characters written including the suffix label.
 		template <typename T>
 		int formatFloat(T val, int nDec, const char* postLabel, int postLabelLen, bool setThSeparator = true, td::FormatFloat fmt = td::FormatFloat::Decimal, const char* trailingTxt = nullptr)
 		{
@@ -1549,12 +1732,25 @@ public:
 			return nLen + postLabelLen;
 		}
 
+		/// @brief Formats an integer value into the internal format buffer using a custom printf format.
+		/// @tparam T             Integer type.
+		/// @param val            Value to format.
+		/// @param pFormat        Printf-style format string (e.g. "%d").
+		/// @param setThSeparator If true, thousand separators are inserted.
+		/// @param trailingTxt    Optional text to append after the number.
+		/// @return Number of characters written.
 		template <typename T>
 		int formatInt(T val, const char* pFormat, bool setThSeparator = true, const char* trailingTxt = nullptr)
 		{
 			return formatInt(formatBuffer, formatBuffer + BUFF_OFFSET, val, pFormat, _maxLen - BUFF_OFFSET, setThSeparator, trailingTxt);
 		}
 
+		/// @brief Formats a signed integer value into the internal format buffer using %d.
+		/// @tparam T             Signed integer type.
+		/// @param val            Value to format.
+		/// @param setThSeparator If true, thousand separators are inserted.
+		/// @param trailingTxt    Optional text to append after the number.
+		/// @return Number of characters written.
 		template <typename T>
 		int formatInt(T val, bool setThSeparator = true, const char* trailingTxt = nullptr)
 		{
@@ -1563,6 +1759,12 @@ public:
 			return formatInt(formatBuffer, formatBuffer + BUFF_OFFSET, val, "%d", _maxLen - BUFF_OFFSET, setThSeparator);
 		}
 
+		/// @brief Formats an unsigned integer value into the internal format buffer using %u.
+		/// @tparam T             Unsigned integer type.
+		/// @param val            Value to format.
+		/// @param setThSeparator If true, thousand separators are inserted.
+		/// @param trailingTxt    Optional text to append after the number.
+		/// @return Number of characters written.
 		template <typename T>
 		int formatUInt(T val, bool setThSeparator = true, const char* trailingTxt = nullptr)
 		{
@@ -1571,6 +1773,12 @@ public:
 			return formatInt(formatBuffer, formatBuffer + BUFF_OFFSET, val, "%u", _maxLen - BUFF_OFFSET, setThSeparator);
 		}
 
+		/// @brief Formats a signed 64-bit integer value into the internal format buffer.
+		/// @tparam T             64-bit signed integer type.
+		/// @param val            Value to format.
+		/// @param setThSeparator If true, thousand separators are inserted.
+		/// @param trailingTxt    Optional text to append after the number.
+		/// @return Number of characters written.
 		template <typename T>
 		int formatLINT(T val, bool setThSeparator = true, const char* trailingTxt = nullptr)
 		{
@@ -1579,6 +1787,12 @@ public:
 			return formatInt(formatBuffer, formatBuffer + BUFF_OFFSET, val, FMT_LINT8, _maxLen - BUFF_OFFSET, setThSeparator);
 		}
 
+		/// @brief Formats an unsigned 64-bit integer value into the internal format buffer.
+		/// @tparam T             64-bit unsigned integer type.
+		/// @param val            Value to format.
+		/// @param setThSeparator If true, thousand separators are inserted.
+		/// @param trailingTxt    Optional text to append after the number.
+		/// @return Number of characters written.
 		template <typename T>
 		int formatLUINT(T val, bool setThSeparator = true, const char* trailingTxt = nullptr)
 		{
@@ -1587,22 +1801,29 @@ public:
 			return formatInt(formatBuffer, formatBuffer + BUFF_OFFSET, val, FMT_LUINT8, _maxLen - BUFF_OFFSET, setThSeparator);
 		}
 
+		/// @brief Builds a separator-delimited string of five formatted floating-point values in the internal buffer.
+		/// @tparam TFloat     Float or double.
+		/// @tparam SEPARATOR  Single character placed between consecutive values.
+		/// @param val1..val5  Values to format.
+		/// @param nDec1..nDec5 Number of decimal places for each value.
+		/// @param setThSeparator If true, thousand separators are inserted.
+		/// @return Total number of characters written, or a negative value on error.
 		template <typename TFloat, char SEPARATOR>
 		inline int buildFloat5(TFloat val1, int nDec1, TFloat val2, int nDec2, TFloat val3, int nDec3, TFloat val4, int nDec4, TFloat val5, int nDec5, bool setThSeparator)
 		{
-			char* pDest = formatBuffer; 
+			char* pDest = formatBuffer;
 			char* pTmp = formatBuffer + BUFF_OFFSET;
 
 			int nTotalLen = 0;
 			//1
 			int nLen = formatFloat(pDest, pTmp, val1, nDec1, _maxLen - BUFF_OFFSET, setThSeparator);
-			
+
 			if (nLen < 0)
 			{
 				assert(0);
 				return nLen;
 			}
-			
+
 			pDest[nLen++]= SEPARATOR;
 			pDest += nLen;
 			nTotalLen += nLen;
@@ -1611,79 +1832,86 @@ public:
 
 			//2
 			nLen = formatFloat(pDest, pTmp, val2, nDec2, _maxLen - BUFF_OFFSET - nTotalLen, setThSeparator);
-			
+
 			if (nLen < 0)
 			{
 				assert(0);
 				return nLen;
 			}
-			
+
 			pDest[nLen++]= SEPARATOR;
 			pDest += nLen;
-			nTotalLen += nLen;	
+			nTotalLen += nLen;
 			pTmp = pDest + BUFF_OFFSET;
 			assert(nTotalLen + BUFF_OFFSET < _maxLen);
 
 			//3
 			nLen = formatFloat(pDest, pTmp, val3, nDec3, _maxLen - BUFF_OFFSET - nTotalLen, setThSeparator);
-			
+
 			if (nLen < 0)
 			{
 				assert(0);
 				return nLen;
 			}
-			
+
 			pDest[nLen++]= SEPARATOR;
 			pDest += nLen;
-			nTotalLen += nLen;	
+			nTotalLen += nLen;
 			pTmp = pDest + BUFF_OFFSET;
 			assert(nTotalLen + BUFF_OFFSET < _maxLen);
 
 			//4
 			nLen = formatFloat(pDest, pTmp, val4, nDec4, _maxLen - BUFF_OFFSET - nTotalLen, setThSeparator);
-			
+
 			if (nLen < 0)
 			{
 				assert(0);
 				return nLen;
 			}
-			
+
 			pDest[nLen++]= SEPARATOR;
 			pDest += nLen;
-			nTotalLen += nLen;	
+			nTotalLen += nLen;
 			pTmp = pDest + BUFF_OFFSET;
 			assert(nTotalLen + BUFF_OFFSET < _maxLen);
 
 			//5
 			nLen = formatFloat(pDest, pTmp, val5, nDec5, _maxLen - BUFF_OFFSET - nTotalLen, setThSeparator);
-			
+
 			if (nLen < 0)
 			{
 				assert(0);
 				return nLen;
 			}
-			
-			//pDest[nLen++]= SEPARATOR;			
-			nTotalLen += nLen;	
+
+			//pDest[nLen++]= SEPARATOR;
+			nTotalLen += nLen;
 			return nTotalLen;
 		}
 
+		/// @brief Builds a separator-delimited string of four formatted floating-point values in the internal buffer.
+		/// @tparam TFloat     Float or double.
+		/// @tparam SEPARATOR  Single character placed between consecutive values.
+		/// @param val1..val4  Values to format.
+		/// @param nDec1..nDec4 Number of decimal places for each value.
+		/// @param setThSeparator If true, thousand separators are inserted.
+		/// @return Total number of characters written, or a negative value on error.
 		template <typename TFloat, char SEPARATOR>
 		inline int buildFloat4(TFloat val1, int nDec1, TFloat val2, int nDec2, TFloat val3, int nDec3, TFloat val4, int nDec4, bool setThSeparator)
 		{
-			char* pDest = formatBuffer; 
+			char* pDest = formatBuffer;
 			char* pTmp = formatBuffer + BUFF_OFFSET;
 
 			int nTotalLen = 0;
 			//1
 			int nLen = formatFloat(pDest, pTmp, val1, nDec1, _maxLen - BUFF_OFFSET, setThSeparator);
-			
+
 			if (nLen < 0)
 			{
 				assert(0);
 				return nLen;
 			}
-			
+
 			pDest[nLen++]= SEPARATOR;
 			pDest += nLen;
 			nTotalLen += nLen;
@@ -1691,62 +1919,69 @@ public:
 
 			//2
 			nLen = formatFloat(pDest, pTmp, val2, nDec2, _maxLen - BUFF_OFFSET - nTotalLen, setThSeparator);
-			
+
 			if (nLen < 0)
 			{
 				assert(0);
 				return nLen;
 			}
-			
+
 			pDest[nLen++]= SEPARATOR;
 			pDest += nLen;
-			nTotalLen += nLen;	
+			nTotalLen += nLen;
 			pTmp = pDest + BUFF_OFFSET;
 
 			//3
 			nLen = formatFloat(pDest, pTmp, val3, nDec3, _maxLen - BUFF_OFFSET - nTotalLen, setThSeparator);
-			
+
 			if (nLen < 0)
 			{
 				assert(0);
 				return nLen;
 			}
-			
+
 			pDest[nLen++]= SEPARATOR;
 			pDest += nLen;
-			nTotalLen += nLen;	
+			nTotalLen += nLen;
 			pTmp = pDest + BUFF_OFFSET;
 
 			//4
 			nLen = formatFloat(pDest, pTmp, val4, nDec4, _maxLen - BUFF_OFFSET - nTotalLen, setThSeparator);
-			
+
 			if (nLen < 0)
 			{
 				assert(0);
 				return nLen;
 			}
-			
-			//pDest[nLen++]= SEPARATOR;			
-			nTotalLen += nLen;	
+
+			//pDest[nLen++]= SEPARATOR;
+			nTotalLen += nLen;
 			return nTotalLen;
 		}
 
+		/// @brief Builds a separator-delimited string of three formatted floating-point values in the internal buffer.
+		/// @tparam TFloat     Float or double.
+		/// @tparam SEPARATOR  Single character placed between consecutive values.
+		/// @param val1..val3  Values to format.
+		/// @param nDec1..nDec3 Number of decimal places for each value.
+		/// @param setThSeparator If true, thousand separators are inserted.
+		/// @return Total number of characters written, or a negative value on error.
 		template <typename TFloat, char SEPARATOR>
 		inline int buildFloat3(TFloat val1, int nDec1, TFloat val2, int nDec2, TFloat val3, int nDec3, bool setThSeparator)
 		{
-			char* pDest = formatBuffer; 
+			char* pDest = formatBuffer;
 			char* pTmp = formatBuffer + BUFF_OFFSET;
 
 			int nTotalLen = 0;
 			//1
 			int nLen = formatFloat(pDest, pTmp, val1, nDec1, _maxLen - BUFF_OFFSET, setThSeparator);
-			
+
 			if (nLen < 0)
 			{
 				assert(0);
 				return nLen;
 			}
-			
+
 			pDest[nLen++]= SEPARATOR;
 			pDest += nLen;
 			nTotalLen += nLen;
@@ -1754,48 +1989,57 @@ public:
 
 			//2
 			nLen = formatFloat(pDest, pTmp, val2, nDec2, _maxLen - BUFF_OFFSET - nTotalLen, setThSeparator);
-			
+
 			if (nLen < 0)
 			{
 				assert(0);
 				return nLen;
 			}
-			
+
 			pDest[nLen++]= SEPARATOR;
 			pDest += nLen;
-			nTotalLen += nLen;	
+			nTotalLen += nLen;
 			pTmp = pDest + BUFF_OFFSET;
 
 			//3
 			nLen = formatFloat(pDest, pTmp, val3, nDec3, _maxLen - BUFF_OFFSET - nTotalLen, setThSeparator);
-			
+
 			if (nLen < 0)
 			{
 				assert(0);
 				return nLen;
 			}
-			
-			//pDest[nLen++]= SEPARATOR;			
-			nTotalLen += nLen;	
+
+			//pDest[nLen++]= SEPARATOR;
+			nTotalLen += nLen;
 			return nTotalLen;
 		}
 
+		/// @brief Builds a separator-delimited string of two formatted floating-point values in the internal buffer.
+		/// @tparam TFloat     Float or double.
+		/// @tparam SEPARATOR  Single character placed between consecutive values.
+		/// @param val1        First value to format.
+		/// @param nDec1       Number of decimal places for val1.
+		/// @param val2        Second value to format.
+		/// @param nDec2       Number of decimal places for val2.
+		/// @param setThSeparator If true, thousand separators are inserted.
+		/// @return Total number of characters written, or a negative value on error.
 		template <typename TFloat, char SEPARATOR>
 		inline int buildFloat2(TFloat val1, int nDec1, TFloat val2, int nDec2, bool setThSeparator)
 		{
-			char* pDest = formatBuffer; 
+			char* pDest = formatBuffer;
 			char* pTmp = formatBuffer + BUFF_OFFSET;
 
 			int nTotalLen = 0;
 			//1
 			int nLen = formatFloat(pDest, pTmp, val1, nDec1, _maxLen - BUFF_OFFSET, setThSeparator);
-			
+
 			if (nLen < 0)
 			{
 				assert(0);
 				return nLen;
 			}
-			
+
 			pDest[nLen++]= SEPARATOR;
 			pDest += nLen;
 			nTotalLen += nLen;
@@ -1803,43 +2047,72 @@ public:
 
 			//2
 			nLen = formatFloat(pDest, pTmp, val2, nDec2, _maxLen - BUFF_OFFSET - nTotalLen, setThSeparator);
-			
+
 			if (nLen < 0)
 			{
 				assert(0);
 				return nLen;
 			}
-			
-			//pDest[nLen++]= SEPARATOR;			
-			nTotalLen += nLen;	
+
+			//pDest[nLen++]= SEPARATOR;
+			nTotalLen += nLen;
 			return nTotalLen;
 		}
 
+		/// @brief Formats five floating-point values with the same decimal precision, separated by newlines.
+		/// @tparam TFloat Float or double.
+		/// @param val1..val5     Values to format.
+		/// @param nDec           Common number of decimal places.
+		/// @param setThSeparator If true, thousand separators are inserted.
+		/// @return Total number of characters written.
 		template <typename TFloat>
 		inline int uniformFltBuild5(TFloat val1, TFloat val2, TFloat val3, TFloat val4, TFloat val5, int nDec, bool setThSeparator = true)
 		{
 			return buildFloat5<TFloat, '\n'>(val1, nDec, val2, nDec, val3, nDec, val4, nDec, val5, nDec, setThSeparator);
 		}
 
+		/// @brief Formats four floating-point values with the same decimal precision, separated by newlines.
+		/// @tparam TFloat Float or double.
+		/// @param val1..val4     Values to format.
+		/// @param nDec           Common number of decimal places.
+		/// @param setThSeparator If true, thousand separators are inserted.
+		/// @return Total number of characters written.
 		template <typename TFloat>
 		inline int uniformFltBuild4(TFloat val1, TFloat val2, TFloat val3, TFloat val4, int nDec, bool setThSeparator= true)
 		{
 			return buildFloat3<TFloat, '\n'>(val1, nDec, val2, nDec, val3, nDec, val4, nDec, setThSeparator);
 		}
 
+		/// @brief Formats three floating-point values with the same decimal precision, separated by newlines.
+		/// @tparam TFloat Float or double.
+		/// @param val1..val3     Values to format.
+		/// @param nDec           Common number of decimal places.
+		/// @param setThSeparator If true, thousand separators are inserted.
+		/// @return Total number of characters written.
 		template <typename TFloat>
 		inline int uniformFltBuild3(TFloat val1, TFloat val2, TFloat val3, int nDec, bool setThSeparator= true)
 		{
 			return buildFloat3<TFloat, '\n'>(val1, nDec, val2, nDec, val3, nDec, setThSeparator);
 		}
 
+		/// @brief Formats two floating-point values with the same decimal precision, separated by a newline.
+		/// @tparam TFloat Float or double.
+		/// @param val1           First value to format.
+		/// @param val2           Second value to format.
+		/// @param nDec           Common number of decimal places.
+		/// @param setThSeparator If true, thousand separators are inserted.
+		/// @return Total number of characters written.
 		template <typename TFloat>
 		inline int uniformFltBuild2(TFloat val1, TFloat val2, int nDec, bool setThSeparator= true)
 		{
 			return buildFloat2<TFloat, '\n'>(val1, nDec, val2, nDec, setThSeparator);
 		}
 
-    
+
+		/// @brief Formats a td::Date value into the internal format buffer according to the specified date format.
+		/// @param df Date format to apply.
+		/// @param d  Date value to format.
+		/// @return Number of characters written, or -1 on error.
 		int format(td::Date::Format df, const td::Date& d)
 		{
 			char* pBuff = formatBuffer;
@@ -1851,11 +2124,11 @@ public:
 
 			int toRet = 0;
 			int nBufLen = _maxLen;
-			
+
 			cnt::PushBackVector<tDatePartFmt>::const_iterator it = dateFormatOwnShortY4.begin();
 			cnt::PushBackVector<tDatePartFmt>::const_iterator itEnd = dateFormatOwnShortY4.end();
 			switch (df)
-			{				
+			{
 				case td::Date::Format::ShortY4:
 					it = dateFormatOwnShortY4.begin();
 					itEnd = dateFormatOwnShortY4.end();
@@ -1872,7 +2145,7 @@ public:
 					it = dateFormatWinShort.begin();
 					itEnd = dateFormatWinShort.end();
 					break;
-				case td::Date::Format::ShortDM:				
+				case td::Date::Format::ShortDM:
 					it = dateFormatOwnShortDM.begin();
 					itEnd = dateFormatOwnShortDM.end();
 					break;
@@ -1881,7 +2154,7 @@ public:
 			}
 
 			while (it != itEnd)
-			{				
+			{
 				int nPart1 = 0;
 				switch( it->part)
 				{
@@ -1911,7 +2184,7 @@ public:
 					break;
 				case mu::Regionals::DateSeparator:
 					{
-						nPart1 = it->format.length();						
+						nPart1 = it->format.length();
 						if (nPart1 < nBufLen)
 						{
 							STRCPY(pBuff, nBufLen, it->format.c_str());
@@ -1939,9 +2212,15 @@ public:
 				STRCPY(pBuff+1, toRet, bc.c_str());
 			}
 
-			return toRet;				
-		}	
+			return toRet;
+		}
 
+		/// @brief Formats a td::Date into a user-input oriented string stored in buff.
+		/// @param buff        Output character buffer.
+		/// @param buffLen     Size of buff in bytes.
+		/// @param date        Date value to format.
+		/// @param putZeros    If true, each component is zero-padded to a fixed width.
+		/// @return Number of characters written.
         inline int formatInputDate(char* buff, int buffLen, const td::Date& date, bool putZeros)
         {
             int nLen = 0;
@@ -1998,12 +2277,19 @@ public:
             }
             return nLen;
         }
-        
+
+		/// @brief Formats a td::Date into the internal format buffer using the input date order.
+		/// @param date     Date value to format.
+		/// @param putZeros If true, each component is zero-padded to a fixed width.
+		/// @return Number of characters written.
         inline int formatInputDate(const td::Date& date, bool putZeros)
         {
             return formatInputDate(formatBuffer, _maxLen, date, putZeros);
         }
-        
+
+		/// @brief Parses a date string buff according to the configured input date order.
+		/// @param buff Null-terminated input date string.
+		/// @return Parsed td::Date value; falls back to the current date on empty or invalid input.
         inline td::Date getInputDate(const char* buff)
         {
             int nLen = (int) strlen(buff);
@@ -2013,7 +2299,7 @@ public:
                 date.now();
                 return date;
             }
-            
+
             int a=1,b=1,c=1;
             char ch1, ch2;
 #ifdef MU_WINDOWS
@@ -2058,7 +2344,13 @@ public:
             }
             return date;
         }
-        
+
+		/// @brief Formats a td::Time into the provided buffer using a fixed HH:MM:SS.ffff layout.
+		/// @param buff            Output character buffer.
+		/// @param buffLen         Size of buff in bytes.
+		/// @param time            Time value to format.
+		/// @param putLeadingZeros If true, hour, minute and second are zero-padded.
+		/// @return Number of characters written.
         int formatInputTime(char* buff, int buffLen, const td::Time& time, bool putLeadingZeros)
         {
             int nLen = 0;
@@ -2066,32 +2358,50 @@ public:
                 nLen = SNPRINTF(buff, buffLen, _TRUNCATE, "%02d:%02d:%02d.%04d", time.getHour(), time.getMinute(), time.getSecond(), time.getFraction());
             else
                 nLen = SNPRINTF(buff, buffLen, _TRUNCATE, "%d:%d:%d.%04d", time.getHour(), time.getMinute(), time.getSecond(), time.getFraction());
-                
+
             return nLen;
         }
-        
+
+		/// @brief Formats a td::Time into the internal format buffer using a fixed HH:MM:SS.ffff layout.
+		/// @param time            Time value to format.
+		/// @param putLeadingZeros If true, hour, minute and second are zero-padded.
+		/// @return Number of characters written.
         int formatInputTime(const td::Time& time, bool putLeadingZeros)
         {
             return formatInputTime(formatBuffer, _maxLen, time, putLeadingZeros);
         }
-        
+
+		/// @brief Reads a date from the internal format buffer using the configured input date order.
+		/// @return Parsed td::Date value.
         inline td::Date getInputDate()
         {
             return getInputDate(formatBuffer);
         }
-        
+
+		/// @brief Formats a td::Color value into the internal format buffer.
+		/// @param color Color value to format.
+		/// @return Number of characters written.
         inline int format(const td::Color& color)
         {
             return color.formc_str(formatBuffer, _maxLen);
         }
-        
+
+		/// @brief Formats a td::Time value into the internal format buffer using the specified time format.
+		/// @param tf Time format to apply.
+		/// @param t  Time value to format.
+		/// @return Number of characters written, or -1 on error.
 		inline int format(td::Time::Format tf, const td::Time& t)
 		{
 			return format(tf, t, formatBuffer, _maxLen);
 		}
 
+		/// @brief Formats a td::DateTime value into the internal format buffer using separate date and time formats.
+		/// @param df Date format to apply to the date component.
+		/// @param tf Time format to apply to the time component.
+		/// @param dt DateTime value to format.
+		/// @return Total number of characters written (date + space + time), or -1 on error.
 		int format(td::Date::Format df, td::Time::Format tf, const td::DateTime& dt)
-		{				
+		{
 			td::Date d(dt.getDate());
 			int nLen1 = 0;
 			if ( (d.getMonth() == 0) || (d.getDay() == 0) )
@@ -2121,11 +2431,19 @@ public:
 			return nLen1 + nLen2;
 		}
 
-	protected:		
+	protected:
+		/// @brief Formats a Decimal value with an INT4 integer part into buff.
+		/// @param buff        Output buffer.
+		/// @param intPart     Integer component of the decimal value.
+		/// @param decPart     Fractional component of the decimal value.
+		/// @param bNegative   If true, a leading minus sign is prepended.
+		/// @param NDEC        Number of decimal places.
+		/// @param trailingTxt Optional text appended after the formatted value.
+		/// @return Number of characters written.
 		inline int prepareDecimal(char* buff, td::INT4 intPart, td::INT4 decPart, bool bNegative, int NDEC, const char* trailingTxt) const
 		{
-			int nLen = 0;			
-			
+			int nLen = 0;
+
 			if (bNegative)
 			{
 				if (NDEC > 0)
@@ -2140,10 +2458,10 @@ public:
                         const char* negFmt = "-%d%c%0*d";
                         nLen = SNPRINTF(buff, _maxLen, _TRUNCATE, negFmt, intPart, decPoint, NDEC, decPart);
                     }
-					
+
 				}
-				
-			}				
+
+			}
 			else
 			{
                 if (trailingTxt)
@@ -2156,12 +2474,20 @@ public:
                     const char* posFmt = "%d%c%0*d";
                     nLen = SNPRINTF(buff, _maxLen, _TRUNCATE, posFmt, intPart, decPoint, NDEC, decPart);
                 }
-				
+
 			}
-				
+
 			return nLen;
 		}
 
+		/// @brief Formats a Decimal value with a LINT8 integer part into buff.
+		/// @param buff        Output buffer.
+		/// @param intPart     Integer component of the decimal value (64-bit).
+		/// @param decPart     Fractional component of the decimal value (64-bit).
+		/// @param bNegative   If true, a leading minus sign is prepended.
+		/// @param NDEC        Number of decimal places.
+		/// @param trailingTxt Optional text appended after the formatted value.
+		/// @return Number of characters written.
 		inline int prepareDecimal(char* buff, td::LINT8 intPart, td::LINT8 decPart, bool bNegative, int NDEC, const char* trailingTxt) const
 		{
 			int nLen = 0;
@@ -2180,7 +2506,7 @@ public:
                         const char* negFmt = "-" FMT_LINT8 "%c%0*" FMT_LINT8_EXT;
                         nLen = SNPRINTF(buff, _maxLen, _TRUNCATE, negFmt, intPart, decPoint, NDEC, decPart);
                     }
-					
+
 				}
 				else
 				{
@@ -2210,7 +2536,7 @@ public:
                         const char* posFmt = FMT_LINT8 "%c%0*" FMT_LINT8_EXT;
                         nLen = SNPRINTF(buff, _maxLen, _TRUNCATE, posFmt, intPart, decPoint, NDEC, decPart);
                     }
-					
+
 				}
 				else
 				{
@@ -2224,69 +2550,92 @@ public:
                         const char* posFmt = FMT_LINT8;
                         nLen = SNPRINTF(buff, _maxLen, _TRUNCATE, posFmt, intPart);
                     }
-					
-				}				
+
+				}
 			}
 
 			return nLen;
 		}
 
 	public:
+		/// @brief Formats a td::Decimal value into the internal format buffer, optionally with thousand separators.
+		/// @tparam TDEC           Underlying integer type of the Decimal.
+		/// @tparam NLEN           Number of decimal places.
+		/// @param dec             Decimal value to format.
+		/// @param replaceThousand If true, thousand separators are inserted into the integer part.
+		/// @param trailingTxt     Optional text appended after the formatted value.
+		/// @return Number of characters written, or a negative value on error.
 		template<typename TDEC, int NLEN>
 		int format(const td::Decimal<TDEC, NLEN>& dec, bool replaceThousand, const char* trailingTxt = nullptr)
 		{
-			//char* pDest = formatBuffer; 
+			//char* pDest = formatBuffer;
 			char* pTmp = formatBuffer + BUFF_OFFSET;
-			
-			bool bNegative = false;				
+
+			bool bNegative = false;
 			if (dec.getValue() < 0)
 			{
 				bNegative = true;
 			}
 
 			if (dec.getIntPart() < 1000)
-				replaceThousand = false;	
+				replaceThousand = false;
 
 			if (replaceThousand)
 			{
 				int nLen = prepareDecimal(pTmp, dec.getIntPart(), dec.getDecPart(), bNegative, NLEN, trailingTxt);
 
 				if (nLen < 0)
-					return nLen;					
-				
+					return nLen;
+
 				int nCio = nLen;
 
 				if (NLEN > 0)
 					nCio -= (NLEN + 1);
-					
+
 				int nToSkip = 0;
-					
+
 				if (bNegative)
-				{						
+				{
 					nCio--;
 					nToSkip = 1;
-				}				
-					
+				}
+
 				nToSkip += nCio % 3;
 				int nTh = (nCio - 1) / 3;
-				nLen += nTh;					
-				replaceThSeps(pTmp, formatBuffer, nTh, nToSkip, bNegative);	
+				nLen += nTh;
+				replaceThSeps(pTmp, formatBuffer, nTh, nToSkip, bNegative);
 				return nLen;
 			}
 			return prepareDecimal(formatBuffer, dec.getIntPart(), dec.getDecPart(), bNegative, NLEN, trailingTxt);
 		}
-        
- 
+
+
+		/// @brief Formats a td::Variant value into the internal format buffer.
+		/// @param val       Variant value to format.
+		/// @param nDec      Number of decimal places for floating-point variants.
+		/// @param showThSep If true, thousand separators are inserted.
+		/// @param fmt       Floating-point display format.
+		/// @return Number of characters written.
         int format(const td::Variant& val, int nDec, bool showThSep, td::FormatFloat fmt = td::FormatFloat::Decimal)
 		{
 			return mu::formatVariant(this, val, nDec, showThSep, fmt);
 		}
-        
+
+		/// @brief Formats a td::Variant value with an optional trailing text into the internal format buffer.
+		/// @param val         Variant value to format.
+		/// @param nDec        Number of decimal places for floating-point variants.
+		/// @param showThSep   If true, thousand separators are inserted.
+		/// @param fmt         Floating-point display format.
+		/// @param trailingTxt Optional text appended after the formatted value.
+		/// @return Number of characters written.
         int formatWithTrailing(const td::Variant& val, int nDec, bool showThSep, td::FormatFloat fmt = td::FormatFloat::Decimal, const char* trailingTxt = nullptr)
         {
             return mu::formatVariant(this, val, nDec, showThSep, fmt, trailingTxt);
         }
 
+		/// @brief Formats an RGBA color value as a '#' prefixed 8-digit hexadecimal string.
+		/// @param val 32-bit RGBA color value to format.
+		/// @return Pointer to the internal format buffer containing the formatted color string.
 		const char* formatColor(td::UINT4 val)
 		{
 			formatBuffer[0]='#';
@@ -2295,7 +2644,7 @@ public:
 			//for each 4 bits
 			while (pos <= 8)
 			{
-				td::UINT4 rest = val & 0xF0000000;				
+				td::UINT4 rest = val & 0xF0000000;
 				rest >>= 28;
 				if ( rest <= 9 )
 				{
@@ -2304,29 +2653,38 @@ public:
 				else
 				{
 					formatBuffer[pos] = 'a' + (char) (rest - 10);
-				}				
+				}
 				val <<= 4;
 				++pos;
 			}
 			formatBuffer[pos] = '\0';
-			return formatBuffer;	
+			return formatBuffer;
 		}
 
+		/// @brief Returns a const pointer to the current contents of the internal format buffer.
+		/// @return Const pointer to the null-terminated format buffer.
 		inline const char* getBuffer() const
 		{
 			return formatBuffer;
 		}
 
+		/// @brief Returns a mutable pointer to the internal format buffer.
+		/// @return Pointer to the format buffer.
 		inline char* getBuffer()
 		{
 			return formatBuffer;
 		}
 
+		/// @brief Returns a const pointer to the current contents of the internal format buffer.
+		/// @return Const pointer to the null-terminated format buffer.
 		inline const char* c_str() const
 		{
 			return formatBuffer;
 		}
 
+		/// @brief Converts the UTF-8 content currently in the format buffer to UTF-16 and appends it after the UTF-8 data.
+		/// @param inputLen Number of UTF-8 bytes in the format buffer to convert.
+		/// @return Pointer to the start of the newly written UTF-16 data within the format buffer, or nullptr on overflow.
 		const td::UTF16* toUTF16(int inputLen)
 		{
 			const mu::UTF8* sourceStart = (const mu::UTF8*)(formatBuffer);
@@ -2341,13 +2699,21 @@ public:
 
 				mu::UTF16* pBeg = (mu::UTF16*) (formatBuffer + inputLen);
 				mu::UTF16* pEnd = (mu::UTF16*) (formatBuffer + bytesNeeded);
-				mu::UTFConverter::convertUTF8toUTF16(sourceStart, sourceEnd, pBeg, pEnd);	
+				mu::UTFConverter::convertUTF8toUTF16(sourceStart, sourceEnd, pBeg, pEnd);
 				*pEnd = 0;
 				return (td::UTF16*) pBeg;
 			}
 			return 0;
 		}
-        
+
+		/// @brief Extracts only the numeric characters from a data buffer, normalising the decimal and thousand separators.
+		/// @tparam NCHBUFF  Compile-time size of buff.
+		/// @param pData     Input character data.
+		/// @param nDataLen  Number of bytes in pData.
+		/// @param dt        Expected data type of the numeric value.
+		/// @param buff      Output buffer receiving the extracted number string.
+		/// @param sci       If true, scientific notation is accepted.
+		/// @return Tuple of (number of characters extracted, whether the operation succeeded).
         template <size_t NCHBUFF>
         std::tuple<size_t, bool> extractNumbers(const char* pData, size_t nDataLen, td::DataType dt, char (&buff)[NCHBUFF], bool sci= false)
         {
@@ -2355,29 +2721,49 @@ public:
             char thSep = getThousandSeparator();
             return td::extractNumbers(pData, nDataLen, dt, buff, chDecPoint, thSep, sci);
         }
-        
+
+		/// @brief Extracts only the numeric characters from a data buffer into an explicitly sized output buffer.
+		/// @param pData    Input character data.
+		/// @param nDataLen Number of bytes in pData.
+		/// @param dt       Expected data type of the numeric value.
+		/// @param buff     Output buffer receiving the extracted number string.
+		/// @param buffLen  Size of buff in bytes.
+		/// @param sci      If true, scientific notation is accepted.
+		/// @return true if the extraction succeeded, false otherwise.
         inline bool extractNumbers(const char* pData, size_t nDataLen, td::DataType dt, char* buff, size_t buffLen, bool sci= false)
         {
             char chDecPoint = getDecPoint();
             char thSep = getThousandSeparator();
             return td::extractNumbers(pData, nDataLen, dt, buff, buffLen, chDecPoint, thSep, sci);
         }
-        
-         template <size_t NBUFLEN>
+
+		/// @brief Converts a locale-formatted number string to a standard C-locale number string using a fixed-size buffer.
+		/// @tparam NBUFLEN Compile-time size of buff.
+		/// @param pStrIn  Input locale-formatted number string.
+		/// @param nLenIn  Number of characters in pStrIn.
+		/// @param buff    Output buffer receiving the converted string.
+		/// @return Number of characters written to buff.
+        template <size_t NBUFLEN>
         inline size_t toAnsiCNumber(const char* pStrIn, size_t nLenIn, char (&buff) [NBUFLEN])
         {
             char chDecPoint = getDecPoint();
             char thSep = getThousandSeparator();
             return td::toAnsiCNumber(pStrIn, nLenIn, buff, chDecPoint, thSep);
         }
-        
+
+		/// @brief Converts a locale-formatted number string to a standard C-locale number string.
+		/// @param pStrIn  Input locale-formatted number string.
+		/// @param nLenIn  Number of characters in pStrIn.
+		/// @param buff    Output buffer receiving the converted string.
+		/// @param buffLen Size of buff in bytes.
+		/// @return Number of characters written to buff.
         inline size_t toAnsiCNumber(const char* pStrIn, size_t nLenIn, char* buff, size_t buffLen)
         {
             char chDecPoint = getDecPoint();
             char thSep = getThousandSeparator();
             return td::toAnsiCNumber(pStrIn, nLenIn, buff, buffLen, chDecPoint, thSep);
         }
-	};	
+	};
 };
 
 

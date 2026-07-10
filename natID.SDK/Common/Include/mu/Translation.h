@@ -7,13 +7,21 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file Translation.h
+    @brief Declares the translation loading function and the TRANSLATION macro for localized string lookup. */
 #pragma once
 #include <mu/mu.h>
 namespace mu
 {
+	/// @brief Loads a translation file and returns its hash identifier.
+	/// @param fileName Path to the translation file to load.
+	/// @param extension Optional file extension filter; pass nullptr to use the default.
+	/// @return Hash identifier of the loaded translation file, or 0 on failure.
 	MAINUTILS_API td::UINT4 loadTranslation(const char* fileName, const char* extension = nullptr);
 }
 
+/// @brief Injects translation helper methods (trc, trq, trs, trqt, trqs) into a class.
+/// @param x Path to the translation file, passed as a string literal.
 #define TRANSLATION(x) protected: td::UINT4 _trHashFile = 0; \
 template <size_t size>  inline const char* trc(const char(&ctStrIn)[size]) const {td::UINT4 trHashFile = _trHashFile; if (trHashFile == 0) trHashFile = mu::loadTranslation(x); size_t inOutSize = size - 1; return mu::trc(trHashFile, &ctStrIn[0], inOutSize); } \
 template <size_t size>  inline const char* trc(const char(&ctStrIn)[size]) { if (_trHashFile == 0) _trHashFile = mu::loadTranslation(x); size_t inOutSize = size - 1; return mu::trc(_trHashFile, &ctStrIn[0], inOutSize); } \

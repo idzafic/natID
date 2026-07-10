@@ -155,7 +155,7 @@ void InstancedObject<VertexType, InstanceDataType>::addInstance(const InstanceDa
     }
     
     size_t instanceDataSize = sizeof(InstanceDataType);
-    uint32_t instanceOffset = _instanceDataOffset + (_activeInstances * instanceDataSize);
+    uint32_t instanceOffset = uint32_t(_instanceDataOffset + (_activeInstances * instanceDataSize));
     
     uint8_t* bufferData = static_cast<uint8_t*>(s_buffer.contents());
     memcpy(bufferData + instanceOffset, &instance, instanceDataSize);

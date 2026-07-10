@@ -7,6 +7,7 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file DataProviderLib.h @brief Export/import macro definitions for the DataProvider shared library. */
 #pragma once
 
 #include <compiler/Definitions.h>
@@ -24,4 +25,3 @@
     #  define DATAPROVIDER_API __attribute__((visibility("default")))
     #endif
 #endif
-

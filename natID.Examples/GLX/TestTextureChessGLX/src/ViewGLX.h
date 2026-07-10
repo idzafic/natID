@@ -10,16 +10,25 @@
 class ViewGLX : public glx::View
 {
 protected:
-    Renderer* _pRenderer = nullptr;  // Keep reference to our renderer
     gui::Texture _frameTexture; //for frame export
-    
+
+protected:
     glx::IRenderer* createRenderer() override
     {
         _pRenderer = new Renderer(this);
         return _pRenderer;
     }
-
-
+    
+    //Helper methods (IRenderer -> My Renderer)
+    inline Renderer* getRenderer()
+    {
+        return static_cast<Renderer*>(_pRenderer);
+    }
+    
+    inline const Renderer* getRenderer() const
+    {
+        return static_cast<const Renderer*>(_pRenderer);
+    }
 public:
     ViewGLX()
     {
@@ -30,7 +39,7 @@ public:
         if (_pRenderer)
         {
             // Update the texture scale in renderer and redraw
-            _pRenderer->setTextureScale(val);
+            getRenderer()->setTextureScale(val);
             reDraw();
         }
     }
@@ -39,7 +48,7 @@ public:
     {
         if (_pRenderer)
         {
-            _pRenderer->switchTexture();
+            getRenderer()->switchTexture();
             reDraw();
         }
     }

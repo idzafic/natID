@@ -36,6 +36,8 @@ class Renderer : public glx::IRenderer
     glx::ComputePipelineState _computePipeline;
     glx::RenderPipeline _renderPipeline;
 
+    glx::PixelFormat _compatiblePixelFormat;
+
     static constexpr uint32_t GRID_SIZE[2] = { 32*3, 32*2 };
 
     struct GameBoardData {
@@ -133,6 +135,7 @@ public:
     Renderer(glx::View* pView)
         : _device(pView->device())
     {
+        _compatiblePixelFormat = glx::getCompatiblePixelFormat(glx::PixelFormat::RGBA8Unorm_sRGB);
         _commandQueue = _device.newCommandQueue();
         pView->getSize(_viewportSize);
 
@@ -156,15 +159,14 @@ public:
         desc.setFragmentFunction(frag);
         glx::RenderPipeline::ColorAttachments clrAttachments = desc.colorAttachments();
         glx::RenderPipeline::ColorAttachment clrAtt = clrAttachments[0];
-        clrAtt.setPixelFormat(glx::PixelFormat::RGBA8Unorm_sRGB);
-        pView->setPixelFormat(glx::PixelFormat::RGBA8Unorm_sRGB);
-        _font.init(_commandQueue, glx::PixelFormat::RGBA8Unorm_sRGB, gui::getResFileName(":font"), 30, 10);
+        clrAtt.setPixelFormat(_compatiblePixelFormat);
+        pView->setPixelFormat(_compatiblePixelFormat);
+        _font.init(_commandQueue, _compatiblePixelFormat, gui::getResFileName(":font"), 30, 10);
 
         _renderPipeline = _device.newRenderPipelineState(desc, e);
 
         glx::Function comp = renderLib.newFunction("mainComp");
         _computePipeline = _device.newComputePipelineState(comp, e);
-
 
         if (!_renderPipeline.isOk() || !_computePipeline.isOk())
         {

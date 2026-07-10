@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file TypeEnums.h
+    @brief Provides buildEnumSerializer specialisations for td::LineStyle and td::DataType. */
 #pragma once
 #include "mu/EnumSerializer.h"
 #include <typeinfo>
@@ -15,18 +17,22 @@
 
 namespace td
 {
+	/// @brief Populates a mu::EnumSerializer with the string-to-value mappings for a known enum type.
+	/// @tparam T The enum type for which to register mappings (LineStyle or DataType).
+	/// @param ser The EnumSerializer to populate.
+	/// @throws td::String if T is not a recognised enum type.
 	template <typename T>
 	inline void buildEnumSerializer(mu::EnumSerializer& ser)
 	{
 		if (typeid(T) == typeid(LineStyle))
-		{			
+		{
 			ENUMMACRO(ser, SOLID);
 			ENUMMACRO(ser, DASH);
 			ENUMMACRO(ser, DOTDASH);
 			ENUMMACRO(ser, DOT);
 			return;
 		}
-		
+
 		if (typeid(T) == typeid(DataType))
 		{
 			ENUMMACRO(ser, boolean);
@@ -66,7 +72,7 @@ namespace td
 			ENUMMACRO(ser, smallDecimal1);
 			ENUMMACRO(ser, smallDecimal2);
 			ENUMMACRO(ser, smallDecimal3);
-			ENUMMACRO(ser, smallDecimal4);		
+			ENUMMACRO(ser, smallDecimal4);
 			return;
 		}
 

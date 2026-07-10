@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file Warnings.h
+    @brief Suppresses common MSVC warnings that are informational or intentionally unused in this codebase. */
 #pragma once
 #include "Definitions.h"
 

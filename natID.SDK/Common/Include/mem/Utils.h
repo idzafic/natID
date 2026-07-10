@@ -7,12 +7,19 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file Utils.h
+    @brief Memory utility functions for fast copy, comparison, and zero-fill of typed arrays. */
 #pragma once
 #include <td/Types.h>
 #include <simd/Alignment.h>
 
 namespace mem
 {
+	/// @brief Copies size elements of type T from pSource to pDest using memcpy.
+	/// @tparam T Element type to copy.
+	/// @param pDest Pointer to the destination buffer.
+	/// @param pSource Pointer to the source buffer.
+	/// @param size Number of elements to copy.
 	template <typename T>
 	inline void fastCopy(T* pDest, const T* pSource, size_t size)
 	{
@@ -20,6 +27,12 @@ namespace mem
 	        memcpy((void*)pDest, (const void*)pSource, size * sizeof(T));
 	}
 
+	/// @brief Compares size elements of type T between pDest and pSource using memcmp.
+	/// @tparam T Element type to compare.
+	/// @param pDest Pointer to the first buffer.
+	/// @param pSource Pointer to the second buffer.
+	/// @param size Number of elements to compare.
+	/// @return true if both buffers are identical, false if they differ.
 	template <typename T>
 	inline bool fastCompare(const T* pDest, const T* pSource, size_t size)
 	{
@@ -32,6 +45,10 @@ namespace mem
 
     #define SSE_MMREG_SIZE	16
 
+	/// @brief Zeroes size elements of type T at pDest, using SIMD streaming stores when available.
+	/// @tparam T Element type to zero-fill.
+	/// @param pDest Pointer to the destination buffer.
+	/// @param size Number of elements to zero.
     template <typename T>
     inline void fastZero(T* pDest, size_t size)
     {
@@ -56,7 +73,7 @@ namespace mem
                 //Get number of even blocks and save reminder
                 size_t i = sizeInBytes >> 6;
                 sizeInBytes &= 63;
-             
+
                 __m128 xmm0 = _mm_setzero_ps();
                 __m128 xmm1 = _mm_setzero_ps();
                 __m128 xmm2 = _mm_setzero_ps();
@@ -76,5 +93,5 @@ namespace mem
             memset((void*)pDest, 0, size *  sizeof(T));
 #endif
     }
-	
+
 }

@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file String.h
+    @brief Reference-counted, encoding-aware string template (StringBase) supporting UTF-8, UTF-16, and UTF-32. */
 #pragma once
 #include <cstdarg>
 #include <td/Types.h>
@@ -87,6 +89,12 @@ namespace td
 	//	}
 	//};
 	class Variant;
+/// @brief Generic reference-counted string with compile-time encoding and allocator selection.
+///
+/// @tparam T_CHAR Character unit type (UTF8, UTF16, or UTF32).
+/// @tparam Encoding StringEncoding tag controlling encoding conversion behaviour.
+/// @tparam SPACE_FOR_SIZE Number of bytes reserved at the start of the buffer for the length field (2 or 4).
+/// @tparam EXTERN_ALLOCATOR If true the buffer is managed externally (e.g. by a StringMemoryManager); if false the class owns the heap allocation.
 	template <typename T_CHAR, StringEncoding Encoding, int SPACE_FOR_SIZE, bool EXTERN_ALLOCATOR>
 	class StringBase //: public Ref<StringBase<T_CHAR, Encoding, SPACE_FOR_SIZE, EXTERN_ALLOCATOR> >
 	{
@@ -122,32 +130,42 @@ namespace td
 		//friend class DateTime;
 #pragma region ForwardDeclsIn
 
-		char* buffer = nullptr;
+		char* buffer = nullptr; ///< Raw heap pointer to the beginning of the allocation (includes size header and character data).
 	public:
-		using iterator = T_CHAR*;
-		using const_iterator = const T_CHAR*;
-		using CHAR_TYPE = T_CHAR;
+		using iterator = T_CHAR*;             ///< Mutable iterator type over character units.
+		using const_iterator = const T_CHAR*; ///< Immutable iterator type over character units.
+		using CHAR_TYPE = T_CHAR;             ///< Alias for the character unit type.
 
+        /// @brief Check whether this StringBase uses an external allocator.
+        /// @return true if EXTERN_ALLOCATOR is true.
         constexpr bool isExtern() const
         {
             return EXTERN_ALLOCATOR;
         }
         
+		/// @brief Return a mutable iterator to the first character unit.
+		/// @return Pointer to the first T_CHAR.
 		inline iterator begin()
 		{
 			return (iterator) getBegin();
 		}
 
+		/// @brief Return a const iterator to the first character unit.
+		/// @return Const pointer to the first T_CHAR.
 		inline const_iterator begin() const
 		{
 			return (const_iterator) getBegin();
 		}
 
+		/// @brief Return a const iterator one past the last character unit.
+		/// @return Const pointer past the last T_CHAR.
 		inline const_iterator end() const
 		{
 			return (const_iterator) getEnd();
 		}
 
+		/// @brief Return the current reference count stored in the size header (4-byte variant only).
+		/// @return Number of outstanding references, or 0 if not applicable or buffer is null.
 		inline td::UINT4 getNumberOfRefs() const
 		{
             if constexpr (SPACE_FOR_SIZE != 4)
@@ -162,6 +180,10 @@ namespace td
 
 	protected:	
 
+		/// @brief Initialize this StringBase inside a pre-allocated block provided by an external allocator.
+		/// @param pBuff Start of the allocated block; a char* header is placed first, then the string data.
+		/// @param byteLen Total byte length of the character area (excluding the size header).
+		/// @param pInStr Optional null-terminated C string to copy into the buffer.
 		void initObjectOnAllocator(T_CHAR* pBuff, size_t byteLen, const char* pInStr = nullptr)
 		{
 		
@@ -182,6 +204,9 @@ namespace td
 			setTrailingZero(byteLen + SPACE_FOR_SIZE);						
 		}
 
+		/// @brief Initialize the data portion of an externally-allocated StringBase.
+		/// @param byteLen Byte length of the character area.
+		/// @param pInStr Optional null-terminated C string to copy into the buffer.
 		void initDataHolderOnAllocator(size_t byteLen, const char* pInStr = nullptr)
 		{
 			//static_assert(EXTERN_ALLOCATOR, "Cannot call this method on normal String");
@@ -203,6 +228,10 @@ namespace td
 			setTrailingZero(byteLen + SPACE_FOR_SIZE);			
 		}
         
+        /// @brief Initialize the data portion with a leading character followed by a C string.
+        /// @param byteLen Byte length of the character area.
+        /// @param pInStr Null-terminated C string to copy after the lead character.
+        /// @param chLead Character to prepend before pInStr.
         void initDataHolderOnAllocator(size_t byteLen, const char* pInStr, char chLead)
         {
             //static_assert(EXTERN_ALLOCATOR, "Cannot call this method on normal String");
@@ -224,6 +253,7 @@ namespace td
             setTrailingZero(byteLen + SPACE_FOR_SIZE);
         }
         
+        /// @brief Saturate the reference counter to TD_STR_MAX_REF, preventing further sharing.
         inline void setRefsToMaximum()
         {
             if constexpr (EXTERN_ALLOCATOR)
@@ -247,6 +277,8 @@ namespace td
         }
 
 		//if false, string has to be copied
+		/// @brief Increment the reference count.
+		/// @return true if sharing is allowed (reference count was incremented); false if the string must be copied instead.
 		inline bool addRef()
 		{
 			if constexpr (EXTERN_ALLOCATOR)
@@ -270,6 +302,8 @@ namespace td
 			return true;
 		}
 
+		/// @brief Return the raw reference count from the buffer header.
+		/// @return Current reference count, or 0 if the buffer is null.
 		inline td::UINT4 getNoOfRefs() const
 		{
 			if (!buffer)
@@ -281,6 +315,8 @@ namespace td
 		}
 
 		//if true, string can be deleted
+		/// @brief Decrement the reference count.
+		/// @return true if the reference count has reached zero and the buffer may be deleted; false otherwise.
 		inline bool relRef()
 		{
 			if constexpr (EXTERN_ALLOCATOR)
@@ -304,6 +340,7 @@ namespace td
 			return false;
 		}
 
+		/// @brief Release the heap buffer if the reference count drops to zero (no-op for external allocators).
 		inline void cleanBuffer()
 		{
 			if constexpr (!EXTERN_ALLOCATOR)
@@ -320,6 +357,8 @@ namespace td
 		}
 	public:
 
+		/// @brief Return the last character unit in the string, or 0 if empty.
+		/// @return Last T_CHAR value, or 0 for an empty string.
 		T_CHAR getLastChar() const
 		{
             td::UINT4 len = unitLength();
@@ -328,6 +367,7 @@ namespace td
 			return (T_CHAR)0;
 		}
 
+		/// @brief Detach from a shared buffer by making a private copy if the reference count is non-zero.
 		inline void duplicate()
 		{
 			//static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
@@ -346,6 +386,9 @@ namespace td
 			setString(pOldStr, len);
 		}
 
+		/// @brief Fill the string with a single character repeated a given number of times.
+		/// @param ch Character unit to repeat.
+		/// @param nReplications Number of times to repeat ch.
 		void replicate(T_CHAR ch, size_t nReplications)
 		{
 			reserve(nReplications);
@@ -354,6 +397,9 @@ namespace td
 				pStr[i] = ch;
 		}
 
+		/// @brief Convert a single ASCII character to uppercase.
+		/// @param chIn Input character unit.
+		/// @return Uppercase equivalent if chIn is a–z; otherwise chIn unchanged.
 		static inline T_CHAR toUpper(T_CHAR chIn)
 		{			
 			if ((chIn >= 97) && (chIn <= 122))
@@ -363,6 +409,9 @@ namespace td
 			return chIn;
 		}
 
+		/// @brief Convert a single ASCII character to lowercase.
+		/// @param chIn Input character unit.
+		/// @return Lowercase equivalent if chIn is A–Z; otherwise chIn unchanged.
 		static inline T_CHAR toLower(T_CHAR chIn)
 		{			
 			if ((chIn >= 65) && (chIn <= 90))
@@ -372,6 +421,8 @@ namespace td
 			return chIn;
 		}
 
+		/// @brief Check whether every character in the string is an ASCII uppercase letter.
+		/// @return true if non-empty and all characters are A–Z.
 		bool isInUpperCase() const
 		{
             td::UINT4 nLen = unitLength();
@@ -387,6 +438,8 @@ namespace td
 			return true;
 		}
 
+		/// @brief Check whether every character in the string is an ASCII lowercase letter.
+		/// @return true if non-empty and all characters are a–z.
 		bool isInLowerCase() const
 		{
             td::UINT4 nLen = unitLength();
@@ -402,6 +455,8 @@ namespace td
 			return true;
 		}
 
+		/// @brief Check whether the string contains at least one ASCII uppercase letter.
+		/// @return Non-zero (true) if any character is strictly between 'A' and 'Z'.
 		td::UINT4 isAnyUpperCase() const
 		{
             td::UINT4 nLen = unitLength();
@@ -417,6 +472,8 @@ namespace td
 			return false;
 		}
 
+		/// @brief Check whether the string contains at least one ASCII lowercase letter.
+		/// @return Non-zero (true) if any character is strictly between 'a' and 'z'.
 		td::UINT4 isAnyLowerCase() const
 		{
             td::UINT4 nLen = unitLength();
@@ -432,11 +489,15 @@ namespace td
 			return false;
 		}
 
+		/// @brief Check whether the string is empty (zero length).
+		/// @return true if length() == 0.
 		inline bool isNull() const
 		{
 			return (length() == 0);
 		}
 
+		/// @brief Check whether the string consists entirely of ASCII digit characters ('0'–'9').
+		/// @return true if non-empty and every character is a digit.
 		bool isNumeric() const
 		{
             td::UINT4 nLen = unitLength();
@@ -454,7 +515,10 @@ namespace td
 		}
 	protected:
 
-		inline char* createTMPBuffer(int size) 
+		/// @brief Allocate a temporary heap buffer of the given character-unit capacity plus trailing zero and size header.
+		/// @param size Number of character bytes to accommodate (excluding the trailing null and size header).
+		/// @return Pointer to the newly allocated buffer, or null if size <= 0.
+		inline char* createTMPBuffer(int size)
 		{
 			//static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
 			assert(!EXTERN_ALLOCATOR);
@@ -520,6 +584,8 @@ namespace td
 			return 0;
 		}
 
+		/// @brief Write a new character-byte count into the size header of the existing buffer.
+		/// @param size New byte count to store (must not exceed the buffer capacity).
 		inline void resetSize(size_t size)
 		{
             if (!buffer)
@@ -557,6 +623,9 @@ namespace td
 			}
 		}
 		public:
+			/// @brief Shorten the stored string by the given number of character units (no-op if shared or too short).
+			/// @param deltaSize Number of units to remove from the end.
+			/// @return true if the size was successfully reduced; false if the buffer is shared or too short.
 			bool reduceSize(size_t deltaSize)
 			{
 				if (getNoOfRefs() != 0)
@@ -571,6 +640,10 @@ namespace td
 				return true;
 			}
 
+			/// @brief Set a new size only if it does not exceed a given maximum.
+			/// @param newSize Desired new character-byte count.
+			/// @param maxSize Maximum allowed size.
+			/// @return true if newSize <= maxSize and the size was updated; false otherwise.
 			bool resetSize(size_t newSize, size_t maxSize)
 			{
 				if (newSize > maxSize)
@@ -580,6 +653,8 @@ namespace td
 			}
 		protected:
 
+		/// @brief Write the encoding-appropriate null terminator at the end of the allocated region.
+		/// @param nToReserve Total byte length of the allocation (including size header).
 		inline void setTrailingZero(size_t nToReserve)
 		{
 			if constexpr (Encoding == EncodingUTF8)
@@ -602,7 +677,10 @@ namespace td
 			}
 		}
 		//input is only space required for characters without zero ch and space for size
-		inline bool prepareBuffer(int size) 
+		/// @brief Allocate a fresh buffer capable of holding the given number of character bytes plus size header and trailing null.
+		/// @param size Number of character bytes to accommodate (excluding trailing null and size header).
+		/// @return true if the buffer was allocated; false if size <= 0.
+		inline bool prepareBuffer(int size)
 		{			
 			//assert(size <= 0x0000FFFF);
 			//static_assert(!EXTERN_ALLOCATOR, "Cannot call this method on StringExt");
@@ -652,6 +730,8 @@ namespace td
 			return false;
 		}
 
+        /// @brief Return a pointer to the first character byte in the buffer (after the size header).
+        /// @return Pointer to the first character, or null if the buffer is empty.
         char* getBegin() const
 		{
 			if (buffer)
@@ -661,6 +741,8 @@ namespace td
 			return 0;
 		}
 
+        /// @brief Return a pointer one byte past the last character in the buffer.
+        /// @return Pointer past the last character, or null if the buffer is empty.
         char* getEnd() const
 		{
 			if (buffer)
@@ -685,6 +767,10 @@ namespace td
 			return 0;
 		}
 
+		/// @brief Append a string in an arbitrary encoding to this StringBase, converting if necessary.
+		/// @tparam TINPUTENCODING Character unit type of the input string.
+		/// @param pStr Pointer to the input character data.
+		/// @param inputLen Number of character units in pStr.
 		template <typename TINPUTENCODING>
 		inline void appendString(const TINPUTENCODING* pStr, int inputLen)
 		{
@@ -5104,12 +5190,22 @@ namespace td
     typedef StringBase<UTF8, td::EncodingUTF8, 4, false> String;
 	typedef StringBase<UTF8, td::EncodingUTF8, 4, true> StringExt;
 
+	/// @brief Returns DataType::string8 for td::String (UTF-8, stored inline).
+	/// @return DataType::string8.
 	inline DataType getType(const String&) {return string8;}
+	/// @brief Returns DataType::string16 for td::StringUTF16 (UTF-16).
+	/// @return DataType::string16.
 	inline DataType getType(const StringUTF16&) {return string16;}
 
+	/// @brief Returns DataType::string8 for td::StringExt (UTF-8, external storage).
+	/// @return DataType::string8.
 	inline DataType getType(const StringExt&) { return string8; }
-		
+
 	//#pragma endregion
+	/// @brief Converts a value of any trivially-copyable type to its hexadecimal string representation.
+	/// @tparam T Type of the value to convert; size must be known at compile time.
+	/// @param val Reference to the value to encode.
+	/// @return A td::String containing the lower-case hex digits of val's raw bytes.
 	template <typename T>
 	inline td::String toHex(T& val)
 	{
@@ -5126,13 +5222,19 @@ namespace td
 namespace mu
 {
 extern MAINUTILS_API const td::String __emptyString;
+/// @brief Returns the value of the named environment variable as a td::String.
+/// @param variableName Null-terminated name of the environment variable to read.
+/// @return The variable's value, or an empty string if it is not set.
 MAINUTILS_API td::String getEnvironmentVariable(const char* variableName);
 
+/// @brief Returns the current user's home-folder path as a td::String.
+/// @return Absolute path to the home directory (e.g. /home/user or C:\Users\user).
 MAINUTILS_API td::String getHomeFolderName();
 }
 
 namespace std
 {
+	/// @brief Specialization of std::hash for td::StringBase; computes the hash using the string's built-in Adler-style hash.
 	template <typename T_CHAR, td::StringEncoding Encoding, int SIZEINSIDE, bool EXTERN_ALLOCATOR>
 	struct hash<td::StringBase<T_CHAR, Encoding, SIZEINSIDE, EXTERN_ALLOCATOR>> //: public unary_function<td::StringBase<T_CHAR, Encoding, SIZEINSIDE, EXTERN_ALLOCATOR>, size_t>
 	{       

@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file VarsAndParams.h
+    @brief Defines map and set types for symbolic compiler variable and parameter management. */
 #pragma once
 #include <td/String.h>
 #include <unordered_map>
@@ -19,12 +21,13 @@ namespace sc
 using VarAndParamMap = std::unordered_map<td::StringExt, td::UINT4>;
 using VarAndParamSet = std::unordered_set<td::StringExt>;
 
+/// @brief Groups pointers to variable and parameter maps for both the main model and sub-model.
 using VarsAndParams = struct _VP
 {
-    VarAndParamMap* pVars = nullptr;
-    VarAndParamMap* pParams = nullptr;
-    VarAndParamMap* pVarsSubModel = nullptr;
-    VarAndParamMap* pParamSubModel = nullptr;
+    VarAndParamMap* pVars = nullptr; ///< Pointer to the main model variable map
+    VarAndParamMap* pParams = nullptr; ///< Pointer to the main model parameter map
+    VarAndParamMap* pVarsSubModel = nullptr; ///< Pointer to the sub-model variable map
+    VarAndParamMap* pParamSubModel = nullptr; ///< Pointer to the sub-model parameter map
 };
 
 using StrMemManager = mem::StringMemoryManager<td::StringExt, 64*1024>;

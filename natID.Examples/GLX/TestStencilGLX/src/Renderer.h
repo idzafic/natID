@@ -72,6 +72,8 @@ class Renderer : public glx::IRenderer
     float _dAngleAct = 0.0f;
     bool _rotation = false;
 
+    glx::PixelFormat _compatiblePixelFormat;
+    
     struct CubeVertex {
         float position[3];
         float texCoord[2];
@@ -117,7 +119,7 @@ public:
     Renderer(glx::View* pView);
     ~Renderer();
 
-    void onResize(const gui::Size& sz) override final;
+    void onResize(const gui::Size& newSize) override final;
 
     void updateSpeed(float val);
     void switchRotation();
@@ -158,7 +160,7 @@ void Renderer::buildShaders()
 
     glx::RenderPipeline::ColorAttachments mainClrAttachments = mainDesc.colorAttachments();
     glx::RenderPipeline::ColorAttachment mainClrAtt = mainClrAttachments[0];
-    mainClrAtt.setPixelFormat(glx::PixelFormat::RGBA8Unorm);
+    mainClrAtt.setPixelFormat(_compatiblePixelFormat);
 
      _mainRP = _device.newRenderPipelineState(mainDesc, error);
      if (!_mainRP.isOk())
@@ -182,7 +184,7 @@ void Renderer::buildShaders()
 
     glx::RenderPipeline::ColorAttachments outlineClrAttachments = outlineDesc.colorAttachments();
     glx::RenderPipeline::ColorAttachment outlineClrAtt = outlineClrAttachments[0];
-    outlineClrAtt.setPixelFormat(glx::PixelFormat::RGBA8Unorm);
+    outlineClrAtt.setPixelFormat(_compatiblePixelFormat);
 
     _outlineRP = _device.newRenderPipelineState(outlineDesc, error);
     if (!_outlineRP.isOk())
@@ -704,6 +706,8 @@ void Renderer::updateTransforms()
 Renderer::Renderer(glx::View* pView)
     : _device(pView->device())
 {
+    _compatiblePixelFormat = glx::getCompatiblePixelFormat(glx::PixelFormat::RGBA8Unorm);
+    
     _commandQueue = _device.newCommandQueue();
     //_viewportSize = gui::Size(800, 600);
     pView->getSize(_viewportSize);
@@ -717,7 +721,7 @@ Renderer::Renderer(glx::View* pView)
     loadTextures();
     updateTransforms();
 
-    pView->setPixelFormat(glx::PixelFormat::RGBA8Unorm);
+    pView->setPixelFormat(_compatiblePixelFormat);
     pView->setDepthStencilPixelFormat(glx::PixelFormat::Depth32Float_Stencil8);
     pView->setClearDepth(1.0);
     pView->setClearStencil(0);

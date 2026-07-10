@@ -20,6 +20,8 @@ include(${NATID_SDK_ROOT}/DevEnv/natGUI.cmake)
 
 include(../TestSplitAndPropEdit/testSplitAndPropEdit.cmake)
 
+include(../TestSplitAndPropEdit2/testSplitAndPropEdit2.cmake)
+
 include(../TestSimpleDynTab/testSimpleDynTab.cmake)
 
 include(../TestAnimation/testAnimation.cmake)

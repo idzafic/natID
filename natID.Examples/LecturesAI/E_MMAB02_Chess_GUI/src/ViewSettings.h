@@ -66,7 +66,8 @@ public:
             _cmbLangs.addItem(lang.getDescription());
             ++i;
         }
-        
+        _cmbLangs.sizeToFit(); //adjust combo size to its content
+
         bool showLabels = appProperties->getTBLabelVisibility(mu::IAppProperties::ToolBarType::Main, true);
         _chbToolbarIconsAndLabels.setChecked(showLabels);
       
@@ -80,7 +81,11 @@ public:
                 appProperties->setValue("translation", strTr); //write translation info back to properties
             if (isRestartRequired())
             {
-                close();
+                auto pApp = getApplication();
+                //clean up and save here whatever you need, the application is about to terminate... and restart fresh....
+                pApp->restart();
+                return;
+                //Problem with combo box in a popover
                 gui::Alert::showYesNoQuestion(tr("RestartRequired"), tr("RestartRequiredInfo"), tr("Restart"), tr("DoNoRestart"), [this] (gui::Alert::Answer answer) {
                     if (answer == gui::Alert::Answer::Yes)
                     {

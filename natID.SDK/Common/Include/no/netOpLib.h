@@ -7,6 +7,9 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file netOpLib.h
+ *  @brief Defines the NETOP_API and NETOP_TEMPLATE export/import macros for the netOp shared library.
+ */
 //
 //  netOpLib.h
 //

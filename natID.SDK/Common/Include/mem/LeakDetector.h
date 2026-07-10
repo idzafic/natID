@@ -7,11 +7,13 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file LeakDetector.h
+    @brief Compile-time-optional memory leak detection utilities that intercept malloc/free and operator new/delete. */
 #pragma once
 #ifdef MU_USE_MEM_LEAK
 #include <mu/muLib.h>
 
-#ifdef MU_DEBUG
+#ifdef MU_DEBUG_LD
 #if defined(MAINUTILS_EXPORTS) || defined(MU_SHOW_MEM_LEAKS)
 #ifndef MU_WINDOWS
 #include <cstdlib>
@@ -54,10 +56,37 @@
 //extern "C" {
 //#endif
 
+/// @brief Debug replacement for malloc that records the allocation site (file and line).
+/// @param size Number of bytes to allocate.
+/// @param file Source file where the allocation occurs.
+/// @param line Line number where the allocation occurs.
+/// @return Pointer to allocated memory, or nullptr on failure.
 MAINUTILS_API void* dbgLeakMalloc(size_t size, const char* file, int line);
+
+/// @brief Debug replacement for calloc that records the allocation site (file and line).
+/// @param num Number of elements to allocate.
+/// @param size Size in bytes of each element.
+/// @param file Source file where the allocation occurs.
+/// @param line Line number where the allocation occurs.
+/// @return Pointer to zero-initialised allocated memory, or nullptr on failure.
 MAINUTILS_API void* dbgLeakCalloc(size_t num, size_t size, const char* file, int line);
+
+/// @brief Debug replacement for realloc that records the allocation site (file and line).
+/// @param ptr Pointer to the previously allocated block, or nullptr.
+/// @param size New size in bytes.
+/// @param file Source file where the reallocation occurs.
+/// @param line Line number where the reallocation occurs.
+/// @return Pointer to the reallocated memory block, or nullptr on failure.
 MAINUTILS_API void* dbgLeakRealloc(void* ptr, size_t size, const char* file, int line);
+
+/// @brief Debug replacement for free that records the deallocation site (file and line).
+/// @param ptr Pointer to the memory block to free.
+/// @param file Source file where the deallocation occurs.
+/// @param line Line number where the deallocation occurs.
 MAINUTILS_API void dbgLeakFree2(void* ptr, const char* file, int line);
+
+/// @brief Debug replacement for free without site information.
+/// @param ptr Pointer to the memory block to free.
 MAINUTILS_API void dbgLeakFree(void* ptr);
 
 
@@ -71,17 +100,42 @@ MAINUTILS_API void dbgLeakFree(void* ptr);
 #define free(ptr) dbgLeakFree(ptr)
 
 // Overload the new and delete operators
+/// @brief Debug operator new that records the allocation file and line.
+/// @param size Number of bytes to allocate.
+/// @param file Source file of the allocation.
+/// @param line Line number of the allocation.
+/// @return Pointer to the allocated memory.
 MAINUTILS_API void* operator new(size_t size, const char* file, int line);
+
+/// @brief Debug array operator new that records the allocation file and line.
+/// @param size Total number of bytes to allocate.
+/// @param file Source file of the allocation.
+/// @param line Line number of the allocation.
+/// @return Pointer to the allocated memory.
 MAINUTILS_API void* operator new[](size_t size, const char* file, int line);
 
+/// @brief Global operator delete used by the leak detector.
+/// @param ptr Pointer to the memory to release.
 MAINUTILS_API void operator delete(void* ptr) noexcept;
+
+/// @brief Global array operator delete used by the leak detector.
+/// @param ptr Pointer to the array memory to release.
 MAINUTILS_API void operator delete[](void* ptr) noexcept;
 
 // Custom global delete overloads (c++ 20)
 //MAINUTILS_API void operator delete(void* ptr, std::size_t size) noexcept;
 //MAINUTILS_API void operator delete[](void* ptr, std::size_t size) noexcept;
 
+/// @brief Placement-delete matching the debug operator new.
+/// @param ptr Pointer to the memory to release.
+/// @param file Source file (unused at runtime, required for matching placement new).
+/// @param line Line number (unused at runtime, required for matching placement new).
 MAINUTILS_API void operator delete(void* ptr, const char* file, int line) noexcept;
+
+/// @brief Placement-delete matching the debug array operator new.
+/// @param ptr Pointer to the array memory to release.
+/// @param file Source file (unused at runtime, required for matching placement new).
+/// @param line Line number (unused at runtime, required for matching placement new).
 MAINUTILS_API void operator delete[](void* ptr, const char* file, int line) noexcept;
 
 // Overload new macro to capture file and line
@@ -90,6 +144,7 @@ MAINUTILS_API void operator delete[](void* ptr, const char* file, int line) noex
 namespace mem
 {
 //     MAINUTILS_API void initLeakDetector();
+    /// @brief Prints a report of all currently live (leaked) allocations to the debug output.
     MAINUTILS_API void showLeakReport();
 }
 #endif //MU_WINDOWS
@@ -98,5 +153,3 @@ namespace mem
 #endif //MU_DEBUG
 
 #endif // MU_USE_MEM_LEAK
-
-

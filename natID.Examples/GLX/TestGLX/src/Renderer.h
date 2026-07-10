@@ -88,7 +88,7 @@ protected:
     }
 public:
     Renderer(glx::View* pView)
-    : _device(pView->device()) //must be retain
+    : _device(pView->device()) 
     {
         _commandQueue = _device.newCommandQueue();
         buildShaders();

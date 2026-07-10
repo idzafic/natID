@@ -7,6 +7,9 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file IPAddress.h
+ * @brief Lightweight IPv4 and IPv6 address types without external library dependency.
+ */
 //
 //  IP4Address.cpp
 //
@@ -19,49 +22,61 @@
 
 namespace no
 {
+	/// @brief Stores and manipulates a 32-bit IPv4 address (header-only version).
 	class IP4Address
 	{
 		union
 		{
-			char address[4];
-			td::UINT4 nAddress;
+			char address[4]; ///< Raw address bytes in network byte order.
+			td::UINT4 nAddress; ///< Address as a single 32-bit unsigned integer.
 		};
-		
+
 	public:
+		/// @brief Default constructor; initialises the address to 0.0.0.0.
 		IP4Address()
 			: nAddress(0)
 		{
 		}
 
+		/// @brief Copy constructor.
+		/// @param address Source address to copy.
 		IP4Address(const IP4Address& address)
 			: nAddress(address.nAddress)
 		{
 		}
 
+		/// @brief Assignment operator.
+		/// @param address Source address to assign.
 		void operator = (const IP4Address& address)
 		{
 			nAddress = address.nAddress;
 		}
 	};
 
+	/// @brief Stores and manipulates a 128-bit IPv6 address (header-only version).
 	class IP6Address
 	{
 		union
 		{
-			char address[16];
-			td::GUID guid;
+			char address[16]; ///< Raw address bytes in network byte order.
+			td::GUID guid;    ///< Address overlaid as a GUID for convenient comparison.
 		};
 	public:
+		/// @brief Default constructor; initialises the address to the all-zeros address.
 		IP6Address()
 			: guid(0,0)
 		{
 		}
 
+		/// @brief Copy constructor.
+		/// @param address Source address to copy.
 		IP6Address(const IP6Address& address)
 			: guid(address.guid)
 		{
 		}
 
+		/// @brief Assignment operator.
+		/// @param address Source address to assign.
 		void operator = (const IP6Address& address)
 		{
 			guid = address.guid;

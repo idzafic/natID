@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file natGLX.h
+    @brief Defines the NATGLX_API export/import macro for the GLX library. */
 //
 //  Created by Izudin Dzafic on 28/07/2020.
 //  Copyright © 2020 IDz. All rights reserved.
@@ -29,11 +31,14 @@
 #endif
 
 
+#include <glx/Types.h>
+
 namespace glx
 {
 
-//class Device;
-//
-//NATGLX_API Device* createDefaultDevice();
+/// @brief Adjust the required pixel format to the once supported by the device
+/// @param fmt The required pixel format
+/// @return Supported device pixel format
+NATGLX_API PixelFormat getCompatiblePixelFormat(glx::PixelFormat fmt);
 
 } //namespace glx

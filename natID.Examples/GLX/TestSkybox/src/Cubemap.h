@@ -579,12 +579,10 @@ public:
         encoder.setCullMode(glx::CullMode::Front);
         
         // Draw the cube
-        encoder.drawIndexedPrimitives(
-            glx::PrimitiveType::Triangle,
-            _indexCount,
-            glx::IndexType::UInt16,
-            _indexBuffer,
-            0
-        );
+        encoder.drawIndexedPrimitives(glx::PrimitiveType::Triangle,
+                                      uint32_t(_indexCount),
+                                      glx::IndexType::UInt16,
+                                      _indexBuffer,
+                                      0);
     }
 };

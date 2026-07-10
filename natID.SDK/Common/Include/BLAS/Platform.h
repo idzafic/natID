@@ -7,8 +7,17 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file Platform.h
+    @brief Defines the Platform enumeration for supported CPU architectures used by BLAS. */
 #pragma once
 namespace BLAS
 {
-	typedef enum {AMD_Athlon=0, AMD_Barcelona=1, Intel_Pentium4=100, Intel_Core2=101, Intel_Penryn=102, Intel_Nehalem=103} Platform;
+	/// @brief Enumeration of supported CPU platforms for BLAS optimizations.
+	typedef enum {AMD_Athlon=0, ///< AMD Athlon processor
+	              AMD_Barcelona=1, ///< AMD Barcelona processor
+	              Intel_Pentium4=100, ///< Intel Pentium 4 processor
+	              Intel_Core2=101, ///< Intel Core 2 processor
+	              Intel_Penryn=102, ///< Intel Penryn processor
+	              Intel_Nehalem=103 ///< Intel Nehalem processor
+	             } Platform;
 }

@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file Conv.h
+    @brief String-to-number and number-to-string conversion utilities for td types. */
 #pragma once
 
 #include <td/Types.h>
@@ -41,22 +43,26 @@ namespace td
     #define TD_USE_STD_FROM_CHARS 0
 #endif
 
+/// @brief Converts a C string to an arithmetic value of type T.
+/// @param str Pointer to the null-terminated source string.
+/// @param strLen Length of the string, or -1 to compute automatically.
+/// @return Parsed value of type T, or T{0} on failure.
 template<typename T>
 T toNumber(const char* str, int strLen=-1)
 {
     static_assert(std::is_arithmetic<T>::value, "T must be arithmetic type");
-    
+
     if (!str)
         return T{0};
-    
+
     if (strLen < 0)
         strLen = (int) strlen(str);
-    
+
     if (strLen == 0)
         return T{0};
-    
+
     T result = T{0};
-    
+
 #if TD_USE_STD_FROM_CHARS
     auto [ptr, ec] = std::from_chars(str, str + strLen, result);
     if (ec != std::errc())
@@ -78,11 +84,15 @@ T toNumber(const char* str, int strLen=-1)
     else if constexpr (std::is_floating_point<T>::value) {
         result = static_cast<T>(std::strtod(str, nullptr));
     }
-    
+
     return result;
 #endif
 }
 
+/// @brief Converts a character string to a boolean value by checking for "true".
+/// @param pStr Pointer to the character array.
+/// @param nLen Length of the string.
+/// @return True if the string equals "true" (case-sensitive first char check), false otherwise.
 template <typename TCH>
 inline bool toBoolean(const TCH* pStr, int nLen)
 {
@@ -95,18 +105,27 @@ inline bool toBoolean(const TCH* pStr, int nLen)
 }
 
 
+/// @brief Converts a C string to a floating-point value of type TFLOAT.
+/// @param str Pointer to the null-terminated source string.
+/// @return Parsed floating-point value.
 template <typename TFLOAT>
 inline TFLOAT toFloat(const char* str)
 {
     return TFLOAT(mu::toDouble(str));
 }
 
+/// @brief Converts a C string to an integer value of type TINT.
+/// @param str Pointer to the null-terminated source string.
+/// @return Parsed integer value.
 template <typename TINT>
 inline TINT toInt(const char* str)
 {
     return (TINT) atol(str);
 }
 
+/// @brief Converts a C string to a floating-point value, storing the result in val.
+/// @param str Pointer to the null-terminated source string.
+/// @param val Reference to the output floating-point variable.
 template <typename TFLOAT>
 inline void toFloat(const char* str, TFLOAT& val)
 {
@@ -115,16 +134,22 @@ inline void toFloat(const char* str, TFLOAT& val)
         val = 0;
         return;
     }
-    
+
     val = TFLOAT(mu::toDouble(str));
 }
 
+/// @brief Converts a C string to an integer value, storing the result in val.
+/// @param str Pointer to the null-terminated source string.
+/// @param val Reference to the output integer variable.
 template <typename TINT>
 inline void toInt(const char* str, TINT& val)
 {
     val = (TINT) atol(str);
 }
 
+/// @brief Converts a C string to a boolean value by comparing to "true" (case-insensitive).
+/// @param str Pointer to the null-terminated source string.
+/// @return True if the string equals "true", false otherwise.
 inline bool toBoolean(const char* str)
 {
     auto len = strlen(str);
@@ -132,11 +157,14 @@ inline bool toBoolean(const char* str)
         return false;
     if (td::compareNoCase(str, "true") == 0)
         return true;
-    
+
     return false;
 }
 
 //prebaceno u gui/adv/Converter.h
+/// @brief Converts a string to a td::HAlignment value.
+/// @param str Source string containing "Left", "Right", or "Center".
+/// @return Corresponding HAlignment enum value; defaults to Left.
 template <typename TSTR>
 inline td::HAlignment toHAlignment(const TSTR& str)
 {
@@ -159,6 +187,9 @@ inline td::HAlignment toHAlignment(const TSTR& str)
     return td::HAlignment::Left;
 }
 
+/// @brief Converts a string to a td::VAlignment value.
+/// @param str Source string containing "Top", "Bottom", or "Center".
+/// @return Corresponding VAlignment enum value; defaults to Top.
 template <typename TSTR>
 inline td::VAlignment toVAlignment(const TSTR& str)
 {
@@ -167,7 +198,7 @@ inline td::VAlignment toVAlignment(const TSTR& str)
     auto nChars = str.length();
     if (nChars < 6)
         return td::VAlignment::Top;
-    
+
     auto ch = str.getAt(0);
     if (ch == 'B' || ch=='b')
     {
@@ -179,10 +210,13 @@ inline td::VAlignment toVAlignment(const TSTR& str)
         if (str.compareConstStr("enter", 1))
             return td::VAlignment::Center;
     }
-    
+
     return td::VAlignment::Top;
 }
 
+/// @brief Converts a string to a td::TextAlignment value.
+/// @param str Source string containing "Left", "Right", "Center", or "Justify".
+/// @return Corresponding TextAlignment enum value; defaults to Left.
 template <typename TSTR>
 inline td::TextAlignment toTextAlignment(const TSTR& str)
 {
@@ -191,7 +225,7 @@ inline td::TextAlignment toTextAlignment(const TSTR& str)
     auto nChars = str.length();
     if (nChars < 5)
         return td::TextAlignment::Left;
-    
+
     auto ch = str.getAt(0);
     if (ch == 'R' || ch=='r')
     {
@@ -211,6 +245,9 @@ inline td::TextAlignment toTextAlignment(const TSTR& str)
     return td::TextAlignment::Left;
 }
 
+/// @brief Converts a string to a td::TextWrap value.
+/// @param str Source string containing "No", "Word", or "Any".
+/// @return Corresponding TextWrap enum value; defaults to No.
 template <typename TSTR>
 inline td::TextWrap toTextWrap(const TSTR& str)
 {
@@ -231,6 +268,9 @@ inline td::TextWrap toTextWrap(const TSTR& str)
     return td::TextWrap::No;
 }
 
+/// @brief Converts a td::HAlignment value to its string representation.
+/// @param ha The HAlignment enum value.
+/// @return Pointer to a constant string ("Left", "Center", "Right", or "NHA").
 inline const char* toString(td::HAlignment ha)
 {
     switch(ha)
@@ -242,6 +282,9 @@ inline const char* toString(td::HAlignment ha)
     }
 }
 
+/// @brief Converts a td::TextAlignment value to its string representation.
+/// @param ta The TextAlignment enum value.
+/// @return Pointer to a constant string ("Left", "Center", "Right", "Justified", or "NTA").
 inline const char* toString(td::TextAlignment ta)
 {
     switch(ta)
@@ -254,6 +297,9 @@ inline const char* toString(td::TextAlignment ta)
     }
 }
 
+/// @brief Converts a td::VAlignment value to its string representation.
+/// @param va The VAlignment enum value.
+/// @return Pointer to a constant string ("Top", "Center", "Bottom", or "NVA").
 inline const char* toString(td::VAlignment va)
 {
     switch(va)
@@ -265,6 +311,9 @@ inline const char* toString(td::VAlignment va)
     }
 }
 
+/// @brief Converts a td::TextWrap value to its string representation.
+/// @param tw The TextWrap enum value.
+/// @return Pointer to a constant string ("No", "Word", "Any", or "NTW").
 inline const char* toString(td::TextWrap tw)
 {
     switch(tw)
@@ -280,6 +329,9 @@ inline const char* toString(td::TextWrap tw)
 //	return toVAlignment(str.c_str());
 //}
 
+    /// @brief Converts a string to a td::DataType enum value.
+    /// @param str Source string containing the data type name (e.g., "int4", "real8", "string").
+    /// @return Corresponding DataType enum value, or TD_NONE if not recognized.
 	template <typename TSTR>
 	inline td::DataType toDataType(const TSTR& str)
 	{
@@ -440,6 +492,9 @@ inline const char* toString(td::TextWrap tw)
 	//		return td::TD_NONE;
 	//	}
 
+    /// @brief Converts a C string to a td::PresentationType enum value.
+    /// @param str Pointer to the null-terminated source string ("yesNo", "trueFalse", "checkBox").
+    /// @return Corresponding PresentationType value; defaults to PT_SameAsDT.
 	inline td::PresentationType toPresentationType(const char* str)
 	{
 	    if (td::compareNoCase(str, "yesNo") == 0)
@@ -450,10 +505,12 @@ inline const char* toString(td::TextWrap tw)
 	        return td::PresentationType::PT_CheckBox;
 	    return td::PresentationType::PT_SameAsDT;
 	}
-	
-	
 
 
+
+    /// @brief Converts a boolean value to its string representation.
+    /// @param bVal The boolean value.
+    /// @return "true" if bVal is true, "false" otherwise.
     inline const char* boolToStr(bool bVal)
     {
         if (bVal)
@@ -463,6 +520,9 @@ inline const char* toString(td::TextWrap tw)
     }
 
 
+    /// @brief Converts a character to uppercase.
+    /// @param ch The input character.
+    /// @return The uppercase equivalent, or the original character if not a lowercase letter.
     template <typename TCHAR>
     inline TCHAR toUpper(TCHAR ch)
     {
@@ -473,6 +533,9 @@ inline const char* toString(td::TextWrap tw)
         return ch;
     }
 
+    /// @brief Converts a character to lowercase.
+    /// @param ch The input character.
+    /// @return The lowercase equivalent, or the original character if not an uppercase letter.
     template <typename TCHAR>
     inline TCHAR toLower(TCHAR ch)
     {
@@ -484,6 +547,8 @@ inline const char* toString(td::TextWrap tw)
 
     }
 
+    /// @brief Converts all characters in a string to uppercase in-place.
+    /// @param pStr Pointer to the null-terminated string to modify.
     template <typename TCHAR>
     void toUpper(TCHAR* pStr)
     {
@@ -500,6 +565,8 @@ inline const char* toString(td::TextWrap tw)
         }
     }
 
+    /// @brief Converts all characters in a string to lowercase in-place.
+    /// @param pStr Pointer to the null-terminated string to modify.
     template <typename TCHAR>
     void toLower(TCHAR* pStr)
     {
@@ -517,6 +584,9 @@ inline const char* toString(td::TextWrap tw)
         }
     }
 
+    /// @brief Converts a single hexadecimal character to its decimal byte value.
+    /// @param hex The hexadecimal character ('0'-'9', 'a'-'f', 'A'-'F').
+    /// @return Decimal value (0-15), or 0 for unrecognized input.
     inline td::BYTE hexToDec(char hex)
     {
         if (hex >= '0' && hex <= '9')
@@ -535,6 +605,11 @@ inline const char* toString(td::TextWrap tw)
         return 0;
     }
 
+    /// @brief Converts a hexadecimal string to a binary value of type T.
+    /// @param hex Pointer to the hexadecimal string (must be even length).
+    /// @param lenHex Number of hex characters to read.
+    /// @param val Output value of type T filled from the hex data.
+    /// @return True on success, false if the hex length is odd or too large for T.
     template <typename T>
     inline bool hexToDec(const char* hex, size_t lenHex, T& val)
     {
@@ -570,6 +645,10 @@ inline const char* toString(td::TextWrap tw)
     }
 
     ///pHexOut must be at least 2 * len in size
+    /// @brief Converts a binary byte array to its hexadecimal string representation.
+    /// @param pStr Pointer to the input binary data.
+    /// @param len Number of bytes to convert.
+    /// @param outStr Output buffer; must be at least 2*len characters.
     inline void toHex(const char* pStr, size_t len, char* outStr)
     {
         const char pHex[] = "0123456789ABCDEF";
@@ -586,6 +665,9 @@ inline const char* toString(td::TextWrap tw)
         }
     }
 
+    /// @brief Converts a single byte to two hexadecimal characters.
+    /// @param c The input byte.
+    /// @param hex Output array of two characters representing the byte in hex.
     inline void charToHex(unsigned char c, unsigned char hex[2])
     {
         unsigned char hex1 = c / 16;
@@ -596,6 +678,10 @@ inline const char* toString(td::TextWrap tw)
         hex[1] = hex2;
     }
 
+    /// @brief Converts binary data to hex and appends to a string object.
+    /// @param pStr Pointer to the input binary data.
+    /// @param len Number of bytes to convert.
+    /// @param outStr Output string that receives the hex representation.
     template <typename TSTR>
     inline void toHex(const char* pStr, size_t len, TSTR& outStr)
     {
@@ -604,6 +690,9 @@ inline const char* toString(td::TextWrap tw)
     }
 
     ///pHexOut must be at least 2 * sizeof(T) in size
+    /// @brief Converts a typed value to its hexadecimal string representation.
+    /// @param val The input value to convert.
+    /// @param outStr Output buffer; must be at least 2*sizeof(T) characters.
     template <typename T>
     inline void toHex(T& val, char* outStr)
     {
@@ -630,6 +719,9 @@ inline const char* toString(td::TextWrap tw)
         //}
     }
 
+    /// @brief Converts a C string to an unsigned 64-bit integer.
+    /// @param pStr Pointer to the null-terminated decimal string.
+    /// @return Parsed LUINT8 value.
     inline td::LUINT8 toUint8(const char* pStr)
     {
         char *pStop = 0;
@@ -640,6 +732,9 @@ inline const char* toString(td::TextWrap tw)
 #endif
     }
 
+    /// @brief Converts a C string to a signed 64-bit integer.
+    /// @param pStr Pointer to the null-terminated decimal string.
+    /// @return Parsed LINT8 (signed 64-bit) value.
     inline td::LUINT8 toInt8(const char* pStr)
     {
         char *pStop = 0;
@@ -650,18 +745,28 @@ inline const char* toString(td::TextWrap tw)
 #endif
     }
 
+    /// @brief Zeroes out the memory of a value.
+    /// @param val Reference to the value to clear.
     template <typename T>
     inline void toZero(T& val)
     {
         memset((void*)&val, 0, sizeof(T));
     }
 
+    /// @brief Converts a localized number string to ANSI C locale format (dot as decimal separator).
+    /// @param pStrIn Input string in locale-specific format.
+    /// @param nLenIn Length of the input string.
+    /// @param buff Output buffer; must be at least 25 bytes.
+    /// @param buffLen Size of the output buffer.
+    /// @param decPoint Decimal point character used in the input.
+    /// @param thSep Thousands separator character used in the input.
+    /// @return Number of characters written to buff.
     inline size_t toAnsiCNumber(const char* pStrIn, size_t nLenIn, char* buff, size_t buffLen, char decPoint, char thSep)
     {
         assert(buffLen >= 25);
         memset(buff, 0, buffLen);
         size_t  iPos = 0;
-        
+
         for (size_t i=0; i<nLenIn && iPos < 24; ++i)
         {
             char ch = pStrIn[i];
@@ -677,6 +782,13 @@ inline const char* toString(td::TextWrap tw)
         return iPos;
     }
 
+    /// @brief Template overload of toAnsiCNumber using a fixed-size array buffer.
+    /// @param pStrIn Input string in locale-specific format.
+    /// @param nLenIn Length of the input string.
+    /// @param buff Fixed-size output character array (at least 25 bytes required).
+    /// @param decPoint Decimal point character used in the input.
+    /// @param thSep Thousands separator character used in the input.
+    /// @return Number of characters written to buff.
     template <size_t NBUFLEN>
     inline size_t toAnsiCNumber(const char* pStrIn, size_t nLenIn, char (&buff) [NBUFLEN], char decPoint, char thSep)
     {
@@ -684,6 +796,16 @@ inline const char* toString(td::TextWrap tw)
         return toAnsiCNumber(pStrIn, nLenIn, buff, NBUFLEN, decPoint, thSep);
     }
 
+    /// @brief Extracts numeric characters from a string, handling sign, decimal point and optional scientific notation.
+    /// @param pData Input data string.
+    /// @param nDataLen Length of the input data.
+    /// @param dt DataType used to determine float/integer handling.
+    /// @param buff Output buffer for the extracted number (at least 25 bytes).
+    /// @param nBuffLen Size of the output buffer.
+    /// @param decPoint Decimal point character.
+    /// @param thSep Thousands separator character.
+    /// @param sci If true, allow scientific notation characters (e/E/+/-).
+    /// @return True if any non-numeric characters were encountered (input changed), false otherwise.
     inline bool extractNumbers(const char* pData, size_t nDataLen, td::DataType dt, char* buff, size_t nBuffLen, char decPoint, char thSep, bool sci= false)
     {
         assert(nBuffLen >= 25);
@@ -746,6 +868,15 @@ inline const char* toString(td::TextWrap tw)
         return changed;
     }
 
+    /// @brief Template overload of extractNumbers using a fixed-size array buffer.
+    /// @param pData Input data string.
+    /// @param nDataLen Length of the input data.
+    /// @param dt DataType for float/integer handling.
+    /// @param buff Fixed-size output character array (at least 25 bytes required).
+    /// @param decPoint Decimal point character.
+    /// @param thSep Thousands separator character.
+    /// @param sci If true, allow scientific notation characters.
+    /// @return Tuple of (number of characters written, whether the input was changed).
     template <size_t NCHBUFF>
     std::tuple<size_t, bool> extractNumbers(const char* pData, size_t nDataLen, td::DataType dt, char (&buff)[NCHBUFF], char decPoint, char thSep, bool sci= false)
     {
@@ -810,4 +941,3 @@ inline const char* toString(td::TextWrap tw)
     }
 
 } //namespace td
-

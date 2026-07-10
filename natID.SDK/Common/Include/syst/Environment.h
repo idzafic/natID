@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file Environment.h
+    @brief Provides utilities to read and expand operating-system environment variables. */
 #pragma once
 #include <td/String.h>
 #include <cstdlib>
@@ -17,10 +19,14 @@
 
 namespace syst
 {
+	/// @brief Provides static methods for reading and resolving environment variables.
 	class Environment
 	{
 	public:
         ///returns value environment variable if exists, otherwise empty string
+		/// @brief Returns the value of an environment variable by its C-string name.
+		/// @param envVar The name of the environment variable.
+		/// @return The value of the variable, or an empty string if it does not exist.
 		inline static td::String getVariable(const char* envVar)
 		{
             if (!envVar)
@@ -42,7 +48,10 @@ namespace syst
             return str;
 #endif
 		}
-        
+
+        /// @brief Returns the value of an environment variable by its td::String name.
+        /// @param envVar The name of the environment variable.
+        /// @return The value of the variable, or an empty string if it does not exist.
         inline static td::String getVariable(const td::String& envVar)
         {
             if (envVar.length() == 0)
@@ -66,6 +75,9 @@ namespace syst
         }
 
         /// returns value of environment variable if exists, otherwise name of environment variable
+        /// @brief Returns the value of an environment variable, falling back to the variable name.
+        /// @param envVar The name of the environment variable as a C-string.
+        /// @return The value if defined, or the variable name itself if undefined.
         inline static td::String getVariable2(const char* envVar)
         {
             if (envVar == nullptr)
@@ -89,6 +101,9 @@ namespace syst
         }
 
         /// returns value of environment variable if exists, otherwise name of environment variable
+        /// @brief Returns the value of an environment variable, falling back to the variable name.
+        /// @param envVar The name of the environment variable as a td::String.
+        /// @return The value if defined, or the variable name itself if undefined.
         inline static td::String getVariable2(const td::String& envVar)
         {
             if (envVar.length() == 0)
@@ -110,13 +125,17 @@ namespace syst
             return envVar;
 #endif
         }
-        
+
         ///replaces environment variables that start with $ in a path with slash (/) as separator'
+        /// @brief Expands environment variable references (prefixed with '$') in a path string.
+        /// @param path The path string potentially containing '$VAR' tokens.
+        /// @param pVarMap Optional map of additional variable overrides; may be nullptr.
+        /// @return A new string with all recognized variable references expanded.
         inline static td::String replaceVariablesInPath(const td::String& path, std::map<td::String, td::String>* pVarMap = nullptr)
         {
             if (path.length() < 1)
                 return path;
-            
+
             auto nToReplace = path.getCount('$');
             if (nToReplace == 0)
             {
@@ -144,7 +163,7 @@ namespace syst
             auto nSeparators = path.getCount('/');
             cnt::PushBackVector<td::String> parts;
             cnt::StringBuilderSmall sb;
-            
+
             if (nSeparators == 0)
             {
                 parts.reserve(nToReplace+1);
@@ -187,7 +206,7 @@ namespace syst
                             else
                                 sb << Environment::getVariable2(part);
                         }
-                            
+
                     }
                 }
             }
@@ -207,7 +226,7 @@ namespace syst
                         sb << '/';
                     else
                         bFirst = false;
-                    
+
                     auto nVars = part.getCount('$');
                     if (nVars > 0)
                     {
@@ -235,7 +254,7 @@ namespace syst
                                         }
                                         else
                                             sb << Environment::getVariable2(subPart);
-                                        
+
                                     }
                                     else
                                         sb << part;
@@ -265,15 +284,23 @@ namespace syst
             }
             return sb.toString();
         }
-        
+
         ///replaces environment variables that start with $ in a path with slash (/) as separator'
+        /// @brief Expands environment variable references in a filesystem path object.
+        /// @param path The filesystem path potentially containing '$VAR' tokens.
+        /// @param pVarMap Optional map of additional variable overrides; may be nullptr.
+        /// @return A new string with all recognized variable references expanded.
         inline static td::String replaceVariablesInPath(const fo::fs::path& path, std::map<td::String, td::String>* pVarMap = nullptr)
         {
             td::String strPath = path.string();
             return replaceVariablesInPath(strPath, pVarMap);
         }
-        
+
         ///replaces environment variables that start with $ in a path with slash (/) as separator'
+        /// @brief Expands environment variable references in a C-string path.
+        /// @param varPath The C-string path potentially containing '$VAR' tokens.
+        /// @param pVarMap Optional map of additional variable overrides; may be nullptr.
+        /// @return A new string with all recognized variable references expanded.
         inline static td::String replaceVariablesInPath(const char* varPath, std::map<td::String, td::String>* pVarMap = nullptr)
         {
             td::String strPath(varPath);

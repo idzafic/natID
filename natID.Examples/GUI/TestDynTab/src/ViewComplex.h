@@ -254,14 +254,14 @@ protected:
     {
         if (pBtn == &_btnHideRow)
         {
-            bool bHide = true;
-            if (_lbl2.isHidden())
-                bHide = false;
-            _lbl2.hide(bHide, false);
-            _lblPrice.hide(bHide, false);
-            _price.hide(bHide, false);
-            _lineEdit2.hide(bHide, false);
-            _textEdit.hide(bHide, true);
+            bool bVisible = false;
+            if (_lbl2.isVisible())
+                bVisible = true;
+            _lbl2.setVisible(bVisible, false);
+            _lblPrice.setVisible(bVisible, false);
+            _price.setVisible(bVisible, false);
+            _lineEdit2.setVisible(bVisible, false);
+            _textEdit.setVisible(bVisible, true);
             return true;
         }
         if (pBtn == &_btn1)
@@ -307,7 +307,7 @@ protected:
         if (pBtn == &_btn5)
         {
             _isLblHidden = !_isLblHidden;
-            _lblLong.hide(_isLblHidden, true);
+            _lblLong.setVisible(!_isLblHidden, true);
             return true;
         }
         

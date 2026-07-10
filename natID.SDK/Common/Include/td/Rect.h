@@ -7,43 +7,57 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file Rect.h
+    @brief Defines a generic axis-aligned rectangle with left, top, right, bottom edges. */
 #pragma once
 #include <math/math.h>
 #include <td/Point.h>
 
 namespace td
 {
+	/// @brief Represents an axis-aligned rectangle defined by four edge coordinates.
+	/// @tparam T The numeric type used for the coordinate values.
 	template <typename T>
 	class Rect
 	{
 	public:
-		T left;
-		T top;
-		T right;
-		T bottom;
+		T left;   ///< Left edge coordinate.
+		T top;    ///< Top edge coordinate.
+		T right;  ///< Right edge coordinate.
+		T bottom; ///< Bottom edge coordinate.
 
+		/// @brief Returns the width of the rectangle as the absolute difference of right and left.
+		/// @return Width of the rectangle.
 		T width() const
 		{
 			return math::abs(right - left);
 		};
 
+		/// @brief Sets the right and bottom edges based on a given width and height.
+		/// @param w Desired width; sets right = left + w.
+		/// @param h Desired height; sets bottom = top + h.
 		void setWidthAndHeight(T w, T h)
 		{
 			right = left + w;
 			bottom = top + h;
 		};
 
+		/// @brief Returns the height of the rectangle as the absolute difference of bottom and top.
+		/// @return Height of the rectangle.
 		T height() const
 		{
 			return math::abs(bottom - top);
 		};
 
+		/// @brief Computes the centre point of the rectangle.
+		/// @param center Output parameter that receives the centre coordinates.
 		void center(Point<T>& center) const
 		{
 			center.x = (left + right)/2;
 			center.y = (top + bottom) /2;
 		};
 
+		/// @brief Default constructor; initialises all edges to zero.
 		Rect()
 			: left(0)
 			, right(0)
@@ -51,6 +65,11 @@ namespace td
 			, bottom(0)
 		{};
 
+		/// @brief Constructs a Rect from explicit edge coordinates.
+		/// @param l Left edge value.
+		/// @param t Top edge value.
+		/// @param r Right edge value.
+		/// @param b Bottom edge value.
 		Rect(T l, T t, T r, T b)
 			: left(l)
 			, right(r)
@@ -58,6 +77,9 @@ namespace td
 			, bottom(b)
 		{};
 
+		/// @brief Constructs a Rect from two corner points.
+		/// @param tl The top-left corner point.
+		/// @param br The bottom-right corner point.
 		Rect(const Point<T>& tl, const Point<T>& br)
 			: left(tl.x)
 			, right(br.x)
@@ -65,6 +87,8 @@ namespace td
 			, bottom(br.y)
 		{};
 
+		/// @brief Copy constructor.
+		/// @param r The Rect to copy from.
 		Rect(const Rect<T>& r)
 			: left(r.left)
 			, right(r.right)
@@ -72,6 +96,9 @@ namespace td
 			, bottom(r.bottom)
 		{};
 
+		/// @brief Assignment operator.
+		/// @param r The Rect to assign from.
+		/// @return Reference to this Rect.
 		const Rect<T>& operator = (const Rect& r)
 		{
 			left = r.left;
@@ -81,6 +108,10 @@ namespace td
 			return * this;
 		};
 
+		/// @brief Computes the minimum distance from a point to any edge of the rectangle.
+		/// @param x The x-coordinate of the query point.
+		/// @param y The y-coordinate of the query point.
+		/// @return The minimum distance from the point to the nearest edge segment.
 		T getMinDistance(T x, T y) const
 		{
 			double minDistance = getDistanceFromAB(left, top, right,  top, x, y);
@@ -112,7 +143,10 @@ namespace td
 	//{
 	//	return os << r.left << r.top << r.right << r.bottom;
 	//}
-	
+
+	/// @brief Returns the DataType identifier for a Rect of the given primitive type.
+	/// @tparam TPRIM The primitive type of the Rect coordinates.
+	/// @return td::rect data-type identifier.
 	template <typename TPRIM>
 	inline td::DataType getType(const td::Rect<TPRIM>&) { return td::rect; }
 }

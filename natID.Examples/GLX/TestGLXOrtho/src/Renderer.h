@@ -84,11 +84,6 @@ class Renderer : public glx::IRenderer
 
     // Pan and zoom
     glm::vec2 _panOffset = glm::vec2(0.0f, 0.0f);
-    float _zoom = 1.0f;
-    static constexpr float _zoomMin = 0.1f;
-    static constexpr float _zoomMax = 50.0f;
-    static constexpr float _scrollSpeed = 0.3f;
-    static constexpr float _zoomKeyFactor = 1.1f;
 
     // Drag tracking
     glm::vec2 _lastDragPos = glm::vec2(0.0f, 0.0f);
@@ -97,6 +92,14 @@ class Renderer : public glx::IRenderer
     std::deque<InstancedObject> _objects;
     InstancedObject* _crosshairH = nullptr;  // Horizontal line
     InstancedObject* _crosshairV = nullptr;  // Vertical line
+    
+    float _zoom = 1.0f;
+    static constexpr float _zoomMin = 0.1f;
+    static constexpr float _zoomMax = 50.0f;
+    static constexpr float _scrollSpeed = 0.3f;
+    static constexpr float _zoomKeyFactor = 1.1f;
+    
+    glx::PixelFormat _compatiblePixelFormat;
 
 protected:
 
@@ -129,7 +132,8 @@ protected:
 
         glx::RenderPipeline::ColorAttachments clrAttachments = desc.colorAttachments();
         glx::RenderPipeline::ColorAttachment clrAtt = clrAttachments[0];
-        clrAtt.setPixelFormat(glx::PixelFormat::RGBA8Unorm);
+        //clrAtt.setPixelFormat(glx::PixelFormat::RGBA8Unorm);
+        clrAtt.setPixelFormat(_compatiblePixelFormat);
 
         _RP = _device.newRenderPipelineState(desc, error);
         if (!_RP.isOk())
@@ -313,6 +317,7 @@ public:
     Renderer(glx::View* pView)
         : _device(pView->device())
     {
+        _compatiblePixelFormat = glx::getCompatiblePixelFormat(glx::PixelFormat::RGBA8Unorm);
         _pView = pView;
         _commandQueue = _device.newCommandQueue();
         pView->getSize(_viewportSize);
@@ -324,8 +329,8 @@ public:
         buildCrosshair();
         updateProjection();
 
-        pView->setPixelFormat(glx::PixelFormat::RGBA8Unorm);
-
+        pView->setPixelFormat(_compatiblePixelFormat);
+        //pView->setPixelFormat(glx::PixelFormat::RGBA8Unorm);
         mu::DebugConsoleLog::info() << "Ortho polygon renderer initialized";
     }
 
@@ -394,6 +399,8 @@ public:
     {
         scale = std::abs(scale);
 
+        mu::dbgLog("Zoom x=%.1f, y=%.1f", framePoint.x, framePoint.y);
+        
 		double newZoom = glm::clamp(_zoom * static_cast<float>(scale), _zoomMin, _zoomMax);
 
         double offsetX = (_viewportSize.width / _zoom - _viewportSize.width / (newZoom));

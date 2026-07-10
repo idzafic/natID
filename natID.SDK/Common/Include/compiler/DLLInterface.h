@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file DLLInterface.h
+    @brief Configures DLL export/import interface warnings for MSVC compiler. */
 //
 //  Created by Izudin Dzafic on 25/10/2020.
 //  Copyright © 2020-2021 IDz. All rights reserved.

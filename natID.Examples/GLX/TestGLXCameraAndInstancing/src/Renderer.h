@@ -63,6 +63,7 @@ class Renderer : public glx::IRenderer
     float _accAngle = 0.0f;
     float _dAngle = 0.01f;
     td::BYTE _usedTexture = 0;
+    glx::PixelFormat _compatiblePixelFormat;
     
     struct CubeVertex {
         float position[3];
@@ -113,7 +114,7 @@ protected:
 
         glx::RenderPipeline::ColorAttachments clrAttachments = desc.colorAttachments();
         glx::RenderPipeline::ColorAttachment clrAtt = clrAttachments[0];
-        clrAtt.setPixelFormat(glx::PixelFormat::RGBA8Unorm);
+        clrAtt.setPixelFormat(_compatiblePixelFormat);
 
         _RP = _device.newRenderPipelineState(desc, error);
         if (!_RP.isOk())
@@ -601,16 +602,13 @@ protected:
         memcpy(_uniformBuffer.contents(), &ubo, sizeof(UniformBufferObject));
         glx::Buffer::Range range(0, sizeof(UniformBufferObject));
         _uniformBuffer.didModifyRange(range);
-
-
-        
-
     }
 
 public:
     Renderer(glx::View* pView)
         : _device(pView->device())
     {
+        _compatiblePixelFormat = glx::getCompatiblePixelFormat(glx::PixelFormat::RGBA8Unorm);
         _pView = pView;
         _commandQueue = _device.newCommandQueue();
         pView->getSize(_viewportSize);
@@ -623,7 +621,7 @@ public:
         updateCamera();
 
         // Configure View to manage depth texture
-        pView->setPixelFormat(glx::PixelFormat::RGBA8Unorm);
+        pView->setPixelFormat(_compatiblePixelFormat);
         pView->setDepthStencilPixelFormat(glx::PixelFormat::Depth32Float);
         pView->setClearDepth(1.0);
         

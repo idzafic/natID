@@ -7,6 +7,9 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file Utils.h
+ * @brief Thread utility declarations placeholder.
+ */
 #pragma once
 
 

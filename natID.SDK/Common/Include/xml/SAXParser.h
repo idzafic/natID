@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file SAXParser.h
+    @brief Template-based SAX-style XML parser that processes XML documents via callback methods. */
 #pragma once
 #include <cnt/List.h>
 #include <td/String.h>
@@ -29,74 +31,107 @@
 //(bom[0] == 0xfe && bom[1] == 0xff) ||
 //(bom[0] == 0 && bom[1] == 0 && bom[2] == 0xfe && bom[3] == 0xff))
 
-//bomDict={ # bytepattern : name              
-//(0x00, 0x00, 0xFE, 0xFF) : "utf_32_be",        
+//bomDict={ # bytepattern : name
+//(0x00, 0x00, 0xFE, 0xFF) : "utf_32_be",
 
 //(0xFF, 0xFE, 0x00, 0x00) : "utf_32_le",
-//(0xFF, 0xFE, None, None) : "utf_16_le", 
+//(0xFF, 0xFE, None, None) : "utf_16_le",
 
-//(0xFE, 0xFF, None, None) : "utf_16_be", 
+//(0xFE, 0xFF, None, None) : "utf_16_be",
 //(0xEF, 0xBB, 0xBF, None) : "utf_8",
 //}
 
 namespace xml
 {
+	/// @brief Template SAX XML parser that invokes TXML_CONSUMER callbacks during parsing.
+	/// @tparam TXML_CONSUMER  Consumer/handler class that receives parser callbacks (CRTP).
+	/// @tparam TBUFF          Buffer type used for input data reading.
+	/// @tparam NODE_AND_ATTRIB_HASH_SIZE  Hash table size for node and attribute name lookup.
+	/// @tparam FROM_MEMORY    True if parsing from a memory buffer, false if parsing from a file.
+	/// @tparam SKIP_COMMENTS  True to discard XML comments (default), false to deliver them.
 	template <class TXML_CONSUMER, class TBUFF, unsigned int NODE_AND_ATTRIB_HASH_SIZE, bool FROM_MEMORY, bool SKIP_COMMENTS = true>
 	class SAXParser : public mu::Tokenizer<char, TBUFF, FileString8, mu::ParserType::Xml, FROM_MEMORY>
 	{
 	public:
-        enum class FileEncoding : td::BYTE {UTF_32_BE, UTF_32_LE, UTF_16_BE, UTF_16_LE, UTF_8, None};
-		enum class NodeType : td::BYTE {Dummy=0, WithAttribs, WithoutAttribs, NODE_WITH_ATTRIBS_AND_TEXT, NODE_WO_ATTRIBS_AND_TEXT};
-		typedef cnt::HashEntry<td::StringExt> tHashEntry;
-		typedef mu::Tokenizer<char, TBUFF, FileString8, mu::ParserType::Xml, FROM_MEMORY> TBASE;
+        /// @brief XML file encoding detected from the byte-order mark.
+        enum class FileEncoding : td::BYTE {
+            UTF_32_BE, ///< UTF-32 big-endian encoding
+            UTF_32_LE, ///< UTF-32 little-endian encoding
+            UTF_16_BE, ///< UTF-16 big-endian encoding
+            UTF_16_LE, ///< UTF-16 little-endian encoding
+            UTF_8,     ///< UTF-8 encoding
+            None       ///< No BOM detected; assume UTF-8 or ASCII
+        };
+		/// @brief Classification of an XML node based on its content.
+        enum class NodeType : td::BYTE {
+            Dummy=0,                    ///< Self-closing element with no attributes
+            WithAttribs,                ///< Element that has attributes
+            WithoutAttribs,             ///< Element without attributes
+            NODE_WITH_ATTRIBS_AND_TEXT, ///< Element with both attributes and text content
+            NODE_WO_ATTRIBS_AND_TEXT    ///< Element with text content but no attributes
+        };
+		typedef cnt::HashEntry<td::StringExt> tHashEntry; ///< Hash entry type for node/attribute names.
+		typedef mu::Tokenizer<char, TBUFF, FileString8, mu::ParserType::Xml, FROM_MEMORY> TBASE; ///< Convenience alias for the base tokenizer type.
     private:
-        cnt::Stack< const tHashEntry *, 16> _processingNodes;
+        cnt::Stack< const tHashEntry *, 16> _processingNodes; ///< Stack of currently open node hash entries.
 
-	protected:		
-		bool _callOnNodeTextForWhitespace = false;
-		mu::ParserException _lastException;
-		const tHashEntry* _pLastNode = nullptr;
-		const tHashEntry* _pLastAttrib = nullptr;
-		cnt::HashList< cnt::HashBucket< tHashEntry>, td::StringExt, NODE_AND_ATTRIB_HASH_SIZE>  _nodeAndAttribHash;
-		std::ifstream _inputFile;
-		int _nNodesOnStack = 0;
-        FileEncoding _fileEncoding;
-		td::BYTE _rootDetected = 0;
-		//bool nodeJustOpened;
-		td::BYTE _endTextDetected = 0;
-
-		td::BYTE _makeFullCallOnDummyNode = 1;
-	
 	protected:
+		bool _callOnNodeTextForWhitespace = false; ///< If true, fire onNodeText even for whitespace-only text.
+		mu::ParserException _lastException; ///< Stores the most recent parser exception for error reporting.
+		const tHashEntry* _pLastNode = nullptr; ///< Hash entry of the most recently opened node.
+		const tHashEntry* _pLastAttrib = nullptr; ///< Hash entry of the most recently encountered attribute.
+		cnt::HashList< cnt::HashBucket< tHashEntry>, td::StringExt, NODE_AND_ATTRIB_HASH_SIZE>  _nodeAndAttribHash; ///< Combined hash table for node and attribute name lookups.
+		std::ifstream _inputFile; ///< File stream used when parsing from a file.
+		int _nNodesOnStack = 0; ///< Number of currently open nodes on the processing stack.
+        FileEncoding _fileEncoding; ///< Detected encoding of the input file.
+		td::BYTE _rootDetected = 0; ///< Non-zero once the root element opening tag has been seen.
+		//bool nodeJustOpened;
+		td::BYTE _endTextDetected = 0; ///< Non-zero when trailing content after the root closing tag is detected.
+
+		td::BYTE _makeFullCallOnDummyNode = 1; ///< When non-zero, emit onOpenNode/onCloseNode callbacks for self-closing elements.
+
+	protected:
+		/// @brief Returns a pointer to the CRTP-derived consumer object.
+		/// @return Pointer to the TXML_CONSUMER instance.
 		inline TXML_CONSUMER* consumer()
 		{
 			return static_cast<TXML_CONSUMER*>(this);
 		}
 
+		/// @brief Looks up a node hash entry by its null-terminated name string.
+		/// @param pStr  Null-terminated node name to look up.
+		/// @return Pointer to the matching hash entry, or nullptr if not found.
 		inline const tHashEntry* getNodeHashEntry(const char* pStr) const
 		{
 			unsigned int hash = mu::Utils::calcHashNo(pStr);
 			return _nodeAndAttribHash.find(hash, pStr);
 		}
 
+		/// @brief Looks up a node hash entry by its pre-computed hash number.
+		/// @param hashNo  Hash number to look up.
+		/// @return Pointer to the matching hash entry, or nullptr if not found.
 		inline const tHashEntry* getNodeHashEntry(td::UINT4 hashNo) const
-		{			
+		{
 			return _nodeAndAttribHash.find(hashNo);
 		}
 
+		/// @brief Looks up an attribute hash entry by its null-terminated name string.
+		/// @param pStr  Null-terminated attribute name to look up.
+		/// @return Pointer to the matching hash entry, or nullptr if not found.
 		inline const tHashEntry* getAttribHashEntry(const char* pStr) const
 		{
 			unsigned int hash = mu::Utils::calcHashNo(pStr);
 			return _nodeAndAttribHash.find(hash, pStr);
 		}
 
+		/// @brief Reads the byte-order mark from the input and sets _fileEncoding accordingly.
 		inline void detectFileEncoding()
 		{
 			unsigned char ch = (unsigned char) *TBASE::it;
 			if (ch == 0x00)
 			{
 				//UTF_32_BE
-				//(0x00, 0x00, 0xFE, 0xFF) : "utf_32_be", 
+				//(0x00, 0x00, 0xFE, 0xFF) : "utf_32_be",
 				++TBASE::it;
 				ch = (unsigned char) *TBASE::it;
 				if (ch != 0x00)
@@ -116,7 +151,7 @@ namespace xml
 			{
 				//UTF_32_LE or UTF_16_LE
 				//(0xFF, 0xFE, 0x00, 0x00) : "utf_32_le",
-				//(0xFF, 0xFE, None, None) : "utf_16_le", 
+				//(0xFF, 0xFE, None, None) : "utf_16_le",
 				++TBASE::it;
 				ch = (unsigned char) *TBASE::it;
 				if (ch != 0xFE)
@@ -147,7 +182,7 @@ namespace xml
 					throw mu::ParserException(-1,-1, mu::ExceptionType::NotAnXMLFile, "Not an XML file");
 				++TBASE::it;
 				ch = (unsigned char) *TBASE::it;
-				if (ch != 0xBF)				
+				if (ch != 0xBF)
 					throw mu::ParserException(-1,-1, mu::ExceptionType::NotAnXMLFile, "Not an XML file");
 
 				++TBASE::it;
@@ -170,6 +205,7 @@ namespace xml
 			}
 		}
 
+		/// @brief Parses the XML declaration header (<?xml version="1.0" ...?>).
 		inline void parseHeader()
 		{
 			//detect file encoding
@@ -190,10 +226,10 @@ namespace xml
 
 			int pos = 0;
 
-			do 
+			do
 			{
 				while (TBASE::it != TBASE::itEnd)
-				{	
+				{
 					switch(pos)
 					{
 					case 0:
@@ -301,16 +337,17 @@ namespace xml
 							return;
 						}
 						throw mu::ParserException(-1,-1, mu::ExceptionType::WrongHeader, "Wrong XML header: Expected xml header closing sign '?'");
-						return;						
+						return;
 					default:
 						throw mu::ParserException(-1,-1, mu::ExceptionType::WrongHeader, "Wrong XML header");
-					}					
+					}
 				}
 				TBASE::checkBuffer();
-			}while(true);			
+			}while(true);
 		}
 
 
+		/// @brief Parses a closing element tag (</name>) and invokes onCloseNode on the consumer.
 		inline void parseEndNode()
 		{
 			unsigned int hashID = TBASE::template parseName<true, true>();
@@ -331,16 +368,16 @@ namespace xml
 				str.format("Unexpected closing element name with hash: '%s'!", TBASE::_outBuffer.c_str());
 				throw mu::ParserException(TBASE::_nLines, 0, mu::ExceptionType::WrongToken, str.c_str());
 			}
-				
+
 			consumer()->onCloseNode();
 
 			_processingNodes.pop();
 			--_nNodesOnStack;
 			if (_nNodesOnStack > 0)
 			{
-				_pLastNode = _processingNodes.top();						
-				//std::cout << "Closing node :" << outBuffer.c_str() << std::endl;			
-				//std::cout << "          Node on stack: "; 
+				_pLastNode = _processingNodes.top();
+				//std::cout << "Closing node :" << outBuffer.c_str() << std::endl;
+				//std::cout << "          Node on stack: ";
 				//pLastNode->show(std::cout);
 			}
 			else
@@ -351,9 +388,10 @@ namespace xml
 			TBASE::moveNext();
 		}
 
+		/// @brief Parses text content between element tags and invokes onNodeText on the consumer.
 		inline void parseNodeText()
 		{
-			//do 
+			//do
 			//{
 			TBASE::parseXMLText();
 			//	if (*it == '!')
@@ -381,8 +419,10 @@ namespace xml
 		}
 
 		//typename mu::Tokenizer<char, TBUFF, FileString8,  XML_PARSER, FROM_MEMORY>::Token
+		/// @brief Parses all attributes of the current opening element tag.
+		/// @return The terminating token (T_SLASH for self-closing, T_GT for end of opening tag).
 		inline typename mu::Tokenizer<char, TBUFF, FileString8, mu::ParserType::Xml, FROM_MEMORY>::Token parseNodeAttributes()
-		{			
+		{
 			do
 			{
 				typename TBASE::Token t = TBASE::template getNextToken<false>();
@@ -414,11 +454,14 @@ namespace xml
 			} while (true);
 		}
 
+		/// @brief Opens a node: registers it in the hash, fires onOpenNode, and pushes it onto the stack.
+		/// @tparam nodeType  The structural type of this node.
+		/// @param hashID     Pre-computed hash of the node name.
 		template<NodeType nodeType>
 		inline void openNode(unsigned int hashID)
 		{
 			//std::cout << hashID << " " << outBuffer.c_str() << std::endl;
-			//nodeJustOpened = true;				
+			//nodeJustOpened = true;
 			//pLastNode = nodeHash.add(hashID, outBuffer.length(), outBuffer.c_str());
             const tHashEntry* pOldLastNode = _pLastNode;
             _pLastNode = _nodeAndAttribHash.add(hashID, TBASE::_outBuffer.length(), TBASE::_outBuffer.c_str(), consumer());
@@ -439,6 +482,7 @@ namespace xml
             }
 		}
 
+		/// @brief Parses an opening element tag (including its attributes and any inline text).
 		inline void parseNode()
 		{
 			unsigned int hashID = TBASE::template parseName<true, true>();
@@ -461,12 +505,12 @@ namespace xml
 						throw mu::ParserException(TBASE::_nLines, 0, mu::ExceptionType::WrongToken, "Unexpected token");
 
 					//pLastNode = nodeHash.add(hashID, outBuffer.length(), outBuffer.c_str());
-					
+
 					//nodeHash.add(hashID, TBASE::_outBuffer.c_str());
 
 					if (_makeFullCallOnDummyNode != 0)
 						openNode<NodeType::WithAttribs>(hashID);
-                    
+
 					consumer()->onDummyNode();
 
 					if (_makeFullCallOnDummyNode != 0)
@@ -484,7 +528,7 @@ namespace xml
 							_pLastNode = nullptr;
 						}
 					}
-                    
+
 					TBASE::moveNext();
 
 					//ch = *TBASE::it;
@@ -506,11 +550,11 @@ namespace xml
 					//moveNext();
 					if (*TBASE::it == '>')
 					{
-						//std::cout << "Closed node with attribs. Node: " << outBuffer.c_str() << std::endl;	
+						//std::cout << "Closed node with attribs. Node: " << outBuffer.c_str() << std::endl;
 						consumer()->onCloseNode();
-						--_nNodesOnStack;						
+						--_nNodesOnStack;
 
-						_processingNodes.pop();						
+						_processingNodes.pop();
 						if (_nNodesOnStack > 0)
 						{
 							_pLastNode = _processingNodes.top();
@@ -544,15 +588,16 @@ namespace xml
 				//consumer->onOpenNode();
 				openNode<NodeType::WithoutAttribs>(hashID);
 				TBASE::_outBuffer.erase();
-				
+
 				if (*TBASE::it == '>')
 					TBASE::moveNext();
 
-				parseNodeText();				
+				parseNodeText();
 			}
 		}
 
 		//<?nesto x="a"?>
+		/// @brief Parses an XML processing instruction (<?target attr="val"?>).
 		inline void parseWorkingInstruction()
 		{
 			TBASE::moveNext();
@@ -588,8 +633,9 @@ namespace xml
 		}
 
 		//returns true if comment was inside
+		/// @brief Parses a construct starting with '!' (comment, CDATA section, or DOCTYPE).
 		inline void parseExclamation()
-		{			
+		{
 			TBASE::moveNext();
 			//comments
 			if (*TBASE::it == '-')
@@ -604,13 +650,13 @@ namespace xml
 						consumer()->onNodeComment();
 					}
 					if (*TBASE::it != '>')
-					{						
+					{
 						throw mu::ParserException(TBASE::_nLines, 0, mu::ExceptionType::WrongToken, "Unexpected token! Comments are not closed with '>'");
-					}					
+					}
 					TBASE::moveNext();
 					return;
-					//std::cout << "Comments: " << outBuffer.c_str() << std::endl;					
-				}				
+					//std::cout << "Comments: " << outBuffer.c_str() << std::endl;
+				}
 			}
 			else if (*TBASE::it == '[')
 			{
@@ -644,6 +690,7 @@ namespace xml
 			throw mu::ParserException(TBASE::_nLines, 0, mu::ExceptionType::WrongToken, "Unexpected token");
 		}
 
+		/// @brief Skips XML comments that appear after the root closing tag.
 		inline void skipCommentsTrailingComments()
 		{
 			TBASE::moveNext();
@@ -656,19 +703,20 @@ namespace xml
 					TBASE::moveNext();
 					TBASE::template skipComments<false>(2, "--");
 					if (*TBASE::it != '>')
-					{						
+					{
 						throw mu::ParserException(TBASE::_nLines, 0, mu::ExceptionType::WrongToken, "Unexpected token! Trailing comments are not closed with '>'");
-					}	
+					}
 					_endTextDetected = 0;
 					TBASE::moveNext();
 					return;
-					//std::cout << "Comments: " << outBuffer.c_str() << std::endl;					
-				}				
+					//std::cout << "Comments: " << outBuffer.c_str() << std::endl;
+				}
 			}
 		}
 
+		/// @brief Main parsing loop that processes the entire XML document body after the header.
 		inline void parseXMLContent()
-		{				
+		{
 			_rootDetected = 0;
 			typename TBASE::Token t = TBASE::Token::T_NOT_INITIALIZED;
 
@@ -684,7 +732,7 @@ namespace xml
 				}
 
 				if (t != TBASE::Token::T_LT)
-				{						
+				{
 					parseNodeText();
 					//nodeJustOpened = false;
 					continue;
@@ -699,11 +747,11 @@ namespace xml
 				//nodeJustOpened = false;
 				//}
 				//else
-				//{			
+				//{
 				//	t = getNextToken<false>();
 				//	if (t != T_LT)
 				//		throw ParserException(nLines,0, E_WRONG_TOKEN, "Unexpected token");
-				//}				
+				//}
 
 				char ch = *TBASE::it;
 
@@ -717,7 +765,7 @@ namespace xml
 					TBASE::moveNext();
 					if (TBASE::isAlpha(*TBASE::it))
 					{
-						parseEndNode();	
+						parseEndNode();
 						continue;
 					}
 					else // if (*it == '>')
@@ -737,10 +785,10 @@ namespace xml
 					throw mu::ParserException(TBASE::_nLines,0, mu::ExceptionType::WrongToken, "Invalid element name");
 
 			}
-			//check part after the end of root			
+			//check part after the end of root
 			try
 			{
-				do 
+				do
 				{
 					_endTextDetected = 0;
 					typename TBASE::Token t = TBASE::template getNextToken<false>();
@@ -748,16 +796,16 @@ namespace xml
 					if (t == TBASE::Token::T_LT)
 					{
 						if (*TBASE::it != '!')
-						{							
+						{
 							break;
 						}
 						skipCommentsTrailingComments();
 					}
 					else
-					{						
+					{
 						break;
 					}
-				} while (true);				
+				} while (true);
 			}
 			catch (const mu::ParserException& e)
 			{
@@ -770,6 +818,10 @@ namespace xml
 		}
 
 #pragma region writing
+		/// @brief Writes a string value to the output buffer, optionally escaping XML special characters.
+		/// @tparam convertSpecialCharacters  If true, escapes &, >, < and optionally " characters.
+		/// @tparam checkQuoation             If true, also escapes double-quote characters.
+		/// @param str  The string value to write.
 		template <bool convertSpecialCharacters, bool checkQuoation>
 		inline void writeValue(const td::String& str)
 		{
@@ -817,9 +869,10 @@ namespace xml
 			{
 				TBASE::_outBuffer.append(str.length(), str.c_str());
 			}
-		}		
+		}
 #pragma endregion
 	public:
+		/// @brief Constructs a SAXParser and initialises all tracking state to default values.
 		inline SAXParser()
 		    : _pLastNode(nullptr)
 			, _pLastAttrib(nullptr)
@@ -832,22 +885,29 @@ namespace xml
 			//attribNames.reserve(NODE_AND_ATTRIB_HASH_SIZE);
 		}
 
+		/// @brief Destructor; closes any open resources.
 		inline ~SAXParser()
 		{
 			//if (TBASE::pInput)
 				//delete TBASE::pInput;
 		}
 
+		/// @brief Returns true if the document was parsed successfully (root seen, all nodes closed, no trailing data).
+		/// @return True on successful completion, false otherwise.
 		inline bool isOk() const
 		{
 			return ((_rootDetected != 0) && (_nNodesOnStack == 0) && (_endTextDetected==0));
 		}
 
+		/// @brief Returns true if the root element opening tag has been encountered.
+		/// @return True once the root element has been opened.
 		inline bool isRootDetected() const
 		{
 			return (_rootDetected != 0);
 		}
 
+		/// @brief Returns true if the root element has been fully closed.
+		/// @return True when root was detected and the node stack is empty.
 		inline bool isEndOfXMLDetected() const
 		{
 			return (_rootDetected != 0) && (_nNodesOnStack == 0);
@@ -861,11 +921,16 @@ namespace xml
 		//	o << "\n\nAttrib hashes:\n";
 		//	attribHash.show(o);
 		//	o << '\n';
-		//}		
-	
+		//}
+
 		//template <class T_LOGSTREAM>
+		/// @brief Parses an XML document from a null-terminated in-memory character string.
+		/// @param pXmlData    Pointer to a null-terminated UTF-8 XML string.
+		/// @param pLog        Optional logger for error messages.
+		/// @param checkHeader If true, validates the XML declaration header before parsing content.
+		/// @return True on success, false if a parse error occurred.
 		inline bool parseMemory(const char* pXmlData, const mu::ILogger* pLog = nullptr, bool checkHeader = true)
-		{	
+		{
 			static_assert(FROM_MEMORY, "Cannot call this method (parseMemory) on XmlFileParser");
 			assert(FROM_MEMORY);
 
@@ -878,14 +943,14 @@ namespace xml
 
 			//TBASE::pInput = new TBUFF;
             reset();
-            
+
 			TBUFF memInput;
 			TBASE::_pInput = &memInput;
 			TBASE::_pInput->setBufferAsInput(pXmlData);
 			TBASE::initIterators();
-            
+
 			try
-			{				
+			{
 				if (checkHeader)
 					parseHeader();
 				parseXMLContent();
@@ -905,14 +970,19 @@ namespace xml
 					}
 					//e.show(o, "");
 					return false;
-				}				
+				}
 			}
 
 			return true;
 		}
-				
+
+		/// @brief Parses an XML document from a td::String in-memory string.
+		/// @param strXML      String containing a complete UTF-8 XML document.
+		/// @param pLog        Optional logger for error messages.
+		/// @param checkHeader If true, validates the XML declaration header before parsing content.
+		/// @return True on success, false if a parse error occurred.
 		inline bool parseMemory(const td::String& strXML, const mu::ILogger* pLog = nullptr, bool checkHeader = true)
-		{			
+		{
 			if (pLog == nullptr)
 			{
 				auto pAppSet = mu::getAppSettings();
@@ -924,7 +994,8 @@ namespace xml
 			//consumer->onParseFinished();
 			return toRet;
 		}
-        
+
+        /// @brief Resets all parser state so the object can be reused for another document.
         void reset()
         {
             TBASE::reset();
@@ -937,7 +1008,12 @@ namespace xml
             _nodeAndAttribHash.reset();
             _processingNodes.reset();
         }
-        
+
+        /// @brief Parses an XML document from a mem::Buffer in-memory buffer.
+        /// @param buffXML     Memory buffer containing a complete UTF-8 XML document.
+        /// @param pLog        Optional logger for error messages.
+        /// @param checkHeader If true, validates the XML declaration header before parsing content.
+        /// @return True on success, false if a parse error occurred.
         inline bool parseMemory(mem::Buffer& buffXML, const mu::ILogger* pLog = nullptr, bool checkHeader = true)
         {
             static_assert(FROM_MEMORY, "Cannot call this method (parseMemory) on XmlFileParser");
@@ -951,7 +1027,7 @@ namespace xml
             }
 
             reset();
-            
+
             mem::BufferReader buffReader(&buffXML);
             //TBASE::pInput = new TBUFF;
             TBUFF memInput;
@@ -984,7 +1060,7 @@ namespace xml
 
             return true;
         }
-        
+
 //        inline bool parseMemory(const mem::Buffer& buffXML, const mu::ILogger* pLog = nullptr, bool checkHeader = true)
 //        {
 //            if (pLog == nullptr)
@@ -999,13 +1075,17 @@ namespace xml
 //            return toRet;
 //        }
 
-		
+
 		//inline bool parseFile(const td::String& fileName, const mu::ILogger* pLog = nullptr)
 		//{
 		//	return parseFile(fileName);
 		//}
 
 		//template <class T_LOGSTREAM>
+		/// @brief Opens and parses an XML file from disk.
+		/// @param fileName  Path to the XML file to parse.
+		/// @param pLog      Optional logger for error messages.
+		/// @return True on success, false if the file could not be opened or a parse error occurred.
 		inline bool parseFile(const td::String& fileName, const mu::ILogger* pLog = nullptr)
 		{
 			static_assert(!FROM_MEMORY, "Cannot call this method (parseFile) on XmlMemoryParser!");
@@ -1024,7 +1104,7 @@ namespace xml
 				_inputFile.close();
 
 			if (!fo::openFile(_inputFile, fileName, FO_BINARY_OPEN_EXISTING))
-			{								
+			{
 				//throw ParserException(-1,-1, E_CANNOT_OPEN_FILE, fileName.c_str());
                 cnt::StringBuilderSmall sb;
                 sb << "Cannot open xml file: " << fileName.c_str();
@@ -1044,14 +1124,14 @@ namespace xml
 
 			//if (!TBASE::pInput)
             reset();
-            
+
 			TBUFF memInput;
 			TBASE::_pInput = &memInput;
 
 			TBASE::_pInput->setFileAsInput(&_inputFile);
 			TBASE::initIterators();
 			try
-			{						
+			{
 				parseHeader();
 				parseXMLContent();
 			}
@@ -1079,7 +1159,7 @@ namespace xml
 					//	e.show(*pO, fileName.c_str());
 					//consumer->onParseFinished(false);
 					return false;
-				}				
+				}
 			}
 			catch (td::ZStringUTF8& str)
 			{
@@ -1111,7 +1191,7 @@ namespace xml
 				mu::dbgLog("XmlFileParser::parseFile! Unexpected exception while parsing while parsing xml file:  %s", fileName.c_str());
 
 				//if (pO)
-					//*pO << "Unexpected exception while parsing!!!\n" << td::ENDL;				
+					//*pO << "Unexpected exception while parsing!!!\n" << td::ENDL;
 				//consumer->onParseFinished(false);
 				return false;
 			}
@@ -1119,24 +1199,36 @@ namespace xml
 			//consumer->onParseFinished(true);
 			return true;
 		}
-        
+
+        /// @brief Opens and parses an XML file from a filesystem path object.
+        /// @param filePath  Filesystem path to the XML file.
+        /// @param pLog      Optional logger for error messages.
+        /// @return True on success, false on error.
         inline bool parseFile(const fo::fs::path& filePath, const mu::ILogger* pLog = nullptr)
         {
             td::String strFilePath(filePath.string());
             return parseFile(strFilePath, pLog);
         }
 
+		/// @brief Writes a human-readable description of the last error to an output stream.
+		/// @tparam OSTREAM  Output stream type.
+		/// @param o         Output stream to write the error description to.
+		/// @param fileName  Name of the file that was being parsed (for context in the message).
 		template<class OSTREAM>
 		void showLastError(OSTREAM& o, const char* fileName) const
 		{
 			_lastException.show(o, fileName);
 		}
-        
+
+        /// @brief Returns the error message from the last failed parse operation.
+        /// @return Const reference to the last error message string.
         const td::String& getLastError() const
         {
             return _lastException.message;
         }
-        
+
+        /// @brief Returns a formatted error string that includes the line number when available.
+        /// @return Formatted error string combining line number and message.
         const td::String getError() const
         {
             if (_lastException.lineNo >= 0)
@@ -1147,11 +1239,12 @@ namespace xml
             }
             return _lastException.message;
         }
-        
+
+        /// @brief Returns the 1-based line number of the last parse error.
+        /// @return Line number where the last error occurred (1-based).
         int getLastErrorLineNo() const
         {
             return _lastException.lineNo+1;
         }
 	};
 };
-

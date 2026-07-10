@@ -66,24 +66,9 @@ protected:
     
     void onDraw(const gui::Rect& rDraw) override
     {
-        //mu::dbgLog("onDraw x=%.1f y=%.1f w=%.1f h=%.1f", rDraw.left, rDraw.top, rDraw.width(), rDraw.height());
-        //
-        //gui::Transformation::saveContext();
-        //{
-        //    auto r = rDraw;
-        //    gui::Size sz;
-        //    getSize(sz);
-        //    r.left = 0;
-        //    r.top = 0;
-        //    r.setSize(sz);
-        //    r.inflate(-3);
-        //    gui::Transformation transf;
-        //    transf.scale(1.0);
-        //    transf.setToContext();
-        //    gui::Shape::drawRect(r, td::ColorID::DarkGreen, td::ColorID::Yellow, 1.0f);
-        //}
-        //gui::Transformation::restoreContext();
-        
+        //mu::dbgLog("l=%.1f, t=%.1f", _modelRefPt.x, _modelRefPt.y);
+
+        //mu::dbgLog("onDraw x=%.1f y=%.1f w=%.1f h=%.1f", rDraw.left, rDraw.top, rDraw.width(), rDraw.height());        
         _model.draw(rDraw);
         if (_pSelectedShape)
         {
@@ -96,7 +81,7 @@ protected:
     bool onActionItem(gui::ActionItemDescriptor& aiDesc) override
     {
         auto [menuID, firstSubMenuID, lastSubMenuID, actionID] = aiDesc.getIDs();
-        auto pAI = aiDesc.getActionItem();
+        //auto pAI = aiDesc.getActionItem();
         
         if (menuID == 100)
         {
@@ -358,8 +343,8 @@ public:
         {
             mu::dbgLog("Shapes opened from file = %s", fileName.c_str());
         }
-        _modelRefPt = {0,0};
         scale(1.0);
+        setModelRefPoint({0,0});
         reDraw();
     }
     

@@ -10,7 +10,7 @@
 class ViewGLX : public glx::View
 {
 protected:
-    Renderer* _pRenderer = nullptr;  // Keep reference to our renderer
+//    Renderer* _pRenderer = nullptr;  // Keep reference to our renderer
     gui::Texture _frameTexture; //for frame export
     
     glx::IRenderer* createRenderer() override

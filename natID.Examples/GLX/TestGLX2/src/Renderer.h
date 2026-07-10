@@ -49,7 +49,7 @@ protected:
         glx::Library library;
 
         path = gui::getResFileName(":shaders");
-		path += "/TestGLX2";
+        path += "/testGLX2";
 
         library = _device.newLibrary(path, error);
         if (!library.isOk())

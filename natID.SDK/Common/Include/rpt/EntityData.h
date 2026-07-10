@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file EntityData.h
+    @brief Template class for indexed entity data storage with negative index ranges. */
 #pragma once
 #include <rpt/AutoElement.h>
 #include <td/String.h>
@@ -15,19 +17,28 @@
 namespace rpt
 {
 	//indexFrom and indexTo are negative values
+	/// @brief Template container that stores data elements accessible via a negative integer index range.
+	/// @tparam T Element type stored in the container.
+	/// @tparam indexFrom Starting (higher) index boundary (negative value).
+	/// @tparam indexTo Ending (lower) index boundary (negative value).
 	template <typename T, int indexFrom, int indexTo>
 	class EntityData
 	{
 	protected:
-		T _data[indexFrom - indexTo];
-		T _empty;
-		T _assignEmpty;
+		T _data[indexFrom - indexTo]; ///< Internal array holding the data elements.
+		T _empty; ///< Default empty value returned for out-of-range const access.
+		T _assignEmpty; ///< Default empty value returned for out-of-range non-const access.
 	public:
+		/// @brief Default constructor.
 		EntityData(){}
+		/// @brief Copy constructor.
+		/// @param d Source EntityData instance to copy from.
 		EntityData(const EntityData& d)
 		{
 			operator = (d);
 		}
+		/// @brief Copy assignment operator.
+		/// @param d Source EntityData instance to copy from.
 		void operator =(const EntityData& d)
 		{
 			int nElems = indexFrom - indexTo;
@@ -35,6 +46,9 @@ namespace rpt
 				_data[i] = d._data[i];
 		}
 
+		/// @brief Const element access by index.
+		/// @param i Index of the element (must be in range (indexTo, indexFrom]).
+		/// @return Const reference to the element, or _empty if index is out of range.
 		const T& operator [] (int i) const
 		{
 			//assert( (i <= indexFrom) && (i > indexTo) );
@@ -45,6 +59,9 @@ namespace rpt
 			return _data[indexFrom - i];
 		}
 
+		/// @brief Non-const element access by index.
+		/// @param i Index of the element (must be in range (indexTo, indexFrom]).
+		/// @return Reference to the element, or _assignEmpty if index is out of range.
 		T& operator [] (int i)
 		{
 			//assert(i <= indexFrom && i > indexTo);
@@ -54,8 +71,8 @@ namespace rpt
 		}
 	};
 
-	typedef rpt::EntityData<td::Variant, RPT_TXT_DOCUMENT_TYPE, RPT_DOCUMENT_LAST> DocumentData;
-	typedef rpt::EntityData<td::String, RPT_TXT_COMPANY1, RPT_COMPANY_LAST> CompanyData;
-	typedef rpt::EntityData<td::String, RPT_TXT_OBJ_TYPE, RPT_OBJ_LAST> ObjectData;
-    typedef rpt::EntityData<td::String, RPT_TXT_SINATURE1, RPT_SIGNATURE_LAST> SignatureData;
+	typedef rpt::EntityData<td::Variant, RPT_TXT_DOCUMENT_TYPE, RPT_DOCUMENT_LAST> DocumentData; ///< Variant-typed entity data for document-level fields.
+	typedef rpt::EntityData<td::String, RPT_TXT_COMPANY1, RPT_COMPANY_LAST> CompanyData; ///< String-typed entity data for company-level fields.
+	typedef rpt::EntityData<td::String, RPT_TXT_OBJ_TYPE, RPT_OBJ_LAST> ObjectData; ///< String-typed entity data for object-level fields.
+    typedef rpt::EntityData<td::String, RPT_TXT_SINATURE1, RPT_SIGNATURE_LAST> SignatureData; ///< String-typed entity data for signature fields.
 }

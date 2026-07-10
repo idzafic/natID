@@ -14,11 +14,9 @@ protected:
     ToolBar _toolBar;
     View _view;
     
-
-    
     void toggleRadarDirection()
     {
-        Renderer* pRadarRenderer = _view.getRadarRenderer();
+        Renderer* pRadarRenderer = _view.getRenderer();
         if (pRadarRenderer) {
             pRadarRenderer->toggleRadarDirection();
             bool isReversed = pRadarRenderer->isRadarReversed();

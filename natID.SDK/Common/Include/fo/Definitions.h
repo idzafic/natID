@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file Definitions.h
+    @brief Common filesystem namespace alias definitions for the fo (file operations) module. */
 #pragma once
 
 //#include <boost/config/warning_disable.hpp>
@@ -14,7 +16,7 @@
 #include <boost/filesystem.hpp>
 //#include <boost/filesystem/fstream.hpp>
 #else
-#include <filesystem> 
+#include <filesystem>
 #endif
 
 namespace fo

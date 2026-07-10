@@ -7,6 +7,9 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file URL.h
+ * @brief URL encoding utility for percent-encoding arbitrary strings.
+ */
 //
 //  URL.h
 //
@@ -18,8 +21,21 @@
 #include <cnt/StringBuilder.h>
 
 namespace no
-{	
+{
 	//charToHex
+    /// @brief Percent-encodes a string so it is safe for use in a URL.
+    ///
+    /// Unreserved characters (alphanumerics and <tt>-_.!~*'()</tt>) are copied
+    /// as-is.  Spaces are encoded as '+' when @p plusForSpace is true, or as
+    /// @c %20 otherwise.  All other bytes are encoded as <tt>%XX</tt>.
+    ///
+    /// @tparam TBUILDER Type of the string builder (must support @c reset(),
+    ///         @c <<, and @c getString()).
+    /// @param s Input string to encode.
+    /// @param build String builder used as an intermediate work buffer.
+    /// @param plusForSpace If true, spaces are encoded as '+'; otherwise as @c %20.
+    /// @param resetCnt If true, the builder is reset before encoding begins.
+    /// @return The percent-encoded string.
 	template <class TBUILDER>
 	inline td::String encodeURL(const td::String& s, TBUILDER& build, bool plusForSpace = true, bool resetCnt = true)
 	{
@@ -38,7 +54,7 @@ namespace no
 				c == '-' || c == '_' || c == '.' || c == '!' || c == '~' ||
 				c == '*' || c == '\'' || c == '(' || c == ')')
 			{
-				build << c;				
+				build << c;
 			}
 			else if ( (c == ' ') && plusForSpace)
 			{
@@ -61,4 +77,3 @@ namespace no
 		return toRet;
 	}
 }
-

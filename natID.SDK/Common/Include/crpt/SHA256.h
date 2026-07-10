@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file SHA256.h
+    @brief SHA-256 cryptographic hash implementation with Base64 and hex output support. */
 #pragma once
 #include <td/Types.h>
 #include <crpt/Hex.h>
@@ -17,13 +19,14 @@
 
 namespace crpt
 {
+/// @brief Computes SHA-256 message digests and provides convenience methods for hex and Base64 output.
 	class SHA256
 	{
-		size_t _ctx_tot_len;
-		size_t _ctx_len;
-		td::BYTE _ctx_block[2 * SHA256_BLOCK_SIZE];
-		td::UINT4 _ctx_h[8];
-	
+		size_t _ctx_tot_len;                    ///< Total number of message bytes processed so far
+		size_t _ctx_len;                        ///< Number of bytes currently buffered in _ctx_block
+		td::BYTE _ctx_block[2 * SHA256_BLOCK_SIZE]; ///< Internal message block buffer (holds up to two blocks)
+		td::UINT4 _ctx_h[8];                   ///< Current intermediate hash state (eight 32-bit words)
+
 #define SHFR(x, n)    (x >> n)
 #define ROTR(x, n)   ((x >> n) | (x << ((sizeof(x) << 3) - n)))
 #define ROTL(x, n)   ((x << n) | (x >> ((sizeof(x) << 3) - n)))
@@ -52,7 +55,7 @@ namespace crpt
            | ((td::UINT4) *((str) + 0) << 24);   \
 }
 
-		// Macros used for loops unrolling 
+		// Macros used for loops unrolling
 
 #define SHA256_SCR(i)                         \
 {                                             \
@@ -86,10 +89,13 @@ namespace crpt
 										0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3,	0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
 										0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5,	0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
 										0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208,	0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2 };
-				
+
+		/// @brief Processes one or more 512-bit message blocks and updates the hash state.
+		/// @param message Pointer to the raw message data to process.
+		/// @param block_nb Number of 64-byte blocks to process from message.
 		inline void transf(const td::BYTE* message, size_t block_nb)
-		{	
-			for (size_t i = 0; i < block_nb; i++) 
+		{
+			for (size_t i = 0; i < block_nb; i++)
 			{
 				td::UINT4 w[64];
 				td::UINT4 wv[8];
@@ -195,6 +201,7 @@ namespace crpt
 			}
 		}
 
+		/// @brief Initialises the SHA-256 context to its starting state.
 		inline void init()
 		{
 #ifdef SHA256_USELOOPS
@@ -212,6 +219,9 @@ namespace crpt
 			_ctx_tot_len = 0;
 		}
 
+		/// @brief Feeds additional message bytes into the running SHA-256 computation.
+		/// @param message Pointer to the next chunk of message data.
+		/// @param len Number of bytes in message to process.
 		inline void update(const td::BYTE* message, size_t len)
 		{
 			size_t tmp_len = SHA256_BLOCK_SIZE - _ctx_len;
@@ -219,7 +229,7 @@ namespace crpt
 
 			memcpy(&_ctx_block[_ctx_len], message, rem_len);
 
-			if (_ctx_len + len < SHA256_BLOCK_SIZE) 
+			if (_ctx_len + len < SHA256_BLOCK_SIZE)
 			{
 				_ctx_len += len;
 				return;
@@ -242,6 +252,8 @@ namespace crpt
 			_ctx_tot_len += (block_nb + 1) << 6;
 		}
 
+		/// @brief Pads the message and produces the final 32-byte SHA-256 digest.
+		/// @param digest Output buffer of at least SHA256_DIGEST_SIZE (32) bytes that receives the digest.
 		void finalize(unsigned char *digest)
 		{
 			size_t block_nb = (1 + ((SHA256_BLOCK_SIZE - 9) < (_ctx_len % SHA256_BLOCK_SIZE)));
@@ -271,6 +283,10 @@ namespace crpt
 #endif // SHA256_USELOOPS
 		}
 	public:
+		/// @brief Computes the SHA-256 digest of a raw byte buffer.
+		/// @param message Pointer to the input data.
+		/// @param len Number of bytes to hash.
+		/// @param digest Output buffer of at least 32 bytes that receives the binary digest.
 		inline void calc(const td::BYTE *message, size_t len, td::BYTE* digest)
 		{
 			init();
@@ -278,26 +294,39 @@ namespace crpt
 			finalize(digest);
 		}
 
+		/// @brief Computes the SHA-256 digest of a char buffer.
+		/// @param message Pointer to the input character data.
+		/// @param len Number of bytes to hash.
+		/// @param digest Output buffer of at least 32 bytes that receives the binary digest.
 		inline void calc(const char* message, size_t len, td::BYTE* digest)
 		{
 			return calc((const td::BYTE*) message, len, digest);
 		}
 
+		/// @brief Computes the SHA-256 digest of a td::String and writes the binary result.
+		/// @param str The input string to hash.
+		/// @param digest Output buffer of at least 32 bytes that receives the binary digest.
 		inline void calc(const td::String& str, td::BYTE* digest)
 		{
 			init();
 			update((const td::BYTE*)str.c_str(), str.length());
 			finalize(digest);
-		}	
+		}
 
+		/// @brief Computes the SHA-256 digest of a td::String and stores the binary result in a td::String.
+		/// @param str The input string to hash.
+		/// @param hashOut String that receives the 32-byte binary digest.
 		inline void calc(const td::String& str, td::String& hashOut)
 		{
 			init();
 			update((const td::BYTE*)str.c_str(), str.length());
 			hashOut.reserve(32);
-			finalize( (td::BYTE*) hashOut.begin());			
+			finalize( (td::BYTE*) hashOut.begin());
 		}
 
+		/// @brief Computes the SHA-256 digest of a td::String and returns the binary digest as a td::String.
+		/// @param str The input string to hash.
+		/// @return A td::String containing the 32-byte binary digest.
 		inline td::String calc(const td::String& str)
 		{
 			td::String hashOut;
@@ -308,6 +337,10 @@ namespace crpt
 			return hashOut;
 		}
 
+		/// @brief Computes the SHA-256 digest of a char buffer and returns the binary digest as a td::String.
+		/// @param message Pointer to the input character data.
+		/// @param len Number of bytes to hash.
+		/// @return A td::String containing the 32-byte binary digest.
 		inline td::String calc(const char* message, size_t len)
 		{
 			td::String hashOut;
@@ -318,24 +351,34 @@ namespace crpt
 			return hashOut;
 		}
 
+		/// @brief Computes the SHA-256 digest of a td::String and encodes the result as a lowercase hex string.
+		/// @param str The input string to hash.
+		/// @param hashOut String that receives the 64-character lowercase hex representation of the digest.
 		inline void calcToHex(const td::String& str, td::String& hashOut)
 		{
 			init();
 			update((const td::BYTE*)str.c_str(), str.length());
-			td::BYTE digest[32];			
+			td::BYTE digest[32];
 			finalize(digest);
 			crpt::toHex(digest, hashOut);
 		}
 
+		/// @brief Computes the SHA-256 digest of a td::String and encodes the result as a Base64 string.
+		/// @param str The input string to hash.
+		/// @param hashOut String that receives the Base64-encoded representation of the digest.
 		inline void calcToBase64(const td::String& str, td::String& hashOut)
 		{
 			init();
 			update((const td::BYTE*)str.c_str(), str.length());
 			td::BYTE digest[32];
-			finalize(digest);			
+			finalize(digest);
 			crpt::toBase64(digest, hashOut);
 		}
-        
+
+		/// @brief Computes the SHA-256 digest of a char buffer and encodes the result as a Base64 string.
+		/// @param pStr Pointer to the input character data.
+		/// @param nLen Number of bytes to hash.
+		/// @param hashOut String that receives the Base64-encoded representation of the digest.
         inline void calcToBase64(const char* pStr, size_t nLen, td::String& hashOut)
         {
             init();
@@ -344,7 +387,13 @@ namespace crpt
             finalize(digest);
             crpt::toBase64(digest, hashOut);
         }
-        
+
+		/// @brief Computes the SHA-256 digest of a char buffer and writes the result into a fixed-size Base64 C-string buffer.
+		/// @tparam size Capacity of the output character array (must be large enough for the Base64 output plus null terminator).
+		/// @param pStr Pointer to the input character data.
+		/// @param nLen Number of bytes to hash.
+		/// @param base64Encoded Output array that receives the null-terminated Base64-encoded digest.
+		/// @return Number of characters written to base64Encoded (excluding the null terminator).
         template <size_t size>
         inline size_t calcToBase64CStr(const char* pStr, size_t nLen, char(&base64Encoded)[size])
         {

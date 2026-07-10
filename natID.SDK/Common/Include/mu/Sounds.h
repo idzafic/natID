@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file Sounds.h
+    @brief Provides a cross-platform beep function for generating audible tones. */
 #pragma once
 #include <td/Types.h>
 #ifdef MU_WINDOWS
@@ -15,6 +17,9 @@
 
 namespace mu
 {
+	/// @brief Generates an audible beep at the specified frequency for the given duration.
+	/// @param freqHz Frequency of the tone in Hertz.
+	/// @param durationInMs Duration of the tone in milliseconds.
 	inline void beep(td::UINT4 freqHz, td::UINT4 durationInMs)
 	{
 #ifdef MU_WINDOWS
@@ -33,7 +38,7 @@ namespace mu
 			if (parms.end_delay || (i + 1 < parms.reps))
 				usleep(1000 * parms.delay);                        /* wait...    */
 	//}
-#endif // 
+#endif //
 
 	}
 }

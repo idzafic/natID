@@ -1,5 +1,5 @@
-#define GLM_FORCE_RADIANS 
-#define GLM_FORCE_DEPTH_ZERO_TO_ONE 
+#define GLM_FORCE_RADIANS
+#define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #pragma once
 
 #include <glx/IRenderer.h>
@@ -43,6 +43,7 @@ class Renderer : public glx::IRenderer
     float _angleX = 0.0f;
     float _angleY = 0.0f;
     bool _useFlat = true; // true = flat shading, false = interpolation shading
+    glx::PixelFormat _compatiblePixelFormat;
     
     struct CubeUniforms {
         glm::mat4 mvpMatrix;
@@ -84,7 +85,7 @@ protected:
 
         glx::RenderPipeline::ColorAttachments flatClrAttachments = flatDesc.colorAttachments();
         glx::RenderPipeline::ColorAttachment flatClrAtt = flatClrAttachments[0];
-        flatClrAtt.setPixelFormat(glx::PixelFormat::RGBA8Unorm);
+        flatClrAtt.setPixelFormat(_compatiblePixelFormat);
 
         _flatRP = _device.newRenderPipelineState(flatDesc, error);
         if (!_flatRP.isOk())
@@ -104,7 +105,7 @@ protected:
 
         glx::RenderPipeline::ColorAttachments interpClrAttachments = interpDesc.colorAttachments();
         glx::RenderPipeline::ColorAttachment interpClrAtt = interpClrAttachments[0];
-        interpClrAtt.setPixelFormat(glx::PixelFormat::RGBA8Unorm);
+        interpClrAtt.setPixelFormat(_compatiblePixelFormat);
 
         _interpolationRP = _device.newRenderPipelineState(interpDesc, error);
         if (!_interpolationRP.isOk())
@@ -302,6 +303,8 @@ public:
     Renderer(glx::View* pView)
         : _device(pView->device())
     {
+        _compatiblePixelFormat = glx::getCompatiblePixelFormat(glx::PixelFormat::RGBA8Unorm);
+
         _commandQueue = _device.newCommandQueue();
         pView->getSize(_viewportSize);
 
@@ -310,7 +313,7 @@ public:
         buildBuffers();
         updateUniforms();
 
-        pView->setPixelFormat(glx::PixelFormat::RGBA8Unorm);
+        pView->setPixelFormat(_compatiblePixelFormat);
         pView->setDepthStencilPixelFormat(glx::PixelFormat::Depth32Float);
         pView->setClearDepth(1.0);
         

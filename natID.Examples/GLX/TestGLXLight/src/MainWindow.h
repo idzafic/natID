@@ -58,7 +58,7 @@ protected:
     
 public:
     MainWindow()
-    : gui::Window(gui::Geometry(50, 50, 1200, 600))
+    : gui::Window(gui::Geometry(50, 50, 1200, 500))
     {
         setDbgName("GLX Light Demo Main Window");
         _mainMenuBar.setAsMain(this);

@@ -5,7 +5,6 @@
 class ViewGLX : public glx::View
 {
 protected:
-    Renderer* _pRenderer = nullptr; 
     
     glx::IRenderer* createRenderer() override
     {
@@ -13,6 +12,16 @@ protected:
         return _pRenderer;
     }
 
+    //Helper methods (IRenderer -> My Renderer)
+    inline Renderer* getRenderer()
+    {
+        return static_cast<Renderer*>(_pRenderer);
+    }
+    
+    inline const Renderer* getRenderer() const
+    {
+        return static_cast<const Renderer*>(_pRenderer);
+    }
 public:
     ViewGLX()
     : glx::View({gui::InputDevice::Event::Keyboard, gui::InputDevice::Event::CursorEnterLeave, gui::InputDevice::Event::PrimaryClicks, gui::InputDevice::Event::SecondaryClicks, gui::InputDevice::Event::CursorMove, gui::InputDevice::Event::CursorDrag, gui::InputDevice::Event::Zoom })
@@ -30,20 +39,20 @@ public:
         switch (virtKey)
         {
         case gui::Key::Virtual::Left:
-            _pRenderer->moveLightLeft();
-            reDraw();
+                getRenderer()->moveLightLeft();
+            //reDraw();
             return true;
         case gui::Key::Virtual::Right:
-            _pRenderer->moveLightRight();
-            reDraw();
+                getRenderer()->moveLightRight();
+            //reDraw();
             return true;
         case gui::Key::Virtual::Up:
-            _pRenderer->moveLightUp();
-            reDraw();
+                getRenderer()->moveLightUp();
+            //reDraw();
             return true;
         case gui::Key::Virtual::Down:
-            _pRenderer->moveLightDown();
-            reDraw();
+                getRenderer()->moveLightDown();
+            //reDraw();
             return true;
         default:
             break;
@@ -55,35 +64,36 @@ public:
         {
         case ' ':
         {
-            bool currentState = _pRenderer->getCameraRotating();
-            _pRenderer->setCameraRotating(!currentState);
-            reDraw();
+            auto pRenderer = getRenderer();
+            bool currentState = pRenderer->getCameraRotating();
+            pRenderer->setCameraRotating(!currentState);
+            //reDraw();
             return true;
         }
 
         case 'a':
         {
-            _pRenderer->setCCWRotation(false);
-            reDraw();
+            getRenderer()->setCCWRotation(false);
+            //reDraw();
             return true;
         }
         case 'd':
         {
-            _pRenderer->setCCWRotation(true);
-            reDraw();
+            getRenderer()->setCCWRotation(true);
+            //reDraw();
             return true;
         }
         case 'w':
         {
-            _pRenderer->setCameraMoveUp(true);
-            reDraw();
+            getRenderer()->setCameraMoveUp(true);
+            //reDraw();
             return true;
         }
 
         case 's':
         {
-            _pRenderer->setCameraMoveDown(true);
-            reDraw();
+            getRenderer()->setCameraMoveDown(true);
+            //reDraw();
             return true;
         }
         default:
@@ -99,8 +109,8 @@ public:
     {
         if (_pRenderer)
         {
-            _pRenderer->updateSpeed(val);
-            reDraw();
+            getRenderer()->updateSpeed(val);
+            //reDraw();
         }
     }
     
@@ -112,7 +122,7 @@ public:
         if (_pRenderer)
         {
             setContinousRenderMode(bAnimate);
-            _pRenderer->switchRotation();
+            getRenderer()->switchRotation();
 //            reDraw();
         }
     }
@@ -121,13 +131,9 @@ public:
     void sunColorPicker(const glm::vec3& color)
     {
         if (_pRenderer) {
-            _pRenderer->setSunColor(color);
-            reDraw();
+            getRenderer()->setSunColor(color);
+//            reDraw();
         }
     }
     
-    Renderer* getRenderer()
-    {
-        return _pRenderer;
-    }
 };

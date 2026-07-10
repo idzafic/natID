@@ -7,6 +7,9 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file rptLib.h
+ *  @brief Defines the NATRPT_API export/import macro for the natid reporting shared library.
+ */
 #pragma once
 
 #include <compiler/Definitions.h>

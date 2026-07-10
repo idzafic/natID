@@ -2,7 +2,7 @@
 #include <gui/Window.h>
 #include "MenuBar.h"
 #include "ToolBar.h"
-#include "ViewGLX.h"
+#include "ViewSkyBox.h"
 
 class MainWindow : public gui::Window
 {
@@ -10,7 +10,7 @@ private:
 protected:
     MenuBar _mainMenuBar;
     ToolBar _toolBar;
-    ViewGLX _viewCubeMap;
+    ViewSkyBox _viewSkyBox;
 public:
     MainWindow()
     : gui::Window(gui::Size(1000, 600))
@@ -20,7 +20,7 @@ public:
         _toolBar.forwardMessagesTo(this);
         
         setToolBar(_toolBar);
-        setCentralView(&_viewCubeMap);
+        setCentralView(&_viewSkyBox);
     }
     
 protected:
@@ -32,7 +32,7 @@ protected:
         if (pSlider == _toolBar.getSpeedSlider())
         {
             double val = pSlider->getValue();
-            _viewCubeMap.updateSpeed((float)val);
+            _viewSkyBox.updateSpeed((float)val);
             return true;
         }
         return false;
@@ -42,7 +42,7 @@ protected:
     {
         if (pBtn == _toolBar.getTextureSwitch())
         {
-            _viewCubeMap.switchTexture();
+            _viewSkyBox.switchTexture();
             return true;
         }
         return false;

@@ -1,0 +1,86 @@
+#---------------------------------------------------------------------------
+# Project
+#---------------------------------------------------------------------------
+
+PROJECT_NAME           = "natID Framework"
+PROJECT_NUMBER         = main
+PROJECT_BRIEF          = "Cross-platform C++ GUI framework"
+
+OUTPUT_DIRECTORY       = docs
+CREATE_SUBDIRS         = NO
+
+#---------------------------------------------------------------------------
+# Input
+#---------------------------------------------------------------------------
+
+INPUT                  = natID.SDK/Common/Include
+
+FILE_PATTERNS          = *.h
+
+RECURSIVE              = YES
+
+EXCLUDE                =
+EXCLUDE_PATTERNS       =
+
+#---------------------------------------------------------------------------
+# Extraction
+#---------------------------------------------------------------------------
+
+EXTRACT_ALL            = NO
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = NO
+EXTRACT_LOCAL_CLASSES  = YES
+
+JAVADOC_AUTOBRIEF      = YES
+MULTILINE_CPP_IS_BRIEF = YES
+
+OPTIMIZE_OUTPUT_FOR_C  = NO
+OPTIMIZE_OUTPUT_JAVA   = NO
+
+#---------------------------------------------------------------------------
+# HTML
+#---------------------------------------------------------------------------
+
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+HTML_COLORSTYLE        = LIGHT
+
+GENERATE_TREEVIEW      = YES
+DISABLE_INDEX          = NO
+FULL_SIDEBAR           = YES
+
+#---------------------------------------------------------------------------
+# Source Browser
+#---------------------------------------------------------------------------
+
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = YES
+
+REFERENCED_BY_RELATION = YES
+REFERENCES_RELATION    = YES
+
+#---------------------------------------------------------------------------
+# Graphviz
+#---------------------------------------------------------------------------
+
+HAVE_DOT               = YES
+
+CLASS_DIAGRAMS         = YES
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+COLLABORATION_GRAPH    = YES
+GROUP_GRAPHS           = YES
+INCLUDE_GRAPH          = YES
+INCLUDED_BY_GRAPH      = YES
+DIRECTORY_GRAPH        = YES
+
+DOT_IMAGE_FORMAT       = svg
+
+#---------------------------------------------------------------------------
+# Output
+#---------------------------------------------------------------------------
+
+GENERATE_LATEX         = NO
+GENERATE_XML           = NO
+GENERATE_MAN           = NO
+GENERATE_RTF           = NO

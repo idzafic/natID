@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file WinMain.h
+    @brief Windows-specific entry-point helpers and RAII memory-leak detection utility. */
 //
 //  Created by Izudin Dzafic on 28/07/2020.
 //  Copyright © 2020 IDz. All rights reserved.
@@ -29,12 +31,17 @@
 
 //#include <compiler/Definitions.h>
 
-#pragma comment(linker, "/entry:mainCRTStartup") 
+#pragma comment(linker, "/entry:mainCRTStartup")
 #endif
 
+/// @brief RAII helper that enables the CRT memory-leak detector on Windows debug builds.
+///
+/// Construct one instance at the very start of main(); the destructor dumps any
+/// unreleased allocations to the debug output when the program exits.
 class MemLeaks
 {
 public:
+	/// @brief Constructor; activates the CRT heap-allocation tracking flags on Windows debug builds.
 	MemLeaks()
 	{
 #ifdef MU_WINDOWS
@@ -47,6 +54,7 @@ public:
 #endif
 	}
 
+	/// @brief Destructor; dumps all unreleased heap blocks to the debug output on Windows debug builds.
 	~MemLeaks()
 	{
 #ifdef MU_WINDOWS

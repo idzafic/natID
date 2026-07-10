@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file ResourceStateCommandEncoder.h
+    @brief Declares the glx::ResourceStateCommandEncoder wrapper class. */
 //
 //  Created by Izudin Dzafic on 28/07/2020.
 //  Copyright © 2020 IDz. All rights reserved.
@@ -23,17 +25,18 @@ class ResourceStateCommandEncoder;
 namespace glx
 {
 
+/// @brief Wraps a Metal ResourceStateCommandEncoder for managing resource state transitions.
 class NATGLX_API ResourceStateCommandEncoder
 {
 private:
-    MTL::ResourceStateCommandEncoder* _pResourceStateCommandEncoder = nullptr;
+    MTL::ResourceStateCommandEncoder* _pResourceStateCommandEncoder = nullptr; ///< Pointer to the underlying Metal resource state command encoder.
 protected:
+    /// @brief Default constructor; initialises the encoder without an underlying native object.
     ResourceStateCommandEncoder();
 public:
 
-    
+
 };
 
 
 } //namespace glx
-

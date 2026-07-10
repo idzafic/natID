@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file SimpleParser.h
+    @brief Lightweight tokenizer-based parser for alphanumeric and numeric token extraction. */
 #pragma once
 #include <mu/Tokenizer.h>
 #include <td/BufferString.h>
@@ -17,6 +19,10 @@
 
 namespace mu
 {
+	/// @brief Simple tokenizer-based parser that extracts alphanumeric and numeric tokens from strings or files.
+	/// @tparam TSTR        String type used to store extracted tokens (defaults to td::String).
+	/// @tparam TINPBUFFER  Input buffer wrapper type (defaults to StringWrapper8).
+	/// @tparam PARSER_TYPE Tokenizer parsing mode (defaults to mu::ParserType::C).
 	template <class TSTR = td::String, class TINPBUFFER = StringWrapper8, mu::ParserType PARSER_TYPE=mu::ParserType::C >
 	class SimpleParser : public Tokenizer<char, TINPBUFFER, FileString8, PARSER_TYPE, true>
 	{
@@ -24,12 +30,16 @@ namespace mu
 		typedef Tokenizer<char, TINPBUFFER, FileString8, PARSER_TYPE, true> TBASE;
 		typedef typename Tokenizer<char, TINPBUFFER, FileString8, PARSER_TYPE, true>::Token TBaseToken;
 
-		typename TBASE::Token _currentToken = TBASE::Token::T_NOT_INITIALIZED;
+		typename TBASE::Token _currentToken = TBASE::Token::T_NOT_INITIALIZED; ///< Most recently processed token type.
 
+		/// @brief Pushes a single parsed token into the output container.
+		/// @tparam TVECT Container type whose elements are TSTR instances.
+		/// @param t      Token type just scanned.
+		/// @param tokens Output container receiving the new string token.
 		template<class TVECT>
 		inline void putToken(typename TBASE::Token t, TVECT& tokens)
 		{
-			if (t == TBASE::Token::T_ALPHANUM)		
+			if (t == TBASE::Token::T_ALPHANUM)
 			{
 				TBASE::template parseName<false, true>();
 				TSTR& str = tokens.push_back();
@@ -41,23 +51,35 @@ namespace mu
 				TBASE::parseNumber();
 				TSTR& str = tokens.push_back();
 				str.fromKnownString(TBASE::_outBuffer.c_str(), TBASE::_outBuffer.length());
-			}							
+			}
 		}
-				
+
+		/// @brief Reads a LUINT8 value from a C-string.
+		/// @param pStr Null-terminated string containing the numeric value.
+		/// @param val  Output parameter receiving the parsed value.
 		inline void getVal(const char* pStr, td::LUINT8& val) const
 		{
 			val = mu::Utils::toLUINT8(pStr);
 		}
 
+		/// @brief Reads an int value from a C-string.
+		/// @param pStr Null-terminated string containing the numeric value.
+		/// @param val  Output parameter receiving the parsed value.
 		inline void getVal(const char* pStr, int& val) const
 		{
 			val = mu::Utils::toINT4(pStr);
-		}		
+		}
 
 
 	public:
-		SimpleParser(){}		
+		/// @brief Default constructor.
+		SimpleParser(){}
 
+		/// @brief Reads a file and extracts all alphanumeric and numeric tokens into the provided container.
+		/// @tparam TVECT Container type whose elements are TSTR instances.
+		/// @param fileName Path to the file to parse.
+		/// @param tokens   Output container receiving the extracted tokens.
+		/// @return true on success, false if the file could not be opened or parsing failed.
 		template<class TVECT> // =cnt::PushBackVector<td::String>>
 		bool parseAlphanumFromFile(const char* fileName, TVECT& tokens)
 		{
@@ -70,7 +92,7 @@ namespace mu
 			TINPBUFFER inputWrapper;
 			TBASE::pInput = &inputWrapper;
 			TBASE::pInput->setFileAsInput(&f);
-			
+
 			TBASE::initIterators();
 			try
 			{
@@ -96,23 +118,27 @@ namespace mu
 			TBASE::pInput = nullptr;
 			return true;
 		}
-		
+
+		/// @brief Parses a C-string and extracts all alphanumeric and numeric tokens into the provided container.
+		/// @tparam TVECT Container type whose elements are TSTR instances.
+		/// @param pStr   Null-terminated input string to parse.
+		/// @param tokens Output container receiving the extracted tokens.
 		template<class TVECT> // =cnt::PushBackVector<td::String>>
 		void parseAlphanum(const char* pStr,  TVECT& tokens)
-		{				
+		{
 			//StringWrapper8 inputWrapper;
 			TINPBUFFER inputWrapper;
-			TBASE::_pInput = &inputWrapper; // new StringWrapper8;		
+			TBASE::_pInput = &inputWrapper; // new StringWrapper8;
 
 			TBASE::_pInput->setBufferAsInput(pStr);
-			TBASE::initIterators();			
+			TBASE::initIterators();
 			try
-			{					
+			{
 				while (TBASE::it != TBASE::itEnd)
 				{
 					typename TBASE::Token t = TBASE::template getNextToken<false>();
 					putToken(t, tokens);
-				}								
+				}
 			}
 			catch(const mu::ParserException& )
 			{
@@ -131,23 +157,28 @@ namespace mu
 
 
 		//cnt::PushBackVector<int>
+		/// @brief Parses a C-string and extracts numeric tokens, converting each to the container's element type.
+		/// @tparam TVECT Container type whose elements are numeric values.
+		/// @param pStr   Null-terminated input string to parse.
+		/// @param tokens Output container receiving the parsed numeric values.
+		/// @return true if only numeric tokens were encountered, false if an alphabetic token was found.
 		template<class TVECT>  // =cnt::PushBackVector<int> >
 		bool parseNumbers(const char* pStr,  TVECT& tokens)
-		{				
+		{
 			//StringWrapper8 inputWrapper;
 			TINPBUFFER inputWrapper;
 			TBASE::pInput = &inputWrapper; // new StringWrapper8;
 			TBASE::pInput->setBufferAsInput(pStr);
-			TBASE::initIterators();			
+			TBASE::initIterators();
 			try
-			{					
+			{
 				while (TBASE::it != TBASE::itEnd)
 				{
 					typename TBASE::Token t = TBASE::template getNextToken<false>();
 					if (t == TBASE::T_NUMERIC)
 					{
 						TBASE::parseNumber();
-						typename TVECT::T_DATA val;						
+						typename TVECT::T_DATA val;
 						getVal(TBASE::outBuffer.c_str(), val);
 						tokens.push_back(val);
 					}
@@ -159,10 +190,10 @@ namespace mu
 							TBASE::pInput = nullptr;
 							return false; //TBASE::moveNext();
 						}
-							
+
 					}
-						
-				}								
+
+				}
 			}
 			catch(const mu::ParserException& )
 			{
@@ -170,7 +201,7 @@ namespace mu
 				{
 					if (TBASE::isNumeric(*TBASE::outBuffer.begin()) )
 					{
-						tokens.push_back( (atoi (TBASE::outBuffer.c_str()) )); 						
+						tokens.push_back( (atoi (TBASE::outBuffer.c_str()) ));
 					}
 				}
 			}
@@ -179,29 +210,35 @@ namespace mu
 			return true;
 		}
 
+		/// @brief Sets the input buffer wrapper used for subsequent parsing operations.
+		/// @param inputWrapper Pointer to a pre-constructed TINPBUFFER to use as input.
 		void initBufferWrapper(TINPBUFFER* inputWrapper)
 		{
 			TBASE::pInput = inputWrapper;
 		}
 
 	protected:
+		/// @brief Dispatches a single token to the appropriate callback handler method.
+		/// @tparam TCALLBACK Callback type exposing handleAlphaNum, handleNum, and handleToken methods.
+		/// @param t        Token type to dispatch.
+		/// @param callBack Callback object receiving the parsed token.
 		template<class TCALLBACK>
 		void passToken(typename TBASE::Token t, TCALLBACK& callBack)
 		{
 			_currentToken = t;
 			if (t == TBASE::T_ALPHANUM)
 			{
-				auto hashVal = TBASE::template parseName<true, true>();				
+				auto hashVal = TBASE::template parseName<true, true>();
 				//auto len = TBASE::outBuffer.length();
 				//if (len > 0)
 				{
 					callBack.handleAlphaNum(TBASE::outBuffer.c_str(), TBASE::outBuffer.length(), hashVal);
-				}				
+				}
 			}
 			else if (t == TBASE::T_NUMERIC)
 			{
 				TBASE::parseNumber();
-				
+
 				//if (len > 0)
 				{
 					callBack.handleNum(TBASE::outBuffer.c_str(), TBASE::outBuffer.length());
@@ -212,8 +249,13 @@ namespace mu
 				callBack.handleToken(t, TBASE::outBuffer.c_str(), TBASE::outBuffer.length());
 			}
 		}
-		
+
 	public:
+		/// @brief Parses the entire content of str and delivers each token to callBack.
+		/// @tparam TCALLBACK Callback type exposing handleInit, handleFinish, handleWhiteSpace,
+		///                   handleAlphaNum, handleNum, and handleToken methods.
+		/// @param str      Input string to parse.
+		/// @param callBack Callback object receiving each parsed token event.
 		template<class TCALLBACK>
 		void parseWithCallback(const TSTR& str, TCALLBACK& callBack)
 		{
@@ -221,7 +263,7 @@ namespace mu
 
 			//StringWrapper8 inputWrapper;
 			//TINPBUFFER inputWrapper;
-			//TBASE::pInput = &inputWrapper; // new StringWrapper8;		
+			//TBASE::pInput = &inputWrapper; // new StringWrapper8;
 
 			TBASE::pInput->setBufferAsInput(str.c_str());
 			TBASE::initIterators();
@@ -252,7 +294,7 @@ namespace mu
 					if (_currentToken != TBASE::T_NOT_INITIALIZED)
 					{
 						if (_currentToken == TBASE::T_ALPHANUM)
-						{							
+						{
 							callBack.handleAlphaNum(pStr, buffLen, 0);
 						}
 						else if (_currentToken == TBASE::T_NUMERIC)
@@ -271,7 +313,7 @@ namespace mu
 					{
 						if (TBASE::outBuffer.isWhiteSpaceOnly())
 						{
-							callBack.handleWhiteSpace(pStr, buffLen, true);							
+							callBack.handleWhiteSpace(pStr, buffLen, true);
 						}
 						else
 						{
@@ -285,10 +327,10 @@ namespace mu
 								callBack.handleNum(pStr, buffLen);
 							}
 							else
-							{		
+							{
 								passToken(_currentToken, callBack);
 							}
-						}					   
+						}
 					}
 				}
 			}
@@ -298,6 +340,6 @@ namespace mu
 		}
 	};
 
-	typedef mu::SimpleParser<td::String, StringWrapper8, mu::ParserType::AlphaNumerical> AlphaParser;
-	typedef mu::SimpleParser<td::String, StringWrapper8, mu::ParserType::C> AlphaNumParser;
+	typedef mu::SimpleParser<td::String, StringWrapper8, mu::ParserType::AlphaNumerical> AlphaParser; ///< Parser variant that recognises only alphabetic tokens.
+	typedef mu::SimpleParser<td::String, StringWrapper8, mu::ParserType::C> AlphaNumParser; ///< Parser variant that recognises both alphabetic and numeric tokens in C style.
 }

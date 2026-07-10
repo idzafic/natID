@@ -149,6 +149,7 @@ class Renderer : public glx::IRenderer
     int _lastMouseX = 0;
     int _lastMouseY = 0;
     bool _firstMouseMove = true;
+    glx::PixelFormat _compatiblePixelFormat;
     
     // Keyboard state tracking
     std::unordered_map<char, bool> _keyStates;
@@ -213,7 +214,7 @@ void buildShaders()
 
         glx::RenderPipeline::ColorAttachments clrAttachments = desc.colorAttachments();
         glx::RenderPipeline::ColorAttachment clrAtt = clrAttachments[0];
-        clrAtt.setPixelFormat(glx::PixelFormat::RGBA8Unorm);
+        clrAtt.setPixelFormat(_compatiblePixelFormat);
 
         _RP = _device.newRenderPipelineState(desc, error);
         if (!_RP.isOk())
@@ -450,6 +451,8 @@ public:
 Renderer(glx::View* pView)
     : _device(pView->device())
 {
+    _compatiblePixelFormat = glx::getCompatiblePixelFormat(glx::PixelFormat::RGBA8Unorm);
+    
     _pView = pView;
     _commandQueue = _device.newCommandQueue();
     pView->getSize(_viewportSize);
@@ -468,7 +471,7 @@ Renderer(glx::View* pView)
     updateCamera();
 
     // Configure View to manage depth texture
-        pView->setPixelFormat(glx::PixelFormat::RGBA8Unorm);
+        pView->setPixelFormat(_compatiblePixelFormat);
         pView->setDepthStencilPixelFormat(glx::PixelFormat::Depth32Float);
         pView->setClearDepth(1.0);
         pView->setClearColor(td::Color(255, 255, 255, 255));

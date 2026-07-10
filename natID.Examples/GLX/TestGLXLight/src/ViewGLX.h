@@ -8,18 +8,25 @@
 #include <mu/DebugConsoleLog.h>
 
 
-
 class ViewGLX : public glx::View
 {
 protected:
-    Renderer* _pRenderer = nullptr; 
     
     glx::IRenderer* createRenderer() override
     {
-
         _pRenderer = new Renderer(this);
         return _pRenderer;
-
+    }
+    
+    //Helper methods (IRenderer -> My Renderer)
+    inline Renderer* getRenderer()
+    {
+        return static_cast<Renderer*>(_pRenderer);
+    }
+    
+    inline const Renderer* getRenderer() const
+    {
+        return static_cast<const Renderer*>(_pRenderer);
     }
 
 public:
@@ -33,8 +40,8 @@ public:
     {
         if (_pRenderer)
         {
-            _pRenderer->updateSpeed(val);
-            reDraw();
+            getRenderer()->updateSpeed(val);
+            //reDraw();
         }
     }
     
@@ -44,8 +51,8 @@ public:
 
         if (_pRenderer)
         {
-            _pRenderer->switchRotation();
-            reDraw();
+            getRenderer()->switchRotation();
+            //reDraw();
         }
     }
     
@@ -83,7 +90,7 @@ public:
                     }
                     
                     // Get the current drawable and save it
-                    glx::CommandQueue cmdQueue = _pRenderer->getCommandQueue();
+                    glx::CommandQueue cmdQueue = getRenderer()->getCommandQueue();
                     bool success = saveDrawable(path, cmdQueue, format);
                     
                     if (success)
@@ -98,10 +105,5 @@ public:
                     }
                 }
             });
-    }
-    
-    Renderer* getRenderer()
-    {
-        return _pRenderer;
     }
 };

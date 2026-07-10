@@ -7,6 +7,9 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file Constants.h
+ * @brief Mathematical constants for common numeric values.
+ */
 #pragma once
 #include <td/Types.h>
 #ifndef _MATH_DEFINES_DEFINED
@@ -29,9 +32,9 @@ namespace math
 	constexpr const double  DBL_2_SQRTPI = 1.12837916709551257390;   // 2/sqrt(pi)
 	constexpr const double  DBL_SQRT2  =  1.41421356237309504880;   // sqrt(2)
 	constexpr const double  dBL_SQRT1_2 =  0.707106781186547524401;  // 1/sqrt(
-	
-	constexpr const double DBL_SQRT3 = 1.7320508075688772;
+
+	constexpr const double DBL_SQRT3 = 1.7320508075688772; ///< Square root of 3
 	//const double DBL_SQRT2 = 1.414213562373095;
 	//const double DBL_PI = 3.1415926535897932;
-	constexpr const float FLT_PI = 3.1415926f;
+	constexpr const float FLT_PI = 3.1415926f; ///< Pi as single-precision float
 }

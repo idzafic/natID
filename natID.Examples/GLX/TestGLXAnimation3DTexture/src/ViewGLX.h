@@ -10,24 +10,31 @@
 class ViewGLX : public glx::View
 {
 protected:
-    Renderer* _pRenderer = nullptr;  // Keep reference to our renderer
+    //Renderer* _pMyRenderer = nullptr;  // Keep reference to our renderer
     
     glx::IRenderer* createRenderer() override
     {
         _pRenderer = new Renderer(this);
+//        _pRenderer = _pMyRenderer;
         return _pRenderer;
     }
     
-
+    inline Renderer* getRenderer() {
+        return static_cast<Renderer*>(_pRenderer);
+    }
     
+    inline const Renderer* getRenderer() const {
+        return static_cast<const Renderer*>(_pRenderer);
+    }
+
     // Input handling methods for 3D animation interaction
     bool onKeyPressed(const gui::Key& key) override
     {
         MU_DEBUG_LOG_INFO("Key pressed");
         if (_pRenderer)
         {
-            _pRenderer->handleKeyPressed(key);
-//            reDraw(); // // No need (it's continous render mode)
+            auto pMyRenderer = getRenderer();
+            pMyRenderer->handleKeyPressed(key);
             return true;
         }
         return false;
@@ -39,8 +46,8 @@ protected:
         if (_pRenderer)
         {
             auto pt = inputDevice.getFramePoint();
-            _pRenderer->handleLeftClick(pt);
-            //reDraw(); // No need (it's continous render mode)
+            auto pMyRenderer = getRenderer();
+            pMyRenderer->handleLeftClick(pt);
         }
     }
     
@@ -50,8 +57,8 @@ protected:
         if (_pRenderer)
         {
             auto pt = inputDevice.getFramePoint();
-            _pRenderer->handleRightClick(pt);
-//            reDraw(); // // No need (it's continous render mode)
+            auto pMyRenderer = getRenderer();
+            pMyRenderer->handleRightClick(pt);
         }
     }
 
@@ -68,8 +75,9 @@ public:
     {
         if (_pRenderer)
         {
-            _pRenderer->updateSpeed(val);
-            reDraw();
+            auto pMyRenderer = getRenderer();
+            pMyRenderer->updateSpeed(val);
+            // reDraw();
         }
     }
     
@@ -77,8 +85,10 @@ public:
     {
         if (_pRenderer)
         {
-            _pRenderer->switchTexture();
-            reDraw();
+            auto pMyRenderer = getRenderer();
+            pMyRenderer->switchTexture();
+            if (!isContinousRenderMode())
+                reDraw();
         }
     }
     
@@ -116,7 +126,8 @@ public:
                     }
                     
                     // Get the current drawable and save it
-                    glx::CommandQueue cmdQueue = _pRenderer->getCommandQueue();
+                    auto pMyRenderer = getRenderer();
+                    glx::CommandQueue cmdQueue = pMyRenderer->getCommandQueue();
                     bool success = saveDrawable(path.c_str(), cmdQueue, format);
                     
                     if (success)

@@ -12,8 +12,6 @@
 #include <gui/InputDevice.h>
 #include <mu/DebugConsoleLog.h>
 
-
-
 class Renderer : public glx::IRenderer
 {
     glx::Device _device;
@@ -26,7 +24,9 @@ class Renderer : public glx::IRenderer
     
     gui::Size _viewportSize;
     td::UINT1 _usedFont = 0;
-
+    
+    glx::PixelFormat _compatiblePixelFormat;
+    
 protected:
     void loadTextures()
     {
@@ -37,7 +37,7 @@ protected:
         const size_t maxChars = 1000;
         
         td::String fontPath1 = gui::getResFileName(":font1");
-        _font1Initialized = _font1.init(_commandQueue, glx::PixelFormat::RGBA8Unorm, fontPath1.c_str(), 320.0, maxChars);
+        _font1Initialized = _font1.init(_commandQueue, _compatiblePixelFormat, fontPath1.c_str(), 320.0, maxChars);
         if (!_font1Initialized)
         {
             mu::DebugConsoleLog::error() << "Failed to initialize font1, location is " << fontPath1.c_str();
@@ -51,7 +51,7 @@ protected:
         }
         
         td::String fontPath2 = gui::getResFileName(":font2");
-        _font2Initialized = _font2.init(_commandQueue, glx::PixelFormat::RGBA8Unorm, fontPath2.c_str(), 32.0, maxChars);
+        _font2Initialized = _font2.init(_commandQueue, _compatiblePixelFormat, fontPath2.c_str(), 32.0, maxChars);
         if (!_font2Initialized)
         {
             mu::DebugConsoleLog::error() << "Failed to initialize font2, location is: " << fontPath2.c_str();
@@ -74,12 +74,13 @@ public:
     Renderer(glx::View* pView)
         : _device(pView->device())
     {
+        _compatiblePixelFormat = glx::getCompatiblePixelFormat(glx::PixelFormat::RGBA8Unorm);
         _commandQueue = _device.newCommandQueue();
         _viewportSize = gui::Size(800, 600);
 
         loadTextures();
 
-        pView->setPixelFormat(glx::PixelFormat::RGBA8Unorm);
+        pView->setPixelFormat(_compatiblePixelFormat);
         
         // Font will automatically retrieve viewport size during draw
         mu::DebugConsoleLog::ok() << "Texture renderer initialized";
@@ -88,7 +89,6 @@ public:
 
     ~Renderer()
     {
-        
         _commandQueue.release();
         _device.release();
     }

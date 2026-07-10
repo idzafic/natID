@@ -7,6 +7,8 @@
 // # Contact: idzafic at etf.unsa.ba  or idzafic at gmail.com
 // ################################################################################################################
 
+/** @file TextAttribs.h
+    @brief Text attribute and styled range structures for rich-text rendering. */
 //
 //  Created by Izudin Dzafic on 28/07/2020.
 //  Copyright © 2020 IDz. All rights reserved.
@@ -18,33 +20,39 @@
 
 namespace gui
 {
-	
+
+/// @brief Holds font markup, style, and color attributes for a run of text.
 class TextAttribs
 {
 public:
-    cnt::Array<Font::Markup, (size_t)gui::Font::Markup::NA> markups;
-    gui::Font::Style style = gui::Font::Style::Normal;
-    td::ColorID colorID = td::ColorID::SysText;
-    
+    cnt::Array<Font::Markup, (size_t)gui::Font::Markup::NA> markups; ///< Array of font markup flags applied to the text.
+    gui::Font::Style style = gui::Font::Style::Normal; ///< Font style (e.g. Normal, Bold, Italic).
+    td::ColorID colorID = td::ColorID::SysText; ///< Color applied to the text run.
+
+    /// @brief Default constructor; leaves all attributes at their defaults.
     TextAttribs()
     {
     }
-	
-	void clean()
-	{
+
+    /// @brief Resets all attributes to their default values.
+    void clean()
+    {
         colorID = td::ColorID::SysText;
-		style = gui::Font::Style::Normal;
-		for(auto& e: markups)
-		{
-			e = gui::Font::Markup::NA;
-		}
-	}
+        style = gui::Font::Style::Normal;
+        for(auto& e: markups)
+        {
+            e = gui::Font::Markup::NA;
+        }
+    }
 };
 
+/// @brief Extends TextAttribs with a character range, associating attributes with a specific span of text.
 class TextAttribsRange : public TextAttribs
 {
 public:
-    gui::Range range;
+    gui::Range range; ///< Character range within the text to which the attributes apply.
+
+    /// @brief Default constructor; leaves all attributes and range at their defaults.
     TextAttribsRange()
     {
     }
