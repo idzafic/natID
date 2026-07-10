@@ -1,6 +1,6 @@
 Overview of Changes in 4.2.1, 2026-07-10
 =========================================
-- Clipboard support
+- Clipboard support (txt)
 - ARM-linux support
 - Stepper (Horizontal and vertical)
 - Other fixes and improvements
